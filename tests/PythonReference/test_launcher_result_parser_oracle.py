@@ -74,9 +74,9 @@ EXPECTED_CASE_IDS = (
     "energyplus-result.parse-table-failure-surface",
     "energyplus-result.parse-table-grammar-duplicates",
 )
-EXPECTED_FIXTURE_BYTES = 43608
+EXPECTED_FIXTURE_BYTES = 43605
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:a5e4024e46ed30d2cfed54b8f158a167de796bde898cc5cc451701ded4d3df6e"
+    "sha256:e7fc86fd859eb054022796fdf7163bcc040b738d23fdd3466944362558ba6a94"
 )
 EXPECTED_CASES_SHA256 = (
     "sha256:a0464a29bfd0bd1712deacbac50d3f87f6ea15e4ba9f4d19a70e88e896be38dd"

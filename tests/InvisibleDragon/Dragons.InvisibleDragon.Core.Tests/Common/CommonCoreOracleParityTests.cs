@@ -19,10 +19,10 @@ public sealed class CommonCoreOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/common-core-oracle.json";
     private const string OracleSha256 =
-        "sha256:2aba044516f955c5ef1ae28770982a68bf79d3dab6899f66a9091e0ccc4e9f9a";
+        "sha256:3510b6b3c561019457501391d2847c5e45ed2dc6dd4479842df9bf7db8446f7e";
     private const string CasesSha256 =
         "sha256:143964427b8165d29a99192ad21414eacc1f9cdc21520f3f3681447ad28e4ea4";
-    private const int OracleByteLength = 34_831;
+    private const int OracleByteLength = 34_828;
     private const int ExpectedCaseCount = 39;
     private const string OracleSchema =
         "dragons.invisibledragon.common-core-oracle.v1";
@@ -201,7 +201,7 @@ public sealed class CommonCoreOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

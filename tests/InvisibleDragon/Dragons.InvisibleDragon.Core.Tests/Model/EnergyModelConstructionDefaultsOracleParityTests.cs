@@ -20,10 +20,10 @@ public sealed class EnergyModelConstructionDefaultsOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-model-construction-defaults-oracle.json";
     private const string OracleSha256 =
-        "sha256:50a6c1d8cf1c9362b7cacf4462d468211ce3b993059e362bfe83eb3274cc1f13";
+        "sha256:2ecefb4e37eac9a67dfc7545d3bcc4480682598acf7fa04d19f4f452d2dc685b";
     private const string CasesSha256 =
         "sha256:7a2c84fc965b884bd93d4e4f12bfab5df03e491b50dd8ed8ecda9eb4d6b21c84";
-    private const int OracleByteLength = 21_802;
+    private const int OracleByteLength = 21_799;
     private const int ExpectedCaseCount = 9;
     private const string OracleSchema =
         "dragons.python-reference.dragon-model-construction-defaults.v1";
@@ -34,11 +34,11 @@ public sealed class EnergyModelConstructionDefaultsOracleParityTests
     private const string EnergyModelRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs";
     private const string EnergyModelSourceSha256 =
-        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+        "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28";
     private const string AssemblerRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
     private const string AssemblerSourceSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
 
     private static readonly string[] DefaultObjectTypes =
     {
@@ -217,7 +217,7 @@ public sealed class EnergyModelConstructionDefaultsOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
 
         JsonElement[] sources = upstream.GetProperty("sources").EnumerateArray().ToArray();

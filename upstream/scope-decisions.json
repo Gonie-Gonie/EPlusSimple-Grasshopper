@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:25a52087451b51f1af128d3a0a6b89bf76a080e0b39a160bcc76299ab04b6403",
+  "content_sha256": "sha256:60b5133104ffd00acd01d8226a76fc8f286776f55035869c729e092bb2a70180",
   "decisions": [
     {
       "approval": "approved",
@@ -2774,7 +2774,7 @@
       "upstream_symbol_hash": "sha256:ea3a8f1769cf2fc59f066bb0ebf59e5673823c946aaf9ea5930965d7e9beea4c"
     }
   ],
-  "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+  "inventory_sha256": "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
   "schema": "dragons.upstream-scope-decisions.v1",
   "summary": {
     "approved_count": 252,

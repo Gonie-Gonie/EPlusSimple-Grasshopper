@@ -20,9 +20,9 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-shape-opening-adjacency-core-oracle.json";
-    private const int FixtureBytes = 260_292;
+    private const int FixtureBytes = 260_256;
     private const string FixtureSha256 =
-        "sha256:62cffb90701ba585b44712b7cce76d1393bec01fe0dfc8eccad170e49a6e2a34";
+        "sha256:1eb9d258baa9471665d1470498d6855db7e7fde6bc89ac7a259d8908b6a3fe64";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-shape-opening-adjacency-core.v1";
     private const string CasesSha256 =
@@ -30,20 +30,20 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_shape_opening_adjacency_core_oracle.py";
-    private const int GeneratorBytes = 91_220;
+    private const int GeneratorBytes = 91_181;
     private const string GeneratorSha256 =
-        "sha256:0ef5f27f015f22ebfb973c0a89b8a2062d1905e3bd398fd378befd2830584e26";
+        "sha256:004eb87cbe18ddf3ac8c6c919c708d78e52182c585ac55b8994afbc7ff1ecec2";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_shape_opening_adjacency_core_oracle.py";
     private const int ValidatorBytes = 26_850;
     private const string ValidatorSha256 =
-        "sha256:ffa144ad7c4124458213e149623c03cc9a457e637f345b2c6c8dc9a5576a0a82";
+        "sha256:cf017361f5914deaa0f777a2538ac40cea8cf173a0a7334192af3f14d793699b";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/shape.py";
     private const int UpstreamBytes = 27_438;
@@ -56,20 +56,20 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Shading.cs", 1_950,
-            "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Openings.cs", 2_408,
-            "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs", 7_731,
-            "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs", 1_909,
-            "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceAdjacency.cs", 4_044,
-            "sha256:83d67c465446be31133fcd17d2e3cbbab9b6b320a28a3f2608ad55c99450fb59"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764,
-            "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Shading.cs", 1_944,
+            "sha256:e125e43e56a69fbb4707e1553d8a3318280b1d3356ec8c403256a6adc5001ef3"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Openings.cs", 2_396,
+            "sha256:3bca5b2a25574c58318eb55fd7f9a2c121a05e5c5645224a8e91c9ba92474588"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs", 7_719,
+            "sha256:a4d2d35982c8aff254c0c8d74982e13394db2a770f38691710f9739f8b0a38e8"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs", 1_903,
+            "sha256:fc745e92061a0e8b1429399836f8a268b0d551e644f75f800a9cf987712c9d7a"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceAdjacency.cs", 4_035,
+            "sha256:d78880fc40340ac3a2cfa4c63ff048f68347cabf114dc856ff18dc9666051190"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723,
+            "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
     };
 
     private static bool DiscoverPins => false;
@@ -170,7 +170,7 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
         new(7, "sha256:26864b21db4e256819ecd68bd4493f8b0cbdd48f430d91726c0d817035f946f4"),
         new(6, "sha256:1cfa7e7e6196db5db775ef158391ab18d5c0f1b4b51c290b1ff1653de39eb92b"),
         new(6, "sha256:b73d1f643c95b2cdead760d228d4d8bc08d201ec7e640cbc8deb412e1464035b"),
-        new(10, "sha256:da13abd9c459600023c6ab72ea91b5f090b8d2dd8d5fabb51eb707f7f8cb8814"),
+        new(10, "sha256:bfcd5537448072544d0a6ba04619963a50e0826754d4e29611c081bcec2d4110"),
         new(13, "sha256:afae1436752290c7cef315a98d03854dc6ff16ef7999999b6e8fc976f7411cf4"),
         new(8, "sha256:730a4d632408ca29d1bfa5204554ead7d4ab41bb51133400832a07571f9565ef"),
     };
@@ -179,25 +179,25 @@ public sealed class OpeningAdjacencyCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:c075c45deb7cda1407a72808c0d277d6efd5316085b144095d2bf517386973f7",
-        "sha256:5388e0665f85bc41bb818f26c8f6fa89cf76898e26e6df4d36abe0c373570bee",
-        "sha256:fa39e26798264f38d0e9a43f1940c2863f70f05203b2b1e8c74faa3c5eb8afd9",
-        "sha256:a7a103e8899887ec153199f974e4050ca493cda73d31b7c64e562ebba60ab30e",
-        "sha256:45b6423f0139944ee5c8cb4726894b9dc4585b05cdd343bddb24b830fe43c35f",
-        "sha256:6d4294f2c7584ecee38272e92a20d323ba5d26bbe1b6cf488d5749dfdfc8c496",
-        "sha256:8b9e5ab60f25bf306e117d4df92ea08a784482435e73166da9ecdb52ab860bbc",
-        "sha256:4b3ebe4b809eb5da6aa98988847d7dff288a1fd3370583166b27b0210feb31ee",
-        "sha256:69f056b8beb1e306a0c7ad7c83365a09e184365bb579bddfec8a349663b17d03",
-        "sha256:887aaad7449dce5e1753add6d5cf5de3e944d222be88d154b00f4421afb4ef5c",
-        "sha256:0705e84c47890ec56447c65eff16bb31d5340d79e19921ae7b985ecb037855b3",
-        "sha256:08ce2c6a908b36f58f12d985c5e38cb513acbae7176e30362366de85347ed0b0",
-        "sha256:71a4f989a069bbfa082ed1c95b6d592cb559164bbc3e59bbd3e4516acbd121b8",
-        "sha256:93821fe3c3d6a6237b2810173fd5930d7650eead430add543f323b70ec45cc48",
-        "sha256:fa3365775b6703acd140afe11e50b9f546326dcb8b74d608086d15e6f3393b20",
-        "sha256:ce75591156a712c29b635ee22f70387d62faee6d006cf41308a4649819ed6abc",
-        "sha256:334050b16537ed04fbda77c181a7442d51c502b0d35014eedc670fd651e85786",
-        "sha256:19224d3273d70c3effeced094b414ca5df1fdb1316e39f9ba9f79236dd760c51",
-        "sha256:dc72750acd6bdc3c06076d2f61c0cd7e8b1ef02b5e7499c142a0142d1bc426d9",
+        "sha256:91a3e4fd999e1e1123daf461b7af133716d1a5c86fa027e7d4460e172ae4c667",
+        "sha256:ab0354e29293adce96b9106de5b795be0cd01f7d3fec9dfff1d26fd6dd7a03a0",
+        "sha256:8907b49adfad94d4ef1d426469b35f4199710c9f2364f1381b3280ee6fcc6c0b",
+        "sha256:5e0e7a26e2d065ff213c2544cd1735aee2e5c8e14f26af3d3d40cd89706d90e9",
+        "sha256:6415125a5c9362b8b2fb519652d51dac54495eb17ac13a8efc1d0c01465fd76b",
+        "sha256:acf1a5b94a183cefca351af0257cd83d19743bd2e5fe4e90e580ed4039d16b6f",
+        "sha256:0a701f25bf91d130c669beb329c048fd57504b3d398738383e26b1532ad4ce35",
+        "sha256:8343dace323f0af0efda3cdbd541b09a1524b6bda415786c33bc7cce61ae4050",
+        "sha256:953543c89f85d80e15a183043a683ccaa05f69c6c3bb3c58c4b70080fcbebfd6",
+        "sha256:7dcd4c85d04003ad27bc97fabaa3852ee52699065a01395c18cb773d160c53f2",
+        "sha256:d5f392b056defc290a57cb77da10475f75c66f9d16cd42737589f4d5025286c3",
+        "sha256:1e7e05e399eb8f8cde731e645b31188f3607c992d538dc76eccca80c071a61df",
+        "sha256:a39a9c28955850d803f240ec0e29fa114f803bcccaa4c01dbed9b890596989ec",
+        "sha256:5ba61edf5694d7a6d1a57163728d07e2a39deb3e71b8df671a4ff7d7ca28c9a4",
+        "sha256:cf1b32b5afd459cee99a80cae9761b8ddc499e0396253d17fdb2466a59c34e01",
+        "sha256:f8daafdf176b247959630b7760e811a1ae9f449e3f1f0461fe54d8a520e9183b",
+        "sha256:2287965fdbc2c9926419d913473a16022fb029fb5b1059ff6974763d3172271d",
+        "sha256:e33f2b187df71f8a4e660c096e8be2efe8209d79abb190116d522fcdf5ff5a21",
+        "sha256:441af14783469fbafe8f54bc01b439b6f57fee16d8993085a94431bbf3190bfd",
     };
 
     [Fact]

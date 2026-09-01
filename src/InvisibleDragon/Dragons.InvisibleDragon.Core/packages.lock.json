@@ -96,7 +96,7 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       }
     },
@@ -107,7 +107,7 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       }
     },
@@ -118,7 +118,7 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       }
     }

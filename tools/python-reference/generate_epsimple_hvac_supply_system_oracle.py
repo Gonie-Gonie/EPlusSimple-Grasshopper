@@ -30,12 +30,12 @@ from typing import Any, Callable
 SCHEMA = "dragons.python-reference.epsimple-hvac-supply-system.v1"
 SOURCE_PATH = "src/epsimple/core/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 53_850
 EXPECTED_SOURCE_SHA256 = (
@@ -48,9 +48,9 @@ EXPECTED_SOURCE_AST_SHA256 = (
 BASE_PATH = Path(__file__).resolve().with_name(
     "generate_epsimple_hvac_enums_base_oracle.py"
 )
-EXPECTED_BASE_BYTES = 61_458
+EXPECTED_BASE_BYTES = 61_377
 EXPECTED_BASE_SHA256 = (
-    "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+    "sha256:a397d3169f61a375b12a3934a2270874bfef1f3713a635cfd5e342668d12046b"
 )
 
 
@@ -176,7 +176,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:9aa09c93f083fd82df4a25c756fbebf5c8138a44db926f316ad42bb298e2fc64"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:4f5dfc68347827185ddbabfe9734c052342583fe11860eafd207622f5a92cebe"
+    "sha256:7970cc0df3abc11f86dfef9f12b9605907818f7077dd275d20796c8e8701a60b"
 )
 EXPECTED_FACT_SHA256 = {
     "epsimple-hvac-supply-system.air-handling-unit-construction-json-source-capabilities-dragon": "sha256:647e2b09be67fe1e7d2af204ed2cad94bf2cf729d6b73976177cf330bd8a7fcf",
@@ -296,24 +296,24 @@ def _native_route(symbol: str) -> str:
 NATIVE_ROUTES = {symbol: _native_route(symbol) for symbol in TARGET_SYMBOLS}
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 6_465,
+        "bytes": 6_456,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs",
-        "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5",
+        "sha256": "sha256:7ee0ec0b4eca1a78b4c6df5f6ba452b784bf09859ff24e6f50c681d16a63f1cb",
     },
     {
-        "bytes": 48_650,
+        "bytes": 48_641,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
-        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968",
+        "sha256": "sha256:a212275276ccff153d5df42a44a46ac8877afa485e315ee27d08767a909f29bb",
     },
     {
-        "bytes": 16_652,
+        "bytes": 16_646,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
-        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842",
+        "sha256": "sha256:40e6e7aa1eb89cb341c7e7a32471fa029024e49b261dce8a8926514109d727ba",
     },
     {
-        "bytes": 87_343,
+        "bytes": 87_154,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
-        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd",
+        "sha256": "sha256:9462f609a4a7a4e062612e4058921b0c91931dc8ff7216dbe54e258cb59ec22c",
     },
 )
 
@@ -1628,4 +1628,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -28,12 +28,12 @@ from typing import Any, Callable
 SCHEMA = "dragons.python-reference.dragon-hvac-misc-systems-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 137_833
 EXPECTED_SOURCE_SHA256 = (
@@ -46,9 +46,9 @@ EXPECTED_SOURCE_AST_SHA256 = (
 SUPPORT_GENERATOR_PATH = Path(__file__).resolve().with_name(
     "generate_dragon_hvac_supply_core_oracle.py"
 )
-EXPECTED_SUPPORT_GENERATOR_BYTES = 65_898
+EXPECTED_SUPPORT_GENERATOR_BYTES = 65_859
 EXPECTED_SUPPORT_GENERATOR_SHA256 = (
-    "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97"
+    "sha256:7ce1af80729c2f2aa333016ba95db3963b25db24e1b23d2c89f49ea2694590e2"
 )
 
 
@@ -177,11 +177,11 @@ EXPECTED_PV_SUPPORT_RECEIPT_SHA256 = (
     "sha256:cba0ef027d545cebea7499110dc774d4dc7e7de85e1ea8ae1f0b7b42828783cf"
 )
 PV_SUPPORT_FIXTURE = {
-    "bytes": 147_261,
+    "bytes": 147_258,
     "cases_sha256": "sha256:767c3314ec20d07aa12fdce48b9969a98b54b835855b4be7ecfdd896816be0dd",
     "path": "fixtures/reference/python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json",
     "schema": "dragons.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
-    "sha256": "sha256:07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b",
+    "sha256": "sha256:34793bc83100d9c527f1a7dce5e16dd4527ccb0e193e8db48e70ae35d3dfc7e1",
 }
 
 EQUIVALENT_SYMBOLS = {
@@ -272,7 +272,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:4f52a6e71dd8f2136d7ba9cfe61e904e2038d831291f3cb8c50c0f18aa5e7ca3"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:6acc31ab341ba8abf3ef70b8efc755210ab3febe048bbf4af67728b801de000b"
+    "sha256:97b070ecdcde1818f19c72b08dd5ff23e0ba183382eed7000ad6a2ba9211af8a"
 )
 EXPECTED_FACT_SHA256 = {
     "dragon-hvac-misc-systems-core.domestic-hot-water-constructor-fuel": "sha256:8492b46ae506b16cd682e22a4b5b104ea8151eb866c5f308730a29e684d9e13b",
@@ -297,34 +297,34 @@ EXPECTED_CASES_SHA256 = (
 NATIVE_IMPLEMENTATION_COMMIT = "8f289eb8e94883cde53f583ab250fa6c4394ce2a"
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 7_582,
+        "bytes": 7_561,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
-        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "sha256": "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249",
     },
     {
-        "bytes": 1_941,
+        "bytes": 1_926,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/DomesticHotWater.cs",
-        "sha256": "sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d",
+        "sha256": "sha256:590fcaf0e9011fd6841c2e9679d46fe3a06acef091587b7de5a216f88158974e",
     },
     {
-        "bytes": 7_074,
+        "bytes": 7_056,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
-        "sha256": "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82",
+        "sha256": "sha256:6937f9d9204bdbfc7907de15540772b4d33a0e5ad2a73beda0888fb89682f8cb",
     },
     {
-        "bytes": 22_015,
+        "bytes": 21_985,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "sha256": "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28",
     },
     {
-        "bytes": 50_764,
+        "bytes": 50_723,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "sha256": "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4",
     },
     {
-        "bytes": 13_182,
+        "bytes": 13_173,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
-        "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "sha256": "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048",
     },
 )
 

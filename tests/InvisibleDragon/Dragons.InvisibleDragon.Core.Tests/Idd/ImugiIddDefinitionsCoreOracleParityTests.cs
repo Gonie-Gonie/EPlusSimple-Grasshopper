@@ -15,9 +15,9 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/imugi-idd-definitions-core-oracle.json";
-    private const int FixtureBytes = 165_323;
+    private const int FixtureBytes = 165_062;
     private const string FixtureSha256 =
-        "sha256:3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69";
+        "sha256:5b586ac030309bed3ab840525b4c9cff207b97919cff76bb48e8003b9135bcf9";
     private const string FixtureSchema =
         "dragons.python-reference.imugi-idd-definitions-core.v1";
     private const string FixtureRepositoryCommit = "f208041";
@@ -26,21 +26,21 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_imugi_idd_definitions_core_oracle.py";
-    private const int GeneratorBytes = 70_965;
+    private const int GeneratorBytes = 70_938;
     private const string GeneratorSha256 =
-        "sha256:fa70dfc565a30542f58697cee512701356cf2200b3f07332de4e345f0b7b1398";
+        "sha256:6b69716bca218db814bc1eb2411e19f1d9614cb5857f70e93e461e5c95fb1c0e";
     private const string ValidatorPath =
         "tests/PythonReference/test_imugi_idd_definitions_core_oracle.py";
-    private const int ValidatorBytes = 23_636;
+    private const int ValidatorBytes = 23_633;
     private const string ValidatorSha256 =
-        "sha256:b797ab5cb57509672d644bdc733ff2b8bd8534c4d697972f7722b944a7ff66f9";
+        "sha256:5135e0f97382969393313dbd4be353916f33454ad1241dffb257fdbcba303930";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/imugi.py";
@@ -66,22 +66,22 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
     private const string NativeClassificationSha256 =
         "sha256:18ec23c265e1ec4e1a03900cabb555878be94260721f3e3e0917494b636aa8ae";
     private const string NativeRoutesSha256 =
-        "sha256:5d667ff19b24ac69c71cb9cc6b28421ac7a94b74a1607cc49e2efd1044a42418";
+        "sha256:3b16564cba60821614f0206705e93a0a09a13b9507af5cda0743d139fe984e8f";
     private const string NativeSourceReceiptsSha256 =
-        "sha256:79a9fdb0bbb7ab52d9203cda6225fa12bef234175f618c31f449334ae0e3fd02";
+        "sha256:17a7108a6961f7585bf0678ab1a7c0f3372d1e67ee28bb2368a77b72a25f5096";
     private const string FullIddIdentitySha256 =
-        "sha256:7e37ecb64566277e54a8c406dffd8df81517df6babfecba1a5a6feb6a9ba15af";
+        "sha256:8225b83bdf960137d81363da69b81acd639b309eb394e845648dd041c3cff8f0";
 
     private const string FullIddGeneratorPath =
         "tools/python-reference/generate_idd_schema_oracle.py";
-    private const int FullIddGeneratorBytes = 38_634;
+    private const int FullIddGeneratorBytes = 38_631;
     private const string FullIddGeneratorSha256 =
-        "sha256:64986549c0e3a3aadfef16606396006257d1be4e3b301058098ce364db8391f0";
+        "sha256:29287f01c865d01c67bb25f1cb3e6d3f1466bed7859379342d7276124cf4cfc7";
     private const string FullIddFixturePath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int FullIddFixtureBytes = 585_482;
+    private const int FullIddFixtureBytes = 585_481;
     private const string FullIddFixtureSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string EnergyPlusIddSha256 =
         "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2";
     private const string NativeHash =
@@ -92,14 +92,14 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
 
     private static readonly ArtifactPin[] ReviewedNativeArtifacts =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs", 13_005,
-            "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs", 19_960,
-            "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f"),
-        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs", 8_339,
-            "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa"),
-        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs", 16_860,
-            "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs", 12_999,
+            "sha256:b6be5a2ac41a05f519d8103a816d90a0153fe21d64916671ff430c964c516f66"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs", 19_954,
+            "sha256:555b79f49740c1da4149002b9cb8e4507ea806eac10866098057f040e4fc55b3"),
+        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs", 8_330,
+            "sha256:1d58b2af26801c1359f022f9498c2e9109f7e0917eb74001f3a2a6c4ac0d1fad"),
+        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs", 16_839,
+            "sha256:9111d5732c096495edbbae830df3bb04d0d2373a54e36270ae402658f47f63c7"),
     };
 
     private static readonly ArtifactPin[] ProductionSources = ReviewedNativeArtifacts.Take(2).ToArray();
@@ -195,11 +195,11 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new("A01", 25, "sha256:676a736a9dc1f029b5428ffca232ed1f07bdde700a4790a8876c3caa43453dd3"),
+        new("A01", 25, "sha256:0767fe4fa07a147b9331fdc42d13c2ae410092705c4d3e2fba39cbe9deba33a9"),
         new("B01", 7, "sha256:a9eb9f4173806f044daeddb92aacd83d5d057bdc2a44f61050cdc508a21dfcab"),
         new("C01", 25, "sha256:d180336669074f59b00c77cc06570a5461c51f752aab6470c680b211494bad26"),
         new("D01", 27, "sha256:5ce6a9199f53bd476df8809a17087594d1426751697222310dd2de101eef7483"),
-        new("E01", 19, "sha256:cc6af54a8b10e195091e93f9133c6e7207e6cd4c618f3c39924f5a8dde7ad591"),
+        new("E01", 19, "sha256:9ab5dc0d58fad29428e06aa8da49ccf716804fc85ff652a6f58eabc0ad4471b9"),
         new("F01", 7, "sha256:4cad3f75e0740ac201116f929d4a242ecc152741b2e2aa3efc821099944e7751"),
         new("G01", 18, "sha256:1b4f12941b6db9114607240b36de663c2ae5a7083ef57c7d46b5470c240bd47e"),
         new("H01", 23, "sha256:c7e32caccfd6cbe5a834e41af782e5e9a63a989c2ed215f869fc3ec6897c6658"),
@@ -207,91 +207,91 @@ public sealed class ImugiIddDefinitionsCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:11465c65883f63aeea67c0fa88d37042589bba176d42f18c6c2bf92dfc9ca5e8", // 1123 IddField
-        "sha256:2db9a361deca0360c042dec43ed3bd9a6e26263af0e48c75367d91d3da6c4205", // 1124 IddField.__eq__
-        "sha256:78726b4e017dda28550728ccf0d53379b1aebf1e883c0173675b37bc09129208", // 1125 IddField.__init__
-        "sha256:6aff1a32f27c68366a1301520afc7363d7624f2a2b785a70b6107846c26ae615", // 1128 IddField.default
-        "sha256:1eb3aafd85943de37f9649bc97c836969c2ce98b71e8781cf987127f1b5c063c", // 1129 IddField.external_list
-        "sha256:8b9912a4c6f36eda42d920326e3beae7b432317946247a999f5d33a8870ec7ca", // 1130 IddField.from_text
-        "sha256:1fb85af57dd88d7c3424836671a208f84c55e31186980e6cbfdb708d5cb14ef7", // 1131 IddField.is_autocalculatable
-        "sha256:e00d5522733d414efa241ce95b13336aa77ca058f3d4aff95cf2996e3f4c8397", // 1132 IddField.is_autosizable
-        "sha256:b7fa299d8ce591b78b469433d9dc584d52c867807c1d8fb919b9f5304c32f7d7", // 1133 IddField.is_deprecated
-        "sha256:8cb19253e511bf5cc94d10c85dbbb380a1aedfe7dfca6294e16a38ff0dca2ff8", // 1134 IddField.is_extensible
-        "sha256:32afa60db379cf00b9f202e8fd6dccf0e3c809f3df635f542501260dec41d71d", // 1135 IddField.is_required
-        "sha256:692fc8b89aa5b3bd1e40b096461612892448a8f8dfbe7d9d59582e6b87ab29b5", // 1136 IddField.is_retaincase
-        "sha256:55a59dd865004479377820811afef5c29567bf9a3427562b65de29606f0acf5d", // 1137 IddField.key
-        "sha256:6dc457f34627a82d395df085158a62c0a4ff9df02b01326b50aced690aa0649f", // 1138 IddField.maximum
-        "sha256:b201f99a7fda44c68872c258036a15469c8bb2bc09dd2e2f1792b555762d1553", // 1139 IddField.memo
-        "sha256:1e6ea2b2b7f235f6b7aa99937fc4c4732e0558c71b54a3fc705103e6470bd8d5", // 1140 IddField.minimum
-        "sha256:8af36bcf459e9fbe86b41190774544e0b2f3c6290861525c46bdb6dc0b229a9e", // 1141 IddField.name
-        "sha256:2ea49ee72526df51d8ec95ccc1f8c2a3789a9c0d874781c4c24cfaf589ecb65a", // 1142 IddField.object_list
-        "sha256:b7c2e12e20964cdf1b72ce81b6ad1990b59ae809a6c38b2968092a9edf3fb822", // 1143 IddField.reference
-        "sha256:20fd112a5f75a9659379f6595eceebaa8b29227cda84b44ff2bc30819ec26fdf", // 1144 IddField.reference_cls
-        "sha256:c68f481024a739af7c6ff41b7ebb081bb23f903c696a28dfcbf65b684c6c3028", // 1145 IddField.referenceable
-        "sha256:45caf1f5369057da52e86294e596ffd62720b7bbc0485cea03a8b3b091f19971", // 1146 IddField.type
-        "sha256:4ae32fe67c1a15bdc4d10f5245edbe7bb0f7bb9857402a287fbcdb3974ca0810", // 1147 IddField.unit
-        "sha256:ab78b423c973cbb2d17cf8787c275e6d78fcfb66ecec3273f1de8ea128fda1ee", // 1148 IddObject
-        "sha256:1ec0e0d0b7f42b1dbe0ab380857c9be77e5e38fa02e2a11e3892321fcb61ea0a", // 1149 IddObject.__eq__
-        "sha256:42f8842eca2aebcb52f962a913bf99c01d15ef7cf16e6a61855064a40585c534", // 1150 IddObject.__init__
-        "sha256:32607d13d85d8790224f27a2306e5e87a1e1ef12b92b3c79265dc7c39e560eff", // 1153 IddObject.begin_extensible
-        "sha256:fac5807754f6c98414fc0bced33ad3b967984ef047fc9edfaa41ed3efe9479fd", // 1154 IddObject.default
-        "sha256:e342cc7f4ce81549017f3ea89b14e3de33b3a21c0b020d5962a20391fc6df0b4", // 1155 IddObject.extensible
-        "sha256:c797e5dfdbcad668fc3e87653c48064074e0ac845d8e80f3cc6bffbe1224cd11", // 1156 IddObject.format
-        "sha256:a23e3efc1dd4330c9fe48f512e61698293368f9620c44f6582555b2aeed03cc6", // 1157 IddObject.from_text
-        "sha256:6b15ed10c4b470e5531a5c3ab17fef05c380e7774562a0280a14d53efa6cb0a7", // 1158 IddObject.idd_index
-        "sha256:4422852be2c5e5744639ae95f83f84d101868b12146ee6237b43b94a55fb0702", // 1159 IddObject.is_obsolete
-        "sha256:f6fce9ff22090489eb653682b8c94442f5a60310b7d0cec241859aa2dd616e60", // 1160 IddObject.is_required
-        "sha256:720a16ce2e26b5bde087d5a6fabdcdfc98c6d6af679c1ecd1b25917ee12f5be7", // 1161 IddObject.is_unique
-        "sha256:046929c27229e3cf2a249ed64dd4759f4db0339cbdcc6bd5502e32c3c737cf80", // 1162 IddObject.memo
-        "sha256:1b9db4c65e380598a1955b6e56de2554e99adb0ca531379e94fb96fb6dc7e964", // 1163 IddObject.min_fields
-        "sha256:0abcf434f973f5da1fc287a4c575e8ccdecfd5c0608fc5ca169679d11b9f965f", // 1164 IddObject.name
-        "sha256:b4c4bef580d189f6d81f63ecb833b34266b82c52c5408922f4598e3c3fcc6aeb", // 1165 IddObject.reference
-        "sha256:c530c822b4dbb341fe0690d38dc4a0a0e85136a481845204f981c06f3295596e", // 1166 IddObject.required_fields
+        "sha256:fec3ff648145c848d4697c2617a2f9426a4f32f866b148dfe20e640903bffca2", // 1123 IddField
+        "sha256:27122973e4f00f33b713003af3c9976c2de74b7738c4e218db3822908fdf4bcf", // 1124 IddField.__eq__
+        "sha256:640b9087135a062708040d9a840007005ebfc1619c704dc999f29fc8ebb05ed5", // 1125 IddField.__init__
+        "sha256:ed47ac4353c7c1621c329dca2a80c5b92d3364875b5debcdb64c3911480cc2cf", // 1128 IddField.default
+        "sha256:af15a402a0119633b881854f2d83d4efa0c17f7a5f02025876dc18c152dd3310", // 1129 IddField.external_list
+        "sha256:d17570a7287c92304c4935fa71c768146a2bf706b75054015c46b6bdbf39f4af", // 1130 IddField.from_text
+        "sha256:b725a3cb00ff8a5500c3ce0b34e1d7980824baacf4437e4f0a3daa22ccfd88a1", // 1131 IddField.is_autocalculatable
+        "sha256:5d06cff47bf62d00b84e43d67749ba1edd37e4a8eee79b9b31fc33fb783b790d", // 1132 IddField.is_autosizable
+        "sha256:2bea460d9c5f1c3636bddee29f06c447f140542d9c43808467050ee770f67907", // 1133 IddField.is_deprecated
+        "sha256:8e4fc7b06401a2acf6e44054aa5a7b68d222b5954f75fd26931a93592f74164d", // 1134 IddField.is_extensible
+        "sha256:ebb4dc95348e5d60d59f07914e993d3ce18de8eaf512c3f19bb155d3ca47a16c", // 1135 IddField.is_required
+        "sha256:e35654072eb3a5e97bc1a06e9c0c733e44781a3313bf4ee0725fcbba6619bf2d", // 1136 IddField.is_retaincase
+        "sha256:7fb51664f89654378c116ea4ed0a8fdc086a939e11d241039278c43b45384e1c", // 1137 IddField.key
+        "sha256:f45a4c3b470f1ebc27c9955d612b44b005c63842e351e3caf4549e66275f9b25", // 1138 IddField.maximum
+        "sha256:210b5a2b3ac5fad27b9f7dfd4345437deb185aa41289d712340a42f8b40582fe", // 1139 IddField.memo
+        "sha256:ea204a1e0c465cf91601809f99acae5391303583630d689b3cc8a1c6f6118abb", // 1140 IddField.minimum
+        "sha256:57bf8ed0e7f08e32c40a510c349925589ecf26ceb97a1827e3e4b96501c31d03", // 1141 IddField.name
+        "sha256:a9bbf3410c81da0fdf833105e34b73f47f8506e4ef6ec2aa0b521230686cfd17", // 1142 IddField.object_list
+        "sha256:688e86603b1269ee481683c98a4ea1ba2de5a082f32db1617b2fd9ba67d4bda8", // 1143 IddField.reference
+        "sha256:1dd0afd3b99cd3d4e087619116deb1eff8013e0e62a0e03074a1f8ff72594023", // 1144 IddField.reference_cls
+        "sha256:b891a069dbed99b7b98e337a542a90a7cc027625f9f66acfe5f86ee13f81313b", // 1145 IddField.referenceable
+        "sha256:6a03275d42ae59bb3c204e9220cf6eb34d9b73928d2617b996c2975174ac3265", // 1146 IddField.type
+        "sha256:19a6e6f2f35e0dee6dd7242f32658e873125fd38fb10beeddbf949f8db730dd8", // 1147 IddField.unit
+        "sha256:710a4d5edd089ef677768ec842a617f6c1c13b2c0b90bc8fbea5f4eea82e44d1", // 1148 IddObject
+        "sha256:39a41af31e71f1a5b5dead38dca8aa3f123ebce433222b8eb20261b578e52758", // 1149 IddObject.__eq__
+        "sha256:9bca02f43b885da0cb8f49b5e7fcd0016654a89b694506bfc0eda63e9435cc42", // 1150 IddObject.__init__
+        "sha256:fab3dd6cc8d844ae3f5e7c04b0882bfbe2e37a9c88eada30a03a8c5e2110910d", // 1153 IddObject.begin_extensible
+        "sha256:bf4757f8a94b613cc52062d4297578986421b21c6bf9ab070ecf03d63749ec12", // 1154 IddObject.default
+        "sha256:0fba15b4e425620077cc00b403deb1af8603a4cb2c278968ff05b16935d251cf", // 1155 IddObject.extensible
+        "sha256:caa654b514ef8703f4c3d8bb709471a31c7a03eb9ba42ee735e2a08e3b86af3b", // 1156 IddObject.format
+        "sha256:aefbe9f9dcfa7f36a45da7edc0d3ee20f1ff87e56c9d913e621a9b8c8459bad4", // 1157 IddObject.from_text
+        "sha256:73b83a6c0cc4ad963156362e4f6de3ea8f98beab9a203d76d9faeb7615a69172", // 1158 IddObject.idd_index
+        "sha256:63f9b4a8de99e63f56819fe70f9e0e0306e3f6a9da1ef82e183c37e12fd3eab8", // 1159 IddObject.is_obsolete
+        "sha256:5196f14cf005fcf87211e67af5ffef30266631d7fde50861073e9797e0ccc16c", // 1160 IddObject.is_required
+        "sha256:e46e7683572d24ecec5b209183af477a50e75c756fad35c868006feca257b697", // 1161 IddObject.is_unique
+        "sha256:79837b54a144644d652d14a960a79ba699c22f245c78c39fddde3f1697d65c73", // 1162 IddObject.memo
+        "sha256:46d62cf5e5359d7b82ae535d7bb5783ca4e5a70f8d6b84471ada40756946f3fe", // 1163 IddObject.min_fields
+        "sha256:824206ecfd7fb81292417cd1941c8919ca951d3365f6b4cb6f58137a727ce901", // 1164 IddObject.name
+        "sha256:8b87d5cb2b6165ad78181d0aa917529ff206a715ee4ed1caffce286cdfadad9a", // 1165 IddObject.reference
+        "sha256:cbf0a3d5c8a1c1dc37a86acaf8f376292c9209fab2837807d62b3c2b5ab13f35", // 1166 IddObject.required_fields
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:9d137d5283eeff82b72ddd1fa2e47e626a4a9446dbbcac83242caa9083dd2b4d", // imugi-idd-definitions-core-1123-209ee073
-        "sha256:f4c227c209456056a8b725767d9c62baf6cfb77183e27057a5801c382942b118", // imugi-idd-definitions-core-1124-cc926b4c
-        "sha256:3cb6067f47094592c4937818512b9b8fa46ee3a06674896b0fbf0dbeb5009131", // imugi-idd-definitions-core-1125-e4303f76
-        "sha256:15ff9327b246e8b08123764a74e157887e7304006687189ed7d805335fe0a054", // imugi-idd-definitions-core-1128-4748d03a
-        "sha256:2bfe79d483eb810c2deb3397e55f33dd2c56a82aef070dd9c21df85a7b2f0cf8", // imugi-idd-definitions-core-1129-d3f9ed1f
-        "sha256:341cb5e4afaa61813b6266831688bdf8c86b653cdd5d5ee4bb22ac34727ddab8", // imugi-idd-definitions-core-1130-2b6d880a
-        "sha256:be4180f9a9424a8a0a4901a0c616ae1332b5ddc7283bb3256091c1b34d450d2e", // imugi-idd-definitions-core-1131-d0349be4
-        "sha256:173fc29335d8dde40595636790c2414e0a2da379a45608c7cbebb97bbb55dd10", // imugi-idd-definitions-core-1132-a5aa4b09
-        "sha256:f32dd7ffdf61c8cc0190df4518fd039403d08a670ce47ca39b61eea09ff7e690", // imugi-idd-definitions-core-1133-83922a08
-        "sha256:d62c9814d8215d835516a2322a904cab7a74963c970807e396182b529e94129a", // imugi-idd-definitions-core-1134-6f8cd3f1
-        "sha256:415c13a372bbc7c54d388675b8f50b17ebf4429ff279553683ba5704c8563302", // imugi-idd-definitions-core-1135-b64e2145
-        "sha256:37689102cc70615d32125dea8d6e90849123b0571fd70e667efde1ef1250a8ee", // imugi-idd-definitions-core-1136-46f42932
-        "sha256:fa551b81235d4ba36d4809ebb893a73b51aa80f5a8d732fd1a815c2bc74eb4fb", // imugi-idd-definitions-core-1137-b2a62552
-        "sha256:4703770c22ea3018b781bb07d1f3e8f761a90a95adb36187250b98aaa153c43c", // imugi-idd-definitions-core-1138-0fc0df49
-        "sha256:87662be1d512ed73fff82aa5023c42c1677d35f93a39faa5d88fde1ef9c0a6fe", // imugi-idd-definitions-core-1139-203215fc
-        "sha256:4aee0fa6e55413e119d35e70d225e549644e1b06101739c4f2cf642fb5a3167d", // imugi-idd-definitions-core-1140-04d44d1d
-        "sha256:176ad20d5e2698c95b7c571aaf8c846b2fd8b26b361026721c1effc7ecb248e7", // imugi-idd-definitions-core-1141-dc05a34b
-        "sha256:58b4526e67e448fe36e43eff876e311865459ff2479adda684f77d8bb2a0f05f", // imugi-idd-definitions-core-1142-f35f045c
-        "sha256:893510f276fa098d06b719bf6de9169672ae985e705a29a7c31cb6b27c056881", // imugi-idd-definitions-core-1143-ecceb577
-        "sha256:588690135b7f5f7b99c464b5adae6b28ffb8e6c8ea9063b1d5c57f8caf434209", // imugi-idd-definitions-core-1144-704213be
-        "sha256:393aebbd921b380982b50cd96868d0908e50457cd4c4d51fe9128493c0cc653e", // imugi-idd-definitions-core-1145-4695751c
-        "sha256:f1c935a3cce0915630ad58e2861694edffad299eb7d398152f8d0188937dfd33", // imugi-idd-definitions-core-1146-5b7e3d73
-        "sha256:924605805d6ad918e4b52c5fb7d82ae13ef96984359cf52709cdf8271aaf8b8e", // imugi-idd-definitions-core-1147-59edda63
-        "sha256:c3ee9252bc55c14689fa778d202b826eabb6db0d498b95635a867ff19c09074e", // imugi-idd-definitions-core-1148-8a75cdbc
-        "sha256:b2931121bc1f80a86839aeefb28ab315649c5ce872a1faa5106e2d931cb5d8e8", // imugi-idd-definitions-core-1149-355edc7a
-        "sha256:a5d9b8a39a73a532245f137eef0feb02f7b8e2b445adf469ae3ced73606ec236", // imugi-idd-definitions-core-1150-a85878fd
-        "sha256:ab82d0d0a8e1d70bb9e08eef686b8979c0ab528b704fe8e4cac24e38db9c1c1c", // imugi-idd-definitions-core-1153-cc944d8e
-        "sha256:3a3616ae83e2a3027cd7781b0e02e1f7ff9ee5ac76018e655af8e14e916c8902", // imugi-idd-definitions-core-1154-ceed741c
-        "sha256:f114d072e4a8f16f06a43bea6f929f8b052aa270a386a1f48d1c5d1b1bad05f9", // imugi-idd-definitions-core-1155-656dae5a
-        "sha256:f966d8d93570263c81ee8990b826ffdad14a6c86a72cd4857d010833a98e6b8f", // imugi-idd-definitions-core-1156-54aa570d
-        "sha256:999060046e6470b63e782d66eaec66bfea422a9b82b1176859c512111cc503e8", // imugi-idd-definitions-core-1157-e55a8f89
-        "sha256:c04a03e27c8862a5366a98c0a7428052d7a667834d1e7a8b15133a461f345451", // imugi-idd-definitions-core-1158-b7a1f5de
-        "sha256:4f99e9b3f31f9f8723e6d3d21c023cee2ac15dde5c17fbf7281775dbe8fabd74", // imugi-idd-definitions-core-1159-b654e577
-        "sha256:61b392a42c719febd001d5bf07bb90a8d5587ec5166dda3a513458dbe31b13c7", // imugi-idd-definitions-core-1160-b64e2145
-        "sha256:6ee5b51dab7226e62d61ae91a9a88793bb71ce9fac07edca5c77e40cb1855d8d", // imugi-idd-definitions-core-1161-9f99bd10
-        "sha256:fd240675909c8ba3848269184a2302f95676e4eddf7dd7a49424f56e29f2b8b8", // imugi-idd-definitions-core-1162-203215fc
-        "sha256:874a67f14644a76eaf0110d679a402ab8796cf804b0d43467234eb9b14e77cfd", // imugi-idd-definitions-core-1163-1821fd04
-        "sha256:c093f5045e5f3c7568b750eeed7547c0c3382888f98d718a0ec39e4b4f7f6459", // imugi-idd-definitions-core-1164-dc05a34b
-        "sha256:39b5eb618540d1d550d82c4b3b61a71b4a487425798647655374d5dea4730cb7", // imugi-idd-definitions-core-1165-ecceb577
-        "sha256:87ef21bf335b669ed0d47c30fa3e6f218cd93389d919a7acb49891042cc75033", // imugi-idd-definitions-core-1166-b01c46a0
+        "sha256:64163b1ff726beee36146392bd25d348ff6e2d43c63b322754a4d82336f66e36", // imugi-idd-definitions-core-1123-209ee073
+        "sha256:485b2a82b7ce1800037e63bfb99d28b2b384f76d30bb84a73a4827f8a3397299", // imugi-idd-definitions-core-1124-cc926b4c
+        "sha256:7968e7adfa0ace077c0224c226b90a70c48ee061fcbe2206b902f58522647300", // imugi-idd-definitions-core-1125-e4303f76
+        "sha256:e1b9b40faab999c5520b9b16a684faa8111f695df2f82691c21c7b82dcea2e3e", // imugi-idd-definitions-core-1128-4748d03a
+        "sha256:72817c81620991393d7c4dfa9bdbec4796148574ff6a977ae87640aea44822cd", // imugi-idd-definitions-core-1129-d3f9ed1f
+        "sha256:13631f204ad57b6181298dd76845474bb7e9d03b2b5dc64f818e949b135813ad", // imugi-idd-definitions-core-1130-2b6d880a
+        "sha256:03154ee80aa5fe46d75a1149a86c310213f70c6309929d25f7eddbb03fdc70cd", // imugi-idd-definitions-core-1131-d0349be4
+        "sha256:a743f93c8fdff44f3008d7d315bd2910336d3e43a2c0f0280928109059f1b80e", // imugi-idd-definitions-core-1132-a5aa4b09
+        "sha256:26a982073f6918e1ce58a75cd0dd79afb8ce5ff4b26ebf0aefeea83956c66331", // imugi-idd-definitions-core-1133-83922a08
+        "sha256:b8ea3924efec421571e985b439f5bc56a43991e2b0059aaf5cc114e4befd1849", // imugi-idd-definitions-core-1134-6f8cd3f1
+        "sha256:0544f71ab5dc9c6c655aa0fdaa36a3372df5fbffd2a795c958f4319ac3f771bd", // imugi-idd-definitions-core-1135-b64e2145
+        "sha256:02861c0edc23be7a914e76b056acdad712fe65721419dc8423eda33eda672b57", // imugi-idd-definitions-core-1136-46f42932
+        "sha256:4a0c76794b601477b536ae9c640c5c31e86ce2cafc4d2db5768182aa84e0443a", // imugi-idd-definitions-core-1137-b2a62552
+        "sha256:2acdda469e5b18c3c442b20974d7f9ec0b8bfc4818fc505fa9525a915a34d847", // imugi-idd-definitions-core-1138-0fc0df49
+        "sha256:c852a98cf200e5e0ef54792672613f2c02f0588f5d6417193b91816a50001181", // imugi-idd-definitions-core-1139-203215fc
+        "sha256:74f9b8edf4481d15ea776ab326c5b2e366d0ee484e42e6e21d34ff1403529e2c", // imugi-idd-definitions-core-1140-04d44d1d
+        "sha256:34262c2eebd9eefaa419f0f02e0b6b6780fe88669c2bed1b2c18e8b510d78a95", // imugi-idd-definitions-core-1141-dc05a34b
+        "sha256:c291c0142fa2a3f6a676b45ade21209af37888d7dc0cba335dcf07aae0f7da91", // imugi-idd-definitions-core-1142-f35f045c
+        "sha256:ff9ed36e71062420ea309580ecdf5712b4fd7a5755f5ba0c677d851850d1e003", // imugi-idd-definitions-core-1143-ecceb577
+        "sha256:fd13bd75b7253e87167105960db8de66300512afbfdbc4ad4f95b3af1f795cc2", // imugi-idd-definitions-core-1144-704213be
+        "sha256:d8f351dc9a72bad144535293f484a673ab02eb7e674e83373a7cd01af40e0c83", // imugi-idd-definitions-core-1145-4695751c
+        "sha256:e48037dc25fa315de4b9888b69a07b6ded72164f0e29fe0accb59483aad5317a", // imugi-idd-definitions-core-1146-5b7e3d73
+        "sha256:d7a2d20c5020644fb35b6716ba6467f4a00c963fd7fa2c709b896e36b438598f", // imugi-idd-definitions-core-1147-59edda63
+        "sha256:032012275a1741b792101b04b27169c092b3bf83698dea3b08ed8dc1beb24ffe", // imugi-idd-definitions-core-1148-8a75cdbc
+        "sha256:fc399dfe91c1d89d98e9bf1120e4dbc47de8aa63a865183d5fafa00186152d10", // imugi-idd-definitions-core-1149-355edc7a
+        "sha256:5cf993723d743656b179c776d8896415939146e7bb2f9058b0c607077318be46", // imugi-idd-definitions-core-1150-a85878fd
+        "sha256:e1b8b18c044457ed4787c32c18d7cb729dbab3813f60ed9f4804e2d223acca40", // imugi-idd-definitions-core-1153-cc944d8e
+        "sha256:36f92b06a2ff263c0d4716afafddbcef83411d4e4bdfe33d96ee20367dac219e", // imugi-idd-definitions-core-1154-ceed741c
+        "sha256:80fbd73d4d440c922aa3eb6b2346319c2988f2516428eee47e82eb063b690ba2", // imugi-idd-definitions-core-1155-656dae5a
+        "sha256:0971fe8d8c6d8fd6ca17145c15f121a0b0e2c3900187382ffbefef1d0999b619", // imugi-idd-definitions-core-1156-54aa570d
+        "sha256:9011e2aa14f16c004fe4c8bcf56147f3a1cf258161626e7f09863f673faa9cf5", // imugi-idd-definitions-core-1157-e55a8f89
+        "sha256:247ef29f7eaeb87e2351d7b51c51a01c13c893d5ddd3044f428066344b718b12", // imugi-idd-definitions-core-1158-b7a1f5de
+        "sha256:122363d0b4e39948f5ab29fa2fab8f68a799e4873f718713770143326346771d", // imugi-idd-definitions-core-1159-b654e577
+        "sha256:a217140a357205c596886ed42efbf5995a57137db37ccc81a93d20e15cf58c6b", // imugi-idd-definitions-core-1160-b64e2145
+        "sha256:271dc02b3867628c30ba303e28ad6c6391168e65ac84ce051eef93ce157c6c33", // imugi-idd-definitions-core-1161-9f99bd10
+        "sha256:3616db3ce7ac98b71e8773d078f413dc5a0def92c478164a4f83a5a751a5570c", // imugi-idd-definitions-core-1162-203215fc
+        "sha256:d975ee814ff2b390389d367934107911f7bc78f92f33f021c5053c4ee3a4bb13", // imugi-idd-definitions-core-1163-1821fd04
+        "sha256:18bbbe3c0a83580aa7bdd6bacb4089ca50a972af148418a88eeea06e2c4cfb6f", // imugi-idd-definitions-core-1164-dc05a34b
+        "sha256:8860d539f8e26187bfea2abb7c4c1a3f6965b66a2c17600852feccbad2410d8b", // imugi-idd-definitions-core-1165-ecceb577
+        "sha256:f094708ab298e1b74d2036f89949010c6808d04a49d6f1e64861ff0051cd50d6", // imugi-idd-definitions-core-1166-b01c46a0
     };
 
     [Fact]

@@ -22,8 +22,8 @@ from typing import Any
 
 
 BASE_PATH = Path(__file__).with_name("generate_imugi_idd_definitions_core_oracle.py")
-BASE_BYTES = 70_965
-BASE_SHA256 = "sha256:fa70dfc565a30542f58697cee512701356cf2200b3f07332de4e345f0b7b1398"
+BASE_BYTES = 70_938
+BASE_SHA256 = "sha256:6b69716bca218db814bc1eb2411e19f1d9614cb5857f70e93e461e5c95fb1c0e"
 _base_spec = importlib.util.spec_from_file_location("_imugi_idd_oracle_support", BASE_PATH)
 if _base_spec is None or _base_spec.loader is None:
     raise RuntimeError("Cannot load pinned Imugi oracle support.")
@@ -100,7 +100,7 @@ EXPECTED_FACT_SHA256 = {
     "imugi-idf-object-core.idf-object-relationships-and-rename": "sha256:f7fedb8dab3e50ccaf7fac294548f0643b66c53f813ac9b84812d39a2a1290c8",
     "imugi-idf-object-core.idf-object-validation-and-choices": "sha256:a6162af6ebf81b3b9d2d015090810f37098340fccf836e44823541c42a0566a1",
     "imugi-idf-object-core.idf-read-and-write": "sha256:8ad8bde738a9b855393561c66150f855cb015c9f0ea42a144a13e0bf00cfaac1",
-    "imugi-idf-object-core.idf-run-signature": "sha256:c8e92c934fce4ae101ec6ebef6a74fc03e0cd28884192bdf4a8a9cd32e9e773d",
+    "imugi-idf-object-core.idf-run-signature": "sha256:096017556ee6c744bdb66767bb3f57d1c7c52ee7af6df6df190cb66c768113a8",
     "imugi-idf-object-core.idf-text-append-and-validity": "sha256:223305616ffe25b10756ef7a5de922e771282114b3757f558ac73276683f0e7f",
 }
 EXPECTED_CASE_SHA256 = {
@@ -109,13 +109,13 @@ EXPECTED_CASE_SHA256 = {
     "imugi-idf-object-core.idf-object-relationships-and-rename": "sha256:fe98fe37c75c289d5c6e6cb28c35206027474a4d9bef965d1c2ff0428e9218d6",
     "imugi-idf-object-core.idf-object-validation-and-choices": "sha256:319a7e8ad0efc26303e657747157a3512f5a84cb8ca4a0af06b5ca8966ce5ec7",
     "imugi-idf-object-core.idf-read-and-write": "sha256:b6cb09fcf092b7e107b93a7f4710cade1b542636ec282a2466b36e133f0c5872",
-    "imugi-idf-object-core.idf-run-signature": "sha256:0dbac25c23c3a1bb3c397707d461b29db5bde22e363f9b7b60fd78ad5de33130",
+    "imugi-idf-object-core.idf-run-signature": "sha256:0a43be3847e54fcfd9985f150b0af5541c7078ee96c2690214363f7dcaed33a8",
     "imugi-idf-object-core.idf-text-append-and-validity": "sha256:fbf30d45ff890ac30b4d11c2891d46fa38b9b2826816255bd084e57b067fac90",
 }
-EXPECTED_CASES_SHA256 = "sha256:b756d2c05de8a6c61319b0e7dcaa44e13a4a4dcc01919480418b6555e7d12cc5"
+EXPECTED_CASES_SHA256 = "sha256:703852d0899ab2e6baef64a49a13551420804ae7bbad92728a74f326a1e544d1"
 EXPECTED_RUNTIME_SIGNATURES_SHA256 = "sha256:77dec7ad133bea6d345c54a314004428272b47dfbeb7b8477a55c0fad6d2b51a"
 EXPECTED_LOADED_LOCAL_MODULES_SHA256 = "sha256:b38033bf44c4359f5ee8cf44f8a12b2b267a2f4ddf83a25f0a13b5628b20f692"
-EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = "sha256:7a61f827f76c6fe4c259373295603c25ce69da2bf33fb544511918c5caec1003"
+EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = "sha256:6a292fce75b32e2448d52655a9bab88c7393527bc0c13bb57bdc0e26ffb0a1cb"
 
 EQUIVALENT_INDICES = (1112, 1113, 1118, 1170, 1174, 1181)
 CLASSIFICATIONS = {
@@ -135,15 +135,15 @@ CASE_SPECS = (
 CASE_IDS = tuple(PREFIX + slug for _, slug, _ in CASE_SPECS)
 
 NATIVE_SOURCES = (
-    {"bytes": 13_182, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
-    {"bytes": 6_040, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfParser.cs", "sha256": "sha256:98a33eaed892707acb1d05c9e9ef74a9ebb9ec3d258e370e89ff706e267806be"},
-    {"bytes": 4_289, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
-    {"bytes": 12_094, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
+    {"bytes": 13_173, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"},
+    {"bytes": 6_031, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfParser.cs", "sha256": "sha256:30d9ad1e84f55ff3a62180c4a3be1d60d37f09ee24f03e37d9c8dd8fd7003b1c"},
+    {"bytes": 4_280, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:c7b98b6eed298687fca229ae7262ffdf2494953b3cc6576835cacbcc47cf998a"},
+    {"bytes": 12_082, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:12488433e2e9f349553e0716531e88db275f563b7f5b806c10a316ae3719cf7e"},
 )
 SUPPORT = (
     {"bytes": BASE_BYTES, "path": "tools/python-reference/generate_imugi_idd_definitions_core_oracle.py", "sha256": BASE_SHA256},
-    {"bytes": 165_323, "path": "fixtures/reference/python-0.7.0/imugi-idd-definitions-core-oracle.json", "sha256": "sha256:3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69"},
-    {"bytes": 2_459, "path": "fixtures/reference/python-0.7.0/ashrae-140-modified.idf-summary.json", "sha256": "sha256:b37f44bb097f84cebd7bc9afbba0086b86f00b8e74440e93e753d991ec99420e"},
+    {"bytes": 165_062, "path": "fixtures/reference/python-0.7.0/imugi-idd-definitions-core-oracle.json", "sha256": "sha256:5b586ac030309bed3ab840525b4c9cff207b97919cff76bb48e8003b9135bcf9"},
+    {"bytes": 2_456, "path": "fixtures/reference/python-0.7.0/ashrae-140-modified.idf-summary.json", "sha256": "sha256:6bfc5767964244c0e7e779b56cc38fe4c79139a0ae74d86aeda8a6c03199d817"},
 )
 
 

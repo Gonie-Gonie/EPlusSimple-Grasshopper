@@ -21,9 +21,9 @@ public sealed class SupplyCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-hvac-supply-core-oracle.json";
-    private const int FixtureBytes = 215_698;
+    private const int FixtureBytes = 215_230;
     private const string FixtureSha256 =
-        "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f";
+        "sha256:657b53b768c90a2915ca10c781ff63ab5a21323bb09f534d4d5da3178fe99194";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-hvac-supply-core.v1";
     private const string FixtureRepositoryCommit = "07bcb7e";
@@ -32,21 +32,21 @@ public sealed class SupplyCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_hvac_supply_core_oracle.py";
-    private const int GeneratorBytes = 65_898;
+    private const int GeneratorBytes = 65_859;
     private const string GeneratorSha256 =
-        "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97";
+        "sha256:7ce1af80729c2f2aa333016ba95db3963b25db24e1b23d2c89f49ea2694590e2";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_hvac_supply_core_oracle.py";
     private const int ValidatorBytes = 17_313;
     private const string ValidatorSha256 =
-        "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd";
+        "sha256:863eb92bbec8fe415e3c917ddf690e106beea5611bf39dbc1850a896c8d23622";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
@@ -65,36 +65,36 @@ public sealed class SupplyCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
-            "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_267,
-            "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HydronicSupplySystems.cs", 24_522,
-            "sha256:c815c219d38294b0d3ba1a0ad2921e5ea77a90377887ed0fca8150bae46f96b2"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764,
-            "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561,
+            "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_249,
+            "sha256:bf93e1c6889f7d371fff983caad1b3c90d4cbc6113bbb5d9a7a783740af1bb46"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HydronicSupplySystems.cs", 24_504,
+            "sha256:23a9ffa8e776464c77570ab60854a4fb812de22f84a6ba1e4bf242a45f563269"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723,
+            "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
     };
 
     private static readonly ArtifactPin[] SupportFixtures =
     {
-        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-group-core-oracle.json", 31_163,
-            "sha256:320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092"),
-        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-group-to-idf-object-oracle.json", 22_608,
-            "sha256:f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608"),
-        new("fixtures/reference/python-0.7.0/dragon-model-add-supply-system-oracle.json", 15_122,
-            "sha256:4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c"),
+        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-group-core-oracle.json", 31_160,
+            "sha256:32f05de2a2ead16e0097d3402577e8bce03f40ea151162a6312000bb4f5a5886"),
+        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-group-to-idf-object-oracle.json", 22_605,
+            "sha256:e5e47e5ffa2d725697d8741d05f54655705106e4bb75348c6d9eff46e04715bc"),
+        new("fixtures/reference/python-0.7.0/dragon-model-add-supply-system-oracle.json", 15_119,
+            "sha256:42ad2d75ce91edd153bd9e07382a03b5095ea0300df227f87e0d0147b377230f"),
     };
 
     private static readonly ArtifactPin[] SupportNativeTests =
     {
-        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs", 84_813,
-            "sha256:52c10f25b87534b8c898002f343c04b7cafcbbe1095bbc182051e81ed55681bd"),
-        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/SupplyGroupToIdfObjectOracleParityTests.cs", 72_411,
-            "sha256:81348fc57fee6ae6cb9773b5d22dbed68ed031310c34cef4b6db9fc191607207"),
-        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/EnergyModelAddSupplySystemOracleParityTests.cs", 50_818,
-            "sha256:9f1156dcd9684c14ca84f29eca9266b4c1fac67973aa9f642a67215acf3de801"),
+        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/SupplyGroupCoreOracleParityTests.cs", 84_786,
+            "sha256:c0887c43694e30250b76dcce672ad27104d8a55e7e52ffe29744e8b5170290ff"),
+        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/SupplyGroupToIdfObjectOracleParityTests.cs", 72_366,
+            "sha256:1008884f2a370e2a73080d0110ca58a3a0cf60b2ddebc364e41ec3ace1ca94c9"),
+        new("tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/EnergyModelAddSupplySystemOracleParityTests.cs", 50_773,
+            "sha256:539db26d973139a83cb704fc52347d8ebb11f60802bcebcb0d72b80ccacf511b"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -178,122 +178,122 @@ public sealed class SupplyCoreOracleParityTests
     private static bool DiscoverPins => false;
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new("A01", 14, "sha256:a2587b9487de61e0ef6f141684112467048f9552903c10962f56c6537ce24956"),
-        new("EF01", 14, "sha256:00a5fba961e57521fcd2b398f2f2b2fb13fda38bf99442e25d2efcd4d48815dd"),
-        new("E01", 14, "sha256:ffe6e6278fedda87679834c19f14ae3a7bfedf448102bb64f50d935f14a5434e"),
-        new("F01", 14, "sha256:2f2251af0615d7133d214d92ee1b7f743b8d8061bca2cbefb9067e8c360a0047"),
-        new("P01", 14, "sha256:e2911048f8028543e1e301dc9cf3d88e42449c244c0993184ae622842bf8b8e7"),
-        new("RF01", 14, "sha256:d4561d6c91fcb3089b94389518911941c5c4c1b74829f20255b03ad697170a2b"),
-        new("R01", 14, "sha256:68976866e4bef8caf0782bdaf74eaa027d8119ffbc855f9ffaec375bd3fb9ecf"),
-        new("G01", 9, "sha256:dd37fa8e84c573b8495116e0ff9de7789b26f87e3cbe8e09bff7d98e9592696e"),
-        new("S01", 9, "sha256:dba00a9ec826ee0672ddf25963744698e9d4779a6d6cf5fe5305376796990e4a"),
+        new("A01", 14, "sha256:6e048ffd532ed11f6c3eb93295cca1fb4bc2105d6222248f38da5f8b815ebfde"),
+        new("EF01", 14, "sha256:f35dc0148e3427a6703460497d13d012bd9c717a145ba02d47c9744a58f3e291"),
+        new("E01", 14, "sha256:1ab5e2f378a5578ceb47c70d2b0ec4145af9b1d28b77ed188c070e738a07ce58"),
+        new("F01", 14, "sha256:bb24f29693e3f339694d49cbfabb72e65c1c3c6a6d591ef95720a9688b291eda"),
+        new("P01", 14, "sha256:c4ab5267132c15f1050984ff3bf53da06601a66fd3c63810e7fcb72a3b1e640c"),
+        new("RF01", 14, "sha256:93526ce671c02a1e73349c73c695abf102167538c45a3ffc41b5bf5ef70e3c0d"),
+        new("R01", 14, "sha256:24564ad89f9201896e6e8105467771bd976291d901ec24e84e973f9644dedea9"),
+        new("G01", 9, "sha256:d60094777e3bbfc2caf2646c60b5b6e6bf153d662c7c289bd2841fffcc5df137"),
+        new("S01", 9, "sha256:0a09ddfca8bc68ef81500d557ffd4c7de73801773b2accbeb9f7ead27e7bfe21"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:8284086b635a1720b5fd750ec900dc7c4e9dbfb02bf89b8240cb79314a1cde57", // 645 AirHandlingUnit
-        "sha256:8c05605b41e64f245f668be97aac8146e01f198c965f4a639953d1021f7886cd", // 647 AirHandlingUnit.__init__
-        "sha256:c1fa93741dc37ce6835ccd59545bf41b87a810b07b3dea0b19eb7cbc443c898e", // 648 AirHandlingUnit.coolable
-        "sha256:70510ee4758545b36f3f642868ba910d50eb8c54ce18499b562024edb99c1d30", // 649 AirHandlingUnit.heatable
-        "sha256:95325a05294e81caf971cc1e5378aa8d42b336baabbff1ff360fd1f604cdfda9", // 650 AirHandlingUnit.idf_objtypename
-        "sha256:f82e225e554327c9262ee50ed152656fe4234e1b39be2c95871af0a9f1d18ee0", // 651 AirHandlingUnit.to_idf_object
-        "sha256:65476e90f931cb8e5240b113bdb43bcf0ce42ab7e23bd20488e12d3389a1f9f0", // 700 ElectricRadiantFloor
-        "sha256:e083edda06053bb76a7a7632a083d3329c04f859b1ef9ea1c25163fe8dc2b57c", // 701 ElectricRadiantFloor.__init__
-        "sha256:db4304a0287afc7cdf2c5e943ddfddfff0d85c981ccf66bc05dec03ac3897e17", // 702 ElectricRadiantFloor.coolable
-        "sha256:2503b5b5f16a235f2a5d68eae622c88a064c5a0c8e3ceffb40ff348059a0bb8f", // 703 ElectricRadiantFloor.heatable
-        "sha256:456996c51ce54968f5cb1999515a1882756840d4c77494096ad74c6ab48e9a8a", // 704 ElectricRadiantFloor.idf_objtypename
-        "sha256:19e190cbdb537df0bae42ab843f41dca969e5b3cf11196ee8433dae9ae03b926", // 705 ElectricRadiantFloor.source
-        "sha256:fc62018640034975633ebef1f428b2daf4e24f2af6b085e5c73dcfc163c5a7c2", // 706 ElectricRadiantFloor.to_idf_object
-        "sha256:4033678cedce191accfa80c895bcf0db5a76ddc8c4e1caa2c21dc271cc5cac89", // 707 ElectricRadiator
-        "sha256:1d0534ae4c2e34ee9536b6510e2a51fde2d325817e4516c5198126151cc92477", // 708 ElectricRadiator.__init__
-        "sha256:e76886745fee90f274c4f52fb5e3e005ee9ebdb73a76040e73446ee890914dcf", // 709 ElectricRadiator.coolable
-        "sha256:c0d2468e342297e1ff14b89f83387015331e3c64de2de737f7d7ea147e0f5436", // 710 ElectricRadiator.heatable
-        "sha256:bcb1cda4b204fd46ea8a23ecde5dc018438882f00f998edf4a64d9b9e2bc41cc", // 711 ElectricRadiator.idf_objtypename
-        "sha256:fba5b0a525ff5c929a279b82e25c909aad17ab7cf81d23315aa27454d1515b4a", // 712 ElectricRadiator.source
-        "sha256:423138b7959f4c1b010768b9bc4922e1e9b078328058c27e5d80c2837e40e5a3", // 713 ElectricRadiator.to_idf_object
-        "sha256:2a2096580a275b64b1591b6c35d4113c8af6e0d732f0ff9fc4e23747dfd724da", // 720 FanCoilUnit
-        "sha256:5bbd56bb1b381195eaa2ec2642384cf34bd414a292c76a0787c853088a81ecab", // 721 FanCoilUnit.__init__
-        "sha256:9872bd7a4c4fcba2eb284b3730dd81d883bf061047cb74aaddf1ca29c45121a9", // 722 FanCoilUnit.coolable
-        "sha256:8c4ad30a6f2ed2fddee32a2cd51c4f966b660aee2e6bae3edaccc33ef0d5cfef", // 723 FanCoilUnit.heatable
-        "sha256:225640dd2063ab9cf1ac120406670978454295b964229a773a72d222642e688f", // 724 FanCoilUnit.idf_objtypename
-        "sha256:dcb228b158a3da24c14d3bccc1f1911b9e540222323d69781bf920794676118c", // 725 FanCoilUnit.to_idf_object
-        "sha256:e8c0e05a90c0e21fec8d8ea802bbd5f7b5c6572e2c27526439f68652320dc43e", // 750 PackagedAirConditioner
-        "sha256:fc797c4cc126dc81121ba0072ab6f6003d0487f9fa9535ba823fc4d7e1d56ab6", // 751 PackagedAirConditioner.coolable
-        "sha256:71549df7a1cdead4ecc982f0fc26983d3d3fe0a26cabb68f09ed3f763be58461", // 752 PackagedAirConditioner.heatable
-        "sha256:2b049302347fb5e9bc23566ac8a8c1661df027f9cfe8df1c33a9a7831eb1885d", // 762 RadiantFloor
-        "sha256:ed241c2e869eaa6ff4e52ac6a297257e9588ac4a75bdc7a0f767b360d1a16d92", // 763 RadiantFloor.__init__
-        "sha256:17b497af76db41531fc7b475dd9fd6ad687d393270662a4be2ea92eb705bb39c", // 764 RadiantFloor.coolable
-        "sha256:75a0b7fe9c9e0b1984a60faee0b444159733dd2c2d665553a9cb032a1c13e2da", // 765 RadiantFloor.heatable
-        "sha256:01b71333991664ac8d758fef6d0fe563f5d8e2d68e928af74dfdb80e9af88a6f", // 766 RadiantFloor.idf_objtypename
-        "sha256:1a837a9410ac1b645b031743cb2839857a620ecb97db572cc650a2f3372858b9", // 767 RadiantFloor.to_idf_object
-        "sha256:7c8eeb6dffb40635a4901e36f978a56bbef7d23142fef634f07309a9a04f5b06", // 768 Radiator
-        "sha256:07f7a1b954934d5b3ace95662e6013f5222c44bf2e15e3e13c3c40bba685783b", // 769 Radiator.__init__
-        "sha256:f6ab9d236e0f554a4369fc0bde9ff7f5665a9df2d98aefeabc62fe5a3089505f", // 770 Radiator.coolable
-        "sha256:d378111e5a049c526d3bdc853e615cd0ee1970560996704ec1dcbe2bc7a4bba2", // 771 Radiator.heatable
-        "sha256:4f0d0679849887078a41ad600025ef87c6d038c084b62f420cdc1cc9ccdb506a", // 772 Radiator.idf_objtypename
-        "sha256:0bfea9118c45059b6bdddea00e660d632e37fadd57cdf77dc6482583bb95490f", // 773 Radiator.to_idf_object
-        "sha256:3558f1485c98842f202eaf15aab29512ea67a341be9eca1a371a174eba67090b", // 789 SupplyGroup
-        "sha256:41c271e5f00b9dabb9f7b393098e0ca0b3e7410db9c1d953acbf243dd119d977", // 797 SupplySystem
-        "sha256:96902b256ffb855f23561b57ef0f33a84c8c30018ddf0fb66d64a04800f1110e", // 798 SupplySystem.idf_get_airinletnodename
-        "sha256:8333ab16b9c6f0ccaa1cf7537685ee5af11e5ff1ff8b370426f376d728b6ff90", // 799 SupplySystem.idf_get_airoutletnodename
-        "sha256:5b653effaf1b947802364b3e5932a8ef5e65244659660d5cdce2d15c9c91d3e9", // 800 SupplySystem.idf_get_demandbranchname
-        "sha256:1b2b6656b5a77fe9a2d1e3d0664475216ec93416cd313962b4ad01bc18dc0e24", // 801 SupplySystem.idf_get_objname
-        "sha256:89bb1ba92293ba4fcbd7569db8cf07a79be4b1c59dad90ffed8ec9dd8f04abe5", // 802 SupplySystem.idf_objtypename
-        "sha256:6ec8f67de8bbfaea4d1bd043219593e4b196fd8fbdd8baf048ab29801cdd5924", // 803 SupplySystem.to_idf_object
+        "sha256:323f4ae63aa6b4521d913dbdcf1923f79dcfb72f8175a6b37e6f1e34cf098cea", // 645 AirHandlingUnit
+        "sha256:e36e7aa2310acae8e03caa139c9915842f5c500176f9eed69b498285b6888d66", // 647 AirHandlingUnit.__init__
+        "sha256:31961fd21630146ac7c272a727cc0088c827cf9071e3bf2267ae603f8b905c8f", // 648 AirHandlingUnit.coolable
+        "sha256:f0700c70c731d0b3f83ad5cfa5607fc950de822c85514be6d8781d79a87ef279", // 649 AirHandlingUnit.heatable
+        "sha256:5a52a6bb9a2470dd861f5c83fac7ff46d47343afaef0bd4766a1e0bc51c78ded", // 650 AirHandlingUnit.idf_objtypename
+        "sha256:f8cfe88b529d5072d322b2dd8e3879c2ec2e54345c255d16bf4900fbf0110c68", // 651 AirHandlingUnit.to_idf_object
+        "sha256:3abfb9f06e772402084a2928a80e3492f3d31a5825f4e03840a77d9569bbf72b", // 700 ElectricRadiantFloor
+        "sha256:2c6a60682c941ba0a9e78138f832abf45539697eaacfa23aa1b930a3831931d7", // 701 ElectricRadiantFloor.__init__
+        "sha256:3bf00242d7c716f27f8a7de58dccfe84b729d1369ecb34cb5f5e2cf29230d7b1", // 702 ElectricRadiantFloor.coolable
+        "sha256:d7238ab0033a111bd2bf19a36e5ff7801f7689e2624fea812d759f94fbdb1264", // 703 ElectricRadiantFloor.heatable
+        "sha256:86c29a10463be1f2a409f91017d203fcfd89c9281155ab00eeb1443536d2171d", // 704 ElectricRadiantFloor.idf_objtypename
+        "sha256:1327afd1ecb8cb4a56bdfaba8c2d454f23ff9ba0ae94dc01a8be2b6195d8d926", // 705 ElectricRadiantFloor.source
+        "sha256:3b4dc6b52bb80b0561a31d550e8beef57eb6d02f100ab2428e230f92b56c7833", // 706 ElectricRadiantFloor.to_idf_object
+        "sha256:6965b3107a26b5e47eef048d6d83fa6d54e7a1219b82f88996ecb2d9f1dd5700", // 707 ElectricRadiator
+        "sha256:07da2ef20c07b346afb9ba00102c3f9173ad7440de3e106775fd7e3df5a4ed6d", // 708 ElectricRadiator.__init__
+        "sha256:e4544507c4b28add08381be7fd447b4aaf90517117ec4de0b8b6b700b664612b", // 709 ElectricRadiator.coolable
+        "sha256:9e2c97d4a4398f7bec04f2fd4de9f4dab356c95ca17098ad56f294ee89973673", // 710 ElectricRadiator.heatable
+        "sha256:3b2823a39740210a755a66807151095c65905b701e7822f3dc48547274244c4d", // 711 ElectricRadiator.idf_objtypename
+        "sha256:47555060043a1536800d302f22bd552ffc58af0f925573658c0f3282c5992bd1", // 712 ElectricRadiator.source
+        "sha256:378be7c6503e8d80986b89d83e07f5143a0a228293c1fc1476900c8189965988", // 713 ElectricRadiator.to_idf_object
+        "sha256:bb280ab510cd4fec40098ae1c7d3e4415c6072d3e813f684fa651e141b2f996a", // 720 FanCoilUnit
+        "sha256:be0745ca1a1b4700c2e27eb45dc9bb05793eb4ade45654b0297fe14f5ef27ea0", // 721 FanCoilUnit.__init__
+        "sha256:38d08bcefee2147039263264fd0d0fbfc567cd4b79f7afcd718208ba92ee9bfb", // 722 FanCoilUnit.coolable
+        "sha256:e34c694afa4cff16009deffc51d8141720354efc10496e8075781c9aedf57954", // 723 FanCoilUnit.heatable
+        "sha256:e7e725eefcfc55433d9747154eb11a904fbd8b873ab3ff0ff40c14152393559f", // 724 FanCoilUnit.idf_objtypename
+        "sha256:362f4ffff2d767e47d1d7192e8b27ecc45bd6ec345ea494180231791731ea989", // 725 FanCoilUnit.to_idf_object
+        "sha256:4c2b33ef859daae7ec39da8979f4496f519c48c3b976d1421eab61fdf984b2de", // 750 PackagedAirConditioner
+        "sha256:cd9e6b36aad7cf5ca5de9697247b49dbdd12d35bbd88c6c73c0fa3304628af1a", // 751 PackagedAirConditioner.coolable
+        "sha256:7ceacc168c16c052a97afd46622941442990c5d41f487485389e2efc9653f761", // 752 PackagedAirConditioner.heatable
+        "sha256:530c3f2792d5f39e2cc300f6c7ac91ceb5c1e04c6ffebe74b5ebc453c6e06cb7", // 762 RadiantFloor
+        "sha256:7f1512c7f394df74e4ad23c7fc5346370f9dec5c4981a12073a309a0c9e183f5", // 763 RadiantFloor.__init__
+        "sha256:740f5e8a1c558f13eca09c803630f8187aff4772f56fccc4873ec0f1c49653cf", // 764 RadiantFloor.coolable
+        "sha256:73d89804f0114a1cf6a02171c132e2515666105c588131832f9eb00e4dbabbb7", // 765 RadiantFloor.heatable
+        "sha256:27f13c07893603bf1a717fd5ebbaba8c5cd7fbc0f697516e31aea62ae36f3b11", // 766 RadiantFloor.idf_objtypename
+        "sha256:da09ca8679903363c0ccb438f53528badef8285420cf7afeed3cb19ce7ef3775", // 767 RadiantFloor.to_idf_object
+        "sha256:62585c6a35a3080722c2c7829a65875318c1a1340699503f486c8e5000b656d9", // 768 Radiator
+        "sha256:192e1a643694011b815b6c6483ef4d12e80f6c7f8c8c2912bbf1b11c2d17799b", // 769 Radiator.__init__
+        "sha256:a1819e8e7b83266cf08ce4e0b1ca587dae1f212c65dc3de213b50962e2d9794b", // 770 Radiator.coolable
+        "sha256:032438c2afc8102795e1d1d4625ec0ba4c709a17324b1572e6957db5aa3adfbf", // 771 Radiator.heatable
+        "sha256:199aecfe4d7f47923a94171ba94d946564f74487851dcfbe281d8768c77901f0", // 772 Radiator.idf_objtypename
+        "sha256:118b1a00ba51ab9c8fb8e586a0c70cd74b0b62e3a0a3ce0ec235d5067611163e", // 773 Radiator.to_idf_object
+        "sha256:f8992f781ca1d942ff52fbc6006260eabcf07b6b558f270766fc0007477092f4", // 789 SupplyGroup
+        "sha256:243d88f239ed0527c68ee6e6ee3e9b0e8a951aa1b8079fc12c2eeb83ee03baba", // 797 SupplySystem
+        "sha256:629de9e8b9bf3e8fde50eb0e54593a6487f8b5c3a892311223eddf878af27153", // 798 SupplySystem.idf_get_airinletnodename
+        "sha256:cc27c11cac8dae224d698c78e4dce53f1aa7ec5eb3168e6acc34075401e02a21", // 799 SupplySystem.idf_get_airoutletnodename
+        "sha256:fe188d80175a47cf8b059aa17de25520f75bc603d651d224a4cee218748d3bf8", // 800 SupplySystem.idf_get_demandbranchname
+        "sha256:b35bf0029a40e5443e211584fd9f3767e7c42698318e80fb62f7807522087544", // 801 SupplySystem.idf_get_objname
+        "sha256:4fde991324c3c698d51a5a870577c66faff4aadd2f71573a41ffb7fb1d7cf94e", // 802 SupplySystem.idf_objtypename
+        "sha256:7f8873a5a2d518e9d8bd7c04c7feb5a5babebf1bf6bf1422fe235c778d136811", // 803 SupplySystem.to_idf_object
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:8c9c347a1240778eaf4fc1968847e7b95a5573701efad6f09bd13b87335c6089", // dragon-hvac-supply-core-645-airhandlingunit
-        "sha256:a8aa63df21706632e0c6b77c212a4357ea8806cd88dec45e21981c6655c8395c", // dragon-hvac-supply-core-647-airhandlingunit-__init__
-        "sha256:6440a8ca5106c5e3187163bda5a3cbf9d976010009fd38f6b96b6f519b84c4ad", // dragon-hvac-supply-core-648-airhandlingunit-coolable
-        "sha256:2012d5305d170ee9293680989431468d725642c2504f5719daa7e76c016b1b23", // dragon-hvac-supply-core-649-airhandlingunit-heatable
-        "sha256:9864d7b88050ec31cbdbcc68bbb0a5a9b33f04be33d6444417dfe012577b4775", // dragon-hvac-supply-core-650-airhandlingunit-idf_objtypename
-        "sha256:4063aba72d064b53d475bf482c60343c72b6849a89d07068263fa12593712964", // dragon-hvac-supply-core-651-airhandlingunit-to_idf_object
-        "sha256:ecdfb5c7f386bf80691823a301db777ff477b4f17d048323d84c9983e5ff4532", // dragon-hvac-supply-core-700-electricradiantfloor
-        "sha256:c7e5b631e61afe88198a4cb65e1f15c3efdcd37d641369aa445a51d8e2a8e695", // dragon-hvac-supply-core-701-electricradiantfloor-__init__
-        "sha256:68bd370ef8523d162947d38bdce1e79daffea261a51ffe10c5d4a1b4e50b941b", // dragon-hvac-supply-core-702-electricradiantfloor-coolable
-        "sha256:ada997bccca2a6559b545944f5a0e8fce7a330a0996635c89dd11349b35f0c60", // dragon-hvac-supply-core-703-electricradiantfloor-heatable
-        "sha256:df16390bcdc617f6a40d140899e8a1ebe596af2e727f8be7d54a68e7f818cd2e", // dragon-hvac-supply-core-704-electricradiantfloor-idf_objtypename
-        "sha256:2eff1286586470729de9c133d16eb426cd462a27df54376a1807ddbb931a8e52", // dragon-hvac-supply-core-705-electricradiantfloor-source
-        "sha256:d30e3f2661c8925806c9b477c95cb168c79565d9fab330b0534476c87a9db660", // dragon-hvac-supply-core-706-electricradiantfloor-to_idf_object
-        "sha256:2e3273c4ebcfc7e6124985f18bdd06b2ea4d325941969d8a0b4a008886b7eb27", // dragon-hvac-supply-core-707-electricradiator
-        "sha256:2aa833753bcfa24c01addff598b9418994b61769e5ad8374aa26ed3bc0360981", // dragon-hvac-supply-core-708-electricradiator-__init__
-        "sha256:91e592e60ab5aa588cce0718c8a995757b326d01f25cf083e29e72b2273e0e98", // dragon-hvac-supply-core-709-electricradiator-coolable
-        "sha256:31b306e38b9f3cf548e2e507fb0e9ab40e60e2a56e4f685dd71f98f6b55b1863", // dragon-hvac-supply-core-710-electricradiator-heatable
-        "sha256:88292e45e706c2017bfd0c33b5834d6c7325aa10202fc86bbaa3421634baf913", // dragon-hvac-supply-core-711-electricradiator-idf_objtypename
-        "sha256:635ae6926011d2da5fd45b19199ef421bd04f5431762736473fa0e29fba468ef", // dragon-hvac-supply-core-712-electricradiator-source
-        "sha256:d84ad4b463a8178eb637aa4b1c3d4b2817fb3ddb8aa663967f0de1d5aad40898", // dragon-hvac-supply-core-713-electricradiator-to_idf_object
-        "sha256:96eb80862ef12a2d2b6de1a05923a245f5b9de6ac0a73ad54778af3611146f6b", // dragon-hvac-supply-core-720-fancoilunit
-        "sha256:9b74c4e99ac5cca3033a0ec708bfd49f7bc90b01f2a0f980301be51aaef07c03", // dragon-hvac-supply-core-721-fancoilunit-__init__
-        "sha256:a854761061621eac7becb9fa7fb4b76af387bdfd5b988553bbc3476f8843a121", // dragon-hvac-supply-core-722-fancoilunit-coolable
-        "sha256:150291a9bb44c6510676748e3aa64a9d1addd76914efd4eefef65cd89acba6ea", // dragon-hvac-supply-core-723-fancoilunit-heatable
-        "sha256:2dbc19b706df084377ea6ad6e6abd7cf6414d7d4e6510df87dcf9cff34452d6c", // dragon-hvac-supply-core-724-fancoilunit-idf_objtypename
-        "sha256:c6f394fec75fa31e13b30de4e65ddb2e472e9bbd9ad5ceadca871fd653fa624a", // dragon-hvac-supply-core-725-fancoilunit-to_idf_object
-        "sha256:2a210db0fb81b4c89f38586bc8308e732669c00a39cc1c2b5f62facc5dc3a2bb", // dragon-hvac-supply-core-750-packagedairconditioner
-        "sha256:b59776b71be2e92c07802d446ece743345d6e44b189c1c764d9abe774f64987c", // dragon-hvac-supply-core-751-packagedairconditioner-coolable
-        "sha256:3b41708e5f25be1d665fde64a4a1c1ffd7a2e62603c433af8957be4d44c06103", // dragon-hvac-supply-core-752-packagedairconditioner-heatable
-        "sha256:4fe193974ae35e1208151350979d2c4ec3278de28054ba392dad3df8241034b9", // dragon-hvac-supply-core-762-radiantfloor
-        "sha256:a4b1e852d6bb68be1751580d3150183f94834ff0745af8fcaecafc1e600190c0", // dragon-hvac-supply-core-763-radiantfloor-__init__
-        "sha256:353bf85209f4bf9be93664468960f85d8c9024a62f062531cf3d9bd90b8c4063", // dragon-hvac-supply-core-764-radiantfloor-coolable
-        "sha256:a16f02bc78b31ea8f797c6f2635381a2478b4c5502c634b850d63125162a8a92", // dragon-hvac-supply-core-765-radiantfloor-heatable
-        "sha256:a06bc02b59adb859c8aa0fcc839a41552d836b9274235b139837bee9f02c687d", // dragon-hvac-supply-core-766-radiantfloor-idf_objtypename
-        "sha256:7f5522144e6a1824370acd1929c17a8571a5e1ebc1da704817a86bb61cbf90b8", // dragon-hvac-supply-core-767-radiantfloor-to_idf_object
-        "sha256:325e16a48643602a85adea9a6c605d46dc21f1208062b4f7650db8125282b4e6", // dragon-hvac-supply-core-768-radiator
-        "sha256:1ccfe7ae43546343942895e091de35fb14e40dbde4a435e582db8de3b11104c0", // dragon-hvac-supply-core-769-radiator-__init__
-        "sha256:35a1b3b36b818a002c463cbaa88456b04bd33564d24d220dd54fdd308e7bee98", // dragon-hvac-supply-core-770-radiator-coolable
-        "sha256:19a2e694159c63e7da155901133c367c1ec37d7c13bcbe4f698ff651bc4ef025", // dragon-hvac-supply-core-771-radiator-heatable
-        "sha256:a1007132c33826f49dd4bb319fecf0e135ae4dc3faf92ef61edf1f35bcb83118", // dragon-hvac-supply-core-772-radiator-idf_objtypename
-        "sha256:18d9acf9d80a73b6577466edf67098f9d99a3dd7c6b7c349e9077737afaa09a5", // dragon-hvac-supply-core-773-radiator-to_idf_object
-        "sha256:7556ae2a9f631c4b7f5989ca3f7b59b71aa3f2197230378999bd49d1f3a575ae", // dragon-hvac-supply-core-789-supplygroup
-        "sha256:cbd1e330eea72a2c71b18fb7ff4909a98eec4ec325f08e95b49177138af22ec1", // dragon-hvac-supply-core-797-supplysystem
-        "sha256:21a4dde3e5363d6abf33869fe2d48cc732160a58122cda06b883d35e2c7df803", // dragon-hvac-supply-core-798-supplysystem-idf_get_airinletnodename
-        "sha256:e22e78b655800a1ac2d6d75602756f48b0337328a224cf932a232f5585e21fbd", // dragon-hvac-supply-core-799-supplysystem-idf_get_airoutletnodename
-        "sha256:a17138c7cdfed5e16149a379c4dfc08de641b17acd00d61d68c53111873ed56a", // dragon-hvac-supply-core-800-supplysystem-idf_get_demandbranchname
-        "sha256:10c6d69f011dc617e49ee6e1dd9cafbb57e40fae939b205032b37ff6370144ab", // dragon-hvac-supply-core-801-supplysystem-idf_get_objname
-        "sha256:f9fa83951d92efd86c707da1941bf61cfdb6b8410482f93215dbbf043c144566", // dragon-hvac-supply-core-802-supplysystem-idf_objtypename
-        "sha256:53317be3ba14f636e46ee47c939f82f10c0768a79e8550977b7fd34801ce7d1f", // dragon-hvac-supply-core-803-supplysystem-to_idf_object
+        "sha256:807b1d675ad5b2e748255fd5bfbb608a73862abd2a122c1a5ef455bec8dbc730", // dragon-hvac-supply-core-645-airhandlingunit
+        "sha256:12807a267d354f562ee196af8271162dac2c02e6ade1e58a4ac7e873365a9bcb", // dragon-hvac-supply-core-647-airhandlingunit-__init__
+        "sha256:48f9304f3935277c084f9b855031cdfbfde8948003b450ab9148c3865f89ae20", // dragon-hvac-supply-core-648-airhandlingunit-coolable
+        "sha256:c5bbedf2d07bcaef9e0b6545912c3b9ea1796e2caa9658876e3ab83f48fd0255", // dragon-hvac-supply-core-649-airhandlingunit-heatable
+        "sha256:f25432ed05673dea2c2290a2bff2d63e58f6bb202010b800d24b1bd64d6fe9ed", // dragon-hvac-supply-core-650-airhandlingunit-idf_objtypename
+        "sha256:e2f1e4165e32b1e154e8a12b2abbb034e2a11e758e7446139379ab6ab9426bc3", // dragon-hvac-supply-core-651-airhandlingunit-to_idf_object
+        "sha256:62fe6ce0a7b124b13e8edd9766aa58af13e59561c958711c2e9e4b16a28ef0d2", // dragon-hvac-supply-core-700-electricradiantfloor
+        "sha256:968f9321c606981c61b14de2b60da763f898123d71c68b2f66b15512ad5fc38a", // dragon-hvac-supply-core-701-electricradiantfloor-__init__
+        "sha256:b37d6a0d0af3ac72117bf133ccdd059a2127a451219d68080a68ac020a6f7651", // dragon-hvac-supply-core-702-electricradiantfloor-coolable
+        "sha256:a4450a04b3f89c697e4065d4ed3be5d8a3084a67a8641c30c49d8c85687cb638", // dragon-hvac-supply-core-703-electricradiantfloor-heatable
+        "sha256:8fb11f89255a1b3acf80e4728fba2bd972cbff7268715cf3999a606634f10df3", // dragon-hvac-supply-core-704-electricradiantfloor-idf_objtypename
+        "sha256:65135f234d7811d718df49186571f8e4e4f1a5403f77c4973c1f418efb71f977", // dragon-hvac-supply-core-705-electricradiantfloor-source
+        "sha256:c6cabadcc7fe58eae9aedcb920e43870722c24984d6246169d82749c4d7ee06e", // dragon-hvac-supply-core-706-electricradiantfloor-to_idf_object
+        "sha256:d2b266332649d8da62d95c7dcb885d2f899060e17b9dc47b8a9423ac69c7babc", // dragon-hvac-supply-core-707-electricradiator
+        "sha256:26a9e56eb960ecd2b99772299e23da22c7cb0b42cd3f1a14f783a616baf03d30", // dragon-hvac-supply-core-708-electricradiator-__init__
+        "sha256:969dcfc3ee2379b292b6d2cd553a910d700c38caeb173e66e6899a73c6fbf5e7", // dragon-hvac-supply-core-709-electricradiator-coolable
+        "sha256:e71622d5b1d8ec67dcfff640b9fc66b75ec4684dda731f91d272129df3239dc0", // dragon-hvac-supply-core-710-electricradiator-heatable
+        "sha256:6420c5395220f33c75e62b4484f2ac25b6166f9ea6d1e180a0f6a4f466abf738", // dragon-hvac-supply-core-711-electricradiator-idf_objtypename
+        "sha256:b627b4cc5c9a14c83fe54a144577eac8c3a02379fd2a1c4aa3010e4923b4057c", // dragon-hvac-supply-core-712-electricradiator-source
+        "sha256:7a8fe1b374a86c303447e1b04ccd769074d6ce2028d5adaeb46322b571c616d9", // dragon-hvac-supply-core-713-electricradiator-to_idf_object
+        "sha256:2bd8eae553a88d365b27298e387656836b83258c9330dffdcddd21fdc4ded698", // dragon-hvac-supply-core-720-fancoilunit
+        "sha256:e59dd3a862b0f074bf2a1111636e194d8926a35388786007bfc4ed8cf1e20d49", // dragon-hvac-supply-core-721-fancoilunit-__init__
+        "sha256:fb1818187fba008f0714c48a9e1b978d97d36bdbc3d3c58cc438f87be102797b", // dragon-hvac-supply-core-722-fancoilunit-coolable
+        "sha256:ab89518d4e807a57db782445ab4e8ff8329db213c51a306f3d2b3594f88ba291", // dragon-hvac-supply-core-723-fancoilunit-heatable
+        "sha256:d4317dc9bfd7d235278a3ff4a452120e8e76b0c5551f60dd573187b814dee188", // dragon-hvac-supply-core-724-fancoilunit-idf_objtypename
+        "sha256:8ed2a7d44dbca32536d105aad89bbfae678096671d0fa9c733d84c82c6b9eff7", // dragon-hvac-supply-core-725-fancoilunit-to_idf_object
+        "sha256:9e45db82d5e9e235ed9eb99c81e547dbcb056e4a87bc37f5955035bccc7ce3b4", // dragon-hvac-supply-core-750-packagedairconditioner
+        "sha256:c3db172f9bd5e9cc2f8cfede77c8354442d323aa26e3d7331f4ad3b46014930d", // dragon-hvac-supply-core-751-packagedairconditioner-coolable
+        "sha256:e8f19c2f4f9f4b8ad36d77f01c30ae3b27118dd2914e4aa2edd928af5afce8ae", // dragon-hvac-supply-core-752-packagedairconditioner-heatable
+        "sha256:70b11a92e2d61bbdfd972e2f6300b26d2be2b4b6b1677b0fcd51b16a166436bb", // dragon-hvac-supply-core-762-radiantfloor
+        "sha256:44343c2abd459b7c6c4b1266e25e9d7bd2ff252e25f9ba0c371013a95da7b917", // dragon-hvac-supply-core-763-radiantfloor-__init__
+        "sha256:46b97accf92441277dd8e694bb53294f4791a18c47b0d464d65b0efbb3743997", // dragon-hvac-supply-core-764-radiantfloor-coolable
+        "sha256:df51492148cf6492cf46a0c38cdc61b7a0f2f25653ac2f2a517640eb90c8ad46", // dragon-hvac-supply-core-765-radiantfloor-heatable
+        "sha256:7da9f0c22b567616dff966cea6015d36c9f8344e787d4c0ba7d81b99a6b81b58", // dragon-hvac-supply-core-766-radiantfloor-idf_objtypename
+        "sha256:1a38fffca8705696951f0a5182641771890196277a544161160cb01a4f5845dc", // dragon-hvac-supply-core-767-radiantfloor-to_idf_object
+        "sha256:297d83f38cb93387ff47a2a9c6c987889d615c20a9801a10fc8da8790de8d0bc", // dragon-hvac-supply-core-768-radiator
+        "sha256:28162a2a059cb6001072ae6b74ed5cf39a3701eec0a6b3103e6ec099ebc39233", // dragon-hvac-supply-core-769-radiator-__init__
+        "sha256:c67224f28b31a0b3769dd277b4651c70a477a95cc1143642bd1d29d14dccd530", // dragon-hvac-supply-core-770-radiator-coolable
+        "sha256:40ce6ba112d3dd539e8e267ec9d03a25dac2cbed1a59d2ff05f1313d59b320de", // dragon-hvac-supply-core-771-radiator-heatable
+        "sha256:58b2ef8d8ea91d9be8795a3fb7235c08522f552ff4e6d3ada0b3f2f59bfacf6b", // dragon-hvac-supply-core-772-radiator-idf_objtypename
+        "sha256:e5b5bc97f8fd7cfc84b1034d74df45a401803aa348743d71b0bb2de8b6a87449", // dragon-hvac-supply-core-773-radiator-to_idf_object
+        "sha256:e8445f69b273908c2ae38265a4fbec2ca6b9c120385848937c8e19565f340970", // dragon-hvac-supply-core-789-supplygroup
+        "sha256:b26e2eb6246fe2a78de42316156ad6903155652af420aa696ab6128a1c7b3f9c", // dragon-hvac-supply-core-797-supplysystem
+        "sha256:08dbd12aa74a2cd93737fbbad8b5695a5552271a60d0d3783044d7691b6298df", // dragon-hvac-supply-core-798-supplysystem-idf_get_airinletnodename
+        "sha256:34edd8aab23b8d5a57c49aa3b5f02dc90e8f249f4f3897529be9f6ee95a7c30b", // dragon-hvac-supply-core-799-supplysystem-idf_get_airoutletnodename
+        "sha256:8ae912c0bce1c81f5ac5b03831bdcfc4cd30571ba426da81211f65461022742c", // dragon-hvac-supply-core-800-supplysystem-idf_get_demandbranchname
+        "sha256:f1aeea1f2d87a34dedc006ac8ac0a08e1df4fd74ad1a6c3d0806d3656922a958", // dragon-hvac-supply-core-801-supplysystem-idf_get_objname
+        "sha256:afc0de48818a7f9f9cc4d1815730839f446b117713d28628e7396f3ddb58b1db", // dragon-hvac-supply-core-802-supplysystem-idf_objtypename
+        "sha256:59e45b93aa423bfc8ab127daebfcc97cfbc535c71666f4d24a18b8a677e14f1b", // dragon-hvac-supply-core-803-supplysystem-to_idf_object
     };
 
     [Fact]

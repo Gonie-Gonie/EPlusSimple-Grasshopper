@@ -18,9 +18,9 @@ public sealed class SourceTowerCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-hvac-source-tower-core-oracle.json";
-    private const int FixtureBytes = 172_950;
+    private const int FixtureBytes = 172_575;
     private const string FixtureSha256 =
-        "sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5";
+        "sha256:6fd214450197ea5effac61353819ab6ce4ab30b0fcd4a18fcd34816095015620";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-hvac-source-tower-core.v1";
     private const string FixtureRepositoryCommit = "884c2ff";
@@ -29,21 +29,21 @@ public sealed class SourceTowerCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_hvac_source_tower_core_oracle.py";
-    private const int GeneratorBytes = 68_752;
+    private const int GeneratorBytes = 68_725;
     private const string GeneratorSha256 =
-        "sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5";
+        "sha256:3f4ac211b3449ffac3b3f2a2048fc90320d45b5019d22ea59d6715a3e773353e";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_hvac_source_tower_core_oracle.py";
-    private const int ValidatorBytes = 24_482;
+    private const int ValidatorBytes = 24_479;
     private const string ValidatorSha256 =
-        "sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058";
+        "sha256:481e26fcbc6382f30e424d1ee1aac7d1574b44877d86bd7e621cd92b75ccfcf9";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
@@ -63,51 +63,51 @@ public sealed class SourceTowerCoreOracleParityTests
     private const string RelocatedObservationsSha256 =
         "sha256:2eadd58ac936f71225de5f4181712dd6c8cebafefd12471258f719d02f193a44";
     private const string NativeRoutesSha256 =
-        "sha256:6cbebb6f136b1e86a1edc9b8cab00eca578aa1bc40cc8834ce23f172d69fa3f2";
+        "sha256:d29aa3cf7d7f993becbc1fb898c2d657f8321d4203c0a909b6374b421834137c";
     private const string NativeClassificationSha256 =
         "sha256:25004c97fa276f70c732c54520212ca1f3979f11f84bc8bbe75f5f3e9a03291f";
     private const string NativeSourceReceiptsSha256 =
-        "sha256:2b00b4902605bb3821275f5436e125bbee3fb2b5107a04680f2aef8e51ed6476";
+        "sha256:e9af227594a75550e715c82b05d02a0c1960fd751105aa078c57e78ec85b84aa";
 
     private const string SupportFixturePath =
         "fixtures/reference/python-0.7.0/dragon-hvac-source-system-to-idf-object-oracle.json";
-    private const int SupportFixtureBytes = 3_927_710;
+    private const int SupportFixtureBytes = 3_927_707;
     private const string SupportFixtureSha256 =
-        "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f";
+        "sha256:d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e";
     private const string SupportGeneratorPath =
         "tools/python-reference/generate_dragon_hvac_source_system_to_idf_object_oracle.py";
-    private const int SupportGeneratorBytes = 66_475;
+    private const int SupportGeneratorBytes = 66_469;
     private const string SupportGeneratorSha256 =
-        "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159";
+        "sha256:52106bcc6d7070b19fb637a1435a94cadca000a7fb7f42b69dc2538ffe906ffe";
     private const string SupportParityPath =
         "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/SourceSystemToIdfObjectOracleParityTests.cs";
-    private const int SupportParityBytes = 126_972;
+    private const int SupportParityBytes = 126_876;
     private const string SupportParitySha256 =
-        "sha256:c26edf68f0bafc211641d19bb0dfa7f758c85a158220079cb5454a7832c18fb5";
+        "sha256:f8d809f75c88976724bd6d7b5d493a9809ad44b5739888188bd8f3d102b1ae1d";
 
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Hvac.SourceTowerCoreOracleParityTests.MatchesPinnedSourceTowerCoreThroughProductionPublicRoutes";
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
-            "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_027,
-            "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs", 1_076,
-            "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs", 23_777,
-            "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs", 19_554,
-            "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_801,
-            "sha256:f7b6867f411575c6ce5e068df9568f76791ad7a715d41a5b4937528105f78574"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/PlantLoopAssembler.cs", 10_538,
-            "sha256:6a612a61c056583471cec4782ca4b64e6a94be6a177fec1ef0ee869ff3da25ee"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingPlantLoopAssembler.cs", 19_561,
-            "sha256:0d571a9ad78caf2aa55913c19a86df041f12c8506b4999e7a03209d626aee594"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561,
+            "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_012,
+            "sha256:f9ad853a991646f0cbeede575ae934a9aff7fd1c62e419e1b99c212afffbd486"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs", 1_070,
+            "sha256:695de4b9fdeeb39fce18257b0febe64d2a0cf34024f4cd138f0b6ca4ca414961"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs", 23_762,
+            "sha256:cc9b71a242f6a3119baeebe25aed003201179e005cd030d59eca609026d2d963"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs", 19_539,
+            "sha256:48150a93275d8e4f395b064badc2ed07ba929287fd9c9b3ef461ccc3104e0f2e"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_786,
+            "sha256:7e20829a35f57c60db38fafe5bbe0b1157b2681542eca6bb2f0e889ad27a2db0"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/PlantLoopAssembler.cs", 10_529,
+            "sha256:23ce6a57bbe10dd90f5c6c6820b0419fce87afdfe4221b864beaa97cb465c728"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingPlantLoopAssembler.cs", 19_552,
+            "sha256:d1dcc7cc037876af094292b539767fdfcb17e2457f8242f6cd66909734bc4a51"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -211,143 +211,143 @@ public sealed class SourceTowerCoreOracleParityTests
     private static readonly JsonSerializerOptions DiscoveryJsonOptions = new() { WriteIndented = true };
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new(16, "sha256:41a023d133b465eb56d96971d43adc0d2161e3d99f85fd24f92dbb90529f6bf3"),
-        new(15, "sha256:9732e608bebc852247ff3e7699d5e6c38272b7b5864f43820e64d53762cebbc7"),
-        new(16, "sha256:3fb9adc51917cc8dfc848dde367278ee18fde93ecda806f5fec3983d7f3e8f98"),
+        new(16, "sha256:5519cb821812476757063714dd12afdd519a6325ea5476accc6a53cabf86c938"),
+        new(15, "sha256:e3a4ffbb962aaa512f5701bd3b587163754743c189ae0bad4e03a8d4282ee85c"),
+        new(16, "sha256:94745d75bdc666692fe7f748245f720df6841babf97f831b3333963831d0ab58"),
         new(9, "sha256:c3ed4ff9db850b904c878515abdcfc326969ad7d20cb4a85bdbf5199b8428250"),
         new(40, "sha256:b411b92088959c2c94c31644f2246936d188233b21151baa02578e25dbc7dd9d"),
         new(17, "sha256:ef207db0152957fe02e610ef8e78ab0bf0f6fdf0b7d5945109a65f56027ab40e"),
         new(24, "sha256:9e3639040fb992b9b9b0e74c7337fe4ecadd3fd616ba604066dcf0f67b0de1b5"),
-        new(13, "sha256:86a8a199d6dc23dd6dad52e6c5aa5c2788b908b1007a68b9ec11912e5f35822c"),
-        new(17, "sha256:2a5b80c1060307468ef70c98b604763cdcdb9d2a5842519beb7584fc91bb8a92"),
+        new(13, "sha256:2d97aed6d386ad6bdcf21c097d4dbe8d240fc19003ce28064947d2fadad46fae"),
+        new(17, "sha256:6fcdf08686ea18335515be59696910147abeda09c5896c472d7d6ed5869c48d1"),
         new(17, "sha256:b294be8308790aa313f7e8508f24d7e41085f34f09e256923698649e13230e5c"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:bc1a28f636fcaf3b10171bc76537b14b651108ac4b2064a26632908d20a4c381",
-        "sha256:aeb211a1b94ef18566c45702355c1fccdfb71c3ee5d2f769f4e901939372d1fe",
-        "sha256:6701b6d84e136f96768379cfa9cf2ed54172b23ab66cc20e6f092b09e6389116",
-        "sha256:40c9f3a7284afe7ee2539874f1cedc713bce7b263855cd828ebbb2c5875d8881",
-        "sha256:d600a36f515159e4f9a7c235e6f6beb6c786489d6d5a4bc8fcdbbdea9f550fd1",
-        "sha256:87a355fe652e5746db288ec7b59ac87e9c9856ac0287e6778bbbcdac9e438b84",
-        "sha256:1d2dc9a30e14dbf625851da7fc68472b444f7fcbe46c81d9f3290d291ba25503",
-        "sha256:7dc0422f6167dd0d812e344abc8113b90e0cf031e97a7f8cfdf35ebfe6f7e1e4",
-        "sha256:8328fcb095f2d6322b2cee28dded80423ef9d66e13a3e25e8f5d851e8dd8d645",
-        "sha256:2dc061b4551171409c8d5e77bacc98f35f33c2b4bf90b091ceaf6ba83fa0ace6",
-        "sha256:15574b25447ef5f455226613946d11ef5710e468a45441066e618c14f83efbfa",
-        "sha256:10138bd7c1582ab59dbd57a7eedef048927bc6d8c8e0cabfc2945f8634c22b2a",
-        "sha256:8a5d7f075f19e634c03565d53a34305981ca512ef9882f671241d6b39bba3918",
-        "sha256:bdd0f8c25abfac28f074e6de6c7b087b33a9a3fa8821a0950b896bf78f67fb97",
-        "sha256:4835afd85c7b862895d2825f20d788be8d152c7a0f700212777f5d896c7036c5",
-        "sha256:56477ec89f388d4ca36d31124ef89eef2f8d404b9b6b5f0d1f0ba96750a75824",
-        "sha256:21c045692817e154d0757521742ceb11ac8c13cb0832dc0a0953c99ae6999b3d",
-        "sha256:0c558f1353f58b851e25bf91203622ec99428c1156326531b0b90ff3b91e1b1c",
-        "sha256:9c495f90be94fe28c5ab393ab6c14b6e940284cad6cff9aa6da19dbb28bd0854",
-        "sha256:62e0c7cea00e4ccb8f34e20e947ea30b6e938695651c94e1d0112fd75741fe26",
-        "sha256:841286fc1045e46f606b24ec73f29ca909ff69b347e5ae98651c7c21fb625d78",
-        "sha256:7c094eaf2667b09063f464e89f1601b1cf2ea657090c63a02d88bbc644294ecd",
-        "sha256:03078e831f4fbec2793c859543ce0b49d8e81616e07c131285d458afd702751e",
-        "sha256:9ff1b97b3efd7be5e4359d78030377acc106fe50d270890c9df0661f08977bed",
-        "sha256:ce3074f2c876d468cc11c1b99cc45d96be5c3a2b416586e6728461ba8ee4ad96",
-        "sha256:033734835dc1d121ecb4e7e8f1a90b0714a8c37fdf8e011ec4c37b9f2e788be9",
-        "sha256:7a8fdbd84686e23ceee91486b7e63e60e4390757c9268c2c258efc6c307f907e",
-        "sha256:a5dbd9b657185df3f23447e6629b7ba2663cfa3160371922735151da278c4441",
-        "sha256:094a33cf546f4204ecc3669ae95d45d475efe20c970f093bfaf43831760dd834",
-        "sha256:aee19b05578ce4bcccd8a6e0c79b3058cca11a87d374d9f62fa5412cfe131d69",
-        "sha256:81ea36680b46976ba70f30e0110e8ff8c868a6464c3fc3f632d427d7a5b56ec4",
-        "sha256:6655c225bb5b527bdf9b3323c243d843b81ad92f31f81ed4ff0c30c4f4a88160",
-        "sha256:38ca9f00447153d0ea614ab4a6e4eb1909aab9e10cd35e246b57c3f2711ed691",
-        "sha256:02ef27074ea6471261b16e2109d10af6c897913719eceb02b1f0d930cf75f47a",
-        "sha256:5f9ae6cb39487213c351869c537a2c459b899e1d0dff428cd36b5afb971e5062",
-        "sha256:6ca47cf873a95d0cbc4763d340ed40cae3384fb32d828d96fbadb882a118bf67",
-        "sha256:0958d8b26fc0cb9c878de48e93cd7c3f02e6543949ed899066a3572c4945952c",
-        "sha256:dc550253fb8e475b93a63bad6283f2039bf631869eb42e0c77a61fb96c826c85",
-        "sha256:427aa142b3ab92939f66418c978c115bd7aee0471b358258ad257d7d6fc5b8f6",
-        "sha256:cbfd7d70e3e657b538b8f9220e8b2725ab423e9621d09bcae043ee3d88bd5628",
-        "sha256:3094b7d489b0b3191c5cd52d2951a5486135522c954353789017705a5af9d650",
-        "sha256:64730ec0ae1de813f22d3dd75fced6b58d191869ee2f768f1e5ec1daa36adc27",
-        "sha256:1fe7c3b8b9eea03f8a330ef796d156cdeac881b614a7bd2edbf4608638bbf89d",
-        "sha256:90ed5c72378b5508ce56121bdc73f9f32d99c46fbb4627731ed778c94bf858f0",
-        "sha256:845e17b14a41f826705416c0a4ecfc993511a704b911ceb117cadefae69c69f7",
-        "sha256:1dfe8fc8a09d85f2679534d3e6bb8d69179e94a3239b586f122ee52e9ff194f6",
-        "sha256:d97cb13010e4df1f7f23395dbc703763b66561e403e096afec65ce330c91c464",
-        "sha256:604c14e7103c3bfbae162dcf7480662c43a1815ba06931710e1e5eccdb569947",
-        "sha256:d7ca39afc098eaf98e89c946acfd95ccf4e961fbd17c71377004381d0dca921c",
-        "sha256:1b813e0640336dc2dfa8f519ab141bb55e9e02d1087e22e924288a13b451e3f2",
-        "sha256:1b94cd0da6569ded3e8ca3fb7fc564ed62bf95703bee621618fba0c9bbf2da9f",
-        "sha256:06c21470a97110c43477e825462d7cb82548daa25bece4183e13c102c577e1e1",
-        "sha256:8efb6738afac9ca75f9da37881e4cd44b95e12164b26adffc34f66dd36d42745",
-        "sha256:7a0c7be6c444b39ad0693797b0b13a74c15a45e9340b3a1d66eb9b01bd316b7d",
-        "sha256:b78978e5dac52d4869bc1fa012e3468d059c4db8d4baa3e0877af72117c3f5a4",
-        "sha256:61a3032a682ed25f5e2226eb3550570f27e1fbf1d71f772b31d03a29fd8d6c83",
-        "sha256:29bb671190876fbce6f1e81bc1eca314fdfb01136ee16dc4ddb18bc09ae47f2f",
-        "sha256:f53a270a5d6a08e664067d9fbe78315239b09affdf24f46f0d815fd421801ff2",
-        "sha256:c57ee020b08fa26a62fed57d7910fd3bf577041d3e052880283d8ec4b8e5a525",
+        "sha256:7eae1f413c64f164a97bf37e7a4359b742d7321b2877b238acdb7a2dab266be6",
+        "sha256:780fc466abffc392a7bfdb20e44c19e4fdb28d959b3fd18a7765b157ab9400ea",
+        "sha256:a952c017ef477b3430b6fa94cf708743f69242ccc4006181771c0ae9194f79f4",
+        "sha256:39694d5235cd9c95783103ce397beff78e4c14b3ec0b1b8aee268cc7527b5cfc",
+        "sha256:71430bfb53cd640766e817d742aaf8d9a11f0eb4d8893653233233ba3869cf80",
+        "sha256:9048ee9f3188ebddbad5726af562b6192ec5a3543566e5c5a9781a532eb58ee5",
+        "sha256:b0f72f856a0416b32d69bf74c23768ec6a812f2d84a19502fdac7d94b3e1ec9d",
+        "sha256:b648d2a74857d4711a39b3734ba97eee94381fe177c83c3a0434876db30f14d8",
+        "sha256:6b0f8bad16483aad55bf0d6d408b312750e04129bb974eb9760b5955c4f28ff9",
+        "sha256:cb64ed1b0468b8314c266873b45079d34f7935c4eca21e1f895b1fcd2f7e6615",
+        "sha256:7ff08cd1859cbddc1e6428fdc6db5052b38192de1877bda0c699b98069d4f575",
+        "sha256:e7f667c5a5bbcd9462c79ab0032c6b081c80f1b8035c99e9228696ceef49f633",
+        "sha256:4d89b21304b211a449fd0f196891d750a9a1a048a4813315937e84abf0ca7a66",
+        "sha256:1af6a7f70bb1b3f31431755ac4704b1adb798a6831666dcdecbd4441bd000ad4",
+        "sha256:b73b2e272a58e35bb6d591711f577372ad337bddc9a8a18b821c57cf65309549",
+        "sha256:1a24aaade6e0213958f6e5b74e4035ab0952cf9566f48572eb0fd307a3e1b80b",
+        "sha256:be44d37e49914fced33bdc7fe0fcb6552cc9319787294db852866df155d99091",
+        "sha256:f9164a545c3e0d687645e84f910407f1be6d49767fa04401b0796150b9f6a5fb",
+        "sha256:eea968b9b9f566f2ad6ca260fb6f2dd1c67fdefecf80900d28487e484901b841",
+        "sha256:58e44729c708b6c0a293bb9a0eb579f38295eda3ec6e1ac4e92be3c34294d0ad",
+        "sha256:8daefeacba02eff3c405d4662bd85b88314c9962219292c3c873a74dcdd3a970",
+        "sha256:df533650f0eadce3d877d7dd767bf74e387eae468cd7c4c66c19adda67735281",
+        "sha256:3e68e11feef69d469bbe09fd69b3e024de38e827ef6b22e85fe0a293cba9d4aa",
+        "sha256:b8d2da640ef2f60684e415b59590eb9c38149171b98732b6f7971e1dd39b3117",
+        "sha256:13125a4996698aaca31c1bf9cb37cb48e101d3740876494dfb550451f629db79",
+        "sha256:0f395900e9962d91f41587cf8fc5b0c48b16ecc07349ef9fb0555d2f753422ef",
+        "sha256:7578a70cf9fd97dc1cd4470849547e6e7c59c5d4182e4a7b92f4afc2a22fe75d",
+        "sha256:2ece64de4bee2243b53206c458c1534128aa56267d54bc23c058b612026e8ec5",
+        "sha256:0da3b20c892935c26510b079820aacf6915df4cf7ff93d4e82f81af9c9c33099",
+        "sha256:9865b3d6a6463471cbe18230ffd5fa49445de7d2852801b3c985ba0ee4fdc04c",
+        "sha256:9a1f53729712216f82615673aa43d016cb77876f5af4d6bab502a059d1d7ef56",
+        "sha256:7bd7815fa3e500f184c7069f083c6b3273c8f67a836deed7c5e49a1759d08b73",
+        "sha256:b1d914c3e5e865a33f2bc2bde09e93c7c2ebb734e2a16f09fe4425be02eeba48",
+        "sha256:6b600e3cadf3a1fc8d3755986f03b269e057acac2269c718cb3de4c62a0833dc",
+        "sha256:e552fbd0da6aa7c819ba4954331f8a9aea8fab2f4e04bc103457110f1d371991",
+        "sha256:510d2e0e86eb12e2c91eceb25547043a618ac349e4112d45cc9d9bb813037a55",
+        "sha256:3312fe7c8c9d4d18eb5e40bb0157309dc36c29a655bbacb8a1d60509ae9ee446",
+        "sha256:429d7a3d8fb9853c821333e9450ea8e8a19c0e1a40c741b87f5486bc81d9835b",
+        "sha256:95fd6e821c0317530786e2722756d2505e2ad50601bc4c33514a95d2c1a4a7af",
+        "sha256:fc70eaac890b50c88a65ca3abcd3cf298a2b07b04347556481a902e6d055f5bf",
+        "sha256:a77b9ae31a6543d1ecbf4b1872eeca792434e63f5ffe14252f99e7900f6d3c3e",
+        "sha256:1f38c4d2196b5d5f025b802fea4bb985196571b000fc075578a8957b2e12ab11",
+        "sha256:10af1e75f95b04473f6233416224fceac936014c164348071ea37326162aa74a",
+        "sha256:ae330a4f96bddb3bad3cd4859ec8821b581132e06a4312031890b4a48521e364",
+        "sha256:66af7ee7c66842ccef7306b266bad58fe4e2d875aa34a3455c75d37b9dcdcf37",
+        "sha256:1ba0c8d1aed8a71e1935476d5efec1e6dcb5786f4cd8817e21f8f791f6d00bd1",
+        "sha256:cdccbdb0e1cc3cca22ac0023f67f72bea28b7af15562a0287a49bd0c317e1080",
+        "sha256:978a042a5b0aabbe1e7853e9d5edd69711ac9037b979be2ca68fe8c379b4e633",
+        "sha256:1684c3e01d34af65db90c42e64c0f9d404f4779e77f8aed1f881bf4202c17c30",
+        "sha256:b00d009c0bfc8094265fc56ef886d101203c2ed841ee40105198f0359a042db5",
+        "sha256:eab09eb234dc068c2cf75eb82bf2827e906c6556b8ff1c5064d9cf329e0c807b",
+        "sha256:30709013188c5bbf9500ce61d39411f4a5fed03e895aa31f6aed9d6b1af9de2c",
+        "sha256:f9cbb000f13f4c1f8ce75698ece8f86231d4595f68f3293b4bf21355fb5b773a",
+        "sha256:a5381857f5101e1e3e374dd2fca8e8815e006dd6a63d84fea1ac0701aac37143",
+        "sha256:7b2295a408c49b3d464f670dd9de523fd5bc7f603241d5c7916ab5b4439dff6d",
+        "sha256:ce2ebe8e2f3dea4073d8dc1abf635f61a8bb3c61f97f57d55303ce8f469d7efa",
+        "sha256:4546960ce703400200842ef54a215f81527383ee8874d6ea05c507b27f11c9a5",
+        "sha256:749a1850ddf507a8ab76c2fe66a633143298dde35d16101eeefa5f64c168261a",
+        "sha256:7f33b7a44b1d3220f975c0fdad42c960c36443579de2974279bb8c3e5350ed8f",
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:c101fe4c61f1b5fc2e5e918911b2873d08d58e1cad781ce087c9eef8086c2687", // dragon-hvac-source-tower-core-641-3a1dd026
-        "sha256:bef09d3986d78f26f6577bd95dc05818ae743ff953be48043c2b1c7bcfc3b3e5", // dragon-hvac-source-tower-core-642-14ca97c1
-        "sha256:9c86f627a34a0776f57d021dba83625063fc6fac1a82c6e2e4b413364bf40b6b", // dragon-hvac-source-tower-core-643-3e4cd4b3
-        "sha256:ac8f16c0cf36d1452ec00298d04c249d806be88a70e74155fcc31cf0367996a4", // dragon-hvac-source-tower-core-652-fef90e4c
-        "sha256:ce6fff64233e9cce7e857379122086d62ab48702c3e9563297aea29a40c96af4", // dragon-hvac-source-tower-core-653-735f922d
-        "sha256:614280337651e9f3079d60f31383cca483a66e8f62f9f0cd2eac20b430e63a88", // dragon-hvac-source-tower-core-654-b97f1590
-        "sha256:3d77ff757a936b4fd9ed405ee2bbf082f2b54afc525900a5c3eebf187e4fc084", // dragon-hvac-source-tower-core-657-610bd83a
-        "sha256:308393e8b2311865e76018f3ee8af5b2c080ec0d4610b3884e5ac3308a97f470", // dragon-hvac-source-tower-core-658-65f8043a
-        "sha256:20d114844d67123689165d2859fa3b160e7408d3af01bf16b77d746fea21a145", // dragon-hvac-source-tower-core-659-4ab109ff
-        "sha256:b98ef9ebeeb47f129f55000e7043c0a093cd813ff8810f9817404165738a0d8d", // dragon-hvac-source-tower-core-661-a4d512bc
-        "sha256:2a353eefc2626fe3d95bd65abafa7142ddfa0db34bc57c2a06ab957d3df51d7f", // dragon-hvac-source-tower-core-662-4b2767cd
-        "sha256:69f7f2410c6b130601c15d70d73889d629b1103f3d4588894e0f5b5758c8666f", // dragon-hvac-source-tower-core-664-a365cc0a
-        "sha256:f309ce93a52bb035228e6bfa38ded50d2f5b8a041c8140fbecf9b5037a7a737d", // dragon-hvac-source-tower-core-665-648bc45c
-        "sha256:b3b4e3da4013e8bbe570cc7c328f9edb622bfcd2422cfe38723c83ef1467d3d6", // dragon-hvac-source-tower-core-667-8785ee6d
-        "sha256:e5db69b1b6a4e6940c3c6e55493ac1184231f74aa51a2fc999039e29b16d3de9", // dragon-hvac-source-tower-core-668-dfd51671
-        "sha256:7af6d2a76a0ed248eafd93af9e0cb74e6f79b52ee0b864daab2572f34d30a2bb", // dragon-hvac-source-tower-core-669-2947a213
-        "sha256:081a757d3a7681fc97e3ddb89e3e1aaf7f1b8b0c784cc77c3f755192f8e79adb", // dragon-hvac-source-tower-core-670-5074351d
-        "sha256:2aa2d677868645e1c1d14e45369397b4548ba6d016a8f18729b89bf70d418257", // dragon-hvac-source-tower-core-673-4b07da75
-        "sha256:17c9be1c2259014f70a304181e65cf9c148e1a90f85c42ace7a74118bcfa0c8c", // dragon-hvac-source-tower-core-674-d388c8f3
-        "sha256:31f448f399a5ab1dfa54d377a194e4a87515b8026882e7b0bba414bea968967c", // dragon-hvac-source-tower-core-675-b754f9c4
-        "sha256:4ec2543f19799d1000717b139107c1719817cb77bd0c7dd6980d88c45ef28bd2", // dragon-hvac-source-tower-core-676-482bcce0
-        "sha256:d362eb3c9037cdbb1474edeb0ca3f8a9b118107b3fd12b728bcde566c21b2d48", // dragon-hvac-source-tower-core-677-bc43234b
-        "sha256:491b998b5bd80a3ba791a190098b7960980544ea82f677e8a1fcb5dc96bbf820", // dragon-hvac-source-tower-core-678-7da2b907
-        "sha256:e3ccff7f7a9015e4cc41eb686e0f1a052e8300a5119bc7f5db751305ed692dab", // dragon-hvac-source-tower-core-679-53dba42f
-        "sha256:59c412dcf586e4232beeaa10a77eee5a53efabff9e634e456b220881f7742c99", // dragon-hvac-source-tower-core-680-87efb2b8
-        "sha256:1e06c5ccbf831992b1e63c7fb3a6e6838f394ad87f58988b3709e79f7079db70", // dragon-hvac-source-tower-core-681-8200f079
-        "sha256:125ad05c035cc0dd62ee60bc36900e27a55ae92b2288445c7cfe35bbab685119", // dragon-hvac-source-tower-core-682-c1e5599b
-        "sha256:50f5d1b3dc33d78a9eb900b3dad5685f99209949013bb664e2794fbd2e301717", // dragon-hvac-source-tower-core-683-65852008
-        "sha256:1c3144ea560fc01409775751faf956b908010c609a2d74238c06319b0848992d", // dragon-hvac-source-tower-core-726-66a9b58b
-        "sha256:ba068ff29a902ae73c1db2c47402b97fdd7e1c82f72169648754debc19dc7139", // dragon-hvac-source-tower-core-727-4d234c1e
-        "sha256:9dc856adde46d71f57dc806c925743c0a9d5170a4e1b690331b1aee432f601a5", // dragon-hvac-source-tower-core-728-a3ee9ef5
-        "sha256:76a3eb3adcd9ab3898d2f65cbd77177f0b659decd9fa226743981075c23f597a", // dragon-hvac-source-tower-core-729-8d1b877f
-        "sha256:b06f4e35a404ddabf3c5c646d76e2ce78f1f4bc90df07cf3dff248fecfb93a69", // dragon-hvac-source-tower-core-730-b26b5808
-        "sha256:fa6921038dbc67aae8195f9c7f02e1442f8f3b46325efe1ef2417a9a61d7ddd8", // dragon-hvac-source-tower-core-731-1f61e381
-        "sha256:05dc23910403d315b927f15267b3edef7d60db0507594712a8b270cb6a2e3b97", // dragon-hvac-source-tower-core-732-7fc1afe4
-        "sha256:f5ca6ee4a89d0a48f77a17c670455d601a6ca57a93f925e147229b046d31217c", // dragon-hvac-source-tower-core-733-5afbce03
-        "sha256:cbb3728a6fe5bb70e85e80fdd0262dda2b58631461c8bc0663551ac00b7e03dc", // dragon-hvac-source-tower-core-734-42a148cb
-        "sha256:327ee053a9f6d64d93e9009b72f2d16bfe4c38427e16c3830a2e3e6f4703a6a9", // dragon-hvac-source-tower-core-735-914d30a5
-        "sha256:4a852faa475f1b432f2a88e1d2b52658132f0b9d5c3ca92bff03e8454f3ee276", // dragon-hvac-source-tower-core-736-dea3dce6
-        "sha256:34ad9e6cd3cacdf31459c8a8f77674f3d79b7d73d6d8496c87ea45892ba4d0d8", // dragon-hvac-source-tower-core-738-5016ceb5
-        "sha256:c3d6aab1451ab799787fa0bfb643427a03382ea289ab6b3e072bc31ad8cd85d0", // dragon-hvac-source-tower-core-739-0189ef90
-        "sha256:2f0d791d315fed8afdc251e54edf5fcd3375f5956250bff680b9f24c27ab8b30", // dragon-hvac-source-tower-core-740-f862c5a4
-        "sha256:28b50e6d72eec22392323bee01cb9e322aec9caf2a001f25ff3ba89d9ca866b7", // dragon-hvac-source-tower-core-741-498d6fec
-        "sha256:476b1045fdcf0f0cc01d60a6fd0a2fe461928b0a4fc5477bc2dde1852440e99d", // dragon-hvac-source-tower-core-742-66eef776
-        "sha256:1a5cd82b508c0262f1784941fd4fc1b3f7ab7e648f14b621f0ac1e14a6aa215f", // dragon-hvac-source-tower-core-744-219b5b22
-        "sha256:79a9fca1396901720e60efbb873edb2e07325613e5eb1c1298e2c46bf72c49bd", // dragon-hvac-source-tower-core-745-7ba0b88b
-        "sha256:669dc022c2b134fcebf5c7128b3ab392707a4b1eac8caef6c26e05c62f892079", // dragon-hvac-source-tower-core-747-3946064c
-        "sha256:c1d4d83048036ce6dcead9056d651a5fe72a9dfe9f77560da537cadc3bebdafa", // dragon-hvac-source-tower-core-748-3692dbe4
-        "sha256:ac25bd74ecdb59d5fcf4328cd454ab45b5901165ceb666272663495f206fde58", // dragon-hvac-source-tower-core-777-d8fcbe86
-        "sha256:5df3ba5c358df0ac9c9f9071b354c8b8b606d7d666e1e208d08e0ff6fb0e388d", // dragon-hvac-source-tower-core-778-491d3dcc
-        "sha256:312ad86a42c42bca15d0ba9ab41f326392049eafa2ebaf470d5d61c06a7066cf", // dragon-hvac-source-tower-core-779-dd1f2652
-        "sha256:dfb6569edcb4023f31935eaa5996e127a134bde6ddedb21d072f5aad61ce72d4", // dragon-hvac-source-tower-core-780-9fcd3f6d
-        "sha256:6fb1cb624b56498078e98997c3d5c36799c83dca907672359c672859f8d59f55", // dragon-hvac-source-tower-core-781-ee8dc7f9
-        "sha256:35967b26b3a3769975d8ac2664cf6105bf3c5e10a8729f412fd8ae378ab7a1f8", // dragon-hvac-source-tower-core-782-5b92cad7
-        "sha256:0aa7a4a3be09d1e342685579e6c204f2d75951c02150e71304d86be3ef7537a2", // dragon-hvac-source-tower-core-783-65852008
-        "sha256:79c236afbb681f5712c486b2b889dd7ba75338c46ad2884dc13e5cb27d853566", // dragon-hvac-source-tower-core-784-6cd0d336
-        "sha256:d8e65d523ab681d037d51fd0e0e47bf685a774f9de05894aa114207f4a64cc43", // dragon-hvac-source-tower-core-785-b62cdf0b
-        "sha256:f18da24f17541001ff7da79159ff2b5bfe2a5f833f870151c29a19660ff6d585", // dragon-hvac-source-tower-core-786-8ad08f57
-        "sha256:64cedafef6171d8ab44ba19f8f7089eb93cbfcd4c20b52c017b71464b17fda74", // dragon-hvac-source-tower-core-787-14bb746e
+        "sha256:d54a1a3e4e0443d12b0403b80c1ee0c252e0aa60dd831958863b6f39a3310d29", // dragon-hvac-source-tower-core-641-3a1dd026
+        "sha256:3eed11b19b22cda1f0eaf10f990592576680f94070eb1e1c910bcd257de42487", // dragon-hvac-source-tower-core-642-14ca97c1
+        "sha256:ce41d947022539ae42cb90f6769f626eaafa6add746c4e69e546f7c172d680b8", // dragon-hvac-source-tower-core-643-3e4cd4b3
+        "sha256:16678d02ee63e51eee92975074a04b8b665eebc80d83201bfed98cd1b097d7e7", // dragon-hvac-source-tower-core-652-fef90e4c
+        "sha256:f164aac24a3ef31653c48b018dff68bc94f3f9e3bbda2dfe17a15d1e6f4c99fe", // dragon-hvac-source-tower-core-653-735f922d
+        "sha256:a4f0533e8f34c2330fb70d7f172a193996e001b98ff2da62c34ae1f5aa85d382", // dragon-hvac-source-tower-core-654-b97f1590
+        "sha256:7cb7e2e914ebcff2d4cc7a96e507c05d756567d91bfb60f7904342ae03b5d891", // dragon-hvac-source-tower-core-657-610bd83a
+        "sha256:8bdd993b5e5e5de6228a172740a6e00a459d0ee9d2ef75a4f6244e72280e5e5c", // dragon-hvac-source-tower-core-658-65f8043a
+        "sha256:670fc549bd8197b2bebe2a5796746b41840255a399d8168f46d5089041a2e23b", // dragon-hvac-source-tower-core-659-4ab109ff
+        "sha256:169f6b150d5a38877ba6afde70f20f4e0ff116728c0d35ac6f5990fb167925ad", // dragon-hvac-source-tower-core-661-a4d512bc
+        "sha256:22d5e5b9646274bb2b363f93f0974192cce74d9f24fee1b9e4172066d23789b4", // dragon-hvac-source-tower-core-662-4b2767cd
+        "sha256:dcc16b72706d6c8306f38c51f44c1de86d09422bb1ba5376420e3589cff3f56e", // dragon-hvac-source-tower-core-664-a365cc0a
+        "sha256:d988182be0a8ff0b8e7fc0e30e206a57270256f0acc6ba3f6fad307489a2362d", // dragon-hvac-source-tower-core-665-648bc45c
+        "sha256:34fb43382a13b56b26a5a1b3132e38fc57acc1e2693b7fd17e46fcb7b4dff9e4", // dragon-hvac-source-tower-core-667-8785ee6d
+        "sha256:ad3d66000780612e459b5e7e3dedf4c59c47ae82d1b5dda3dfdb22045496f0d1", // dragon-hvac-source-tower-core-668-dfd51671
+        "sha256:861af5539016ca2e7a1ed39f158dfa6e0ee0cc5be9627b185e648e1aabbac6ef", // dragon-hvac-source-tower-core-669-2947a213
+        "sha256:a7575dc79b80c77d1679424833499410842ffdb1c0f6b502fd124a6b6f276bb2", // dragon-hvac-source-tower-core-670-5074351d
+        "sha256:454b9a819b4fd1d06d7b8fb439eec37183d46138db268c24f039f4fdf3f7b68a", // dragon-hvac-source-tower-core-673-4b07da75
+        "sha256:5f5e2bfc746afcd58fcd445acac5a992c3bfc1d5d9fcefa800339672487eb9da", // dragon-hvac-source-tower-core-674-d388c8f3
+        "sha256:0f1d35f92db471d96959f72791113ae38e671a04e3e7a33476d9e6d1750ba5b5", // dragon-hvac-source-tower-core-675-b754f9c4
+        "sha256:819b31b99cc72b789081b514d2cdc7c391f401d88603a8784733df21dc58f33c", // dragon-hvac-source-tower-core-676-482bcce0
+        "sha256:e35d146b4dea7c136ede03a6ac2ca588acdc4ad8d9f1a99181978d96f1863013", // dragon-hvac-source-tower-core-677-bc43234b
+        "sha256:07ff9f50dce50fa92a49e7fee290b3f6fd3d2cc0b5600ee79f62e989bd90d441", // dragon-hvac-source-tower-core-678-7da2b907
+        "sha256:7154282987f8bf5ce69a991f02f039e08eafe35733ea3910a25a047b15467643", // dragon-hvac-source-tower-core-679-53dba42f
+        "sha256:560a194eb2b92fe156278da05f89bec29141e6ab00b82260b592afbe80a42a88", // dragon-hvac-source-tower-core-680-87efb2b8
+        "sha256:803781b3262eaea440e923584c91d98468b6fdbb72768650883a75326623b51a", // dragon-hvac-source-tower-core-681-8200f079
+        "sha256:ee59385e9a67e84843209a4789d6ded32be44f2fc870e8462fcecca9f7ad45d0", // dragon-hvac-source-tower-core-682-c1e5599b
+        "sha256:7f99a77b29a102e64d5b87981e029c37fc5b1b6d1ab36206794ab4cc8f84945a", // dragon-hvac-source-tower-core-683-65852008
+        "sha256:554b2da2684246ec42b7280b73bd8b85ce64ad31a04c53c4e99a05189d92fedc", // dragon-hvac-source-tower-core-726-66a9b58b
+        "sha256:1ffd92062a79b568e70fc1c7d2d612290b3229122b83cc5e5cb4812a7cc9a3dc", // dragon-hvac-source-tower-core-727-4d234c1e
+        "sha256:71a5f4c6929dcb03de55b92151eb9d8fa28353133b13ef03992a2576d9b3ff3f", // dragon-hvac-source-tower-core-728-a3ee9ef5
+        "sha256:bab7a8a2a279cc555f19f829821be1436146bdae9b60184c48d9e28b6a7f7c81", // dragon-hvac-source-tower-core-729-8d1b877f
+        "sha256:3713905aa1b282b8fb47a1118e7bc1f49972ca52507a3b375d8b5f2d10b87cf6", // dragon-hvac-source-tower-core-730-b26b5808
+        "sha256:d085e2f8c74cdabd3f7ce8f8afb5b09fb4436a5cd3a427e973faae3c0b7d3539", // dragon-hvac-source-tower-core-731-1f61e381
+        "sha256:2b5dba112c0821947d6ebd2795d1838046ffae189c60c57f3b742d32f6d136fd", // dragon-hvac-source-tower-core-732-7fc1afe4
+        "sha256:7b03dc907d4216096d3c7add7369b542347215e706ba796e0567b66e7c32c222", // dragon-hvac-source-tower-core-733-5afbce03
+        "sha256:c1a7c7d6577e79dc67f0923e6d94c4cbf67eefadcbd215a6a09f4eb748e5d33e", // dragon-hvac-source-tower-core-734-42a148cb
+        "sha256:9356ed65a6bf9c18e7673fb157dedaa55459f6b7de07e5f6e7863baaa5170c4f", // dragon-hvac-source-tower-core-735-914d30a5
+        "sha256:a77e6213892e5b718d19df066efec3fe69192185d9eb1e8be2b8446d3a01b4e0", // dragon-hvac-source-tower-core-736-dea3dce6
+        "sha256:966c66ca629de16201800a276537ea519ed71290f35708c99377979a3c08a058", // dragon-hvac-source-tower-core-738-5016ceb5
+        "sha256:3e34c00fc937c862ae866c9d8a793b893336bd806a5e8d010706111524432011", // dragon-hvac-source-tower-core-739-0189ef90
+        "sha256:b77061c307a12163a4e9404da1921e7c9d9c0ed9d669e3e57ab9f394db2998b2", // dragon-hvac-source-tower-core-740-f862c5a4
+        "sha256:c7bdf55e559793f3daeb3ecd9557d4c8f4350d524a570cae9b89815d554bbd73", // dragon-hvac-source-tower-core-741-498d6fec
+        "sha256:fa6ad43fb007c35162d35a12638d73e87ede68221004f59f16dcf25421dd9c6d", // dragon-hvac-source-tower-core-742-66eef776
+        "sha256:ebf9d291d6a66994968a3f8d5372851183164ef18a998e547423be6cb306d35e", // dragon-hvac-source-tower-core-744-219b5b22
+        "sha256:364c56a56eaa0413140467bc56d95cc2102d4b53adbce5f2612ff23e7cad91ef", // dragon-hvac-source-tower-core-745-7ba0b88b
+        "sha256:1b08f48d3555b269316e8dc0b0eb6380bef8420963f8a892b1c4836d4976a559", // dragon-hvac-source-tower-core-747-3946064c
+        "sha256:bf7489d101632a11438168e55acf6f1d5b2c34c6762db532c2fc5d5a5f808075", // dragon-hvac-source-tower-core-748-3692dbe4
+        "sha256:28e0248d6e8cbc0eb5408d39437c7313b54261a7ba4c18b976972bd0ac40c767", // dragon-hvac-source-tower-core-777-d8fcbe86
+        "sha256:f63ecfceb03fc8f78e52982f36c872a401178b9fab2f98fa21886a97a636d6e2", // dragon-hvac-source-tower-core-778-491d3dcc
+        "sha256:bfb8101f8d858320b7cde4c2e476bdee8b4566d0d206fa91e7f5d2bd4dea65d1", // dragon-hvac-source-tower-core-779-dd1f2652
+        "sha256:b1a6ec1665e1a9856499615db752944a1e682971f8c97e42985c100e0e7bd413", // dragon-hvac-source-tower-core-780-9fcd3f6d
+        "sha256:1d0309567cd39d687fbc8c9b84334b12b1ff41bccbc2edbb16799889adc8ed34", // dragon-hvac-source-tower-core-781-ee8dc7f9
+        "sha256:3b35df374d7b92b1f7fd4730a99c86d5546fb44501c37db1f0098be711bbda34", // dragon-hvac-source-tower-core-782-5b92cad7
+        "sha256:4db32d257d458ea0cbe41481580b75869865d7dbab9772c43c0ba4d36e4bf49d", // dragon-hvac-source-tower-core-783-65852008
+        "sha256:0963a87f43162bf1eec593ca5f694d670ce5c553f3b1074a0aa6d05f86c111bb", // dragon-hvac-source-tower-core-784-6cd0d336
+        "sha256:d27045acd9228ef5176af937a195944e819cd90120872229fcd58ef793c7ea0a", // dragon-hvac-source-tower-core-785-b62cdf0b
+        "sha256:f3daa56fb3e477e509ded90d30d71746235eb81cd2a9edaf96b3124796d21ebc", // dragon-hvac-source-tower-core-786-8ad08f57
+        "sha256:e5783f84fed9a34be51c0b73742c6ac8b0533994f4904a05709c25d09ce9ad3a", // dragon-hvac-source-tower-core-787-14bb746e
     };
 
     [Fact]

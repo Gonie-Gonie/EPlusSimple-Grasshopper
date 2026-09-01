@@ -14,10 +14,10 @@ public sealed class DayScheduleCoreOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/day-schedule-core-oracle.json";
     private const string OracleSha256 =
-        "sha256:202c889b0c38d5571fd6c55aa1eac4cc94344f177df09d5654086860bc714239";
+        "sha256:fb43f9d5fffa2bca80a92ab11dbe291ba74decd332dd351af615bde9724b124d";
     private const string CasesSha256 =
         "sha256:928a70bc70c83fc9fd7969253c2c5cc5ab5ffb8fca63726f197c007405d95c45";
-    private const int OracleByteLength = 166_372;
+    private const int OracleByteLength = 166_369;
     private const int ExpectedCaseCount = 42;
     private const string OracleSchema =
         "dragons.invisibledragon.day-schedule-core-oracle.v1";
@@ -212,7 +212,7 @@ public sealed class DayScheduleCoreOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

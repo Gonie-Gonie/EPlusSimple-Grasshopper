@@ -23,21 +23,21 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
         "fixtures/reference/python-0.7.0/dragon-hvac-source-system-to-idf-object-oracle.json";
     private const string OracleSchema =
         "dragons.python-reference.dragon-hvac-source-system-to-idf-object.v1";
-    private const int OracleByteLength = 3_927_710;
+    private const int OracleByteLength = 3_927_707;
     private const string OracleSha256 =
-        "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f";
+        "sha256:d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e";
     private const string CasesSha256 =
         "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07";
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_hvac_source_system_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 66_475;
+    private const int GeneratorByteLength = 66_469;
     private const string GeneratorSha256 =
-        "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159";
+        "sha256:52106bcc6d7070b19fb637a1435a94cadca000a7fb7f42b69dc2538ffe906ffe";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_hvac_source_system_to_idf_object_oracle.py";
     private const int PythonValidatorByteLength = 26_934;
     private const string PythonValidatorSha256 =
-        "sha256:b86d4c8a2ea60de84a9d982fbf901f23f76c44e4e2216532cb4567baae802d0e";
+        "sha256:9f3567334e4e079f593a27a39b460a4de3fb467fc2f06de04f113de62bac90da";
 
     private const int ExpectedCaseCount = 20;
     private const int ExpectedPythonObjectCount = 519;
@@ -45,7 +45,7 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
     private const string UpstreamSourceSha256 =
         "sha256:a57ec9d15df749efe0c42b3b68016293cf39ee1ffde1d3960d2451b3853e8ed0";
@@ -64,9 +64,9 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int IddOracleByteLength = 585_482;
+    private const int IddOracleByteLength = 585_481;
     private const string IddOracleSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string IddOracleSchema = "dragons.energyplus-idd-schema.v1";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";
@@ -248,14 +248,14 @@ public sealed class SourceSystemToIdfObjectOracleParityTests
 
     private static readonly NativeArtifact[] NativeArtifacts =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582, "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_027, "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs", 23_777, "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs", 19_554, "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/PlantLoopAssembler.cs", 10_538, "sha256:6a612a61c056583471cec4782ca4b64e6a94be6a177fec1ef0ee869ff3da25ee"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingPlantLoopAssembler.cs", 19_561, "sha256:0d571a9ad78caf2aa55913c19a86df041f12c8506b4999e7a03209d626aee594"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_801, "sha256:f7b6867f411575c6ce5e068df9568f76791ad7a715d41a5b4937528105f78574"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764, "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561, "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_012, "sha256:f9ad853a991646f0cbeede575ae934a9aff7fd1c62e419e1b99c212afffbd486"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs", 23_762, "sha256:cc9b71a242f6a3119baeebe25aed003201179e005cd030d59eca609026d2d963"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs", 19_539, "sha256:48150a93275d8e4f395b064badc2ed07ba929287fd9c9b3ef461ccc3104e0f2e"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/PlantLoopAssembler.cs", 10_529, "sha256:23ce6a57bbe10dd90f5c6c6820b0419fce87afdfe4221b864beaa97cb465c728"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingPlantLoopAssembler.cs", 19_552, "sha256:d1dcc7cc037876af094292b539767fdfcb17e2457f8242f6cd66909734bc4a51"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/IdfGenerationContext.cs", 3_786, "sha256:7e20829a35f57c60db38fafe5bbe0b1157b2681542eca6bb2f0e889ad27a2db0"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723, "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
     };
 
     private static readonly string[] ContextOnlyNotTargeted =

@@ -10,7 +10,7 @@ public sealed class DayScheduleMetricsOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/day-schedule-metrics-oracle.json";
     private const string OracleSha256 =
-        "sha256:45ef72b5561dd159859cf9c295ee5652450f3c37d213bfcb81f1ade79c5967b5";
+        "sha256:f0784f65ef387f29871d3c5e61871aaa17bb81625228c4cb14b18e718e4b7d61";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Profile.DayScheduleMetricsOracleParityTests.MatchesPinnedPythonMetrics";
     private const string UpstreamPath = "src/idragon/dragon/profile.py";
@@ -47,7 +47,7 @@ public sealed class DayScheduleMetricsOracleParityTests
         JsonElement upstream = root.GetProperty("upstream");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

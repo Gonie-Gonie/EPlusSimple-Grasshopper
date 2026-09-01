@@ -73,9 +73,9 @@ EXPECTED_CASE_IDS = (
     "version-patch.explicit-three",
     "version-patch.two-component-default",
 )
-EXPECTED_FIXTURE_BYTES = 34831
+EXPECTED_FIXTURE_BYTES = 34828
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:2aba044516f955c5ef1ae28770982a68bf79d3dab6899f66a9091e0ccc4e9f9a"
+    "sha256:3510b6b3c561019457501391d2847c5e45ed2dc6dd4479842df9bf7db8446f7e"
 )
 
 

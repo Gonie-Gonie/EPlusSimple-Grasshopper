@@ -11,7 +11,7 @@ public sealed class ConstructionTests
     private const string EqualityOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/construction-equality-hash-oracle.json";
     private const string EqualityOracleSha256 =
-        "sha256:6a1de9268675565ab6a14467717ac38799c45d9fdbba4230b4be403a9b79dbe7";
+        "sha256:1f69c98f334c9d96eaa419b4d0283c2a1b3ccbdccc6b56867e754609cb030729";
     private const string ConstructionTestOwner =
         "Dragons.InvisibleDragon.Tests.ConstructionTests";
 
@@ -540,7 +540,7 @@ public sealed class ConstructionTests
                 "847b01f68f438f560a986072bcaa7768fbf67897",
                 root.GetProperty("upstream_commit").GetString());
             Assert.Equal(
-                "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+                "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
                 root.GetProperty("inventory_sha256").GetString());
             JsonElement source = root.GetProperty("source");
             Assert.Equal("src/idragon/dragon/construction.py", source.GetProperty("path").GetString());

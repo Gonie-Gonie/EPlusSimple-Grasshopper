@@ -13,7 +13,7 @@ public sealed class ScheduleCoreOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/schedule-core-oracle.json";
     private const string OracleSha256 =
-        "sha256:9810d81206c066ef05f6d95f2dc1e7c66a84e8dbb939efbe76a63d8e4b9717bb";
+        "sha256:cbb999f40dc0633acc1c1e58ed3681fe6ec76f9875c61c0aa9d22258a235b922";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Profile.ScheduleCoreOracleParityTests.MatchesPinnedPythonScheduleCore";
     private const string UpstreamPath = "src/idragon/dragon/profile.py";
@@ -211,7 +211,7 @@ public sealed class ScheduleCoreOracleParityTests
         byte[] bytes = File.ReadAllBytes(path);
         string sha256 = $"sha256:{Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant()}";
         Assert.Equal(OracleSha256, sha256);
-        Assert.Equal(15_661_618, bytes.Length);
+        Assert.Equal(15_661_615, bytes.Length);
 
         CultureInfo originalCulture = CultureInfo.CurrentCulture;
         CultureInfo originalUiCulture = CultureInfo.CurrentUICulture;
@@ -333,7 +333,7 @@ public sealed class ScheduleCoreOracleParityTests
         JsonElement upstream = root.GetProperty("upstream");
         AssertKeys(upstream, "commit", "inventory_sha256", "path", "source_sha256");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
-        Assert.Equal("sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0", RequiredString(upstream, "inventory_sha256"));
+        Assert.Equal("sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02", RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal("sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445", RequiredString(upstream, "source_sha256"));
 

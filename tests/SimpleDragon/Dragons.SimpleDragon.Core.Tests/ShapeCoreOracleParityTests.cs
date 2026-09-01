@@ -19,29 +19,29 @@ public sealed class ShapeCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/epsimple-shape-core-oracle.json";
-    private const int FixtureBytes = 108_435;
+    private const int FixtureBytes = 108_261;
     private const string FixtureSha256 =
-        "sha256:802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5";
+        "sha256:1beff8671a20e03e968dd0570aae174282752b5b28feefcd035ca136d023f90f";
     private const string FixtureSchema = "dragons.python-reference.epsimple-shape-core.v1";
     private const string CasesSha256 =
         "sha256:1b6be41823b3a165d1e5c923f46278a44ae8ff68ccef1a0edd08d72ab637398e";
 
     private const string GeneratorPath =
         "tools/python-reference/generate_epsimple_shape_core_oracle.py";
-    private const int GeneratorBytes = 73_269;
+    private const int GeneratorBytes = 73_185;
     private const string GeneratorSha256 =
-        "sha256:40431189b32b4592b949d48a04092634618d84d1a2bfaa3db11b00a346b501a2";
+        "sha256:383cde612b61410cda7e35bd309a936824a96c5e0b95d876f6d98bebb5af5c9f";
     private const string ValidatorPath =
         "tests/PythonReference/test_epsimple_shape_core_oracle.py";
-    private const int ValidatorBytes = 16_597;
+    private const int ValidatorBytes = 16_594;
     private const string ValidatorSha256 =
-        "sha256:db4eb54a35bd7293600904229b3ce6172e1b811df73544661540e3be133e91fa";
+        "sha256:1260a5f59db7876a2dc67725edd3be847984d3f7f56ce92c3d3095a0737b173b";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/epsimple/core/shape.py";
     private const int UpstreamBytes = 22_922;
@@ -54,38 +54,38 @@ public sealed class ShapeCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Fenestration.cs", 2_419,
-            "sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Surface.cs", 7_039,
-            "sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Zone.cs", 6_664,
-            "sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_650,
-            "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_652,
-            "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_343,
-            "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Model/GreenRetrofitModel.cs", 7_677,
-            "sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/Material.cs", 1_997,
-            "sha256:c869470be0b2a1f95ce7ad7cfa3ca32489bb99bed23e3465d0ab426175e8b1f5"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/SurfaceConstruction.cs", 7_278,
-            "sha256:0fa371d0fd3c6957ad506b927122c51f3eabb0de32d20d7b1602f118302458b4"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/FenestrationConstruction.cs", 3_962,
-            "sha256:15eb1452a5c89bf1e2ce41e1931500b6a329ea6467ac618e2ad6fb139369f5af"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs", 6_465,
-            "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/OtherSystems.cs", 3_855,
-            "sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/UsageProfile.cs", 8_870,
-            "sha256:94ef1a3d94da3d5e108e47da9f0158a4c51e340f4646d5bc52d885da63852eb9"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/ProfileDatabases.cs", 6_756,
-            "sha256:73564c26c8ba3ec98e0758fa8528a6a0771d72c268af7a4beb23e5cc7dc6625c"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonDatabase.cs", 2_543,
-            "sha256:31bf339ab34fb3e4f65362be0d9519b1d54c44e4b0e46b63e67398873d5fb74a"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Internal/DomainSupport.cs", 3_763,
-            "sha256:8e08f4b14fe302d5920970a505940db34a5e863a57670ddba241ef2288e703ab"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Fenestration.cs", 2_410,
+            "sha256:254b305f2ea49d8c39b25a228a0e734e730fd9168ba04c599c3344b6e92ac9f8"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Surface.cs", 7_030,
+            "sha256:fc64bbc6f9914393f1f3ec1fea7a101ba30e0c7640ed12280a8d1614dfc78dee"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Zone.cs", 6_655,
+            "sha256:e5a1c9672c7ff9a9d2cf660c96f303f0f162cdd888f681e0f7b24ef98d197a29"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_641,
+            "sha256:a212275276ccff153d5df42a44a46ac8877afa485e315ee27d08767a909f29bb"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_646,
+            "sha256:40e6e7aa1eb89cb341c7e7a32471fa029024e49b261dce8a8926514109d727ba"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_154,
+            "sha256:9462f609a4a7a4e062612e4058921b0c91931dc8ff7216dbe54e258cb59ec22c"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Model/GreenRetrofitModel.cs", 7_668,
+            "sha256:927ac0cd6982f48f1112a690e1a656dd16716dd96d5a145beb303e2154bbcc33"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/Material.cs", 1_988,
+            "sha256:a574a5a93277be915c4a9a20e81d5e13fd7d52d0e43b7ba120078fb4eb8d672e"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/SurfaceConstruction.cs", 7_269,
+            "sha256:605f54f51df2690cef21885171d6c72752022823f393f872c836160312cf03c6"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/FenestrationConstruction.cs", 3_953,
+            "sha256:6e8fb7cf51f284d51fb37d5a1b88626422e7ace34a3187d7e0e73196a3a96073"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs", 6_456,
+            "sha256:7ee0ec0b4eca1a78b4c6df5f6ba452b784bf09859ff24e6f50c681d16a63f1cb"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/OtherSystems.cs", 3_846,
+            "sha256:e1aba0e081e550031cb5dfd9f83f0bc8016c89c36cc2ab1b80c7a6af35aa7714"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/UsageProfile.cs", 8_861,
+            "sha256:5478c330a208c61d797413212024933db98fb6fffe021be7f9b73c30ffd079b1"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/ProfileDatabases.cs", 6_747,
+            "sha256:041b28085203376258726c21033c140a04a6fed65bcd07cd9ea429ced5d73bf1"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonDatabase.cs", 2_537,
+            "sha256:af9d3176183292b19e2304e9be3e000e266a6d858d462bdfd65d042d1568147b"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Internal/DomainSupport.cs", 3_757,
+            "sha256:40ea55a659ab84d3ccfff8dc2d36ad8ff9612b21bf8fdf96dedef2d76e144005"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -202,117 +202,117 @@ public sealed class ShapeCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:c91053c8621ff85b6ef3b5433806c7ea3dcc1b21de57542c6dcdabf92e6b1644",
-        "sha256:249ea441d842f497603575c9c9c2079682d6411f97572d2dfbef7101f9b0bf27",
-        "sha256:bb6518827f5e01a8fa3fa384ba1ecea3d829377f23505b21f36959e10d4c3c64",
-        "sha256:f123f0bf380b29d580d37479e11f1b0d60a08ec8dc78c88dbba8fe29565cb8e1",
-        "sha256:df9411469e9e6b56ae5a148b9d1256a227ef26472ab3885e7bd0164992aa120b",
-        "sha256:5851a4df77ce53345039feca424379f156ef80579feb691c6795555ecec7dcb8",
-        "sha256:e439e96ed77f6fdf559d27fd574abb7c166933ec6b5711c86a4299788bc202ed",
-        "sha256:6064b935a453421cb7e46c0d874e0030a67bf804008f10e9230ea4ae2de2e75c",
-        "sha256:828cfc9976cee6dbcf58d317c4a9f0d765ced88af5ace65642e0eca1f9fcbc5b",
-        "sha256:0b77f43701b02d723429062bb23532932e3a40f4d69f587aab6090f8c47b6146",
-        "sha256:6d26c2cbedd21261294cf94e0367b8c84d1d8a0057244f49f8f0343dfbf9492d",
-        "sha256:ccd1d3a93ec95a03b69d5492ccf2e38acf96eb403f9222e3e2ca4a073dd23e75",
-        "sha256:1b9c78a65fe702383218a10772158326aa2186e4b0f8c38c35de2d8df8f81c90",
-        "sha256:49fef807a087dcb3479d5dbf11cc02ff5c2a8184e5e624a80921be52046e32b8",
-        "sha256:402cf192b70650333d40da12120c816ccb0d6bb7e7ab21af0e59acb669cdd90b",
-        "sha256:3b410c64208d8ea43ba8cc5b581de11db2a5a3e11f724eb0c18f776176cf684e",
-        "sha256:eade22e11fa771331b1a7e9fe3816022e171264b9ded1830129b45fbade5f0f4",
-        "sha256:ed73b6cc24784ca991b35b26d8d88e22f8a1ae6f8ad910859d133bb3b31a25af",
-        "sha256:c10249072d2f7797a84d85751c61d59d7b1936ca570ac11de3e0bdcc72f0282b",
-        "sha256:edb876a1a25cfb54e29b790dae13014a290d778330b3351e0a4a8872071bb6e9",
-        "sha256:19b6cd5c44f0aca9a1b8355cb642a3eb07b48d4742db6b5e225772d4e310dd4e",
-        "sha256:5d58b415ec0ea02090111fc41f98a0061f3b4834e2c334a27f32521004be7cd9",
-        "sha256:54732d735006a832ceacbcff38e9827b9ccffae59a4e7fccc31320d9ddb7dd98",
-        "sha256:3a11f5c4df71dd7f76f79c47b08472c07f3118c307576b21c7b8fff8cb66f658",
-        "sha256:b61279b3e6837db174a553c50c5e0a33600d5871111619488ad30458ba2b1baa",
-        "sha256:1202598d119100e3c185ccfebf049dd25cdae86cbe15a57ee3741d5ce11ad8e0",
-        "sha256:a5813c4c053c38e8e9706abb01cb870b09a999d8d5b87a79b421d9529dbea46b",
-        "sha256:722157ee9277cbf0a2d47ddd594d5451a3b2d009aaf61d3f1083e826e396ddb5",
-        "sha256:73a9290c396fdff94a91676ec23af3059d0728102229959624be9da6ff4e0ab2",
-        "sha256:ea816387e7a8e05055a45bc8478409283f51179c4c4853c7837e548e0dcf9d14",
-        "sha256:41fd0b9676a71b406b12694d8e41016f2ce0d29114ea673e37ba0ef2ef0122b3",
-        "sha256:bd48c53490e6e19be65c670333dec94f8aa68c91690371044147ad97f35ac63a",
-        "sha256:f01a8a90a5b787ad691b237f84d598b64035013740c5885fb4cedfc8efed54e3",
-        "sha256:9d147afd0c4b343d8e60a2cabf491696086cba7c98967e4cd89b4a4f863afdf8",
-        "sha256:d279db700d7515474d83de0f05732aee2dea8b88a0d08e0cf99ad2d042244dae",
-        "sha256:aef0b974bce1c63ba0e3790ac9512f271e988f26e5c989df243c2e8318018ffa",
-        "sha256:6472d9b36a01318d98733c558ae25e8faa0e54f8f8f2ddab6c58dec8820cf33b",
-        "sha256:3939e13476fcd3bd195292296fd531ee16ecfb4cc33fcf174cc3effd12dcda93",
-        "sha256:6cc26afe2a83e6b03a96dd44e7dea4c002fdeda2df20608edb7a2c5233d50291",
-        "sha256:c84337b58e5d0a6e3188658f921f65d1f712702e8bd6918d3f20420738afb0df",
-        "sha256:257c4e040154a6c72edca73e90bd2c23e50e097afa2b40bce4def1323145ae0b",
-        "sha256:e2fd819467791dd5c9e61146e4c1eb487f3e578e78d9ff4b6c5e86a3885ff3dc",
-        "sha256:86857191473c42c13e020e1a7c001ed5d886f6246a1be302da8302911d6378a7",
-        "sha256:3e68d8d5364c3a0a28a75503ae1df4831b7cccb1b381468eb440ccf4afda3fde",
-        "sha256:5551f27d85a6d565484cf751665a4459dafca98be89d66c1a914b00add5c0cba",
-        "sha256:542b33db5555279cb4014249430989f2a2eb6551db490a3adb532ba761624156",
-        "sha256:934baa12adf58a63de7820ccf998656407e9d2e6394272d157651751e98f0295",
-        "sha256:c25bca8ce860c72a8a3924b8df6a7e75394e4993840e8908cf525847c1063fb6",
-        "sha256:fdcdbf61ce1f9635aef0f6f24e03294ea9fa280f56a5d787a9064c5d4050d26a",
-        "sha256:d04acf486afff0b9dc467048c34e510af82abfd3f0685be1744964f6edb963b9",
-        "sha256:23684e21723560507e0f489599970b44426991cf93a69d8a4b721089fb1c6be6",
-        "sha256:257250202b6d31736de8502a19ef5c6f4d3bf1b09cc5ec431e76844535d7a6f5",
-        "sha256:8ab3a77bb4628a15d2a242119db9c6c25813631a7ad088af7b2d3e6d1b1ecdca",
+        "sha256:b6626755ad5bf8192fb3c35d91df91b1b388f3543617479d983cff6c15143dfe",
+        "sha256:f101c843b58ec010323963b397f7dc1333d2dec9baba0f53925b067a9d837445",
+        "sha256:0f8890a98cf3a48e40e891ab542e45d001e3c106d19857cca9b80c300d3f7016",
+        "sha256:ad44d1b9bdcf21ecf6ecc7acfcdde849c824a931f315324f8c53b570f7cea55d",
+        "sha256:4ceb9cd7a6ebf7bfd3b53ad089ee7eb23cb97a1898f85fad36dcce3916e4d681",
+        "sha256:e18670dc2737585830b0882fffd4167e2d5983a2fe1d35096b2edc1a8b6f158d",
+        "sha256:b166f29245d3337b4e180cafb3a3a1bf891aba76ffa8545dd0c08c1e9f13d870",
+        "sha256:457d49439f2264630e0feb59bb71688c0922208e68e9607c5e60a85e9c2e9721",
+        "sha256:7ea0c23edb672cc744f9c8c4d1db2bde16da65d0fb9e1cd9237b0b1a54561705",
+        "sha256:c4255c628be66fc8238ecfbeeb29f6f0d7b30d5b6f5ff871aa4e637f9c49257a",
+        "sha256:02863aea33cdf7d833a1af27ebed414908b53b7e7ff78942f96d64209c71b69b",
+        "sha256:184b27dc7e85bf6cbc1e0f1730841cb41afa657eedef3fc71c7bfe438844fcf0",
+        "sha256:8a15f7068d35d547237ef858a8bc18b2c8101dbd79e727cd41535d3860c16591",
+        "sha256:60f1b0b472f56c5a392da7a542c5cff17a74cee0f985840ccdc904d544f8ff0a",
+        "sha256:4bbd87dcac0c5d5633e2a53e0e2d55709011e0f67da506617d46df2ee96bc67c",
+        "sha256:c9252c8a98974f2e1b3c5a9dd597070240b9bc8fd96dd902fa966cfbf62d67f0",
+        "sha256:483550a46622a28134a658616b656a1045fc197d5207a05619f6ed6c3e2f2818",
+        "sha256:78b167ec615dbf1cad32ba08626e92ebbeda4f27ed8bd05c2d78943156c277ee",
+        "sha256:66c1560499ccecfba30c4f5db054bb946c008cd6943a2404f93ffe18f1768522",
+        "sha256:9774a9b7f4ff819f2d7275d2f1fb6f3ac559fc65f22e2e7093776ed966c0e8ae",
+        "sha256:5d4e6e63da17b517cff7dbbc9a94f051220741e8ca36f66154a604e56e6cd41d",
+        "sha256:d632b59b9b07794a46281056f3200dba350fa6b31d1bdb8fae015135350c9431",
+        "sha256:85a1d9971ad8d0bd20c26594526d5e9d9c9d08dad7910e2bad4312e3a7ece2b7",
+        "sha256:a6ca5a26b49683b62fca008b4d7775631ecc87453ffb1fbe928684b167c114d1",
+        "sha256:adcb3b15f383306eb64a9cdabc46daf2604255038a201e5d5c0677ce8d966d58",
+        "sha256:4071890db5b30471dfdf45cd899fda204e7e7a4640d8dfefef33f980d1c265ea",
+        "sha256:2ed8b9b31a39ff08920f5cb156d9eb38f8f0e258dc59929e97a6d3e47c5a58c8",
+        "sha256:7ebe33e97355ecc5d83045f4c0fa62db79e52ec07aa525cdf4e17480361c8caf",
+        "sha256:02eb883013eeaf5af8718ec1b1a841d48add7eb082acf9c1bade30bd5b20a38d",
+        "sha256:32d28ac5a1c4b3f4e7a8ab45e5398942dd64d29e41bf6cf4c2785869fce7ca41",
+        "sha256:186c2847128a15c275ee0ac10dc4add3fab7a9611bce956a8ab649c519b8b149",
+        "sha256:f268d7a02653179f69494f409d7a4287a81b50524291acf6fe07115266da782c",
+        "sha256:d0f82f448fa746f40110567218a2b2efcc76bd4147d229ad15c4579dc0c73acd",
+        "sha256:e403a7fd3cffc452d4e88a102c7958889ccbd1d603c5ef6e07d09ab200e8f2b8",
+        "sha256:c3b0694cac1ebfb34e8d95a5c5814ae5203c7895212f46bbbb502d99c7752a05",
+        "sha256:adc1b9a9752e19207265d44938937b3f32642026caa284f06dde632fc7f600f0",
+        "sha256:c87a493be5c50fa22fe19f135872c4252c3d568b0a63600c1660e1158734ca1c",
+        "sha256:bac12f4e47f8c2ca1414caa3ac948b46c81ab9383f3145b493fe1023e32a0609",
+        "sha256:544312cceab4d97057913fa54e0e9ecf415f4852ab66b650f863fc7098c4a923",
+        "sha256:641db43f9fd16f7d25dd730dbf1c2b1a51657603d8ee54bcde0968c26c559a99",
+        "sha256:90b581f1807d5ea04af33bd788a9d10cc02652d38db061cef0247cf7956ad917",
+        "sha256:1ebc5c8f03a758872880d51f072b7b2418e3b220148e5eeb3983c9c17a74848a",
+        "sha256:90b5665d3cab08d4e54525ac5e6f8f5405e905465fb6554aad7a74d7c713aa18",
+        "sha256:27ef118e25014f0d176bdaa40c80bbd030acc52a6911e9e7bf14095090b932ae",
+        "sha256:9c6dfe60aac500556f8018bbadb02ef5991132cad1622f9f35c522d619659d2d",
+        "sha256:754682478bf1bbbdeccd67d04ea0faa9367df1b2ad8c2915f7cf9d68820f0360",
+        "sha256:b191a0f79f127b2623b2390b980b7d68aac0bd7b2bcbeb59f106846d036bb6ea",
+        "sha256:ebf5ffdd06e2d5c8c6efe7c8f174e8459a1ce2022cd4eeb07e0c328a875dbe62",
+        "sha256:77c3cc7296a5a4787fc9aa3d200bfdcd2e8bd6533d7a593e5a0e59bbd4701ccf",
+        "sha256:2fd873b5bf56c3e3ae401c62ec3a3a4b31f067513de1c3764b8b59fe72e4d629",
+        "sha256:9e3d464cd39946d5ffc78342917001efc6ba5f6b8ef6f955d5d9bdc5cd25e2a0",
+        "sha256:a85d9f1573da9809952b68cc7b467578e065fe2625832be6a6731347c21056e0",
+        "sha256:289be1240c196a9173d636652555a89f4bb504017573cc6ee8e06f80e5f420fc",
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:6a912e79b185d0ab6ab40efc600f617c5cc04071d337152030a21d4c6084a4a9", // epsimple-shape-core-405-6008dd91
-        "sha256:aa9241036c2b91520bc849d217d493465a929fe170c50ab8e14ae39a20148e10", // epsimple-shape-core-406-bb03051d
-        "sha256:3bb19bfb68417af9869a334c92aeefd82f6ab299755f395356a1cc0266b54c2e", // epsimple-shape-core-407-09c92f4a
-        "sha256:fdb6b82bc61548b7ee1cead61b1971dbdb4f36b6615412528de194f8b28ae785", // epsimple-shape-core-408-f40e4929
-        "sha256:1b2321c58e32104ee487d7bf9659e62768111be5e81f8dfd977e1c8bebc9b932", // epsimple-shape-core-409-8c468e24
-        "sha256:482b5abf11a1011f23c2e43ba73789abdff54b84674c51637dd9635fcb78aea7", // epsimple-shape-core-410-2ca0072c
-        "sha256:0b205f347ed2bdda90ef6584894b51f906e5e1bb183103759b46b05b45f24494", // epsimple-shape-core-411-26b0f9bb
-        "sha256:78ee715368380f4b16e7b8d0687754049906e2a3a2782c92f1e40e1d76b20f22", // epsimple-shape-core-412-eb81bd06
-        "sha256:e5b1dea92acd091b68cffac57f8e4e57307614f8a7fc38ee0fea372f5ed1c9d6", // epsimple-shape-core-413-43d44ea1
-        "sha256:d1becc96b87aff61fac206fc83d6cb18434a5b6566b843b9f0e716f26d436e68", // epsimple-shape-core-414-246156d9
-        "sha256:ba61fa25c83851b987f60f58d9b4d1cd042217525b5ee66e36d1c9693ce49c01", // epsimple-shape-core-415-a0dbc411
-        "sha256:c2aabad9e104c189cb71d8f8ac939279de462488459100112ad56c6a3f48237f", // epsimple-shape-core-417-1b22b2f1
-        "sha256:23fb3694a208957a05c939dadf5e51c7656b3706dae67acef5aeece505a8725d", // epsimple-shape-core-418-0b0cbf2f
-        "sha256:61662c8eb3f522c9329fdfb63c014ad98c7af96c064479db31e8c4149751cdd7", // epsimple-shape-core-419-2e553f68
-        "sha256:0cb38e1141a685dba73d726e6190b6a5b5f5a501ead91406c9542c723f259344", // epsimple-shape-core-420-ede823e2
-        "sha256:c7502e59d16247399599b881e5d0bc6c5c38f47ea15d16d07ccf31cb14ea4f68", // epsimple-shape-core-421-1981a404
-        "sha256:4f7e321cdebc0679d61ebbc251f5a3d637bc9c570a18877bad92250faffe2e1a", // epsimple-shape-core-422-996a596c
-        "sha256:30090495fc11fe53be68f80df9b0e8998e939bffa541c970e020bebd352f8767", // epsimple-shape-core-423-246156d9
-        "sha256:675c74ddc7cb05a6199d1ddd7bfe9bf4ed7bbe5fa0e417adf2e72999d4da172b", // epsimple-shape-core-424-0d951ae6
-        "sha256:031e3b76154daa19a270633573b38f0bcbf9ff0bace1a67128f4cf88ff8802b8", // epsimple-shape-core-426-bd742aa0
-        "sha256:f845805a5ea886d2ad87c24f8d9823134743ad36905010456808d5ed79208b5b", // epsimple-shape-core-429-cf314ac6
-        "sha256:8e60064a82ff649be1fbe8faba1df8816367f059b1b6c2aa17a36b6eb70cc5be", // epsimple-shape-core-430-aa93b96b
-        "sha256:7a79bc4d5b05900b5cf13b40b529d2d0090c1ed54f6bd23e01a237bb6b2ab9b9", // epsimple-shape-core-431-98e03520
-        "sha256:d53595bf046190ad04a260afd792d28e81e2f11674ff589824ec391dc0ebcf17", // epsimple-shape-core-432-3680772f
-        "sha256:512e21a3f819b9657bc8b939066007ca9884f8f66fa1ce67c9b9bfe4e96f5e35", // epsimple-shape-core-433-9aed8e71
-        "sha256:df481fb0f8d349eac64f48d61261f98ff89c30fe5bd5fc171401359a0a523b76", // epsimple-shape-core-434-8e01b8fa
-        "sha256:88dae5e7b59f91bea94ecaf92e724157b96bc985cfbfb3de7b72e5dc8a975f9c", // epsimple-shape-core-435-3da5f695
-        "sha256:f15758d4d1371d94a1d9a8032471cbe5331a45b26b1b703da9b20ef79f2bd676", // epsimple-shape-core-436-72d9807c
-        "sha256:c4aad8ff5b12ae4f16f302f6cc211748fae0b17a700808b788f3748dcd346a01", // epsimple-shape-core-437-42d0195c
-        "sha256:e8f614b494c0ef57d69cf26489abca4412df09391eebb2cc6a2531f169823ed8", // epsimple-shape-core-438-4ec64b53
-        "sha256:668f71c9d6f65ec762f9f62289ea6ffa0ed9cf495ffd26c6b0e3974a845b6025", // epsimple-shape-core-439-3a69bea0
-        "sha256:2cbf5715a41c952aaffc378a9f823b71101fda921401cbc622994bd2ea21ed01", // epsimple-shape-core-440-26abf64e
-        "sha256:8877d85d7c229c1bbc1834a45c665e4bf241e41f35a29abbe578af642b7fbda4", // epsimple-shape-core-441-5afcce2a
-        "sha256:3546205a2db5a52a82b9c92fcca76d9d953f1abcf176b69ef6491366deaeb4fc", // epsimple-shape-core-442-00f305af
-        "sha256:98ae9bbe2eb72a1650e05a5a243ac114eca31becbf3091deca4e5912ebd6e19e", // epsimple-shape-core-443-e8fad25a
-        "sha256:64611b1b71fe0082f2af3d5ba41c0bbc68be86f34b5b8909f18c06de19839e2d", // epsimple-shape-core-444-92ce583d
-        "sha256:9db1582df64c53f07b3b63b27cf3137a1120b0b47e6bd8760fd9a0730e512b19", // epsimple-shape-core-445-4f40b518
-        "sha256:3da04156ef0482111842f42ce3b4b79cc46ebcee641948104fb9ecb57a88c2ff", // epsimple-shape-core-446-93259bed
-        "sha256:44b036eb8fa06100a9a87757373ce6f55249d96f6da6b57f12ba6c8e61e13172", // epsimple-shape-core-447-f032bad2
-        "sha256:b6c8caa6832e12340305245ab16768197ab673323b6ece1c2f0d3922b9f37732", // epsimple-shape-core-448-dda48f66
-        "sha256:79cf6808b695ab24dc08ea0f1241519935f43b8b1830517c3d4fc5d82ec3e6bd", // epsimple-shape-core-449-246156d9
-        "sha256:fce3629fb5295527dcecb07d81fb23e1ed9decf1fea3ed108e9e749d64a6401b", // epsimple-shape-core-451-a5f3cee1
-        "sha256:fe1942a46e4fb8955e4e9321160787fd6754a4a4aec3c58bd54fb3ee1d937cd2", // epsimple-shape-core-452-51ef4a1e
-        "sha256:2be40379493229bc6223ee9c0ecf1f90dd2f1aaa3d542f38768874a939a453e6", // epsimple-shape-core-453-e0f58a2e
-        "sha256:b53e471e9eb85a71cc248dd61e509e412d13ed2af5f09563a037b5e181a7fb45", // epsimple-shape-core-454-1254d46e
-        "sha256:9955f6fa79a55b12401615893ada0c9b5a3429e11769f2421e835212818669b1", // epsimple-shape-core-455-d8077110
-        "sha256:5fed2c7ddb8819de98cff249bdfc61fc38f210102940d9fa1245512021c31148", // epsimple-shape-core-456-ecb20cb3
-        "sha256:14cdd478ba8a71a9eb1d2ec05cdc986d99c0542e4b02240f8eab2c040ba68e18", // epsimple-shape-core-457-486d73d3
-        "sha256:f1978d4547e9db7f7fb119cae53efc3e9da4cc44dbe6d2b92ae2cf4e4590f862", // epsimple-shape-core-458-c68b3d65
-        "sha256:f172a13b6c83729a8c69cf8e7e872e54b6da87a344a0d99e9d963d8964789fbf", // epsimple-shape-core-459-349a48c8
-        "sha256:b5b837cc1a8a790d5dd64f45253bd2f8be1097b3b1dc63b12f6fe50080740185", // epsimple-shape-core-460-3fffc5a8
-        "sha256:32be0733ed8961692a2fd088a96eea7d8771efb2bcf29be226718ea2391c3cc4", // epsimple-shape-core-461-3eaf6c25
-        "sha256:18362fe3a5cbeb306493abeea18ffad2d8f8ff97dc371fac4dee8808d9166d49", // epsimple-shape-core-462-da336048
+        "sha256:4befea8f364fc7416bd9969cc1085fdb39a47dce0c90f07fd252f1fcfd836719", // epsimple-shape-core-405-6008dd91
+        "sha256:38c8b674f84a7aa2bafa3b7badc2cf21b587825db215f61fda68fa3568f7264c", // epsimple-shape-core-406-bb03051d
+        "sha256:0f582e7f2c91f950de120a6e36f2cb3598a6c9765a0f65cd741a03fd11357c3b", // epsimple-shape-core-407-09c92f4a
+        "sha256:1e120231334390120a464f64e81cb833008c0f26946c90e282945470cdb192fa", // epsimple-shape-core-408-f40e4929
+        "sha256:c7131ee574c3f05d1ba9b09501fa56e5f7ebc5e7d9ebb2f4fd6113ac35ba4f72", // epsimple-shape-core-409-8c468e24
+        "sha256:79aba35b29462ea91a5780e2d4fb41c415ea4d72e6220b077593982d4bd210ae", // epsimple-shape-core-410-2ca0072c
+        "sha256:6acc8bce2c539d2e39f31d85cd5229dc5c95fd7a63120cbd40662a3959ded952", // epsimple-shape-core-411-26b0f9bb
+        "sha256:7308ee19143e36433992f59740876f960e139e1f88fab8dfbbc40197f28002f5", // epsimple-shape-core-412-eb81bd06
+        "sha256:f43adb66a9927684bd884ff20754d25751581c587018fc2210584220d4583bf5", // epsimple-shape-core-413-43d44ea1
+        "sha256:469b690e993b128c925e430db63c0279a51ae264fc4949b26d3130129bca9598", // epsimple-shape-core-414-246156d9
+        "sha256:a282dbe421814014e9e7528045b7ddea981ba1fb4b2aaf6f891c8155bae0aeb5", // epsimple-shape-core-415-a0dbc411
+        "sha256:f5a10cbc70b3039163376d7b30d52ee57a417bee1756269725efd66f34e0874d", // epsimple-shape-core-417-1b22b2f1
+        "sha256:8b800bd8d08a9f0ac5c5fb0d82854caf18c43059d398f1b237311cd3cf0f1019", // epsimple-shape-core-418-0b0cbf2f
+        "sha256:03126ca71a3dda402acaf583b824d9bcbfae69d9e7190d2c1c01af9d66c10dcb", // epsimple-shape-core-419-2e553f68
+        "sha256:2fcd49c33e82f404db7fb2ab3ab2ff6ebe933996e3a1373a25e96ac023a4f24e", // epsimple-shape-core-420-ede823e2
+        "sha256:0c16a1950b46346afe5ab2f14773f5f4c97ff183772c8c9bfa1e633c6e7d39ec", // epsimple-shape-core-421-1981a404
+        "sha256:1d817a16b2db7ef924d1eb7db4d4be11e3eb880bb674472197399ec6c7182740", // epsimple-shape-core-422-996a596c
+        "sha256:329d1069e3af96118cbdbf653a4d5c49b2a931376d18ea99086dc442ff6214ae", // epsimple-shape-core-423-246156d9
+        "sha256:4dbd0e4e9acf3f36b049e1482fa0d8f8a6cdf1088297f782213a7d8473a323df", // epsimple-shape-core-424-0d951ae6
+        "sha256:a35e3f9aab6aba086459a4d6aea2131ae1cdf87225b4b94eef6ae3178b8b34ac", // epsimple-shape-core-426-bd742aa0
+        "sha256:d47d6b69732c4242afdb809bd2c21a7fffc6909ca5052920cb78f4550893f578", // epsimple-shape-core-429-cf314ac6
+        "sha256:78346e3fcccca74880bfa020aa9a4c66e45db64d3de509a79f35a45bf289f262", // epsimple-shape-core-430-aa93b96b
+        "sha256:eedd5f5ae6d84f2e3abcad998eea6c14b853641a68a9ab60fae8945275119c02", // epsimple-shape-core-431-98e03520
+        "sha256:e839519d67a1a65b135a31c1dd56fe4225a4744f2b78b42c1d0d706f7f76c8d5", // epsimple-shape-core-432-3680772f
+        "sha256:162bff2975dd219b7c5c405f187c7cbf40e73e07b973cdaf1d3b17dc947b9361", // epsimple-shape-core-433-9aed8e71
+        "sha256:acbb00491063c56b8c327a696baa63446d8b273c56d6a2933673f105667579bc", // epsimple-shape-core-434-8e01b8fa
+        "sha256:70fd12403a15f8994509bd2af4438b0c6e25aa7f9a3003cc34da914ae5c2bd78", // epsimple-shape-core-435-3da5f695
+        "sha256:f7de7bae464c829663ae9b1bf3515aa6bcbe25389a3a293664a360298b065f60", // epsimple-shape-core-436-72d9807c
+        "sha256:f20386bb80cc5c461ac92190d9458b34835dcfdc9395126e0cd694f81bb71dac", // epsimple-shape-core-437-42d0195c
+        "sha256:05664eb961ab45b3450b86331a3eecb01cce1cc3a0c3af95c42746a83e944d59", // epsimple-shape-core-438-4ec64b53
+        "sha256:57f9a9d24731b26e88742e61bce18122b01b95425d2230423685fa878660fda1", // epsimple-shape-core-439-3a69bea0
+        "sha256:6a5c377ad97dd9fd4d224562816fd39effdededea46636941248bbf4ae200144", // epsimple-shape-core-440-26abf64e
+        "sha256:c6483f417211612a6e932abc19013975ba59f3d73a1c04ac03850e91bfa8130b", // epsimple-shape-core-441-5afcce2a
+        "sha256:b4a898dfe579ba34cfa3bd5d95d9df35763fed79a46044dfc13fa623e3835c88", // epsimple-shape-core-442-00f305af
+        "sha256:caf633390df9897768d32b1ac4dd85e0a66948becbaa0ab294b8b546bf9d655a", // epsimple-shape-core-443-e8fad25a
+        "sha256:ecc1f94f68cbdc5555445339688789c2ae8746f7583492fc86c39ff9392d7742", // epsimple-shape-core-444-92ce583d
+        "sha256:33971f03007785675dcfcdaa7f1ce2af003fc05d55399098d087ea217b6298a7", // epsimple-shape-core-445-4f40b518
+        "sha256:71ade8b8bb05d105bea7560fb5102f6eb6b2543a79cf38fc68c4d0133dee6176", // epsimple-shape-core-446-93259bed
+        "sha256:fe607bbfe83806e013b2ab5642871c907049e72d16f47216b72424be704b01bc", // epsimple-shape-core-447-f032bad2
+        "sha256:b8a641211088506c8d9f6e8da36d778748a5cfd970f8976290e721da030e7ff1", // epsimple-shape-core-448-dda48f66
+        "sha256:a8129930fb76f09db7eb947bbbd8f722981e92fc87af3832431feeba7e303a0d", // epsimple-shape-core-449-246156d9
+        "sha256:6fb07ce2ee7735d47aba1bbcc1a393d331a8ddcb2a53ab7a672b2c478974f58b", // epsimple-shape-core-451-a5f3cee1
+        "sha256:05e5e4b2e9ed55feaca565026d76f55a3d4ba1721c101b6a184b12fb85dc1cd8", // epsimple-shape-core-452-51ef4a1e
+        "sha256:d4791261ef6be93e607adaa8c2dec48420ebbe38bee4fad708e301802f34c82d", // epsimple-shape-core-453-e0f58a2e
+        "sha256:794ed5eb73fea82ecc3ee050948258d40fe09570b708ff3393bf9b7ffd53353a", // epsimple-shape-core-454-1254d46e
+        "sha256:0d82ed2ef79b6727d9c991b45cdbd10ce7916ac8c16f8daf5fd3c376e8fea70e", // epsimple-shape-core-455-d8077110
+        "sha256:95238b5f1817c9480a0082c7a93e13f8b72dc85f6d8889cb01fc78e5319e8080", // epsimple-shape-core-456-ecb20cb3
+        "sha256:001a9fe2928f104ed0483448ebf11785149c7532689573332a636bcbbdbf37f1", // epsimple-shape-core-457-486d73d3
+        "sha256:7a5858fafd5ead1c15d54cc0c67b8805ba2ae410b6480a493813523d62dd54b1", // epsimple-shape-core-458-c68b3d65
+        "sha256:af685ff0d3644aabfe392ada3e03c427c07db28575b605c9ee1da0271eb427fa", // epsimple-shape-core-459-349a48c8
+        "sha256:99bbd51a0d911d56daa50d11c34ceb03de6e57d12db10a4c0e469825854e22ec", // epsimple-shape-core-460-3fffc5a8
+        "sha256:b665ca10d9afa0b114bb9d4eb3091b9dbe786f3cdc13a3bb66daadea9230fc3c", // epsimple-shape-core-461-3eaf6c25
+        "sha256:815d1479e918862a589636042605f0cf068d5200685bc17988b1a22652218717", // epsimple-shape-core-462-da336048
     };
 
     [Fact]
@@ -547,8 +547,8 @@ public sealed class ShapeCoreOracleParityTests
         ValidateArtifactProjection(
             artifacts.GetProperty("strict_json_support"),
             "tools/python-reference/generate_schedule_type_oracle.py",
-            21_114,
-            "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc");
+            21_108,
+            "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1");
     }
 
     private static void ValidateRuntime(JsonElement runtime)

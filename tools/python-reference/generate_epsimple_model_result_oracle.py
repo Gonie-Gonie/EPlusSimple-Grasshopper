@@ -33,12 +33,12 @@ from typing import Any, Callable, Iterator
 SCHEMA = "dragons.python-reference.epsimple-model-result.v1"
 SOURCE_PATH = "src/epsimple/core/model.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 36_949
 EXPECTED_SOURCE_SHA256 = (
@@ -67,9 +67,9 @@ EXPECTED_DEPENDENCIES = {
 }
 
 SUPPORT_PATH = Path(__file__).resolve().with_name("generate_schedule_type_oracle.py")
-EXPECTED_SUPPORT_BYTES = 21_114
+EXPECTED_SUPPORT_BYTES = 21_108
 EXPECTED_SUPPORT_SHA256 = (
-    "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+    "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1"
 )
 BOOTSTRAP_PATH = Path(__file__).resolve().with_name("bootstrap_reference.py")
 EXPECTED_BOOTSTRAP_BYTES = 1_232
@@ -114,29 +114,29 @@ WEATHER_RESOURCES = (
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 23_665,
+        "bytes": 23_653,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
-        "sha256": "sha256:533ee8789aa9e02951216416be168b43c0ad7c20fc8da0c256a72650806fc32f",
+        "sha256": "sha256:641353d7753fa8d951e34741171eb7f7c75f110efc03c002b07dcb91da5be439",
     },
     {
-        "bytes": 17_506,
+        "bytes": 17_491,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs",
-        "sha256": "sha256:9a9f1bc3c38814776c3c0ac888423418215c42bb7c270848b72b480751438b3b",
+        "sha256": "sha256:4ddd61c1826875419c820647bc1b1088170eaad9c93be59009d8bb00442ee4c9",
     },
     {
-        "bytes": 19_280,
+        "bytes": 19_274,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs",
-        "sha256": "sha256:5181cc98bb9e193cae2c6c29b33ca74d6e98bf7e44f11e0e3855d9f591f4e8f7",
+        "sha256": "sha256:8e3fce292d33026aa392dc7376a0666e67be6b4e8ee63fe9f327504b4385b366",
     },
     {
-        "bytes": 14_845,
+        "bytes": 14_836,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrReader.cs",
-        "sha256": "sha256:498b12addde1cfc0c4e6c3931dd5c079e185cc2f45a9fa2cb5cde700f4075130",
+        "sha256": "sha256:288870f6c9ba8c813e7a0cf7fd2013363e36a767170a8b9857150be2cdfb398f",
     },
     {
-        "bytes": 5_023,
+        "bytes": 5_017,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs",
-        "sha256": "sha256:802f6fb7592f1d48504f6d26b50a5d29e0e5305d5379265effb9efe080d5e65a",
+        "sha256": "sha256:f7b05749cbeb667043b47ebb9e9ab47e58620bcc9722d283fb8938547ca9fd76",
     },
 )
 

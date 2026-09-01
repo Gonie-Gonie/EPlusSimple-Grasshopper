@@ -22,10 +22,10 @@ public sealed class EnergyModelConditioningOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-model-conditioning-oracle.json";
     private const string OracleSha256 =
-        "sha256:7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81";
+        "sha256:73959db67986cebf3c1c7e1a1e853b0b763c0f403afd01fd32f81e3b74b41825";
     private const string CasesSha256 =
         "sha256:96d15556dcde29a91582c66bc7c056c374619d8a50c7c17785ef0eeb241bdfca";
-    private const int OracleByteLength = 19_851;
+    private const int OracleByteLength = 19_848;
     private const int ExpectedCaseCount = 9;
     private const string OracleSchema =
         "dragons.python-reference.dragon-model-conditioning.v1";
@@ -187,7 +187,7 @@ public sealed class EnergyModelConditioningOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         JsonElement[] sources = upstream.GetProperty("sources")
             .EnumerateArray()

@@ -39,12 +39,12 @@ from typing import Any, Iterator
 SCHEMA = "dragons.python-reference.imugi-idd-definitions-core.v1"
 SOURCE_PATH = "src/idragon/imugi.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 91_815
 EXPECTED_SOURCE_SHA256 = (
@@ -378,7 +378,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:757fa1f6f1a78f595eb2894b11427cb2ee7ec9ceb61fe98df86d9d1eb3e939d4"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:8e9287c015eb273b3847e92fb7106a0e186354ccba5cb74f17436dfe4270269f"
+    "sha256:81a361817db212e6e01b7519b4ed8054d1cd9fe0dcfcaa1f6b922c4dc024840e"
 )
 EXPECTED_FACT_SHA256 = {
     "imugi-idd-definitions-core.field-class-and-construction": "sha256:d9af6e406b1a21cedc127a4168d1c65fe9bf67d919c76e774187b9749ab84748",
@@ -405,35 +405,35 @@ EXPECTED_CASES_SHA256 = (
 )
 
 SUPPORT_GENERATOR_RECEIPT = {
-    "bytes": 38_634,
+    "bytes": 38_631,
     "path": "tools/python-reference/generate_idd_schema_oracle.py",
-    "sha256": "sha256:64986549c0e3a3aadfef16606396006257d1be4e3b301058098ce364db8391f0",
+    "sha256": "sha256:29287f01c865d01c67bb25f1cb3e6d3f1466bed7859379342d7276124cf4cfc7",
 }
 SUPPORT_FIXTURE_RECEIPT = {
-    "bytes": 585_482,
+    "bytes": 585_481,
     "path": "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz",
-    "sha256": "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705",
+    "sha256": "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26",
 }
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 13_005,
+        "bytes": 12_999,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs",
-        "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "sha256": "sha256:b6be5a2ac41a05f519d8103a816d90a0153fe21d64916671ff430c964c516f66",
     },
     {
-        "bytes": 19_960,
+        "bytes": 19_954,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
-        "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
+        "sha256": "sha256:555b79f49740c1da4149002b9cb8e4507ea806eac10866098057f040e4fc55b3",
     },
     {
-        "bytes": 8_339,
+        "bytes": 8_330,
         "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
-        "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa",
+        "sha256": "sha256:1d58b2af26801c1359f022f9498c2e9109f7e0917eb74001f3a2a6c4ac0d1fad",
     },
     {
-        "bytes": 16_860,
+        "bytes": 16_839,
         "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
-        "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f",
+        "sha256": "sha256:9111d5732c096495edbbae830df3bb04d0d2373a54e36270ae402658f47f63c7",
     },
 )
 

@@ -15,12 +15,12 @@ public sealed class ScheduleTypeOracleParityTests
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/profile.py";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamSourceSha256 = "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445";
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/schedule-type-oracle.json";
     private const string OracleSha256 =
-        "sha256:68e858a2b243df127663b801f80396671e069645b11659e55ad48eb81973e705";
+        "sha256:6d2b4ea6b1717874a66b3f033b62e55a4aeae6d36a54f55231231b28bcd58940";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.ScheduleTypeOracleParityTests.MatchesPinnedPython";
     private static readonly (string Symbol, string Hash)[] ExpectedSymbols =

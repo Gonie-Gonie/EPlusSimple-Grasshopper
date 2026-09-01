@@ -22,10 +22,10 @@ public sealed class UsageProfileCoreOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/usage-profile-core-oracle.json";
     private const string OracleSha256 =
-        "sha256:cad2b959e76194b24d0029818246053f77d32a358fdcd73d5aad7bc597a3558b";
+        "sha256:af4fe3a1c7827c7857a478f07d258afed1d00f0c6009c1c54e98f7a366e7c6ed";
     private const string CasesSha256 =
         "sha256:2ffcd616b3d27069fce79d0028a0cba289e625bde5d7445b450edce58368b903";
-    private const int OracleByteLength = 551_190;
+    private const int OracleByteLength = 551_187;
     private const int ExpectedCaseCount = 39;
     private const string OracleSchema =
         "dragons.simpledragon.usage-profile-core-oracle.v1";
@@ -227,7 +227,7 @@ public sealed class UsageProfileCoreOracleParityTests
         JsonElement upstream = root.GetProperty("upstream");
         AssertKeys(upstream, "commit", "inventory_sha256", "path", "source_sha256");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
-        Assert.Equal("sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0", RequiredString(upstream, "inventory_sha256"));
+        Assert.Equal("sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02", RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal("sha256:e43f07d41e1e90cb9dcb7207fce67d8a6cb93acf54242b7a87c0aa30dda1309c", RequiredString(upstream, "source_sha256"));
 

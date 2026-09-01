@@ -573,7 +573,7 @@
   ],
   "upstream": {
     "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
-    "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+    "inventory_sha256": "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
     "path": "src/idragon/dragon/model.py",
     "source_sha256": "sha256:8899ac8e262f21561ab877698a8405a44ede093df1ba06350d20d9e07474b090"
   }

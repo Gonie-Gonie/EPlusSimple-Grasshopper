@@ -53,9 +53,9 @@ generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
 
-EXPECTED_FIXTURE_BYTES = 17_936
+EXPECTED_FIXTURE_BYTES = 17_933
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"
+    "sha256:1e2820763758cf2f997f1f0524a7989c511cfcd05f337117bb47460ec4b6e44e"
 )
 EXPECTED_CASES_SHA256 = (
     "sha256:aea20222894cc0c5a500dfccb15f9955e56666f4de763fef62c297fe975d0a47"

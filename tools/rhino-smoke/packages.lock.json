@@ -24,20 +24,20 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.EnergyPlus.Runtime": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },

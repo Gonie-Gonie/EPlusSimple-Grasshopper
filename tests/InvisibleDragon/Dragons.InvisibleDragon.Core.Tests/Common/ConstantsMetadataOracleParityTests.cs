@@ -22,30 +22,30 @@ public sealed class ConstantsMetadataOracleParityTests
 
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/constants-metadata-oracle.json";
-    private const int FixtureBytes = 117_164;
+    private const int FixtureBytes = 117_140;
     private const string FixtureSha256 =
-        "sha256:9289e629b6948ee28a9b52c90bbc2cc2b9bd78508a50b1073ea9ebb531423d9c";
+        "sha256:7a154b6147fe4dca6717c59f3005943d6ab44f9c3ce2dfe03255686481413810";
     private const string CasesSha256 =
         "sha256:e664bc6349a4965d94f50f5fcf31d544b5472163496a7117146fb3f9ce83a4e0";
 
     private const string GeneratorPath =
         "tools/python-reference/generate_constants_metadata_oracle.py";
-    private const int GeneratorBytes = 66_762;
+    private const int GeneratorBytes = 66_735;
     private const string GeneratorSha256 =
-        "sha256:583515c5ff3f6637f4c57328fb83a9dc8bb44a4bb9983d47adbc4425cc25dc12";
+        "sha256:00fe4c741b9bc663ff985b609304dd3806ab7d05aa1d8af7555f05c0a76a22fd";
 
     private const string ValidatorPath =
         "tests/PythonReference/test_constants_metadata_oracle.py";
     private const int ValidatorBytes = 22_802;
     private const string ValidatorSha256 =
-        "sha256:086b76f78c15d9160fe264dbf146df4c736c995cbbe9923395d1978ffb2ce4dc";
+        "sha256:0a09c8409c8ff32517a047442ab2357922e463c38d720dfb23f878b0cd285682";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamPath = "src/idragon/constants.py";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
@@ -57,33 +57,33 @@ public sealed class ConstantsMetadataOracleParityTests
 
     private const string RuntimeResolverPath =
         "src/Shared/Dragons.EnergyPlus.Runtime/RuntimeResolver.cs";
-    private const int RuntimeResolverBytes = 14_594;
+    private const int RuntimeResolverBytes = 14_588;
     private const string RuntimeResolverSha256 =
-        "sha256:5c4170c2f4648a5fab93ff092c2c307589bd909d436437ccc66280bf4ac487f6";
+        "sha256:ae290360e832f99eb6190744684624fda003172428b668cb7d47ba84f28f35b2";
     private const string RuntimeLayoutPath =
         "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs";
-    private const int RuntimeLayoutBytes = 2_302;
+    private const int RuntimeLayoutBytes = 2_296;
     private const string RuntimeLayoutSha256 =
-        "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c";
+        "sha256:5552379c29e2f60e0edd5d2762d3468c605fd5a8e47aec65f3eab9f6c758458b";
     private const string ProfilePath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Profile/Profile.cs";
-    private const int ProfileBytes = 4_079;
+    private const int ProfileBytes = 4_067;
     private const string ProfileSha256 =
-        "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72";
+        "sha256:670c41d252c47be93f5bc839967332a1aba33061a2eb832b532e658b1b3683fd";
     private const string PackageInfoPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs";
-    private const int PackageInfoBytes = 406;
+    private const int PackageInfoBytes = 400;
     private const string PackageInfoSha256 =
-        "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13";
+        "sha256:ca115b1128e531e70ee35ff0cf081a9b83cd14daec06322cf2cae64d33c5dcc1";
     private const string CoreProjectPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Dragons.InvisibleDragon.Core.csproj";
-    private const int CoreProjectBytes = 788;
+    private const int CoreProjectBytes = 770;
     private const string CoreProjectSha256 =
-        "sha256:b3b6cbc76b42082cc93f1c91305eddcb9c6250b68fcac1a0e7d81700c8aa873f";
+        "sha256:f364545115f52ce395f541e0daf0516a2ac99c1358c3eb0aab68b7ac6700b03d";
     private const string BuildPropsPath = "Directory.Build.props";
     private const int BuildPropsBytes = 1_773;
     private const string BuildPropsSha256 =
-        "sha256:df094cbeb59317477d4293c68ab176eff74285845ac24086191de5c8c279c3a1";
+        "sha256:836e157df80b47a0b176f6393614f7c9174f0fdb17b1b378f16e7df68cd6a658";
 
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests.MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations";
@@ -238,7 +238,7 @@ public sealed class ConstantsMetadataOracleParityTests
             "sha256:5c9774e81f3886d7a93f4152480e1ed58f8749a486ce411bd4e0830807b1e6e7",
             "sha256:81e16ccea394a6f22e27d6a26210439f9099e8217d9d38c3f411ae7bd3f43936",
             "constants-metadata-575-a8260e5f", "native-semantic-version-string",
-            "Dragons.InvisibleDragon.PackageInfo.Version (0.1.0)",
+            "Dragons.InvisibleDragon.PackageInfo.Version (0.1.1)",
             new[] { 4, 5, 8 }, new[] { 6 }),
     };
 
@@ -268,36 +268,36 @@ public sealed class ConstantsMetadataOracleParityTests
         new(6, "sha256:1c3f51a841d18aadc18b851f5210664148fa8f483a9c2470a81350334382404f"),
         new(5, "sha256:a45d2d6de335b367f59eeb2e1755bd527a3b70c5615bb8e65e32deb97801319e"),
         new(5, "sha256:7b04129d43384c0f4b1362adfb4cc9f8bd4f3c6222fa2a0c2c6a848513d4eb31"),
-        new(5, "sha256:72561c31f81b8b0caec7627308066d8a41920062470ca79fa9303aeb372b6b12"),
+        new(5, "sha256:83b752f99b05c74863239432c2f9edac2d223d0b4b0733797bdca345c24c25f2"),
         new(5, "sha256:714d0d52983faf68e560cd80cba151a5e28af6e53f85402ff913c9792bf0c95f"),
         new(5, "sha256:5569777d65f20ccdc963adb2d871a8d6574d1b38266d73dd00528f1780adf6f3"),
         new(6, "sha256:b0f439aa593d6010d6b267059d66ba6cb83dc2825dbd6f0a64b1c5e286bbda50"),
-        new(5, "sha256:79599d27efb2b628508bd9db7140b65bac0f5a20603e15ebaae534db8ade6c0d"),
+        new(5, "sha256:9a1afbadcbf23c2565a35a96b852caf6fd0fc4b70480ecf03b9974f5df24e9eb"),
         new(6, "sha256:9b027c0e89ce55c99bd036aa9e99121fedc2a6d1f5ff2d8d7248d16e5ddee1b1"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:b010e27fab04726eca7bad08cc9862c6f9614f44bd86658c6fa519f909de7c58",
-        "sha256:e245c641ed9b9a37d6e2f7f17c52f6f44ae274516b4edfe740c4866e81436960",
-        "sha256:bcdb44f08ca85537eca206313be08bf31384dec386fd842bce38e96b3553d1f9",
-        "sha256:5536cae6af137a72c7c927cc4221cd1eea35e0f541b74922275683420ec267eb",
-        "sha256:a3741a5a5870ff30f6e840e266c436abda507ff96c93e974cbc68df211e28168",
-        "sha256:1539ac6658af20566740884fc3f1d4802e99a0a96b9760a06d69f0f37420804b",
-        "sha256:c666b0f9e6499a34acc0a98f3f01584e73add9a9d64dd3e66842e79012714aad",
-        "sha256:9ab52755f1c9d6600068d446d4df9420aa0c37df3a365668dc241334f5ca63d7",
+        "sha256:88d915e41a1dcd70b46dda1575758dd86034b649563cacbc7bec8a3abdbab6e7",
+        "sha256:ce484a5a52cc1a1a99dac74a8193fef2b022bcb0f74973d3aa9db89351f69439",
+        "sha256:dae69cb2f9deac8b8cc1269f92de2773bd0e20e30b515df551d1168e10eef57a",
+        "sha256:7a18a1fdd4703aa16446d2b0d7fa304dc596a2548a41608dd6093ef71fa65823",
+        "sha256:7e828e878759ff776b0426042840e41270579428de7e897c1d0d3d98e2147fbf",
+        "sha256:c83234f70630c6a7d7397f1b3c37c42a19c99c0eb477a8a9bc07b80bddd2eb24",
+        "sha256:7e038b45a1588208dcc8261a0e4e3bb675232df849747ee3f23f0b76c7ab8a08",
+        "sha256:d255e942d93dd17261240f6ce9827ff48dc2b7bf554d02b0d7d2eab55efa774d",
     };
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:1260f23bad5142f44afb51fbbaf1a335b256712d9d1fe3670f3c84f238ecc1ae",
-        "sha256:9197d216c12052e6553557ef964bd06d48f09c212f4598773f1d7f299e763eba",
-        "sha256:ef814651c1d0e843ae53c9dd6fc834ccd2271ea975d2e132d809d644eb53cc88",
-        "sha256:0c358b1bdfba0186aaf1fbae8d5c9768b2e34c3528cf02df1b720e145eabb25d",
-        "sha256:9add953f90477a1c6294d5c2eba362c862fa6f0aef2bd1b25c4f598ac5d3910f",
-        "sha256:ce337d684f985b7fe8402969f81e473a06ad4a872a1fb0acf66469ddf6f58d73",
-        "sha256:d16c7e2050430c23a42db97ee0e60db6e4b9d34667a037539879581bdbeaf7aa",
-        "sha256:450d23845ac4b76a1a1b9b129d52ef1fc8f824d22eb94a17f43126bb22caab00",
+        "sha256:161514891090c2d3416b6aaee61a44f950c19f79c0733631d13cc15ceaf0f366",
+        "sha256:be88ec95133d383e2fb2db2c7a1c69ab9d5c34f5339c1409c9eb7498e1f48621",
+        "sha256:54f5f64076edd7a07335a64941c12219861cae2e393ebf16d0fcbbd44ab3347e",
+        "sha256:5ccb84d1c53c8fc73206cda5a701712408fb7e2b16a083591e8068289f4fa7ca",
+        "sha256:199e64994c454a3b997f7189beba9d0353ca760f3f44196ad865c7ed9b374205",
+        "sha256:80495d757457dcec75c124d29ea869fce42a31ad0fa4f1762c5f2cf8f6a153ce",
+        "sha256:5cb765ac345649bc74c74b05e05bcefd9a50ffd0edaea95f64bfcf78ffd61a35",
+        "sha256:44e84d997df1d3c2fa94619368e1268938d46e4058672bf934434526efc5237f",
     };
 
     private static bool DiscoverPins => string.Equals(
@@ -631,7 +631,7 @@ public sealed class ConstantsMetadataOracleParityTests
         Type type = typeof(DragonPackageInfo);
         Assert.True(type.IsAbstract && type.IsSealed);
         Assert.Equal("InvisibleDragon", DragonPackageInfo.Name);
-        Assert.Equal("0.1.0", DragonPackageInfo.Version);
+        Assert.Equal("0.1.1", DragonPackageInfo.Version);
         Assert.Null(type.GetField("REQUIRED_PYTHON", BindingFlags.Public | BindingFlags.Static));
         Assert.Equal(
             new[] { "net48", "net7.0-windows", "net8.0-windows" },
@@ -640,7 +640,7 @@ public sealed class ConstantsMetadataOracleParityTests
         {
             "native-package-info-kind=static-class",
             "native-name=InvisibleDragon",
-            "native-version=0.1.0",
+            "native-version=0.1.1",
             "native-required-python-member=absent",
             "native-target-frameworks=net48|net7.0-windows|net8.0-windows",
         };
@@ -703,12 +703,12 @@ public sealed class ConstantsMetadataOracleParityTests
         Assert.NotNull(parsed);
         Assert.Equal(0, parsed!.Major);
         Assert.Equal(1, parsed.Minor);
-        Assert.Equal(0, parsed.Build);
+        Assert.Equal(1, parsed.Build);
         return new[]
         {
-            "native-version=0.1.0",
+            "native-version=0.1.1",
             "native-version-storage=const-string",
-            "native-version-components=0|1|0",
+            "native-version-components=0|1|1",
             "python-version-components=0|7|0",
             "python-tuple-operations=not-preserved",
         };

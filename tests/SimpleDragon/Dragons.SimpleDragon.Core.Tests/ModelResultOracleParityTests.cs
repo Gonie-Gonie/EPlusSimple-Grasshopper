@@ -17,29 +17,29 @@ public sealed class ModelResultOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/epsimple-model-result-oracle.json";
-    private const int FixtureBytes = 763_720;
+    private const int FixtureBytes = 763_624;
     private const string FixtureSha256 =
-        "sha256:f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed";
+        "sha256:d639c5c1047dca6a3682c9c2cfdac5fd1da99b5743c11d591d50942ae5322c02";
     private const string FixtureSchema = "dragons.python-reference.epsimple-model-result.v1";
     private const string CasesSha256 =
         "sha256:ac4b9647caba8c1c40edc1314936fcfaaf1cfc155e0ed51f54839094484bf3cf";
 
     private const string GeneratorPath =
         "tools/python-reference/generate_epsimple_model_result_oracle.py";
-    private const int GeneratorBytes = 71_783;
+    private const int GeneratorBytes = 71_720;
     private const string GeneratorSha256 =
-        "sha256:4d075cccd3119ac955af78f2e2fa2d0a6f0c5f3b20fb5b1acf326ac08cd417a3";
+        "sha256:1fa83c6072574bb7577021b71be0a093fcd222bc35dd9e0642888056c99f3c8a";
     private const string ValidatorPath =
         "tests/PythonReference/test_epsimple_model_result_oracle.py";
     private const int ValidatorBytes = 20_902;
     private const string ValidatorSha256 =
-        "sha256:77ff66c8ed842c23701a1e703162b7b673ec4fc05677540c3f252960a7458a52";
+        "sha256:1c6a25bd65db5cb30c4a8ebb97f6a3990065d8e279ebc4f9ad8702d86ab21cd1";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/epsimple/core/model.py";
     private const string UpstreamArtifactPath =
@@ -64,16 +64,16 @@ public sealed class ModelResultOracleParityTests
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs", 23_665,
-            "sha256:533ee8789aa9e02951216416be168b43c0ad7c20fc8da0c256a72650806fc32f"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs", 17_506,
-            "sha256:9a9f1bc3c38814776c3c0ac888423418215c42bb7c270848b72b480751438b3b"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs", 19_280,
-            "sha256:5181cc98bb9e193cae2c6c29b33ca74d6e98bf7e44f11e0e3855d9f591f4e8f7"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrReader.cs", 14_845,
-            "sha256:498b12addde1cfc0c4e6c3931dd5c079e185cc2f45a9fa2cb5cde700f4075130"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs", 5_023,
-            "sha256:802f6fb7592f1d48504f6d26b50a5d29e0e5305d5379265effb9efe080d5e65a"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs", 23_653,
+            "sha256:641353d7753fa8d951e34741171eb7f7c75f110efc03c002b07dcb91da5be439"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs", 17_491,
+            "sha256:4ddd61c1826875419c820647bc1b1088170eaad9c93be59009d8bb00442ee4c9"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs", 19_274,
+            "sha256:8e3fce292d33026aa392dc7376a0666e67be6b4e8ee63fe9f327504b4385b366"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrReader.cs", 14_836,
+            "sha256:288870f6c9ba8c813e7a0cf7fd2013363e36a767170a8b9857150be2cdfb398f"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs", 5_017,
+            "sha256:f7b05749cbeb667043b47ebb9e9ab47e58620bcc9722d283fb8938547ca9fd76"),
     };
 
     private static readonly ArtifactPin[] NativeData =
@@ -135,39 +135,39 @@ public sealed class ModelResultOracleParityTests
     };
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:b27f258af83edbd51c9db4c05a3d00395e2b4115e18c308e57e2273219578c5e",
-        "sha256:b6fee14b30fa663b90b0fa650da12127b274c93b4c0a4349177392cfa213720f",
-        "sha256:d7881a2e961b07c11ce1d11fbf4959e72f8c6ba4b9aff360b7d8878715015797",
-        "sha256:9d03d350ae5a9664a577adcb688ddc3e3b8b34f43e1e5935b305ad910fef9778",
-        "sha256:02ce88bec6e865fabc37fc18268ec6f0c9d6176f042a5cabcc9a038f42619978",
-        "sha256:7bff383a6bafac39ea1efc82a377c1811a306f64e91e5ef0929f8f7f3362edf0",
-        "sha256:58f46f600ea8944c936cab9e38b0cafd5afc8a631f6c0e0ab1547927c1e3f49f",
-        "sha256:ec4984385c4ad0c45d3e6b6846070d9910f888795d38c55026e32630be60da83",
-        "sha256:5f917bb107b66050247eb0ad3e5a3b3b22a101c0e3e3008c723b92daf9027251",
-        "sha256:9c47247dc9f30a4131422c9f0c05af7b4f7acb155f2f43aff11f0db2782252d3",
-        "sha256:9e4489aafc00252cff6b7c4e396a9d95b8bb097a4bd8b07b21c1daf8a212b718",
-        "sha256:0657fc9c280ccf2ab75477444e570d8473072054061ed12babd1a8deb53eef0f",
-        "sha256:e3252d5b339e761b7dbbbc37a55daff2578517869af3ddcdee86acb6fb86fe25",
-        "sha256:22b00213ef72a2862b7a8c7977359db0a193871bbc7a8cebd651f9c8d889578b",
+        "sha256:2e34002492ea2fb69ba727c136ecb2a1b43c7bd93317649f926c150d9fa6a5dd",
+        "sha256:e0ba25d5a90f97538ff13c37b598c4beefbc0950e6e5228bf12a255e8344b0a5",
+        "sha256:89b5c2c317f20571a49ecf77a71f5cdffecbd43824de2889d396c3ac2d7caa3a",
+        "sha256:d306d4c9072a7835798743b42523250daada003b9419e2a18f2dd508431fbd7d",
+        "sha256:a889042ac2fecebb8c5bcc63e9f3db00f6d2afaed652c28e5ef3bb9947b5e749",
+        "sha256:026ca79c3c62ea4d37ea3418b224a73c2a1e2733c686c3b110d1c93adb4ca246",
+        "sha256:09dc113f85a81433d5063f70a022310dc09cfcb4f78afd416b769f32ead47173",
+        "sha256:ea3a914af4acc3449123ef19d21139e6460fba93744fba9bcc28a35556a318dd",
+        "sha256:9e7b6b97984d510fd19660f20ed13ef8564cdce4be993863a68ef3e0cf5444f8",
+        "sha256:ddbcdeea712374d38f85f37bcb765631c9dbec05c791995a2c772373dedae161",
+        "sha256:b731f1650caf3b2079e9884361931c2414981a7d977018a978d9ac6df0af1935",
+        "sha256:17e03d82cf4b815d7c9ad68e9d1b9669ef7de89708b1db266b1f1a7c309f87f0",
+        "sha256:5e409b094e00a4ab2b847f3455a4f66394c8da8dd8c60b2a2b8831e56e6e1a18",
+        "sha256:b23bb07fe1ef574c3434a66726eec62f14e0cf6ae63dc17dd5370959062d465f",
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:4cba0b1ed3da6537abfd3271cb63483f3bca1ae1f0d736332923d0a14ea4af3c", // epsimple-model-result-373-8b407386
-        "sha256:23784982e3b996986fa4c0cb8430703b0ee4b0a1bd9c4963eed71f3c761df8c2", // epsimple-model-result-374-ff1cddac
-        "sha256:29d09d7844b9cedfbedf6ff5901cdfeb49493f4eba95204702f10a49d7969f63", // epsimple-model-result-375-856dd66b
-        "sha256:28e2d25f95900431fe19cbc6654b479977484b7ac87ba36d0293c28d83a8c313", // epsimple-model-result-376-37a89b1c
-        "sha256:2e8961f43459b2a1c60b2998441e6d07f5b440629a82ea31d6449fb5a69cb299", // epsimple-model-result-377-4e80e0ef
-        "sha256:5285f2c91e5d89032a055aae5075e1693b85bc773d233ff63bfef90b55d0dece", // epsimple-model-result-378-a63f6fa2
-        "sha256:c897717fc007ee893f680dc6f2f9cb460a053f77e036833f45b12d1a898b0260", // epsimple-model-result-379-b7774317
-        "sha256:368242100de1ec785023bd49bd7a3baa0f391ffb93c3ce590704f7ae41db6ada", // epsimple-model-result-380-93d2bbd8
-        "sha256:4a1ad55b89f234758a6cc5983b74c3d7f5e5f3ec24f37a23543f5ece8860fa9f", // epsimple-model-result-381-72b97e85
-        "sha256:a3ef0f0cd7345b3c932478328601aa228c0178d3f40f504896df95cfcd01d703", // epsimple-model-result-382-7d1d1cd9
-        "sha256:e7d765592e2e07726eb2b9b77a9f9d759ca399a88db7601a5d71ba852a799ad5", // epsimple-model-result-383-010fb599
-        "sha256:11a793cf1233a528ea648030352ed0545118aeafc5494737361d90a2fadcdf34", // epsimple-model-result-384-48114e14
-        "sha256:a264b56c7d898b3d69657f8048e29cf7477bfa9977c7f712e4ef3823e94e0b3a", // epsimple-model-result-385-842eb853
-        "sha256:46e7fb4fb9a9fd55f0d143f6c2a6b26be6d3a5e9bf3c7b09155b173c1e6b7fdc", // epsimple-model-result-386-67ef521c
+        "sha256:1b1c6955b60f28b0dee44f0ec7566f38322fce6481f30b9667a3cf47a00a2ce6", // epsimple-model-result-373-8b407386
+        "sha256:bdd3943ea4868409c054a77061bbeb802b6b89b66b31b84c75d97b0e02509b62", // epsimple-model-result-374-ff1cddac
+        "sha256:f3cb7d188d045af5d7b07d79c10604b2fc2a1b947b356b0681986b42fa2312e6", // epsimple-model-result-375-856dd66b
+        "sha256:cbfb9b76ec688e9e2bf64426b20c645f495c58e141b5313770a577fff92ace77", // epsimple-model-result-376-37a89b1c
+        "sha256:7daaa356e21871f95c5665c76ac54a09999bd0bbc8bfc6039e202f79c7b66f68", // epsimple-model-result-377-4e80e0ef
+        "sha256:fe0af7ca3c8fdcd6d07adbe589f5a80446761ef66569aa2caa72bbd09a68ded3", // epsimple-model-result-378-a63f6fa2
+        "sha256:bf9329a5ee195b1eb7fd3527757cad6122d2ddadbf512a53faea6a92e6caf068", // epsimple-model-result-379-b7774317
+        "sha256:05b590e3d0006b05cf70c19e07ad4cccad670eaab2073602563a414bed1a9b2f", // epsimple-model-result-380-93d2bbd8
+        "sha256:6c40d92d24829fef88969dfb150e9d834984c4fbd20550a1151fb0a641674522", // epsimple-model-result-381-72b97e85
+        "sha256:8e65bd758739c0194f949c23870ba68154237aff175ee24a20d12123b3e81f52", // epsimple-model-result-382-7d1d1cd9
+        "sha256:b1944628ab3c2d56b6717288987375d7b9dfffc9ebf341855ad20ec80a138dac", // epsimple-model-result-383-010fb599
+        "sha256:4e02df6eb200350ff53133bc58b781f49a445a06944025c7baa4ad96dc5d3ab4", // epsimple-model-result-384-48114e14
+        "sha256:08b88b6efafbc76218dc467c470d8d5d9affa91a8a22f527318d79f061e2c1de", // epsimple-model-result-385-842eb853
+        "sha256:c755a959144675a3bf3983ab802f1cb576da16c3179a3ba93e495103349f8396", // epsimple-model-result-386-67ef521c
     };
 
     [Fact]

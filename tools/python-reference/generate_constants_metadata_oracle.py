@@ -29,11 +29,11 @@ SCHEMA = "dragons.python-reference.constants-metadata.v1"
 SOURCE_PATH = "src/idragon/constants.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
-EXPECTED_INVENTORY_FILE_BYTES = 518_070
+EXPECTED_INVENTORY_FILE_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_SOURCE_BYTES = 2_590
 EXPECTED_SOURCE_SHA256 = (
@@ -110,7 +110,7 @@ NATIVE_ADAPTATION_CANDIDATES = {
     "PackageInfo": "Dragons.InvisibleDragon.PackageInfo static class",
     "PackageInfo.NAME": "Dragons.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
     "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows build targets",
-    "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.0)",
+    "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.1)",
 }
 RUNTIME_CONTRACTS = {
     "Directory": "class-signature:()",

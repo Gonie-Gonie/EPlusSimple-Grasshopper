@@ -24,10 +24,10 @@ public sealed class EnergyModelAssemblyOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-model-assembly-oracle.json";
     private const string OracleSha256 =
-        "sha256:f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4";
+        "sha256:8c947ee3529bf498625dab7ec07acd6ac27685446e4197a0bb564e6d72e43edb";
     private const string CasesSha256 =
         "sha256:c93a9a25726848777d527518a99419f21175fb9e473c0371654fef9fb5f01eaa";
-    private const int OracleByteLength = 119_000;
+    private const int OracleByteLength = 118_997;
     private const int ExpectedCaseCount = 10;
     private const int ExpectedSemanticCaseCount = 5;
     private const int ExpectedOrchestrationCaseCount = 5;
@@ -36,7 +36,7 @@ public sealed class EnergyModelAssemblyOracleParityTests
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const int UpstreamInventoryIndex = 821;
     private const string UpstreamPath = "src/idragon/dragon/model.py";
     private const string TargetSymbol = "EnergyModel.to_idf";
@@ -53,21 +53,21 @@ public sealed class EnergyModelAssemblyOracleParityTests
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_model_assembly_oracle.py";
     private const string GeneratorSha256 =
-        "sha256:2e1294c95abd407345a0c567a1b800068788d3e3be4059c0801a0bc567ea3bd0";
+        "sha256:4bcb0c46d810665e5872e45db102468e9bcbdacdab76aa6e00511448417aa8c5";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_model_assembly_oracle.py";
     private const string PythonValidatorSha256 =
-        "sha256:674663b235325c23a014b960203b8e0722438f4e4ed4a197b3e677a9f2f0aa16";
+        "sha256:2295e3d9d0d2f44a58efa81e6bbdf70e0cfd33b152c820a914e257ccc072508e";
     private const string PublicRouteRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs";
     private const string PublicRouteSha256 =
-        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+        "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28";
     private const string PublicRouteSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string ImplementationSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble";
     private const string AdaptationId = "validated-fresh-energy-model-idf-assembly";

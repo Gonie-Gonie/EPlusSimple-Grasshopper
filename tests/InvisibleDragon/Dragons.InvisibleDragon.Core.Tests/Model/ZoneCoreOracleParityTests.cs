@@ -20,9 +20,9 @@ public sealed class ZoneCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-shape-zone-core-oracle.json";
-    private const int FixtureBytes = 91_202;
+    private const int FixtureBytes = 91_196;
     private const string FixtureSha256 =
-        "sha256:63d62d596d37c2e33adcbaf025f37ccda36d8a4291d96b3201d427d8caed59b3";
+        "sha256:8bb7c858d42d96acdc5d0266b9455c1e3cd1b2fe89b464a408d8761026b5dbb2";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-shape-zone-core.v1";
     private const string CasesSha256 =
@@ -30,20 +30,20 @@ public sealed class ZoneCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_shape_zone_core_oracle.py";
-    private const int GeneratorBytes = 67_980;
+    private const int GeneratorBytes = 67_971;
     private const string GeneratorSha256 =
-        "sha256:ce86db526f27158c7e81b40e5e6007c090008bfca5612775a01f8df141936666";
+        "sha256:6bb824554bd27014094ea431880eccc69b82845713236b41ca80d44f306f4fed";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_shape_zone_core_oracle.py";
-    private const int ValidatorBytes = 22_690;
+    private const int ValidatorBytes = 22_687;
     private const string ValidatorSha256 =
-        "sha256:126c3601b36b3b4f3e1e22c92402b55c510fb00f9cd5da3698285725f9491201";
+        "sha256:f79b5f0af548ad68df2bfb17eb2c0ba5b5329ba0f5e9ad2ca33993a0007b7d7d";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/shape.py";
     private const int UpstreamBytes = 27_438;
@@ -56,30 +56,30 @@ public sealed class ZoneCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Internal/DomainGuard.cs", 2_416,
-            "sha256:a8d28c985fe67376ca08015ed8e6d28600c98366c33a4a41dfd4abf377f57d8c"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/PlanarPolygon.cs", 16_524,
-            "sha256:73a1dd052fb12ed0802a6236d21484e2b680cbe3f0f4005ade6a61995111c653"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs", 1_909,
-            "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs", 7_731,
-            "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Zone.cs", 6_698,
-            "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Profile/Profile.cs", 4_079,
-            "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
-            "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_027,
-            "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_267,
-            "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_182,
-            "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764,
-            "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Internal/DomainGuard.cs", 2_413,
+            "sha256:5bb42189e091fb4ed17f3e242a0e22c32b47b2242c2e6b9a43da46ecaa929ac4"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/PlanarPolygon.cs", 16_515,
+            "sha256:8b8ff21d647c63bd4c4eee0d46febb097372da58f570f3fec0b214b9393dfd7a"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs", 1_903,
+            "sha256:fc745e92061a0e8b1429399836f8a268b0d551e644f75f800a9cf987712c9d7a"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs", 7_719,
+            "sha256:a4d2d35982c8aff254c0c8d74982e13394db2a770f38691710f9739f8b0a38e8"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Zone.cs", 6_686,
+            "sha256:17423d03e67e5d19ee681f138291bb011a81b84e42b4a188825d570854235ffa"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Profile/Profile.cs", 4_067,
+            "sha256:670c41d252c47be93f5bc839967332a1aba33061a2eb832b532e658b1b3683fd"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561,
+            "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs", 18_012,
+            "sha256:f9ad853a991646f0cbeede575ae934a9aff7fd1c62e419e1b99c212afffbd486"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_249,
+            "sha256:bf93e1c6889f7d371fff983caad1b3c90d4cbc6113bbb5d9a7a783740af1bb46"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_173,
+            "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723,
+            "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
     };
 
     private static bool DiscoverPins => false;
@@ -276,28 +276,28 @@ public sealed class ZoneCoreOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new(13, "sha256:13f0a751803185b1cfabde8b89efe82e05dc6836427ff4492838782de35e2e37"),
+        new(13, "sha256:2e2bbec9ce077fe2b69e5d4f47ca8297dd2753215c4e1b1d0b25181240ed9736"),
         new(8, "sha256:8474f1e2ca664f9934a2ab947d96220aa4fde1272ce2a2ca2f14805b6caade91"),
-        new(9, "sha256:6fdfb429a7a734ff900147c7454a61f5d432f71c460cbb72ef106a6c055647dc"),
+        new(9, "sha256:5c192ce95804c27b4e273a3e74b762f59b19d1d8d81737141be7d09a4d061477"),
         new(6, "sha256:741a8f0544cb6bf0a399e9a6dd6baa4afbdedf7ab10ea816e8c5084934903f2b"),
         new(9, "sha256:c406bd5f0b22704f8692ec232d22bf9772b44756f80bdfc0a0b89f1da514acc1"),
         new(15, "sha256:deb8b70c20d4b3db64bcc46e52560dfe7af2d94550ecd985de9f2ca217e4d480"),
         new(10, "sha256:17459c9b182f000d0290a1399a5cfda4cb51835b75aa5b1be9783db4ac7c14d4"),
-        new(18, "sha256:18ab46217d71856567d28206a2256f4375f351504efc65239fd3287720a5a7f5"),
-        new(10, "sha256:4d3bb3168d0caa138fe030b01e2281b1d609736a6a0ff3751b04eda1f7487627"),
+        new(18, "sha256:ae31e70f95c8a9c7c2ea5c3482fd69dcc8205aa9346916418196737ac826b058"),
+        new(10, "sha256:6703d2ecf76b0e60edbbcd7b1cc6906c87e55cbc7519fe1df9250cc6a4897e70"),
         new(17, "sha256:582a98ead22983ca64c77c9bc3aff51754b531c1d83d5363b20984d1d1365b58"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:f21dfce2129fa58635ab4896c2afa35000f3195f7a9719f7cee51585ffc6267d",
-        "sha256:bf2ebcea57e49f729552672b68dc91fc902853f4a08c4683675f2e14ee56d89d",
-        "sha256:bcc83acaa516b9f2a9b50c3aab4bb77a9b9385bd9e80903b4b8a44f711bf27ce",
-        "sha256:e9c5f87781baeef940dbcf06978893b6ae84d1ed661ba4df8351b9fc807661f0",
-        "sha256:cdce413a7abd467883aa51e8af549838f2e9ffba875fa6cd501ca0b7e4aa9270",
-        "sha256:678949cffd20083ab71304632aae0b7e945cc9dea7862d574967b585fcc5de57",
-        "sha256:ee3e42bf7b7b071d2225df831cce93f7316e7e4f576535c229aa94e9552f4468",
-        "sha256:4c673a4f89ae77fea63d764db40ab8edccd65b079babe97e72a0306e2e79c2f7",
+        "sha256:aeb2c85b51d001b237633e7228fce7d25731f4fb23f398053bb1b20bdcb98ddf",
+        "sha256:a73caada38edb6dc6f04a9a91cfcc14c33368711bccd74fa50786ae22fbf7dd7",
+        "sha256:d144006c69030e0a3565e272b3e78d5633a09194181e46d7ce9748b655d77fd1",
+        "sha256:d9d58c2c3243d690ea92caa0cea9edfce7e9e10c4e3e17d4a221d857c8acf9bb",
+        "sha256:0901120aaeee04cadb0be18a7ab16790f7f02d095b330fd1510471218f1892c2",
+        "sha256:6ef220117410211f8edff42057ca9bbe4c92ebe109204e04ba3e53aa803e9caf",
+        "sha256:27eb98b4e9d43dfe43ad7be60a64d69c8806b87a052e9ae172a31ae24379b55a",
+        "sha256:0a2b79d9ddcdc7c6c0fcc90e4021296a6bd7c8fbc643dd542f8244e803212aae",
     };
 
     [Fact]

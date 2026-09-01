@@ -1,5 +1,5 @@
 {
-  "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+  "content_sha256": "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
   "files": [
     {
       "ast_hash": "sha256:f26684ea4b6e1bfe7b9576f06d45971e420d2e9e49da99b6c52ff9d0d424fae3",
@@ -123,7 +123,7 @@
     }
   ],
   "schema": "dragons.upstream-public-symbol-inventory.v2",
-  "scope_sha256": "sha256:9b34f9d49e7cba5aa9e2102a86fd62b59732d6ea5d4a5c5024692ed2657b7985",
+  "scope_sha256": "sha256:2e2600321bbcc00895bd412c3570cda63978b447a4603ce27daa46ea212985d6",
   "summary": {
     "kind_counts": {
       "class": 151,

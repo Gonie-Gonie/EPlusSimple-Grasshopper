@@ -23,15 +23,15 @@ public sealed class ShadingMaterialIdfOracleParityTests
     private const string OracleSchema =
         "dragons.python-reference.dragon-shape-shading-material-to-idf-object.v1";
     private const string OracleSha256 =
-        "sha256:e805e1d8e953879012975cd8854e8737da29ed038f66d6176010337ace6f27fe";
+        "sha256:364652ab7190f1d55d8f85227ff388d42b838e713ae193f2100ca6dbdb18a5db";
     private const string CasesSha256 =
         "sha256:e577eebfb5c6ad65670bc3ae9624d77eec2d2f3e21d0d518c25f78cde2459f92";
-    private const int OracleByteLength = 56_704;
+    private const int OracleByteLength = 56_701;
     private const int ExpectedCaseCount = 6;
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/shape.py";
     private const string UpstreamSourceSha256 =
         "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c";
@@ -43,7 +43,7 @@ public sealed class ShadingMaterialIdfOracleParityTests
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string AppendWindowShadingSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendWindowShading";
     private const string ShadingMaterialSymbol =

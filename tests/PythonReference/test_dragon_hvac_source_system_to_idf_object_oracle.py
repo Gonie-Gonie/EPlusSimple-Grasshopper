@@ -47,9 +47,9 @@ if spec is None or spec.loader is None:
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
 
-EXPECTED_FIXTURE_BYTES = 3_927_710
+EXPECTED_FIXTURE_BYTES = 3_927_707
 EXPECTED_FIXTURE_SHA256 = (
-    "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
+    "sha256:d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e"
 )
 EXPECTED_CASES_SHA256 = (
     "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07"

@@ -17,10 +17,10 @@ public sealed class TerrainOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-model-terrain-oracle.json";
     private const string OracleSha256 =
-        "sha256:f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e";
+        "sha256:1e2820763758cf2f997f1f0524a7989c511cfcd05f337117bb47460ec4b6e44e";
     private const string CasesSha256 =
         "sha256:aea20222894cc0c5a500dfccb15f9955e56666f4de763fef62c297fe975d0a47";
-    private const int OracleByteLength = 17_936;
+    private const int OracleByteLength = 17_933;
     private const int ExpectedCaseCount = 18;
     private const string OracleSchema =
         "dragons.python-reference.dragon-model-terrain.v1";
@@ -171,7 +171,7 @@ public sealed class TerrainOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

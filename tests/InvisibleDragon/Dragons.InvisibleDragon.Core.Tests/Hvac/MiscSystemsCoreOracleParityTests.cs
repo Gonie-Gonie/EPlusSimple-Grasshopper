@@ -20,9 +20,9 @@ public sealed class MiscSystemsCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-hvac-misc-systems-core-oracle.json";
-    private const int FixtureBytes = 290_479;
+    private const int FixtureBytes = 290_302;
     private const string FixtureSha256 =
-        "sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89";
+        "sha256:c875ac4cd72e80aaa9de793807247597c5084cb70c96fab879d95747fdba962b";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-hvac-misc-systems-core.v1";
     private const string FixtureRepositoryCommit = "c99f216";
@@ -31,21 +31,21 @@ public sealed class MiscSystemsCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_hvac_misc_systems_core_oracle.py";
-    private const int GeneratorBytes = 53_961;
+    private const int GeneratorBytes = 53_922;
     private const string GeneratorSha256 =
-        "sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421";
+        "sha256:ff4bb943baeefbee48be4a0e1a0eb467674cd6722c7c88c53b5e372d9f4ddc2f";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_hvac_misc_systems_core_oracle.py";
     private const int ValidatorBytes = 22_698;
     private const string ValidatorSha256 =
-        "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117";
+        "sha256:4dca901f5340002f9be7dcd3e669397d56b4413976601012d6da267c248159d6";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
     private const int UpstreamBytes = 137_833;
@@ -60,9 +60,9 @@ public sealed class MiscSystemsCoreOracleParityTests
 
     private const string SupportPath =
         "fixtures/reference/python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json";
-    private const int SupportBytes = 147_261;
+    private const int SupportBytes = 147_258;
     private const string SupportSha256 =
-        "sha256:07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b";
+        "sha256:34793bc83100d9c527f1a7dce5e16dd4527ccb0e193e8db48e70ae35d3dfc7e1";
 
     private const string ErvRoute =
         "Dragons.InvisibleDragon.Hvac.ZoneVentilationAssignment -> " +
@@ -73,18 +73,18 @@ public sealed class MiscSystemsCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
-            "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/DomesticHotWater.cs", 1_941,
-            "sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs", 7_074,
-            "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764,
-            "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_182,
-            "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561,
+            "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/DomesticHotWater.cs", 1_926,
+            "sha256:590fcaf0e9011fd6841c2e9679d46fe3a06acef091587b7de5a216f88158974e"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs", 7_056,
+            "sha256:6937f9d9204bdbfc7907de15540772b4d33a0e5ad2a73beda0888fb89682f8cb"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723,
+            "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_173,
+            "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -132,51 +132,51 @@ public sealed class MiscSystemsCoreOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new("A01", 7, "sha256:c0d45e20c7b0a60054cd7a0cfa110bf8985437ff0239ee691dae570044868f60"),
-        new("A02", 7, "sha256:fca24e1d2ca2f86b679e441b2a29adfe8f0e34882b307ad4fb6ba1f0e695cf44"),
-        new("B01", 13, "sha256:64ae7415d4afb9eca09a7532d99451825e8820574765af86bf8f6f47a3140968"),
-        new("C01", 6, "sha256:c30afcb4e4b30db2a83e0686f45f89bd0dac9fc05409afd0652ceca72c2778cf"),
+        new("A01", 7, "sha256:ca3c19dad33a81cd3df96641d03bec40b7ccb8fd43e456573ec1705a58a74a91"),
+        new("A02", 7, "sha256:9424c8f1ab1f211fe7928c248061d547abde7203b0b5e4b111546df0d33286d6"),
+        new("B01", 13, "sha256:d89afb953c4276aec42d1a23965ac44d8f5f6c89102a4e901246ae65ae53a203"),
+        new("C01", 6, "sha256:05e467f1c1a253f1f34cee5882a2d579c9434c7b70f3d06994d2961fb4899764"),
         new("C02", 6, "sha256:9c9dd7c4c87629fe127ad7c12b9fe9ec37158f3017f45062b90a1110877ef8f7"),
         new("C03", 6, "sha256:7a9faeec325fcde4fd9a20f1eea37d80f67be9bb84dfbbcf5d5e41707be727fa"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:fb8acacf8a2859a292d2b0220936f09897d5fac6b2a5c311d821034cf5b48f9c", // 693 DomesticHotWater
-        "sha256:e69532849718f4503971fd563f6fb9f438c32b108c0e6bdeb8bcae3368b68a38", // 694 DomesticHotWater.__init__
-        "sha256:d1ce8137b8e834ec8ed2603fa90c6564f9185fb927e97fa79179bfbd471431ed", // 697 DomesticHotWater.efficiency
-        "sha256:30890a1468c2395a92c0d03a51b7517fc07b8ad5818b9d37f040a70cf30a0bcf", // 698 DomesticHotWater.fuel
-        "sha256:ff7e019736f12dc8a0016f23d6ba0fd78b5dfa2b5a335423f13a0a74be281881", // 699 DomesticHotWater.to_idf_object
-        "sha256:cae7563b39576627c0013c050d16761b4daaadfff273d5862768f3127c7e3b4c", // 714 EnergyRecoveryVentilator
-        "sha256:b1659ecad59286ebe96d4f7f33d5eb97aa43a8a4c0264ab2407673c952b12e28", // 715 EnergyRecoveryVentilator.__init__
-        "sha256:57a17e62fb93cf611874f038e9de0bfde6cead8486b538620f6372c2e6af2d07", // 716 EnergyRecoveryVentilator.to_idf_object
-        "sha256:1203db3639d74a5452b21d8b869ec17ca0d92d35ce2262771213a12853e6a7aa", // 753 PhotoVoltaicPanel
-        "sha256:c2d8c6166e529f15eddc9622681a37c3843d0da4b86a1aa2a7d214931b116590", // 754 PhotoVoltaicPanel.__init__
-        "sha256:1d138cdbbd31817127ee54a8e132dc68863a08d6c0a59963b2f3e1dcde5589f4", // 756 PhotoVoltaicPanel.area
-        "sha256:a6b5cbf8f9656851e10d2f3702214889ac2db22107551a72189240c8872e5c1e", // 757 PhotoVoltaicPanel.azimuth
-        "sha256:6e712f4c7437ae00d3c2211f40802cef614471c203d9dbae8e1b79da1bb200a5", // 758 PhotoVoltaicPanel.effective_area_ratio
-        "sha256:b0e62e5f756f9509366948eb15cc763f47e8064b4cfb604b228846d8e8af9ee3", // 759 PhotoVoltaicPanel.efficiency
-        "sha256:5dbb12930a21167f4985d51e3107c54dbc7258faa8fe9741ab21866bff47cae6", // 760 PhotoVoltaicPanel.tilt
+        "sha256:fea792e0a3f0bff8169bbc16f483c0f6a121e9bc3cd87ff6eae11d0159cf75a0", // 693 DomesticHotWater
+        "sha256:86f5328527112656ab32ab95828a298cfe5bcd75e3cd04a46928d707a9ba6c2a", // 694 DomesticHotWater.__init__
+        "sha256:2ccfc1b7dc699d1f00dcf526ee2242aa11f97456a99e34a2c1b2f141f3c99064", // 697 DomesticHotWater.efficiency
+        "sha256:451f790c13c03bcad5806833fd91a0fbd239c9af4d400fdcbdb18f1be28e20c2", // 698 DomesticHotWater.fuel
+        "sha256:277e1c9914551c4b4786570c47a314d1e967dc4b8ab5fdf4ede8ff5a00dc25db", // 699 DomesticHotWater.to_idf_object
+        "sha256:0b36cb5b771cf3345b1287833bcf1986bd7023d3f11c7629f196a45dccb342bb", // 714 EnergyRecoveryVentilator
+        "sha256:163d701c367617b0868556e30adf9e7e05ccdcb28f8dff0ed122202f7bcc220c", // 715 EnergyRecoveryVentilator.__init__
+        "sha256:5cb07aeb4adb460caf92b36464f1d31f75247ca341ac71dd0aa68e4c243ed212", // 716 EnergyRecoveryVentilator.to_idf_object
+        "sha256:a75b4a771e318a4d431e18ec1f72bf42cc6bcd476b5b3505a85ce01b95880138", // 753 PhotoVoltaicPanel
+        "sha256:bdeaae3d892e04144f2fa83841ba45640120c73d06527a305965b2625c42a83b", // 754 PhotoVoltaicPanel.__init__
+        "sha256:2362c619d83a338b85e6e838c0774e865ed6e4842b96117ccfeca6e5060bb01c", // 756 PhotoVoltaicPanel.area
+        "sha256:163f41f7a7b47b3f92ecfabbc89f9d8b7639d1cb6ec099d86e5c5bc853e94992", // 757 PhotoVoltaicPanel.azimuth
+        "sha256:73311b7b85d719a06164a889f1b78c424c147e4a2377ed33583aad9a77500d7c", // 758 PhotoVoltaicPanel.effective_area_ratio
+        "sha256:f8d25294fd15c98d216e3eb03adab594d277b962af029591c7d12cdc588dc894", // 759 PhotoVoltaicPanel.efficiency
+        "sha256:db34cc7199fc80f747c7a5c754a80d28fdc12b25afaf87ec552d163144ccf752", // 760 PhotoVoltaicPanel.tilt
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:b91a3b4427dac338a46825ff18ec78aea1e018426753a08c468d79d9e8e6db01", // dragon-hvac-misc-systems-core-693-domestichotwater
-        "sha256:eede3d03a9da4bc09d58574919911582e4073f8b7a0370e3003d2c9bd58c6790", // dragon-hvac-misc-systems-core-694-domestichotwater-__init__
-        "sha256:a1350be80dd5627d8570fa65229c7d2fe0ec628bc7b4599832eeec85f85b75d6", // dragon-hvac-misc-systems-core-697-domestichotwater-efficiency
-        "sha256:e2601eb1dd249096e84e6f26434d5fdca6f62972db19d11656f3a50783003bcc", // dragon-hvac-misc-systems-core-698-domestichotwater-fuel
-        "sha256:8d90cebf76b5aeb0a9e5fe34d8a64a3287ddf8197c0a9f225321a46f24f8fef3", // dragon-hvac-misc-systems-core-699-domestichotwater-to_idf_object
-        "sha256:f22feb490e0d3d3f4cf8bbbd490fc5a9719cbbad7120510b3549723b1a87f9bc", // dragon-hvac-misc-systems-core-714-energyrecoveryventilator
-        "sha256:adb33eae6b012f5572e28fd1edf765ff2d3b027ad6d296912d80b65099ed38fd", // dragon-hvac-misc-systems-core-715-energyrecoveryventilator-__init__
-        "sha256:1aa4af88f192d47dedc512468de04e9f91b7f827c1c944ddbe43e63cab7051c7", // dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to_idf_object
-        "sha256:f9abec816bc299289404479f6f3882dc6ae4bf6f14485a14cf922408db2564ef", // dragon-hvac-misc-systems-core-753-photovoltaicpanel
-        "sha256:218aaff4095be7ddb65456f52bac455af36159746dd755816bdf6c5052dfaea3", // dragon-hvac-misc-systems-core-754-photovoltaicpanel-__init__
-        "sha256:ad6f896506c021e207c523bcf2e22b3ba3c23f2b7cea3c8e4d059cdda8c89e2b", // dragon-hvac-misc-systems-core-756-photovoltaicpanel-area
-        "sha256:3ab9565751d133f837e4579b86db7e725f7bf31f4deda4c05afb31496327d6c1", // dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth
-        "sha256:0e6738976198190046dc57e9aded7fa22f59d82e9252b560341928c371befd2f", // dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective_area_ratio
-        "sha256:22744b7a1f87ae7380e66a96df7be537d158adb40f05b2c47b0269786f5859e3", // dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency
-        "sha256:ae346cd3fccc4a206242c7f5b10fbdd847bf5884af960171bdcaf6ad0d423074", // dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt
+        "sha256:1b305ab28912375b0141e5cc7366420668483283c380359cba2e1e33341787bf", // dragon-hvac-misc-systems-core-693-domestichotwater
+        "sha256:8e0fb1bcef34cdb4c2d2491b3e06f8a85dd023cda5cb7819efe43e8f01e53aab", // dragon-hvac-misc-systems-core-694-domestichotwater-__init__
+        "sha256:f398f20ff34ca3372b6509aa3a5fa178b7bfdebdeec1ee4fabfa696d798361d5", // dragon-hvac-misc-systems-core-697-domestichotwater-efficiency
+        "sha256:d1ace7a13f1a81c2742b3d24a1c3b1b0f3a5b34873401aade2f039f30b11c965", // dragon-hvac-misc-systems-core-698-domestichotwater-fuel
+        "sha256:a9d901f638b4f4439feae717338e3aa622c0d5f7feec42c6a656dc30b0987ee9", // dragon-hvac-misc-systems-core-699-domestichotwater-to_idf_object
+        "sha256:20791bf4b2a6eec736f32a746e3f8e2b2d7adc021ba0e308ff8c0f8559109c56", // dragon-hvac-misc-systems-core-714-energyrecoveryventilator
+        "sha256:82a42e385c76da95a4b3c357b7817a79e0c5e5094e07708128fda96177f86604", // dragon-hvac-misc-systems-core-715-energyrecoveryventilator-__init__
+        "sha256:27fa9f5e8e5ae24643d5881bbf64d23eb91f662538f5d210f9480d45b33719e3", // dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to_idf_object
+        "sha256:baf4bbff64448a9db571baa1c9e0ea22ada8301c8d18989e9e4d2be594ff47fe", // dragon-hvac-misc-systems-core-753-photovoltaicpanel
+        "sha256:502c4da9b0336e48a69bbdf9711ce696fa3b48b69abd9623afa86e3b0a2b8a92", // dragon-hvac-misc-systems-core-754-photovoltaicpanel-__init__
+        "sha256:816125f80119fce8648ea150fca8539a1160c6fc031e1dd34020ea6199d3972b", // dragon-hvac-misc-systems-core-756-photovoltaicpanel-area
+        "sha256:301b589ad142075aa01f66e8c4d6cd6292ac5cbf2131f3361f1e1248778bb027", // dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth
+        "sha256:d9da137c2d4b60f72cd39304e81b7f64f9367887981c82db9d558da570a96a37", // dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective_area_ratio
+        "sha256:d59cac56082cac118fdfc5fd6ccaec8535e8e5bedcdb153625f7c49ce701d7a9", // dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency
+        "sha256:17a67ac7d9a2e616100569dfddbd43e9de8c248d7e80145ccf770a31da163c64", // dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt
     };
 
     [Fact]

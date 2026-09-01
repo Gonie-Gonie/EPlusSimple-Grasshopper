@@ -25,15 +25,15 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
     private const string OracleSchema =
         "dragons.python-reference.dragon-hvac-supply-group-to-idf-object.v1";
     private const string OracleSha256 =
-        "sha256:f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608";
+        "sha256:e5e47e5ffa2d725697d8741d05f54655705106e4bb75348c6d9eff46e04715bc";
     private const string CasesSha256 =
         "sha256:8937d915b40bde81aff7b1481bf0d747a878dbefe464c28d091b4bb7d4ba8f0e";
-    private const int OracleByteLength = 22_608;
+    private const int OracleByteLength = 22_605;
     private const int ExpectedCaseCount = 3;
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
     private const string UpstreamSymbol = "SupplyGroup.to_idf_object";
     private const string AdaptationId = "model-context-supply-group-idf-assembly";
@@ -44,7 +44,7 @@ public sealed class SupplyGroupToIdfObjectOracleParityTests
     private const string ImplementationSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.Assemble";
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Hvac.SupplyGroupToIdfObjectOracleParityTests.MatchesPinnedPythonSupplyGroupToIdfObjectThroughNativeModelContext";
 

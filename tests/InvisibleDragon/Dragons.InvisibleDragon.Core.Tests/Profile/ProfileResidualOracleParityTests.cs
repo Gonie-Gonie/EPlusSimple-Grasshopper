@@ -17,10 +17,10 @@ public sealed class ProfileResidualOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/profile-residual-oracle.json";
     private const string OracleSha256 =
-        "sha256:00278252228a1774c93ee9189a7fc28f2eff95b49e67f45ddfb2eae9c862baeb";
+        "sha256:76471f9ba5851a0483f18c3a319c947adbbdbd499a9ceaef48b4cd2f8c1bcde4";
     private const string CasesSha256 =
         "sha256:9ccf19079e3776b299a4fd4ab6c069daefb076e28855c77ca2639b18a390ba16";
-    private const int OracleByteLength = 24_064;
+    private const int OracleByteLength = 24_061;
     private const int ExpectedCaseCount = 15;
     private const string OracleSchema =
         "dragons.invisibledragon.profile-residual-oracle.v1";
@@ -172,7 +172,7 @@ public sealed class ProfileResidualOracleParityTests
         AssertKeys(upstream, "commit", "inventory_sha256", "path", "source_sha256");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

@@ -15,14 +15,14 @@ public sealed class RuleSetOperationsOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/rule-set-operations-oracle.json";
     private const string OracleSha256 =
-        "sha256:5575c9d2946b99afd474220429eef5e5531931a36e26eb55a1e3d4e93548fdc6";
+        "sha256:a3d968905846064ce38fd504b405eda0da25a6bb2937c38059fbb0b949d83315";
     private const int ExpectedCaseCount = 334;
     private const int ExpectedAdaptationCaseCount = 61;
     private const int ExpectedRepairReferenceCount = 24;
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/profile.py";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamSourceSha256 =
         "sha256:e286a612360a781cf40e0afbb09b60befdfd7526c36267f608620b9a1b89d445";
     private const string EvidenceTestCase =

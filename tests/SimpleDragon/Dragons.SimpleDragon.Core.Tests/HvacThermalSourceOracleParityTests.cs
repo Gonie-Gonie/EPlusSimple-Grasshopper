@@ -25,9 +25,9 @@ public sealed class HvacThermalSourceOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/epsimple-hvac-thermal-source-oracle.json";
-    private const int FixtureBytes = 135_657;
+    private const int FixtureBytes = 135_360;
     private const string FixtureSha256 =
-        "sha256:e78e8bcbe42cd236775db63d50088bad82a9e9c5328e5fa5de6873d069984391";
+        "sha256:a82d1b26673cada47b45b8cbd61f03beeb6ce39495090e6b731bc1b4114bcdf2";
     private const string FixtureSchema =
         "dragons.python-reference.epsimple-hvac-thermal-source.v1";
     private const string FixtureRepositoryCommit = "5a1e2bb";
@@ -36,25 +36,25 @@ public sealed class HvacThermalSourceOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_epsimple_hvac_thermal_source_oracle.py";
-    private const int GeneratorBytes = 63_818;
+    private const int GeneratorBytes = 63_785;
     private const string GeneratorSha256 =
-        "sha256:e930c9242c76b48500010e76f625e41baa07de96e4629b447df61db6c571e51c";
+        "sha256:7a3ad0eb70b31542a04b6927389aad67fdcac37a0426632a00a55bdbc40f182d";
     private const string ValidatorPath =
         "tests/PythonReference/test_epsimple_hvac_thermal_source_oracle.py";
-    private const int ValidatorBytes = 18_337;
+    private const int ValidatorBytes = 18_334;
     private const string ValidatorSha256 =
-        "sha256:ca7fb52d4a68ada17437d9e4590b129cf22cce842b37147aacf76d4f17c92265";
+        "sha256:8d3026ebea8b4484fae93331b62ac010ba8b9bc1a536f36c4c3b12104c348dfc";
     private const string SupportPath =
         "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py";
-    private const int SupportBytes = 61_458;
+    private const int SupportBytes = 61_377;
     private const string SupportSha256 =
-        "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d";
+        "sha256:a397d3169f61a375b12a3934a2270874bfef1f3713a635cfd5e342668d12046b";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/epsimple/core/hvac.py";
     private const int UpstreamBytes = 53_850;
@@ -75,11 +75,11 @@ public sealed class HvacThermalSourceOracleParityTests
     private const string AdjacentReceiptsSha256 =
         "sha256:ef4f76630b955cdfdb33b822b2fa3d59ef89c4d2b02d5435567e3f1684cfb15f";
     private const string NativeRoutesSha256 =
-        "sha256:862de5307de7fcebe494fb4c6691e3ac3ea7fb25abe4a8743f922e553fa9f215";
+        "sha256:3d6a875956692d15c0512fda9a319c9f46bd39dc3b760cc48c337b7080e72886";
     private const string NativeSourcesSha256 =
-        "sha256:25f9f683ca28ab928c3cad112c2a3f06cbab26da5c6c3d2867fd343d32c80d6f";
+        "sha256:37cec365c3d6305962db2773749fd9ad22ce148241dbc6720d3208b03f6d66b4";
     private const string NativeReviewSha256 =
-        "sha256:b2c6200243aaab4deb60dcf11ef8216a4215043b53d9f54f759f09193f8db415";
+        "sha256:aa0af5125100e524c774ba92d7993d00fadff21347e49303c32850e0868e11a8";
     private const string NativeTemplatePath =
         "fixtures/simple-dragon/grm/ASHRAE 140 modified.grm";
     private const int NativeTemplateBytes = 9_154;
@@ -90,14 +90,14 @@ public sealed class HvacThermalSourceOracleParityTests
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs", 6_894,
-            "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_650,
-            "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_652,
-            "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_343,
-            "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs", 6_885,
+            "sha256:db5fafe1034aca7b16ef222ecad981b790952474e5311b798c9eb6a677c82af4"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_641,
+            "sha256:a212275276ccff153d5df42a44a46ac8877afa485e315ee27d08767a909f29bb"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_646,
+            "sha256:40e6e7aa1eb89cb341c7e7a32471fa029024e49b261dce8a8926514109d727ba"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_154,
+            "sha256:9462f609a4a7a4e062612e4058921b0c91931dc8ff7216dbe54e258cb59ec22c"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -166,115 +166,115 @@ public sealed class HvacThermalSourceOracleParityTests
     private static readonly JsonSerializerOptions DiscoveryJsonOptions = new() { WriteIndented = true };
     private static readonly NativePin[] ExpectedNativePins =
     [
-        new(32, "sha256:a86686bb3df409087d84e8045652b590ae544e815bb624110887de8c0f82d61d"),
-        new(32, "sha256:2fea00bd3688a7fefcc2bed02c3709023cfda6c42de6f1f430656851f0d53109"),
-        new(39, "sha256:c90ae9c009419150a28f980b16ded1c0c544ca02c0eaadfab8bad751451a0859"),
-        new(21, "sha256:cae9dd047fcb2f0c21fffef9571916cf8681db00429141a73056d0b231228c52"),
-        new(26, "sha256:76f5661c09f9fe656fcaab83e9be2f2d88d1dc571078c127f38bf33cb01f2f7b"),
-        new(36, "sha256:7c97dc43e9cc85c923281e34a80077c17c5c5ff2e4415b0d3aee9bdbffcbb8cf"),
+        new(32, "sha256:da848eefc680aa746ecd27309b1b88ae4b75c71c4f2837fc6fa9c3aa4488d4ce"),
+        new(32, "sha256:96a34260bb285e6b84e3f7364d7b83ace8b3d9e9fea0d311d288c661816dbe29"),
+        new(39, "sha256:d30ed66dea2c6af5e4350a4fb87d3961d2cfee65cf85f69876dea3b2671e3077"),
+        new(21, "sha256:7e6417776b82561513c836b4c84b4f17e56807b3d3b81f5edb250ded754c920c"),
+        new(26, "sha256:928a7ac965fb4b77a5199d01bf927710c4e8845068e03f5dbf08a89326b9fe0f"),
+        new(36, "sha256:9480da94ac8774f1430ddc1749e4db408cf43327925e47c5dbbdcb1db92cc929"),
     ];
 
     private static readonly string[] ExpectedReceiptHashes =
     [
-        "sha256:b01cac1e77058e16a7983fc450a2a506ff8320694ef32a8386261d19bd562228",
-        "sha256:e2807b07877fbc4a57a5c41412d0a6d00f1eaf518be3e5ab6c3f676c0c8f7105",
-        "sha256:b8c28c9700ef78f23fb08bf066f492382ea267dc47d0ea0bdf44805eaa446cb6",
-        "sha256:443ff1edfd5f2c66875c89dd83da495f0c1d67ff15aac25a8be411cb9111ddae",
-        "sha256:eb188a1c55dd80c62e60cf46ad73b0212ad25c663988e2fca512a0cac7269d73",
-        "sha256:7b9e444c554b277bc6c25e50c5f2fb593fcf46c6a20a1ad504e7cf018c3162c5",
-        "sha256:e1e8a7945b3d217578963124d93113f58706b971392ed7a7f2767fff53334cf1",
-        "sha256:35dcdbb2459fe5bc79159139a44505edf40b0142758dbdfce1fa51558e45e2d2",
-        "sha256:e8d34b317151abcd01fd4f1f5d32d5c203a8cd4d5e7ff5c5d5d1b115aa306676",
-        "sha256:73c8ae28eaebd3a5a0af93d5c93102160a472d1c951086a9a78284b8eb1e0665",
-        "sha256:597d4bd26dc0d254e48847ee6a92e65d2ba8529d65b549ff7ac93345bd4ccade",
-        "sha256:bc7d81bca94157cbed1f0ba500a69311eed31e5752ab97498d7dcf4b47266ea0",
-        "sha256:fd09865e22ed85ed11ed4ed6b4f0e6111bb5af81daa1415e8525792e6e6839c4",
-        "sha256:efe5613d1debda4395cedecea0ca9dc86bad0de877971102d1a4f8da8f5728e8",
-        "sha256:8f568b733f99135309eef567ce0a70a11da4ff10413f8ad1695db3e8dbefe94f",
-        "sha256:e191ff932bde186162fe0cd69b2d285c7ae28da8ffa48d7fb9e4ba5c63df730a",
-        "sha256:f444c7a0e2eda4e7670786d5891548c75407b6ae554eb61c32f77098de8ae6e3",
-        "sha256:ca303cbed2055515509c57875e937cb5c3effc877931cfc9aed1a985f5c6ab76",
-        "sha256:63dc65460b601f46c2148889cdc5e01c780bc404483b7de17325ecf543fce51b",
-        "sha256:d41ac73cca069e0409a64018d391d89e38c998b3481542f89b14d9bb3bd6114e",
-        "sha256:b20b573770676374be84a4f432cdfadffd33c71bc574e69a4ced07addf923719",
-        "sha256:f162fbfdca858a730516fea9e3f5d1cec8ff8b61c931addd3d34457f9e8a3da5",
-        "sha256:5865691c7c4a37cfeae5335fa32f0e7e70bc56107bd4b2b54bb815484d19d21f",
-        "sha256:f250e5f747fdc9742f4e762cd8ecde6000aaa95b1c0c7ac17b1dcd81754d054b",
-        "sha256:52938dac7a9eae1f56b7033a77c16ba17cb5ad3afe451412ecf049d9c93a55a4",
-        "sha256:7fb5cae698d0a81ea8e87f9539fc617f3b5ac6bf9d7c7de34d4da93bcc7e3602",
-        "sha256:937f94dcbcb847c917e5b8889321efd1351f78a5721056badc1f7c0f5a0004e5",
-        "sha256:2baa4e28157b627186ecc53b329a4496d72a12e44aba1dcf6c9bb5a66352128f",
-        "sha256:637a0279f72769662574e3270633d717861542642d470fd42c28f6128c81687f",
-        "sha256:e75de4d130c41dec81f2c7274a259b93ada70a2b4a7288c1e59cfdf00fb690a4",
-        "sha256:48ce5c4eedeedbde292aeb1b006b463cd839e78d2e8802fc5ac109bc5581413d",
-        "sha256:55ba954a6faf8ab7075c472a5da79ef53e0e8a765a904a6ebb9f37ec4cb1b3d8",
-        "sha256:b28ff444366cfc2c6b9669fe340299a62cc0b15268a59bdba1b9cb2fbd47538f",
-        "sha256:33711b79744ce3d4d235e37a1168bd0d17c6b0280782ce0bd591e860dd7cb318",
-        "sha256:63d381b7f18a487e9847e8cf17119436ec1474a2b4e3e9e9a9e05ffa04e2c22e",
-        "sha256:53bf4542b479ce9fcdaf2d8fb0a527d0b2b717dc63fa77a16db9bbc31c88eaf5",
-        "sha256:711a610a7897021d5d633c7dff4d593cca95ac56178f20ef5ba3ea5da1a8c270",
-        "sha256:1b0e3bd88c76060e1f2a360d059e4d9970e99b5a76b474d5dc80e547c12349d3",
-        "sha256:8bd0239baea3e3a9de2829b1c6182d8d714d9a07bb00f196e9c89812ca7451b3",
-        "sha256:77a3fe40c8082977dcd69a12f2c4911ebeada2ebab8812e66828cd945c6fe592",
-        "sha256:e9b9b76defee4b9a8a31a170186c2ccef8538f4575ad261f166b6b17056cbb60",
-        "sha256:701e7853d409f7c47b1c77201165246eff30c84787d194fc9a595a624f920df1",
-        "sha256:d1742977d40381a6a2858af4f66a2341db67040c9c5b7ca2b2c68bc9b9b54a1f",
-        "sha256:f8d1d0734360982358cdbfeffd18f7292993fe58584920002cc91028666a7367",
-        "sha256:498330b1e98a32216a8fd3753fce253e6459eb2f817a71a1c4f097e0f189a362",
-        "sha256:51705a2ee7763d79d00225590f46ff7e88ff62e0aaade38c9466df60241d988d",
-        "sha256:12349574668d8886aacf0b0fd22c56fa19449cebc2b05cc34e76dc5318346135",
+        "sha256:09022e8150e5e13d1aa41bff01c32b56b651dc067bbc1e72870087934d25a73b",
+        "sha256:c402b02825939ef171e4d684123e86f072c544746513ca905e48865d9461970f",
+        "sha256:8d0af8876ea3a47ab5354d9c0dcb18e74dd667da4210003f5b1b231fb78711dc",
+        "sha256:73cd0ed862a50f9f31d8eb2e4c9214ed483739f767be803dc175522d050da873",
+        "sha256:0698abd90d45648a89cbfc8d7a977ecb28834163c83666a1d8d9d990f7797826",
+        "sha256:927be08883794de83292941ebb6c637758b6d3ab2e93153cfc32c13378f7bc37",
+        "sha256:235e5d92bb2b90c4f56c55d8f8fecf41e40e212ce022ed258c2d3234326deef1",
+        "sha256:4da0602ceacad8e93a45581cd61661c6446c15037baaf6d1020b42f970f76f05",
+        "sha256:fd6f3a9e0c8a24ee763ae930276d8c4ddad26cd22f5e4667d5e9b9a22ab050eb",
+        "sha256:678dcd69cc805811b30310b16e9c33963869b4f57c2b5146a6548ff46b7c43fd",
+        "sha256:a5a6ccee2b0e46ef8fed86f4fb606b9471d349bdd4b59d5dcf06a73616d624a4",
+        "sha256:23e514d0ae5fa6e4c92c813818d1eff11f46178eed1150bad885566f820869e9",
+        "sha256:68be179dc0c55ff8dedf24aff688f18f42e5ae5052fab78bb1493eca1f5a63ac",
+        "sha256:64e95b50f4492a9c293a437e084ff07d0f756a0cba9da9f3591b2f2bc6aabcc8",
+        "sha256:5eca476e3478dedfce95607ea901dc356c6d5281940078f537948f5077bcca39",
+        "sha256:755dfb59d6ae14c6456fedc64ef7dce2c567083e6be8f0b8020922b645651beb",
+        "sha256:7d3405dc75e4f42a1c6ae181f6929b2cb8b200dc029c92152a593ce81ead618a",
+        "sha256:a17bbe8d189c39fced38daa56053b04ae734f8dc5ed7a0f371be7b1c2a5cfc9d",
+        "sha256:717218bacf91fc74a611d2e2c722970bb4b284ea12b93f960e604219c859cf25",
+        "sha256:1326d7df40352c2542ff87029f49776bf53e51bf3cb82a296f66058bdae19e29",
+        "sha256:5e16fbc2462aa96e9e938f2f4e43ebdab055aab476419461835c88eeb7e0dc3e",
+        "sha256:ec4d37a9a2e7ab4c712554d900889b3b1e187eeebd46c66cce4cc15b9eb7a0e2",
+        "sha256:34ce1878713cc7d4a302009854670e2b156b29ec1957e667e1000a654e9a224d",
+        "sha256:e801405b3cc71a6db2c79953de3ac80df397ee5dd48c11ca1e75ab17307f3e82",
+        "sha256:fe9274e4af11908337968518fa9f44a5e3e37b11f72b4062d03ec94a5af618d9",
+        "sha256:a0312aa437751272b36972ed658c653f09921612a328bb38292a8a192b9a33f3",
+        "sha256:114104e25d98805eb2777945e2bbeec1e7ae8a053cc67530cdf3ffe2aea639f8",
+        "sha256:686477b76a89b8c645e28b3b2e863eb921bdd3632a9f9912dd57892efac948e5",
+        "sha256:584924a1d31cceeff08cdb1652b6df9ef561b452d918e5357908949f7f470f17",
+        "sha256:5357d3656de8a7269e4f10f0792b130578f9bf9f2e76b817d5bd288020045aba",
+        "sha256:55453c733388b73948a54eddd5c106bef7e3d23d404778ef4bd7d8aede4d09cf",
+        "sha256:3e09f7fe894c9ed386d2cf7107006c3396e065707e9192a23765fcb3600b66e3",
+        "sha256:440594a7a08e9275eb3eb13013b64c37d8fdff43ba0c30816c5c268ed7764701",
+        "sha256:fa429f45ad3d5a5bd09639a1f4850172713e9481a749a2e538f88e833b25a433",
+        "sha256:c93fb15e44169025b0f20a37a617a402d7a308c7022236e788c91c6303757375",
+        "sha256:a1059181cb6ced53ee44d18349d2646a9e3af386b97ac753a025366744399053",
+        "sha256:9d077b112a7c84e69fa409b5124aaaf0f66608fa667428e1684f932509527e96",
+        "sha256:e40dba82ff37415c087802b95d23dbc7de39f4f57d10cec67563e8a39d513bb9",
+        "sha256:607e6389746cceb569d060564cb9ee2ded9f299f37b3e9cc8e69adf9131862f4",
+        "sha256:274344a9f969c9617104a5d0575881c7dec4651e7539635134b939a64cd29171",
+        "sha256:91d77ba1d4d6606d086116e3e5e27ebeb64dc8d3871a16d1b2d1026f55ca75fc",
+        "sha256:5fb761d4778387f6e61c0e48d339ef5cb1e6ff6c0d4921dcbbaca69c0814a3e9",
+        "sha256:51449b47bdb4715a32a0fa4fbd244ee56560934ce77a4cb61092ae550bb6ca5a",
+        "sha256:ba6167bd89907c0bc45f51ceaf444fe6f54c00ce00f81f265b4f7e6e440cbf42",
+        "sha256:adfcf293c008bf0289923706eaccb6e89af3d2d6a1da76fadda5fa16f5e880b9",
+        "sha256:154ba5cc67bd9a8a3fa7f6ffbcd6da47e3af80c8c41df22b930ed394b4308f0c",
+        "sha256:4f42fec81caee4bcfe980e02888be68f13bc186dc17f043e1d6a8517a8a785f6",
     ];
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     [
-        "sha256:b716febd96c3b2b7b8179d0c092443be3b2568973acd4d333f141afcb4a79f73", // epsimple-hvac-thermal-source-135-c44e12f9
-        "sha256:4f3ca9cece28d4392f8184bd8eb6efa013a4dea2d52f776ee3cf5f34f004438c", // epsimple-hvac-thermal-source-136-246156d9
-        "sha256:3634f3aed984b29f2d6ab8b5fc2af86157bc9830ad73e05120bc3fdbde4e8785", // epsimple-hvac-thermal-source-139-4aae19c6
-        "sha256:852fd186de4bf39f2c39da5b676de8c88866fbfc0d8f2e40e06d3ac714634872", // epsimple-hvac-thermal-source-142-be052579
-        "sha256:b201e7fe0af6577a12e170600fbd5153f147303c711e660032dcdf90fd181a43", // epsimple-hvac-thermal-source-143-d699d5f1
-        "sha256:6a6c2852004ce82f007b81124f645391da1bfc383626ba2114fe2d5af9e14d3a", // epsimple-hvac-thermal-source-144-253d21d2
-        "sha256:ba927766ab1f387b163bdc35c9f949323ece65062eeaf25d7f1bac0de8e64c92", // epsimple-hvac-thermal-source-145-f305d756
-        "sha256:b0670a6a45214ee1c789b7e6da8c12a1b18497f7d39ee2be99b2649229b67433", // epsimple-hvac-thermal-source-146-7a12c015
-        "sha256:e5bebd5b0a67e654fcd026c62af2ed148cc2ae7fd6ed612c56e4952824801ac5", // epsimple-hvac-thermal-source-157-8d52ff9e
-        "sha256:7e3264fd1a4b2333ce91ab4d1e8ed4e6ffc2e5446afeb0a3e6d4dcfb8e605b64", // epsimple-hvac-thermal-source-158-246156d9
-        "sha256:af1991ecf3a5b89169a37a44bf2be5160166cfd55e2ccade4b0633ad2c60a429", // epsimple-hvac-thermal-source-161-f45db90e
-        "sha256:e64c317a3ec71fc1e9c47bb92f2daa89a65410f4fd0c583342cad308f5660aac", // epsimple-hvac-thermal-source-164-d699d5f1
-        "sha256:cab7a61a9531e151bf49e31b7480fa159dbeb8003c5d256637d1fb4841d8302e", // epsimple-hvac-thermal-source-165-80144f2f
-        "sha256:2e4a0f94410af992c78f7197a507c330f2bbdc127dc84f539ba1a022b756edc5", // epsimple-hvac-thermal-source-166-bd3f1e5a
-        "sha256:a8c933e84abb05bf99b44f3ccda3321c6eb68d518c19e13ae84ea8b08b0e9364", // epsimple-hvac-thermal-source-167-64d0443e
-        "sha256:4fe87b5b667657385bcd50410616672b367ae0f852ece6298704ad9ac78274b5", // epsimple-hvac-thermal-source-168-f9effaf3
-        "sha256:9d88904657f7c5bb19ee024790d7ffd998296e4f678b149ad6aef5f59f5165c1", // epsimple-hvac-thermal-source-169-86b77a93
-        "sha256:d37a13f01e7a27468325c3dc0b015814d2a6b81f3ff91647b4bbf1efe5b3ede4", // epsimple-hvac-thermal-source-170-8baa00de
-        "sha256:475bcda1b622cead02bc5c9385128e7f5a23c9a63cd6878eaba6252eae3de545", // epsimple-hvac-thermal-source-171-246156d9
-        "sha256:288cdb3354822d77d51764b89dc54d61cc07065db67d1e93a0c3d7e36f00df85", // epsimple-hvac-thermal-source-174-9c5215c4
-        "sha256:98a4fe46bbdaaac41d196048670807fb76e4c78a8a3594db665a14475a914c0c", // epsimple-hvac-thermal-source-177-d699d5f1
-        "sha256:2fe3451618f68e088360fcb36739a90402d3b7679782cafc251c272b538c55d0", // epsimple-hvac-thermal-source-178-000c99e3
-        "sha256:1eba63512e312c2cfc4be2a2b50069104442b1fae22d167c9af526ba7be09a86", // epsimple-hvac-thermal-source-179-e56b52fb
-        "sha256:642f0633dc7956582014cdd34d7867e346f692d4ba4c989717d8083379c6bdf0", // epsimple-hvac-thermal-source-180-473c615a
-        "sha256:9e06fc69950f2bbb034e06df3b9b5f6cf1c0458bb44f5aa8f9658c76866ca02a", // epsimple-hvac-thermal-source-181-75acdde9
-        "sha256:32ab862e5152b822ed5341df81e945a0411289d440f5c5cf411a4eba15f7c946", // epsimple-hvac-thermal-source-182-253d21d2
-        "sha256:7ef5b5319454472a76dd7f041f12cc162395defd8bbf74907eaee917fb7469ac", // epsimple-hvac-thermal-source-183-ca5a6445
-        "sha256:95bf0d07d127e0c57a6eb8b06991c2cd8c70530daf839d1d4aba78b10bdbc245", // epsimple-hvac-thermal-source-184-b3b58ae8
-        "sha256:473e79b7bc45e8d18a755891c835abc3b2508c3c7b422ca939f0d236c8bd945a", // epsimple-hvac-thermal-source-199-a1c6d574
-        "sha256:adf04da0ce5f264d9af58f215c696699bac6f924d432c97038d17c45a11cb09d", // epsimple-hvac-thermal-source-200-246156d9
-        "sha256:ce3644625cd3d2c278ced579e32206de7313cb5adbcf128a3f3c1855a25610dc", // epsimple-hvac-thermal-source-203-f477c20b
-        "sha256:914d350fdd81e3aa942b3915779d0d945c9b045c9b39058df870e9a0be428206", // epsimple-hvac-thermal-source-206-c53a5bbb
-        "sha256:320f3d7b05fe1dcda83f66e5c8f5f140d761c49fdde0f24acd033671f92ade6f", // epsimple-hvac-thermal-source-207-f9effaf3
-        "sha256:afe92a278708a00e24facedf6f9d9b2193e27b9454c2fcee6b4cf1537452d5ac", // epsimple-hvac-thermal-source-208-bf1c4c8b
-        "sha256:1353b60f38d8696e33d01e7680579b699f6023b75031567d2aa3fd9cf98d93de", // epsimple-hvac-thermal-source-248-a87f33ee
-        "sha256:908ca1834e524eb0aa934863077a4d9c985d0bb752b39f5683ee266e6de55c68", // epsimple-hvac-thermal-source-251-81ac3508
-        "sha256:dec5c204d9abbf79eadaaaf673d79914ca7a7327944b6fe3d249b29ccfdd61b4", // epsimple-hvac-thermal-source-252-069a6710
-        "sha256:af8aeb5902e4bde1a784e36c10de9b03a31f8b7d98697e1788f573bfe28ae376", // epsimple-hvac-thermal-source-253-3872db31
-        "sha256:b377167f5fc91c900e99a19d36f32439fd4bd13947c49eb8a30fbf5d6935436e", // epsimple-hvac-thermal-source-254-246156d9
-        "sha256:81707fa359bb1a84f57b9aa444b17bbf83900c711388b6eaea232fd7084860b2", // epsimple-hvac-thermal-source-257-7e88c6cd
-        "sha256:01cd52d09f33230ac5563557b13674e3e5df9c375dc2b8aff3ed1b726d6c0387", // epsimple-hvac-thermal-source-260-2c365992
-        "sha256:7d4632b913d3eb000b8e70f3c6a75a7cc49cdfac04a0ce9bf2a69c03cc399039", // epsimple-hvac-thermal-source-261-59bd7983
-        "sha256:e60b614ca5768313011c8d180407ff10e2fb94a05e55a3652ca351f40d1accfa", // epsimple-hvac-thermal-source-262-20b220f0
-        "sha256:64acfc83b9cbc71d1ccf1819b49195cf3b97ba49a94cde36655616a3095c7240", // epsimple-hvac-thermal-source-263-37420422
-        "sha256:7610b721ad8a32e35ee1bc690a51b37db593863e85b73ddab84a800173bc1352", // epsimple-hvac-thermal-source-264-b48949da
-        "sha256:b24fb0df19a14844039bb768d6e32c701ddf94839e1de93d45a1a67e837448a6", // epsimple-hvac-thermal-source-265-55ddf021
-        "sha256:8c1ea607dde3384c3f49283173ed23038f47a638007aafba744698a2546f7d03", // epsimple-hvac-thermal-source-266-0feeee0b
+        "sha256:f48e5d49030a654320c3f9b46f1fd23402cc057681ffe1266bac5b93f77c143b", // epsimple-hvac-thermal-source-135-c44e12f9
+        "sha256:d4842bf9967e3ec5f36f7daf000cbe0230474af526b6f04aabb080685d350932", // epsimple-hvac-thermal-source-136-246156d9
+        "sha256:d9d3309d759989531fe5c687f4b12c4d8bff844d936543ae7de7cbc3367274c3", // epsimple-hvac-thermal-source-139-4aae19c6
+        "sha256:e8762f77024b9b0f2064bf8e0361427011bda78e2fcbcb2c1ca7fc5ebec61fbf", // epsimple-hvac-thermal-source-142-be052579
+        "sha256:60952b6ae6a56b5cdda9647733c2ee90801e98b37a0f1b4a4cb7036b848bb32a", // epsimple-hvac-thermal-source-143-d699d5f1
+        "sha256:d11d8a4b8ac7f5016fcaa742ab222a00ac0d3179af9fefa826853ab8e0b97cce", // epsimple-hvac-thermal-source-144-253d21d2
+        "sha256:4db311f4f6d33ad35ffc0ef7150781d7b26d4ae43005b8df148d02d387ae253c", // epsimple-hvac-thermal-source-145-f305d756
+        "sha256:6110b8cd827a88a927bd2b5f160559fc1b9ec023fbda8436fcd02c217685bb0f", // epsimple-hvac-thermal-source-146-7a12c015
+        "sha256:e017e238045dfcd5bddf753c54c360ce453f79abfdbf3d3b7d4ff39f1f2992b0", // epsimple-hvac-thermal-source-157-8d52ff9e
+        "sha256:229f2e78da834265a53de115ccb9744c2dd975bd73ae712b13ef66521b364b56", // epsimple-hvac-thermal-source-158-246156d9
+        "sha256:3ec4b5da6c26f18586bd2af6a750fe74f3c89b82a71c4c1d9584051350227e1b", // epsimple-hvac-thermal-source-161-f45db90e
+        "sha256:40e236292e737cf1026273d88a7bffa5fd7754592978f2dd06064dabad7064be", // epsimple-hvac-thermal-source-164-d699d5f1
+        "sha256:bc60352fb304ab2102d7dcb2cb75f41959101d82f1538d4ddde7690d0a8dc95b", // epsimple-hvac-thermal-source-165-80144f2f
+        "sha256:58dba5ce887f49519d276a84dbe246f07a724589b6ff65ec05b104f405aebd02", // epsimple-hvac-thermal-source-166-bd3f1e5a
+        "sha256:8058f582646e18348702b3d21e51276729d00b0d3813402e7f037695e5fe8238", // epsimple-hvac-thermal-source-167-64d0443e
+        "sha256:3fc98c7a0024451b6a113e75067fe2aee5c36ac7f1e635db80b8a550d37b1761", // epsimple-hvac-thermal-source-168-f9effaf3
+        "sha256:5bfec6588aec44a83d55c77f7b662ec5748c22d04d1d9794d751ba01db291c9e", // epsimple-hvac-thermal-source-169-86b77a93
+        "sha256:d28663574aa8353bae6d1188e579d721946688cb07cdd9e8b3284a6bb0c4fdaf", // epsimple-hvac-thermal-source-170-8baa00de
+        "sha256:259a14f0625be872204f5063de28700847c116f3b8dbf4c1309c9fcab4fd6810", // epsimple-hvac-thermal-source-171-246156d9
+        "sha256:f7bdc1c8798f72c7d31efd920d58c8b44b45bd627bd534fd6f9c3efc24014b94", // epsimple-hvac-thermal-source-174-9c5215c4
+        "sha256:d243d8ccd72c3f8f3645d32d0e7b59f5ec15f973c73c5e4c60c7d362526525a3", // epsimple-hvac-thermal-source-177-d699d5f1
+        "sha256:f3094367e7f5adc73fba6963ae72782f225e0706c860af794c32b29d9d48d49a", // epsimple-hvac-thermal-source-178-000c99e3
+        "sha256:441769a3c9e603eda71a8bc738226fb2929708cab39e3d4f8a6dc44f4106c655", // epsimple-hvac-thermal-source-179-e56b52fb
+        "sha256:33a95fbaec5d81be8bbaa5b091ab8cfbb66bd7fc0ed6b7e775e9be480ac0c8d0", // epsimple-hvac-thermal-source-180-473c615a
+        "sha256:406c1d88e37f97a54858fa9f12df15d89872da185705e3e64e9cd2caea9d18e3", // epsimple-hvac-thermal-source-181-75acdde9
+        "sha256:a9bb3dada60a9e9cc9c259da2064b93467d65012e59a4627322d37d9d4ae8cd6", // epsimple-hvac-thermal-source-182-253d21d2
+        "sha256:56e319617a45666e9293b317b755c7f1a9e34c42afe6e8d0eaf050dd974aa298", // epsimple-hvac-thermal-source-183-ca5a6445
+        "sha256:734972d99e2edbf2d08d0f5f169d02616770ddfd4ffae2271db2c2721432cd30", // epsimple-hvac-thermal-source-184-b3b58ae8
+        "sha256:e649f58495ad74e911dc273f8d61972f18bf86e334785be737ed89de639f3d1d", // epsimple-hvac-thermal-source-199-a1c6d574
+        "sha256:79f8a3a448a2277b55b96b8efadc37cf6cd36520a625a8a64e51cfb7257b6545", // epsimple-hvac-thermal-source-200-246156d9
+        "sha256:651b9a11675c322aff968ed1e298741f90f1efbf58acc607c1a6af9621375c88", // epsimple-hvac-thermal-source-203-f477c20b
+        "sha256:9bd5939b552e2d3b2e3268964c2381d718ef1eaaf9928446d30928fbeaf59269", // epsimple-hvac-thermal-source-206-c53a5bbb
+        "sha256:e5f2715f2508924d86e6ea2ce818358b24019a890716e9cd5d3abcc3cd66ecc2", // epsimple-hvac-thermal-source-207-f9effaf3
+        "sha256:d37c4df94b4a58cb4faff84723e60114443a2e4e3e84914eebeb18e2c23eea23", // epsimple-hvac-thermal-source-208-bf1c4c8b
+        "sha256:f306dbcf04b4e4da776db42299b2a5aa2e500eec6207611d9988232953bf892d", // epsimple-hvac-thermal-source-248-a87f33ee
+        "sha256:f4775f48af555fbc17e4eb9e9bf189c406442c4a813bb05adc7d17f03c3b57c1", // epsimple-hvac-thermal-source-251-81ac3508
+        "sha256:7cc1ed1b0749f17a22b19652b2a72fd941cb4a271c52271584f6000e329b53b8", // epsimple-hvac-thermal-source-252-069a6710
+        "sha256:f766078b3f52722738664415791be0f0e6aab247bfba8885cd01944efcca4143", // epsimple-hvac-thermal-source-253-3872db31
+        "sha256:e4a8200c63acc8cb75849a6dc2ea8c1693b53ca243b80c0aeaeb4ed47cc6d036", // epsimple-hvac-thermal-source-254-246156d9
+        "sha256:4ba9570536d1b8071394161e128a8addae7d8ed87b88fb2aea474b3d4ec598d6", // epsimple-hvac-thermal-source-257-7e88c6cd
+        "sha256:1b1033db6264070fb444ca82eda0776a6f592d4e4905c5f28352fb5cdb072ff5", // epsimple-hvac-thermal-source-260-2c365992
+        "sha256:784d37a6d865e79b07075b8fd13cc54151b9f28d9116a19f78e4cf02b1d5acfe", // epsimple-hvac-thermal-source-261-59bd7983
+        "sha256:803cc59a441cf98e8ec70e1053ab97ebf333b16a6ad3d6661397469677d4b4cd", // epsimple-hvac-thermal-source-262-20b220f0
+        "sha256:c6fcab229670e39e7067e0df25e370f87d9ccdc58468951fc4e5cc0e495abe1c", // epsimple-hvac-thermal-source-263-37420422
+        "sha256:a827ac48eba9ba9c1a87c8889cafd6e59e55738a01edcd7b9a27f86eb0fe3af3", // epsimple-hvac-thermal-source-264-b48949da
+        "sha256:722983307641cbf07c704d65257d6422a4d28285d80685cb09308a8935aa7b03", // epsimple-hvac-thermal-source-265-55ddf021
+        "sha256:efbcb11d2cb345eed15e65fc6e577f98f5f83eb63b8d6dda2915a6eda3271cf7", // epsimple-hvac-thermal-source-266-0feeee0b
     ];
 
     [Fact]
@@ -544,8 +544,8 @@ public sealed class HvacThermalSourceOracleParityTests
         AssertArtifact(
             runtime.GetProperty("strict_json_support"),
             "tools/python-reference/generate_schedule_type_oracle.py",
-            21_114,
-            "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc");
+            21_108,
+            "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1");
         AssertArtifact(runtime.GetProperty("thermal_source_support"), SupportPath, SupportBytes, SupportSha256);
     }
 

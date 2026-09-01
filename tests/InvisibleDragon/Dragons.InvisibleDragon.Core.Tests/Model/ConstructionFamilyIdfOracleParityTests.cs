@@ -25,26 +25,26 @@ public sealed class ConstructionFamilyIdfOracleParityTests
         "fixtures/reference/python-0.7.0/dragon-construction-to-idf-object-oracle.json";
     private const string OracleSchema =
         "dragons.python-reference.dragon-construction-to-idf-object.v1";
-    private const int OracleByteLength = 63_256;
+    private const int OracleByteLength = 63_253;
     private const string OracleSha256 =
-        "sha256:415cda6877c71985f8943ddd328bc04500e9905f7561c908285bc1bfe95e6b91";
+        "sha256:0ca44ff38d80f388b9dea241f3fa81f490e4535f8eacbdd7a485da960bd14bd7";
     private const string CasesSha256 =
         "sha256:c99cd6cf0fabfa45e599866d7acb8be22d9c7d7d6d6ab13b8732ad811291cbf5";
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_construction_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 46_536;
+    private const int GeneratorByteLength = 46_530;
     private const string GeneratorSha256 =
-        "sha256:3d149181d1df5faaa38c50209cc9a5f18b9bebc15f817fed7a2f7293b83d8ca4";
+        "sha256:71b1c4596328d0e62813ccca282715f0b72cf6002c2acd1acb74dd7ae19ce72b";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_construction_to_idf_object_oracle.py";
     private const int PythonValidatorByteLength = 22_845;
     private const string PythonValidatorSha256 =
-        "sha256:b56a1e16fed85f62d4fcab88857ecaf800fcabcc94e34e0b2d28309d3c439a44";
+        "sha256:a770d1d59050e396127cfddb69d3bc176b4aad4f192aaf6843fa0437f1be43da";
 
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/construction.py";
     private const string UpstreamSourceSha256 =
         "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622";
@@ -53,16 +53,16 @@ public sealed class ConstructionFamilyIdfOracleParityTests
 
     private const string PublicRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs";
-    private const int PublicByteLength = 22_015;
+    private const int PublicByteLength = 21_985;
     private const string PublicSha256 =
-        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+        "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28";
     private const string PublicSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
-    private const int ImplementationByteLength = 50_764;
+    private const int ImplementationByteLength = 50_723;
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string AppendSurfaceConstructionSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendSurfaceConstruction";
     private const string AppendGlazingSymbol =
@@ -72,9 +72,9 @@ public sealed class ConstructionFamilyIdfOracleParityTests
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int IddOracleByteLength = 585_482;
+    private const int IddOracleByteLength = 585_481;
     private const string IddOracleSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string IddOracleSchema = "dragons.energyplus-idd-schema.v1";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";

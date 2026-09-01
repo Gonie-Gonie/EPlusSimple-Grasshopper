@@ -29,9 +29,9 @@ from typing import Any
 
 
 BASE_GENERATOR_RECEIPT = {
-    "bytes": 70_965,
+    "bytes": 70_938,
     "path": "tools/python-reference/generate_imugi_idd_definitions_core_oracle.py",
-    "sha256": "sha256:fa70dfc565a30542f58697cee512701356cf2200b3f07332de4e345f0b7b1398",
+    "sha256": "sha256:6b69716bca218db814bc1eb2411e19f1d9614cb5857f70e93e461e5c95fb1c0e",
 }
 
 
@@ -272,7 +272,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:89b8c44c53fb90ecf4ae781d3cae69a37a3301277f933c0a65d3525130540166"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:3aa3f7403e3469566fc8f93a0ecbbd2e2e5fcffd8bfbd91e59aeca43a83aeb79"
+    "sha256:7d7c722011783508ac9ea05c36e597655e8cfe84b52719dc213022adc839dda6"
 )
 EXPECTED_FACT_SHA256 = {
     "imugi-idd-schema-static-core.a-exception-types": "sha256:c63c81fd17ded5a68ac3854944aa1350dbbfc72da3f1d2dc15e8da87c4e2ae0b",
@@ -300,34 +300,34 @@ EXPECTED_CASES_SHA256 = (
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 13_005,
+        "bytes": 12_999,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs",
-        "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
+        "sha256": "sha256:b6be5a2ac41a05f519d8103a816d90a0153fe21d64916671ff430c964c516f66",
     },
     {
-        "bytes": 19_960,
+        "bytes": 19_954,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
-        "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
+        "sha256": "sha256:555b79f49740c1da4149002b9cb8e4507ea806eac10866098057f040e4fc55b3",
     },
     {
-        "bytes": 11_254,
+        "bytes": 11_242,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddSchemaCache.cs",
-        "sha256": "sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b",
+        "sha256": "sha256:55ddd0da5501f24296b36c2ae6c31fc52e8a50832e3ffc8f783849e51b6af3c7",
     },
     {
-        "bytes": 4_954,
+        "bytes": 4_951,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
-        "sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
+        "sha256": "sha256:e28760c5903fa7c4e842620a7ba91c15947eb3378812a72262041af4397bd5a1",
     },
     {
-        "bytes": 8_339,
+        "bytes": 8_330,
         "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
-        "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa",
+        "sha256": "sha256:1d58b2af26801c1359f022f9498c2e9109f7e0917eb74001f3a2a6c4ac0d1fad",
     },
     {
-        "bytes": 16_860,
+        "bytes": 16_839,
         "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
-        "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f",
+        "sha256": "sha256:9111d5732c096495edbbae830df3bb04d0d2373a54e36270ae402658f47f63c7",
     },
 )
 

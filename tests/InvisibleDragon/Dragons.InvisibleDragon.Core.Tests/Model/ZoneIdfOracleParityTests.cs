@@ -23,9 +23,9 @@ public sealed class ZoneIdfOracleParityTests
 {
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-shape-zone-to-idf-object-oracle.json";
-    private const int OracleByteLength = 219_578;
+    private const int OracleByteLength = 219_575;
     private const string OracleSha256 =
-        "sha256:fb59f434db0aa0f4744d14b17d3354e61918241df112744f26ebffd44e7f8c5c";
+        "sha256:7c0c3f10d8e3a83b52a6ddfde0512e4913e2fc950a0224ba9256f0e94ac19a67";
     private const string OracleSchema =
         "dragons.python-reference.dragon-shape-zone-to-idf-object.v1";
     private const string CasesSha256 =
@@ -33,19 +33,19 @@ public sealed class ZoneIdfOracleParityTests
 
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_shape_zone_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 67_646;
+    private const int GeneratorByteLength = 67_640;
     private const string GeneratorSha256 =
-        "sha256:63558e76be55ad97a9d98987e19379756fd6d8392c7dad39babd76a548783bc8";
+        "sha256:41d0de6eee371576d19ed5744b7316ee1dfcf89410c050c1205a2f0c4f9a13fb";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_shape_zone_to_idf_object_oracle.py";
     private const int PythonValidatorByteLength = 20_769;
     private const string PythonValidatorSha256 =
-        "sha256:84cd755903f579b043ccf9b51ab455affd6e2a6db60c12bd38336614b24dbb4d";
+        "sha256:a3d8c40bf50bf0e85f9b7f14beb6c39e6df09299a80201cd5ab414b1574e093f";
 
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/shape.py";
     private const string UpstreamSourceSha256 =
         "sha256:20a0b0d1e642c5cf8fb878cbf3ea6adabaace0d9d6360bb6cbab851246ceae7c";
@@ -54,19 +54,19 @@ public sealed class ZoneIdfOracleParityTests
 
     private const string PublicRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs";
-    private const int PublicByteLength = 22_015;
+    private const int PublicByteLength = 21_985;
     private const string PublicSha256 =
-        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+        "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
-    private const int ImplementationByteLength = 50_764;
+    private const int ImplementationByteLength = 50_723;
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string ZoneRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Zone.cs";
-    private const int ZoneByteLength = 6_698;
+    private const int ZoneByteLength = 6_686;
     private const string ZoneSha256 =
-        "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920";
+        "sha256:17423d03e67e5d19ee681f138291bb011a81b84e42b4a188825d570854235ffa";
 
     private const string PublicSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument";
@@ -85,9 +85,9 @@ public sealed class ZoneIdfOracleParityTests
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int IddOracleByteLength = 585_482;
+    private const int IddOracleByteLength = 585_481;
     private const string IddOracleSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string IddOracleSchema = "dragons.energyplus-idd-schema.v1";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";

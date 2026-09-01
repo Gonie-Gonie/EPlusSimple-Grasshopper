@@ -14,9 +14,9 @@ public sealed class IdentifierConventionsOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/epsimple-identifier-conventions-oracle.json";
-    private const int FixtureBytes = 121_058;
+    private const int FixtureBytes = 120_950;
     private const string FixtureSha256 =
-        "sha256:c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f";
+        "sha256:0427210382b31555368dad0b6ca5f478d5f56b7b97949e6b850637fbda6ec6c6";
     private const string FixtureSchema =
         "dragons.python-reference.epsimple-identifier-conventions.v1";
     private const string CasesSha256 =
@@ -28,43 +28,43 @@ public sealed class IdentifierConventionsOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_epsimple_identifier_conventions_oracle.py";
-    private const int GeneratorBytes = 65_523;
+    private const int GeneratorBytes = 65_469;
     private const string GeneratorSha256 =
-        "sha256:599254a8c597c61c369602d4977c7016b97c5334091cf767266fe95705c07a05";
+        "sha256:ee0c7eb18b10d575845455b4a52658ffd93dbb82ee5a6afffd4d3e054892a89d";
     private const string ValidatorPath =
         "tests/PythonReference/test_epsimple_identifier_conventions_oracle.py";
     private const int ValidatorBytes = 21_869;
     private const string ValidatorSha256 =
-        "sha256:93a682654512fd950418885e8e7044661c378923205709127cda40c01d190c80";
+        "sha256:ae437e0548c07f5ff52446569c52589d2d70152b2c2f7806a66a786ce3d6e2d5";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
         new(
             "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
-            8_613,
-            "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012"),
+            8_610,
+            "sha256:33d0281782b82837646804bbdfaa3ffd083a08a48bad98abfb7db4352aa43a3c"),
         new(
             "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
-            397,
-            "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0"),
+            391,
+            "sha256:ae38d765d945b10c0aa59197efcab4ee0e47c020aaffc120ef99f8d22382ab91"),
         new(
             "src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs",
-            3_131,
-            "sha256:76915a821bccc2dbc8e3f185c1faf6c3da07dfe64cd50301b336367d8c5d2d81"),
+            3_104,
+            "sha256:ae2cb7c89e4dcef7195e528fc7831c5abdba560651a244281ffeaaa83c60fc9f"),
         new(
             "src/SimpleDragon/Dragons.SimpleDragon.Core/Weather/WeatherDatabase.cs",
-            9_463,
-            "sha256:c7ddc71015eb375e56565a2898d7998cf865fb50d0c8626374f0f642644e9e98"),
+            9_454,
+            "sha256:28f3885362fe08663ba6393bae545b70d17284d1751aa5a97cd0194e1b271b34"),
         new(
             "src/SimpleDragon/Dragons.SimpleDragon.Core/Dragons.SimpleDragon.Core.csproj",
-            3_213,
-            "sha256:ab3a363c447c90a77b5f7bd8e4f62c4211c026f543c131d2d23ee9a854659910"),
+            3_165,
+            "sha256:98eb7f31bc1f1f6f5caa49db6201cadb5e27a0e4c0272d2948c1843635d599bf"),
     };
 
     private static readonly AutoBinding[] AutoMembers =
@@ -122,40 +122,40 @@ public sealed class IdentifierConventionsOracleParityTests
 
     private static readonly ExpectedTarget[] ExpectedTargets =
     {
-        new(10, "AUTOID_PREFIX", "sha256:9a7c270abf554af2ac0d3455101382eca02debe8c0b23e6f8c3f8a465bb32355", "sha256:49d889ac24e0edaf914c064f03a2ee0f22cd61794c90f41a36730989ae5c4b70"),
-        new(11, "AUTOID_PREFIX.DAY_SCHEDULE", "sha256:7d4821ca360166e6a06218c647b7ea935dd62080d896fd2f45cdff14da52eea0", "sha256:ebe9020f32dda40ac41369079883b4c266213f5fd658ef18e2e49809a5ec671c"),
-        new(12, "AUTOID_PREFIX.FENESTRATION", "sha256:d327acd7e82d257668484c17fe1ad79cca5a086b7977682c6e0a07af27987603", "sha256:29415a4532cc1e828c92e40db1a99b5b72c49735f5ead79e8af19d254bd6bd0a"),
-        new(13, "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "sha256:a00d7b14c20b1fbeaedf4e6b456bff8555bcb9ee539f74799d9e7e42a40fcc80", "sha256:d73cc7faf13a747201d43ac4dc9fb268370fcaac2da9f95df1a38622ad765a19"),
-        new(14, "AUTOID_PREFIX.HEAT_EXCHANGER", "sha256:d76b9ddc6df8f01d27ebf334bb8797bf798947ed40835eea8f0cf5fc84d94ccd", "sha256:3d33238b729bde87f712aca9da80093919f0b43c0880d602999714686ce32b2b"),
-        new(15, "AUTOID_PREFIX.MATERIAL", "sha256:9b7489e4c9b530dab76d9d2dd9cc834d6f751d1d35188c70976af5ecea048275", "sha256:3aeea8d72293d62438ae13a2c57537dc478574fde9f1b591baab94f85dd2dc60"),
-        new(16, "AUTOID_PREFIX.PROFILE", "sha256:f04014577c229312753d0289ef8342419fb7fed9452799dc2bce8e6d5438c32e", "sha256:6215e1cc9f38731e1104d86f5b6d687b63a9c00f35c6ef4c07e2d1f9b5313f1f"),
-        new(17, "AUTOID_PREFIX.PV_PANEL", "sha256:46500b8a4aa511167e9fcfb13e33c74b901d1ba1a274ec71390708960fee493a", "sha256:b06fe3cb29b4b1fab699cbfb0de790244672b4fad79a155bc807dea55cee48ee"),
-        new(18, "AUTOID_PREFIX.RULESET", "sha256:e5ac2688f0382545b277dae27cc3a02744e6d5f7f3de1c1111ce2b487751bc15", "sha256:48b354d76e74a079e51e615a56c119961e382e6145958191f25c781ec2c9e965"),
-        new(19, "AUTOID_PREFIX.SCHEDULE", "sha256:c61dbb424961f11afedba70eabadd6c54ccdb52a7f7be1d56299ede42c0468c6", "sha256:6a4a09541192424c81adad75b95e4ecff281d4316a9642e985f157ccce61ab55"),
-        new(20, "AUTOID_PREFIX.SOURCE_SYSTEM", "sha256:60d016219cabe29d48669ee37e1d223932bfc6556bcc8f0a4a5ea0af147655c3", "sha256:94db04792ebac4b485dc4750379547beb01116d42eff755b41e7e0d448dfd212"),
-        new(21, "AUTOID_PREFIX.SUPPLY_SYSTEM", "sha256:c2e6d435b1a6650d0998650fdb23d4310cd07ce02806553a645755990ca3bcd4", "sha256:8269d73a695adb90cf51918761289a83a740e13be9540a52c5c8868f2fe700b0"),
-        new(22, "AUTOID_PREFIX.SURFACE", "sha256:7fca2d17fabcb91b32dd28349a50f44fe1ed0c0be63cf6dba21d37ffbf229472", "sha256:0676d0a98539129914b681e798b057b39e6f488494c801e75d91d444014ac754"),
-        new(23, "AUTOID_PREFIX.SURFACE_CONSTRUCTION", "sha256:147095a3d8aeedcd5fb82264a34c353733325268d6ad25b8e85222340fff3ca5", "sha256:bb50f2ec9729a2ab097de35594573b0e6f0166d0618238ba5b7e51d605d7fbc7"),
-        new(24, "AUTOID_PREFIX.ZONE", "sha256:5f36f9019cc2b5ad1e96b3338a84b04d4da0360941a4499db6846ddafa926ccf", "sha256:c0500033c21c3e4e5e8d92f6d4639faf962ec1d89a666a05cf4bddfc05b03fa5"),
-        new(25, "AUTOID_PREFIX.__format__", "sha256:d0c85092c98182b0366673cd287507b75d62850d9e272b32896597e787a58170", "sha256:a627c9b091c57e8e91bda29501e39587fa4128fec124360ffa395cc84b028174"),
-        new(27, "AUTOID_PREFIX.__str__", "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98", "sha256:3ee104cfac65d9513a3e97d4cc0c07581457c16ff078b76f4b4a4ab92c22c24c"),
-        new(31, "Directory", "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6", "sha256:96d49d0b47a0ad1c45328cbbb76b5d2e1baa51ce2f750513eef521a4e257ea4f"),
-        new(32, "Directory.CONSTRUCTION_DIR", "sha256:91c573a02d0e3b2d93a1271fbe1c3ddb5d4d10c04083707c799fa1503f5b3dea", "sha256:5601e4973e167f2cf635b09bd098b8da045523939e08b1706211a8b534a7c6f8"),
-        new(33, "Directory.PROFILE_DIR", "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6", "sha256:c5040c75bc3bbedd9f5528ad1b0820962bdcc558816eb3014a1a640846e6dea9"),
-        new(34, "Directory.WEATHER_DATA_DIR", "sha256:8a5bf6543c4f0db98ee0169deb7dfddd4c126e34d52aa67b512136dc3e8bcd01", "sha256:c30aab809c885a5e192d5681f963e2b24b27ba40215e300da4967dee12d6701a"),
-        new(35, "Directory.WEATHER_META_DIR", "sha256:15e81d1d4205ffe651af323c3cc7352255847972301ad1753fd3d8d5098dc260", "sha256:8eed8cb92b6c4dfa07182888a2c27b6f1cfcf36b1a07cbca06962f0d15017754"),
-        new(36, "PackageInfo", "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1", "sha256:fe4d4276c13cd499976dd33417c45fc79d36d9506656fdb03b1073db3729f55a"),
-        new(37, "PackageInfo.NAME", "sha256:537c8c3bc3c2d48105e8e6c453208e725f985ac9d84f87e5f66c094ea5696cad", "sha256:184e11cb30735a077ff9d958a7773aa3a2c6ef862487054d29438b56882ad81a"),
-        new(38, "PackageInfo.REQUIRED_PYTHON", "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4", "sha256:a45b04c19582cb9035964aceb6884fcf90a08480eb82bfa384fa905532037ecd"),
-        new(39, "PackageInfo.VERSION", "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4", "sha256:a60e227a3d77b56dd90d1b9fa634d8291e3f18509e30c4dd26f37548e87509cc"),
-        new(58, "SpecialTag", "sha256:a66e2175ee03b1d6d73c70998500b45ae7eac6989b60ddd2adb09882a17f2c9b", "sha256:c8f848c9aec6699e487b4b0866886dfa218a4075125e8833b0e7f7681da2e1f4"),
-        new(59, "SpecialTag.CLONE", "sha256:00989ee6011feaa240308f2a1e1bb8c47def1f4be493b51b91e75c75ee7bf39f", "sha256:f10ee7f4a6d020f1afb791cdf3066590a4a18ca7390f36099874ec5f21349d54"),
-        new(60, "SpecialTag.COOLROOF", "sha256:622c00d22fff7838ef72f37deeac6461b137ff084511ea1085717955cc893f4b", "sha256:98c47babdc5247193f160c1ef8035134d049f4436ada946221c421a19f96547e"),
-        new(61, "SpecialTag.DB", "sha256:a43168ea5003995edfe35fec6f3f6b25ad26eb9111e97337db7dece5e0ede870", "sha256:5808de1507c015662fc179ce752174c57abc948bc4f15d7382370f8d4df66a55"),
-        new(62, "SpecialTag.FLIP", "sha256:4a5884386e242adce385eb0991559fb93426172ac5e152276000036947d4683f", "sha256:df02a310048126e3a6222b35cfb4dac490167ab7bd8486e99d9d01af0f65c6fb"),
-        new(63, "SpecialTag.SPECIAL", "sha256:0faf9b24524c68d912d1b0d1438b85bf856778fbbdc7a11ef7c20137c8d08be6", "sha256:66bb79bee5f9bd8a99280e2fd1c975d2edda8ed6ff26f5366e67c20c8c0a8963"),
-        new(64, "SpecialTag.__format__", "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0", "sha256:6d5c42990ca2a5a741e08ddb21f1a878e3743266e9bb350c4e08348e4d7b1166"),
-        new(66, "SpecialTag.__str__", "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98", "sha256:a56b63ef6e2feb46d2f49883fd884c227c18f74964f1b59dcb1181d1a195d3b9"),
+        new(10, "AUTOID_PREFIX", "sha256:9a7c270abf554af2ac0d3455101382eca02debe8c0b23e6f8c3f8a465bb32355", "sha256:b10ed5ce1876c090eef0d007f4cbcab9623af5e80b0646047d5b2755376f3536"),
+        new(11, "AUTOID_PREFIX.DAY_SCHEDULE", "sha256:7d4821ca360166e6a06218c647b7ea935dd62080d896fd2f45cdff14da52eea0", "sha256:533051c33f4ea40635b1c9c44064ac5bdd894cf4b3fc23397a82e2f15aa8ed80"),
+        new(12, "AUTOID_PREFIX.FENESTRATION", "sha256:d327acd7e82d257668484c17fe1ad79cca5a086b7977682c6e0a07af27987603", "sha256:3cd4904c325fb7f204a16fd9ff38099598dc790e0045bd809ea5419e07838fdf"),
+        new(13, "AUTOID_PREFIX.FENESTRATION_CONSTRUCTION", "sha256:a00d7b14c20b1fbeaedf4e6b456bff8555bcb9ee539f74799d9e7e42a40fcc80", "sha256:481f20bce14877d389d0a2d090c633b44571e72efc0289361ae200dfde7e6782"),
+        new(14, "AUTOID_PREFIX.HEAT_EXCHANGER", "sha256:d76b9ddc6df8f01d27ebf334bb8797bf798947ed40835eea8f0cf5fc84d94ccd", "sha256:c54292e537f76a02fcdceb18713a4d18923058e9f25c9abce2d84a879575047e"),
+        new(15, "AUTOID_PREFIX.MATERIAL", "sha256:9b7489e4c9b530dab76d9d2dd9cc834d6f751d1d35188c70976af5ecea048275", "sha256:11746ae758fc60476a2b0c9db296293012036b9c78cadab3ede802c102f2b0c0"),
+        new(16, "AUTOID_PREFIX.PROFILE", "sha256:f04014577c229312753d0289ef8342419fb7fed9452799dc2bce8e6d5438c32e", "sha256:f76f9652016c9c30bd38d0f26ce186c664959724cf7ca7c3b7106996b345f389"),
+        new(17, "AUTOID_PREFIX.PV_PANEL", "sha256:46500b8a4aa511167e9fcfb13e33c74b901d1ba1a274ec71390708960fee493a", "sha256:c3993c02938942742a0910d033186cf567543eb101e33e86fe18dcdfc12e480d"),
+        new(18, "AUTOID_PREFIX.RULESET", "sha256:e5ac2688f0382545b277dae27cc3a02744e6d5f7f3de1c1111ce2b487751bc15", "sha256:d9e8a95be4247cdb36900d47dc8fdfb79d3ef6c9be7742f96f803ab0e68951d2"),
+        new(19, "AUTOID_PREFIX.SCHEDULE", "sha256:c61dbb424961f11afedba70eabadd6c54ccdb52a7f7be1d56299ede42c0468c6", "sha256:c6ef426497304fad96b717df50f10d4b7d2b01e125f0fa990780724841ce7d2b"),
+        new(20, "AUTOID_PREFIX.SOURCE_SYSTEM", "sha256:60d016219cabe29d48669ee37e1d223932bfc6556bcc8f0a4a5ea0af147655c3", "sha256:c6d8108e99638a18d2f9ffe4e16369f54246cd46dd653feb2cf27f9bade1dc5a"),
+        new(21, "AUTOID_PREFIX.SUPPLY_SYSTEM", "sha256:c2e6d435b1a6650d0998650fdb23d4310cd07ce02806553a645755990ca3bcd4", "sha256:aa02146f3f01e2562c63a46457fc470d1bc543cc2b72704306da211bc5200d77"),
+        new(22, "AUTOID_PREFIX.SURFACE", "sha256:7fca2d17fabcb91b32dd28349a50f44fe1ed0c0be63cf6dba21d37ffbf229472", "sha256:c84816eda9f0885fa12cab43c961667660ae53461b1479069b84f32cbcd3bea1"),
+        new(23, "AUTOID_PREFIX.SURFACE_CONSTRUCTION", "sha256:147095a3d8aeedcd5fb82264a34c353733325268d6ad25b8e85222340fff3ca5", "sha256:e7698d8c660f36e76da71e2dd8347d181f6156b2d9f254b01b3685b3b98506d9"),
+        new(24, "AUTOID_PREFIX.ZONE", "sha256:5f36f9019cc2b5ad1e96b3338a84b04d4da0360941a4499db6846ddafa926ccf", "sha256:8873a0deea5e3a82afdbb6928ab066441ae7ccdf1b0d6477352c85f932139750"),
+        new(25, "AUTOID_PREFIX.__format__", "sha256:d0c85092c98182b0366673cd287507b75d62850d9e272b32896597e787a58170", "sha256:2d44517c14b063ea50bfbea33ed0e3b4ead4729e79181829a178c49e49e94347"),
+        new(27, "AUTOID_PREFIX.__str__", "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98", "sha256:dc4645c08d29f8d0beca17e8bb2b42d1775d88883fbcc279b8ac7b81075751ea"),
+        new(31, "Directory", "sha256:5b876ad7fd9b11f66cc01ecb6c43d4e143b6f0258ba070c02551d968dd68aaf6", "sha256:4654bf36a8322b1141c3eec5434e815058285b3e6c0de5377274b3cb54cd5a56"),
+        new(32, "Directory.CONSTRUCTION_DIR", "sha256:91c573a02d0e3b2d93a1271fbe1c3ddb5d4d10c04083707c799fa1503f5b3dea", "sha256:6f10fb873dfc81f4331b33ea8c79aa27699632c98d1b894f5b7b4891cc245cc6"),
+        new(33, "Directory.PROFILE_DIR", "sha256:f65d5eaefa2bc1cbb6f0c9b5904624194a1551f48e7966c7973d35526bad4fa6", "sha256:21a669c66ca4e1c0dcc1cc5ad03dac406a5a7366872e0045122f7d0225b4691d"),
+        new(34, "Directory.WEATHER_DATA_DIR", "sha256:8a5bf6543c4f0db98ee0169deb7dfddd4c126e34d52aa67b512136dc3e8bcd01", "sha256:ba908878aed524968415f355f53c12a1b717d89f530cdfb0acab7ef4a73fac17"),
+        new(35, "Directory.WEATHER_META_DIR", "sha256:15e81d1d4205ffe651af323c3cc7352255847972301ad1753fd3d8d5098dc260", "sha256:33d46ef8857437d5254f422ff94ae7f3607cdd6b660094a0069c737b3145eee4"),
+        new(36, "PackageInfo", "sha256:aaf5b98d4a7dc29f83b698f1fb2881b7bb258885bd2aaf17a53b6da902d1eda1", "sha256:863656b54c9dd5e6c150bc22c37d8c9b34780003f3fd54d4d4f447deee8759ae"),
+        new(37, "PackageInfo.NAME", "sha256:537c8c3bc3c2d48105e8e6c453208e725f985ac9d84f87e5f66c094ea5696cad", "sha256:08a7ac18f7b17d2f70b0d3c5871fe3fe9232a5fd368a700370b6aa2e23ce4c03"),
+        new(38, "PackageInfo.REQUIRED_PYTHON", "sha256:cf74d0eb707a3668aa515bdd31d767109337841bcf28f03b96c6e9264d9407a4", "sha256:0df4a31f2a4d1f345462e9b1166a8b3bae6d85566a56731676a92bdb6ef3e2af"),
+        new(39, "PackageInfo.VERSION", "sha256:a8260e5f38f8422e1ac38ce24fd0136b4bb3a4de24f268e9a262aa6034031ea4", "sha256:f711bd670d75cc20ed2a83dda8b050c795bcbd55028e143e188f74dfd360d242"),
+        new(58, "SpecialTag", "sha256:a66e2175ee03b1d6d73c70998500b45ae7eac6989b60ddd2adb09882a17f2c9b", "sha256:6776c0f5b45fcf41830dbf87b58d71839d686708ac51f4ecd25aad9b13b49f6b"),
+        new(59, "SpecialTag.CLONE", "sha256:00989ee6011feaa240308f2a1e1bb8c47def1f4be493b51b91e75c75ee7bf39f", "sha256:55865a0eb173aaffad6d2f38ae5fff9fd8bcbc327700be81be6c9034d45a8b2b"),
+        new(60, "SpecialTag.COOLROOF", "sha256:622c00d22fff7838ef72f37deeac6461b137ff084511ea1085717955cc893f4b", "sha256:97732d156b1470ee978d0b528ff935e76772ca6ead85bda2ba3b21161c68eb07"),
+        new(61, "SpecialTag.DB", "sha256:a43168ea5003995edfe35fec6f3f6b25ad26eb9111e97337db7dece5e0ede870", "sha256:6a7f09fc790bd561d9aca92df5c2003f2669c7d4b40ccdaa7a87a665e898bbf5"),
+        new(62, "SpecialTag.FLIP", "sha256:4a5884386e242adce385eb0991559fb93426172ac5e152276000036947d4683f", "sha256:94a93b9afe287b39fe6cdadc9cf7ea4c571a5fcdcb701aed2fc17d798f95f1ab"),
+        new(63, "SpecialTag.SPECIAL", "sha256:0faf9b24524c68d912d1b0d1438b85bf856778fbbdc7a11ef7c20137c8d08be6", "sha256:58bc2b290418599d48d1c6064416cf598424c26178284aff4ef6911bb9957390"),
+        new(64, "SpecialTag.__format__", "sha256:4ef932bb8135c4cfaf7e17e805cfb299e50d9400f4a106605bdb2fb75477d3a0", "sha256:694e07c540cc553f7d105c81b0a937b66b432da4b145db969ef298f2684310ec"),
+        new(66, "SpecialTag.__str__", "sha256:13ed292afebbf1a59717e776df9d6ba3e220d2cc248ac2cc450deab9c2261c98", "sha256:a0b46b759da0e191c622198bda4f288d06537b3ad416a2d8e1364508ad103f17"),
     };
 
     private static readonly Dictionary<string, string> ExceptionAdaptations =
@@ -344,8 +344,8 @@ public sealed class IdentifierConventionsOracleParityTests
         ValidateArtifactProjection(
             artifacts.GetProperty("strict_json_support"),
             "tools/python-reference/generate_schedule_type_oracle.py",
-            21_114,
-            "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc");
+            21_108,
+            "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1");
     }
 
     private static void ValidateRuntime(JsonElement runtime)
@@ -817,13 +817,13 @@ public sealed class IdentifierConventionsOracleParityTests
         Assert.Equal(new[] { 0, 7, 0 }, facts.GetProperty("version").EnumerateArray().Select(item => item.GetInt32()));
         Assert.Equal(new[] { 3, 12 }, facts.GetProperty("required_python").EnumerateArray().Select(item => item.GetInt32()));
         Assert.Equal("SimpleDragon", PackageInfo.Name);
-        Assert.Equal("0.1.0", PackageInfo.Version);
+        Assert.Equal("0.1.1", PackageInfo.Version);
         Assert.Equal("0.7.0", PackageInfo.Compatibility.UpstreamVersion);
         Assert.Equal(new[] { "net48", "net7.0-windows", "net8.0-windows" }, DeclaredTargetFrameworks());
         return new[]
         {
             "native-package-name=SimpleDragon",
-            "native-package-version=0.1.0",
+            "native-package-version=0.1.1",
             "native-upstream-compatibility-version=0.7.0",
             "native-target-frameworks=net48,net7.0-windows,net8.0-windows",
         };
@@ -888,10 +888,10 @@ public sealed class IdentifierConventionsOracleParityTests
             .Select(item => int.Parse(item, CultureInfo.InvariantCulture))
             .ToArray();
         Assert.Equal(new[] { 0, 7, 0 }, upstream);
-        Assert.Equal(new[] { 0, 1, 0 }, native);
+        Assert.Equal(new[] { 0, 1, 1 }, native);
         return new[]
         {
-            "native-package-version=0.1.0",
+            "native-package-version=0.1.1",
             "native-compatible-upstream-version=0.7.0",
             "native-version-representation=immutable-dotted-string",
         };

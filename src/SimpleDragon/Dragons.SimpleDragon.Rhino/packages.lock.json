@@ -87,29 +87,29 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.EnergyPlus.Runtime": "[1.0.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.1, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
       "dragons.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "RhinoCommon": "[7.0.20314.3001, )"
         }
       },
       "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
@@ -147,28 +147,28 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.EnergyPlus.Runtime": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
       "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
@@ -195,28 +195,28 @@
       "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.EnergyPlus.Runtime": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.1, )"
         }
       },
       "dragons.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
       "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
-          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.1, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.1, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },

@@ -25,15 +25,15 @@ public sealed class EnergyModelAddSupplySystemOracleParityTests
     private const string OracleSchema =
         "dragons.python-reference.dragon-model-add-supply-system.v1";
     private const string OracleSha256 =
-        "sha256:4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c";
+        "sha256:42ad2d75ce91edd153bd9e07382a03b5095ea0300df227f87e0d0147b377230f";
     private const string CasesSha256 =
         "sha256:ac58c4020edba588dceb8793b42552d261eb6686975bee1b553e9d8697d9cc2d";
-    private const int OracleByteLength = 15_122;
+    private const int OracleByteLength = 15_119;
     private const int ExpectedCaseCount = 3;
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/model.py";
     private const string UpstreamSymbol = "EnergyModel.add_supply_system";
     private const string AdaptationId = "model-context-supply-system-assembly";
@@ -44,7 +44,7 @@ public sealed class EnergyModelAddSupplySystemOracleParityTests
     private const string ImplementationSymbol =
         "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendHvac";
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Model.EnergyModelAddSupplySystemOracleParityTests.MatchesPinnedPythonAddSupplySystemAndNativeModelContextAssembly";
 

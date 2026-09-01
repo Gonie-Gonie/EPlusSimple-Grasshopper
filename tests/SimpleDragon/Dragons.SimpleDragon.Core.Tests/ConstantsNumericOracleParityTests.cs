@@ -16,10 +16,10 @@ public sealed class ConstantsNumericOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/epsimple-constants-numeric-oracle.json";
     private const string OracleSha256 =
-        "sha256:252708fae632f2d587c8ab6f3659f0c94a34c1d2f2b3c70c70997a824c590ee2";
+        "sha256:5184425ab052e66882ecd3ac7253d531603279acf1ef455dde7e489e442cdffc";
     private const string CasesSha256 =
         "sha256:e80c7d274444f640a4c3a2ddf3b8a7c03e06adfe6e0b3b844c8ed74dce501e3a";
-    private const int OracleByteLength = 89_695;
+    private const int OracleByteLength = 89_692;
     private const int ExpectedCaseCount = 87;
     private const string OracleSchema =
         "dragons.python-reference.epsimple-constants-numeric.v1";
@@ -195,7 +195,7 @@ public sealed class ConstantsNumericOracleParityTests
         JsonElement upstream = root.GetProperty("upstream");
         AssertKeys(upstream, "commit", "inventory_sha256", "observation_dependency", "path", "source_sha256");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
-        Assert.Equal("sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0", RequiredString(upstream, "inventory_sha256"));
+        Assert.Equal("sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02", RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal("sha256:d5dd5241ec90b14ba3708a525cd74279a8cdc238164a5b8544c4c82b05a29897", RequiredString(upstream, "source_sha256"));
         ValidateObservationDependency(upstream.GetProperty("observation_dependency"));

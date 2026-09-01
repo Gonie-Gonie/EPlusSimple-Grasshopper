@@ -14,10 +14,10 @@ public sealed class RuleSetCoreParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/rule-set-core-oracle.json";
     private const string OracleSha256 =
-        "sha256:ad70604e6f5a0f24cfd8503692a5f73b635189d4d5d1c3e627196f99d1d20825";
+        "sha256:091fa6bffcab120a51c2b46f5533909bb4b909a929754029d99c866fe1e6e9e4";
     private const string CasesSha256 =
         "sha256:9509c5d9ed393dfdbedcd786b62ddca041fbacb1d13aa91391d441ec3c67bb63";
-    private const int OracleByteLength = 170_470;
+    private const int OracleByteLength = 170_467;
     private const int ExpectedCaseCount = 72;
     private const string OracleSchema =
         "dragons.invisibledragon.rule-set-core-oracle.v1";
@@ -675,7 +675,7 @@ public sealed class RuleSetCoreParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

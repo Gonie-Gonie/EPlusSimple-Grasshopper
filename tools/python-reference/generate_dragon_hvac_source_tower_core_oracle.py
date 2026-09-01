@@ -33,12 +33,12 @@ from typing import Any, Iterator
 SCHEMA = "dragons.python-reference.dragon-hvac-source-tower-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 137_833
 EXPECTED_SOURCE_SHA256 = (
@@ -51,17 +51,17 @@ EXPECTED_SOURCE_AST_SHA256 = (
 SUPPORT_GENERATOR_PATH = Path(__file__).resolve().with_name(
     "generate_dragon_hvac_source_system_to_idf_object_oracle.py"
 )
-EXPECTED_SUPPORT_GENERATOR_BYTES = 66_475
+EXPECTED_SUPPORT_GENERATOR_BYTES = 66_469
 EXPECTED_SUPPORT_GENERATOR_SHA256 = (
-    "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159"
+    "sha256:52106bcc6d7070b19fb637a1435a94cadca000a7fb7f42b69dc2538ffe906ffe"
 )
 SUPPORT_FIXTURE_RELATIVE_PATH = (
     "fixtures/reference/python-0.7.0/"
     "dragon-hvac-source-system-to-idf-object-oracle.json"
 )
-EXPECTED_SUPPORT_FIXTURE_BYTES = 3_927_710
+EXPECTED_SUPPORT_FIXTURE_BYTES = 3_927_707
 EXPECTED_SUPPORT_FIXTURE_SHA256 = (
-    "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
+    "sha256:d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e"
 )
 EXPECTED_SUPPORT_CASES_SHA256 = (
     "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07"
@@ -402,7 +402,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:2eadd58ac936f71225de5f4181712dd6c8cebafefd12471258f719d02f193a44"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:30c59cb99dfdbf8bcbfe39f823e7573e9e3c259e19ae775ca86dd5a09b6d6012"
+    "sha256:6de2b38ceaeab9c04a6ae072d1bceb50210055c5d008a70f9eb99d7910cc1500"
 )
 EXPECTED_FACT_SHA256 = {
     "dragon-hvac-source-tower-core.absorption-chiller-core": "sha256:a18e2e05f3a99a45a2c4a97c4f4ae652e1b542196cdec8a98fcc1d19c14a0505",
@@ -434,29 +434,29 @@ EXPECTED_CASES_SHA256 = (
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 7_582,
+        "bytes": 7_561,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
-        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "sha256": "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249",
     },
     {
-        "bytes": 18_027,
+        "bytes": 18_012,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs",
-        "sha256": "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e",
+        "sha256": "sha256:f9ad853a991646f0cbeede575ae934a9aff7fd1c62e419e1b99c212afffbd486",
     },
     {
-        "bytes": 1_076,
+        "bytes": 1_070,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
-        "sha256": "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a",
+        "sha256": "sha256:695de4b9fdeeb39fce18257b0febe64d2a0cf34024f4cd138f0b6ca4ca414961",
     },
     {
-        "bytes": 23_777,
+        "bytes": 23_762,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs",
-        "sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be",
+        "sha256": "sha256:cc9b71a242f6a3119baeebe25aed003201179e005cd030d59eca609026d2d963",
     },
     {
-        "bytes": 19_554,
+        "bytes": 19_539,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
-        "sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
+        "sha256": "sha256:48150a93275d8e4f395b064badc2ed07ba929287fd9c9b3ef461ccc3104e0f2e",
     },
 )
 

@@ -41,7 +41,7 @@
     {
       "id": "two-zone-one-sided-adjacency-shared-hp",
       "input_grm": "fixtures/compatibility/models/two-zone-one-sided-adjacency-shared-hp.grm",
-      "input_grm_sha256": "cc9f4da851ed7eb3d7ab0af18ab11b16e95a5ae40cf2aa529ab44ee25e88a324",
+      "input_grm_sha256": "ac2d50bf859f652e0bd1087029d00eaf837dc10f8725d5c07fd2fcfcd1126ebf",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -57,7 +57,7 @@
     {
       "id": "screw-chiller-closed-two-speed-fcu",
       "input_grm": "fixtures/compatibility/models/screw-chiller-closed-two-speed-fcu.grm",
-      "input_grm_sha256": "c11f0d17a631d0811aee421a0eec50733a16c033e2ef8f105e8883c6cf058836",
+      "input_grm_sha256": "7dc3e2f3d0b6bfdf48381779afd9ed28ae6c79b1dd4189ac4745be688a2bb8b8",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -73,7 +73,7 @@
     {
       "id": "packaged-erv-pv-openings",
       "input_grm": "fixtures/compatibility/models/packaged-erv-pv-openings.grm",
-      "input_grm_sha256": "816fdebe6a91ef6010656fa2c3b599b789906928038ae8445f1d5062ed417783",
+      "input_grm_sha256": "e2a5ef14825402b027dc1b9824f8cacc83502ecd1873b404a62caa72dcd0b42b",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -89,7 +89,7 @@
     {
       "id": "packaged-erv-pv-openings--tampa",
       "input_grm": "fixtures/compatibility/models/packaged-erv-pv-openings.grm",
-      "input_grm_sha256": "816fdebe6a91ef6010656fa2c3b599b789906928038ae8445f1d5062ed417783",
+      "input_grm_sha256": "e2a5ef14825402b027dc1b9824f8cacc83502ecd1873b404a62caa72dcd0b42b",
       "weather": "WeatherData/USA_FL_Tampa.Intl.AP.722110_TMY3.epw",
       "weather_sha256": "2f374875f35b4c61e5bf6dc15e7ae284b5c570a7921550dfccb123ffa809dcb9",
       "weather_header": "LOCATION,Tampa International Ap,FL,USA,TMY3,722110,27.97,-82.53,-5.0,6.0",
@@ -105,7 +105,7 @@
     {
       "id": "packaged-erv-pv-openings--golden",
       "input_grm": "fixtures/compatibility/models/packaged-erv-pv-openings.grm",
-      "input_grm_sha256": "816fdebe6a91ef6010656fa2c3b599b789906928038ae8445f1d5062ed417783",
+      "input_grm_sha256": "e2a5ef14825402b027dc1b9824f8cacc83502ecd1873b404a62caa72dcd0b42b",
       "weather": "WeatherData/USA_CO_Golden-NREL.724666_TMY3.epw",
       "weather_sha256": "c184b947cd34d41c6d6474d63d66dbb82bc0e6cae4c888edcf837348282bce7f",
       "weather_header": "LOCATION,Denver Centennial  Golden   Nr,CO,USA,TMY3,724666,39.74,-105.18,-7.0,1829.0",
@@ -121,7 +121,7 @@
     {
       "id": "packaged-erv-pv-openings--san-francisco",
       "input_grm": "fixtures/compatibility/models/packaged-erv-pv-openings.grm",
-      "input_grm_sha256": "816fdebe6a91ef6010656fa2c3b599b789906928038ae8445f1d5062ed417783",
+      "input_grm_sha256": "e2a5ef14825402b027dc1b9824f8cacc83502ecd1873b404a62caa72dcd0b42b",
       "weather": "WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw",
       "weather_sha256": "7d4d35cd413bbac64ddb87150996a7ac3b9fcff4b21a8160925de225467e4def",
       "weather_header": "LOCATION,San Francisco Intl Ap,CA,USA,TMY3,724940,37.62,-122.40,-8.0,2.0",
@@ -137,7 +137,7 @@
     {
       "id": "geothermal-heat-pump-ahu",
       "input_grm": "fixtures/compatibility/models/geothermal-heat-pump-ahu.grm",
-      "input_grm_sha256": "8f65aea3c738dadf53791e300bbfbad19eac6a6c81bbff57d498d545ee10df01",
+      "input_grm_sha256": "56e287cdca443de2cdd00c4d3c3372b63c6c9b08279d52f7dc827d70ab18a4e2",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -153,7 +153,7 @@
     {
       "id": "boiler-heating-fuel-shared-matrix",
       "input_grm": "fixtures/compatibility/models/boiler-heating-fuel-shared-matrix.grm",
-      "input_grm_sha256": "87998dbf8b3d1dc8e6353ffb445c24f27f388fab220c6127c7b99efc41ae4644",
+      "input_grm_sha256": "f7841a4033cb1f4466f95e58ea73a74354983e3ed8efb27bdaf162daf085c058",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -169,7 +169,7 @@
     {
       "id": "absorption-default-explicit-electric-radiant",
       "input_grm": "fixtures/compatibility/models/absorption-default-explicit-electric-radiant.grm",
-      "input_grm_sha256": "994893c5310f42a4a370d4d422e24267594f25df646df1ddb5ab84c5d22ebd88",
+      "input_grm_sha256": "f4e5d42260b7f8702613802ca015979617352c92fd88280c6c5ba2141439075b",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",
@@ -205,7 +205,7 @@
     {
       "id": "district-shared-fcu-radiator-radiant-dhw",
       "input_grm": "fixtures/compatibility/models/district-shared-fcu-radiator-radiant-dhw.grm",
-      "input_grm_sha256": "1cd6fb729ea0e0ea6c6cf70fa7cc2de927d091a8e1bbebc8ed56821c931d6db0",
+      "input_grm_sha256": "5489ab05b7b9bce6808aca28bb3b0a7a062f781471481fbb0ba2c7b5c189a0ed",
       "weather": "WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
       "weather_sha256": "c7d4efcf93ba316a1d874352e743df5cf137ba5c0e3459eb2dc4b5442d5b7f5c",
       "weather_header": "LOCATION,Chicago Ohare Intl Ap,IL,USA,TMY3,725300,41.98,-87.92,-6.0,201.0",

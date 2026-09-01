@@ -14,9 +14,9 @@ public sealed class ConstructionCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-construction-core-oracle.json";
-    private const int FixtureBytes = 395_339;
+    private const int FixtureBytes = 395_318;
     private const string FixtureSha256 =
-        "sha256:1d7034be43ebf8528db6342eec7c0c2fc151148e9a31f80a2a2c21c5fe04a41e";
+        "sha256:25f2c13f0999e50d9a5fc32a31dd7b60e3a8847c1363570cec21b7d107aa10e7";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-construction-core.v1";
     private const string CasesSha256 =
@@ -24,21 +24,21 @@ public sealed class ConstructionCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_construction_core_oracle.py";
-    private const int GeneratorBytes = 82_993;
+    private const int GeneratorBytes = 82_969;
     private const string GeneratorSha256 =
-        "sha256:94f9b3822c0e36b0ed12395d87f2febd3c07ebb0159950009d3daddb6766b9b9";
+        "sha256:c24172f07f19a8f6b085aa214bb709f49a87e9b4dd3363ed4c734f262c5ebefd";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_construction_core_oracle.py";
     private const int ValidatorBytes = 20_232;
     private const string ValidatorSha256 =
-        "sha256:4b7573c3b2fd85f3954a84a4ab2c5916bb8aa1050011d9eef7b58936fd31afdb";
+        "sha256:1c8cf4739f07abfe83a6b1656acadb558f7926570f92ac114c1bc6ae41d93951";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/construction.py";
@@ -58,20 +58,20 @@ public sealed class ConstructionCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/ISurfaceConstruction.cs", 219,
-            "sha256:9275332e67030ce071ee76eebe790621b9e7caca8308eccb7ac15021be445626"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Construction.cs", 1_756,
-            "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Layer.cs", 2_046,
-            "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Material.cs", 3_447,
-            "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/MaterialRoughness.cs", 247,
-            "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/SimpleConstructions.cs", 2_025,
-            "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Internal/DomainGuard.cs", 2_416,
-            "sha256:a8d28c985fe67376ca08015ed8e6d28600c98366c33a4a41dfd4abf377f57d8c"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/ISurfaceConstruction.cs", 216,
+            "sha256:d960c1de9896e2b634df27979713fb484030abfc79f14d38e68286041df3e6a7"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Construction.cs", 1_750,
+            "sha256:85f4e6d46ef7eaed3d68ab7699508c7182aa50f16e1e5f4f5079dca56d616795"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Layer.cs", 2_040,
+            "sha256:381d4b41f654233414e59710685120d7832363552dd80f9cc43d371de2109475"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Material.cs", 3_441,
+            "sha256:dd3027aaed2917eb78120f4280b86ff1e510627632d913a289d52690470112fe"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/MaterialRoughness.cs", 244,
+            "sha256:76f351811fa91d043275601a688e583d5ca9bb5c74a16a55e7c595c7710f0012"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/SimpleConstructions.cs", 2_019,
+            "sha256:a72caa2d2c70ea18bf080bf623837ef3a0c7869a4991a7977255b00021d9e762"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Internal/DomainGuard.cs", 2_413,
+            "sha256:5bb42189e091fb4ed17f3e242a0e22c32b47b2242c2e6b9a43da46ecaa929ac4"),
     };
 
     private static readonly CaseDefinition[] Cases =
@@ -103,16 +103,16 @@ public sealed class ConstructionCoreOracleParityTests
     {
         new(7, "sha256:2c77d222952e80db0fb06e38e3f5f93371b242d055b6f869b1fa1fd5b24b8ed3"),
         new(4, "sha256:ee0b0523b25fb3f8bfd5b51445fda4f58becff271633f6fd6ca1f7d43af6d9a2"),
-        new(6, "sha256:c566511ebc875a54f0b91a51adbde7ce8d24b5da288487d4d5b0ea495f7646e9"),
-        new(5, "sha256:150c7117b99c65f95447da4f1ed7e28b76eb1f467dfd77154c8d483e481663e2"),
-        new(6, "sha256:8960839e768ef63111559306e3a2d9a098bf4bdfd05d50b2f912d4ac3e8aa686"),
+        new(6, "sha256:2dce95a8dad351b6a96e04047308ddc71fae4ef030bd11f0129f58e9fbc46d5b"),
+        new(5, "sha256:1d3fcd26903b38f99949a7c67d289aa2863f5696fdac241d53df740a039167d7"),
+        new(6, "sha256:b871aca196cba5684010607c321fd1c9f5a88d3e2007f987d61f898ec6208cd3"),
         new(15, "sha256:84808cd94e722907b6a984f7f9fc55007b773bb00dbfc174063bd37ef57d29a2"),
         new(6, "sha256:e719814edba1e3dc2dac77fc3577899110aaa4e8a16cc3f0218cfa3208d0f4e1"),
         new(6, "sha256:2755912e2e336ebc5f4b3439ef2b833854c402e43aa72ada7a94a2219fa1ea71"),
         new(8, "sha256:7cd429c64fcd4b0d704c5faa3726dab7a65723e1415aa8450934d89429c625a5"),
         new(7, "sha256:ae86069aca3f90420d4735131cbb6c3cacf7770902c5a2b8c24e550f0aebe686"),
-        new(9, "sha256:a3a4646162dac2c9dc1ed1ce684c9fd948203dceb5cb7fc59fa14bb2ca38ea10"),
-        new(9, "sha256:32f21c12021c06fda3c1c80484d1702c0aa9bd8cbc5e3e2a2865414a48f4f148"),
+        new(9, "sha256:f6173166ac9b6a69e7639e0ea2cc48a1babd0fa62a1d8387bcbdb6828526389e"),
+        new(9, "sha256:e1cf2cfdfb1d770a0e5460b78b084e1785bf98875b40f08a118682ace68dd660"),
         new(12, "sha256:cc97b8708d738a8d627bedb459c2dd5a3d599dcebd5239d1890b95770f2db6aa"),
         new(5, "sha256:9d630b2ad64469c8e542d078f995ad5f57b5274a034fc476f37263c964ff5944"),
         new(6, "sha256:d010f8b53d67101bc792cf29a045aeac47cfff57205b3ba5a576b66fafdb83da"),
@@ -124,80 +124,80 @@ public sealed class ConstructionCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:652f3e47593c40f4ce3219b27512b5564012bfcb964f39132e2751602e1d8410",
-        "sha256:13dbf0a9c3b23d923f1ebda91b38aaabb921ff3bb437ea9bdd8056d0cfbf60d7",
-        "sha256:dd717e081a81e69a56a5402da40f2cdf0aaf7a1b5ca3c2e83d164b23b6df2bee",
-        "sha256:35b5e3f8fc6fa8c59bbe87c9479e3daaea5a65267ec01685de262870f2fec710",
-        "sha256:4ba57d50ed37a0d6a4ca715e66329112029cbb1c7bac4c1d89d533bd850bbb14",
-        "sha256:9c83b75b1b026273a77856b83e4c09fb2f716a6d6311dfd1d3b490f87741a120",
-        "sha256:d2fe69505c5f6e8889a8426214347e06d68ccbdeee45609f84510d849c2e64ca",
-        "sha256:20ef38477d98a9ae6b851ccff3726ca318fc460b65370fab0d96acb055c72f6d",
-        "sha256:763b0571e383f177526aa65925fb0c9d7ac20acbd4760353ed69fa1aff044812",
-        "sha256:1270dd680eaeb8175eddd103a2995a96a3ab16fd06f2821ae3c8b4935c8e4fa8",
-        "sha256:5d78339ab02ff19b0001595eafc38e07b298d80c794aa36491df102e2b2e1c2e",
-        "sha256:f742b5e9ee7aa8c558aff5ea50d526d06cd3513e65e09b05eff6e6e809f20274",
-        "sha256:fb2123c30c01866c066df22c119aac1d23cca74152bf5b586f2c34538bc2d3e3",
-        "sha256:69a6802104de81f481e7c5519a076a9fdede0d42749a0a180a3b3a8b49b63ea6",
-        "sha256:84e79a77ca15a6957de9af019f1aaba12e8834a81c958c5f6e052980005b3884",
-        "sha256:3a2773ce1349f22db653b2e28f00b4271cfb94170e5fc51cd3fa6478789a6e6c",
-        "sha256:88bc1047e7b3a90cbaa8741181b79829efac4b977754e787a5e2aec2b328776c",
-        "sha256:8b1a550d46cb05c6d36cd40384c1c7e5091d54f074358fd287d360a4bcad6843",
-        "sha256:0a24c588a793f99d624fa82e19a67962a1d2e3cfd9afd24c341031697a7f1c3d",
-        "sha256:a9ee090c9177441714e33bbad9554457e95ba74a3dabdd25c1483fad135b493a",
-        "sha256:b36d3f7fefebf46879dc638daf2376671bdc19ecf4cc0f0915697e772f7df5a3",
-        "sha256:894fbcd9467fab6732cd2abf5f23f34ac6e4603a4deb6a3afe63ae254a150cd4",
-        "sha256:d47847530604652d8b75b72bce0e87526a703ad212a91ec1efe05bb85fc2095a",
-        "sha256:8e7d28351545e5b5962997203dd526e9947588708d39fdc2056368e4af1ec2cf",
-        "sha256:de478b29d93c6ad02c814b3e136b4d92c66d50be21afe8e19d2fc9c342181354",
-        "sha256:0e688e2fa39f51dfb1d1fe7a97ecae9a554ff8893a71c9fa0f1a2df9be27e281",
-        "sha256:9945019e047fe3bf1b17c17d2d86fffe3e87fa07f5aec1d0220e433a160a9982",
-        "sha256:de3a19dbf87836340b8f942e4e45942d5da9630acaedc7892fa220cc8fe2629e",
-        "sha256:966132fc97e4bdef7a5f01e348bb8c0797fbcfa747732835e5720ce104ffa0ff",
-        "sha256:a9008e028363cf75d155cdb2e80ca12a9e67fff44f711c9ab2aedc01817a6292",
-        "sha256:cb44617d8efe59f332642846ae76369a83d7ab02f72e50d69f1b91cf55b1738e",
-        "sha256:f449ded5249782882e028ab17dd8db2395526e96c970ba022408e467ff7d262a",
-        "sha256:6b886c2228a946b15aeaabba3871ba2007dfe6d07cc5e1a2727f13ba24839690",
-        "sha256:94d0d73f67963556147eea18e3e1b1cc19668739ddb601e0f2e6904346d48e9b",
-        "sha256:2ac2a08d050cfabdaaf3f0b19bcba3bf07588ed0d709e88da0594cdeb3bbe0a5",
+        "sha256:d1c71b4af4d1d24d58c0d9782203e382b6a01aea96629c93a1fede5e4eb6719a",
+        "sha256:30d2a1ca7dbafd4b9534102328e7ad509f214695bedf7c7498a4ebfd07552958",
+        "sha256:0c532fefbe2a7191ca7f35840eb363aa661a058f4963aa863d63b7c68df53486",
+        "sha256:06f63ed28372dc6612f5dc665bad789747494e93542e7c2f9faed9d04b0e2bf8",
+        "sha256:deb9e6a584852d29d435cd9b2c685b5b2c5c492d997dd85afae6f661c1d0a1da",
+        "sha256:2e3933c1acf3d24acc063d55c31c3b3f295c5194dfc818b0a65f11d7a8410c9e",
+        "sha256:a059543e2f18d0803434034efecf80f03d0973ddfd69afd4c36329b3fad5cca2",
+        "sha256:9890ac92971dd2f30d1456df14fefdc4b66b2227bccf9740315702b8df41309d",
+        "sha256:5772e250992e1ecf8ebb1a2f154fc2c3fa07a5d749c3b1e58df5b9324c9fc36e",
+        "sha256:bf2befee765c4eebf41cdb70065234500c56baa84c4f0ca5f36644abb90f6ff7",
+        "sha256:fc852da660877b48d732c5350941be70ff66e476d96c5668279eec0dd54868d7",
+        "sha256:6b8d58573d5b95e35809ce90130bd77b7e54fdb12dc35a5cac6f621fc46f5e92",
+        "sha256:ed46209a09c534dbd3594d0bb3cbbb07c0c763510c82e902ff15945ccdf77f15",
+        "sha256:50723ffc9b9ae9e42c6185994377d2b801708579817fa694689f65edfbc3713d",
+        "sha256:03354a48eb73c4b042ca57df3d40fbc42635c3c7135a683837e570a3fffb6140",
+        "sha256:b31be2ae14a7b4047f5a5b3366bf17856ee33330b3eb387c66c482f00658d5ce",
+        "sha256:05c9c51485da24c8d49f024a8d7101c7cde7f134072d0cb53587ed265d902658",
+        "sha256:45c26be4ec4bcc0ffd96c5b16542db370b37e82f61cfb4527901787a3190475b",
+        "sha256:c883318b15009a4a6634858593aaf93ccfa06866e2231326beff6b498d3705b9",
+        "sha256:a2d6e2a01dabd6dc8d1371195d94f747b8a08c795bc64223f4003ebba8a1767b",
+        "sha256:bc0ac9b63291e57adcccdd5aada2c8678a5c02ae331ea69268eefb604b076e6e",
+        "sha256:f0f038de2cda3eabf4b818bfc61298268af62b71b892257420c1809d4cbf42b5",
+        "sha256:1f8c96489ac8dd3d49114debfce2fb8600074bf2f2c9408bbda3e00d2295b58e",
+        "sha256:5c013a0918fedf1574cdb1444a30c68c87721dd7c5cc5dbfddd5acfc61ef3c48",
+        "sha256:277d020f916524ec77dc9beaf65a7d8fbeac5d7fa8ed4095097b5fa781f957df",
+        "sha256:d0fd1a3a01d19a4a9c6ed24cafc00a24f591aaaa7f79029c9436bd526b034614",
+        "sha256:2db9b628fe3fad0498dc86b081917ee37f1648ae2bc68cd16ec5fc73e68925d6",
+        "sha256:3e28bb389620a3414cd7f478b8d617e41891cd75497db9ca8c999e9a8ab9bdb1",
+        "sha256:9c0b84440cb73280b9b599a7f9699777db262e6f661df4f7e794116a166ed7b6",
+        "sha256:3d63dec6c5402bb4a7affe3bff3e9d1fa36110b0a165ae7e7acde569edfdc59f",
+        "sha256:e15faf5a4453e5c607d368c2fd08290ff440f84b0277de2018e1a84837d31d81",
+        "sha256:690354458de70dcb27ff274bf5f671461e513f8272e526c39b7a554d9ebff632",
+        "sha256:27b68e8465d5754a93951b5230419cfb7aaeff2df8d642c338726c1d222e8e42",
+        "sha256:a2af0947c6483cf1bb667b5d91cecedfabc7e15333eaa338452907e203c8bae2",
+        "sha256:aec861e0e8028619b4afa3b76fbc143fb2b06777d7e9afe0ea7ca58257de41f4",
     };
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:497e43c59a983d8a2aa09a24df5589bdd06ef8901e4cbabccb9e7ae088e70ab0",
-        "sha256:44898c0c06578acd3a36e28867e09af35f0a95a379a8e6b486892eedbffb44fe",
-        "sha256:007ce437d750a648fba8024df16f62fa545e36b8d2e5338324597d9a83e60939",
-        "sha256:44799a3b0ea20ae8348620cd0f4bb237b5711d2d1765bcb240b7a465158e232f",
-        "sha256:e8e0ede1bb6d0cea4ced87ad8b9c217eec5b1d38f8aadb118496976d9cf54c00",
-        "sha256:6bb17711c4759e0e08257d5e22baaf03c602f24de308c13c5d84e430ced21c3c",
-        "sha256:cf2152e6aa80404b2b630e6563ac244509045677b48e53ea4db9aa61356d768d",
-        "sha256:070f8f3d83bd470ca401a26bd3706e989fb4a68ef4a54d69c7d7b25c6e83fb30",
-        "sha256:bcde87ecef242babd021572a1052c9f9c80a2068a6d6b8e2bbfdd639ea0015b6",
-        "sha256:f98b569caedbd199ddab442d2f14affa453267695d2d10e67dc8d297544c52b6",
-        "sha256:1304d5e093ed05d9e9113d48fa6528b778101ffc55459747076db87915d32a63",
-        "sha256:26647cc112260c3d83b09bf613f099491111afeefb1f18e15b2d4d8a4be0eedd",
-        "sha256:b4fd9a488bad4e1d8d63d2727044778083cfd203f3bfb945d57a8cb5fe8d692c",
-        "sha256:ec597e460150c3083e650a9cfa1d0d06a22c9fecad5344dafdaf1c6103bd4e88",
-        "sha256:10811bca002cdaea6662bce2feddcfe955e3648407f3a412da4e6770d0d2328a",
-        "sha256:5b9664b963b83e71d6244fb6e120e54c75998fee2c86f9c8127d7a36927a766a",
-        "sha256:c64849c96bb318a639ad1fb1b24904251d638dc883fe52590f97cb4b6b72ef4a",
-        "sha256:04f720cebcf30a1cdec92eb00347bec90692530fa72080542a2dc1f8b4bed3a5",
-        "sha256:eb68ef1bbb8b4f68b96bd2df11f27d0509a7aa18c580ffc24a4878ced3183fb7",
-        "sha256:4b5673031289009c98f2b5f00d86bd3098502c7fe9f7be4b0ec4d2417bf02b76",
-        "sha256:510dcc98f63c7aea8a8c35705a52a0af68900b20cdfe15a5fb42b32fdab8e334",
-        "sha256:be774cdfd931fb770b41cec00f6eaf22036a76f3c8be32e4f0504eab45980d22",
-        "sha256:e3cf160aad420112e1905123eea73e8be47bbec2d50ff39ac16038f6ffb1d29c",
-        "sha256:e2568208ce9baa109cdd92181bd1f40df982bee248c95e0082347904ced43dd9",
-        "sha256:0d0e22424d7d1722ba327a2af116a3cf3234ae182b6b42c8e58fb1685fb81299",
-        "sha256:8850eb0679b224958b6efe67832e72ddaa8f67f7f0d1671508cddf7a4c8c2736",
-        "sha256:2bd0ee5e9ede272175ff6c0b9494007d7c5c43d93a6e2d7a9ec23e1e3351bb14",
-        "sha256:a970d2447790305621259c8b2113cc22a1b049343750fbd9b5805d23b7b72927",
-        "sha256:87d357a588b97240d0157877eed951d46ffb48adfe21059102e9d211b1fc3903",
-        "sha256:5ebc43664cf28029de6023e414267c6390eace71b4b0b5d9d7c5ab7a1b7154c5",
-        "sha256:0184d994d37234940af9a0ed88c0328fb1c7628b8699c62346175a02bb7a1d4f",
-        "sha256:6814e836ccb9b19dba614902ca5561a46eac74991fe52d151c79b9d8444ba8f9",
-        "sha256:69e55d71f8e1ecf3a364fcdb560f8a3a2263ae946bbc0574cdea6319f982e09d",
-        "sha256:6704cafbc046dcd6c0eae4320b77bd37da5b86b664aadeec7b3b729c1db59292",
-        "sha256:151a06246ab153849410f5e883cf3a00856facea0f5326de7eb26933807463d2",
+        "sha256:144a4b47a0eeef8b365ae239c6d3dca9fe0b9b67414ea6d411d93bb717d37a22",
+        "sha256:5dff226a2f11f9d42cb50e6d542aab8dd84a0dd262d3e8afaaff21bf0a11a113",
+        "sha256:0c2bd35b2ca8c760464efb9fa4cd602f53c12ac143b9800840a8e373ea9a32a2",
+        "sha256:3ffebdf65a9fbc1a1c2c15e96160e5dfa7b9454466ea9ceff63149f2ba2488a9",
+        "sha256:f57421b459af2f876519f3daadf05cd598a03b12cd9f06a7b1ba19bd69455a3a",
+        "sha256:346b6af22ae3e8e5e5bbb6f82570e1fa5f47b2c8bb15b26a8d81e6cb15959959",
+        "sha256:abe4aa7e92361b952f4fac0fe71da7e587c016ad80895806aa8e36f37cdef312",
+        "sha256:3397c6abe98d6c43e8548264e916f1c7057aa8f9523b2c0c6f1f927561220651",
+        "sha256:291d0750e35026ab81a06543ebac68626222a42ef34db588b0c99239588b96c8",
+        "sha256:c716e866a94ba92720ef5a8122eb66861b232a70cd7e20b40b3091e0ecc2fc18",
+        "sha256:41841cccc6db9f95aea4582ff289de6cf20d16e2f0abc310f7eb33a04ea48a8a",
+        "sha256:5383c7ff063ca5400b9e3e93f20348d9e4638c7bee15afd517191e84bb7be04d",
+        "sha256:0116ec051657d4565a12ea0402b8b217962780e2baa03d4f2f79fe855842391a",
+        "sha256:1ae196c19c27380926ecad89a06abacb2b3b16a0b80360709b1dabd4ca7797d3",
+        "sha256:919e4c7a33639b00f260b4c9a1e2c7b2833dbb505940957c179438875e2cebd1",
+        "sha256:bc18346c0466bfb93ba73fc08ce9e8998589754a17ab390031aeac7a14f6cc90",
+        "sha256:4fe09d7f2bf13253fd6113e29a2de5ea445daa40627209ca2a5f54380e47838d",
+        "sha256:e99bb4c58a2767cccd3907d01f73e772ca84559b6af1afb91aea5dfe0ae77edd",
+        "sha256:644b353a8283313e9d5d883be993501702daf374eb2e8073eb047d8ede875d72",
+        "sha256:7b7e75ac887a695c1a75d9967cebffff488fcedbd174274240a574c401f038ac",
+        "sha256:94e143285b3cabd685afc26da1f7788b8f21c35c60d4e788e71840ad98daad1f",
+        "sha256:d607aa23c03f41ad619dc6e286ef83139dde9ed8a40a83616c97c0d62a803688",
+        "sha256:5eda32de92842f4592a1f1ef538fdc9f00962ca4d9f0d4236d149f377b3306ea",
+        "sha256:e11238839060b4df82ba04c4af6390f577d189abea283d89d4621809350395f5",
+        "sha256:ef7bba1183f055dac69cba66692c11d2919dcab4946eb81abf021f6640f71bce",
+        "sha256:7747123b3a3abf7cc05ea3f3f761054141f0172c13f0b2f3fe5c18e1605ae5a0",
+        "sha256:ffc67481665659b336122bffe104828f3e5b89c01f4d9e0b5dd7d10c0b7dd656",
+        "sha256:3501525a78b56b500cd4f32adf4cbb876455396d4c38977fa0993526cb778e80",
+        "sha256:e1a08c2066fc0036fa29f41385a7e3a651c9886e30f6ed94826cabe84ff52cbe",
+        "sha256:6b675ee02cec7ed9a987327d7f66acdd374befce87c446f8d5ce1eaeeb95da04",
+        "sha256:a481ce2b661e8a7e7e89250a552f672b686ec41dd1a729943919d265aee5b6cf",
+        "sha256:2738b75a0485a65056c18e0b50c2361677f4fe982032ea7c58b4f779967f849b",
+        "sha256:87d74b5d36f8fa443b6fce0227501ae8fb56398fd51da325bbb8cea3c76a521e",
+        "sha256:d67a76ec5b524d79019737f442c99e86311f4dbe3006feed3bc5c53718a33b56",
+        "sha256:99cf6c0e3daefe873f0278a1590cf641b1a9e4a87ed4d4a9b16b0126b5fc91c0",
     };
 
     private static bool DiscoverPins => string.Equals(

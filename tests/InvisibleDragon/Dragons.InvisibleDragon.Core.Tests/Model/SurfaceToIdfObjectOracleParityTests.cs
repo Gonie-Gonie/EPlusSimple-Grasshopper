@@ -21,9 +21,9 @@ public sealed class SurfaceToIdfObjectOracleParityTests
 {
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/dragon-shape-surface-to-idf-object-oracle.json";
-    private const int OracleByteLength = 535_248;
+    private const int OracleByteLength = 535_245;
     private const string OracleSha256 =
-        "sha256:4e8bafd045e32e94f343b83c08fa144e925f4aa8fc2b39f981c591d46d35dc9b";
+        "sha256:6c32f737eb12ca869c6e7b5742eed434042c6731fd6aed73178cb1c8765d478d";
     private const string OracleSchema =
         "dragons.python-reference.dragon-shape-surface-to-idf-object.v1";
     private const string CasesSha256 =
@@ -31,23 +31,23 @@ public sealed class SurfaceToIdfObjectOracleParityTests
 
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_shape_surface_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 49_149;
+    private const int GeneratorByteLength = 49_143;
     private const string GeneratorSha256 =
-        "sha256:bdea72c903ab7ac109a89ee252587087d02dc68633d08f825e9109f132ce320c";
+        "sha256:f86cd2ce661ae83cfac741c4b0bafaa15db1c9cbe1f7bff4766d4c433ea5bca5";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_shape_surface_to_idf_object_oracle.py";
     private const int PythonValidatorByteLength = 29_000;
     private const string PythonValidatorSha256 =
-        "sha256:35d881d729209612987198bc512303c436a02e92954f1b1cca985aefe9e2d4be";
+        "sha256:3e4553ce5bd40b0a45c5555a86d8a18acab7b0226787afd77aa89968e211297f";
 
     private const string InventoryRepositoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryByteLength = 518_070;
+    private const int InventoryByteLength = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const int InventoryIndex = 1045;
     private const string UpstreamPath = "src/idragon/dragon/shape.py";
     private const string UpstreamSourceSha256 =
@@ -71,20 +71,20 @@ public sealed class SurfaceToIdfObjectOracleParityTests
         "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument";
     private const string PublicRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs";
-    private const int PublicByteLength = 22_015;
+    private const int PublicByteLength = 21_985;
     private const string PublicSha256 =
-        "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3";
+        "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs";
-    private const int ImplementationByteLength = 50_764;
+    private const int ImplementationByteLength = 50_723;
     private const string ImplementationSha256 =
-        "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905";
+        "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4";
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int IddOracleByteLength = 585_482;
+    private const int IddOracleByteLength = 585_481;
     private const string IddOracleSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string IddOracleSchema = "dragons.energyplus-idd-schema.v1";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";
@@ -98,7 +98,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
         WriteIndented = true,
     };
     private const string ReceiptSha256 =
-        "sha256:7976d445b4680e73f8beef0304bb16e0bb87d375ea9567b9ebf1fcad7fde7ed4";
+        "sha256:e92d1c25a0651dc7e6f222f87363ab81f4a8d627e621de62d70cdf5d69628135";
 
     private static readonly string[] SelectedObjectTypes =
     {
@@ -123,7 +123,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 21,
                 new[] { 23 },
                 new[] { 348, 1, 0, 1 },
-                "sha256:7c66b450ad379eac6c50ce3e437c5447380a32919a1801bb584d64f7732726c4",
+                "sha256:27d9737d848da9d2426b7e3d41183061facbef20e189235296c30386b8b9feaf",
                 "sha256:d03bf0a31c1b3af4bb428d2693ab1e4b21f62d78b3c2ff17d211bc65392b4fe7",
                 "sha256:02e0cbed24a78bdd03a9d9b7176cc30454d796b47df303adc6f216f84c98bf50",
                 new[] { "BuildingSurface:Detailed|Adiabatic Custom-Air Ceiling" },
@@ -147,7 +147,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 22,
                 new[] { 26 },
                 new[] { 345, 1, 0, 0 },
-                "sha256:b5e7c793d9cc6abde8ac815214c7d863cc48fd08841270e35d435b15db432268",
+                "sha256:338f0d9a10b0eb2c7d0859acb75bda60a1eb137a96a734e372e42da309232ff4",
                 "sha256:370ca48222b24498a16e104537fec48f2e76d911712838196ec38cdf46bd2a50",
                 "sha256:b8e328f27fa760d53a1e0ed6d9f88770a9eae4806907381484cbc0fc7bcc1941",
                 new[] { "BuildingSurface:Detailed|Ground Pentagon Floor" },
@@ -177,7 +177,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 38,
                 new[] { 9, 9, 9, 9, 23, 9, 9, 9, 9, 23 },
                 new[] { 696, 2, 2, 0 },
-                "sha256:085914ae1ea97757c203349822cd174f1901e4c3cfed40b3fbeb57ccbcd50260",
+                "sha256:d0a8b6b60ecd2554597e3bfe66abdc2f16175fab8338bbe8487f08e1cd973244",
                 "sha256:5e7bee1746747f54e93fb3568e61fd3c8704eb0c26d96f4499661ddcb9b5c8c9",
                 "sha256:a0e3f877266a7683e597b21198b23ecf3116fd41fee6e6eff2abb8663b184ee0",
                 new[]
@@ -232,7 +232,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 22,
                 new[] { 23 },
                 new[] { 348, 1, 0, 0 },
-                "sha256:174d81bccc7c17189a76f5ac59ba6c8d44b76e8d5b9bfbfbd4702b883db1ccf2",
+                "sha256:a4bd61b27afd8eb7a34266c59365ca890d50a705b65902b32e082b27bd00ff0e",
                 "sha256:7d80d7ba2108479897e8e0e59fd22201970a1dde6066f8b252e933d64b5c27ef",
                 "sha256:4470e204310b807b1977f95476a00b22f5fd7d473ee3186399a25351c30d51a8",
                 new[] { "BuildingSurface:Detailed|Outdoor Ceiling Becomes Roof" },
@@ -262,7 +262,7 @@ public sealed class SurfaceToIdfObjectOracleParityTests
                 35,
                 new[] { 9, 9, 9, 8, 8, 29, 17, 15, 17, 23 },
                 new[] { 366, 3, 19, 0 },
-                "sha256:accbdf7010c6dccee1176f57b5fd409ce7be74bc60e251389cbf302b97bd57bf",
+                "sha256:47e09e0bafe7a11cb89f962145a06f330aa88aa834ae9d4184af67fff3543452",
                 "sha256:30bf0dafe7daa808849c6392f66ce7293b2111e9b9898d20ff7284c90498203c",
                 "sha256:6b4cf576ee3970184f0675c3c657bb2f3b157eb03d5778ad38f2674508acbcfe",
                 new[]

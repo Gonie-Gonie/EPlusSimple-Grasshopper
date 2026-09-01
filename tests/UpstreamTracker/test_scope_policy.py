@@ -30,10 +30,10 @@ NEEDS_RATIONALE = (
     "No symbol-level equivalence, verified exception, or out-of-scope evidence is registered."
 )
 EXPECTED_FINAL_DECISIONS_SHA256 = (
-    "sha256:25a52087451b51f1af128d3a0a6b89bf76a080e0b39a160bcc76299ab04b6403"
+    "sha256:60b5133104ffd00acd01d8226a76fc8f286776f55035869c729e092bb2a70180"
 )
 EXPECTED_FINAL_MATRIX_SHA256 = (
-    "sha256:a966da9575d42ba79510cae764c2054dbc9fe273e16886f50b7789594cc83475"
+    "sha256:5f4b08ae280be6a0f216bde2a88d049c6c14f8fe9bb78f58964af2ef1e9a487c"
 )
 
 
@@ -681,7 +681,7 @@ class SafeScopePolicyTests(unittest.TestCase):
             for exact_binding in (
                 assertion_id,
                 "commit d48f97a",
-                "sha256:e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6",
+                "sha256:85c6f251087083b59c889725b19cbc5f9fb2c9c28b29135c38ce38fe7f65f61d",
                 "sha256:1d3679ac9c0f3aa9469434235cedb17099bc728ede8a2afd9cb0c0b8af6f9832",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
@@ -777,9 +777,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for exact_binding in (
                 assertion_id,
                 "commit 85264dd",
-                "sha256:5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c",
-                "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d",
-                "sha256:b6331cef12c6ff6809c4beb569f73ab528b04dde3f8f032db6651c5d418d0428",
+                "sha256:878c2970a95d4a80e87408cc07a7f5ea2c97c764385e990d8459c536a199a208",
+                "sha256:a397d3169f61a375b12a3934a2270874bfef1f3713a635cfd5e342668d12046b",
+                "sha256:236069bdde9be3a556559da1f12150114b75bbf08fbd951918744459f015a491",
                 "sha256:fd9d587384f4fd980d9765723aac63b5625619b51dd4645a6e0a14882381c1c4",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
@@ -1060,9 +1060,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for exact_binding in (
                 assertion_id,
                 "commit 0ef3a7d",
-                "sha256:e78e8bcbe42cd236775db63d50088bad82a9e9c5328e5fa5de6873d069984391",
-                "sha256:e930c9242c76b48500010e76f625e41baa07de96e4629b447df61db6c571e51c",
-                "sha256:ca7fb52d4a68ada17437d9e4590b129cf22cce842b37147aacf76d4f17c92265",
+                "sha256:a82d1b26673cada47b45b8cbd61f03beeb6ce39495090e6b731bc1b4114bcdf2",
+                "sha256:7a3ad0eb70b31542a04b6927389aad67fdcac37a0426632a00a55bdbc40f182d",
+                "sha256:8d3026ebea8b4484fae93331b62ac010ba8b9bc1a536f36c4c3b12104c348dfc",
                 "sha256:b7c9f676404298d22903b3f4c038eb37f9648612a41e6ee05cbe60368b93aee3",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
@@ -1284,9 +1284,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for exact_binding in (
                 assertion_id,
                 "commit 6517fb9",
-                "sha256:b9a98ea739bf4181a4f93c8bed161f559c03bb93a4926ee56dccc100ddd49d65",
-                "sha256:e7874d74d2338c4fa71ab7ddf3cf33b17ce713dcefa0a3d6519cd5a5dd28780d",
-                "sha256:91d1c96ea25e25804b747999e80b78993ff1b58fe8563dc32e0ba8f1a73d9534",
+                "sha256:61ae6f650e0cd05db76b18b68477fff72e1357ae1842892170fefa01cb4285c2",
+                "sha256:a4bb12756e28697389d1850f81f2d231d8266ab6a72259a20085a59835b6b8d9",
+                "sha256:52b11bb8f4afc05feedd74fd475940c1b248371effd6dcaea59fd2d8eb5ba033",
                 "sha256:59a8555cec7c643d7de152fb4a168a01ad8089bc8f014c0ed85f5d0be3a57753",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
@@ -1404,9 +1404,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for exact_binding in (
                 assertion_id,
                 "commit 7e69d81",
-                "sha256:baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc",
-                "sha256:febce413e0c12adc4e75441a61de37f7a1f04744dd3cb1b7e71c4325a5c1e02b",
-                "sha256:d2d1fa88d554d967065508272e881718a6b0f440a185506a8dab10c6976d4b22",
+                "sha256:e93876b839672d4de1f5b0c205c87f1b03a894c08e391cef2170b090f2645dc4",
+                "sha256:f749032884f2336a2d672a2a59af432859fe9d40498cf4399cb969f0cec9f277",
+                "sha256:5f394ab6811e6d174443278f93ec3956a07ad41eba186073b2c339baa2373db7",
                 "sha256:d48eaf3e2c2ecb09f950ae8380a4b98a744e18048b157703f306e0fd4f1735a6",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
@@ -1602,9 +1602,9 @@ class SafeScopePolicyTests(unittest.TestCase):
                 assertion_id,
                 adaptation_family,
                 "commit 61bb21b",
-                "sha256:f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed",
+                "sha256:d639c5c1047dca6a3682c9c2cfdac5fd1da99b5743c11d591d50942ae5322c02",
                 "sha256:d3ed6f576696d32cdf4c5f59f0a6d5c805f3d4541bdd375720ec80feb280f7e4",
-                "sha256:24839d4170db23a9839c5656ba0b259afc85f9a035468694599c5df4f00b013a",
+                "sha256:bd9be7390618ed4e5f39bea28e0face69b39077815635872c572a41ba0e6af49",
             ):
                 self.assertIn(exact_binding, entry.rationale, symbol)
 
@@ -2035,9 +2035,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 assertion_id,
                 "commit 33d0be9",
-                "sha256:60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5",
-                "sha256:e9c78f72ae62dc65f229c9766322fb53062b0f8e037bd1b62b5ac5050d8ce2d5",
-                "sha256:75762179ea1614ca74fd275accd132c1f0169f7d836b2e46e87a1a23e740f058",
+                "sha256:6fd214450197ea5effac61353819ab6ce4ab30b0fcd4a18fcd34816095015620",
+                "sha256:3f4ac211b3449ffac3b3f2a2048fc90320d45b5019d22ea59d6715a3e773353e",
+                "sha256:481e26fcbc6382f30e424d1ee1aac7d1574b44877d86bd7e621cd92b75ccfcf9",
                 "sha256:26d4f0fc8d81917f2dc98460a64c1232ff54e0a7755c047cf5fd57032041e5f6",
             ):
                 self.assertIn(binding, entry.rationale, index)
@@ -2154,9 +2154,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit 07bcb7e",
                 "commit 606f247",
-                "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f",
-                "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97",
-                "sha256:6832bde12cb4e5ab213f2f12307267ebe571de1bf2fc1a8ffa37db728014eabd",
+                "sha256:657b53b768c90a2915ca10c781ff63ab5a21323bb09f534d4d5da3178fe99194",
+                "sha256:7ce1af80729c2f2aa333016ba95db3963b25db24e1b23d2c89f49ea2694590e2",
+                "sha256:863eb92bbec8fe415e3c917ddf690e106beea5611bf39dbc1850a896c8d23622",
                 "sha256:17eac584b001cc62c7b1ca77a5ba76ef29ac88c02c082c67ffa94e2bb8c1e65e",
             ):
                 self.assertIn(binding, entry.rationale, index)
@@ -2246,9 +2246,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit d14de9e",
                 "commit c33fa05",
-                "sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054",
-                "sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31",
-                "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf",
+                "sha256:24b6994b1a39aa363fb0127ea6bfd93bcd12c803768e04f634ed615f08f815eb",
+                "sha256:357763c4c73e48db275833ab884bf550ea5e143126f550520e9a748bb17154d6",
+                "sha256:f6699787a997dc3daad0b8606b5581e93220d1a97476cad44f42052503730eb3",
                 "sha256:f36e63ac60e1b312d7d8f31a317e03e37a13ff49b8ef8f1f8cf960e5e67165c4",
                 "No standalone or internal postprocessor API equivalence is claimed.",
             ):
@@ -2377,9 +2377,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit c99f216",
                 "commit 597bf21",
-                "sha256:2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89",
-                "sha256:4d32b8eb44c810ee1210448be2e1fc8c94dee90a18159099304a2e74743dc421",
-                "sha256:ef66a678175883a24ca4eedd29f0f16570d321a8379f3eceba1e8e123b0a2117",
+                "sha256:c875ac4cd72e80aaa9de793807247597c5084cb70c96fab879d95747fdba962b",
+                "sha256:ff4bb943baeefbee48be4a0e1a0eb467674cd6722c7c88c53b5e372d9f4ddc2f",
+                "sha256:4dca901f5340002f9be7dcd3e669397d56b4413976601012d6da267c248159d6",
                 "sha256:100a8788627f81d9547ad7d57a685a3ed3bc47a1e4f463dbe93165f3c4edfbf3",
                 "No active EnergyPlus process or internal generate route is claimed.",
             ):
@@ -2519,9 +2519,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit f208041",
                 "commit adcda65",
-                "sha256:3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69",
-                "sha256:fa70dfc565a30542f58697cee512701356cf2200b3f07332de4e345f0b7b1398",
-                "sha256:b797ab5cb57509672d644bdc733ff2b8bd8534c4d697972f7722b944a7ff66f9",
+                "sha256:5b586ac030309bed3ab840525b4c9cff207b97919cff76bb48e8003b9135bcf9",
+                "sha256:6b69716bca218db814bc1eb2411e19f1d9614cb5857f70e93e461e5c95fb1c0e",
+                "sha256:5135e0f97382969393313dbd4be353916f33454ad1241dffb257fdbcba303930",
                 "sha256:1782390684d440ece9c849f4d4c9f6a892577681a45038e46bf074a322142541",
                 "No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
             ):
@@ -2707,8 +2707,8 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit 2fa8cf5",
                 "commit 20135d0",
-                "sha256:86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0",
-                "sha256:aae0ce640c69f571dda0e82b0a02e303505a22331a96083115174421a15f1a83",
+                "sha256:93a074d69a9cc386a5898a3af5ed5580b05d523300073fe0fb6c0d93cd29a4ac",
+                "sha256:9ad86909322e70b861f49640174b1f98fe9e0642433ea4bfe9b5ec0f33ffdd3e",
                 "sha256:72272b62b2112f075a01b32a0c3a521d3b6b3faced71f0d3c10e2a129a901cee",
                 "sha256:ab5b13e39fb99724727f77c1554699c37908b6783b063979beb743f10e8d481a",
                 "all previous receipts, batch1 IDD definition evidence, and every non-target Imugi",
@@ -2926,9 +2926,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit aa53eda",
                 "commit d616392",
-                "sha256:7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd",
-                "sha256:8589497feab58cc9d9c05479c50264a091182c2d68531398d1decddd24f7cc43",
-                "sha256:5c296ed4b6129dfbb40523136f91877169191a4ff42b5be63411d46bc91e5c73",
+                "sha256:61c137044af671cd9a1a935fea516b3d72eaa74f3d3c5122b3a61acef981cc93",
+                "sha256:3e87aaf0501d1176ab1ffb2be07710d1c8e6c58ef061101b4a70b14eb6f8b7f7",
+                "sha256:054a927afa780027119b67634e6b84196404160ac23dd9b10c99049444b16a25",
                 "sha256:51fc6b40f71cd0a4bec0e9a59c2879c5d2e3d16246d2b099df0238f10b05178d",
                 "all previous receipts, batch1 IDD definition evidence, batch2 IDD schema/static evidence, and every non-target Imugi",
                 "No active EnergyPlus process, internal native route, or broad Python source/API compatibility is claimed.",
@@ -3126,9 +3126,9 @@ class SafeScopePolicyTests(unittest.TestCase):
             for binding in (
                 "Oracle commit db1f31e",
                 "commit 9adac2b",
-                "sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba",
-                "sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4",
-                "sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef",
+                "sha256:4c4da9b23f38805b4550aa5c75c5f2899ebec336a43c7718188e267f77373767",
+                "sha256:8243d0a6f8289209d088a7e679bf84da53cc0cedf75dbdea140596d2e0a452ca",
+                "sha256:e66605a5c403fc186be87427bd64a9f832c3e7085768788774d760f86b9bad81",
                 "sha256:853330bfb531717aea11774e1c0b2610349fb907f950a29c29cdb2485e601f54",
                 f"Only inventory index {index}",
                 "all previous receipts and batch1 IDD definition, batch2 IDD schema/static, batch3 IDF/IdfObject evidence",

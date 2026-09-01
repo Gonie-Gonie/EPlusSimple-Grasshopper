@@ -2718,35 +2718,35 @@
     "classification_sha256": "sha256:25004c97fa276f70c732c54520212ca1f3979f11f84bc8bbe75f5f3e9a03291f",
     "public_production_routes_only": true,
     "python_executes_native_runtime": false,
-    "routes_sha256": "sha256:6cbebb6f136b1e86a1edc9b8cab00eca578aa1bc40cc8834ce23f172d69fa3f2",
+    "routes_sha256": "sha256:d29aa3cf7d7f993becbc1fb898c2d657f8321d4203c0a909b6374b421834137c",
     "source_receipts": [
       {
-        "bytes": 7582,
+        "bytes": 7561,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
-        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"
+        "sha256": "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"
       },
       {
-        "bytes": 18027,
+        "bytes": 18012,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs",
-        "sha256": "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"
+        "sha256": "sha256:f9ad853a991646f0cbeede575ae934a9aff7fd1c62e419e1b99c212afffbd486"
       },
       {
-        "bytes": 1076,
+        "bytes": 1070,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
-        "sha256": "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a"
+        "sha256": "sha256:695de4b9fdeeb39fce18257b0febe64d2a0cf34024f4cd138f0b6ca4ca414961"
       },
       {
-        "bytes": 23777,
+        "bytes": 23762,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs",
-        "sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"
+        "sha256": "sha256:cc9b71a242f6a3119baeebe25aed003201179e005cd030d59eca609026d2d963"
       },
       {
-        "bytes": 19554,
+        "bytes": 19539,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
-        "sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"
+        "sha256": "sha256:48150a93275d8e4f395b064badc2ed07ba929287fd9c9b3ef461ccc3104e0f2e"
       }
     ],
-    "source_receipts_sha256": "sha256:2b00b4902605bb3821275f5436e125bbee3fb2b5107a04680f2aef8e51ed6476"
+    "source_receipts_sha256": "sha256:e9af227594a75550e715c82b05d02a0c1960fd751105aa078c57e78ec85b84aa"
   },
   "runtime": {
     "dependencies": {
@@ -2774,14 +2774,14 @@
     "case_count": 20,
     "cases_sha256": "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07",
     "fixture": {
-      "bytes": 3927710,
+      "bytes": 3927707,
       "path": "fixtures/reference/python-0.7.0/dragon-hvac-source-system-to-idf-object-oracle.json",
-      "sha256": "sha256:2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
+      "sha256": "sha256:d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e"
     },
     "generator": {
-      "bytes": 66475,
+      "bytes": 66469,
       "path": "tools/python-reference/generate_dragon_hvac_source_system_to_idf_object_oracle.py",
-      "sha256": "sha256:f8c3a031304554ecd43381867188c29bf38c2ce0ebf4bf284c394792f7817159"
+      "sha256": "sha256:52106bcc6d7070b19fb637a1435a94cadca000a7fb7f42b69dc2538ffe906ffe"
     },
     "resolved_adjacent_symbols": [
       "AbsorptionChiller.to_idf_object",
@@ -3811,9 +3811,9 @@
     "adjacent_receipts_sha256": "sha256:6e3440ca7a866008249ce603d92cb4da33cd9baf5f1b50be29e9f24e3207d769",
     "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
     "inventory": {
-      "bytes": 518070,
-      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
-      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+      "bytes": 518067,
+      "content_sha256": "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
+      "file_sha256": "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
     },
     "isolated_import": {
       "loaded_local_modules": [

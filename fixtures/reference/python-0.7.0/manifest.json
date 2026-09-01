@@ -9,328 +9,328 @@
     },
     {
       "path": "ashrae-140-modified.idf-summary.json",
-      "bytes": 2459,
-      "sha256": "b37f44bb097f84cebd7bc9afbba0086b86f00b8e74440e93e753d991ec99420e"
+      "bytes": 2456,
+      "sha256": "6bfc5767964244c0e7e779b56cc38fe4c79139a0ae74d86aeda8a6c03199d817"
     },
     {
       "path": "ashrae-140-modified.model.json",
-      "bytes": 4555,
-      "sha256": "0076a953ce599b47be283375f9aef93b24ddb3cd4192a8bc39573061e6ec8f96"
+      "bytes": 4552,
+      "sha256": "20afc00b906cdfeb9f7d8c1dcbf58d40dd4bda1d67d28395b728e91cbb537bf3"
     },
     {
       "path": "common-core-oracle.json",
-      "bytes": 34831,
-      "sha256": "2aba044516f955c5ef1ae28770982a68bf79d3dab6899f66a9091e0ccc4e9f9a"
+      "bytes": 34828,
+      "sha256": "3510b6b3c561019457501391d2847c5e45ed2dc6dd4479842df9bf7db8446f7e"
     },
     {
       "path": "constants-engineering-oracle.json",
-      "bytes": 20889,
-      "sha256": "e5261b2898a374722c24247f7d5a4fbc7df83cab1fbe8ad225827ee170d5cf54"
+      "bytes": 20886,
+      "sha256": "a14a0450793742ec665e8bd40d73e4688f4de8d59b7ef000ca62f7edb27e4859"
     },
     {
       "path": "constants-metadata-oracle.json",
-      "bytes": 117164,
-      "sha256": "9289e629b6948ee28a9b52c90bbc2cc2b9bd78508a50b1073ea9ebb531423d9c"
+      "bytes": 117140,
+      "sha256": "7a154b6147fe4dca6717c59f3005943d6ab44f9c3ce2dfe03255686481413810"
     },
     {
       "path": "construction-equality-hash-oracle.json",
-      "bytes": 4326,
-      "sha256": "6a1de9268675565ab6a14467717ac38799c45d9fdbba4230b4be403a9b79dbe7"
+      "bytes": 4323,
+      "sha256": "1f69c98f334c9d96eaa419b4d0283c2a1b3ccbdccc6b56867e754609cb030729"
     },
     {
       "path": "database-query-oracle.json",
-      "bytes": 3228689,
-      "sha256": "27157ebe6e927e2ba9faabf1a00a6d02480993b1802616c37d2d6bc02c82dffd"
+      "bytes": 3228686,
+      "sha256": "f33bb0bf58db74934fd33ce0dfe4700f7328fe2c61e24549b6e3c894ef362cf1"
     },
     {
       "path": "day-schedule-core-oracle.json",
-      "bytes": 166372,
-      "sha256": "202c889b0c38d5571fd6c55aa1eac4cc94344f177df09d5654086860bc714239"
+      "bytes": 166369,
+      "sha256": "fb43f9d5fffa2bca80a92ab11dbe291ba74decd332dd351af615bde9724b124d"
     },
     {
       "path": "day-schedule-metrics-oracle.json",
-      "bytes": 24749,
-      "sha256": "45ef72b5561dd159859cf9c295ee5652450f3c37d213bfcb81f1ade79c5967b5"
+      "bytes": 24746,
+      "sha256": "f0784f65ef387f29871d3c5e61871aaa17bb81625228c4cb14b18e718e4b7d61"
     },
     {
       "path": "day-schedule-operations-oracle.json",
-      "bytes": 435956,
-      "sha256": "ffa9805fd16847484195eb001cb7530c718554d13db40f811f7fa1242c020355"
+      "bytes": 435953,
+      "sha256": "bca7172f0f24fabf05313b8498f7e9ee8345d597e32e590f15f0a9980e8e5edf"
     },
     {
       "path": "dragon-construction-air-boundary-core-oracle.json",
-      "bytes": 97764,
-      "sha256": "056d6dfbd9e0b0402ae6b19788f156eb799384e975ba1469fe7578f7d2736f2c"
+      "bytes": 97758,
+      "sha256": "16ad4d6d7a90e39a233d742d336d801e612c214360a5c1ac4c6853aec9f7ec03"
     },
     {
       "path": "dragon-construction-core-oracle.json",
-      "bytes": 395339,
-      "sha256": "1d7034be43ebf8528db6342eec7c0c2fc151148e9a31f80a2a2c21c5fe04a41e"
+      "bytes": 395318,
+      "sha256": "25f2c13f0999e50d9a5fc32a31dd7b60e3a8847c1363570cec21b7d107aa10e7"
     },
     {
       "path": "dragon-construction-to-idf-object-oracle.json",
-      "bytes": 63256,
-      "sha256": "415cda6877c71985f8943ddd328bc04500e9905f7561c908285bc1bfe95e6b91"
+      "bytes": 63253,
+      "sha256": "0ca44ff38d80f388b9dea241f3fa81f490e4535f8eacbdd7a485da960bd14bd7"
     },
     {
       "path": "dragon-hvac-appenders-controllers-oracle.json",
-      "bytes": 179542,
-      "sha256": "2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054"
+      "bytes": 178786,
+      "sha256": "24b6994b1a39aa363fb0127ea6bfd93bcd12c803768e04f634ed615f08f815eb"
     },
     {
       "path": "dragon-hvac-misc-systems-core-oracle.json",
-      "bytes": 290479,
-      "sha256": "2b2e5d3a5a6fc76247e6faec469dc23039ad53ae0c64a36553974633f2da9f89"
+      "bytes": 290302,
+      "sha256": "c875ac4cd72e80aaa9de793807247597c5084cb70c96fab879d95747fdba962b"
     },
     {
       "path": "dragon-hvac-photovoltaic-to-idf-object-oracle.json",
-      "bytes": 147261,
-      "sha256": "07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b"
+      "bytes": 147258,
+      "sha256": "34793bc83100d9c527f1a7dce5e16dd4527ccb0e193e8db48e70ae35d3dfc7e1"
     },
     {
       "path": "dragon-hvac-source-system-to-idf-object-oracle.json",
-      "bytes": 3927710,
-      "sha256": "2fbc3ad2d810dee6b3e88f8b6e8c119e8ce709abf0c534233343e486f7bf9c7f"
+      "bytes": 3927707,
+      "sha256": "d5d4e43350e6b183715578ea3ac3df75c3d400b4faa24a10932c31f1f928d00e"
     },
     {
       "path": "dragon-hvac-source-tower-core-oracle.json",
-      "bytes": 172950,
-      "sha256": "60e0a2353620437049bba8420a0154e638fe86e5c915b4231793e397bb5c4fc5"
+      "bytes": 172575,
+      "sha256": "6fd214450197ea5effac61353819ab6ce4ab30b0fcd4a18fcd34816095015620"
     },
     {
       "path": "dragon-hvac-supply-core-oracle.json",
-      "bytes": 215698,
-      "sha256": "dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f"
+      "bytes": 215230,
+      "sha256": "657b53b768c90a2915ca10c781ff63ab5a21323bb09f534d4d5da3178fe99194"
     },
     {
       "path": "dragon-hvac-supply-group-core-oracle.json",
-      "bytes": 31163,
-      "sha256": "320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092"
+      "bytes": 31160,
+      "sha256": "32f05de2a2ead16e0097d3402577e8bce03f40ea151162a6312000bb4f5a5886"
     },
     {
       "path": "dragon-hvac-supply-group-to-idf-object-oracle.json",
-      "bytes": 22608,
-      "sha256": "f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608"
+      "bytes": 22605,
+      "sha256": "e5e47e5ffa2d725697d8741d05f54655705106e4bb75348c6d9eff46e04715bc"
     },
     {
       "path": "dragon-model-add-supply-system-oracle.json",
-      "bytes": 15122,
-      "sha256": "4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c"
+      "bytes": 15119,
+      "sha256": "42ad2d75ce91edd153bd9e07382a03b5095ea0300df227f87e0d0147b377230f"
     },
     {
       "path": "dragon-model-assembly-oracle.json",
-      "bytes": 119000,
-      "sha256": "f01960724a367eadb8fbee9a5bef3b8d4304449eb9d3c71fa626f4db03024ef4"
+      "bytes": 118997,
+      "sha256": "8c947ee3529bf498625dab7ec07acd6ac27685446e4197a0bb564e6d72e43edb"
     },
     {
       "path": "dragon-model-class-oracle.json",
-      "bytes": 34711,
-      "sha256": "9a5e00a585e983d4a753acb94c46307848d32020e8d3960f9ad8184ccb4cfa7a"
+      "bytes": 34705,
+      "sha256": "59936dcd720e29723bbfec2332b127a7cfd16ea0bf73ebe816d6247712688579"
     },
     {
       "path": "dragon-model-conditioning-oracle.json",
-      "bytes": 19851,
-      "sha256": "7cbdcad0691b3e56010981217f11e515c6cb7f417b6a22643925876b33e6de81"
+      "bytes": 19848,
+      "sha256": "73959db67986cebf3c1c7e1a1e853b0b763c0f403afd01fd32f81e3b74b41825"
     },
     {
       "path": "dragon-model-construction-defaults-oracle.json",
-      "bytes": 21802,
-      "sha256": "50a6c1d8cf1c9362b7cacf4462d468211ce3b993059e362bfe83eb3274cc1f13"
+      "bytes": 21799,
+      "sha256": "2ecefb4e37eac9a67dfc7545d3bcc4480682598acf7fa04d19f4f452d2dc685b"
     },
     {
       "path": "dragon-model-projections-oracle.json",
-      "bytes": 22156,
-      "sha256": "cee03dd2df0ef704dd77145e94223cc1a74a852ef3d822307749fe368b489117"
+      "bytes": 22153,
+      "sha256": "2c1ff9a21e0d8bdb68dce2686620a3ef8812d1ee9e26e6dc75a1e241b464710f"
     },
     {
       "path": "dragon-model-terrain-oracle.json",
-      "bytes": 17936,
-      "sha256": "f371e7b98aebb4f5bb338185c32e804975801349a123c58aba4d78263658183e"
+      "bytes": 17933,
+      "sha256": "1e2820763758cf2f997f1f0524a7989c511cfcd05f337117bb47460ec4b6e44e"
     },
     {
       "path": "dragon-shape-geometry-core-oracle.json",
-      "bytes": 244637,
-      "sha256": "46f026a4ce39931ec1e9d3581f49600e4178f3c744d2c6e022263d0fc695d4d8"
+      "bytes": 244625,
+      "sha256": "7cc2b689869f71e4b854c393912583c34acaca7576b9b6e76d946ae6e6c6226c"
     },
     {
       "path": "dragon-shape-opening-adjacency-core-oracle.json",
-      "bytes": 260292,
-      "sha256": "62cffb90701ba585b44712b7cce76d1393bec01fe0dfc8eccad170e49a6e2a34"
+      "bytes": 260256,
+      "sha256": "1eb9d258baa9471665d1470498d6855db7e7fde6bc89ac7a259d8908b6a3fe64"
     },
     {
       "path": "dragon-shape-shading-material-to-idf-object-oracle.json",
-      "bytes": 56704,
-      "sha256": "e805e1d8e953879012975cd8854e8737da29ed038f66d6176010337ace6f27fe"
+      "bytes": 56701,
+      "sha256": "364652ab7190f1d55d8f85227ff388d42b838e713ae193f2100ca6dbdb18a5db"
     },
     {
       "path": "dragon-shape-surface-to-idf-object-oracle.json",
-      "bytes": 535248,
-      "sha256": "4e8bafd045e32e94f343b83c08fa144e925f4aa8fc2b39f981c591d46d35dc9b"
+      "bytes": 535245,
+      "sha256": "6c32f737eb12ca869c6e7b5742eed434042c6731fd6aed73178cb1c8765d478d"
     },
     {
       "path": "dragon-shape-zone-core-oracle.json",
-      "bytes": 91202,
-      "sha256": "63d62d596d37c2e33adcbaf025f37ccda36d8a4291d96b3201d427d8caed59b3"
+      "bytes": 91196,
+      "sha256": "8bb7c858d42d96acdc5d0266b9455c1e3cd1b2fe89b464a408d8761026b5dbb2"
     },
     {
       "path": "dragon-shape-zone-to-idf-object-oracle.json",
-      "bytes": 219578,
-      "sha256": "fb59f434db0aa0f4744d14b17d3354e61918241df112744f26ebffd44e7f8c5c"
+      "bytes": 219575,
+      "sha256": "7c0c3f10d8e3a83b52a6ddfde0512e4913e2fc950a0224ba9256f0e94ac19a67"
     },
     {
       "path": "epsimple-constants-numeric-oracle.json",
-      "bytes": 89695,
-      "sha256": "252708fae632f2d587c8ab6f3659f0c94a34c1d2f2b3c70c70997a824c590ee2"
+      "bytes": 89692,
+      "sha256": "5184425ab052e66882ecd3ac7253d531603279acf1ef455dde7e489e442cdffc"
     },
     {
       "path": "epsimple-construction-core-oracle.json",
-      "bytes": 349214,
-      "sha256": "d4e9421c40c39dfaef948054798b03fb046fa31d1a5742cb8a53484c87d819f9"
+      "bytes": 349184,
+      "sha256": "8fad664f712facf9eef8627d80e9bafcf468e4b0c63d4cf09d9632db814246b4"
     },
     {
       "path": "epsimple-hvac-enums-base-oracle.json",
-      "bytes": 160001,
-      "sha256": "5bf5e8f88a2050232aa45e79c48894a54897eea57cddaf75697ab914d9715b7c"
+      "bytes": 159545,
+      "sha256": "878c2970a95d4a80e87408cc07a7f5ea2c97c764385e990d8459c536a199a208"
     },
     {
       "path": "epsimple-hvac-other-systems-oracle.json",
-      "bytes": 72791,
-      "sha256": "baab4b84afb2f387267fa49e4b7907f0d74b3a49076d5a0e7562d421a8c5cedc"
+      "bytes": 72674,
+      "sha256": "e93876b839672d4de1f5b0c205c87f1b03a894c08e391cef2170b090f2645dc4"
     },
     {
       "path": "epsimple-hvac-supply-system-oracle.json",
-      "bytes": 168146,
-      "sha256": "b9a98ea739bf4181a4f93c8bed161f559c03bb93a4926ee56dccc100ddd49d65"
+      "bytes": 167819,
+      "sha256": "61ae6f650e0cd05db76b18b68477fff72e1357ae1842892170fefa01cb4285c2"
     },
     {
       "path": "epsimple-hvac-thermal-source-oracle.json",
-      "bytes": 135657,
-      "sha256": "e78e8bcbe42cd236775db63d50088bad82a9e9c5328e5fa5de6873d069984391"
+      "bytes": 135360,
+      "sha256": "a82d1b26673cada47b45b8cbd61f03beeb6ce39495090e6b731bc1b4114bcdf2"
     },
     {
       "path": "epsimple-identifier-conventions-oracle.json",
-      "bytes": 121058,
-      "sha256": "c4375d858409fae187776ab88ebb6c5a21c76ac7d0e98b38ed2912a419f2bf7f"
+      "bytes": 120950,
+      "sha256": "0427210382b31555368dad0b6ca5f478d5f56b7b97949e6b850637fbda6ec6c6"
     },
     {
       "path": "epsimple-model-core-oracle.json",
-      "bytes": 102172,
-      "sha256": "e5cfdc9ba823dc891693864051ffb8cbc06cd08137becef9d6c06fd0c2942cf6"
+      "bytes": 101911,
+      "sha256": "85c6f251087083b59c889725b19cbc5f9fb2c9c28b29135c38ce38fe7f65f61d"
     },
     {
       "path": "epsimple-model-result-oracle.json",
-      "bytes": 763720,
-      "sha256": "f988073b3a9b951f71009b42bd4423546f8f7a5aac61493714efc5d25aa067ed"
+      "bytes": 763624,
+      "sha256": "d639c5c1047dca6a3682c9c2cfdac5fd1da99b5743c11d591d50942ae5322c02"
     },
     {
       "path": "epsimple-shape-core-oracle.json",
-      "bytes": 108435,
-      "sha256": "802bcf3d1bc05828329a659ec9013c498325ea5be8f647975dcbb4cb3eee2ba5"
+      "bytes": 108261,
+      "sha256": "1beff8671a20e03e968dd0570aae174282752b5b28feefcd035ca136d023f90f"
     },
     {
       "path": "fenestration-construction-database.json",
-      "bytes": 54147,
-      "sha256": "6fd2b18e1e4d464286c6f3a3a197e3c526e863e34ab392f52818435ae6872344"
+      "bytes": 54144,
+      "sha256": "a69b766d40f622440e87f605db5c0799e4319336783ee55741886168a39f4321"
     },
     {
       "path": "idd-24.2.0.schema.json.gz",
-      "bytes": 585482,
-      "sha256": "f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705"
+      "bytes": 585481,
+      "sha256": "75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26"
     },
     {
       "path": "imugi-idd-definitions-core-oracle.json",
-      "bytes": 165323,
-      "sha256": "3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69"
+      "bytes": 165062,
+      "sha256": "5b586ac030309bed3ab840525b4c9cff207b97919cff76bb48e8003b9135bcf9"
     },
     {
       "path": "imugi-idd-schema-static-core-oracle.json",
-      "bytes": 124762,
-      "sha256": "86f8dedc692e58dd7f3836d295a78bd9a9ef3dd71e84dee75be6ef44f228eea0"
+      "bytes": 124609,
+      "sha256": "93a074d69a9cc386a5898a3af5ed5580b05d523300073fe0fb6c0d93cd29a4ac"
     },
     {
       "path": "imugi-idf-object-core-oracle.json",
-      "bytes": 119205,
-      "sha256": "7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd"
+      "bytes": 119037,
+      "sha256": "61c137044af671cd9a1a935fea516b3d72eaa74f3d3c5122b3a61acef981cc93"
     },
     {
       "path": "imugi-idf-object-list-core-oracle.json",
-      "bytes": 105236,
-      "sha256": "6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba"
+      "bytes": 105110,
+      "sha256": "4c4da9b23f38805b4550aa5c75c5f2899ebec336a43c7718188e267f77373767"
     },
     {
       "path": "launcher-result-parser-oracle.json",
-      "bytes": 43608,
-      "sha256": "a5e4024e46ed30d2cfed54b8f158a167de796bde898cc5cc451701ded4d3df6e"
+      "bytes": 43605,
+      "sha256": "e7fc86fd859eb054022796fdf7163bcc040b738d23fdd3466944362558ba6a94"
     },
     {
       "path": "launcher-runtime-oracle.json",
-      "bytes": 19789,
-      "sha256": "4681df3e0fbe037588ad3210218c567a0aba8a3a7976f8e096ba37bd5109b35b"
+      "bytes": 19786,
+      "sha256": "3df3d7fb8c0c9d85ad0e9ffae9ae3055d742671b4554b2c860ff9f1877f9df33"
     },
     {
       "path": "material-database.json",
-      "bytes": 659,
-      "sha256": "45d7c88dd10661486436bed8a94e3de41eaa5713d21003e803a6b0775004f9d8"
+      "bytes": 656,
+      "sha256": "5cde67c45a63c2a42d326b1d50bc971e52e712d78e977a88b388fe51f49e9048"
     },
     {
       "path": "metadata.json",
-      "bytes": 512,
-      "sha256": "75bb064e4084aeb71d45ba2f3dbe57d626363d949d5d06761ca081be101f8b1d"
+      "bytes": 509,
+      "sha256": "ed1815151e7d3da3a6d7dca20bb27f24574e4687844f2c5c9ae9a99d78a12333"
     },
     {
       "path": "profile-database.json",
-      "bytes": 13247,
-      "sha256": "f2fa189c3a785493d4e67e1513e695e1d30e32cc8680e8c181fa61645189c81a"
+      "bytes": 13244,
+      "sha256": "0eab4ea3a91401bf7dbe49177d52e04b7ce4c5cc76766cc7e30e4537d15dfcab"
     },
     {
       "path": "profile-residual-oracle.json",
-      "bytes": 24064,
-      "sha256": "00278252228a1774c93ee9189a7fc28f2eff95b49e67f45ddfb2eae9c862baeb"
+      "bytes": 24061,
+      "sha256": "76471f9ba5851a0483f18c3a319c947adbbdbd499a9ceaef48b4cd2f8c1bcde4"
     },
     {
       "path": "rule-set-core-oracle.json",
-      "bytes": 170470,
-      "sha256": "ad70604e6f5a0f24cfd8503692a5f73b635189d4d5d1c3e627196f99d1d20825"
+      "bytes": 170467,
+      "sha256": "091fa6bffcab120a51c2b46f5533909bb4b909a929754029d99c866fe1e6e9e4"
     },
     {
       "path": "rule-set-operations-oracle.json",
-      "bytes": 3006843,
-      "sha256": "5575c9d2946b99afd474220429eef5e5531931a36e26eb55a1e3d4e93548fdc6"
+      "bytes": 3006840,
+      "sha256": "a3d968905846064ce38fd504b405eda0da25a6bb2937c38059fbb0b949d83315"
     },
     {
       "path": "schedule-core-oracle.json",
-      "bytes": 15661618,
-      "sha256": "9810d81206c066ef05f6d95f2dc1e7c66a84e8dbb939efbe76a63d8e4b9717bb"
+      "bytes": 15661615,
+      "sha256": "cbb999f40dc0633acc1c1e58ed3681fe6ec76f9875c61c0aa9d22258a235b922"
     },
     {
       "path": "schedule-operations-oracle.json",
-      "bytes": 10190654,
-      "sha256": "0036b17a367317e3898a16b57d39727035f9df30c7fb8a5c6a9cfaa49263c9a0"
+      "bytes": 10190651,
+      "sha256": "45eb834503cef90e42bf46d7488fb80a57421daabf7d341fbe44dc6578b69e86"
     },
     {
       "path": "schedule-type-oracle.json",
-      "bytes": 22692,
-      "sha256": "68e858a2b243df127663b801f80396671e069645b11659e55ad48eb81973e705"
+      "bytes": 22689,
+      "sha256": "6d2b4ea6b1717874a66b3f033b62e55a4aeae6d36a54f55231231b28bcd58940"
     },
     {
       "path": "surface-construction-database.json",
-      "bytes": 836229,
-      "sha256": "1a6b4b569354dc5481cb6aa194cb57a4e65b22810bcda47aa75687acaf2d80d7"
+      "bytes": 836226,
+      "sha256": "d249ba606ca77f79e28d5b788edefb4dc0db887625ca8d5c0253d21b3d5b93bf"
     },
     {
       "path": "usage-profile-core-oracle.json",
-      "bytes": 551190,
-      "sha256": "cad2b959e76194b24d0029818246053f77d32a358fdcd73d5aad7bc597a3558b"
+      "bytes": 551187,
+      "sha256": "af4fe3a1c7827c7857a478f07d258afed1d00f0c6009c1c54e98f7a366e7c6ed"
     },
     {
       "path": "usage-profile-schedule-oracle.json",
-      "bytes": 311381,
-      "sha256": "ed5e5326a7a20d0191c8a2bbac5b6fcb277c19df8cdb183d8b9de3d56b1d2f29"
+      "bytes": 311378,
+      "sha256": "6de0f1b2b1ed43240f91ef9fc1ff0beea060de8dd9ec5088ed80f172b4d324ee"
     },
     {
       "path": "utils-core-oracle.json",
-      "bytes": 16070,
-      "sha256": "b661c4b906552383f4c27d68e69564b6b81a61f7555e7cc849b6c25318ac746c"
+      "bytes": 16067,
+      "sha256": "4522eb151b8e367b48c8d9fc9cf50cfd5cd61ee989d61461e732a15332806dca"
     }
   ]
 }

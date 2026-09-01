@@ -13,14 +13,14 @@ namespace Dragons.InvisibleDragon.Tests.Idf;
 public sealed class ImugiIdfObjectListCoreOracleParityTests
 {
     private const string FixturePath = "fixtures/reference/python-0.7.0/imugi-idf-object-list-core-oracle.json";
-    private const int FixtureBytes = 105_236;
-    private const string FixtureSha = "sha256:6047f16dc92ae8b8e3e93daf43149ec0d8041ac15f748619e143d6efc0f7aaba";
+    private const int FixtureBytes = 105_110;
+    private const string FixtureSha = "sha256:4c4da9b23f38805b4550aa5c75c5f2899ebec336a43c7718188e267f77373767";
     private const string GeneratorPath = "tools/python-reference/generate_imugi_idf_object_list_core_oracle.py";
-    private const int GeneratorBytes = 22_838;
-    private const string GeneratorSha = "sha256:cc504d32c9b6926093185f0bb7e4c988c4bfe9b27d035330768f5f8b980fa8c4";
+    private const int GeneratorBytes = 22_811;
+    private const string GeneratorSha = "sha256:8243d0a6f8289209d088a7e679bf84da53cc0cedf75dbdea140596d2e0a452ca";
     private const string ValidatorPath = "tests/PythonReference/test_imugi_idf_object_list_core_oracle.py";
     private const int ValidatorBytes = 7_509;
-    private const string ValidatorSha = "sha256:56c31b542ec2bdefb75d7402f2dbbb32217e2634be826dae3566069b475e56ef";
+    private const string ValidatorSha = "sha256:e66605a5c403fc186be87427bd64a9f832c3e7085768788774d760f86b9bad81";
     private const string Schema = "dragons.python-reference.imugi-idf-object-list-core.v1";
     private const string CasesSha = "sha256:60ddb2ba91b3c3b19867063bdca5be7e0f31d628f193569ba487f79cb6816c2f";
     private const string TargetsSha = "sha256:9a292cd543bb675b93c77e7456ab43def3dc0ea004159d511cab1bef17d7feb3";
@@ -31,9 +31,9 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
 
     private static readonly Pin[] NativeSources =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_182, "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", 12_094, "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", 4_289, "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_173, "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", 12_082, "sha256:12488433e2e9f349553e0716531e88db275f563b7f5b806c10a316ae3719cf7e"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", 4_280, "sha256:c7b98b6eed298687fca229ae7262ffdf2494953b3cc6576835cacbcc47cf998a"),
     };
     private static readonly CasePin[] Cases =
     {
@@ -56,7 +56,7 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
     private static readonly HashSet<int> Equivalent = new() { 1194, 1199, 1209, 1211 };
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new("A01", 8, "sha256:70f44ad4a194c5e6b7214f95a098c1a24cddaf1b2c010571aa69b6d5c0b0287f"),
+        new("A01", 8, "sha256:87504005220c654cd1040e14f0e1fdade13c3e0fbe29517a8c1ac80130aa5d9a"),
         new("A02", 7, "sha256:fbf4cd1a29de5407fde1c1b1c3d8a4e7cfd41176d3e1bd8b5389d42951b4e424"),
         new("A03", 6, "sha256:dd47d8bba57298bce849839dc54062cdbafc26f5318dbd9060b97f9aa438ffdc"),
         new("A04", 5, "sha256:df4b815475f655fbee6f4020744cc91daa64d05feac02e07670a94898853c38c"),
@@ -64,49 +64,49 @@ public sealed class ImugiIdfObjectListCoreOracleParityTests
     };
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:3f2b4b1d0c62bd92b686229ab6ea48e9cc1aad9ea8af10db84c68ead088185a9",
-        "sha256:c5deb0c9099e1437f492a89b65dff9701163a26ca1e1f9e483d1e538e8cc7d07",
-        "sha256:0e27e06199f4905773d51875116dfb501431e2fcdb609408160a9f3ba3b52c17",
-        "sha256:6002f6ea5c4a4ca30d6da6aec51f7d9f13ceed4287db368846329fd337986654",
-        "sha256:32d5dfc5c677fe27f0f56709eb4368968bde3002523ce07a5c7d5d4629fefb3c",
-        "sha256:bbb65da967688a2979eba54e830a62e6f88615e6d408bbba439015bf100daade",
-        "sha256:892d36e2af1cf82a153e15eb5260c4867ce7f834337ab3ea6bb06ac6525a1ebf",
-        "sha256:12216a28d4a840deec78c9183ba2a6b1f640bd66387acab4496cf6f402e14fdf",
-        "sha256:61ae8807ed25cde238c51043177865412bb28b11506736025034d1b47d0eac92",
-        "sha256:f039ee95081f54cd5220fcfac652c2c70d6afb7ad3daf24f37b5e85af38e6f1d",
-        "sha256:1bf4e64095ca4515da48eb37236bb8d7ff3da7c889a04aaef2d3db8d7c06326c",
-        "sha256:0bdc86658236f5d43067473a0a8c793c942a736d16a1e4d96e468bc4fbca4fc8",
-        "sha256:eb97e34c666177bde8749a09b1ca24900b2db5314cee33dc77dc16fe8035c843",
-        "sha256:63cd50d9fccdc1e88e18972a29c8cd937d6e47ab0ebd384479f8fa21f0efc509",
-        "sha256:0d3699e544335733dfb42064e6aea27c30f458badb59a5af8658f6abe2d6f201",
-        "sha256:3ae815e7977d66cc8b1c59f8c1ef2cd0e158c84842553334e8587750040ab2f0",
-        "sha256:45f7e5beea6f0bfaeb2d356cdd95bc7d530a31a2ad13c4cc6901c5c1d9c41e9e",
-        "sha256:05864e4e2d0d60fe66b8bac3666d5c652dff7c418066d9723e6e37f17ed9dd29",
-        "sha256:4318fa206e74e772f41b79b0615d449728db041116f31159cb3be3a11a33caed",
+        "sha256:559e1144e8f3e21673baa603baaa5bd7e07ac2d6c90c10bcd264a409d5578b3f",
+        "sha256:0718e3852553ca0862f3006e42c8727298586adb2fadb50d8fb72e8218a83961",
+        "sha256:62c9093974a8d103ec4f112e50d2104240d634d5f3d8f3577b3e07b57a3cffc2",
+        "sha256:0022dd84f0dfba05cef7c74d6a1ecd38d8a1575562686875b31819c88c20e4ec",
+        "sha256:c965b254c6353cb4912715816b1fcf291ce9145a292e3905af2efe314d82c1b8",
+        "sha256:b528b7f2bbe9ade8529552b4caba0d0cad5eb582d08851998fdfd3ae459398eb",
+        "sha256:0ced4df11a96f6c2c13f4701ebd56f2cff39fbfd1586f8193d2cba27a8e823d2",
+        "sha256:35602e2323291d3998d5829735b7c76c635dd54bfda5cc6a2860c85f900730d3",
+        "sha256:4b983b7035469f302fe44047b67ac2f868160012dd6636349ce5415e65044a0e",
+        "sha256:dd0b3769d7ef81dacdbb706325068458144b721e2e26721ae3514a8f141570cf",
+        "sha256:d8af590971db7dd4a37d4a687f86ac753bf2ab82df672969746860d33799fb64",
+        "sha256:713b463aa68bd2dc0033cc35786921e3104a8cd034d78fe35c800d3bc3cca28e",
+        "sha256:31f7afa836f34e6ad1495e6468cca418e1651ffa7314abb8655846f90154b52a",
+        "sha256:ed4c77d553ba6cf3d2a02750098d2e2e58184bc677ba121e42efea10a09d508a",
+        "sha256:cfeb99b1ace9c032154a30531ab451d3e66b4f9a322ec85bb77394781e3076d1",
+        "sha256:fac0a6eca0a873cfc0783afb8bf179739315d7ba35eee2accb36a8da75b927f7",
+        "sha256:4a0eb58310f174e78bc3c8f88e5b0b58c53e409d8f1ee84169203146713870f2",
+        "sha256:8d8be7cea3651ccae6e4b25a5b81178f717d11ec0c2cac0c61290540d742db0e",
+        "sha256:c753bade010fd82910b93b19e34d1fe6f8ce935e21f74efa9437823db2f5f084",
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:f590aec6b5355bac7e1423ab409654e785b67a11cf1314053d60ec25e622c9c4", // imugi-idf-object-list-core-1190-eb2835ed
-        "sha256:1c4c6458d97c48a3168d20ffa3c0e6afde7a9a31bd8ae9e4913e096e7bc86b82", // imugi-idf-object-list-core-1194-034c2864
-        "sha256:fe8ab778170d8d90f07742b15353f9051dd6c2a34d10baa15f51b54964d2f659", // imugi-idf-object-list-core-1195-24887408
-        "sha256:98c612dff733226ae26295f4ce3d63a787e67f4307eb7edb74a7d3aa7b0ae7c3", // imugi-idf-object-list-core-1197-d30f53e9
-        "sha256:eee149798af3a5c498eaca1aad4360abbb8d36c106355ad39be60f38dc5871a9", // imugi-idf-object-list-core-1198-f05c55da
-        "sha256:9f7642cc00e07e3b21a3ea075ed6b8b6c58b1c8ee4013cb264a38c554bebdcad", // imugi-idf-object-list-core-1199-06fd9750
-        "sha256:abacf0cf4c49a7d7b6e3a2c1f9eaa18efb98549e934f2175bc3d28498681546c", // imugi-idf-object-list-core-1201-b4caf414
-        "sha256:00bc5766ce41c656281d6126f282e8ed65f2d6026b60b3a2e2d664f891cd51ce", // imugi-idf-object-list-core-1203-72a3014e
-        "sha256:48bc53427fec6caa7ac75fc9c244b1133f10fbf5ccb791ccd672c7403bb3dc39", // imugi-idf-object-list-core-1204-3d1f6b46
-        "sha256:487f450912629b27492c2c2a9807d52c300a70a204d30cc76ffbd9688b96ee8a", // imugi-idf-object-list-core-1205-2c80edf4
-        "sha256:b92712324b5cbc7b37eafc1a6ec89906d6243614b607cbebc296d6e90e5a17b7", // imugi-idf-object-list-core-1206-16829ca5
-        "sha256:b1b50578dc808cf282242fa26e51558c68a34d46abbc9ee49b90f80de113b1b0", // imugi-idf-object-list-core-1207-0087b1d2
-        "sha256:9c1d0533258a65641ca406e2186efa90c8cd9f64dc69c0d3e54b8312bfb40472", // imugi-idf-object-list-core-1208-19646451
-        "sha256:520a407a8e246b5f833a28892bf90414cee1781f3edee7c8b6e1fb26737575ff", // imugi-idf-object-list-core-1209-31a2a780
-        "sha256:e3b2dee6cbf5790e970589b37c113ba96a6e7d32f6546ce15d041bcbbc364464", // imugi-idf-object-list-core-1210-52ef6813
-        "sha256:7dff741da121e9a526b9b3385a6e9fba00378c5614c65f168ef2e5e660df21aa", // imugi-idf-object-list-core-1211-585d5ffa
-        "sha256:060c6fab0afcad8f39b134717d61b5315687e9d82a6f48922f3f7f57ddf8e68a", // imugi-idf-object-list-core-1212-063a0bdd
-        "sha256:d36555b839510c1d2904d11fe9df02b693776432143da72134aa7aa1aaa3bf23", // imugi-idf-object-list-core-1214-9a9bd1c1
-        "sha256:44a88d6a5639b7b168f10e5907396ba7444f5acf6236dd26f58147ca5151417c", // imugi-idf-object-list-core-1215-45bc5d0e
+        "sha256:ab01c40ee509ac0c3586e422b246f6fc2252302f6b95b6bdb73876bfdaca2206", // imugi-idf-object-list-core-1190-eb2835ed
+        "sha256:205e7a61f8297945d3aa2f1041a04aa7a3eafc8a1db53e6390613aa3a38edad8", // imugi-idf-object-list-core-1194-034c2864
+        "sha256:7fb7fd78923b4ae01f7fe9b3c78dec968ac193e5a9ba383574e1ec4181826b9e", // imugi-idf-object-list-core-1195-24887408
+        "sha256:706bc70350cf6c26769f83b56217fe4db8ce6a6abd6fa9ea315d09c89d98dce0", // imugi-idf-object-list-core-1197-d30f53e9
+        "sha256:55f1b049429cb44f3382e7d1b0efee0db825e17c459f69567e4f1a07f37248b2", // imugi-idf-object-list-core-1198-f05c55da
+        "sha256:4f44acbb2aed2de04732c6fd2270e27a3a67a6fea8897f12bbd4ab114e76a835", // imugi-idf-object-list-core-1199-06fd9750
+        "sha256:9be7a1e0704178db47f3059672d2cab6f6a01dc0de60c1fa09f290ddf9c855fa", // imugi-idf-object-list-core-1201-b4caf414
+        "sha256:27dd56b8f9f770693836dbbf00efdc9dcfdd3de3a70333214bc08c25a8123be5", // imugi-idf-object-list-core-1203-72a3014e
+        "sha256:a20da614709554074e51fd784d4ea1ba7750c5e401682f324206eb24999bf0e1", // imugi-idf-object-list-core-1204-3d1f6b46
+        "sha256:eb437b44fb6f1503529e97d5dd30f16d2459d9dcb7d5eeca13c724c75731b70b", // imugi-idf-object-list-core-1205-2c80edf4
+        "sha256:c3d4af23bca98f3ce04c2df2f5f5edd1d89023aa5c3b11818407a8ccb665c196", // imugi-idf-object-list-core-1206-16829ca5
+        "sha256:d3c621b803a4c0fa0a8774022d46fc6e2bbb510e045b4fe6ccdcaa9aeb8fcde1", // imugi-idf-object-list-core-1207-0087b1d2
+        "sha256:39dea5e32196fa0b3889a71fbaafe83cc1d691c746614149441cf315cef6d000", // imugi-idf-object-list-core-1208-19646451
+        "sha256:e45e6fa9a1d7fae8dd5f807abcda8daa707ada59b1f605d247cf714e98651932", // imugi-idf-object-list-core-1209-31a2a780
+        "sha256:35f6f953fff5bdde7c6e9e0cbbd10080ffbe0a480cc8b9db415717b1674b9aca", // imugi-idf-object-list-core-1210-52ef6813
+        "sha256:690ad50b0dd1f71e25d2675c13eb955ad5593015df197d501e40d38e70028250", // imugi-idf-object-list-core-1211-585d5ffa
+        "sha256:72ae5034cbe13696783e69fccfd744029304f4f0f1d2f9abc629643b011af54b", // imugi-idf-object-list-core-1212-063a0bdd
+        "sha256:3f876fbe5cfd856f04e536499a514bf05d07ab4e20ed5a902e65f90ae8198773", // imugi-idf-object-list-core-1214-9a9bd1c1
+        "sha256:4972632ab03e09cc2be79abb9a655523a6e98d629265cc184ec0479d24c7f5c8", // imugi-idf-object-list-core-1215-45bc5d0e
     };
 
     [Fact]

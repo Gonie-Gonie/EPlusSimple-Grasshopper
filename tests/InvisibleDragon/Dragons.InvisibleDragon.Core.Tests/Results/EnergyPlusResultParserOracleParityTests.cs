@@ -15,10 +15,10 @@ public sealed class EnergyPlusResultParserOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/launcher-result-parser-oracle.json";
     private const string OracleSha256 =
-        "sha256:a5e4024e46ed30d2cfed54b8f158a167de796bde898cc5cc451701ded4d3df6e";
+        "sha256:e7fc86fd859eb054022796fdf7163bcc040b738d23fdd3466944362558ba6a94";
     private const string CasesSha256 =
         "sha256:a0464a29bfd0bd1712deacbac50d3f87f6ea15e4ba9f4d19a70e88e896be38dd";
-    private const int OracleByteLength = 43_608;
+    private const int OracleByteLength = 43_605;
     private const int ExpectedCaseCount = 21;
     private const string OracleSchema =
         "dragons.python-reference.launcher-result-parser.v1";
@@ -176,7 +176,7 @@ public sealed class EnergyPlusResultParserOracleParityTests
             "847b01f68f438f560a986072bcaa7768fbf67897",
             RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

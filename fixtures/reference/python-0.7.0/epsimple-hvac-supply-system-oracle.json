@@ -2920,30 +2920,30 @@
   "native_review": {
     "public_production_routes_only": true,
     "python_executes_native_runtime": false,
-    "routes_sha256": "sha256:578ab9f3b1df7e5a9aa3ca30fe53edcbe8bc2620b41e6cb228267450af455145",
+    "routes_sha256": "sha256:b47c0d48a11ff74cfe713378121b99368353f1b492e8f6de9b570a949c3a7939",
     "source_receipts": [
       {
-        "bytes": 6465,
+        "bytes": 6456,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs",
-        "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"
+        "sha256": "sha256:7ee0ec0b4eca1a78b4c6df5f6ba452b784bf09859ff24e6f50c681d16a63f1cb"
       },
       {
-        "bytes": 48650,
+        "bytes": 48641,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
-        "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
+        "sha256": "sha256:a212275276ccff153d5df42a44a46ac8877afa485e315ee27d08767a909f29bb"
       },
       {
-        "bytes": 16652,
+        "bytes": 16646,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
-        "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
+        "sha256": "sha256:40e6e7aa1eb89cb341c7e7a32471fa029024e49b261dce8a8926514109d727ba"
       },
       {
-        "bytes": 87343,
+        "bytes": 87154,
         "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
-        "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
+        "sha256": "sha256:9462f609a4a7a4e062612e4058921b0c91931dc8ff7216dbe54e258cb59ec22c"
       }
     ],
-    "source_receipts_sha256": "sha256:26021fb1a71c8c47b7e4d45e31d5703bc2694c996e85d5da670954fab24b2ca0"
+    "source_receipts_sha256": "sha256:5e85f7f593aafe22f2688fe9aa9e2698190d4dbd54908d6a24e0d987325233c1"
   },
   "runtime": {
     "bootstrap": {
@@ -2969,14 +2969,14 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7",
     "strict_json_support": {
-      "bytes": 21114,
+      "bytes": 21108,
       "path": "tools/python-reference/generate_schedule_type_oracle.py",
-      "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
+      "sha256": "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1"
     },
     "supply_system_support": {
-      "bytes": 61458,
+      "bytes": 61377,
       "path": "tools/python-reference/generate_epsimple_hvac_enums_base_oracle.py",
-      "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
+      "sha256": "sha256:a397d3169f61a375b12a3934a2270874bfef1f3713a635cfd5e342668d12046b"
     }
   },
   "schema": "dragons.python-reference.epsimple-hvac-supply-system.v1",
@@ -3872,9 +3872,9 @@
     "adjacent_receipts_sha256": "sha256:8516665711bdf76cc747fe3843b097c8ee038dde68a4449278c365a0315542d4",
     "commit": "847b01f68f438f560a986072bcaa7768fbf67897",
     "inventory": {
-      "bytes": 518070,
-      "content_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
-      "file_sha256": "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+      "bytes": 518067,
+      "content_sha256": "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
+      "file_sha256": "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
     },
     "isolated_import": {
       "epsimple_core_initializer_executed": false,

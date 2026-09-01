@@ -32,12 +32,12 @@ from typing import Any, Callable, Iterator
 SCHEMA = "dragons.python-reference.dragon-hvac-appenders-controllers.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 137_833
 EXPECTED_SOURCE_SHA256 = (
@@ -50,16 +50,16 @@ EXPECTED_SOURCE_AST_SHA256 = (
 SUPPORT_GENERATOR_PATH = Path(__file__).resolve().with_name(
     "generate_dragon_hvac_supply_core_oracle.py"
 )
-EXPECTED_SUPPORT_GENERATOR_BYTES = 65_898
+EXPECTED_SUPPORT_GENERATOR_BYTES = 65_859
 EXPECTED_SUPPORT_GENERATOR_SHA256 = (
-    "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97"
+    "sha256:7ce1af80729c2f2aa333016ba95db3963b25db24e1b23d2c89f49ea2694590e2"
 )
 SUPPORT_FIXTURE_RELATIVE_PATH = (
     "fixtures/reference/python-0.7.0/dragon-hvac-supply-core-oracle.json"
 )
-EXPECTED_SUPPORT_FIXTURE_BYTES = 215_698
+EXPECTED_SUPPORT_FIXTURE_BYTES = 215_230
 EXPECTED_SUPPORT_FIXTURE_SHA256 = (
-    "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f"
+    "sha256:657b53b768c90a2915ca10c781ff63ab5a21323bb09f534d4d5da3178fe99194"
 )
 EXPECTED_SUPPORT_CASES_SHA256 = (
     "sha256:29eacb2d29f528353302d1afd8e3ef646d7d35886237bb4a3fa494039a4ec36f"
@@ -227,7 +227,7 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:87cf389f96bf8041e9dca0b22291a465aff5715e209d190a175b03a70cbf7d65"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:0e6029c90b6db1faf5c9a12057d0f8b2496c85adbd696784c9200bbcd0218c2f"
+    "sha256:855517efc02d77240c56e866a6166ac4c837a9f9ba33227dca048fbd65b90dd7"
 )
 EXPECTED_FACT_SHA256 = {
     "dragon-hvac-appenders-controllers.demand-branch-appender": "sha256:ad7d55e8192bef04c3f6509932e8760791f0bf8cc5bd67a81de7a1d80638ab53",
@@ -251,29 +251,29 @@ EXPECTED_CASES_SHA256 = (
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 7_582,
+        "bytes": 7_561,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
-        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "sha256": "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249",
     },
     {
-        "bytes": 18_267,
+        "bytes": 18_249,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs",
-        "sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf",
+        "sha256": "sha256:bf93e1c6889f7d371fff983caad1b3c90d4cbc6113bbb5d9a7a783740af1bb46",
     },
     {
-        "bytes": 22_015,
+        "bytes": 21_985,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "sha256": "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28",
     },
     {
-        "bytes": 50_764,
+        "bytes": 50_723,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "sha256": "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4",
     },
     {
-        "bytes": 13_182,
+        "bytes": 13_173,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
-        "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
+        "sha256": "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048",
     },
 )
 

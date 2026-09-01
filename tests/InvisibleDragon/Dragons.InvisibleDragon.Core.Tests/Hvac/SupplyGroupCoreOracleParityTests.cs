@@ -20,22 +20,22 @@ public sealed class SupplyGroupCoreOracleParityTests
     private const string OracleSchema =
         "dragons.python-reference.dragon-hvac-supply-group-core.v1";
     private const string OracleSha256 =
-        "sha256:320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092";
+        "sha256:32f05de2a2ead16e0097d3402577e8bce03f40ea151162a6312000bb4f5a5886";
     private const string CasesSha256 =
         "sha256:b429a0dbefc2ac0411f53bfc705fcbfb984fffcf6859a1a3be7e355bc47a9b8a";
-    private const int OracleByteLength = 31_163;
+    private const int OracleByteLength = 31_160;
     private const int ExpectedCaseCount = 18;
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
     private const string SupplyGroupTypeName =
         "Dragons.InvisibleDragon.Hvac.SupplyGroup";
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs";
     private const string ImplementationSha256 =
-        "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a";
+        "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249";
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Hvac.SupplyGroupCoreOracleParityTests.MatchesPinnedPythonSupplyGroupCore";
 

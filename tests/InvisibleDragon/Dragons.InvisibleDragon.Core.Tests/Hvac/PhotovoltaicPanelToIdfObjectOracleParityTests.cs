@@ -22,26 +22,26 @@ public sealed class PhotovoltaicPanelToIdfObjectOracleParityTests
         "fixtures/reference/python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json";
     private const string OracleSchema =
         "dragons.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1";
-    private const int OracleByteLength = 147_261;
+    private const int OracleByteLength = 147_258;
     private const string OracleSha256 =
-        "sha256:07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b";
+        "sha256:34793bc83100d9c527f1a7dce5e16dd4527ccb0e193e8db48e70ae35d3dfc7e1";
     private const string CasesSha256 =
         "sha256:767c3314ec20d07aa12fdce48b9969a98b54b835855b4be7ecfdd896816be0dd";
     private const string GeneratorRepositoryPath =
         "tools/python-reference/generate_dragon_hvac_photovoltaic_to_idf_object_oracle.py";
-    private const int GeneratorByteLength = 31_850;
+    private const int GeneratorByteLength = 31_844;
     private const string GeneratorSha256 =
-        "sha256:31ecfd6d9c94691281f2edace585402a8612baba298714874211728bb9d9876c";
+        "sha256:4247adeba891b60113290874590c0f982d37fc918168f9a77f98d3e8d1ec0c7b";
     private const string PythonValidatorRepositoryPath =
         "tests/PythonReference/test_dragon_hvac_photovoltaic_to_idf_object_oracle.py";
     private const int PythonValidatorByteLength = 21_314;
     private const string PythonValidatorSha256 =
-        "sha256:0b290029117396173f3a648343d0d751a5938c628a6a7d6a03d35738a474ac4c";
+        "sha256:3ab86b7f763a108caaae382bf568cf08daf3449b12471df1a0894c14ba1042af";
 
     private const string UpstreamCommit =
         "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string InventorySha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const int UpstreamInventoryIndex = 761;
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
     private const string UpstreamSourceSha256 =
@@ -58,9 +58,9 @@ public sealed class PhotovoltaicPanelToIdfObjectOracleParityTests
 
     private const string ImplementationRepositoryPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs";
-    private const int ImplementationByteLength = 7_074;
+    private const int ImplementationByteLength = 7_056;
     private const string ImplementationSha256 =
-        "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82";
+        "sha256:6937f9d9204bdbfc7907de15540772b4d33a0e5ad2a73beda0888fb89682f8cb";
     private const string ImplementationSymbol =
         "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.ToIdfObjects";
     private const string NativeTarget = "PhotovoltaicPanel.ToIdfObjects";
@@ -72,9 +72,9 @@ public sealed class PhotovoltaicPanelToIdfObjectOracleParityTests
 
     private const string IddOracleRepositoryPath =
         "fixtures/reference/python-0.7.0/idd-24.2.0.schema.json.gz";
-    private const int IddOracleByteLength = 585_482;
+    private const int IddOracleByteLength = 585_481;
     private const string IddOracleSha256 =
-        "sha256:f2dfc27d39f788f945ef5cc3b79ffce2a516a568075717bd67088d900a75c705";
+        "sha256:75f9d6c2efa32349704489aae4622b8647ac07f542e61cf3130624786436fa26";
     private const string IddOracleSchema = "dragons.energyplus-idd-schema.v1";
     private const string EnergyPlusVersion = "24.2.0";
     private const string EnergyPlusBuild = "94a887817b";

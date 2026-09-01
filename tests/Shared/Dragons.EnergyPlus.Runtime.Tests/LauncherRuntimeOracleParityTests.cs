@@ -18,10 +18,10 @@ public sealed class LauncherRuntimeOracleParityTests
     private const string OracleRepositoryPath =
         "fixtures/reference/python-0.7.0/launcher-runtime-oracle.json";
     private const string OracleSha256 =
-        "sha256:4681df3e0fbe037588ad3210218c567a0aba8a3a7976f8e096ba37bd5109b35b";
+        "sha256:3df3d7fb8c0c9d85ad0e9ffae9ae3055d742671b4554b2c860ff9f1877f9df33";
     private const string CasesSha256 =
         "sha256:bf5d658273fcf42e536acc102e1b117497b3f017031c0db0c2d605c87297d4bc";
-    private const int OracleByteLength = 19_789;
+    private const int OracleByteLength = 19_786;
     private const int ExpectedCaseCount = 12;
     private const string OracleSchema = "dragons.python-reference.launcher-runtime.v1";
     private const string EvidenceTestCase =
@@ -168,7 +168,7 @@ public sealed class LauncherRuntimeOracleParityTests
         AssertKeys(upstream, "commit", "inventory_sha256", "path", "source_sha256");
         Assert.Equal("847b01f68f438f560a986072bcaa7768fbf67897", RequiredString(upstream, "commit"));
         Assert.Equal(
-            "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
+            "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02",
             RequiredString(upstream, "inventory_sha256"));
         Assert.Equal(UpstreamPath, RequiredString(upstream, "path"));
         Assert.Equal(

@@ -21,29 +21,29 @@ public sealed class ConstructionCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/epsimple-construction-core-oracle.json";
-    private const int FixtureBytes = 349_214;
+    private const int FixtureBytes = 349_184;
     private const string FixtureSha256 =
-        "sha256:d4e9421c40c39dfaef948054798b03fb046fa31d1a5742cb8a53484c87d819f9";
+        "sha256:8fad664f712facf9eef8627d80e9bafcf468e4b0c63d4cf09d9632db814246b4";
     private const string FixtureSchema = "dragons.python-reference.epsimple-construction-core.v1";
     private const string CasesSha256 =
         "sha256:9046cfba389607b07ceb9308c6962cba74c8550fd1e2557fe453f8144d1b0f92";
 
     private const string GeneratorPath =
         "tools/python-reference/generate_epsimple_construction_core_oracle.py";
-    private const int GeneratorBytes = 107_989;
+    private const int GeneratorBytes = 107_953;
     private const string GeneratorSha256 =
-        "sha256:1b48f4ed06dfbae36685f517563a5991438511208481f4f9db653db7228acdf9";
+        "sha256:3a46720e1cdf8ffd301a3af62fabe5c9a710d5fa9ba4c0130916bf9944f8f36f";
     private const string ValidatorPath =
         "tests/PythonReference/test_epsimple_construction_core_oracle.py";
     private const int ValidatorBytes = 22_545;
     private const string ValidatorSha256 =
-        "sha256:39f940059fd79e5070159b1abc1cd06dbb857ee6d572d86e19c9e33c719d37a4";
+        "sha256:f17f039a00dda4e9ff12b59705f94eaad94aec3d7138345dd603a015d36fd299";
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/epsimple/core/construction.py";
     private const int UpstreamBytes = 25_902;
@@ -61,36 +61,36 @@ public sealed class ConstructionCoreOracleParityTests
 
     private static readonly ArtifactPin[] NativeArtifacts =
     {
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/Material.cs", 1_997,
-            "sha256:c869470be0b2a1f95ce7ad7cfa3ca32489bb99bed23e3465d0ab426175e8b1f5"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/FenestrationConstruction.cs", 3_962,
-            "sha256:15eb1452a5c89bf1e2ce41e1931500b6a329ea6467ac618e2ad6fb139369f5af"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/SurfaceConstruction.cs", 7_278,
-            "sha256:0fa371d0fd3c6957ad506b927122c51f3eabb0de32d20d7b1602f118302458b4"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/ConstructionDatabases.cs", 11_476,
-            "sha256:8e45c4ba676f60b5b687bf333b7f0c0134577fdb4c2e00f8e9142defc2551f6d"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonDatabase.cs", 2_543,
-            "sha256:31bf339ab34fb3e4f65362be0d9519b1d54c44e4b0e46b63e67398873d5fb74a"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs", 3_131,
-            "sha256:76915a821bccc2dbc8e3f185c1faf6c3da07dfe64cd50301b336367d8c5d2d81"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Fenestration.cs", 2_419,
-            "sha256:6b71c32871b5468b570b64dfc7389132f4cf0413340add7d16dcf0cb44451a78"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Surface.cs", 7_039,
-            "sha256:a26c799796aa042529926b0c7f4052a495a0e84f8b6a21169aa2b24318b6f809"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Zone.cs", 6_664,
-            "sha256:82b149ae49fdc188d7947553187e4d5cb496d67087ae2e1f7c4e878a02cdd01b"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_650,
-            "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_652,
-            "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_343,
-            "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Model/GreenRetrofitModel.cs", 7_677,
-            "sha256:7bf2f7dfb922f4d85982ada0f5622bfbef59dce8cb4d7a90b2759ed6978935ea"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/ProfileDatabases.cs", 6_756,
-            "sha256:73564c26c8ba3ec98e0758fa8528a6a0771d72c268af7a4beb23e5cc7dc6625c"),
-        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Weather/WeatherDatabase.cs", 9_463,
-            "sha256:c7ddc71015eb375e56565a2898d7998cf865fb50d0c8626374f0f642644e9e98"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/Material.cs", 1_988,
+            "sha256:a574a5a93277be915c4a9a20e81d5e13fd7d52d0e43b7ba120078fb4eb8d672e"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/FenestrationConstruction.cs", 3_953,
+            "sha256:6e8fb7cf51f284d51fb37d5a1b88626422e7ace34a3187d7e0e73196a3a96073"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/SurfaceConstruction.cs", 7_269,
+            "sha256:605f54f51df2690cef21885171d6c72752022823f393f872c836160312cf03c6"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/ConstructionDatabases.cs", 11_467,
+            "sha256:d32ccc161eb531aa2686891243948871e8af4e5b169012dac0084314df430e44"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonDatabase.cs", 2_537,
+            "sha256:af9d3176183292b19e2304e9be3e000e266a6d858d462bdfd65d042d1568147b"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs", 3_104,
+            "sha256:ae2cb7c89e4dcef7195e528fc7831c5abdba560651a244281ffeaaa83c60fc9f"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Fenestration.cs", 2_410,
+            "sha256:254b305f2ea49d8c39b25a228a0e734e730fd9168ba04c599c3344b6e92ac9f8"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Surface.cs", 7_030,
+            "sha256:fc64bbc6f9914393f1f3ec1fea7a101ba30e0c7640ed12280a8d1614dfc78dee"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Zone.cs", 6_655,
+            "sha256:e5a1c9672c7ff9a9d2cf660c96f303f0f162cdd888f681e0f7b24ef98d197a29"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs", 48_641,
+            "sha256:a212275276ccff153d5df42a44a46ac8877afa485e315ee27d08767a909f29bb"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs", 16_646,
+            "sha256:40e6e7aa1eb89cb341c7e7a32471fa029024e49b261dce8a8926514109d727ba"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs", 87_154,
+            "sha256:9462f609a4a7a4e062612e4058921b0c91931dc8ff7216dbe54e258cb59ec22c"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Model/GreenRetrofitModel.cs", 7_668,
+            "sha256:927ac0cd6982f48f1112a690e1a656dd16716dd96d5a145beb303e2154bbcc33"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Profiles/ProfileDatabases.cs", 6_747,
+            "sha256:041b28085203376258726c21033c140a04a6fed65bcd07cd9ea429ced5d73bf1"),
+        new("src/SimpleDragon/Dragons.SimpleDragon.Core/Weather/WeatherDatabase.cs", 9_454,
+            "sha256:28f3885362fe08663ba6393bae545b70d17284d1751aa5a97cd0194e1b271b34"),
         new("data/simple-dragon/construction/material.csv", 146,
             "sha256:2a2b62b1c13e65d99098acac23f1ffcc4aa9ce08d162aa8491898b3f0c7bd395"),
         new("data/simple-dragon/construction/construction_regulation_surface.csv", 106_539,
@@ -222,107 +222,107 @@ public sealed class ConstructionCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:33adc66a0ef21ca9bd88d16f2686fc643243cd6e0567e4171664d447ba5aa34d",
-        "sha256:a8993a436c3f17d29116fe64796c479fc6463ee009958c1b0d1e595a841f1889",
-        "sha256:7c16d3cb4b39902879051b6c1b7d13225c5052ce0db637d434f559b652891a8d",
-        "sha256:373ba473c59cadfaab2a94098fe87c68847ac74e359e003ed3597077d4eea10f",
-        "sha256:3deb7c1efa556db36cc539e9d0da25c24ae0d524a7e7f12085af4216026684b4",
-        "sha256:a8b36dcf00afcebcaa32267e9dff06aabce3cde3bba52b18054e0415c1cbd930",
-        "sha256:6fd92faf17ebb7849714bebe16016b205ee82385c4d47e7a7a5cf22ec6df30b7",
-        "sha256:a3a95b319924c5ed0a514097f51b58304116aec27fb7bf8b54eacadf99c7f95b",
-        "sha256:472dac42f26c79aa05f21c73e85981c6a692261cfae129d91e767091b0650524",
-        "sha256:71e03b3a90ec9ab06adc8271985446c6787fb7ee2663e969f5a6038446c013e2",
-        "sha256:ecd7eb7df54b0e36c322997b9c1790864f71bf271b107099a68b824aea53ac53",
-        "sha256:37c0f50de0f9fc0373f16d653fa400a8a77c0fdafde215cec128e6eb40c66886",
-        "sha256:9fba48bf7142405e85e2f3fca6f287a756409402a73c3034a851045bd0bc87b5",
-        "sha256:8582d6ced4e2c733030301abaecbbb116dbd768a811a5e84977ce2dc483a7394",
-        "sha256:a6cb502c0f778234b5aeb500146b099e7ac64dc0f21b924616f48b85de4f8fc3",
-        "sha256:5ae597abd6bf069dc89495ce57a8c0487803c2ff5f0c40821c2980f19d4e01d5",
-        "sha256:759b1acc304e6e3a995222bf11b61285a987931511ab2e11b718358d0161b1ec",
-        "sha256:96e08fc53a6c187aff0015e123fa7f008bbbc4d0f800915991cf8897353e727a",
-        "sha256:5838327af4df9cea4b0ccbf49b49cb29385e85c1c87184108c7fbbd01a886de1",
-        "sha256:87f21532fddaed447db63826daa6be6a4710a907f32d1978e283d7211958fcf1",
-        "sha256:8bfe7263935d3e23c9158b6d7acdbca48991020bb46f171c39d0ed5dbfdaf751",
-        "sha256:c8099628f7632ca17affa436d7115ac1f38eab0dcee8b136738a8e4cf2b4f1c0",
-        "sha256:d0ef39d5e144715db48a8d76f57317fc336c239aeed262466c3a8e94f00e14b7",
-        "sha256:57613c9754f3d009895d894eb4d412370e92754392f60767d20e64861c3613d5",
-        "sha256:931e2342879b4854d9f9c7995f54bfbece73ef2940a224ad447ab63e0d10ff52",
-        "sha256:fac111b8c4fb37549ea9c4511633085c3e7ca8f097d583d9c4264f8c103706e4",
-        "sha256:8442b781e89a64e3ae2092f5c14af60bf6c344acd5c1e1683f2317493396054c",
-        "sha256:22356dc92d50dcc551026e74296eb42d1c79d7c6faa5a5efd9809373e8967921",
-        "sha256:7c127d16f151e1f8ddd0c3b7b48611323f0b8c68e5e645cf8cd7ac37706f8f6e",
-        "sha256:dfc85167a7954b7bfcf07ba377f70a7e98635cc23a29596739ea7bc20282df63",
-        "sha256:772344f282161e027020a3760c9830633a36cf9441c06fac3026186699fee4ad",
-        "sha256:130e37512e58515af5848a9c63741ba4726daf3f68d90c10c333d7a3f5db8023",
-        "sha256:9d94e64e795518e649c4fbf98de2369205ffae43e7c8152728988cd4d949b448",
-        "sha256:a4c92cd1c66ddd06827b22cf42d8ba33dba5c6ed6c173e601f6c892504ab7b62",
-        "sha256:b4e1a3799d7d858e96d70ae5c2ac1e2be68fe4238cd93549aed430089d4c9a8e",
-        "sha256:0c9efcf98ee6aa8fbc04b5e069a41656302ea3a08436289be535d55108632820",
-        "sha256:c106f71cbb1a54d67e62f644c779bb609e28fcce4b98cd20170e9d5c621c6313",
-        "sha256:2f70488dd6555d42e1dfca9fe69ace14c378093d67155d809bbc9e2ec7ced2b6",
-        "sha256:f137b5347c688f0ee6ae7178e18dfa916b7e8ac9c59810602f880f30e525d717",
-        "sha256:6ee6f81a98cee670cd492d1cb62218be346eed6d80203b84b820f45410f1946c",
-        "sha256:6abeed335b2314384a631479a77fadbf15d3670764c7c065639d950941387b29",
-        "sha256:bbecaf74c4e41fbec1d5448689e6d093430b5076c03cee9e69653642d87dc35c",
-        "sha256:81ae46ce56bfb207be8d96d8675bdeb732d55d0fba7fc7d909f4575411a55c98",
-        "sha256:679e90e645d89bd5d4944885c255de36c2cccdca6b4dbda78a63587266c9a58a",
-        "sha256:52c8d8801881636e40a354a65f4b3298fa8b371850165ba1ff9045963557c1fd",
-        "sha256:80ccec14be573d1eb38f11232801045f347032e1b13236bb290f7086cd9f31a0",
-        "sha256:96391d43fba261c49204026126cd729bc38d31349fdd93d0e6348673c57ea4fc",
-        "sha256:f43151a366c579e24d78d588438afeaf523227c9492c909284d99b61ba943f44",
+        "sha256:7c9c3f29a24027d2c031e0c265a3e48f2cc511cbfcc2190e2641e2f1c0d9372b",
+        "sha256:29dfc56a9a7d9833cef1ae61b6026565841d0ccf56101b09baaab44f88372bea",
+        "sha256:87c1419bcce53c9fe5127a5292fcf010ca78b7670a566849f8a2a5638fe0c89f",
+        "sha256:d963ddeb43b2ac4aef00e793161ae7e42140180d58f1f2124f80771d7df7bdd6",
+        "sha256:be519198243c652e2d3237ffa50435e4c80c5ae93f59e398acabb40b6b9ee6b5",
+        "sha256:ccfb42d65f925d715a806bc9d483622028a9ec9c0f284557f3c30af479d6d967",
+        "sha256:fc4831148f8fff3d3fbda332969fe57ec16c88d8c514500765073223987ddd24",
+        "sha256:74c5d656a83d8aefa26a446037f1b4046d15c5251f33ebcb7d96ae6f45b494ad",
+        "sha256:934934476640e60c0082b408dade4a06ed6525484a14b74878b2472c3a26ab60",
+        "sha256:7ec4282f7d53b9536c87f4525d3396cdff2ce65caf892c852afd672fc1b3a91b",
+        "sha256:4cfe4214bb92dd57afb3db5a9fd5ce89d79cc42d037f7b1c156d4ea4dfcad678",
+        "sha256:ad3be8202c90190868e7177d305f48f5ae3b5aec771e580b12709cabfb084552",
+        "sha256:d5265ec6ca65557506a0a413b3a75a57833fbe46df35bc84afa9634973beedaa",
+        "sha256:bda498157faf9838434c0e778fcaff72eb2c313a54503bfb0d593af78a3da774",
+        "sha256:f70f6562e2f4f6adccd95ecc850a2643fea076582c40d0f3a6165ceba4532c96",
+        "sha256:221e57ab8c294cb0967110885f44938fac1bfbb41f9aef28492018a89016e298",
+        "sha256:5a49ca0cc65073b7a6e63133d05ef978512c77c9a584a02e31d11eba82fd66a8",
+        "sha256:aa6ad3ecbd3a2a8fe7d7d87132d8eb30d01b8531e05be0b87cdc9d8cf77f1052",
+        "sha256:9e7a064718279a58c559cc3591cd6257918ce519f755ea94300283dd880f9d21",
+        "sha256:0a66b52df39919b86290884fa06b533edb8d57dcf52b556e05e508b4d874ca8f",
+        "sha256:c8d6d935a71ace933707e2e7617f786336be3c40f8e12c5f0a15219616a64834",
+        "sha256:33a2296e0669a3a9dee4e7baf9b18c87d1cc1b3454dfefc38903a92304d03dff",
+        "sha256:d7604877f84a0c8a19f7b01a01c4f25b01d7d65bd227a0ad3e59ba90ef955c45",
+        "sha256:577edb2a67885673b3c87f052a95af2bc47bc97042b66f4ff5e78b24dd31a156",
+        "sha256:5bc7709bada75ffd5ac7cea7a151f1a9f4ea027faee0ef226331d78052d36558",
+        "sha256:a145533119c93dc8dcdb45d306d3cf7912ad73c75fe7a0d9b0a48c304ca086ad",
+        "sha256:d9e519b36886535977a63516973d87171c19a57aa9d9061c9b4a35145e603f0f",
+        "sha256:79deb3571525eb0eb0cd52078094ab826555e61c4b639de40e6bd159574a76b1",
+        "sha256:c4a41989c92fe31e7f005deff1531b5d09a62275eb394cb1c4091ea70af24622",
+        "sha256:754f8f695090ca6bc1ec4ed002c0de372e1fa4e1854cb131d55af87669765e9a",
+        "sha256:d6a8b2e6fd1e4c7acae27fe9b907b50d878b1a58319a80e131ae1e29925be516",
+        "sha256:f74e66e0435d9393d0bfbb216ae25ee6935b198718b37bcf37e2a148c304ef4f",
+        "sha256:d251d7634fcc2bea2d7ea79c35beaa5f2c72b89713ad6801c6b217e71e401866",
+        "sha256:6d9501a50dda1f69fa0eccd16a307cc2a91ab05e9d82a3fe0aeccb81cd4617b3",
+        "sha256:e26ae4902b4f7f75ec6f43039baab10800a98d41fa42912b14ef21ca361cb8c2",
+        "sha256:8606f2dedda84328f0835d130de755bd77a931afb25c5d25c4e5d47a7263001e",
+        "sha256:443964325376b5ee17fa90905dac8a8abb6eeb2ff825a0d28a24cebe273cd2d6",
+        "sha256:cd3ea2dbb97b5bbf6917f6294b24bfe09ee8c4f8efbb2e83c43006852d927097",
+        "sha256:c19dabb8802b676b3c0738ff8f82dbfe6ab40dc7470838163c15810a6117d6c5",
+        "sha256:c1358b5e916a16797acb115300ef9c082373bf8144a3a764bcce0eb0974921b9",
+        "sha256:e85f2018f6dd14c1d0325b87ac97d6da1b297c07ef96d1a52587c57f889b3c42",
+        "sha256:cc351045f5ff8a4a5aef8aadeb49fc1f3e19c2732e4b8317e70cd5ccf98a7a82",
+        "sha256:a0adea62f24f327b4178b29f51e268818d73e639bed0d3eb71b1cb31a57e7fbf",
+        "sha256:c790824127415f709f85a6423f6e6e89bb2d2cad142d2d4654116e96bddd4a52",
+        "sha256:07082e3b8585867f9277986b58917c8de5acb05d04c7a55fc5f7ff4d96b49d84",
+        "sha256:3366598aba7971ca284404cae7d0fb0eab964cc8013ec182aa728eb893821278",
+        "sha256:b0dbe0e66122ddce977abc8b5255844c258766c8e35235e1393046317708d9d9",
+        "sha256:c65b8a207734b143d4568d4403f1426d9f0aba93e90fab4afd053f5b83ca9a80",
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:be15b5d17e49845f3d341b4c71a21a15389dbaf3b5e05df9615f9ada48aa365d", // epsimple-construction-core-75-f86ec154
-        "sha256:20840f7f7f4fe5f1d2c7a82ed7161567eb1d601a5e0c74cf01a99e7b78824974", // epsimple-construction-core-76-246156d9
-        "sha256:55660d7ebfe63caea0e15f3fbc2d73bd67e538b4daee8308da233809c9776178", // epsimple-construction-core-79-92969825
-        "sha256:f6509287b9b977dbcd3f18669b0f621bdad81acb2c832e86cf57381ff0c5f3fe", // epsimple-construction-core-82-e3c4284e
-        "sha256:185dba0977d6508d63193baaa7c0055e26d3572e9e0fdbc07d4fbd47e3b969c2", // epsimple-construction-core-83-5025a060
-        "sha256:2160362137025871f7dd976e71c34a6012646eddc6bdbb56b58be7a88a352ac6", // epsimple-construction-core-84-87537fa6
-        "sha256:e49b2bd15781c8fe3db43c595c55839daae50b27b94552125ea0b0a45659fc2c", // epsimple-construction-core-85-c288c4c2
-        "sha256:99e3f3d2eb12797716219cd41719360887f243cb80fda8ccda859a3cfbe76386", // epsimple-construction-core-86-538b0465
-        "sha256:552be7eb306d7e32eb5c8568f846485a3e0f2dcf4e7b4f057bfc123223d945a2", // epsimple-construction-core-87-8aaf803c
-        "sha256:e3d91265e74478a42666e2a5734d6614fa589313fa23b48f6ccde44d21a6ae5e", // epsimple-construction-core-88-f430c29b
-        "sha256:9ef79f9cfd4082e9716477420d25ce9de0f56ecb7eb180eebbfd9fca17d71346", // epsimple-construction-core-89-72e986b6
-        "sha256:298b2d3418132658f494afe64615eea2d8c03013399083b0f85d4271c54588f2", // epsimple-construction-core-90-590c4070
-        "sha256:97752afb6e1ac932083f5d6325a415f669e8746c00817f5b58f2736bfdab9577", // epsimple-construction-core-91-246156d9
-        "sha256:4aea70b4b9c28c75c3b42af943ab4cd8c3de450dad3cf112ef8c5cb4954de19e", // epsimple-construction-core-94-d909f493
-        "sha256:f3b853874379764ec7a27ae5c212217078c21876580957c2b410054097d21e42", // epsimple-construction-core-97-b733b56b
-        "sha256:fa99bee4c9c034d70fb0e64a16824186374f961a2ba7b539aa9eb8f4e072784d", // epsimple-construction-core-98-23136324
-        "sha256:4c07223c4fe705977d225e197bd4b349d234fa63ea04f997cf48b2f8d0641d05", // epsimple-construction-core-99-f2772e15
-        "sha256:d702e7bee9fcc86a7ea6731f963f257df202d72aa5c1e6c50eb19155ca7089d9", // epsimple-construction-core-100-c3fc9501
-        "sha256:b39ab879ece874f05063457768818ec2a9c24c56deea6c58ce775d613252e80a", // epsimple-construction-core-101-f6b33018
-        "sha256:1c06e5dd5ed1c967ea3765e5f14285e6a62aef75973207492dbd1d53c6f7faf1", // epsimple-construction-core-102-abf4a2ea
-        "sha256:ea4c117883bf41744435a24153d7ae93dc73575fbb8f2f57e019a1df3ec21cfa", // epsimple-construction-core-103-7326bc5b
-        "sha256:3a1ab91e190772255b34e4a615fc0b3aa5dc16bb5ca4e8101e1c89af90073615", // epsimple-construction-core-104-352f66b1
-        "sha256:8b31a074872bf8606d548b300a26c3b195c14e45ec0f31c5f24d8142860b4462", // epsimple-construction-core-105-3257fd04
-        "sha256:77a634a2c35b40dc7a610447e4e78754f6443516aab7a17b005bd847dd2f32ea", // epsimple-construction-core-106-45236b5b
-        "sha256:5cbc32e069e1f8bd99ef49ae2f6616a3c4d96de001bf9a21aa65d8c397c27bc5", // epsimple-construction-core-107-3f5ae9f0
-        "sha256:e24f9402e50fa327679d7e3366eebab0177f7e6d8e57a8af4a0357750973d138", // epsimple-construction-core-108-9f449287
-        "sha256:bad3cedc5b3a2b9d5dd916d400f0bcaf048f712f365152fec77e00ac977dc6d4", // epsimple-construction-core-109-758d9c0b
-        "sha256:121d5fdaa1a925235c725695bbbf6f8478975c105d297617c2c7c32f0cc7cb32", // epsimple-construction-core-110-4f9ce2c0
-        "sha256:6a53f7ef253728de24ae91ff52a8456cd2250e8c6cea27910203b13101d437a3", // epsimple-construction-core-111-119ed204
-        "sha256:dfef9bad91ae09af49e85ec0de89630a9b9af833282dcf2b5e927289e0acd2bd", // epsimple-construction-core-112-f3d6bd23
-        "sha256:0657b4cd89dc56675a49a77dd496ac68c0316cb4d25d012f85b7b12ee7e1110a", // epsimple-construction-core-113-246156d9
-        "sha256:649a0c199fd3076dafa4bb6939ef3822d86fab404758e16acc29c9b152aade56", // epsimple-construction-core-114-c6b969b4
-        "sha256:726c25b4649a8dd6da318b329df28903e1f9db023e7762defd2eae737bbc0287", // epsimple-construction-core-117-6e437543
-        "sha256:32e2241f16ffe2c24b8817be2fb0c8acb24f8cd7b024e733677de0e6c64abc02", // epsimple-construction-core-120-23907b76
-        "sha256:fdda2f1308642f24d877735705a3d0094536560cf48a8cb5785d6ef5d7749d48", // epsimple-construction-core-121-60a500a8
-        "sha256:cf44cc3226af313b36d7a4bbb49712610fa640225cff9f54c08cc41d514acd38", // epsimple-construction-core-122-b1bb16e6
-        "sha256:aae519998ee504d88b3645af63b0e19798b1104e174144664121014882061657", // epsimple-construction-core-123-d21ed4db
-        "sha256:b55b36af1b228767852caf6a82e952ecc96afa4807824cb5ba45902bffbcde97", // epsimple-construction-core-124-8a480443
-        "sha256:f0f792fb32c28afee1d8e850d16aca223a2479a1619ff4fcb87aa7c663c9a557", // epsimple-construction-core-125-a806c4c3
-        "sha256:9f53176553501f2726460f965a66700ee83012958faca874913dfc808d2d584e", // epsimple-construction-core-126-71552576
-        "sha256:40a6592b910a659b550f01869bc358991b389f482f428596bfdfd1682d590f59", // epsimple-construction-core-127-dc8c7ebc
-        "sha256:27d6fc1b325fa5be5257466628db7827dc3d13c1085a148799d19f090f88a47d", // epsimple-construction-core-128-fec259a4
-        "sha256:f3f75136694ef229d139934dc61dd51ca83269630d1455db28721ea1de5fd69e", // epsimple-construction-core-129-d72c2143
-        "sha256:eb7491571cb82df7de81bdd66e4875ac17737293eea4812cca609649a651a3b3", // epsimple-construction-core-130-59426aa2
-        "sha256:0fe1d465e43816e5de87c9434d90f7ace11b58b45d6fc71a3c11af9a167abde7", // epsimple-construction-core-131-a204e680
-        "sha256:f975d1b4aaa2f1deac4ec39c347ec1c605bc16a94629f8f64069103875375a57", // epsimple-construction-core-132-d803cd9d
-        "sha256:641c341314c719098e068bf63a11daa2a918db4ed541cd55a5bf2cb33fdd08c2", // epsimple-construction-core-133-d6777d2d
-        "sha256:9aada2b7196181f42e2312c3eee48d1e20bcdcc0ba2348d99a2fe56ec202155a", // epsimple-construction-core-134-558da4a7
+        "sha256:51570cf0c570ddc6c541cfa7598ebadd001924557137e1c1b138cfaffb0b70da", // epsimple-construction-core-75-f86ec154
+        "sha256:489d9b6c051f6316d7f430b700ff93e00d0638da3aa4b1213bc18e44faebc069", // epsimple-construction-core-76-246156d9
+        "sha256:18353a27b7709b3558154caea5fac23d50b1422c7d2720ebf838b0dbe1260302", // epsimple-construction-core-79-92969825
+        "sha256:28e69eef2c656c79882ecb4e2cd4b3fc26f6d8093ae315f4388c0d3c0098f4e1", // epsimple-construction-core-82-e3c4284e
+        "sha256:4d84c61a1f36e29770fa31599ccf7cb2e77924a7b42ad944396d7581ffba0677", // epsimple-construction-core-83-5025a060
+        "sha256:b8e6ab2e8ccce273b70b6a80de10db45bb7cbdffaf2f4797c99a7507e2a80dc7", // epsimple-construction-core-84-87537fa6
+        "sha256:fec3f0e649bf507decbbce38d4789ccdeaefb9033a13f6a91e839b83a2794aa1", // epsimple-construction-core-85-c288c4c2
+        "sha256:0c4224e06d2207aff47d1ab69aee1a3c2787def49780e7c38d1a684e60b79282", // epsimple-construction-core-86-538b0465
+        "sha256:6e21d499ae1d9b616329319ac292e7b3b35446ecc858091cba4b975c0d6267e6", // epsimple-construction-core-87-8aaf803c
+        "sha256:37cc3fa5db07c70c9f2f7903d104472dbc5146930d5885b09266135a87fca1a1", // epsimple-construction-core-88-f430c29b
+        "sha256:fcededfe634a5776c30498f4c77ec54ad55964d753cf5ca7329b30233cb3b3eb", // epsimple-construction-core-89-72e986b6
+        "sha256:488596a98c3a9ace8ee0f0a652c4b085ad4e3b385b1018bf4b27030171954177", // epsimple-construction-core-90-590c4070
+        "sha256:4f948ad853cb8b224d77440771ef5f9634913739c632e54784f96b8b37017d9d", // epsimple-construction-core-91-246156d9
+        "sha256:35bb3de9fec0c56f09f0a44a0a4bedc886ee1ff64b95f67ccb3dd23173831154", // epsimple-construction-core-94-d909f493
+        "sha256:ea493f7d579339baaf9ba55612521478a8ed832aa881612cbe7b3c56ac1f6302", // epsimple-construction-core-97-b733b56b
+        "sha256:982fc059243cb34ed3bd852c68bc6453f1057dd8adf9afd0d58a5c794a8f9d9b", // epsimple-construction-core-98-23136324
+        "sha256:9df158ddc8a71b0c1bfcd9af2c6274070236da0b79ab9702c1e7b1996b9925d0", // epsimple-construction-core-99-f2772e15
+        "sha256:f0cce3e4010f6de6ce380400149a822aafc01d5ede5f44d1f0b8033a2969bf05", // epsimple-construction-core-100-c3fc9501
+        "sha256:fd7e086e44389ac75fec7a61bd7e1eb4656848ab0671d95ad7d651a7e5615b5e", // epsimple-construction-core-101-f6b33018
+        "sha256:63d5ae73307ede0ee97edb5cfb8299a1726821bd3bbb8b3f3530a7b4a229d5b9", // epsimple-construction-core-102-abf4a2ea
+        "sha256:8558fe5b78c5797a4050cc639a4b562e6729bff0dd24cecfe314ceef4639cfc9", // epsimple-construction-core-103-7326bc5b
+        "sha256:df694e02c160aae8106766eea76a09d1c4e6d717b72c5b00a8f4ec8b62d64582", // epsimple-construction-core-104-352f66b1
+        "sha256:5f23bdfd2389569d52fa0a353cbbc4d3607c13d9cd3027a241186799eb874278", // epsimple-construction-core-105-3257fd04
+        "sha256:f7f6aaec62b26de128b9d61d0cc77b46afb16f7ee69adb31c7bbb2db602b7afb", // epsimple-construction-core-106-45236b5b
+        "sha256:7446bb8b2e8e635f1eebd605afb2757577529f80c4b79d894b75bdb1d045b757", // epsimple-construction-core-107-3f5ae9f0
+        "sha256:b925536e176cf0f5c261e8eabf95365b0f9ad9e8b4577628b63587b130f35c51", // epsimple-construction-core-108-9f449287
+        "sha256:7f150327fe0a70e6b24858f6426f622039ad55f633f647e0552645c4a50dc504", // epsimple-construction-core-109-758d9c0b
+        "sha256:5b099a96461716befcf2b6054c646349467360bcf0ed4a7d94ce7859bda21b0d", // epsimple-construction-core-110-4f9ce2c0
+        "sha256:c942f22fdd474c1ffc519d37d732a4be8a91b12a3cfbf85801bcca905fe16ab2", // epsimple-construction-core-111-119ed204
+        "sha256:3f23fd8fabecb4234c67a96673a148c2ae8e1604543ee4d83783b3e7ad5b9af7", // epsimple-construction-core-112-f3d6bd23
+        "sha256:c42a38b171608ac2cc5b1bafe4dd1d246ab222b6c1d02de30902d1971082d1ea", // epsimple-construction-core-113-246156d9
+        "sha256:5e84e5a9c8acd262a245f07739c76244d45104b2d27b1404a30dbfc5d019b743", // epsimple-construction-core-114-c6b969b4
+        "sha256:d3c186ba38ec05150f25a54fca203a9db785c973060783e7671d96055590d57d", // epsimple-construction-core-117-6e437543
+        "sha256:552a9fd7f0618d59c53e19c4b331609742a9261199ba92aa4be51f157a77c519", // epsimple-construction-core-120-23907b76
+        "sha256:8c5c86e56f90a76447c59724e9e62265141a4654fd507809199c718e2c179444", // epsimple-construction-core-121-60a500a8
+        "sha256:fb70f4677fd8a416112db1cba778ad9b5e8fd224f499a05a5a7acbfbea74e26b", // epsimple-construction-core-122-b1bb16e6
+        "sha256:9d7c6e65b4dbc666fe7ee5b475aa273219d21157a4301d885cb9f547f325f700", // epsimple-construction-core-123-d21ed4db
+        "sha256:7b17c2090d5a5d198015fdf112f5b8bb4e39b6e9c8cddcf125151dd4905fe813", // epsimple-construction-core-124-8a480443
+        "sha256:2f6d57d8b99a8a420083844a03f02e6226c1aa86f1e8d50e6c7a4245eba20d8f", // epsimple-construction-core-125-a806c4c3
+        "sha256:1ae7a1d535437885ccb53e2c732b29e9adfc07e7dfdc295d0532c55e19e96f37", // epsimple-construction-core-126-71552576
+        "sha256:4fc1a5f4d6b00ff66097bcc5f43dd3ebb1b061a54ae606891d575735fdb317b9", // epsimple-construction-core-127-dc8c7ebc
+        "sha256:28e5628be1adae52582b5441a6445e0cf279c41ccc88f4dbfbdc381e117ceec8", // epsimple-construction-core-128-fec259a4
+        "sha256:bcfc3c831a9ff4e117cb755c6e213c237c4e9d85cd6bee4ad8f1b68b5bd52340", // epsimple-construction-core-129-d72c2143
+        "sha256:2a03e0f01d250a09f1cfcbb731f451f8a7ed6118a0418848a61fdc1fdb2baa3a", // epsimple-construction-core-130-59426aa2
+        "sha256:da334968cccba2f6c1d61762e176c7d4e46782a96be123f114890418de07a766", // epsimple-construction-core-131-a204e680
+        "sha256:02dec2096d345b5a16d537d870363b46b0a1a4c8e88b57e7febf43d578d145fb", // epsimple-construction-core-132-d803cd9d
+        "sha256:f9025ce080e66a234ab4f24657554b45fcb8e84acbb6e284fd1cb3fc36d235cb", // epsimple-construction-core-133-d6777d2d
+        "sha256:ee6eb9f0cc6f80ec093d8d9fd20bb58588402d1f678c4f10894ba66accec1afc", // epsimple-construction-core-134-558da4a7
     };
 
     [Fact]
@@ -630,8 +630,8 @@ public sealed class ConstructionCoreOracleParityTests
         ValidateArtifactProjection(
             artifacts.GetProperty("strict_json_support"),
             "tools/python-reference/generate_schedule_type_oracle.py",
-            21_114,
-            "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc");
+            21_108,
+            "sha256:555a1df41e5369dbbc44b0729a48673610a86951a215c8e2aa00cfa4fce156f1");
 
         JsonElement[] resources = upstream.GetProperty("database_resources").EnumerateArray().ToArray();
         Assert.Equal(3, resources.Length);

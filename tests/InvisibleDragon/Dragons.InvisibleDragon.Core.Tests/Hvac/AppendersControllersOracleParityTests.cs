@@ -20,9 +20,9 @@ public sealed class AppendersControllersOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-hvac-appenders-controllers-oracle.json";
-    private const int FixtureBytes = 179_542;
+    private const int FixtureBytes = 178_786;
     private const string FixtureSha256 =
-        "sha256:2d5034714366592c720d0872b616e409f62f50362abc58c48d970b904eb4b054";
+        "sha256:24b6994b1a39aa363fb0127ea6bfd93bcd12c803768e04f634ed615f08f815eb";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-hvac-appenders-controllers.v1";
     private const string FixtureRepositoryCommit = "d14de9e";
@@ -31,21 +31,21 @@ public sealed class AppendersControllersOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_hvac_appenders_controllers_oracle.py";
-    private const int GeneratorBytes = 77_285;
+    private const int GeneratorBytes = 77_246;
     private const string GeneratorSha256 =
-        "sha256:00da10485dbd576286b222a016171390199d6148b99c1e45f64c1b5eaa63ad31";
+        "sha256:357763c4c73e48db275833ab884bf550ea5e143126f550520e9a748bb17154d6";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_hvac_appenders_controllers_oracle.py";
     private const int ValidatorBytes = 28_120;
     private const string ValidatorSha256 =
-        "sha256:253e64cd09b57af1dfcb00bf164d49586af6713119dbbd97d3e60dab95074dcf";
+        "sha256:f6699787a997dc3daad0b8606b5581e93220d1a97476cad44f42052503730eb3";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/hvac.py";
@@ -71,9 +71,9 @@ public sealed class AppendersControllersOracleParityTests
     private const string RuntimeSignaturesSha256 =
         "sha256:f44e1bfd639b1c59739524d9d795d6fba96336affacb4d7fa20104b0c8a2c1d5";
     private const string NativeSourceReceiptsSha256 =
-        "sha256:b82b2435acc2802eb55647a47650b135b82f1198b8d504dc1a2b710ab977cfa4";
+        "sha256:94fae1cf2431e27aec7389f65a8a9acd8d91fb91b372ebf25b7ec8c03c8d9672";
     private const string NativeRoutesSha256 =
-        "sha256:f9407672b46a4049a13ee55e7f418e5b74eb13ac5f3aea70a67b9c430406aef3";
+        "sha256:0a73408d863943c88142137daed57b33ce6a0a5116109f5294d98f6759ec4119";
     private const string ClassificationSha256 =
         "sha256:b2abc7395c99e45184fc69f8cccc4f8215a44dc5d683fd7297ba4da43cfcf60e";
 
@@ -88,24 +88,24 @@ public sealed class AppendersControllersOracleParityTests
 
     private static readonly ArtifactPin[] NativeSources =
     {
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_582,
-            "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_267,
-            "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_764,
-            "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"),
-        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_182,
-            "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs", 7_561,
+            "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs", 18_249,
+            "sha256:bf93e1c6889f7d371fff983caad1b3c90d4cbc6113bbb5d9a7a783740af1bb46"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs", 21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs", 50_723,
+            "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4"),
+        new("src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", 13_173,
+            "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"),
     };
 
     private static readonly ArtifactPin[] SupportArtifacts =
     {
-        new("tools/python-reference/generate_dragon_hvac_supply_core_oracle.py", 65_898,
-            "sha256:3f1bcbf28df62c3426f8d343dab3f123b9c730bcdd234e3c570aaff21b87cd97"),
-        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-core-oracle.json", 215_698,
-            "sha256:dcf355329a083f9fac82434e18fc3b847a44bc134eb7f593f497c0aeae4c6b9f"),
+        new("tools/python-reference/generate_dragon_hvac_supply_core_oracle.py", 65_859,
+            "sha256:7ce1af80729c2f2aa333016ba95db3963b25db24e1b23d2c89f49ea2694590e2"),
+        new("fixtures/reference/python-0.7.0/dragon-hvac-supply-core-oracle.json", 215_230,
+            "sha256:657b53b768c90a2915ca10c781ff63ab5a21323bb09f534d4d5da3178fe99194"),
     };
 
     private static readonly CaseBinding[] Cases =
@@ -162,69 +162,69 @@ public sealed class AppendersControllersOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new("A01", 11, "sha256:0b23669c38b5c245bbaa17ff8627d91429066948a46488b027657b8bd014f2ae"),
-        new("B01", 10, "sha256:90c15643e6f84a30040e5b4826b4f517cabb129c805e0642392d673eee45044d"),
-        new("C01", 10, "sha256:a3d566cc0b4383ffead151dae0954c7f31579e8ab9382354d35037a79d872843"),
-        new("D01", 10, "sha256:5dd56bb6750c102d709f02e819adfed8283979d8ae2879ff9c884029b36aefe9"),
-        new("E01", 10, "sha256:07c54b57e79a747480bf4a6e0a7ad24ab7d58466af69a73d547c509e316b59fa"),
-        new("F01", 9, "sha256:0740fa134039ef7318e6f4516757964c1f023d5f46ceb27da1e0757f60a1841d"),
+        new("A01", 11, "sha256:83035ae4c93c2cc8c7830bc4c0c75e43b3c38f648b26393be655504d3a5edae1"),
+        new("B01", 10, "sha256:2909f50a2240de7183f58d2aa6cd97faac782ee3a420c1d0cf2e42ebc9c95418"),
+        new("C01", 10, "sha256:0ed892f60ffbefd9e48dd6dbff1c3a31f8e3099a0ffd24dac340755e7deadbc8"),
+        new("D01", 10, "sha256:32887e5ccc1693074d8bd133770ed424542be9b06a5d476e02f512426df07c64"),
+        new("E01", 10, "sha256:05f36796e8f7e825b1937d2d69fcd82e04f0b87ee277b5dd3f71037d4d823f16"),
+        new("F01", 9, "sha256:7f870facb1c00411823b577cb31c10f6862dfd072463ee06f07547d85e307499"),
     };
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:20b8acfc240dcea046ed698564829c1eb65b3212e9fe8d68cc3b9fc8d64b9af1", // 686 DemandBranchAppender
-        "sha256:14605844379ce2e7ad815d2091077e1245085d5804a6823293371a0d16d12ae7", // 687 DemandBranchAppender.append_to_branchlist
-        "sha256:56f600648dd61674af22a43058f59f6f228f16fce33ac2271ad92b2317a7f5aa", // 688 DemandBranchAppender.append_to_mixer
-        "sha256:e5199301d4a0e1e05329ae9fc709f00c9f850385f9b56cf7bed361ab58ea71a8", // 689 DemandBranchAppender.append_to_spliter
-        "sha256:425ffad021a5678a20f21321430f5bbbf18ba613a49fa33831613263d0e3be9d", // 690 DemandBranchAppender.count_current_branches_branchlist
-        "sha256:7be0fcec894edd9e7cdad436ade69a8220e814bfe9ec4a4d979591446503c14d", // 691 DemandBranchAppender.count_current_branches_connector
-        "sha256:5b0f78f9bd9a573b39894c22c4d3f6481177b632d0f1c179836a191eb152112e", // 692 DemandBranchAppender.run
-        "sha256:55fdc004f5d3970eb04321f25dea9c3678111b75bc2d29922aad21941d509398", // 717 EquipmentListAppender
-        "sha256:5208c37d31620d744f72ad6a9de669b41551d0d096d362ce6e57a81ebee734eb", // 718 EquipmentListAppender.count_current_equipments
-        "sha256:157adc48a79e2faea64a7b7ca669e7af0d39228be96b9ea14f9d3c78bd652292", // 719 EquipmentListAppender.run
-        "sha256:15f12ea90a71ecbbd04c8e24448074e2e5939d33fa719fb3f30f143eb597c827", // 774 SequentialLoadFractionController
-        "sha256:23280527a301f78f0788760593c3c258f5d113a4c93f236cf9a06bfef0af9220", // 775 SequentialLoadFractionController.find_target_equipment_number
-        "sha256:b13f86394605febf593d3c5e522f30d7584853b6ff438be4ace032970dc974aa", // 776 SequentialLoadFractionController.run
-        "sha256:114ac6d7c0c0264fe794f4977a1cfc48bc464baea36a2afe92a233f5f16a3ae8", // 804 SupplySystemToIdfPostProcessor
-        "sha256:d06a21f1428f47192343dd96de3e14e921c81cc259ed61436d3487fa79864493", // 805 SupplySystemToIdfPostProcessor.__init__
-        "sha256:54092a4900beaaaf0eb3d5c4bd9a74ff6b22299e05a29a985ad3b96b8a77edac", // 806 SupplySystemToIdfPostProcessor.run
-        "sha256:48d8898028a8ecdb385a7341d962832da48f2353108e23ca7fbb155e998e252e", // 807 SupplySystemToIdfPostProcessor.source
-        "sha256:a99155abd73eb247bfc5a631abdcab3c1470731c92f865ba19afe526f007fa7e", // 808 ZoneAirNodeAppender
-        "sha256:5e0285a33b675b494aea2dc0b9f50687c19463989881c289c7096ee7bbb48b8d", // 809 ZoneAirNodeAppender.count_current_nodes
-        "sha256:7d38d0b452ceef7fa6e75ba91f0d2d4d2e634f2ce33e5ea3aa626cb8366179f6", // 810 ZoneAirNodeAppender.ensure_nodelist_existence
-        "sha256:1d1d5271c614aaa8c1f282806240937ab7258e2e7bce5ff91050b71f53b4aeba", // 811 ZoneAirNodeAppender.run
-        "sha256:c9b489ab76068024e19fb5a1919f7196dd0b1e937b09406f572216cbd746702b", // 812 ZoneTerminalUnitAppender
-        "sha256:bc85dfbdad6ba382d7752ce34d0dbc0c6fd1af8c2d55126839ec67c7ffa76582", // 813 ZoneTerminalUnitAppender.count_current_units
-        "sha256:e86ae68c3d725338e3fc8aaee37972245791623cca374551d699a5805094002d", // 814 ZoneTerminalUnitAppender.run
+        "sha256:ac3e8f85290a73566498a468c9ea2d7c5ec24989ab215c80173aabcf5f75ef2c", // 686 DemandBranchAppender
+        "sha256:7029a94f8dc4c26c6baa815c692d414d97cb4ece0131d587b2e7e93260d19038", // 687 DemandBranchAppender.append_to_branchlist
+        "sha256:6159b8d9ed0ec3164fe5dee19118ae12a4871f69a0e328470731580307df0c95", // 688 DemandBranchAppender.append_to_mixer
+        "sha256:8d16261926e34f3a123a412b07b2185429b91436c4c9cd6fb36865d6fbf12370", // 689 DemandBranchAppender.append_to_spliter
+        "sha256:b4212baf9326aad582c981bf4ef96b3ae1c6f838f473d69a348987b74718ae5d", // 690 DemandBranchAppender.count_current_branches_branchlist
+        "sha256:b02f9be6d0ad9594923e78837a5f17c4b95d5c25c5637931f3bcd5992bb5a8d8", // 691 DemandBranchAppender.count_current_branches_connector
+        "sha256:d9a9925886acb10ab541373d4f9b7d5d953745fe6d8330ba94d9ac48ccdf03d2", // 692 DemandBranchAppender.run
+        "sha256:02147c3cda8b4687fbb220559057525e54ffe7ee43b575a17566606c7a4c6cb7", // 717 EquipmentListAppender
+        "sha256:5539a5babc1d4d3467d2b56be7ecf17377234bfc315fc51ba8169ae07c3fd78d", // 718 EquipmentListAppender.count_current_equipments
+        "sha256:a5e3899e61e46fe1bf2e84d3b91835fbfae7cbf36c0ea40b67972b0649323405", // 719 EquipmentListAppender.run
+        "sha256:da494ab7d47a12600b8c17f56b60b3ddb808e7f1011801568b77ae6b0acbeef8", // 774 SequentialLoadFractionController
+        "sha256:62de4b553f166c6370d7110e35bb2bc7deca698ca58b3554464a7560f1c61785", // 775 SequentialLoadFractionController.find_target_equipment_number
+        "sha256:5f74b3442761073bfd591e8917053d3f2a25b9e5a3b0cc97b4ae21fa3df934c5", // 776 SequentialLoadFractionController.run
+        "sha256:644b43b029d2756b255f3b70bb57b534d6ecbe91a5c647c8d85068b64ade9280", // 804 SupplySystemToIdfPostProcessor
+        "sha256:de4b745a468d51853245adfdac250cb9b9cbb7918b40e904ec37364d6b44d9ba", // 805 SupplySystemToIdfPostProcessor.__init__
+        "sha256:041258a9fb3e2ebc8e81eb9652ba5a9f271df0e5a2373d09a549cba0ca4cb5f0", // 806 SupplySystemToIdfPostProcessor.run
+        "sha256:daf4ee9cbd988323d0cf87f8da107b36b4bb3c8562bda82318291f76d7e0ca4f", // 807 SupplySystemToIdfPostProcessor.source
+        "sha256:87f7ad7c65e0a4c3bae4183905538186311d2f5de087fafb85dec67c29db31f9", // 808 ZoneAirNodeAppender
+        "sha256:e346d56289c1025e9c2924eb3ecfd50e557c55e0c18d94c49bf66eaadc25a943", // 809 ZoneAirNodeAppender.count_current_nodes
+        "sha256:1813f347860591a9abbf748ba7941c225e79053813957d1cb6fc556e56faf336", // 810 ZoneAirNodeAppender.ensure_nodelist_existence
+        "sha256:af38cf80dc00e710ca71b1444dc3626492a93bfb1737da24f10190f6a9c79e1c", // 811 ZoneAirNodeAppender.run
+        "sha256:569a4414c90c70460468a2a427113aaaba6a25b77267b376e19675bdce4ac8ca", // 812 ZoneTerminalUnitAppender
+        "sha256:0e54820557c9ea91a0c02995380d57d8fd1c30b599fdcaf9efd8d997d7a4bec7", // 813 ZoneTerminalUnitAppender.count_current_units
+        "sha256:e82051aaf440188599a59af12d16044151fc3a23d11221fb61e5f1017cec07b2", // 814 ZoneTerminalUnitAppender.run
     };
 
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:da415468fdf4ee8ee6c32470b59cb819197b87beefc3571d28804a4277aa01f6", // dragon-hvac-appenders-controllers-686-cdbb9fb8
-        "sha256:b3022baa40808470af4bec045d289a10f4477ef83d6010f4ef87805756be449b", // dragon-hvac-appenders-controllers-687-72c53b16
-        "sha256:26a6adb938a9af88128fa79742755f80e86fbc909626323f291c6672286a3eb9", // dragon-hvac-appenders-controllers-688-bf8d6bd1
-        "sha256:52baf73fe0efe5ef148022efdf6a186740bb0e0e9ee126cb889350caf8c6fa34", // dragon-hvac-appenders-controllers-689-29bdd382
-        "sha256:0401cdc4a33458420f0eb634e5c31f9a5fd660f276e91ce0a484800183848cd4", // dragon-hvac-appenders-controllers-690-2fb35691
-        "sha256:66f8f91dfdcf2dcf3d59b019000875852b6ad1cc4cf2b65ec9fe5bc3d34b0b13", // dragon-hvac-appenders-controllers-691-4531204e
-        "sha256:362a1cb48f858b5523628217dffa538d7d57651dead1809c98575671786561f0", // dragon-hvac-appenders-controllers-692-3d176f2c
-        "sha256:2a3800a2025c231e5b749397e2f0c94f510d1b32c189d55977daa5b51cab45b4", // dragon-hvac-appenders-controllers-717-268e7fb5
-        "sha256:c8570889c699636737dac04bf0a4f9cecc660738610bdb4dfffff4e8dca79b9b", // dragon-hvac-appenders-controllers-718-ef88aa10
-        "sha256:dc42048f98ef39f96f2ba94eb25d00f466a0ee758a50bc26e88fc82e7c35e9d3", // dragon-hvac-appenders-controllers-719-9fbbb80e
-        "sha256:2b1e5e6701497f8b92fc80efbf9371c768e981fbb60cce54f44494ced8da021b", // dragon-hvac-appenders-controllers-774-35b327ea
-        "sha256:d84f2610e8d1e5b1d7b7059c47b6db8efa5322d02024fcd10e43093a81e2b879", // dragon-hvac-appenders-controllers-775-5a959bd0
-        "sha256:0c9cd9cc024018ba385139f97cd4e96f44ddf7a388c08023eb30b224489a37f5", // dragon-hvac-appenders-controllers-776-efc3dc2d
-        "sha256:3aa310374fa017915273089842cbf526dc23b98b86cc8b15ace8f31c0d2e1ce2", // dragon-hvac-appenders-controllers-804-9b4492ed
-        "sha256:cb9854489311e4d7a3d64f3e32a6f68908db66da3d55cb376a6f13dfb62b043c", // dragon-hvac-appenders-controllers-805-c63e7515
-        "sha256:17a9f30b979e4cdd7878decce809f64cce318eac72e10522c1e12bd12d9f4425", // dragon-hvac-appenders-controllers-806-582cf3ef
-        "sha256:4326684a0ea3b8226f6f857bb7ecac4b9cf5e05f5a9b25e1549a7452d3c31d34", // dragon-hvac-appenders-controllers-807-ce40cc13
-        "sha256:816cef63e1bb0979a67a0942b6755947f1d589374584bb93d47c2dcf09258629", // dragon-hvac-appenders-controllers-808-bff1883c
-        "sha256:4d100c1353a253af3669c00aa0891f3f7f27ca85b45e89558cbd6a1400edd851", // dragon-hvac-appenders-controllers-809-fc0fbad2
-        "sha256:bbd0dbfa48cdabffec915bd8b63146fc817f7691bf68ae412012d338a81ce578", // dragon-hvac-appenders-controllers-810-e3fabdb5
-        "sha256:7dcd67155afdba11616cfa5ba936f5c220386a73f1ea3655d5904bf15925fb74", // dragon-hvac-appenders-controllers-811-7cd1f8e9
-        "sha256:37c1ee5e69e42187b4a2b841586012e402152f5bbec084debbe35b44ac164fc6", // dragon-hvac-appenders-controllers-812-4ae86427
-        "sha256:1486c0b25ad008e85d28702f379a4d520d45bc605b29b88847d28f0fb7a3e4f9", // dragon-hvac-appenders-controllers-813-fc0fbad2
-        "sha256:d64a56be3e7dfbdb7941202423166e5179daf50e8c0fab1c14af9e0662400563", // dragon-hvac-appenders-controllers-814-46d42798
+        "sha256:a9a626d770209f9bd848047d9524a9658ee4a5d272d222edfee41591f8b3647d", // dragon-hvac-appenders-controllers-686-cdbb9fb8
+        "sha256:140f87040ac939f946cc4d35c4ce32e9a679ee807e4ccbfe28b47ab303d79e50", // dragon-hvac-appenders-controllers-687-72c53b16
+        "sha256:3d3ece3a59cf239bb770124e751291220ce948c20e4175d417ddb36f87b16779", // dragon-hvac-appenders-controllers-688-bf8d6bd1
+        "sha256:277707ef044d1fcf42318fa7836b54fc0b6990af7988e56f571770cce01cd832", // dragon-hvac-appenders-controllers-689-29bdd382
+        "sha256:30e586177ea4391276ece2cb542654993cabc293c8d0cf3ff57b9ffa79506758", // dragon-hvac-appenders-controllers-690-2fb35691
+        "sha256:1c8518b5584364b7b92e4794d51f7b42bb62eb907a85e7419f0201985c05359f", // dragon-hvac-appenders-controllers-691-4531204e
+        "sha256:19485f416ca70e51841bc648f4c8653e77f7a279149cb932f6c523a251bcfaaf", // dragon-hvac-appenders-controllers-692-3d176f2c
+        "sha256:b423b7ad259deba23ed7ae9cdbd1791aa5dfb2328f53ac02b5e902b096ddfe21", // dragon-hvac-appenders-controllers-717-268e7fb5
+        "sha256:3d234d41d2486a3262031d57623a7fecb38799e552650fd8f2e196cc3293dc24", // dragon-hvac-appenders-controllers-718-ef88aa10
+        "sha256:9986c97a12829a49c5f47884fa0d7f0d14f6f6414be59f5cc62feed4a6553c4f", // dragon-hvac-appenders-controllers-719-9fbbb80e
+        "sha256:d16b2f2fb7d6c105c717d193d5a2bd1afa99153b2ef9a83770437dc5a0888827", // dragon-hvac-appenders-controllers-774-35b327ea
+        "sha256:317746a3881979c403dc1fc9c64b1cc8fef567c1efbc6d4fe9df0ddb849bfe42", // dragon-hvac-appenders-controllers-775-5a959bd0
+        "sha256:0ddf50821e519f378da5fdb8cd94a801324c260fcce613170839cb04456b7541", // dragon-hvac-appenders-controllers-776-efc3dc2d
+        "sha256:1493560fd783f86b72d6308afda618016cc64ac6c1b31661625af77016bdc4a2", // dragon-hvac-appenders-controllers-804-9b4492ed
+        "sha256:873e223decf86f705e961adaf56582e544dc5000c273eececba0e994015aa21f", // dragon-hvac-appenders-controllers-805-c63e7515
+        "sha256:1f42672d28cf67b54b4f1173c9993644ff7a1c05ae8de705cbd1c87c4ae3f097", // dragon-hvac-appenders-controllers-806-582cf3ef
+        "sha256:1786b1581d0be9b40c11737e6d1fa12ade479883ac71de4bd73ce53a02d98272", // dragon-hvac-appenders-controllers-807-ce40cc13
+        "sha256:4d86750a088a091d1a3bafb7bea49db0825d0fd2080d66f3bdb7b472b2c6fe7d", // dragon-hvac-appenders-controllers-808-bff1883c
+        "sha256:bd55047a7cf33cfa6c30744d3bc246e79faf9db93806963f846c7d42bd5d302f", // dragon-hvac-appenders-controllers-809-fc0fbad2
+        "sha256:0dade83502f4d24fdf6e585798f0b0fd0a3033f0acd45db1d52acec02bdce894", // dragon-hvac-appenders-controllers-810-e3fabdb5
+        "sha256:31bbf27eb9a8a86763ad0b19622dbc249b856b6ff82ab914a472833df970522f", // dragon-hvac-appenders-controllers-811-7cd1f8e9
+        "sha256:e36179f56bd2ca88cc71ac5aa17953322bc66e440f1f61ed4eef5a365e80de83", // dragon-hvac-appenders-controllers-812-4ae86427
+        "sha256:feff175919689d3a096401c4cceb530be248cadf0ccaf55b04f7a092b0d1911e", // dragon-hvac-appenders-controllers-813-fc0fbad2
+        "sha256:04cafc714fb5dd0a633d587d37f54da0a7da0c9f7595855322e0ee00f204767a", // dragon-hvac-appenders-controllers-814-46d42798
     };
 
     [Fact]

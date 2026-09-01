@@ -14,9 +14,9 @@ public sealed class EnergyModelClassOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-model-class-oracle.json";
-    private const int FixtureBytes = 34_711;
+    private const int FixtureBytes = 34_705;
     private const string FixtureSha256 =
-        "sha256:9a5e00a585e983d4a753acb94c46307848d32020e8d3960f9ad8184ccb4cfa7a";
+        "sha256:59936dcd720e29723bbfec2332b127a7cfd16ea0bf73ebe816d6247712688579";
     private const string FixtureSchema =
         "dragons.python-reference.dragon-model-class.v1";
     private const string CasesSha256 =
@@ -24,21 +24,21 @@ public sealed class EnergyModelClassOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_model_class_oracle.py";
-    private const int GeneratorBytes = 42_980;
+    private const int GeneratorBytes = 42_971;
     private const string GeneratorSha256 =
-        "sha256:083e815084afedac2e0fca455f1bae4a108986d3f06aa1e537269091216815eb";
+        "sha256:c24fd9bdc0ee6f8ee09dc7665b4c2576b95692941a267b2a65b3af77c1a9a060";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_model_class_oracle.py";
-    private const int ValidatorBytes = 21_172;
+    private const int ValidatorBytes = 21_169;
     private const string ValidatorSha256 =
-        "sha256:f25d34ae593a55000422a064a3d232abc41b05738a428956a6634736e08afcd9";
+        "sha256:7cb8f294dd8560cc76d27762c41a9a9448f3767f20bf049567de3eafb21d6a20";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
     private const string UpstreamPath = "src/idragon/dragon/model.py";
@@ -60,9 +60,9 @@ public sealed class EnergyModelClassOracleParityTests
         "Dragons.InvisibleDragon.Tests.Model.EnergyModelClassOracleParityTests.MatchesPinnedPythonEnergyModelClassThroughTypedNativeRoutes";
 
     private const string ExpectedReceiptSha256 =
-        "sha256:bc64f0fa26cb1a352a7a96a8333038ae7922d30cdd75c27a78a45649f9a9a96e";
+        "sha256:d922bee6172dff616937ce6404af82d5e0826dad03010fa6644ed5ecabc72b5a";
     private const string ExpectedCollectorOutputSha256 =
-        "sha256:c2774991d73b05365682f5b0154453cf664dd1bc5f0b2ed2293a29be60703288";
+        "sha256:5cd000c0a672d4bb0a8cda537af082ccd23a209692e2abe9760732b594a431b4";
 
     private static readonly JsonSerializerOptions DiscoveryJsonOptions = new()
     {
@@ -74,12 +74,12 @@ public sealed class EnergyModelClassOracleParityTests
     {
         new(
             "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
-            22_015,
-            "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"),
+            21_985,
+            "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28"),
         new(
             "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
-            4_954,
-            "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685"),
+            4_951,
+            "sha256:e28760c5903fa7c4e842620a7ba91c15947eb3378812a72262041af4397bd5a1"),
     };
 
     private static readonly CaseBinding[] ExpectedCases =
@@ -103,7 +103,7 @@ public sealed class EnergyModelClassOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new(10, "sha256:abb3ecddd94d79ab30911ec006d1c2318f6cff932330e9fdf2f6d11530e1d0fe"),
+        new(10, "sha256:fd590ec2e4d91fd288a3df9827d4c955dd1a235eb6acdb04e5070ea0bbe74129"),
         new(8, "sha256:8dca8ab906bb2b60ce3caa82a532afe46fc504b1cf7dd891ed82ad3b345c8e1b"),
         new(10, "sha256:60f9b3a20202a73844013dc1f83ed368f2d3ad7d1605333d2a01fd4fe5c5d971"),
     };

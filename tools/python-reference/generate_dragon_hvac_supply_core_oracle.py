@@ -29,12 +29,12 @@ from typing import Any, Callable
 SCHEMA = "dragons.python-reference.dragon-hvac-supply-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
-EXPECTED_INVENTORY_BYTES = 518_070
+EXPECTED_INVENTORY_BYTES = 518_067
 EXPECTED_INVENTORY_FILE_SHA256 = (
-    "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3"
+    "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8"
 )
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 EXPECTED_SOURCE_BYTES = 137_833
 EXPECTED_SOURCE_SHA256 = (
@@ -47,9 +47,9 @@ EXPECTED_SOURCE_AST_SHA256 = (
 BASE_PATH = Path(__file__).resolve().with_name(
     "generate_dragon_model_assembly_oracle.py"
 )
-EXPECTED_BASE_BYTES = 76_578
+EXPECTED_BASE_BYTES = 76_569
 EXPECTED_BASE_SHA256 = (
-    "sha256:2e1294c95abd407345a0c567a1b800068788d3e3be4059c0801a0bc567ea3bd0"
+    "sha256:4bcb0c46d810665e5872e45db102468e9bcbdacdab76aa6e00511448417aa8c5"
 )
 
 
@@ -271,50 +271,50 @@ ADAPTATIONS = {
 
 SUPPORT_FIXTURES = (
     {
-        "bytes": 31_163,
+        "bytes": 31_160,
         "path": "fixtures/reference/python-0.7.0/dragon-hvac-supply-group-core-oracle.json",
         "schema": "dragons.python-reference.dragon-hvac-supply-group-core.v1",
-        "sha256": "sha256:320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092",
+        "sha256": "sha256:32f05de2a2ead16e0097d3402577e8bce03f40ea151162a6312000bb4f5a5886",
     },
     {
-        "bytes": 22_608,
+        "bytes": 22_605,
         "path": "fixtures/reference/python-0.7.0/dragon-hvac-supply-group-to-idf-object-oracle.json",
         "schema": "dragons.python-reference.dragon-hvac-supply-group-to-idf-object.v1",
-        "sha256": "sha256:f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608",
+        "sha256": "sha256:e5e47e5ffa2d725697d8741d05f54655705106e4bb75348c6d9eff46e04715bc",
     },
     {
-        "bytes": 15_122,
+        "bytes": 15_119,
         "path": "fixtures/reference/python-0.7.0/dragon-model-add-supply-system-oracle.json",
         "schema": "dragons.python-reference.dragon-model-add-supply-system.v1",
-        "sha256": "sha256:4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c",
+        "sha256": "sha256:42ad2d75ce91edd153bd9e07382a03b5095ea0300df227f87e0d0147b377230f",
     },
 )
 
 NATIVE_SOURCE_RECEIPTS = (
     {
-        "bytes": 7_582,
+        "bytes": 7_561,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
-        "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+        "sha256": "sha256:fcbe9c38cacade8002d121b0834a4441560086052571dd654f3c185a0c897249",
     },
     {
-        "bytes": 18_267,
+        "bytes": 18_249,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs",
-        "sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf",
+        "sha256": "sha256:bf93e1c6889f7d371fff983caad1b3c90d4cbc6113bbb5d9a7a783740af1bb46",
     },
     {
-        "bytes": 24_522,
+        "bytes": 24_504,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HydronicSupplySystems.cs",
-        "sha256": "sha256:c815c219d38294b0d3ba1a0ad2921e5ea77a90377887ed0fca8150bae46f96b2",
+        "sha256": "sha256:23a9ffa8e776464c77570ab60854a4fb812de22f84a6ba1e4bf242a45f563269",
     },
     {
-        "bytes": 22_015,
+        "bytes": 21_985,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
-        "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
+        "sha256": "sha256:60357af37bea1f6e7dd0640254a30761ed4097d53751183e5902c2efa62a0f28",
     },
     {
-        "bytes": 50_764,
+        "bytes": 50_723,
         "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
-        "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+        "sha256": "sha256:155981bef61ce31d155926b2c68dca3f5e6ea7f7db969276e5ea013a994ba2d4",
     },
 )
 
@@ -342,10 +342,10 @@ EXPECTED_RELOCATED_OBSERVATIONS_SHA256 = (
     "sha256:29eacb2d29f528353302d1afd8e3ef646d7d35886237bb4a3fa494039a4ec36f"
 )
 EXPECTED_NATIVE_REVIEW_SHA256 = (
-    "sha256:b30118dbf9234da62f71562be0f36b50b9a09c254d5076b9ad1cf7023bbaed8a"
+    "sha256:987acb2c178f1d3aeba1b4ce98fbc3137897dc40bca0b17a33a76275811bdbbd"
 )
 EXPECTED_SUPPORT_FIXTURES_SHA256 = (
-    "sha256:81d7db98ca49507b865b123975143f665db721cf9390eb8c8ab0c92d220c3402"
+    "sha256:c369c071deddcf1b484399cb2b748f1f2b4e62d70268aa51cfbd44a36e68b4d7"
 )
 EXPECTED_FACT_SHA256 = {
     "dragon-hvac-supply-core.air-handling-unit-state-capability-naming-idf": "sha256:11285c61555f77b299a5382f2f2c0b89563e3709de20b69dc936bd5469ccbf7a",

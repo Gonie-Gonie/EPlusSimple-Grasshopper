@@ -24,7 +24,7 @@ from typing import Any, Callable
 SCHEMA = "dragons.python-reference.dragon-shape-zone-core.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
-    "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
+    "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02"
 )
 SHAPE_SOURCE_PATH = "src/idragon/dragon/shape.py"
 HVAC_SOURCE_PATH = "src/idragon/dragon/hvac.py"

@@ -13,8 +13,8 @@ from typing import Any
 
 
 BASE_PATH = Path(__file__).with_name("generate_imugi_idf_object_core_oracle.py")
-BASE_BYTES = 30_116
-BASE_SHA256 = "sha256:8589497feab58cc9d9c05479c50264a091182c2d68531398d1decddd24f7cc43"
+BASE_BYTES = 30_077
+BASE_SHA256 = "sha256:3e87aaf0501d1176ab1ffb2be07710d1c8e6c58ef061101b4a70b14eb6f8b7f7"
 spec = importlib.util.spec_from_file_location("_imugi_idf_object_oracle_support", BASE_PATH)
 if spec is None or spec.loader is None:
     raise RuntimeError("Cannot load the pinned Imugi IDF support oracle.")
@@ -80,14 +80,14 @@ CASE_SPECS = (
 CASE_IDS = tuple(PREFIX + slug for _, slug, _ in CASE_SPECS)
 
 NATIVE_SOURCES = (
-    {"bytes": 13_182, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
-    {"bytes": 12_094, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
-    {"bytes": 4_289, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
+    {"bytes": 13_173, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:0d16e28d37136a3aa0015759ead7ee324cfed08cff1a3269326d4af144518048"},
+    {"bytes": 12_082, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:12488433e2e9f349553e0716531e88db275f563b7f5b806c10a316ae3719cf7e"},
+    {"bytes": 4_280, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:c7b98b6eed298687fca229ae7262ffdf2494953b3cc6576835cacbcc47cf998a"},
 )
 SUPPORT = (
     {"bytes": BASE_BYTES, "path": "tools/python-reference/generate_imugi_idf_object_core_oracle.py", "sha256": BASE_SHA256},
-    {"bytes": 119_205, "path": "fixtures/reference/python-0.7.0/imugi-idf-object-core-oracle.json", "sha256": "sha256:7237e974d6d938c6f8f7215661f54db4f26a2a7afc664765b895656a7720babd"},
-    {"bytes": 165_323, "path": "fixtures/reference/python-0.7.0/imugi-idd-definitions-core-oracle.json", "sha256": "sha256:3e56e7fe6026fef3146a62aadf3248940c65aa9a2b5c624b519fbc0e3d99dd69"},
+    {"bytes": 119_037, "path": "fixtures/reference/python-0.7.0/imugi-idf-object-core-oracle.json", "sha256": "sha256:61c137044af671cd9a1a935fea516b3d72eaa74f3d3c5122b3a61acef981cc93"},
+    {"bytes": 165_062, "path": "fixtures/reference/python-0.7.0/imugi-idd-definitions-core-oracle.json", "sha256": "sha256:5b586ac030309bed3ab840525b4c9cff207b97919cff76bb48e8003b9135bcf9"},
 )
 
 EXPECTED_FACT_SHA256: dict[str, str] = {

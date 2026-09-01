@@ -13,9 +13,9 @@ public sealed class AirBoundaryCoreOracleParityTests
 {
     private const string FixturePath =
         "fixtures/reference/python-0.7.0/dragon-construction-air-boundary-core-oracle.json";
-    private const int FixtureBytes = 97_764;
+    private const int FixtureBytes = 97_758;
     private const string FixtureSha256 =
-        "sha256:056d6dfbd9e0b0402ae6b19788f156eb799384e975ba1469fe7578f7d2736f2c";
+        "sha256:16ad4d6d7a90e39a233d742d336d801e612c214360a5c1ac4c6853aec9f7ec03";
     private const string CasesSha256 =
         "sha256:996e6d45dbc2265ef078b6668fbcba423249a100329714031d64e09b3de30abc";
     private const string AdjacentExclusionsSha256 =
@@ -23,21 +23,21 @@ public sealed class AirBoundaryCoreOracleParityTests
 
     private const string GeneratorPath =
         "tools/python-reference/generate_dragon_construction_air_boundary_core_oracle.py";
-    private const int GeneratorBytes = 47_018;
+    private const int GeneratorBytes = 47_009;
     private const string GeneratorSha256 =
-        "sha256:a771377f37c51c8852a2a077571a0e18a4aaef715ba97e8f0daca87b5c6a1e43";
+        "sha256:bb28f9e0a4e68684e4b7752fb127fc3be942d5c35eb3d1a9982a311bc26b4618";
     private const string ValidatorPath =
         "tests/PythonReference/test_dragon_construction_air_boundary_core_oracle.py";
     private const int ValidatorBytes = 14_390;
     private const string ValidatorSha256 =
-        "sha256:da8acaa1ea807fe9516d560285318953802447ce917542a221c870040affe370";
+        "sha256:ddf3a82eea5c9e13b7b8caec23574b3d4bc391ec21058c04aded53c03d5a3b8b";
 
     private const string InventoryPath = "upstream/public-symbol-inventory.json";
-    private const int InventoryBytes = 518_070;
+    private const int InventoryBytes = 518_067;
     private const string InventoryFileSha256 =
-        "sha256:182ee3c169f7d5fd5ae6c12746a21ed1615a16575920bb45eb1bd8059832f2e3";
+        "sha256:6f898c6510a42b19841eb0bc60f3344fbed6c76b42d33351821686f3d7eb78e8";
     private const string InventoryContentSha256 =
-        "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0";
+        "sha256:4e52456b1e922630603a66344aa25d59be2fc687a3ea7bc3052129e924842e02";
 
     private const string UpstreamPath = "src/idragon/dragon/construction.py";
     private const string UpstreamCommit = "847b01f68f438f560a986072bcaa7768fbf67897";
@@ -49,19 +49,19 @@ public sealed class AirBoundaryCoreOracleParityTests
 
     private const string InterfacePath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/ISurfaceConstruction.cs";
-    private const int InterfaceBytes = 219;
+    private const int InterfaceBytes = 216;
     private const string InterfaceSha256 =
-        "sha256:9275332e67030ce071ee76eebe790621b9e7caca8308eccb7ac15021be445626";
+        "sha256:d960c1de9896e2b634df27979713fb484030abfc79f14d38e68286041df3e6a7";
     private const string SimpleConstructionsPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/SimpleConstructions.cs";
-    private const int SimpleConstructionsBytes = 2_025;
+    private const int SimpleConstructionsBytes = 2_019;
     private const string SimpleConstructionsSha256 =
-        "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292";
+        "sha256:a72caa2d2c70ea18bf080bf623837ef3a0c7869a4991a7977255b00021d9e762";
     private const string DomainGuardPath =
         "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Internal/DomainGuard.cs";
-    private const int DomainGuardBytes = 2_416;
+    private const int DomainGuardBytes = 2_413;
     private const string DomainGuardSha256 =
-        "sha256:a8d28c985fe67376ca08015ed8e6d28600c98366c33a4a41dfd4abf377f57d8c";
+        "sha256:5bb42189e091fb4ed17f3e242a0e22c32b47b2242c2e6b9a43da46ecaa929ac4";
 
     private const string EvidenceTestCase =
         "Dragons.InvisibleDragon.Tests.Construction.AirBoundaryCoreOracleParityTests.MatchesPinnedAirBoundaryCoreThroughTypedNativeRoutes";
@@ -130,7 +130,7 @@ public sealed class AirBoundaryCoreOracleParityTests
 
     private static readonly NativePin[] ExpectedNativePins =
     {
-        new(17, "sha256:99b150975e7874c1573011051bdd8fa9452f2faf3728f46081ada0d0c1cb415d"),
+        new(17, "sha256:20ef2c27651d8396ba6a4a4a29debc12e76b02f9773756a1cd82e9d0e7a83cbb"),
         new(13, "sha256:8b052843cb51c6cf333313ac744b4d45cd75749126a45e702daa923af87bf302"),
         new(13, "sha256:b310d876e7ea57a8f856a8b5ad395b3e3050cf1055de13bc26109ee5ce1b9d0b"),
         new(12, "sha256:741e3156921fd813d5136810c71fafbe6609477d630fe94cc7638b667d018c24"),
@@ -138,14 +138,14 @@ public sealed class AirBoundaryCoreOracleParityTests
 
     private static readonly string[] ExpectedReceiptHashes =
     {
-        "sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3",
-        "sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a",
+        "sha256:aeca690d5e7596cad9a368b8812bf18f885eab9ec0ac5881d717ca7842f25b72",
+        "sha256:d6fe3435a79549e9cba78b44d7d73603cf3164899924df872fdb7a0e356c82f3",
     };
 
     private static readonly string[] ExpectedCollectorOutputHashes =
     {
-        "sha256:83167c1eb59ce60b50cd6fbb2e7eebbe87e1452243d6b5ff50287691c3e3f4b7",
-        "sha256:a6bc52d12c81f6a4463421cb5c77decd1ba956e797afab0e7c7e19425bf6264f",
+        "sha256:3f46341428e2f78124303174fcc2606fb21b3654f8b20dcf36aa7f85f0375868",
+        "sha256:3189ed8bdc344e24d857162ffacfd9af9016ed3d416606491e0c0894cd4df415",
     };
 
     private static bool DiscoverPins => string.Equals(
