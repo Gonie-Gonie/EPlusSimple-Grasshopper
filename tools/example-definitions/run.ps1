@@ -605,7 +605,6 @@ function Invoke-ExampleHost(
         DRAGONS_ENERGYPLUS_WEATHER = $EnergyPlusWorkflow.WeatherPath
         DRAGONS_INVISIBLE_EXAMPLE_EPW = $EnergyPlusWorkflow.InvisibleWeatherPath
         DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS = $WorkflowStageTimeoutSeconds
-        DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
         TEMP = $hostTemp
         TMP = $hostTemp
     }
