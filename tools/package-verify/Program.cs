@@ -1218,7 +1218,7 @@ internal sealed class PackageVerifier
 
     private static AssemblyMetadata ReadAssembly(Stream stream, string description)
     {
-        using var pe = new PEReader(stream, PEStreamOptions.PrefetchMetadata);
+        using var pe = new PEReader(stream, PEStreamOptions.PrefetchEntireImage);
         if (!pe.HasMetadata)
         {
             throw new InvalidDataException("Managed payload file has no CLR metadata: '" + description + "'.");
