@@ -218,33 +218,75 @@ internal static class ExampleBuildingModels
         model.ApplicationName = ModelApplicationName;
         model.ApplicationUrl = ModelApplicationUrl;
         model.ApplicationDetails = ModelApplicationDetails;
+        // OpenNURBS creates revision zero models, then stamps the current OS user
+        // when they are first written. A nonzero revision suppresses that implicit
+        // first-revision mutation; File3dm may read the neutral history back as zero,
+        // so this must be applied before every write.
+        model.Revision = 1;
+    }
+
+    private static bool ContainsEncodedToken(byte[] bytes, string token)
+    {
+        foreach (Encoding encoding in new[] { Encoding.ASCII, Encoding.Unicode, Encoding.BigEndianUnicode })
+        {
+            byte[] pattern = encoding.GetBytes(token);
+            for (int offset = 0; offset <= bytes.Length - pattern.Length; offset++)
+            {
+                bool matches = true;
+                for (int index = 0; index < pattern.Length; index++)
+                {
+                    byte actual = bytes[offset + index];
+                    byte expected = pattern[index];
+                    if (actual is >= (byte)'A' and <= (byte)'Z') actual += 32;
+                    if (expected is >= (byte)'A' and <= (byte)'Z') expected += 32;
+                    if (actual == expected) continue;
+                    matches = false;
+                    break;
+                }
+
+                if (matches) return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static string[] DecodeBinaryTextViews(byte[] bytes)
+    {
+        var views = new List<string>
+        {
+            Encoding.ASCII.GetString(bytes),
+        };
+        foreach (int offset in new[] { 0, 1 })
+        {
+            int count = bytes.Length - offset;
+            if ((count & 1) != 0) count--;
+            if (count <= 0) continue;
+            views.Add(Encoding.Unicode.GetString(bytes, offset, count));
+            views.Add(Encoding.BigEndianUnicode.GetString(bytes, offset, count));
+        }
+
+        return views.ToArray();
     }
 
     private static void ValidateNoLocalBinaryIdentity(string path, string fileName)
     {
         byte[] bytes = File.ReadAllBytes(path);
-        string ascii = Encoding.ASCII.GetString(bytes);
-        string utf16 = Encoding.Unicode.GetString(bytes);
-        bool exposesUser = System.Text.RegularExpressions.Regex.IsMatch(
-                ascii,
-                "GonieGonie",
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase
-                    | System.Text.RegularExpressions.RegexOptions.CultureInvariant)
-            || System.Text.RegularExpressions.Regex.IsMatch(
-                utf16,
-                "GonieGonie",
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase
-                    | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
-        bool exposesWindowsProfile = System.Text.RegularExpressions.Regex.IsMatch(
-                ascii,
-                @"[A-Za-z]:[\\/]Users[\\/]",
+        string[] textViews = DecodeBinaryTextViews(bytes);
+        bool exposesUser = ContainsEncodedToken(bytes, "GonieGonie");
+        const string absoluteWindowsPath = @"(?<![A-Za-z0-9])[A-Za-z]:[\\/]";
+        const string uncPath = @"\\\\[A-Za-z0-9._-]+[\\/]";
+        bool exposesAbsolutePath = textViews.Any(text =>
+            System.Text.RegularExpressions.Regex.IsMatch(
+                text,
+                absoluteWindowsPath,
                 System.Text.RegularExpressions.RegexOptions.CultureInvariant)
             || System.Text.RegularExpressions.Regex.IsMatch(
-                utf16,
-                @"[A-Za-z]:[\\/]Users[\\/]",
-                System.Text.RegularExpressions.RegexOptions.CultureInvariant);
-        Require(!exposesUser && !exposesWindowsProfile,
-            fileName + " exposes a local user or absolute Windows profile path in its binary metadata.");
+                text,
+                uncPath,
+                System.Text.RegularExpressions.RegexOptions.CultureInvariant));
+        Require(!exposesUser && !exposesAbsolutePath,
+            fileName + " exposes a local user or absolute Windows path in its binary metadata.");
     }
 
     private static void ValidateFile(string path, BuildingModelSpec spec)
@@ -261,6 +303,9 @@ internal static class ExampleBuildingModels
                 && string.Equals(model.ApplicationUrl, ModelApplicationUrl, StringComparison.Ordinal)
                 && string.Equals(model.ApplicationDetails, ModelApplicationDetails, StringComparison.Ordinal),
             spec.FileName + " application metadata changed.");
+        Require(
+            string.IsNullOrEmpty(model.CreatedBy) && string.IsNullOrEmpty(model.LastEditedBy),
+            spec.FileName + " exposes a local user in its revision history.");
         ValidateNoLocalBinaryIdentity(path, spec.FileName);
         Require(model.Settings.ModelUnitSystem == UnitSystem.Meters, spec.FileName + " must use metres.");
         string[] layerNames = model.AllLayers.Select(item => item.Name).ToArray();
