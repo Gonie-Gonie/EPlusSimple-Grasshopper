@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
+using System.Text;
 using Rhino;
 using Rhino.DocObjects;
 using Rhino.FileIO;
@@ -14,6 +15,10 @@ internal static class ExampleBuildingModels
     private const string RoleKey = "DragonRole";
     private const string SurfacesLayer = "DRAGON_SURFACES";
     private const string OpeningsLayer = "DRAGON_OPENINGS";
+    private const string ModelApplicationName = "Dragons Grasshopper";
+    private const string ModelApplicationUrl = "https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper";
+    private const string ModelApplicationDetails =
+        "Neutral Rhino 7+ geometry for Dragon zone, surface, opening, and adjacency workflows.";
     private const double Tolerance = 1e-7;
 
     private static readonly BuildingModelSpec[] Models =
@@ -114,7 +119,7 @@ internal static class ExampleBuildingModels
         string candidatePath = Path.Combine(candidateDirectory, spec.FileName);
         using (File3dm model = CreateModel(spec))
         {
-            Require(model.Write(candidatePath, 7), "Rhino failed to write " + candidatePath + ".");
+            WriteNeutralModel(model, candidatePath);
         }
 
         ValidateFile(candidatePath, spec);
@@ -139,7 +144,7 @@ internal static class ExampleBuildingModels
         using (File3dm model = File3dm.Read(canonicalPath)
             ?? throw new InvalidOperationException("Rhino could not read " + canonicalPath + "."))
         {
-            Require(model.Write(roundTripPath, 7), "Rhino failed to round-trip " + canonicalPath + ".");
+            WriteNeutralModel(model, roundTripPath);
         }
 
         ValidateFile(roundTripPath, spec);
@@ -189,7 +194,57 @@ internal static class ExampleBuildingModels
                 "Rhino refused to add opening " + opening.Name + ".");
         }
 
+        ApplyNeutralModelIdentity(model);
         return model;
+    }
+
+    private static void WriteNeutralModel(File3dm model, string path)
+    {
+        ApplyNeutralModelIdentity(model);
+        var options = new File3dmWriteOptions
+        {
+            Version = 7,
+            SaveUserData = true,
+        };
+        byte[] bytes = model.ToByteArray(options);
+        Require(bytes.Length > 0, "Rhino produced an empty model archive for " + path + ".");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllBytes(path, bytes);
+    }
+
+    private static void ApplyNeutralModelIdentity(File3dm model)
+    {
+        model.StartSectionComments = string.Empty;
+        model.ApplicationName = ModelApplicationName;
+        model.ApplicationUrl = ModelApplicationUrl;
+        model.ApplicationDetails = ModelApplicationDetails;
+    }
+
+    private static void ValidateNoLocalBinaryIdentity(string path, string fileName)
+    {
+        byte[] bytes = File.ReadAllBytes(path);
+        string ascii = Encoding.ASCII.GetString(bytes);
+        string utf16 = Encoding.Unicode.GetString(bytes);
+        bool exposesUser = System.Text.RegularExpressions.Regex.IsMatch(
+                ascii,
+                "GonieGonie",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase
+                    | System.Text.RegularExpressions.RegexOptions.CultureInvariant)
+            || System.Text.RegularExpressions.Regex.IsMatch(
+                utf16,
+                "GonieGonie",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase
+                    | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+        bool exposesWindowsProfile = System.Text.RegularExpressions.Regex.IsMatch(
+                ascii,
+                @"[A-Za-z]:[\\/]Users[\\/]",
+                System.Text.RegularExpressions.RegexOptions.CultureInvariant)
+            || System.Text.RegularExpressions.Regex.IsMatch(
+                utf16,
+                @"[A-Za-z]:[\\/]Users[\\/]",
+                System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+        Require(!exposesUser && !exposesWindowsProfile,
+            fileName + " exposes a local user or absolute Windows profile path in its binary metadata.");
     }
 
     private static void ValidateFile(string path, BuildingModelSpec spec)
@@ -201,6 +256,12 @@ internal static class ExampleBuildingModels
 
         using File3dm model = File3dm.Read(path)
             ?? throw new InvalidOperationException("Rhino could not read " + path + ".");
+        Require(
+            string.Equals(model.ApplicationName, ModelApplicationName, StringComparison.Ordinal)
+                && string.Equals(model.ApplicationUrl, ModelApplicationUrl, StringComparison.Ordinal)
+                && string.Equals(model.ApplicationDetails, ModelApplicationDetails, StringComparison.Ordinal),
+            spec.FileName + " application metadata changed.");
+        ValidateNoLocalBinaryIdentity(path, spec.FileName);
         Require(model.Settings.ModelUnitSystem == UnitSystem.Meters, spec.FileName + " must use metres.");
         string[] layerNames = model.AllLayers.Select(item => item.Name).ToArray();
         Require(layerNames.Contains(SurfacesLayer, StringComparer.Ordinal), spec.FileName + " lost the surfaces layer.");

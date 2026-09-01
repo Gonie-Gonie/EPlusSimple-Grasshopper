@@ -83,6 +83,7 @@ internal static class AdvancedExampleDefinitions
             inputs.ExamplesRoot);
         ScenarioGraph graph = definition.Build(server);
         Save(graph.Document, candidatePath);
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(candidatePath, definition.Product);
 
         GH_Document candidate = Open(candidatePath);
         ValidationFacts candidateFacts = ValidateGraph(
@@ -95,11 +96,16 @@ internal static class AdvancedExampleDefinitions
             candidatePath,
             canonicalPath,
             inputs.OutputDirectory,
-            path => ValidateGraph(
-                Open(path),
-                graph,
-                inputs,
-                exerciseRuntimeWorkflow: false));
+            path =>
+            {
+                CanonicalExamplePublisher.ValidateGrasshopperIdentity(path, definition.Product);
+                ValidateGraph(
+                    Open(path),
+                    graph,
+                    inputs,
+                    exerciseRuntimeWorkflow: false);
+            });
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(canonicalPath, definition.Product);
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts canonicalFacts = ValidateGraph(
             canonical,
@@ -127,6 +133,7 @@ internal static class AdvancedExampleDefinitions
         }
 
         ScenarioGraph graph = definition.Build(server);
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(canonicalPath, definition.Product);
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts facts = ValidateGraph(
             canonical,
@@ -139,6 +146,7 @@ internal static class AdvancedExampleDefinitions
             definition.FileName,
             inputs.ExamplesRoot);
         Save(canonical, roundTripPath);
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(roundTripPath, definition.Product);
         GH_Document roundTrip = Open(roundTripPath);
         ValidationFacts reopened = ValidateGraph(
             roundTrip,

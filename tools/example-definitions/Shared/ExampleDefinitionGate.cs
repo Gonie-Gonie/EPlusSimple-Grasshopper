@@ -153,6 +153,7 @@ internal static class ExampleDefinitionGate
         GH_Document document = CreateDefinition(definition);
         ValidateGraph(document, definition);
         Save(document, candidatePath);
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(candidatePath, definition.Product);
 
         GH_Document candidate = Open(candidatePath);
         ValidationFacts candidateFacts = ValidateGraph(candidate, definition);
@@ -162,7 +163,12 @@ internal static class ExampleDefinitionGate
             candidatePath,
             canonicalPath,
             inputs.OutputDirectory,
-            path => ValidateGraph(Open(path), definition));
+            path =>
+            {
+                CanonicalExamplePublisher.ValidateGrasshopperIdentity(path, definition.Product);
+                ValidateGraph(Open(path), definition);
+            });
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(canonicalPath, definition.Product);
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts canonicalFacts = ValidateGraph(canonical, definition);
         Require(
@@ -184,12 +190,14 @@ internal static class ExampleDefinitionGate
                 canonicalPath);
         }
 
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(canonicalPath, definition.Product);
         GH_Document canonical = Open(canonicalPath);
         ValidationFacts facts = ValidateGraph(canonical, definition);
         string roundTripDirectory = Path.Combine(inputs.OutputDirectory, "roundtrip");
         Directory.CreateDirectory(roundTripDirectory);
         string roundTripPath = Path.Combine(roundTripDirectory, definition.FileName);
         Save(canonical, roundTripPath);
+        CanonicalExamplePublisher.ValidateGrasshopperIdentity(roundTripPath, definition.Product);
         GH_Document roundTrip = Open(roundTripPath);
         ValidationFacts reopenedFacts = ValidateGraph(roundTrip, definition);
         Require(

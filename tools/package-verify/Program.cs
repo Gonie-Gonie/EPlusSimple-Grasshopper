@@ -103,6 +103,7 @@ internal sealed class PackageVerifier
         "checksums.sha256",
     };
     private static readonly string[] NewLineSeparators = { "\r\n", "\n" };
+    private static readonly char[] SemVerSeparators = { '-', '+' };
     private static readonly string[] EmbeddedRuntimeRootDirectory = { "runtime" };
 
     private readonly string _packagesRoot;
@@ -713,14 +714,16 @@ internal sealed class PackageVerifier
 
             if (metadata.Name.StartsWith("Dragons.", StringComparison.Ordinal))
             {
-                Check(scenario, metadata.Version == new Version(0, 1, 1, 0),
+                Version expectedAssemblyVersion = ExpectedAssemblyVersion();
+                Check(scenario, metadata.Version == expectedAssemblyVersion,
                     "Assembly version mismatch for '" + path + "': " + metadata.Version + ".");
                 FileVersionInfo version = FileVersionInfo.GetVersionInfo(path);
-                Check(scenario, version.FileVersion == "0.1.1.0",
+                Check(scenario, version.FileVersion == expectedAssemblyVersion.ToString(),
                     "File version mismatch for '" + path + "': '" + version.FileVersion + "'.");
                 Check(scenario, version.ProductVersion is not null
                         && version.ProductVersion.StartsWith(_spec.Version, StringComparison.Ordinal),
                     "Informational/product version mismatch for '" + path + "': '" + version.ProductVersion + "'.");
+                VerifyDebugPaths(scenario, path, metadata);
             }
         }
 
@@ -1242,7 +1245,47 @@ internal sealed class PackageVerifier
             })
             .OrderBy(item => item, StringComparer.Ordinal)
             .ToArray();
-        return new AssemblyMetadata(name, definition.Version, references, publicTypes);
+        string[] codeViewPaths = pe.ReadDebugDirectory()
+            .Where(entry => entry.Type == DebugDirectoryEntryType.CodeView)
+            .Select(entry => pe.ReadCodeViewDebugDirectoryData(entry).Path)
+            .OrderBy(path => path, StringComparer.Ordinal)
+            .ToArray();
+        return new AssemblyMetadata(name, definition.Version, references, publicTypes, codeViewPaths);
+    }
+
+    private Version ExpectedAssemblyVersion()
+    {
+        string coreVersion = _spec.Version.Split(SemVerSeparators, 2)[0];
+        string[] parts = coreVersion.Split('.');
+        if (parts.Length != 3
+            || !int.TryParse(parts[0], out int major)
+            || !int.TryParse(parts[1], out int minor)
+            || !int.TryParse(parts[2], out int patch))
+        {
+            throw new InvalidDataException("Package version cannot be converted to an assembly version: '"
+                + _spec.Version + "'.");
+        }
+
+        return new Version(major, minor, patch, 0);
+    }
+
+    private void VerifyDebugPaths(string scenario, string assemblyPath, AssemblyMetadata metadata)
+    {
+        Check(scenario, metadata.CodeViewPaths.Length > 0,
+            "First-party assembly has no CodeView identity to audit: '" + assemblyPath + "'.");
+        string normalizedRepositoryRoot = _repositoryRoot.Replace('\\', '/').TrimEnd('/');
+        foreach (string rawPath in metadata.CodeViewPaths)
+        {
+            string path = rawPath.Replace('\\', '/');
+            bool neutral = path.StartsWith("/_/", StringComparison.Ordinal)
+                && !Regex.IsMatch(path, @"^[A-Za-z]:/", RegexOptions.CultureInvariant)
+                && !path.StartsWith("//", StringComparison.Ordinal)
+                && !path.Contains("/Users/", StringComparison.OrdinalIgnoreCase)
+                && !path.Contains(normalizedRepositoryRoot, StringComparison.OrdinalIgnoreCase);
+            Check(scenario, neutral,
+                "First-party assembly exposes a non-neutral CodeView path in '" + assemblyPath
+                    + "': '" + rawPath + "'.");
+        }
     }
 
     private static bool IsManagedPayloadFile(string path)
@@ -1505,6 +1548,7 @@ internal sealed record AssemblyMetadata(
     string Name,
     Version Version,
     AssemblyReferenceIdentity[] References,
-    string[] PublicTypes);
+    string[] PublicTypes,
+    string[] CodeViewPaths);
 
 internal sealed record AssemblyReferenceIdentity(string Name, Version Version);
