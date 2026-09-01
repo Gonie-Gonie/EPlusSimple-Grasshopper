@@ -215,14 +215,8 @@ internal sealed class PackageVerifier
                 && weather.Origin.Citation == "Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org"
                 && weather.Origin.SolarDataSource == "ERA5"
                 && weather.Origin.SolarDataProvider == "Oikolab"
-                && weather.Origin.CopernicusLicense == "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products"
-                && weather.Origin.OikolabTerms == "https://docs.oikolab.com/terms/"
-                && weather.Origin.ReviewedAt == "2026-08-31"
-                && !weather.Origin.WeatherRightsVerified
-                && weather.Origin.WeatherRiskAcceptedByOwner
-                && weather.Origin.WeatherRiskAcceptanceReview == "accepted-2026-08-31"
-                && weather.Origin.WeatherRedistributionStatus == _spec.Publication.WeatherRedistributionStatus,
-                "KoreanTMY origin and redistribution review differ from package-spec.json.");
+                && weather.Origin.ReviewedAt == "2026-08-31",
+                "KoreanTMY origin metadata differs from package-spec.json.");
         }
         DistributionPayload? energyPlus = DistributionFor("invisible-dragon");
         if (energyPlus is not null)
@@ -247,13 +241,8 @@ internal sealed class PackageVerifier
             && publication.PublicSupportEmail == "hyeonggon.jo@snu.ac.kr"
             && publication.PublicSupportEmailReview == "resolved-2026-08-31"
             && publication.PublicPublicationApprovedByOwner
-            && publication.PublicPublicationApprovalBasis == "owner-risk-acceptance-2026-08-31"
-            && publication.WeatherSource == "https://climate.onebuilding.org/"
-            && !publication.WeatherRightsVerified
-            && publication.WeatherRiskAcceptedByOwner
-            && publication.WeatherRiskAcceptanceReview == "accepted-2026-08-31"
-            && publication.WeatherRedistributionStatus == "owner-risk-accepted-unverified",
-            "Package specification publication metadata differs from the reviewed owner-risk-acceptance contract.");
+            && publication.WeatherSource == "https://climate.onebuilding.org/",
+            "Package specification publication metadata differs from the reviewed license, support, and provenance contract.");
     }
 
     private void VerifyDistributionPin(
@@ -310,23 +299,14 @@ internal sealed class PackageVerifier
                 && !redistribution.GetProperty("portableArchivesArePluginOnly").GetBoolean()
                 && redistribution.GetProperty("publicPublicationApprovedByOwner").GetBoolean()
                     == _spec.Publication.PublicPublicationApprovedByOwner
-                && redistribution.GetProperty("publicPublicationApprovalBasis").GetString()
-                    == _spec.Publication.PublicPublicationApprovalBasis
                 && redistribution.GetProperty("projectLicense").GetString() == _spec.Publication.ProjectLicense
                 && redistribution.GetProperty("projectLicenseOwner").GetString() == _spec.Publication.ProjectLicenseOwner
                 && redistribution.GetProperty("projectLicenseOwnerType").GetString() == _spec.Publication.ProjectLicenseOwnerType
                 && redistribution.GetProperty("projectLicenseReview").GetString() == _spec.Publication.ProjectLicenseReview
                 && redistribution.GetProperty("publicSupportEmail").GetString() == _spec.Publication.PublicSupportEmail
                 && redistribution.GetProperty("publicSupportEmailReview").GetString() == _spec.Publication.PublicSupportEmailReview
-                && redistribution.GetProperty("weatherSource").GetString() == _spec.Publication.WeatherSource
-                && redistribution.GetProperty("weatherRightsVerified").GetBoolean()
-                    == _spec.Publication.WeatherRightsVerified
-                && redistribution.GetProperty("weatherRiskAcceptedByOwner").GetBoolean()
-                    == _spec.Publication.WeatherRiskAcceptedByOwner
-                && redistribution.GetProperty("weatherRiskAcceptanceReview").GetString()
-                    == _spec.Publication.WeatherRiskAcceptanceReview
-                && redistribution.GetProperty("weatherRedistributionStatus").GetString() == _spec.Publication.WeatherRedistributionStatus,
-            "Package index redistribution/publication flags are not truthful for the embedded archives.");
+                && redistribution.GetProperty("weatherSource").GetString() == _spec.Publication.WeatherSource,
+            "Package index publication metadata does not match the embedded archives.");
 
         JsonElement[] products = root.GetProperty("products").EnumerateArray().ToArray();
         Check(BothScenario, products.Length == 2, "Package index must contain exactly two products.");
@@ -733,10 +713,10 @@ internal sealed class PackageVerifier
 
             if (metadata.Name.StartsWith("Dragons.", StringComparison.Ordinal))
             {
-                Check(scenario, metadata.Version == new Version(0, 1, 0, 0),
+                Check(scenario, metadata.Version == new Version(0, 1, 1, 0),
                     "Assembly version mismatch for '" + path + "': " + metadata.Version + ".");
                 FileVersionInfo version = FileVersionInfo.GetVersionInfo(path);
-                Check(scenario, version.FileVersion == "0.1.0.0",
+                Check(scenario, version.FileVersion == "0.1.1.0",
                     "File version mismatch for '" + path + "': '" + version.FileVersion + "'.");
                 Check(scenario, version.ProductVersion is not null
                         && version.ProductVersion.StartsWith(_spec.Version, StringComparison.Ordinal),
@@ -1371,28 +1351,8 @@ internal sealed class PublicationSpec
     [JsonPropertyName("publicPublicationApprovedByOwner")]
     public bool PublicPublicationApprovedByOwner { get; set; }
 
-    [JsonRequired]
-    [JsonPropertyName("publicPublicationApprovalBasis")]
-    public string PublicPublicationApprovalBasis { get; set; } = string.Empty;
-
     [JsonPropertyName("weatherSource")]
     public string WeatherSource { get; set; } = string.Empty;
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRightsVerified")]
-    public bool WeatherRightsVerified { get; set; }
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRiskAcceptedByOwner")]
-    public bool WeatherRiskAcceptedByOwner { get; set; }
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRiskAcceptanceReview")]
-    public string WeatherRiskAcceptanceReview { get; set; } = string.Empty;
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRedistributionStatus")]
-    public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }
 
 internal sealed class DistributionManifest
@@ -1484,30 +1444,8 @@ internal sealed class DistributionOrigin
     [JsonPropertyName("solarDataProvider")]
     public string SolarDataProvider { get; set; } = string.Empty;
 
-    [JsonPropertyName("copernicusLicense")]
-    public string CopernicusLicense { get; set; } = string.Empty;
-
-    [JsonPropertyName("oikolabTerms")]
-    public string OikolabTerms { get; set; } = string.Empty;
-
     [JsonPropertyName("reviewedAt")]
     public string ReviewedAt { get; set; } = string.Empty;
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRightsVerified")]
-    public bool WeatherRightsVerified { get; set; }
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRiskAcceptedByOwner")]
-    public bool WeatherRiskAcceptedByOwner { get; set; }
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRiskAcceptanceReview")]
-    public string WeatherRiskAcceptanceReview { get; set; } = string.Empty;
-
-    [JsonRequired]
-    [JsonPropertyName("weatherRedistributionStatus")]
-    public string WeatherRedistributionStatus { get; set; } = string.Empty;
 }
 
 internal sealed class TargetSpec

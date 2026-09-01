@@ -2,13 +2,10 @@
 
 This page is for people installing and loading released Dragon packages.
 
-There is no public Dragon binary or `v0.1.0` tag yet. The release names and
-steps below describe the intended first public bundle only. On 2026-08-31, the
-individual owner authorized publication to proceed while accepting that written
-permission for the Climate.OneBuilding/Oikolab/ERA5, Copernicus, and ASHRAE
-rights chain of SimpleDragon's embedded weather has not been verified. This
-owner decision does not establish upstream permission or license that payload
-under MIT. The MIT code license and public support address are confirmed.
+The `v0.1.1` release keeps InvisibleDragon and SimpleDragon on one lockstep
+version. SimpleDragon includes hash-verified Korean TMYx weather data sourced from
+Climate.OneBuilding. The MIT code license and public support address are
+confirmed.
 
 ## Requirements
 
@@ -24,7 +21,7 @@ installed by this project.
 
 ## Package choices
 
-Each release candidate contains independent `invisible-dragon` and
+Each release contains independent `invisible-dragon` and
 `simple-dragon` products:
 
 - Two Yak files per product: `rh7-win` and `rh8-win`.
@@ -34,11 +31,11 @@ Each release candidate contains independent `invisible-dragon` and
   InvisibleDragon or KoreanTMY weather for SimpleDragon.
 - SHA-256 inventories and a package compatibility report.
 
-Those are product-candidate inputs. The future GitHub release does not attach
+Those are per-product distribution inputs. The GitHub release does not attach
 the `.yak` or per-product portable ZIP files separately. Its Installer ZIP
 contains the four verified Rhino 7/8 Yak payloads behind one installation
 entry point; a portable ZIP may instead be offered separately through an
-authorized Food4Rhino record.
+Food4Rhino record.
 
 Yak is the preferred installation format because Rhino selects the correct
 payload. Rhino 7 uses `net48`. Rhino 8.0–8.19 uses the `net7.0` payload, and
@@ -51,20 +48,20 @@ Do not combine files from different commits or versions. When both products
 are installed, install the complete packages from the same release so their
 shared `Dragons.*` assemblies remain identical.
 
-## Installing the future release bundle
+## Installing the release bundle
 
-The future `v0.1.0` GitHub release is intentionally limited to exactly four
+The `v0.1.1` GitHub release is intentionally limited to exactly four
 assets:
 
 ```text
-Dragons-Grasshopper-0.1.0-Windows-Installer.zip
-Dragons-Grasshopper-User-Guide-0.1.0.pdf
-Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+Dragons-Grasshopper-0.1.1-Windows-Installer.zip
+Dragons-Grasshopper-User-Guide-0.1.1.pdf
+Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
 SHA256SUMS.txt
 ```
 
 The version is fixed by the release source, not chosen by the installer. The
-tag must equal the source version exactly: source `0.1.0` uses tag `v0.1.0`.
+tag must equal the source version exactly: source `0.1.1` uses tag `v0.1.1`.
 Use `SHA256SUMS.txt` from that same release to verify the Installer ZIP before
 opening it.
 

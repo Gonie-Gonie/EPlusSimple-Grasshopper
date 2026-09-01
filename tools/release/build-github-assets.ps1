@@ -21,7 +21,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-$expectedVersion = '0.1.0'
+$expectedVersion = '0.1.1'
 $packageSpecSchema = 'dragons-grasshopper.package-spec.v3'
 $packageIndexSchema = 'dragons-grasshopper.package-index.v3'
 $installerManifestSchema = 'dragons-grasshopper.windows-installer.v1'
@@ -1023,7 +1023,7 @@ paths relative to its own directory. It verifies their SHA-256 values before
 removing or installing either Dragon package. Rhino itself is not installed.
 
 Requirements: Windows x64 and an installed Rhino 7 or Rhino 8 with Grasshopper.
-See LICENSE.txt and NOTICE.md before redistribution.
+See LICENSE.txt and NOTICE.md for licensing and provenance.
 "@
     Write-Utf8Text `
         -Path (Join-Path $bundleRoot 'README.txt') `
@@ -1052,10 +1052,10 @@ See LICENSE.txt and NOTICE.md before redistribution.
         'README.txt',
         'checksums.sha256',
         'release-manifest.json',
-        'packages/rhino7/invisible-dragon-0.1.0-rh7-win.yak',
-        'packages/rhino7/simple-dragon-0.1.0-rh7-win.yak',
-        'packages/rhino8/invisible-dragon-0.1.0-rh8-win.yak',
-        'packages/rhino8/simple-dragon-0.1.0-rh8-win.yak'
+        'packages/rhino7/invisible-dragon-0.1.1-rh7-win.yak',
+        'packages/rhino7/simple-dragon-0.1.1-rh7-win.yak',
+        'packages/rhino8/invisible-dragon-0.1.1-rh8-win.yak',
+        'packages/rhino8/simple-dragon-0.1.1-rh8-win.yak'
     )
     if (-not (Test-ExactOrdinalStringArrays `
             -Left $canonicalExpectedBundlePaths `

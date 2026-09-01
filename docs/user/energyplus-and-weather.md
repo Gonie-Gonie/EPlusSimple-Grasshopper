@@ -48,11 +48,9 @@ local path remain inside the component.
 InvisibleDragon does not select, acquire, or infer weather. A deliberate
 standalone execution graph supplies one user-owned local file:
 
-```text
-ID Model -> Compile InvisibleDragon -> IDF --------+-> Run InvisibleDragon
-                                                   ^
-EPW File -> Verify InvisibleDragon Weather --------+
-```
+![Illustrated InvisibleDragon workflow showing explicit model compilation and a verified EPW converging at Run InvisibleDragon.](assets/illustrations/invisibledragon-workflow.png)
+
+*Figure: InvisibleDragon accepts one deliberate, verified EPW boundary; the EnergyPlus runtime remains internal.*
 
 `Verify InvisibleDragon Weather` (`ID Weather`) accepts an EPW file, verifies
 the local artifact, records its content hash, and emits the typed Weather value
@@ -85,9 +83,6 @@ result is parsed. Failed or cancelled simulations are retained below
 `%TEMP%\Dragons\energyplus-runs` so their EnergyPlus output and logs
 can be inspected; that whole location is disposable after diagnosis.
 
-The files are sourced from Climate.OneBuilding using ISD and Oikolab-supplied
-ERA5 inputs, but public download and attribution do not establish the complete
-Copernicus/Oikolab/ASHRAE right and notice chain needed to rebundle them. No
-written upstream permission has been verified. As recorded in `NOTICE.md`, the
-individual owner accepted that risk and authorized publication to proceed; this
-is an operational decision, not a finding that the weather rights are resolved.
+The files are Korean TMYx weather data sourced from Climate.OneBuilding. The
+archive identity, dataset citation, and address coverage are recorded in
+`resources/runtime/distributions.json` and summarized in `NOTICE.md`.

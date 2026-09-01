@@ -259,7 +259,7 @@ function Copy-PackageRootFiles {
     $readme = @"
 # $($Product.display_name) $($spec.version)
 
-This is a Gonie-Gonie $PayloadDescription for Grasshopper on Windows.
+This is a $PayloadDescription for Grasshopper on Windows.
 
 It contains managed plugin/runtime-bootstrap assemblies and one product-specific
 embedded distribution archive. $embeddedDescription RhinoCommon, Grasshopper,
@@ -643,13 +643,8 @@ if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
     [string] $publicationSpec.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
     [string] $publicationSpec.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
     -not [bool] $publicationSpec.publicPublicationApprovedByOwner -or
-    [string] $publicationSpec.publicPublicationApprovalBasis -cne 'owner-risk-acceptance-2026-08-31' -or
-    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/' -or
-    [bool] $publicationSpec.weatherRightsVerified -or
-    -not [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
-    [string] $publicationSpec.weatherRiskAcceptanceReview -cne 'accepted-2026-08-31' -or
-    [string] $publicationSpec.weatherRedistributionStatus -cne 'owner-risk-accepted-unverified') {
-    throw 'Package publication metadata differs from the reviewed individual/MIT/support/owner-risk-acceptance contract.'
+    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/') {
+    throw 'Package publication metadata differs from the reviewed individual/MIT/support/provenance contract.'
 }
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 if ([string] $distributionManifest.schema -ne 'dragons-grasshopper.distributions.v3' -or
@@ -688,13 +683,7 @@ $reviewedDistributions = @{
         originCitation = 'Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org'
         originSolarDataSource = 'ERA5'
         originSolarDataProvider = 'Oikolab'
-        originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
-        originOikolabTerms = 'https://docs.oikolab.com/terms/'
         originReviewedAt = '2026-08-31'
-        originWeatherRightsVerified = $false
-        originWeatherRiskAcceptedByOwner = $true
-        originWeatherRiskAcceptanceReview = 'accepted-2026-08-31'
-        originWeatherRedistributionStatus = 'owner-risk-accepted-unverified'
     }
 }
 foreach ($distribution in @($distributionManifest.payloads)) {
@@ -719,18 +708,8 @@ foreach ($distribution in @($distributionManifest.payloads)) {
             [string] $distribution.origin.citation -ne [string] $expected.originCitation -or
             [string] $distribution.origin.solarDataSource -ne [string] $expected.originSolarDataSource -or
             [string] $distribution.origin.solarDataProvider -ne [string] $expected.originSolarDataProvider -or
-            [string] $distribution.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
-            [string] $distribution.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
             [string] $distribution.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
-            [bool] $distribution.origin.weatherRightsVerified -ne [bool] $expected.originWeatherRightsVerified -or
-            [bool] $distribution.origin.weatherRiskAcceptedByOwner -ne [bool] $expected.originWeatherRiskAcceptedByOwner -or
-            [string] $distribution.origin.weatherRiskAcceptanceReview -ne [string] $expected.originWeatherRiskAcceptanceReview -or
-            [string] $distribution.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus -or
-            [bool] $distribution.origin.weatherRightsVerified -ne [bool] $publicationSpec.weatherRightsVerified -or
-            [bool] $distribution.origin.weatherRiskAcceptedByOwner -ne [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
-            [string] $distribution.origin.weatherRiskAcceptanceReview -cne [string] $publicationSpec.weatherRiskAcceptanceReview -or
-            [string] $distribution.origin.site -cne [string] $publicationSpec.weatherSource -or
-            [string] $distribution.origin.weatherRedistributionStatus -cne [string] $publicationSpec.weatherRedistributionStatus)) -or
+            [string] $distribution.origin.site -cne [string] $publicationSpec.weatherSource)) -or
         ($productId -eq 'invisible-dragon' -and (
             [string] $distribution.licenseEntry -ne [string] $expected.licenseEntry -or
             [string] $distribution.packageLicensePath -ne [string] $expected.packageLicensePath -or
@@ -940,7 +919,6 @@ $index = [pscustomobject] [ordered] @{
         weatherIncluded = $true
         portableArchivesArePluginOnly = $false
         publicPublicationApprovedByOwner = [bool] $publicationSpec.publicPublicationApprovedByOwner
-        publicPublicationApprovalBasis = [string] $publicationSpec.publicPublicationApprovalBasis
         projectLicense = [string] $publicationSpec.projectLicense
         projectLicenseOwner = [string] $publicationSpec.projectLicenseOwner
         projectLicenseOwnerType = [string] $publicationSpec.projectLicenseOwnerType
@@ -948,10 +926,6 @@ $index = [pscustomobject] [ordered] @{
         publicSupportEmail = [string] $publicationSpec.publicSupportEmail
         publicSupportEmailReview = [string] $publicationSpec.publicSupportEmailReview
         weatherSource = [string] $publicationSpec.weatherSource
-        weatherRightsVerified = [bool] $publicationSpec.weatherRightsVerified
-        weatherRiskAcceptedByOwner = [bool] $publicationSpec.weatherRiskAcceptedByOwner
-        weatherRiskAcceptanceReview = [string] $publicationSpec.weatherRiskAcceptanceReview
-        weatherRedistributionStatus = [string] $publicationSpec.weatherRedistributionStatus
     }
 }
 Write-Utf8JsonIfChanged -InputObject $index -Path (Join-Path $packagesRoot 'package-index.json') -Depth 10

@@ -103,13 +103,7 @@ $expectedDistributions = @{
         originCitation = 'Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org'
         originSolarDataSource = 'ERA5'
         originSolarDataProvider = 'Oikolab'
-        originCopernicusLicense = 'https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products'
-        originOikolabTerms = 'https://docs.oikolab.com/terms/'
         originReviewedAt = '2026-08-31'
-        originWeatherRightsVerified = $false
-        originWeatherRiskAcceptedByOwner = $true
-        originWeatherRiskAcceptanceReview = 'accepted-2026-08-31'
-        originWeatherRedistributionStatus = 'owner-risk-accepted-unverified'
     }
 }
 
@@ -142,13 +136,7 @@ foreach ($payload in $distributionPayloads) {
             [string] $payload.origin.citation -ne [string] $expected.originCitation -or
             [string] $payload.origin.solarDataSource -ne [string] $expected.originSolarDataSource -or
             [string] $payload.origin.solarDataProvider -ne [string] $expected.originSolarDataProvider -or
-            [string] $payload.origin.copernicusLicense -ne [string] $expected.originCopernicusLicense -or
-            [string] $payload.origin.oikolabTerms -ne [string] $expected.originOikolabTerms -or
-            [string] $payload.origin.reviewedAt -ne [string] $expected.originReviewedAt -or
-            [bool] $payload.origin.weatherRightsVerified -ne [bool] $expected.originWeatherRightsVerified -or
-            [bool] $payload.origin.weatherRiskAcceptedByOwner -ne [bool] $expected.originWeatherRiskAcceptedByOwner -or
-            [string] $payload.origin.weatherRiskAcceptanceReview -ne [string] $expected.originWeatherRiskAcceptanceReview -or
-            [string] $payload.origin.weatherRedistributionStatus -ne [string] $expected.originWeatherRedistributionStatus)) -or
+            [string] $payload.origin.reviewedAt -ne [string] $expected.originReviewedAt)) -or
         ($id -eq 'energyplus-24.2.0-windows-x64' -and (
             [string] $payload.licenseEntry -ne [string] $expected.licenseEntry -or
             [string] $payload.packageLicensePath -ne [string] $expected.packageLicensePath -or

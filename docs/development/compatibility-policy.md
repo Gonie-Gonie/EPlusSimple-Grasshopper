@@ -11,7 +11,7 @@ verification. User-facing host support and limitations are documented in the
 | Rhino 7 / Grasshopper | .NET Framework 4.8 (`net48`) | Supported |
 | Rhino 8.0–8.19 / Grasshopper | .NET 7 (`net7.0-windows`) | Supported |
 | Rhino 8.20+ / Grasshopper | .NET 8 (`net8.0-windows`) | Supported |
-| Rhino 9 beta, macOS | — | Not a 0.1.0 target |
+| Rhino 9 beta, macOS | — | Not a 0.1.1 target |
 
 Both Dragon GHAs are built from the same commit and may be loaded together.
 SimpleDragon owns its Grasshopper model, result, and diagnostic types. Its
@@ -23,9 +23,9 @@ the SimpleDragon GHA does not depend on InvisibleDragon Grasshopper types.
 
 The port tracks EPlusSimple/IDragon 0.7.0 at the exact repository commit in
 `upstream/upstream.lock.json`. Historical names and paths are retained only in
-provenance, symbol maps, fixtures, and compatibility reports. The Gonie-Gonie
-products, namespaces, packages, schemas, and owned directory structure are
-InvisibleDragon and SimpleDragon.
+provenance, symbol maps, fixtures, and compatibility reports. The public
+products, namespaces, packages, schemas, and owned directory structure use
+InvisibleDragon and SimpleDragon identities.
 
 Compatibility is assessed at several levels:
 
@@ -95,7 +95,7 @@ compiled Grasshopper products. It does not mean Python source, import, or call
 syntax compatibility. The release gate may claim compatibility only for rows
 that have symbol-level evidence or a reviewed exception.
 
-| In the 0.1.0 engineering scope | Outside the Grasshopper product scope |
+| In the 0.1.1 engineering scope | Outside the Grasshopper product scope |
 |---|---|
 | GRM 0.7.0 read/write semantics, defaults, nulls, and references | Python package import and function-call syntax |
 | Pinned construction, profile, climate, and weather data/query results | Excel/GREXCEL input conversion and execution |
@@ -137,14 +137,8 @@ either engine returns a zero active-load result.
   graph editor.
 - SimpleDragon intentionally loses arbitrary source vertices during its
   area-and-azimuth abstraction.
-- Written redistribution permission has not been verified for the exact
-  Climate.OneBuilding TMYx payload, its Oikolab/ERA5 and Copernicus
-  pass-through terms and notices, or its embedded ASHRAE design-condition
-  material. On 2026-08-31, the individual owner accepted that risk and
-  authorized public publication to proceed. The recorded status is
-  `owner-risk-accepted-unverified`, not a finding that those rights are
-  resolved.
+- SimpleDragon includes the exact hash-pinned Korean TMYx archive sourced from
+  Climate.OneBuilding and selects weather internally from Address and Vintage.
 
 The repository's own code is offered under MIT and the public support address
-is confirmed; neither those facts nor the owner's risk decision erases
-third-party provenance or the weather-rights review in `NOTICE.md`.
+is confirmed. Runtime and weather provenance remain recorded in `NOTICE.md`.

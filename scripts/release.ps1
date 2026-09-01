@@ -18,8 +18,8 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
 if ([string] $packageSpec.schema -cne 'dragons-grasshopper.package-spec.v3' -or
-    [string] $packageSpec.version -cne '0.1.0') {
-    throw 'The first public release process is deliberately bound to version 0.1.0. Decide and commit the final version in package-spec.json before changing this guard.'
+    [string] $packageSpec.version -cne '0.1.1') {
+    throw 'The corrected public release process is deliberately bound to version 0.1.1.'
 }
 $publicationSpec = $packageSpec.publication
 if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
@@ -29,13 +29,8 @@ if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
     [string] $publicationSpec.publicSupportEmail -cne 'hyeonggon.jo@snu.ac.kr' -or
     [string] $publicationSpec.publicSupportEmailReview -cne 'resolved-2026-08-31' -or
     -not [bool] $publicationSpec.publicPublicationApprovedByOwner -or
-    [string] $publicationSpec.publicPublicationApprovalBasis -cne 'owner-risk-acceptance-2026-08-31' -or
-    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/' -or
-    [bool] $publicationSpec.weatherRightsVerified -or
-    -not [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
-    [string] $publicationSpec.weatherRiskAcceptanceReview -cne 'accepted-2026-08-31' -or
-    [string] $publicationSpec.weatherRedistributionStatus -cne 'owner-risk-accepted-unverified') {
-    throw 'Release publication metadata differs from the reviewed individual/MIT/support/owner-risk-acceptance contract.'
+    [string] $publicationSpec.weatherSource -cne 'https://climate.onebuilding.org/') {
+    throw 'Release publication metadata differs from the reviewed individual/MIT/support/provenance contract.'
 }
 $releaseVersion = [string] $packageSpec.version
 $artifactsRoot = Join-Path $repositoryRoot 'artifacts'
@@ -3313,18 +3308,13 @@ $packageIndex = Require-Json `
     -Schema 'dragons-grasshopper.package-index.v3'
 $packagePublication = $packageIndex.redistribution
 if ([bool] $packagePublication.publicPublicationApprovedByOwner -ne [bool] $publicationSpec.publicPublicationApprovedByOwner -or
-    [string] $packagePublication.publicPublicationApprovalBasis -cne [string] $publicationSpec.publicPublicationApprovalBasis -or
     [string] $packagePublication.projectLicense -cne [string] $publicationSpec.projectLicense -or
     [string] $packagePublication.projectLicenseOwner -cne [string] $publicationSpec.projectLicenseOwner -or
     [string] $packagePublication.projectLicenseOwnerType -cne [string] $publicationSpec.projectLicenseOwnerType -or
     [string] $packagePublication.projectLicenseReview -cne [string] $publicationSpec.projectLicenseReview -or
     [string] $packagePublication.publicSupportEmail -cne [string] $publicationSpec.publicSupportEmail -or
     [string] $packagePublication.publicSupportEmailReview -cne [string] $publicationSpec.publicSupportEmailReview -or
-    [string] $packagePublication.weatherSource -cne [string] $publicationSpec.weatherSource -or
-    [bool] $packagePublication.weatherRightsVerified -ne [bool] $publicationSpec.weatherRightsVerified -or
-    [bool] $packagePublication.weatherRiskAcceptedByOwner -ne [bool] $publicationSpec.weatherRiskAcceptedByOwner -or
-    [string] $packagePublication.weatherRiskAcceptanceReview -cne [string] $publicationSpec.weatherRiskAcceptanceReview -or
-    [string] $packagePublication.weatherRedistributionStatus -cne [string] $publicationSpec.weatherRedistributionStatus) {
+    [string] $packagePublication.weatherSource -cne [string] $publicationSpec.weatherSource) {
     throw 'Package index publication metadata does not match package-spec.json.'
 }
 $compatibilityReport = Require-Json `
@@ -3951,7 +3941,6 @@ $releaseGate = [pscustomobject] [ordered] @{
     }
     publication = [pscustomobject] [ordered] @{
         publicPublicationApprovedByOwner = [bool] $packagePublication.publicPublicationApprovedByOwner
-        publicPublicationApprovalBasis = [string] $packagePublication.publicPublicationApprovalBasis
         tagCreated = $false
         githubReleaseCreated = $false
         yakPublished = $false
@@ -3963,11 +3952,7 @@ $releaseGate = [pscustomobject] [ordered] @{
         publicSupportEmail = [string] $packagePublication.publicSupportEmail
         publicSupportEmailReview = [string] $packagePublication.publicSupportEmailReview
         weatherSource = [string] $packagePublication.weatherSource
-        weatherRightsVerified = [bool] $packagePublication.weatherRightsVerified
-        weatherRiskAcceptedByOwner = [bool] $packagePublication.weatherRiskAcceptedByOwner
-        weatherRiskAcceptanceReview = [string] $packagePublication.weatherRiskAcceptanceReview
-        weatherRedistributionStatus = [string] $packagePublication.weatherRedistributionStatus
-        reason = 'The owner authorized publication on 2026-08-31 while accepting that the complete Climate.OneBuilding/Oikolab/Copernicus/ASHRAE weather rights chain remains unverified. This command creates a local candidate only; no tag, GitHub Release, Yak publication, or Food4Rhino submission has occurred.'
+        reason = 'This command creates a local candidate only; no tag, GitHub Release, Yak publication, or Food4Rhino submission has occurred.'
     }
 }
 

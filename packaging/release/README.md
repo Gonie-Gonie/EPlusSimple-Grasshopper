@@ -5,7 +5,7 @@
 repository, SDK, Python, administrator, or network dependency.
 
 The release asset builder must produce this exact extracted layout for version
-`0.1.0`:
+`0.1.1`:
 
 ```text
 Install-Dragons.cmd
@@ -16,15 +16,15 @@ NOTICE.md
 README.txt
 packages/
 |-- rhino7/
-|   |-- invisible-dragon-0.1.0-rh7-win.yak
-|   `-- simple-dragon-0.1.0-rh7-win.yak
+|   |-- invisible-dragon-0.1.1-rh7-win.yak
+|   `-- simple-dragon-0.1.1-rh7-win.yak
 `-- rhino8/
-    |-- invisible-dragon-0.1.0-rh8-win.yak
-    `-- simple-dragon-0.1.0-rh8-win.yak
+    |-- invisible-dragon-0.1.1-rh8-win.yak
+    `-- simple-dragon-0.1.1-rh8-win.yak
 ```
 
 `release-manifest.json` uses schema
-`dragons-grasshopper.windows-installer.v1`, version `0.1.0`, and an
+`dragons-grasshopper.windows-installer.v1`, version `0.1.1`, and an
 ordered `products` array: `invisible-dragon` / `InvisibleDragon`, then
 `simple-dragon` / `SimpleDragon`. Each product contains an ordered `packages`
 array for `rhino7` then `rhino8`; every record has `target`, canonical relative

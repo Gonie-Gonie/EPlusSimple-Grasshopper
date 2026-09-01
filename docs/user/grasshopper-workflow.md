@@ -23,14 +23,9 @@ This is the concise canvas-authoring guide for installed Dragon components.
 
 Build each object where its ownership is visible in the wires:
 
-```text
-Opening Curve + Fenestration Construction -> SD Opening -> SD Wall (opening-bearing face) --+
-Plain wall Brep list -----------------------------------------> SD Wall ---------------------+
-Floor Brep(s) + Construction + Boundary choice --------------> SD Floor --------------------+-> West Surface branch -> West SD Zone --+
-Ceiling Brep(s) + Construction + Boundary choice ------------> SD Ceiling ------------------+                                          |
-                                                                                                                                       +-> SD Model (Address) -> Run SimpleDragon -> GRR / Plot / CSV
-East Floor / Ceiling / Wall outputs -------------------------> East Surface branch -> East SD Zone ------------------------------------+
-```
+![Illustrated SimpleDragon ownership graph from constructions, openings, surfaces, and zone systems through SD Model and Run SimpleDragon to GRR outputs.](assets/illustrations/simpledragon-workflow.png)
+
+*Figure: The canonical SimpleDragon graph keeps ownership local and the simulation boundary short.*
 
 `SD Opening` has no Zone Index or Face Index. Its Construction input is required
 and belongs to the Opening. Connect that completed Opening only to its owning
@@ -86,19 +81,9 @@ starts EnergyPlus by itself.
 
 Low-level authoring uses the same local-ownership rule:
 
-```text
-Curve + Glazing -> ID Window --------------------+
-                                                    |
-Curve + Construction + owned Openings -> ID Wall --+
-Curve + Construction ----------------------> ID Floor --+-> owned Surface branch -> ID Zone <- Profile / HVAC / ERV
-Curve + Construction --------------------> ID Ceiling --+                                |
-                                                                                         +-> ID Model <- PV
-                                                                                                  |
-                                                                                                  v
-                                                                                         Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon
-                                                                                                                           ^
-                                                                                            EPW File -> ID Weather --------+
-```
+![Illustrated InvisibleDragon ownership graph from constructions, openings, surfaces, systems, and an Energy Model through IDF compilation and verified EPW input to simulation.](assets/illustrations/invisibledragon-workflow.png)
+
+*Figure: Standalone InvisibleDragon exposes the model, IDF, and weather boundary while keeping runtime paths internal.*
 
 Here `ID` is the InvisibleDragon component prefix, not an identifier input.
 

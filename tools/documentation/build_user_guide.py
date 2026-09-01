@@ -39,6 +39,15 @@ SOURCE_CHAPTERS = (
     ("03-compatibility.md", "Compatibility"),
     ("04-release-notes.md", "Release Notes"),
 )
+WORKFLOW_ILLUSTRATIONS = (
+    "shared-ownership.png",
+    "zone-tree-branches.png",
+    "simpledragon-workflow.png",
+    "invisibledragon-workflow.png",
+)
+ILLUSTRATION_SIZE_PX = (1920, 1080)
+FIGURE_WIDTH_CM = 16.8
+LINK_OXBLOOD = "6B1F2B"
 
 
 class UserGuideBuildError(RuntimeError):
@@ -1003,11 +1012,16 @@ def _load_oodocs() -> SimpleNamespace:
             Author,
             AuthorLayout,
             Chapter,
+            CodeBlock,
             CoverPage,
             Document,
             DocumentMetadata,
             DocumentSettings,
+            Figure,
+            FrontMatter,
             HeaderFooterDefaults,
+            ListOfFigures,
+            MainMatter,
             PageBreak,
             PageLayout,
             PageMargins,
@@ -1022,6 +1036,14 @@ def _load_oodocs() -> SimpleNamespace:
             VerticalSpace,
         )
         from oodocs.importers.markdown import parse_markdown
+        from oodocs.styles import (
+            BlockDefaults,
+            CaptionDefaults,
+            HeadingStyle,
+            LinkDefaults,
+            StyleSheet,
+            TextStyle,
+        )
     except (ImportError, AttributeError) as exc:
         raise UserGuideBuildError(
             "OODocs is unavailable or incomplete. Run 'dev.cmd setup' and use the "
@@ -1038,11 +1060,16 @@ def _load_oodocs() -> SimpleNamespace:
         Author=Author,
         AuthorLayout=AuthorLayout,
         Chapter=Chapter,
+        CodeBlock=CodeBlock,
         CoverPage=CoverPage,
         Document=Document,
         DocumentMetadata=DocumentMetadata,
         DocumentSettings=DocumentSettings,
+        Figure=Figure,
+        FrontMatter=FrontMatter,
         HeaderFooterDefaults=HeaderFooterDefaults,
+        ListOfFigures=ListOfFigures,
+        MainMatter=MainMatter,
         PageBreak=PageBreak,
         PageLayout=PageLayout,
         PageMargins=PageMargins,
@@ -1055,8 +1082,149 @@ def _load_oodocs() -> SimpleNamespace:
         TitleMatter=TitleMatter,
         TypographyDefaults=TypographyDefaults,
         VerticalSpace=VerticalSpace,
+        BlockDefaults=BlockDefaults,
+        CaptionDefaults=CaptionDefaults,
+        HeadingStyle=HeadingStyle,
+        LinkDefaults=LinkDefaults,
+        StyleSheet=StyleSheet,
+        TextStyle=TextStyle,
         parse_markdown=parse_markdown,
     )
+
+
+def _technical_manual_theme(
+    api: SimpleNamespace,
+    *,
+    header_left: str,
+    header_right: str,
+) -> Any:
+    """Return the shared OODocs technical-manual design system."""
+
+    heading_sizes = (20.0, 15.0, 12.5, 11.0, 10.0, 9.5)
+    heading_styles = {
+        level: api.HeadingStyle(
+            text_style=api.TextStyle(
+                font_name="Times New Roman",
+                font_size=size,
+                bold=True,
+            )
+        )
+        for level, size in enumerate(heading_sizes[:4], start=1)
+    }
+    return api.Theme(
+        typography=api.TypographyDefaults(
+            body_font_name="Times New Roman",
+            monospace_font_name="Courier New",
+            title_font_size=28.0,
+            body_font_size=10.0,
+            heading_sizes=heading_sizes,
+            caption_font_size=8.5,
+        ),
+        captions=api.CaptionDefaults(
+            caption_text_alignment="center",
+            table_caption_position="above",
+            figure_caption_position="below",
+        ),
+        links=api.LinkDefaults(
+            api.TextStyle(text_color=LINK_OXBLOOD, underline=False)
+        ),
+        blocks=api.BlockDefaults(
+            paragraph_text_alignment="justify",
+            table_block_alignment="center",
+            figure_block_alignment="center",
+            heading_styles=heading_styles,
+        ),
+        stylesheet=api.StyleSheet.default(),
+        page_numbers=api.PageNumberDefaults(
+            show_page_numbers=True,
+            page_number_alignment="right",
+            page_number_template="{page}",
+            page_number_font_size=8.0,
+        ),
+        header_footer=api.HeaderFooterDefaults(
+            header_left=header_left,
+            header_right=header_right,
+            footer_left="",
+            footer_right="{page}",
+            different_first_page=True,
+            first_header_left="",
+            first_header_right="",
+            first_footer_left="",
+            first_footer_right="",
+            font_size=8.0,
+        ),
+    )
+
+
+def _validate_user_guide_illustration_sources(repo_root: Path) -> tuple[str, ...]:
+    """Validate the four workflow illustrations before OODocs imports them."""
+
+    workflow_path = repo_root / "docs/user/user-guide/01-workflow.md"
+    try:
+        source = workflow_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        raise UserGuideBuildError(
+            f"Could not read the UTF-8 workflow source {workflow_path}: {exc}"
+        ) from exc
+
+    fenced_blocks = re.findall(r"```[^\n]*\n(.*?)\n```", source, re.DOTALL)
+    diagram_characters = frozenset("┌┐└┘├┤┬┴┼│─→")
+    for block in fenced_blocks:
+        arrow_lines = sum("->" in line for line in block.splitlines())
+        if any(character in block for character in diagram_characters) or arrow_lines >= 2:
+            raise UserGuideBuildError(
+                "The workflow source still contains a fenced ASCII/box-drawing diagram; "
+                "use the reviewed PNG illustrations instead."
+            )
+
+    markdown_images = tuple(
+        (match.group("caption").strip(), match.group("target").strip())
+        for match in re.finditer(
+            r"^!\[(?P<caption>[^\]]+)\]\((?P<target>[^)]+)\)\s*$",
+            source,
+            re.MULTILINE,
+        )
+    )
+    captions: list[str] = []
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise UserGuideBuildError(
+            "Pillow is unavailable in the documentation venv. Run 'dev.cmd setup'."
+        ) from exc
+
+    for filename in WORKFLOW_ILLUSTRATIONS:
+        matches = tuple(
+            caption
+            for caption, target in markdown_images
+            if Path(target).name == filename
+        )
+        if len(matches) != 1 or not matches[0]:
+            raise UserGuideBuildError(
+                f"The workflow source must reference {filename} exactly once with a caption."
+            )
+        illustration_path = repo_root / "docs/user/assets/illustrations" / filename
+        if not illustration_path.is_file():
+            raise UserGuideBuildError(
+                f"Required workflow illustration is missing: {illustration_path}"
+            )
+        try:
+            with Image.open(illustration_path) as image:
+                image.load()
+                actual_format = image.format
+                actual_size = image.size
+        except (OSError, ValueError) as exc:
+            raise UserGuideBuildError(
+                f"Could not inspect workflow illustration {illustration_path}: {exc}"
+            ) from exc
+        if actual_format != "PNG" or actual_size != ILLUSTRATION_SIZE_PX:
+            raise UserGuideBuildError(
+                f"Workflow illustration {illustration_path} must be a "
+                f"{ILLUSTRATION_SIZE_PX[0]}x{ILLUSTRATION_SIZE_PX[1]} PNG; "
+                f"found format={actual_format!r}, size={actual_size}."
+            )
+        captions.append(matches[0])
+    return tuple(captions)
 
 
 def _import_chapter(
@@ -1093,14 +1261,31 @@ def _import_chapter(
     if not imported.blocks:
         raise UserGuideBuildError(f"OODocs imported no content from {path}.")
 
-    # OODocs treats a table with automatic placement as a float.  Reference
-    # tables must stay beside their Inputs/Outputs labels and may split at row
-    # boundaries when a page is full, so make that public placement policy
-    # explicit on every imported table (including tables nested in sections).
+    # Apply one explicit, public-API rendering policy to every imported block,
+    # including blocks nested in section and list containers.
     def prepare_block(block: Any) -> None:
         if isinstance(block, api.Table):
+            block.style = "booktabs"
             block.placement = "here"
             block.split = True
+        elif isinstance(block, api.Figure):
+            caption = getattr(block, "caption", None)
+            caption_text = (
+                caption.plain_text().strip()
+                if caption is not None and hasattr(caption, "plain_text")
+                else ""
+            )
+            if not caption_text:
+                raise UserGuideBuildError(
+                    f"Imported figure in {path} must have non-blank Markdown alt text."
+                )
+            block.width = FIGURE_WIDTH_CM
+            block.height = None
+            block.unit = "cm"
+            block.placement = "here"
+            block.alt_text = caption_text
+        elif isinstance(block, api.CodeBlock) and block.language == "text":
+            block.show_language = False
         for child in getattr(block, "children", ()):
             prepare_block(child)
         for item in getattr(block, "items", ()):
@@ -1125,7 +1310,9 @@ def _import_chapter(
         )
     if not blocks:
         raise UserGuideBuildError(f"{path} has a title but no chapter content.")
-    return api.Chapter(title, *blocks, numbered=False, toc=True)
+    # Chapter numbers are the only heading numbers in the public manuals;
+    # Markdown sections retain their author-provided wording without counters.
+    return api.Chapter(title, *blocks, numbered=True, toc=True)
 
 
 def _build_document(
@@ -1145,35 +1332,12 @@ def _build_document(
         )
         for filename, fallback_title in SOURCE_CHAPTERS
     )
-    theme = api.Theme(
-        typography=api.TypographyDefaults(
-            body_font_name="Malgun Gothic",
-            monospace_font_name="Consolas",
-            title_font_size=24.0,
-            body_font_size=9.5,
-            heading_sizes=(18.0, 15.0, 12.5, 11.0, 10.0, 9.5),
-            caption_font_size=8.5,
-        ),
-        page_numbers=api.PageNumberDefaults(
-            show_page_numbers=True,
-            page_number_alignment="right",
-            page_number_template="{page}",
-            page_number_font_size=8.0,
-        ),
-        header_footer=api.HeaderFooterDefaults(
-            # OODocs 1.3 resolves running chapter names statically for PDF;
-            # a fixed guide label keeps every page accurate across chapters.
-            header_left="Dragon Grasshopper User Guide",
-            header_right="InvisibleDragon + SimpleDragon",
-            footer_left="Gonie-Gonie",
-            footer_right="{page}",
-            different_first_page=True,
-            first_header_left="",
-            first_header_right="",
-            first_footer_left="",
-            first_footer_right="",
-            font_size=8.0,
-        ),
+    # OODocs 1.3 resolves running chapter names statically for PDF, so use a
+    # fixed guide label that remains accurate across every chapter.
+    theme = _technical_manual_theme(
+        api,
+        header_left="Dragon Grasshopper User Guide",
+        header_right="InvisibleDragon + SimpleDragon",
     )
     settings = api.DocumentSettings(
         metadata=api.DocumentMetadata(
@@ -1204,30 +1368,36 @@ def _build_document(
             ),
             cover=api.CoverPage(
                 eyebrow="USER GUIDE",
-                organization="Gonie-Gonie",
+                organization="",
                 footer="InvisibleDragon + SimpleDragon",
             ),
         ),
         page_layout=api.PageLayout.portrait(
             api.PageSize.a4(),
-            api.PageMargins(top=1.8, right=1.6, bottom=1.8, left=1.6, unit="cm"),
+            api.PageMargins(top=2.0, right=2.0, bottom=2.0, left=2.0, unit="cm"),
         ),
         theme=theme,
     )
-    document_blocks: list[Any] = [
-        api.TableOfContents("Contents", max_level=3, show_page_numbers=True)
-    ]
-    for chapter in chapters:
+    main_blocks: list[Any] = []
+    for index, chapter in enumerate(chapters):
         # A small ordinary flowable after the explicit break resets ReportLab's
         # frame state when the preceding chapter ends in a long split table.
         # Without it, a following chapter heading can be positioned above the
         # top frame on some page combinations.
-        document_blocks.extend(
-            (api.PageBreak(), api.VerticalSpace(10, unit="pt"), chapter)
-        )
+        if index:
+            main_blocks.append(api.PageBreak())
+        main_blocks.extend((api.VerticalSpace(10, unit="pt"), chapter))
     return api.Document(
         "InvisibleDragon + SimpleDragon User Guide",
-        *document_blocks,
+        api.FrontMatter(
+            api.TableOfContents("Contents", max_level=3, show_page_numbers=True),
+            api.ListOfFigures(
+                "List of Figures",
+                scope="document",
+                show_page_numbers=True,
+            ),
+        ),
+        api.MainMatter(*main_blocks, start_on_new_page=True),
         settings=settings,
     )
 
@@ -1285,6 +1455,7 @@ def validate_rendered_pdf(
     path: Path,
     catalog: RuntimeCatalog,
     internal_guids: frozenset[str],
+    illustration_captions: tuple[str, ...],
 ) -> None:
     """Postflight the staged PDF before replacing the prior deliverable."""
 
@@ -1297,6 +1468,12 @@ def validate_rendered_pdf(
         if not reader.pages:
             raise UserGuideBuildError("The rendered user-guide PDF has no pages.")
         extracted = "\n".join(page.extract_text() or "" for page in reader.pages)
+        image_count = sum(len(page.images) for page in reader.pages)
+        page_sizes = tuple(
+            (float(page.mediabox.width), float(page.mediabox.height))
+            for page in reader.pages
+        )
+        metadata = reader.metadata
     except UserGuideBuildError:
         raise
     except Exception as exc:
@@ -1306,6 +1483,34 @@ def validate_rendered_pdf(
 
     normalized = re.sub(r"\s+", " ", extracted).strip()
     searchable = normalized.casefold()
+    if (
+        metadata is None
+        or metadata.title != "InvisibleDragon + SimpleDragon User Guide"
+        or metadata.author != "Gonie-Gonie"
+    ):
+        raise UserGuideBuildError("The staged user-guide PDF metadata is incorrect.")
+    if any(
+        abs(width - 595.28) > 1.0 or abs(height - 841.89) > 1.0
+        for width, height in page_sizes
+    ):
+        raise UserGuideBuildError("The staged user-guide PDF contains a non-A4 page.")
+    if image_count < len(WORKFLOW_ILLUSTRATIONS):
+        raise UserGuideBuildError(
+            "The staged user-guide PDF contains fewer than four workflow figures: "
+            f"found {image_count}."
+        )
+    if "list of figures" not in searchable:
+        raise UserGuideBuildError("The staged user-guide PDF is missing its List of Figures.")
+    missing_captions = [
+        caption
+        for caption in illustration_captions
+        if re.sub(r"\s+", " ", caption).strip().casefold() not in searchable
+    ]
+    if missing_captions:
+        raise UserGuideBuildError(
+            "The staged user-guide PDF is missing one or more figure captions: "
+            + ", ".join(missing_captions)
+        )
     chapter_titles = tuple(label for _, label in SOURCE_CHAPTERS)
     missing_chapters = [
         title for title in chapter_titles if title.casefold() not in searchable
@@ -1399,6 +1604,7 @@ def build_user_guide(
     validate_guide_coverage(catalog, guides)
     reference = render_component_reference(catalog, guides)
     _assert_no_internal_guids(reference, internal_guids, str(repo_root / REFERENCE_PATH))
+    illustration_captions = _validate_user_guide_illustration_sources(repo_root)
 
     api = _load_oodocs()
     document = _build_document(api, repo_root, internal_guids, reference)
@@ -1417,7 +1623,12 @@ def build_user_guide(
     try:
         staged_pdf.unlink()
         render_pdf_only(document, staged_pdf)
-        validate_rendered_pdf(staged_pdf, catalog, internal_guids)
+        validate_rendered_pdf(
+            staged_pdf,
+            catalog,
+            internal_guids,
+            illustration_captions,
+        )
         reference_updated = update_text_if_changed(repo_root / REFERENCE_PATH, reference)
         os.replace(staged_pdf, output_path)
     finally:

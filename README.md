@@ -1,8 +1,8 @@
 # Dragons-Grasshopper
 
-This Gonie-Gonie repository ports the upstream EPlusSimple 0.7.0 project and
-its IDragon layer to two independently installable Rhino 7+ / Grasshopper
-plugins written in C#. The public product names in this port are:
+This repository ports the upstream EPlusSimple 0.7.0 project and its IDragon
+layer to two independently installable Rhino 7+ / Grasshopper plugins written
+in C#. The public product names in this port are:
 
 - `Dragons.InvisibleDragon.GH` is the renamed IDragon port. It preserves
   planar polygon vertices and builds EnergyPlus models.
@@ -52,38 +52,31 @@ The root contains only stable project boundaries:
 Generated local settings live with the reusable toolchain state under
 `.tools\state`; no generated configuration directory is kept at the root.
 
-## Installing a packaged candidate
+## Installing a release package
 
 Installed plugins require Rhino 7 or Rhino 8 on Windows, but not the .NET SDK,
 Python, or Visual Studio. Local candidate builds produce a matching Yak archive
-and portable plugin ZIP for each product. These outputs are currently for
-controlled verification and inspection only; they are not publicly published.
-InvisibleDragon candidates carry the exact pinned EnergyPlus ZIP and
-SimpleDragon candidates carry the exact pinned KoreanTMY ZIP; neither payload
+and portable plugin ZIP for each product. Local outputs are verification
+artifacts; use only files attached to the matching GitHub release for public
+installation.
+InvisibleDragon packages carry the exact pinned EnergyPlus ZIP and
+SimpleDragon packages carry the exact pinned KoreanTMY ZIP; neither payload
 is expanded in source control or directly inside a package.
 
 Read [Installation](docs/user/installation.md), [Choosing a Dragon](docs/user/choosing-a-dragon.md),
-and [EnergyPlus and weather](docs/user/energyplus-and-weather.md) before using a
-candidate. InvisibleDragon and SimpleDragon may be installed independently or
+and [EnergyPlus and weather](docs/user/energyplus-and-weather.md) before
+installation. InvisibleDragon and SimpleDragon may be installed independently or
 together when they come from the same release commit.
 
 The canonical Grasshopper flow keeps ownership local and simulation setup internal:
 
-```text
-Curve + Fenestration Construction -> SD Opening ----------------+
-                                                                v
-Face Brep(s) + Construction + Boundary choice -> SD Wall / Ceiling / Floor -> SD Zone <- Height / Profile / HVAC / ERV
-                                                                                     |
-                                                                                     +-> SD Model (Address/Vintage) -> Run SimpleDragon -> GRR
+![Illustrated SimpleDragon workflow from owned surfaces and systems through SD Model and Run SimpleDragon to GRR outputs.](docs/user/assets/illustrations/simpledragon-workflow.png)
 
-Curve -> ID Window / Door -> ID Wall / Ceiling / Floor -> ID Zone <- Profile / HVAC / ERV
-                                                                |
-                                                                +-> ID Model <- PV
-                                                                      |
-                                                                      +-> Compile InvisibleDragon -> IDF --+-> Run InvisibleDragon -> Result
-                                                                                                            ^
-                                                                           EPW File -> ID Weather -----------+
-```
+*SimpleDragon keeps weather selection and EnergyPlus execution inside the direct run boundary.*
+
+![Illustrated InvisibleDragon workflow from explicit model authoring and compilation through verified EPW input to EnergyPlus results.](docs/user/assets/illustrations/invisibledragon-workflow.png)
+
+*InvisibleDragon exposes the Energy Model, IDF, and verified EPW boundary while keeping the runtime internal.*
 
 In these component labels, `ID` abbreviates InvisibleDragon; it is not an
 identifier port.
@@ -128,20 +121,19 @@ command list.
 
 ## Current status
 
-The port is preparing the first independently installable local
-`InvisibleDragon 0.1.0` and `SimpleDragon 0.1.0` release candidate. A generated
+This repository defines the corrected lockstep
+`InvisibleDragon 0.1.1` and `SimpleDragon 0.1.1` release. A generated
 binary is not considered compatible until the algorithm, semantic IDF,
 EnergyPlus result, Rhino geometry, example round-trip, and isolated/co-loaded
 package gates applicable to it pass.
 
 The [documentation index](docs/README.md) covers the end-user workflow,
 compatibility boundary, troubleshooting, examples, and maintainer release
-gates. No public binary, release tag, GitHub release, Yak publication, or
-Food4Rhino listing has been created yet. On 2026-08-31, the individual owner
-authorized public publication to proceed while accepting that the complete
-Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain recorded
-in [NOTICE.md](NOTICE.md) remains unverified. That decision does not claim
-written upstream permission or license the weather payload under MIT.
+gates. Published artifacts are accepted only when their version and source
+commit match the verified release record. SimpleDragon includes hash-verified
+Korean TMYx weather data sourced from
+[Climate.OneBuilding](https://climate.onebuilding.org/); its pinned archive and
+dataset citation are recorded in `resources/runtime/distributions.json`.
 
 ## Repository rules
 
@@ -153,4 +145,4 @@ written upstream permission or license the weather payload under MIT.
   deterministic.
 - Meaningful milestones are tested, committed, and pushed to `main`.
 
-See [NOTICE.md](NOTICE.md) for third-party and redistribution notes.
+See [NOTICE.md](NOTICE.md) for third-party notices and runtime-data provenance.

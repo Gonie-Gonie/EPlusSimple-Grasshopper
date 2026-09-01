@@ -23,13 +23,13 @@ artifacts/
 |   |-- compatibility-report.json
 |   `-- checksums.sha256
 |-- documentation/
-|   |-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
-|   `-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+|   |-- Dragons-Grasshopper-User-Guide-0.1.1.pdf
+|   `-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
 |-- release/
 |   |-- github-assets/
-|   |   |-- Dragons-Grasshopper-0.1.0-Windows-Installer.zip
-|   |   |-- Dragons-Grasshopper-User-Guide-0.1.0.pdf
-|   |   |-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+|   |   |-- Dragons-Grasshopper-0.1.1-Windows-Installer.zip
+|   |   |-- Dragons-Grasshopper-User-Guide-0.1.1.pdf
+|   |   |-- Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
 |   |   `-- SHA256SUMS.txt
 |   |-- release-assets-manifest.json
 |   `-- release-gate.json
@@ -49,9 +49,8 @@ a new build resets generated artifacts, run package and docs after build when
 preparing a complete hand-off. Successful package runs remove their scratch
 stages automatically.
 
-The generated version is deliberately fixed at `0.1.0`; a future tag must be
-exactly `v0.1.0`. These are local, ignored artifacts. Their presence does not
-mean a tag, GitHub release, Yak package, or Food4Rhino listing has been
-published. Owner authorization to proceed despite unverified weather rights is
-recorded separately and does not turn generated candidate files into completed
-publication actions.
+The generated version is deliberately fixed at `0.1.1`; its matching release
+tag is `v0.1.1`. These are local, ignored artifacts. Their presence alone does
+not mean that a tag, GitHub release, Yak package, or Food4Rhino listing has been
+published; public installation files are the copies attached to the matching
+GitHub release.

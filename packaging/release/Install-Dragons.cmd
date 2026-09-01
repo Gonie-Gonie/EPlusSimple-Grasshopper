@@ -19,7 +19,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
 $ExpectedSchema = 'dragons-grasshopper.windows-installer.v1'
-$ExpectedVersion = '0.1.0'
+$ExpectedVersion = '0.1.1'
 $ProductDefinitions = @(
     [pscustomobject] [ordered] @{
         id = 'invisible-dragon'

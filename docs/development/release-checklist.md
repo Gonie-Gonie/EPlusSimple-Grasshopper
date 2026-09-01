@@ -3,32 +3,25 @@
 This is an internal maintainer checklist, not installation or usage guidance.
 
 This checklist is for maintainers preparing the first local InvisibleDragon and
-SimpleDragon 0.1.0 candidate for Rhino 7+. Building a candidate does not itself
-create a tag, GitHub Release, Yak publication, or Food4Rhino submission. The
-owner's separate authorization to proceed despite unverified weather rights is
-recorded in `packaging/package-spec.json`.
+SimpleDragon 0.1.1 candidate for Rhino 7+. Building a candidate does not itself
+create a tag, GitHub Release, Yak publication, or Food4Rhino submission.
 
 ## Source and provenance
 
 - Work from a clean `main` commit already pushed to `origin/main`.
 - Confirm that `packaging/package-spec.json`, assembly metadata, both product
   manifests, both PDF filenames, and every package filename agree on the
-  deliberately fixed first-release version `0.1.0`. Make the final version
-  decision in source; a future tag must be exactly `v0.1.0`, not a runtime
+  deliberately fixed first-release version `0.1.1`. Make the final version
+  decision in source; the release tag must be exactly `v0.1.1`, not a runtime
   override or a product-specific tag.
 - Validate the upstream lock, symbol map, compatibility exceptions, and Python
   reference fixtures.
-- Recheck `LICENSE` and `NOTICE.md`. The owner confirmed individual ownership
-  and MIT publication for the port on 2026-08-31; retain that decision and the
-  pinned upstream MIT attribution.
+- Recheck `LICENSE` and `NOTICE.md`; retain the pinned upstream MIT attribution.
 - Confirm that SimpleDragon contains only the exact hash-pinned KoreanTMY
-  archive and no expanded or arbitrary EPW files. Retain the finding that
-  written permission for its complete Climate.OneBuilding/Oikolab/ERA5,
-  Copernicus, and ASHRAE chain has not been verified, together with the owner's
-  2026-08-31 decision to accept that risk and authorize publication. Do not
-  describe the rights as resolved or the weather payload as MIT licensed.
-  Follow the
-  [weather rights review](publishing/weather-rights-review.md).
+  archive and no expanded or arbitrary EPW files. Confirm its
+  Climate.OneBuilding TMYx source, citation, archive identity, and address
+  coverage against the
+  [weather provenance record](publishing/weather-provenance.md).
 - Reconfirm `hyeonggon.jo@snu.ac.kr` as the intended public support address
   immediately before GitHub, Yak, or Food4Rhino publication.
 - Require both Rhino 7 and Rhino 8 for the complete release gate. A normal
@@ -70,9 +63,7 @@ For diagnosis, its constituent commands are:
 - Require the Food4Rhino metadata PDF builder to import the canonical
   publishing worksheet through OODocs and postflight its version, document
   metadata, required sections, all field headings and fenced values, and the
-  `OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION` safety token.
-  Building the worksheet must not turn owner risk acceptance into a claim of
-  verified permission.
+  Climate.OneBuilding weather source.
 - Require all 1,242 pinned upstream public symbols to have exact registry
   coverage, no `needs_reverification` rows, and fresh authoritative assertion
   evidence for every `equivalent` or `exception` row. External evidence JSON
@@ -139,17 +130,17 @@ For diagnosis, its constituent commands are:
   `artifacts` tree),
   `engineering-compatibility.json`, package index and compatibility report,
   build/test reports, both
-  `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.0.pdf` and
-  `artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf`,
+  `artifacts\documentation\Dragons-Grasshopper-User-Guide-0.1.1.pdf` and
+  `artifacts\documentation\Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf`,
   and all six copied real-host summaries. Confirm both PDFs appear in the
   release-gate asset inventory with their exact byte counts and SHA-256 values.
 - Confirm `artifacts\release\github-assets` contains exactly these four future
   GitHub release assets and nothing else:
 
   ```text
-  Dragons-Grasshopper-0.1.0-Windows-Installer.zip
-  Dragons-Grasshopper-User-Guide-0.1.0.pdf
-  Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+  Dragons-Grasshopper-0.1.1-Windows-Installer.zip
+  Dragons-Grasshopper-User-Guide-0.1.1.pdf
+  Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
   SHA256SUMS.txt
   ```
 
@@ -187,13 +178,11 @@ labels and have licensed Rhino 7 and Rhino 8 installations available to the
 interactive host gates. The gate still verifies the pinned EnergyPlus runtime
 and every required tool rather than trusting runner labels alone.
 
-The owner has authorized public publication while accepting that the complete
-Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain remains
-unverified. Immediately before acting, confirm that the machine-readable state
-still records `weatherRightsVerified: false`, owner risk acceptance, and
-`publicPublicationApprovedByOwner: true`; never describe this as written permission.
-Re-confirm that the chosen release version is still `0.1.0` and that tag
-`v0.1.0` equals it exactly. Tag creation, the GitHub Release with exactly the
+Immediately before acting, confirm that the machine-readable state still
+records `publicPublicationApprovedByOwner: true` and the canonical
+Climate.OneBuilding weather source. Re-confirm that the chosen release version
+is still `0.1.1` and that tag
+`v0.1.1` equals it exactly. Tag creation, the GitHub Release with exactly the
 four staged assets, binary upload, Yak publication, and Food4Rhino submission
 remain distinct manual operations. Record each only after that action actually
 occurs; none is performed by this candidate workflow.

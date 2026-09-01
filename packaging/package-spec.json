@@ -1,6 +1,6 @@
 {
   "schema": "dragons-grasshopper.package-spec.v3",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publication": {
     "projectLicense": "MIT",
     "projectLicenseOwner": "Gonie-Gonie",
@@ -9,12 +9,7 @@
     "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
     "publicSupportEmailReview": "resolved-2026-08-31",
     "publicPublicationApprovedByOwner": true,
-    "publicPublicationApprovalBasis": "owner-risk-acceptance-2026-08-31",
-    "weatherSource": "https://climate.onebuilding.org/",
-    "weatherRightsVerified": false,
-    "weatherRiskAcceptedByOwner": true,
-    "weatherRiskAcceptanceReview": "accepted-2026-08-31",
-    "weatherRedistributionStatus": "owner-risk-accepted-unverified"
+    "weatherSource": "https://climate.onebuilding.org/"
   },
   "targets": [
     {

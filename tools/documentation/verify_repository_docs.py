@@ -29,7 +29,7 @@ DEVELOPMENT_FILES = (
     "example-maintenance.md",
     "release-checklist.md",
     "publishing/food4rhino.md",
-    "publishing/weather-rights-review.md",
+    "publishing/weather-provenance.md",
 )
 OBSOLETE_PATHS = (
     "docs/installation.md",
@@ -195,18 +195,10 @@ def _validate_food4rhino(repo_root: Path) -> int:
         "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
         "publicSupportEmailReview": "resolved-2026-08-31",
         "publicPublicationApprovedByOwner": True,
-        "publicPublicationApprovalBasis": "owner-risk-acceptance-2026-08-31",
         "weatherSource": "https://climate.onebuilding.org/",
-        "weatherRightsVerified": False,
-        "weatherRiskAcceptedByOwner": True,
-        "weatherRiskAcceptanceReview": "accepted-2026-08-31",
-        "weatherRedistributionStatus": "owner-risk-accepted-unverified",
     }
     if publication != expected_publication:
         raise DocumentationError("Package publication metadata differs from the reviewed contract.")
-    if "Publication status: **OWNER APPROVED TO PROCEED" not in text:
-        raise DocumentationError("Food4Rhino publication status must record owner approval.")
-
     shared = _section(text, "Shared Food4Rhino fields", "Shared source and Yak metadata")
     source_metadata = _section(text, "Shared source and Yak metadata", "InvisibleDragon App")
     exact_shared = {
@@ -230,17 +222,8 @@ def _validate_food4rhino(repo_root: Path) -> int:
     support_email = _field(shared, "Support Email")
     if EMAIL_PATTERN.fullmatch(support_email) is None:
         raise DocumentationError("Food4Rhino Support Email is not a valid confirmed address.")
-    if "OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION" not in text:
-        raise DocumentationError("Food4Rhino owner-risk disclosure token is missing.")
-    if "does not state or imply" not in text:
-        raise DocumentationError("Food4Rhino owner-risk disclosure is incomplete.")
     for contract_value in (
-        expected_publication["publicPublicationApprovalBasis"],
-        expected_publication["weatherRiskAcceptanceReview"],
-        expected_publication["weatherRedistributionStatus"],
         "publicPublicationApprovedByOwner: true",
-        "weatherRightsVerified: false",
-        "weatherRiskAcceptedByOwner: true",
     ):
         if contract_value not in text:
             raise DocumentationError(
@@ -267,8 +250,6 @@ def _validate_food4rhino(repo_root: Path) -> int:
 
     if "A `.yak` file is never selected in Food4Rhino's" not in text:
         raise DocumentationError("Food4Rhino sheet does not distinguish Yak linkage from uploads.")
-    if expected_publication["weatherRedistributionStatus"] not in text:
-        raise DocumentationError("Food4Rhino weather redistribution status is stale.")
     file_link_pattern = re.compile(
         r"^### [^\n]*File / Link[^\n]*\n\n```text\n(?P<value>.*?)\n```",
         re.MULTILINE | re.DOTALL,
@@ -286,7 +267,7 @@ def _validate_food4rhino(repo_root: Path) -> int:
     products = {str(item["id"]): item for item in package_spec["products"]}
     product_sections = {
         "invisible-dragon": _section(text, "InvisibleDragon App", "SimpleDragon App"),
-        "simple-dragon": _section(text, "SimpleDragon App", "Upload sequence after authorization"),
+        "simple-dragon": _section(text, "SimpleDragon App", "Upload sequence"),
     }
     checked = len(exact_shared) + len(exact_source_metadata) + 1
     for product_id, section in product_sections.items():

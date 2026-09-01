@@ -41,8 +41,8 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
 if ([string] $packageSpec.schema -cne 'dragons-grasshopper.package-spec.v3' -or
-    [string] $packageSpec.version -cne '0.1.0') {
-    throw 'Documentation requires the deliberate first-release package version 0.1.0.'
+    [string] $packageSpec.version -cne '0.1.1') {
+    throw 'Documentation requires the corrected public-release package version 0.1.1.'
 }
 $releaseVersion = [string] $packageSpec.version
 $defaultOutputPath = Join-Path $documentationOutputRoot (

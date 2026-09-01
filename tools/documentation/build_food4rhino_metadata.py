@@ -33,11 +33,12 @@ _USER_GUIDE_HELPERS = _load_user_guide_helpers()
 UserGuideBuildError = _USER_GUIDE_HELPERS.UserGuideBuildError
 _import_chapter = _USER_GUIDE_HELPERS._import_chapter
 _load_oodocs = _USER_GUIDE_HELPERS._load_oodocs
+_technical_manual_theme = _USER_GUIDE_HELPERS._technical_manual_theme
 render_pdf_only = _USER_GUIDE_HELPERS.render_pdf_only
 
 
 PACKAGE_SCHEMA = "dragons-grasshopper.package-spec.v3"
-EXPECTED_RELEASE_VERSION = "0.1.0"
+EXPECTED_RELEASE_VERSION = "0.1.1"
 SOURCE_PATH = Path("docs/development/publishing/food4rhino.md")
 EXPECTED_PRODUCT_IDENTITIES = {
     "invisible-dragon": "InvisibleDragon",
@@ -51,12 +52,7 @@ EXPECTED_PUBLICATION = {
     "publicSupportEmail": "hyeonggon.jo@snu.ac.kr",
     "publicSupportEmailReview": "resolved-2026-08-31",
     "publicPublicationApprovedByOwner": True,
-    "publicPublicationApprovalBasis": "owner-risk-acceptance-2026-08-31",
     "weatherSource": "https://climate.onebuilding.org/",
-    "weatherRightsVerified": False,
-    "weatherRiskAcceptedByOwner": True,
-    "weatherRiskAcceptanceReview": "accepted-2026-08-31",
-    "weatherRedistributionStatus": "owner-risk-accepted-unverified",
 }
 EXPECTED_SECTIONS = (
     "Publication status and field contract",
@@ -64,10 +60,19 @@ EXPECTED_SECTIONS = (
     "Shared source and Yak metadata",
     "InvisibleDragon App",
     "SimpleDragon App",
-    "Upload sequence after authorization",
+    "Upload sequence",
 )
-SAFETY_TOKENS = (
-    "OWNER_RISK_ACCEPTED_WITHOUT_VERIFIED_WEATHER_PERMISSION",
+PREVIEW_FIGURES = (
+    (
+        "InvisibleDragon App",
+        "invisibledragon-workflow.png",
+        "InvisibleDragon left-to-right workflow preview",
+    ),
+    (
+        "SimpleDragon App",
+        "simpledragon-workflow.png",
+        "SimpleDragon direct-run workflow preview",
+    ),
 )
 
 
@@ -148,21 +153,12 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
     )
     if not fenced_values or any(not value for value in fenced_values):
         raise Food4RhinoPdfError("Food4Rhino paste/select/upload blocks are missing or blank.")
-    for token in SAFETY_TOKENS:
-        if token not in source:
-            raise Food4RhinoPdfError(f"Food4Rhino safety token is missing: {token}")
     for value in (
         EXPECTED_PUBLICATION["projectLicense"],
         EXPECTED_PUBLICATION["projectLicenseOwner"],
-        EXPECTED_PUBLICATION["projectLicenseOwnerType"],
         EXPECTED_PUBLICATION["publicSupportEmail"],
-        EXPECTED_PUBLICATION["publicPublicationApprovalBasis"],
         EXPECTED_PUBLICATION["weatherSource"],
-        EXPECTED_PUBLICATION["weatherRiskAcceptanceReview"],
-        EXPECTED_PUBLICATION["weatherRedistributionStatus"],
         "publicPublicationApprovedByOwner: true",
-        "weatherRightsVerified: false",
-        "weatherRiskAcceptedByOwner: true",
     ):
         if value not in source:
             raise Food4RhinoPdfError(
@@ -171,7 +167,77 @@ def _load_contract(repo_root: Path) -> tuple[str, Path, str, tuple[str, ...], tu
     return version, source_path, source, fields, fenced_values
 
 
-def _build_document(api: Any, source_path: Path, source: str, version: str) -> Any:
+def _find_section(api: Any, root: Any, title: str) -> Any | None:
+    """Return the first descendant section with the exact plain title."""
+
+    for child in getattr(root, "children", ()):
+        if not isinstance(child, api.Section):
+            continue
+        if child.plain_title().strip() == title:
+            return child
+        nested = _find_section(api, child, title)
+        if nested is not None:
+            return nested
+    return None
+
+
+def _add_preview_figures(api: Any, chapter: Any, repo_root: Path) -> None:
+    """Add PDF-only workflow previews beside each Other Images upload field."""
+
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise Food4RhinoPdfError(
+            "Pillow is unavailable in the documentation venv. Run 'dev.cmd setup'."
+        ) from exc
+
+    for product_title, filename, caption in PREVIEW_FIGURES:
+        product_section = _find_section(api, chapter, product_title)
+        if product_section is None:
+            raise Food4RhinoPdfError(
+                f"Could not find the {product_title!r} section for its PDF preview."
+            )
+        other_images = _find_section(api, product_section, "Other Images [UPLOAD]")
+        if other_images is None:
+            raise Food4RhinoPdfError(
+                f"Could not find {product_title!r} Other Images for its PDF preview."
+            )
+        image_path = repo_root / "docs/user/assets/illustrations" / filename
+        if not image_path.is_file():
+            raise Food4RhinoPdfError(f"Food4Rhino preview image is missing: {image_path}")
+        try:
+            with Image.open(image_path) as image:
+                image.load()
+                actual_format = image.format
+                actual_size = image.size
+        except (OSError, ValueError) as exc:
+            raise Food4RhinoPdfError(
+                f"Could not inspect Food4Rhino preview image {image_path}: {exc}"
+            ) from exc
+        if actual_format != "PNG" or actual_size != (1920, 1080):
+            raise Food4RhinoPdfError(
+                f"Food4Rhino preview {image_path} must be a 1920x1080 PNG; "
+                f"found format={actual_format!r}, size={actual_size}."
+            )
+        other_images.children.append(
+            api.Figure(
+                image_path,
+                caption=caption,
+                width=16.8,
+                unit="cm",
+                placement="here",
+                alt_text=caption,
+            )
+        )
+
+
+def _build_document(
+    api: Any,
+    repo_root: Path,
+    source_path: Path,
+    source: str,
+    version: str,
+) -> Any:
     try:
         chapter = _import_chapter(
             api,
@@ -182,34 +248,12 @@ def _build_document(api: Any, source_path: Path, source: str, version: str) -> A
         )
     except UserGuideBuildError as exc:
         raise Food4RhinoPdfError(str(exc)) from exc
+    _add_preview_figures(api, chapter, repo_root)
 
-    theme = api.Theme(
-        typography=api.TypographyDefaults(
-            body_font_name="Malgun Gothic",
-            monospace_font_name="Consolas",
-            title_font_size=23.0,
-            body_font_size=9.0,
-            heading_sizes=(17.0, 14.0, 11.5, 10.5, 9.5, 9.0),
-            caption_font_size=8.0,
-        ),
-        page_numbers=api.PageNumberDefaults(
-            show_page_numbers=True,
-            page_number_alignment="right",
-            page_number_template="{page}",
-            page_number_font_size=8.0,
-        ),
-        header_footer=api.HeaderFooterDefaults(
-            header_left="Food4Rhino Publishing Metadata",
-            header_right=f"Dragons {version}",
-            footer_left="Gonie-Gonie",
-            footer_right="{page}",
-            different_first_page=True,
-            first_header_left="",
-            first_header_right="",
-            first_footer_left="",
-            first_footer_right="",
-            font_size=8.0,
-        ),
+    theme = _technical_manual_theme(
+        api,
+        header_left="Food4Rhino Publishing Metadata",
+        header_right=f"Dragons {version}",
     )
     title = f"Dragons Food4Rhino Publishing Metadata {version}"
     settings = api.DocumentSettings(
@@ -236,22 +280,26 @@ def _build_document(api: Any, source_path: Path, source: str, version: str) -> A
             ),
             cover=api.CoverPage(
                 eyebrow="PUBLISHING WORKSHEET",
-                organization="Gonie-Gonie",
+                organization="",
                 footer=f"InvisibleDragon + SimpleDragon {version}",
             ),
         ),
         page_layout=api.PageLayout.portrait(
             api.PageSize.a4(),
-            api.PageMargins(top=1.8, right=1.6, bottom=1.8, left=1.6, unit="cm"),
+            api.PageMargins(top=2.0, right=2.0, bottom=2.0, left=2.0, unit="cm"),
         ),
         theme=theme,
     )
     return api.Document(
         title,
-        api.TableOfContents("Contents", max_level=3, show_page_numbers=True),
-        api.PageBreak(),
-        api.VerticalSpace(10, unit="pt"),
-        chapter,
+        api.FrontMatter(
+            api.TableOfContents("Contents", max_level=3, show_page_numbers=True)
+        ),
+        api.MainMatter(
+            api.VerticalSpace(10, unit="pt"),
+            chapter,
+            start_on_new_page=True,
+        ),
         settings=settings,
     )
 
@@ -276,6 +324,11 @@ def _validate_pdf(
             raise Food4RhinoPdfError("Food4Rhino metadata PDF has no pages.")
         metadata = reader.metadata
         text = "\n".join(page.extract_text() or "" for page in reader.pages)
+        image_count = sum(len(page.images) for page in reader.pages)
+        page_sizes = tuple(
+            (float(page.mediabox.width), float(page.mediabox.height))
+            for page in reader.pages
+        )
     except Food4RhinoPdfError:
         raise
     except Exception as exc:
@@ -284,6 +337,16 @@ def _validate_pdf(
     expected_title = f"Dragons Food4Rhino Publishing Metadata {version}"
     if metadata is None or metadata.title != expected_title or metadata.author != "Gonie-Gonie":
         raise Food4RhinoPdfError("Food4Rhino PDF metadata title/author is incorrect.")
+    if any(
+        abs(width - 595.28) > 1.0 or abs(height - 841.89) > 1.0
+        for width, height in page_sizes
+    ):
+        raise Food4RhinoPdfError("Food4Rhino metadata PDF contains a non-A4 page.")
+    if image_count < len(PREVIEW_FIGURES):
+        raise Food4RhinoPdfError(
+            "Food4Rhino metadata PDF lost one or more workflow preview images: "
+            f"found {image_count}."
+        )
     compact_text = _compact(text)
     required_text = (
         "Food4Rhino publishing worksheet",
@@ -291,14 +354,7 @@ def _validate_pdf(
         *EXPECTED_PRODUCT_IDENTITIES.keys(),
         *EXPECTED_PRODUCT_IDENTITIES.values(),
         version,
-        *SAFETY_TOKENS,
-        EXPECTED_PUBLICATION["publicPublicationApprovalBasis"],
-        EXPECTED_PUBLICATION["weatherRiskAcceptanceReview"],
-        EXPECTED_PUBLICATION["weatherRedistributionStatus"],
         "publicPublicationApprovedByOwner: true",
-        "weatherRightsVerified: false",
-        "weatherRiskAcceptedByOwner: true",
-        "does not state or imply",
         *fields,
     )
     missing = [value for value in required_text if _compact(value) not in compact_text]
@@ -310,6 +366,16 @@ def _validate_pdf(
     if missing_values:
         raise Food4RhinoPdfError(
             f"Food4Rhino metadata PDF lost {len(missing_values)} copy/select/upload value block(s)."
+        )
+    missing_previews = [
+        caption
+        for _, _, caption in PREVIEW_FIGURES
+        if _compact(caption) not in compact_text
+    ]
+    if missing_previews:
+        raise Food4RhinoPdfError(
+            "Food4Rhino metadata PDF lost workflow preview caption(s): "
+            + ", ".join(missing_previews)
         )
 
 
@@ -325,7 +391,7 @@ def build_food4rhino_pdf(repo_root: Path, output_path: Path) -> Path:
         )
 
     api = _load_oodocs()
-    document = _build_document(api, source_path, source, version)
+    document = _build_document(api, repo_root, source_path, source, version)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, staged_name = tempfile.mkstemp(
         prefix=f".{output_path.stem}.staged.", suffix=".pdf", dir=output_path.parent

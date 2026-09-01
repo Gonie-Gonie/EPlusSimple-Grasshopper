@@ -1,11 +1,11 @@
 name: simple-dragon
-version: 0.1.0
+version: 0.1.1
 authors:
   - Gonie-Gonie
 description: >-
-  Gonie-Gonie SimpleDragon area-and-azimuth building-energy workflows for
-  Grasshopper, with direct managed GRM-to-GRR simulation and internal
-  InvisibleDragon conversion and EnergyPlus execution.
+  SimpleDragon provides area-and-azimuth building-energy workflows in
+  Grasshopper, including direct managed GRM-to-GRR simulation, built-in
+  EnergyPlus execution, and address-based weather.
 url: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper
 icon: icon.png
 keywords:

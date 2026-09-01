@@ -47,10 +47,8 @@ the complete disposable tree.
   Food4Rhino worksheet, and the two version-bound PDF outputs.
 - [Release checklist](release-checklist.md): clean-source, host, package,
   evidence, legal, and publication gates.
-- [Weather rights review](publishing/weather-rights-review.md): exact
-  Climate.OneBuilding payload provenance, unverified
-  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights chain, and the owner's
-  documented decision to accept that risk and proceed.
+- [Weather provenance](publishing/weather-provenance.md): exact
+  Climate.OneBuilding payload identity, citation, and address coverage.
 - [Example maintenance](example-maintenance.md): canonical binary generation,
   Rhino-host round trips, runtime gates, and disposable evidence.
 - [Food4Rhino publishing sheet](publishing/food4rhino.md): the single
@@ -72,9 +70,8 @@ Implementation-specific documentation remains beside the system it describes:
 
 The standard root [LICENSE](../../LICENSE), [NOTICE](../../NOTICE.md), and
 [CHANGELOG](../../CHANGELOG.md) remain authoritative for legal and release
-history. The future GitHub release contract is exactly one Installer ZIP, the
+history. The GitHub release contract is exactly one Installer ZIP, the
 user guide PDF, the Food4Rhino metadata PDF, and `SHA256SUMS.txt`, all bound to
 the deliberately selected package version and matching repository tag. A local
-candidate does not itself perform public publication. Owner authorization is a
-separate machine-readable decision, and actual tag, GitHub Release, Yak, and
-Food4Rhino actions must remain separately recorded.
+candidate does not itself perform public publication; actual tag, GitHub
+Release, Yak, and Food4Rhino actions remain independently recorded.

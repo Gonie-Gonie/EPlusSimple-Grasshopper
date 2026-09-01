@@ -179,7 +179,7 @@
     "Dragons.InvisibleDragon.Grasshopper.Components.DomesticHotWaterComponent": {
       "role": "Compatibility",
       "purpose": "Creates a typed domestic-hot-water definition retained for domain compatibility and future integration.",
-      "workflow": "Use it only when inspecting or extending the domain model; it is not part of the executable 0.1.0 Grasshopper simulation graph.",
+      "workflow": "Use it only when inspecting or extending the domain model; it is not part of the executable 0.1.1 Grasshopper simulation graph.",
       "caveats": [
         "No public Zone or Model input currently accepts this output.",
         "The current Core export path produces no EnergyPlus objects for this value, so it must not be presented as an active load."

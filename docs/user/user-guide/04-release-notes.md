@@ -1,32 +1,29 @@
 # Release notes
 
-These notes describe externally relevant behavior in the current candidate.
+These notes describe externally relevant behavior in the current release.
 
-## 0.1.0 — Unreleased local candidate
+## 0.1.1 — Current release
 
-Version 0.1.0 is an unreleased, locally buildable candidate. There is no public
-0.1.0 binary, Git tag, GitHub release, or Rhino Yak publication. Local packages
-and the PDF guide are development artifacts and must not be represented as a
-published release.
+Version 0.1.1 is the corrected first public release line for both Dragon
+products. A package is part of this release only when its version, source
+commit, checksums, and release record agree.
 
-On 2026-08-31, the individual owner authorized public distribution to proceed
-while accepting that written permission for the complete rights-and-notice
-chain of the bundled Climate.OneBuilding TMYx weather, including Oikolab/ERA5,
-Copernicus, and ASHRAE obligations, has not been verified. The recorded status
-is `owner-risk-accepted-unverified`; it is not a claim of upstream permission.
-The MIT code license and public support address `hyeonggon.jo@snu.ac.kr` are
-confirmed.
+SimpleDragon includes hash-verified Korean TMYx weather data sourced from
+Climate.OneBuilding. The MIT code license and public support address
+`hyeonggon.jo@snu.ac.kr` are confirmed.
 
 ### Product highlights
 
-- Introduces two independently installable Gonie-Gonie Grasshopper products:
+- Uses `Dragons.*` for technical identities while keeping the repository
+  account in author and ownership metadata only.
+- Adds illustrated end-to-end workflows and a reference-manual PDF layout.
+- Introduces two independently installable Grasshopper products:
   InvisibleDragon for lower-level EnergyPlus-facing authoring and SimpleDragon
   for the GRM/GRR building workflow.
 - Supports Rhino 7 on .NET Framework 4.8, Rhino 8.0–8.19 on .NET 7, and Rhino
   8.20+ on .NET 8, all on Windows x64.
 - Produces host-specific Yak candidates and portable packages internally, then
-  assembles one relative-path Windows Installer ZIP for the future GitHub
-  release.
+  assembles one relative-path Windows Installer ZIP for the GitHub release.
 - Keeps installed plugins independent of Python, OODocs, Visual Studio, the
   .NET SDK, and a machine-wide EnergyPlus installation.
 - Tracks the EPlusSimple/IDragon 0.7.0 engineering baseline at upstream commit
@@ -34,7 +31,7 @@ confirmed.
 
 ### Candidate verification matrix
 
-| Gate | Required 0.1.0 evidence | Candidate status |
+| Gate | Required 0.1.1 evidence | Candidate status |
 | --- | --- | --- |
 | Managed implementation | All discovered unit/integration projects pass with no required skip | Passed by the verified candidate gate |
 | Engineering parity | 11 paired Python/C# cases × 6 stages; zero failure or skip | Enforced; report included in candidate |
@@ -43,7 +40,7 @@ confirmed.
 | Packages | Invisible-only, Simple-only, and co-loaded portable candidates; no Python | Enforced for both Rhino generations |
 | Documentation | Four chapters, all 75 components and 37 typed parameters, plus Food4Rhino metadata PDF postflight | Enforced as two version-bound OODocs PDFs |
 | GitHub assets | Installer ZIP, user guide PDF, Food4Rhino metadata PDF, and `SHA256SUMS.txt` only | Deterministically assembled and verified locally |
-| Public publication | Owner authorization separated from unverified Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights | Owner-authorized with risk accepted; no tag, GitHub Release, Yak, or Food4Rhino publication has occurred |
+| Public publication | Tag, GitHub Release, Yak, and Food4Rhino are separate actions | Each published item must match the verified 0.1.1 commit |
 
 A candidate is distributable only when its engineering, host, example,
 package, checksum, and documentation reports all belong to the same source
@@ -98,8 +95,8 @@ attestation.
 
 - Pins EnergyPlus 24.2.0 build `94a887817b` and verifies the official Windows
   archive and prepared runtime files.
-- InvisibleDragon candidates carry the pinned EnergyPlus archive.
-- SimpleDragon candidates carry the pinned `KoreanTMY-v1` archive and prepare
+- InvisibleDragon packages carry the pinned EnergyPlus archive.
+- SimpleDragon packages carry the pinned `KoreanTMY-v1` archive and prepare
   only the address-selected EPW.
 - Uses per-user LocalAppData caches and system temporary run directories rather
   than writing into Rhino installation folders.
@@ -135,7 +132,7 @@ attestation.
 - Adds this PDF-only user guide with a task-oriented Workflow, exhaustive public
   component In/Out reference, Compatibility chapter, and Release Notes.
 
-### Known limitations in this candidate
+### Known limitations in this release
 
 - Windows x64 only; Rhino 9 beta and macOS are not targeted.
 - One pinned EnergyPlus version only.
@@ -152,4 +149,3 @@ attestation.
 - There is no public SimpleDragon-to-InvisibleDragon conversion-preview
   component; the direct SimpleDragon runner intentionally keeps that layer
   internal.
-- Public packages remain unavailable until the distribution notice is resolved.

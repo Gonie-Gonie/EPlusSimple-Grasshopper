@@ -7,12 +7,9 @@ one build or packaging workflow:
   Grasshopper icons, contact sheets, assembly resources, and package icons.
 - `runtime/` declares the exact external EnergyPlus and KoreanTMY archives that
   setup validates and packages without committing or expanding those payloads.
-  The KoreanTMY declaration also pins its Climate.OneBuilding origin,
-  Oikolab/ERA5 and Copernicus provenance links, and current
-  `owner-risk-accepted-unverified` redistribution status. Written upstream
-  permission has not been verified; the individual owner accepted that risk
-  and authorized publication to proceed. See the maintainer
-  [weather rights review](../docs/development/publishing/weather-rights-review.md).
+  The KoreanTMY declaration also pins its Climate.OneBuilding origin, TMYx
+  dataset citation, archive identity, and address coverage. See the maintainer
+  [weather provenance record](../docs/development/publishing/weather-provenance.md).
 
 Generated packages belong under `artifacts`, downloaded payloads under
 `.tools`, and disposable processing under `temp`.

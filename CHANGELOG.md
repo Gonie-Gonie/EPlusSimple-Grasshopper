@@ -1,15 +1,25 @@
 # Changelog
 
 All notable changes to this project are documented here. Both products share
-one release version. A future repository tag must equal the deliberately chosen
-source version exactly: the current first-release source `0.1.0` maps only to
-`v0.1.0`. No public tag exists yet.
+one release version. A repository tag must equal the deliberately chosen source
+version exactly: source `0.1.1` maps only to `v0.1.1`.
 
-## Unreleased
+## 0.1.1 — 2026-09-01
+
+### Corrected
+
+- Use `Dragons.*` for assembly, namespace, schema, cache, environment, and
+  tooling identities; the repository account remains author and owner metadata
+  only.
+- Keep public weather documentation to the packaged TMYx provenance and
+  deterministic verification behavior.
+- Replace public ASCII workflow diagrams with four illustrated, captioned
+  technical-manual figures and align the OODocs PDFs with the reference-manual
+  layout.
 
 ### Added
 
-- Add two independently installable, Gonie-Gonie-owned Grasshopper products:
+- Add two independently installable Grasshopper products:
   InvisibleDragon, the C# port of the historical IDragon layer, and
   SimpleDragon, the C# port of the historical EPlusSimple layer.
 - Support Rhino 7+ with a Rhino 7 `net48` payload and Rhino 8
@@ -77,8 +87,8 @@ source version exactly: the current first-release source `0.1.0` maps only to
   the Python oracle, all production targets and tests, real EnergyPlus runs,
   the exhaustive PDF guide, tracked Grasshopper examples, package contents, and
   all six Rhino 7/Rhino 8 portable-package load scenarios.
-- Assemble a future GitHub attachment set containing exactly
-  `Dragons-Grasshopper-0.1.0-Windows-Installer.zip`, the user guide PDF, the
+- Assemble the GitHub attachment set containing exactly
+  `Dragons-Grasshopper-0.1.1-Windows-Installer.zip`, the user guide PDF, the
   Food4Rhino metadata PDF, and `SHA256SUMS.txt`. The extracted installer uses
   only bundle-relative manifests, checksums, notices, and Rhino 7/8 Yak payloads.
 - Separate external user documentation from development, evidence, release, and
@@ -87,12 +97,8 @@ source version exactly: the current first-release source `0.1.0` maps only to
 
 ### Distribution status
 
-- On 2026-08-31, the individual owner authorized public publication while
-  accepting that written permission for the complete
-  Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain has not
-  been verified. The machine-readable weather status is
-  `owner-risk-accepted-unverified`; it does not claim that the payload is MIT
-  licensed. The MIT code license and `hyeonggon.jo@snu.ac.kr` public support
-  address are confirmed. No public binary, `v0.1.0` tag, GitHub Release, Yak
-  publication, or Food4Rhino submission has yet occurred, and `dev.cmd release`
-  performs none of those actions.
+- SimpleDragon includes hash-verified Korean TMYx weather data sourced from
+  Climate.OneBuilding. The MIT code license and `hyeonggon.jo@snu.ac.kr` public
+  support address are confirmed. `dev.cmd release` assembles and verifies the
+  candidate but does not itself publish tags, GitHub assets, Yak packages, or
+  Food4Rhino changes.

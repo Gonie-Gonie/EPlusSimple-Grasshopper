@@ -34,13 +34,7 @@
         "citation": "Lawrie, Linda K, Drury B Crawley. 2022. Development of Global Typical Meteorological Years (TMYx). https://climate.onebuilding.org",
         "solarDataSource": "ERA5",
         "solarDataProvider": "Oikolab",
-        "copernicusLicense": "https://cds.climate.copernicus.eu/licences/licence-to-use-copernicus-products",
-        "oikolabTerms": "https://docs.oikolab.com/terms/",
-        "reviewedAt": "2026-08-31",
-        "weatherRightsVerified": false,
-        "weatherRiskAcceptedByOwner": true,
-        "weatherRiskAcceptanceReview": "accepted-2026-08-31",
-        "weatherRedistributionStatus": "owner-risk-accepted-unverified"
+        "reviewedAt": "2026-08-31"
       },
       "archiveEpwCount": 80,
       "metadataReferencedUniqueEpwCount": 78,

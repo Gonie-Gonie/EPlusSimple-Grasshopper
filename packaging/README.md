@@ -47,10 +47,10 @@ is independent:
 ```text
 artifacts/packages/<product>/
 |-- yak/
-|   |-- <product>-0.1.0-rh7-win.yak
-|   `-- <product>-0.1.0-rh8-win.yak
+|   |-- <product>-0.1.1-rh7-win.yak
+|   `-- <product>-0.1.1-rh8-win.yak
 `-- portable/
-    `-- <product>-0.1.0-portable-plugin-win.zip
+    `-- <product>-0.1.1-portable-plugin-win.zip
 ```
 
 These per-product files are candidate inputs, not the GitHub release attachment
@@ -58,9 +58,9 @@ set. The local release gate assembles a separate end-user bundle below
 `artifacts/release/github-assets` with exactly four future public assets:
 
 ```text
-Dragons-Grasshopper-0.1.0-Windows-Installer.zip
-Dragons-Grasshopper-User-Guide-0.1.0.pdf
-Dragons-Grasshopper-Food4Rhino-Metadata-0.1.0.pdf
+Dragons-Grasshopper-0.1.1-Windows-Installer.zip
+Dragons-Grasshopper-User-Guide-0.1.1.pdf
+Dragons-Grasshopper-Food4Rhino-Metadata-0.1.1.pdf
 SHA256SUMS.txt
 ```
 
@@ -74,21 +74,17 @@ the internal `release-assets-manifest.json` remains beside `github-assets` as
 candidate evidence and is not a fifth public asset.
 
 `packaging/package-spec.json` deliberately fixes the current first-release
-version at `0.1.0`. The final version decision must be made in source, and the
-future repository tag must equal it exactly (`v0.1.0` for `0.1.0`). Assembling
-these files locally does not create a tag or perform a publication action;
-owner authorization is recorded independently in the specification.
-The same specification is the machine-readable source for the individual
-Gonie-Gonie ownership, MIT license, confirmed public support email, and current
-Climate.OneBuilding weather-redistribution decision. It records project-owner
-publication approval, `weatherRightsVerified: false`, and
-`weatherRedistributionStatus: owner-risk-accepted-unverified` separately so
-that approval cannot be mistaken for verified upstream permission. Packaging
-verifies the Oikolab/ERA5 and Copernicus provenance links in the distribution
-manifest, copies the reviewed publication values into `package-index.json`,
-and lets the release gate cross-check them before preparing any GitHub assets.
+version at `0.1.1`. The final version decision must be made in source, and the
+repository tag must equal it exactly (`v0.1.1` for `0.1.1`). Assembling
+these files locally does not create a tag or perform a publication action.
+The same specification is the machine-readable source for the MIT license,
+confirmed public support email, publication approval, and Climate.OneBuilding
+weather source. Packaging verifies the pinned archive and provenance values in
+the distribution manifest, copies the reviewed publication values into
+`package-index.json`, and lets the release gate cross-check them before
+preparing any GitHub assets.
 
-The transient stage and final ZIP roots include their manifest, icon, Gonie-Gonie notices,
+The transient stage and final ZIP roots include their manifest, icon, notices,
 payload manifest, and SHA-256 list. Each package root additionally contains
 exactly one product-specific verified archive: EnergyPlus for InvisibleDragon,
 or KoreanTMY weather for SimpleDragon. RhinoCommon, Grasshopper, PDB, XML

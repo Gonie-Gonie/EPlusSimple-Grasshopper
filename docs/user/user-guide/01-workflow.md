@@ -28,7 +28,7 @@ repository are documentation-development tools; installed Grasshopper plugins
 do not load them.
 
 InvisibleDragon and SimpleDragon have separate package identities, but the
-planned `0.1.0` GitHub release provides one Windows Installer ZIP containing
+`0.1.1` GitHub release provides one Windows Installer ZIP containing
 both products for Rhino 7 and Rhino 8. Download that ZIP and `SHA256SUMS.txt`
 from the same release, verify the ZIP hash, extract the complete directory, and
 close every Rhino process. From the extracted root, run
@@ -41,11 +41,8 @@ Keep the extracted tree intact while the command runs. The installer verifies
 all four bundled Yak files by relative path, byte length, and SHA-256 before it
 removes an installed package. It does not require the repository, Python,
 OODocs, the .NET SDK, Visual Studio, administrator rights, or network access.
-The public release has not yet been created. The owner has authorized it to
-proceed while accepting that the complete
-Climate.OneBuilding/Oikolab/Copernicus/ASHRAE rights-and-notice chain for the
-bundled TMYx weather has not been verified; that decision is not written
-upstream permission.
+SimpleDragon includes hash-verified Korean TMYx weather data sourced from
+Climate.OneBuilding.
 
 After installation:
 
@@ -86,15 +83,7 @@ InvisibleDragon component or wire.
 The shortest reliable graphs follow the ownership hierarchy from left to
 right.
 
-```text
-opaque material -> layer -> opaque construction ----+
-                                                     |
-fenestration construction -> opening -> Floor/Ceiling/Wall
-                                                     |
-source -> terminal ----------------------------------+-> Zone -> Model
-ERV -------------------------------------------------+
-PV -------------------------------------------------------> Model
-```
+![Ownership stays local in a Grasshopper graph.](../assets/illustrations/shared-ownership.png)
 
 The important boundaries are:
 
@@ -160,10 +149,7 @@ tree of faces/curves vectorizes into a corresponding list or tree of typed
 surfaces. The `Surfaces` input on a Zone consumes a list. A practical pattern is
 one branch per zone:
 
-```text
-{0}: every completed surface owned by Zone 0 -> Zone 0
-{1}: every completed surface owned by Zone 1 -> Zone 1
-```
+![Keep one data-tree branch per zone until the Model boundary.](../assets/illustrations/zone-tree-branches.png)
 
 The same principle applies to openings and HVAC. Keep an opening-bearing wall
 separate from a plain-wall list unless the opening tree exactly matches the
@@ -192,14 +178,7 @@ reference in this guide records the rule for every input.
 
 The canonical SimpleDragon execution boundary is deliberately short:
 
-```text
-SD Floor / SD Ceiling / SD Wall -> SD Zone -> SD Model -> Run SimpleDragon -> GRR
-SD Opening --------------------------^                         |
-SD HVAC / SD ERV --------------------+                         +-> GRR Summary
-SD PV -----------------------------------------> SD Model      +-> Monthly Lines
-                                                               +-> Monthly Bars
-                                                               +-> Export CSV
-```
+![SimpleDragon keeps weather selection and EnergyPlus execution inside the direct GRM-to-GRR run boundary.](../assets/illustrations/simpledragon-workflow.png)
 
 No `toIdf`, InvisibleDragon model, IDF, Weather, EnergyPlus result, executable,
 IDD, EPW, runtime-root, or temporary-directory input belongs between `SD Model`
@@ -357,17 +336,7 @@ selected destination when their Write Button is pressed.
 InvisibleDragon exposes the EnergyPlus-facing authoring model while keeping the
 EnergyPlus executable, IDD, runtime root, and work directory internal.
 
-```text
-Material -> Layer -> Construction -> Floor/Ceiling/Wall -> Thermal Zone -> Energy Model
-Glazing -> Window ---------------------------^                              |
-Construction -> Door ------------------------+                              v
-source -> terminal -> Thermal Zone ------------------------------> Compile InvisibleDragon
-ERV -----------------> Thermal Zone                                      |
-PV ------------------------------------------> Energy Model               +-> IDF -> Run InvisibleDragon
-EPW file -> ID Weather ------------------------------------------------------------^
-                                                                                   |
-                                                                  EnergyPlus Result Summary
-```
+![InvisibleDragon exposes the explicit Energy Model, IDF, and verified EPW boundary while keeping the EnergyPlus runtime internal.](../assets/illustrations/invisibledragon-workflow.png)
 
 ### 1. Create constructions and geometry
 

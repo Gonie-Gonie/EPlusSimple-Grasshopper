@@ -1,10 +1,10 @@
 name: invisible-dragon
-version: 0.1.0
+version: 0.1.1
 authors:
   - Gonie-Gonie
 description: >-
-  Gonie-Gonie InvisibleDragon components for vertex-preserving building-energy
-  model authoring and EnergyPlus runtime integration in Grasshopper.
+  InvisibleDragon components for vertex-preserving building-energy model
+  authoring and EnergyPlus runtime integration in Grasshopper.
 url: https://github.com/Gonie-Gonie/EPlusSimple-Grasshopper
 icon: icon.png
 keywords:
