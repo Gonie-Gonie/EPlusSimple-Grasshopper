@@ -1,12 +1,12 @@
-using GonieGonie.BuildingEnergy.Contracts;
-using GonieGonie.InvisibleDragon.Rhino;
-using GonieGonie.SimpleDragon.Rhino;
+using Dragons.BuildingEnergy.Contracts;
+using Dragons.InvisibleDragon.Rhino;
+using Dragons.SimpleDragon.Rhino;
 using Rhino;
 using Rhino.Geometry;
 using RhinoApp = global::Rhino.RhinoApp;
 using RhinoCore = global::Rhino.Runtime.InProcess.RhinoCore;
 
-namespace GonieGonie.SimpleDragon.RhinoSmoke;
+namespace Dragons.SimpleDragon.RhinoSmoke;
 
 internal static class SimpleDragonRhinoSmokeChecks
 {
@@ -515,8 +515,8 @@ internal static class SimpleDragonRhinoSmokeChecks
     }
 
     private static bool AreasEqual(
-        GonieGonie.SimpleDragon.Zone first,
-        GonieGonie.SimpleDragon.Zone second)
+        Dragons.SimpleDragon.Zone first,
+        Dragons.SimpleDragon.Zone second)
     {
         double[] firstValues = first.Surfaces.Select(surface => surface.Area).OrderBy(value => value).ToArray();
         double[] secondValues = second.Surfaces.Select(surface => surface.Area).OrderBy(value => value).ToArray();

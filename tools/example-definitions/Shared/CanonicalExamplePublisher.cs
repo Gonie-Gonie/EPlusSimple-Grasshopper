@@ -1,4 +1,4 @@
-namespace GonieGonie.Dragons.ExampleDefinitions;
+namespace Dragons.ExampleDefinitions;
 
 /// <summary>
 /// Publishes generated binary examples without replacing semantically identical

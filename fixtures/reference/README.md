@@ -347,7 +347,7 @@ index 815, `EnergyModel`, through three CPython 3.12.7 observations: class and
 topology. The classification exception is
 `sealed-read-only-native-energy-model-class-a7582a41`, its assertion is
 `dragon-model-energy-model-class-a7582a41`, and its native binding is
-`GonieGonie.InvisibleDragon.Model.EnergyModel`. Indices 816-825 are resolved
+`Dragons.InvisibleDragon.Model.EnergyModel`. Indices 816-825 are resolved
 receipts only; loaded `Version` symbols are context receipts only. Exact source
 and Python 3.12 AST receipts cover all twelve loaded local modules. Constructors
 and named members are not separate targets or compatibility claims.

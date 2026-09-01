@@ -14,7 +14,7 @@ RUNNER_PATH = REPOSITORY_ROOT / "tools" / "compatibility-runner" / "compare_outp
 
 def _load_runner():
     spec = importlib.util.spec_from_file_location(
-        "goniegonie_compatibility_compare_outputs",
+        "dragons_compatibility_compare_outputs",
         RUNNER_PATH,
     )
     if spec is None or spec.loader is None:

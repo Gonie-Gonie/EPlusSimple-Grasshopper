@@ -1,6 +1,6 @@
 using RhinoInside;
 
-namespace GonieGonie.Dragons.ExampleDefinitions.Rhino8;
+namespace Dragons.ExampleDefinitions.Rhino8;
 
 internal static class Program
 {

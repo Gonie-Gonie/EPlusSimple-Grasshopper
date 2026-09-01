@@ -21,7 +21,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.dragon-shape-zone-core.v1"
+SCHEMA = "dragons.python-reference.dragon-shape-zone-core.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -108,7 +108,7 @@ ASSERTION_IDS = {
     for item in TARGET_RECEIPTS
 }
 NATIVE_TARGETS = {
-    "Zone": "GonieGonie.InvisibleDragon.Shape.Zone typed aggregate",
+    "Zone": "Dragons.InvisibleDragon.Shape.Zone typed aggregate",
     "Zone.__init__": "Shape.Zone constructor with validated identifiers, profile, and defensive surface-collection copy retaining immutable Surface references",
     "Zone.floor_area": "Zone.FloorArea over immutable native Surface.GrossArea values",
     "Zone.floor_surface": "Zone.FloorSurfaces filtered from the native read-only surface collection",
@@ -187,7 +187,7 @@ def _load_core_support() -> Any:
     path = Path(__file__).resolve().with_name(
         "generate_dragon_hvac_supply_group_core_oracle.py"
     )
-    spec = importlib.util.spec_from_file_location("_goniegonie_zone_core_support", path)
+    spec = importlib.util.spec_from_file_location("_dragons_zone_core_support", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load Zone core support: {path}")
     module = importlib.util.module_from_spec(spec)

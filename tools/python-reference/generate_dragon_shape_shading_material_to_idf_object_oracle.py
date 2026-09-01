@@ -19,7 +19,7 @@ import sys
 from typing import Any
 
 
-SCHEMA = "goniegonie.python-reference.dragon-shape-shading-material-to-idf-object.v1"
+SCHEMA = "dragons.python-reference.dragon-shape-shading-material-to-idf-object.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -93,7 +93,7 @@ def _load_core_support() -> Any:
         "generate_dragon_hvac_supply_group_core_oracle.py"
     )
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_shading_material_support", path
+        "_dragons_shading_material_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load shading-material support: {path}")

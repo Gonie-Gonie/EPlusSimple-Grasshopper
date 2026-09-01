@@ -49,7 +49,7 @@ deliberately excluded.
 
 Do not combine files from different commits or versions. When both products
 are installed, install the complete packages from the same release so their
-shared `GonieGonie.*` assemblies remain identical.
+shared `Dragons.*` assemblies remain identical.
 
 ## Installing the future release bundle
 

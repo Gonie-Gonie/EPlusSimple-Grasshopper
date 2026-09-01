@@ -29,7 +29,7 @@ from types import SimpleNamespace
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.dragon-hvac-appenders-controllers.v1"
+SCHEMA = "dragons.python-reference.dragon-hvac-appenders-controllers.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -79,7 +79,7 @@ def _load_support() -> Any:
     ):
         raise RuntimeError("Pinned dragon HVAC supply-core generator drifted.")
     specification = importlib.util.spec_from_file_location(
-        "_goniegonie_dragon_hvac_appenders_support",
+        "_dragons_dragon_hvac_appenders_support",
         SUPPORT_GENERATOR_PATH,
     )
     if specification is None or specification.loader is None:
@@ -171,12 +171,12 @@ ADAPTATIONS = {
     for index, symbol in TARGET_IDENTITIES
 }
 PUBLIC_NATIVE_ROUTE = (
-    "GonieGonie.InvisibleDragon.Hvac.SupplyGroup -> "
-    "GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment -> "
-    "GonieGonie.InvisibleDragon.Model.EnergyModel -> "
-    "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument("
+    "Dragons.InvisibleDragon.Hvac.SupplyGroup -> "
+    "Dragons.InvisibleDragon.Hvac.ZoneHvacAssignment -> "
+    "Dragons.InvisibleDragon.Model.EnergyModel -> "
+    "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument("
     "IddSchema?, EnergyModelIdfOptions?) -> "
-    "GonieGonie.InvisibleDragon.Idf.IdfDocument"
+    "Dragons.InvisibleDragon.Idf.IdfDocument"
 )
 NATIVE_ROUTES = {symbol: PUBLIC_NATIVE_ROUTE for symbol in TARGET_SYMBOLS}
 
@@ -252,27 +252,27 @@ EXPECTED_CASES_SHA256 = (
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 7_582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
     },
     {
         "bytes": 18_267,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SupplySystems.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs",
         "sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf",
     },
     {
         "bytes": 22_015,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
         "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
     },
     {
         "bytes": 50_764,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
     },
     {
         "bytes": 13_182,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
         "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
     },
 )
@@ -338,7 +338,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         }
     )
     if (
-        value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2"
+        value["schema"] != "dragons.upstream-public-symbol-inventory.v2"
         or value["upstream_commit"].lower() != commit
         or value["content_sha256"] != aggregate
         or aggregate != EXPECTED_INVENTORY_SHA256

@@ -781,200 +781,200 @@
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-185-8785ee6d",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CompressorType.RECIPROCATING": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-186-dfd51671",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CompressorType.SCREW": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-187-2947a213",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CompressorType.TURBO": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-188-5074351d",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CompressorType.__str__": {
         "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
         "assertion_id": "epsimple-hvac-enums-base-189-f40e4929",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CompressorType.to_dragon": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-190-bff3a12f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "CoolingTowerControl": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-191-31f279b7",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerControl.SINGLESPEED": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-192-536f3586",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerControl.TWOSPEED": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-193-bc3d3c6f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerControl.__str__": {
         "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
         "assertion_id": "epsimple-hvac-enums-base-194-f40e4929",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerType": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-195-9dd879be",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerType.CLOSED": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-196-ec6ad133",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerType.OPEN": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-197-0496e7cd",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "CoolingTowerType.__str__": {
         "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
         "assertion_id": "epsimple-hvac-enums-base-198-f40e4929",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-240-66a9b58b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.DISTRICTHEATING": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-241-806c9ca0",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.ELECTRICITY": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-242-dece9e85",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.LPG": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-243-c70f84e9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.NATURALGAS": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-244-50160788",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.OIL": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-245-24bb42a1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.__str__": {
         "adaptation": "grm-reader-writer-vocabulary-rather-than-native-enum-tostring-f40e4929",
         "assertion_id": "epsimple-hvac-enums-base-246-f40e4929",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
       },
       "Fuel.to_dragon": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-enums-base-247-7ce39626",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "NoneSource": {
         "adaptation": "nullable-resolved-source-reference-rather-than-singleton-sentinel-8824a756",
         "assertion_id": "epsimple-hvac-enums-base-267-8824a756",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "NoneSource.ID": {
         "adaptation": "null-source-reference-rather-than-special-string-identifier-dbf0ef4b",
         "assertion_id": "epsimple-hvac-enums-base-268-dbf0ef4b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "NoneSource.__new__": {
         "adaptation": "nullable-source-state-rather-than-process-global-singleton-758d9c0b",
         "assertion_id": "epsimple-hvac-enums-base-269-758d9c0b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "NoneSource.to_dragon": {
         "adaptation": "aggregate-converter-diagnostic-for-unresolved-source-rather-than-null-return-c8347dc8",
         "assertion_id": "epsimple-hvac-enums-base-270-c8347dc8",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "SourceSystem": {
         "adaptation": "sealed-validated-domain-aggregate-rather-than-empty-python-base-9b6905f8",
         "assertion_id": "epsimple-hvac-enums-base-319-9b6905f8",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor and public properties"
       },
       "SourceSystem.TYPE_MAPPER": {
         "adaptation": "grm-reader-enum-dispatch-rather-than-public-mutable-class-map-813567e3",
         "assertion_id": "epsimple-hvac-enums-base-320-813567e3",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with Dragons.SimpleDragon.SourceSystemType"
       }
     },
     "native_routes": {
-      "CompressorType": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CompressorType.RECIPROCATING": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CompressorType.SCREW": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CompressorType.TURBO": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CompressorType.__str__": "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CompressorType.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "CoolingTowerControl": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerControl.SINGLESPEED": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerControl.TWOSPEED": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerControl.__str__": "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerType": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerType.CLOSED": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerType.OPEN": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "CoolingTowerType.__str__": "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.DISTRICTHEATING": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.ELECTRICITY": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.LPG": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.NATURALGAS": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.OIL": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.__str__": "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
-      "Fuel.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "NoneSource": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "NoneSource.ID": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "NoneSource.__new__": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "NoneSource.to_dragon": "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "SourceSystem": "GonieGonie.SimpleDragon.SourceSystem constructor and public properties",
-      "SourceSystem.TYPE_MAPPER": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType"
+      "CompressorType": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.RECIPROCATING": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.SCREW": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.TURBO": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.__str__": "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CompressorType.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "CoolingTowerControl": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.SINGLESPEED": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.TWOSPEED": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerControl.__str__": "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.CLOSED": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.OPEN": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "CoolingTowerType.__str__": "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.DISTRICTHEATING": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.ELECTRICITY": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.LPG": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.NATURALGAS": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.OIL": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.__str__": "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)",
+      "Fuel.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.ID": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.__new__": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "NoneSource.to_dragon": "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "SourceSystem": "Dragons.SimpleDragon.SourceSystem constructor and public properties",
+      "SourceSystem.TYPE_MAPPER": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with Dragons.SimpleDragon.SourceSystemType"
     },
     "runtime_names": "pinned-python-only-no-native-runtime-name-claims",
     "runtime_signatures": {
@@ -2706,27 +2706,27 @@
     "source_receipts": [
       {
         "bytes": 6894,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs",
         "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad"
       },
       {
         "bytes": 6465,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs",
         "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"
       },
       {
         "bytes": 48650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
       },
       {
         "bytes": 16652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
       },
       {
         "bytes": 87343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
       }
     ],
@@ -2761,7 +2761,7 @@
       "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
     }
   },
-  "schema": "goniegonie.python-reference.epsimple-hvac-enums-base.v1",
+  "schema": "dragons.python-reference.epsimple-hvac-enums-base.v1",
   "symbols": [
     {
       "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",

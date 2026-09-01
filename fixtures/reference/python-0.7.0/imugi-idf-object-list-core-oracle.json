@@ -413,25 +413,25 @@
       "structural_only": false
     },
     "native_routes": {
-      "IdfObjectList": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
-      "IdfObjectList.__init__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__setitem__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__str__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.append": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
-      "IdfObjectList.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.ensure_validity": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.fieldnames": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.get_fields": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.has_name": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.has_parent": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.idd": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.insert": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
-      "IdfObjectList.is_containor": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.names": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
-      "IdfObjectList.parent": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.set_fields": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.set_wwr": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)"
+      "IdfObjectList": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
+      "IdfObjectList.__init__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__setitem__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__str__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.append": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+      "IdfObjectList.check_validity": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.ensure_validity": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.fieldnames": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.get_fields": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.has_name": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.has_parent": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.idd": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.insert": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+      "IdfObjectList.is_containor": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.names": "Dragons.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
+      "IdfObjectList.parent": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.set_fields": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.set_wwr": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)"
     },
     "runtime_signatures": {
       "IdfObjectList": {
@@ -585,25 +585,25 @@
       "exception": 15
     },
     "native_routes": {
-      "IdfObjectList": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
-      "IdfObjectList.__init__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__setitem__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.__str__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.append": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
-      "IdfObjectList.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.ensure_validity": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.fieldnames": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.get_fields": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.has_name": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.has_parent": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.idd": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.insert": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
-      "IdfObjectList.is_containor": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.names": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
-      "IdfObjectList.parent": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.set_fields": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
-      "IdfObjectList.set_wwr": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)"
+      "IdfObjectList": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
+      "IdfObjectList.__init__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__setitem__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.__str__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.append": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+      "IdfObjectList.check_validity": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.ensure_validity": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.fieldnames": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.get_fields": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.has_name": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.has_parent": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.idd": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.insert": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+      "IdfObjectList.is_containor": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.names": "Dragons.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
+      "IdfObjectList.parent": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.set_fields": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)",
+      "IdfObjectList.set_wwr": "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)"
     },
     "no_python_api_or_source_compatibility_claim": true,
     "public_production_routes_only": true,
@@ -611,17 +611,17 @@
     "sources": [
       {
         "bytes": 13182,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
         "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"
       },
       {
         "bytes": 12094,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs",
         "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"
       },
       {
         "bytes": 4289,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs",
         "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"
       }
     ]
@@ -1856,7 +1856,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.imugi-idf-object-list-core.v1",
+  "schema": "dragons.python-reference.imugi-idf-object-list-core.v1",
   "support": [
     {
       "bytes": 30116,

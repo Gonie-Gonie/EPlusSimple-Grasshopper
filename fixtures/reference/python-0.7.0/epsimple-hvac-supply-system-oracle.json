@@ -2312,368 +2312,368 @@
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6fd0030b",
         "assertion_id": "epsimple-hvac-supply-system-147-6fd0030b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
       },
       "AirHandlingUnit.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-148-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "AirHandlingUnit.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
         "assertion_id": "epsimple-hvac-supply-system-151-ea6e311c",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties"
       },
       "AirHandlingUnit.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-148b0ee3",
         "assertion_id": "epsimple-hvac-supply-system-154-148b0ee3",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "AirHandlingUnit.source": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-155-ef79e1d5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "AirHandlingUnit.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-11a6909a",
         "assertion_id": "epsimple-hvac-supply-system-156-11a6909a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "ElectricRadiantFloor": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f7f03ff5",
         "assertion_id": "epsimple-hvac-supply-system-209-f7f03ff5",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
       },
       "ElectricRadiantFloor.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-210-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "ElectricRadiantFloor.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-f8bde28f",
         "assertion_id": "epsimple-hvac-supply-system-213-f8bde28f",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties"
       },
       "ElectricRadiantFloor.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b13a9536",
         "assertion_id": "epsimple-hvac-supply-system-216-b13a9536",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "ElectricRadiantFloor.source": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
         "assertion_id": "epsimple-hvac-supply-system-217-b14aeb3a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "ElectricRadiantFloor.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-01ae7da4",
         "assertion_id": "epsimple-hvac-supply-system-218-01ae7da4",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "ElectricRadiator": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-6354666e",
         "assertion_id": "epsimple-hvac-supply-system-219-6354666e",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
       },
       "ElectricRadiator.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-220-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "ElectricRadiator.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a47135f",
         "assertion_id": "epsimple-hvac-supply-system-223-3a47135f",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties"
       },
       "ElectricRadiator.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-226-09cfea01",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity"
       },
       "ElectricRadiator.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-20bd3338",
         "assertion_id": "epsimple-hvac-supply-system-227-20bd3338",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "ElectricRadiator.source": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
         "assertion_id": "epsimple-hvac-supply-system-228-b14aeb3a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "ElectricRadiator.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4b95c9d6",
         "assertion_id": "epsimple-hvac-supply-system-229-4b95c9d6",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "FanCoilUnit": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-618e77c4",
         "assertion_id": "epsimple-hvac-supply-system-230-618e77c4",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
       },
       "FanCoilUnit.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-231-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "FanCoilUnit.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
         "assertion_id": "epsimple-hvac-supply-system-234-ea6e311c",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties"
       },
       "FanCoilUnit.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-4e773b8a",
         "assertion_id": "epsimple-hvac-supply-system-237-4e773b8a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "FanCoilUnit.source": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-238-ef79e1d5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "FanCoilUnit.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-09f12474",
         "assertion_id": "epsimple-hvac-supply-system-239-09f12474",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "PackagedAirConditioner": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-fcef6339",
         "assertion_id": "epsimple-hvac-supply-system-271-fcef6339",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
       },
       "PackagedAirConditioner.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-272-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "PackagedAirConditioner.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b2021d84",
         "assertion_id": "epsimple-hvac-supply-system-275-b2021d84",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties"
       },
       "PackagedAirConditioner.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-278-09cfea01",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity"
       },
       "PackagedAirConditioner.cop": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-279-873a49d3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCop"
       },
       "PackagedAirConditioner.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d49a3e1b",
         "assertion_id": "epsimple-hvac-supply-system-280-d49a3e1b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "PackagedAirConditioner.source": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-b14aeb3a",
         "assertion_id": "epsimple-hvac-supply-system-281-b14aeb3a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "PackagedAirConditioner.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-0be4894a",
         "assertion_id": "epsimple-hvac-supply-system-282-0be4894a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "RadiantFloor": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3a70e982",
         "assertion_id": "epsimple-hvac-supply-system-296-3a70e982",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
       },
       "RadiantFloor.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-297-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "RadiantFloor.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-ea6e311c",
         "assertion_id": "epsimple-hvac-supply-system-300-ea6e311c",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties"
       },
       "RadiantFloor.coolable": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-303-b81ea250",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Coolable"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Coolable"
       },
       "RadiantFloor.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-a3c19218",
         "assertion_id": "epsimple-hvac-supply-system-304-a3c19218",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "RadiantFloor.heatable": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-305-0b60e64a",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Heatable"
       },
       "RadiantFloor.source": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-306-ef79e1d5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "RadiantFloor.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-db124859",
         "assertion_id": "epsimple-hvac-supply-system-307-db124859",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "Radiator": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-8464a277",
         "assertion_id": "epsimple-hvac-supply-system-308-8464a277",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
       },
       "Radiator.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-309-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "Radiator.__init__": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-35304b6f",
         "assertion_id": "epsimple-hvac-supply-system-312-35304b6f",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties"
       },
       "Radiator.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-315-d699d5f1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity"
       },
       "Radiator.from_json": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-349b941b",
         "assertion_id": "epsimple-hvac-supply-system-316-349b941b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch"
       },
       "Radiator.source": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-317-ef79e1d5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.SourceSystem"
       },
       "Radiator.to_dragon": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-bb8edb65",
         "assertion_id": "epsimple-hvac-supply-system-318-bb8edb65",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "SupplySystem": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-d236c0a0",
         "assertion_id": "epsimple-hvac-supply-system-321-d236c0a0",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SupplySystem constructor and public properties"
+        "native_route": "Dragons.SimpleDragon.SupplySystem constructor and public properties"
       },
       "SupplySystem.TYPE_MAPPER": {
         "adaptation": "reviewed-native-discriminated-supply-aggregate-and-conversion-route-3639f058",
         "assertion_id": "epsimple-hvac-supply-system-322-3639f058",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch"
       },
       "SupplySystem.coolable": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-323-a658d7c4",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Coolable"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Coolable"
       },
       "SupplySystem.heatable": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-supply-system-324-9d89b0d8",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Heatable"
       }
     },
     "native_routes": {
-      "AirHandlingUnit": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
-      "AirHandlingUnit.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "AirHandlingUnit.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
-      "AirHandlingUnit.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "AirHandlingUnit.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "AirHandlingUnit.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "ElectricRadiantFloor": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
-      "ElectricRadiantFloor.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "ElectricRadiantFloor.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
-      "ElectricRadiantFloor.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "ElectricRadiantFloor.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "ElectricRadiantFloor.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "ElectricRadiator": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
-      "ElectricRadiator.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "ElectricRadiator.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
-      "ElectricRadiator.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
-      "ElectricRadiator.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "ElectricRadiator.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "ElectricRadiator.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "FanCoilUnit": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
-      "FanCoilUnit.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "FanCoilUnit.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
-      "FanCoilUnit.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "FanCoilUnit.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "FanCoilUnit.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "PackagedAirConditioner": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
-      "PackagedAirConditioner.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "PackagedAirConditioner.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
-      "PackagedAirConditioner.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
-      "PackagedAirConditioner.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
-      "PackagedAirConditioner.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "PackagedAirConditioner.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "PackagedAirConditioner.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "RadiantFloor": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
-      "RadiantFloor.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "RadiantFloor.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
-      "RadiantFloor.coolable": "GonieGonie.SimpleDragon.SourceSystem.Coolable",
-      "RadiantFloor.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "RadiantFloor.heatable": "GonieGonie.SimpleDragon.SourceSystem.Heatable",
-      "RadiantFloor.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "RadiantFloor.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "Radiator": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
-      "Radiator.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "Radiator.__init__": "GonieGonie.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
-      "Radiator.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
-      "Radiator.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
-      "Radiator.source": "GonieGonie.SimpleDragon.SourceSystem.SourceSystem",
-      "Radiator.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "SupplySystem": "GonieGonie.SimpleDragon.SupplySystem constructor and public properties",
-      "SupplySystem.TYPE_MAPPER": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch",
-      "SupplySystem.coolable": "GonieGonie.SimpleDragon.SourceSystem.Coolable",
-      "SupplySystem.heatable": "GonieGonie.SimpleDragon.SourceSystem.Heatable"
+      "AirHandlingUnit": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
+      "AirHandlingUnit.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "AirHandlingUnit.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.AirHandlingUnit and public properties",
+      "AirHandlingUnit.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "AirHandlingUnit.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "AirHandlingUnit.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "ElectricRadiantFloor": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
+      "ElectricRadiantFloor.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "ElectricRadiantFloor.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiantFloor and public properties",
+      "ElectricRadiantFloor.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "ElectricRadiantFloor.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "ElectricRadiantFloor.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "ElectricRadiator": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
+      "ElectricRadiator.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "ElectricRadiator.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.ElectricRadiator and public properties",
+      "ElectricRadiator.capacity": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity",
+      "ElectricRadiator.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "ElectricRadiator.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "ElectricRadiator.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "FanCoilUnit": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
+      "FanCoilUnit.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "FanCoilUnit.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.FanCoilUnit and public properties",
+      "FanCoilUnit.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "FanCoilUnit.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "FanCoilUnit.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "PackagedAirConditioner": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
+      "PackagedAirConditioner.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "PackagedAirConditioner.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.PackagedAirConditioner and public properties",
+      "PackagedAirConditioner.capacity": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity",
+      "PackagedAirConditioner.cop": "Dragons.SimpleDragon.SourceSystem.CoolingCop",
+      "PackagedAirConditioner.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "PackagedAirConditioner.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "PackagedAirConditioner.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "RadiantFloor": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
+      "RadiantFloor.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "RadiantFloor.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.RadiantFloor and public properties",
+      "RadiantFloor.coolable": "Dragons.SimpleDragon.SourceSystem.Coolable",
+      "RadiantFloor.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "RadiantFloor.heatable": "Dragons.SimpleDragon.SourceSystem.Heatable",
+      "RadiantFloor.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "RadiantFloor.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Radiator": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
+      "Radiator.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "Radiator.__init__": "Dragons.SimpleDragon.SupplySystem constructor with SupplySystemType.Radiator and public properties",
+      "Radiator.capacity": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity",
+      "Radiator.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) supply-system dispatch",
+      "Radiator.source": "Dragons.SimpleDragon.SourceSystem.SourceSystem",
+      "Radiator.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "SupplySystem": "Dragons.SimpleDragon.SupplySystem constructor and public properties",
+      "SupplySystem.TYPE_MAPPER": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with SupplySystemType dispatch",
+      "SupplySystem.coolable": "Dragons.SimpleDragon.SourceSystem.Coolable",
+      "SupplySystem.heatable": "Dragons.SimpleDragon.SourceSystem.Heatable"
     },
     "runtime_signatures": {
       "AirHandlingUnit": {
@@ -2924,22 +2924,22 @@
     "source_receipts": [
       {
         "bytes": 6465,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs",
         "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5"
       },
       {
         "bytes": 48650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
       },
       {
         "bytes": 16652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
       },
       {
         "bytes": 87343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
       }
     ],
@@ -2979,7 +2979,7 @@
       "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
     }
   },
-  "schema": "goniegonie.python-reference.epsimple-hvac-supply-system.v1",
+  "schema": "dragons.python-reference.epsimple-hvac-supply-system.v1",
   "symbols": [
     {
       "body_hash": "sha256:644081ff98e0d9dce3b1dd7f739431a71ce8c7524f85a0ec6bc3f40f6bf98de3",

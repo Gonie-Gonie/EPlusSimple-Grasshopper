@@ -536,7 +536,7 @@
     },
     "identity_encoding": "stable-direct-is-relations-only-no-id-or-address",
     "native_targets": {
-      "EnergyModel": "GonieGonie.InvisibleDragon.Model.EnergyModel"
+      "EnergyModel": "Dragons.InvisibleDragon.Model.EnergyModel"
     },
     "raw_fact_encoding": "typed-scalars-plus-stable-topology-and-direct-identity-relations",
     "source_import_policy": "external-temporary-copy-with-complete-loaded-local-module-audit",
@@ -692,7 +692,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-class.v1",
+  "schema": "dragons.python-reference.dragon-model-class.v1",
   "symbols": [
     {
       "body_hash": "sha256:5a7db40c87570a3ae22c820c5b758ed19b5e8120a7cbf0510d3a88eb7c7f33d9",

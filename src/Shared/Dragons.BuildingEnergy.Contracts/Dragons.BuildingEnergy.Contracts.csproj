@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>Dragons.BuildingEnergy.Contracts</AssemblyName>
+    <RootNamespace>Dragons.BuildingEnergy.Contracts</RootNamespace>
+    <Description>Stable contracts shared by the InvisibleDragon and SimpleDragon modules.</Description>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+</Project>

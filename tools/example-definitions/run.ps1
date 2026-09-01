@@ -42,7 +42,7 @@ $runRoot = Join-Path $repoRoot "temp\e\$runToken"
 [IO.Directory]::CreateDirectory($runRoot) | Out-Null
 $systemTempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\', '/')
 $hostWorkingDirectory = [IO.Path]::GetFullPath((
-    Join-Path $systemTempRoot "GonieGonie-Dragons-example-host-$runStamp"))
+    Join-Path $systemTempRoot "Dragons-example-host-$runStamp"))
 if (-not $hostWorkingDirectory.StartsWith($systemTempRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
     throw "Host working directory escaped the system temp root: $hostWorkingDirectory"
 }
@@ -552,7 +552,7 @@ function Build-Plugin([string]$Project, [string]$Framework, [string]$Label) {
 }
 
 function Build-Rhino7Host([string]$RhinoSystem, [string]$GrasshopperDirectory) {
-    $project = Join-Path $toolRoot "Rhino7\GonieGonie.Dragons.ExampleDefinitions.Rhino7.csproj"
+    $project = Join-Path $toolRoot "Rhino7\Dragons.ExampleDefinitions.Rhino7.csproj"
     $properties = @(
         "-p:Rhino7SystemDir=$RhinoSystem",
         "-p:Rhino7GrasshopperDir=$GrasshopperDirectory"
@@ -562,7 +562,7 @@ function Build-Rhino7Host([string]$RhinoSystem, [string]$GrasshopperDirectory) {
 }
 
 function Build-Rhino8Host {
-    $project = Join-Path $toolRoot "Rhino8\GonieGonie.Dragons.ExampleDefinitions.Rhino8.csproj"
+    $project = Join-Path $toolRoot "Rhino8\Dragons.ExampleDefinitions.Rhino8.csproj"
     Invoke-DotNetLogged @("restore", $project, "--locked-mode", "--nologo") "restore-rhino8-host.log"
     Invoke-DotNetLogged @("build", $project, "--configuration", "Release", "--no-restore", "--nologo") "build-rhino8-host.log"
 }
@@ -605,7 +605,7 @@ function Invoke-ExampleHost(
         DRAGONS_ENERGYPLUS_WEATHER = $EnergyPlusWorkflow.WeatherPath
         DRAGONS_INVISIBLE_EXAMPLE_EPW = $EnergyPlusWorkflow.InvisibleWeatherPath
         DRAGONS_ENERGYPLUS_WORKFLOW_TIMEOUT_SECONDS = $WorkflowStageTimeoutSeconds
-        GONIEGONIE_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
+        DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot
         TEMP = $hostTemp
         TMP = $hostTemp
     }
@@ -764,8 +764,8 @@ try {
     if ($RequireEnergyPlusWorkflow -and $energyPlusWorkflow.Status -ne "ready") {
         throw "The required EnergyPlus example workflow is not ready: $($energyPlusWorkflow.Reason)"
     }
-    $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj"
-    $simpleProject = Join-Path $repoRoot "src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj"
+    $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\Dragons.InvisibleDragon.GH\Dragons.InvisibleDragon.GH.csproj"
+    $simpleProject = Join-Path $repoRoot "src\SimpleDragon\Dragons.SimpleDragon.GH\Dragons.SimpleDragon.GH.csproj"
 
     $needRhino7 = $Generate -or $Target -in @("All", "Rhino7")
     $needRhino8 = $Target -in @("All", "Rhino8")
@@ -778,13 +778,13 @@ try {
         Build-Plugin $simpleProject "net48" "simple-rhino7"
         Build-Rhino7Host $rhino7System $rhino7Grasshopper
         $rhino7Runner = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.Dragons.ExampleDefinitions.Rhino7\Release\net48\GonieGonie.Dragons.ExampleDefinitions.Rhino7.exe"
+            Join-Path $repoRoot "temp\build\bin\Dragons.ExampleDefinitions.Rhino7\Release\net48\Dragons.ExampleDefinitions.Rhino7.exe"
         ) "Rhino 7 example host"
         $invisible7 = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.InvisibleDragon.GH\Release\net48\GonieGonie.InvisibleDragon.GH.gha"
+            Join-Path $repoRoot "temp\build\bin\Dragons.InvisibleDragon.GH\Release\net48\Dragons.InvisibleDragon.GH.gha"
         ) "InvisibleDragon Rhino 7 GHA"
         $simple7 = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.SimpleDragon.GH\Release\net48\GonieGonie.SimpleDragon.GH.gha"
+            Join-Path $repoRoot "temp\build\bin\Dragons.SimpleDragon.GH\Release\net48\Dragons.SimpleDragon.GH.gha"
         ) "SimpleDragon Rhino 7 GHA"
         if ($Generate) {
             Invoke-ExampleHost "Rhino7" "Generate" $rhino7Runner @() $invisible7 $simple7 $rhino7Exe $energyPlusWorkflow
@@ -801,13 +801,13 @@ try {
         Build-Plugin $simpleProject "net8.0-windows" "simple-rhino8"
         Build-Rhino8Host
         $rhino8Runner = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.Dragons.ExampleDefinitions.Rhino8\Release\net8.0-windows\GonieGonie.Dragons.ExampleDefinitions.Rhino8.dll"
+            Join-Path $repoRoot "temp\build\bin\Dragons.ExampleDefinitions.Rhino8\Release\net8.0-windows\Dragons.ExampleDefinitions.Rhino8.dll"
         ) "Rhino 8 example host"
         $invisible8 = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.InvisibleDragon.GH\Release\net8.0-windows\GonieGonie.InvisibleDragon.GH.gha"
+            Join-Path $repoRoot "temp\build\bin\Dragons.InvisibleDragon.GH\Release\net8.0-windows\Dragons.InvisibleDragon.GH.gha"
         ) "InvisibleDragon Rhino 8 GHA"
         $simple8 = Require-File (
-            Join-Path $repoRoot "temp\build\bin\GonieGonie.SimpleDragon.GH\Release\net8.0-windows\GonieGonie.SimpleDragon.GH.gha"
+            Join-Path $repoRoot "temp\build\bin\Dragons.SimpleDragon.GH\Release\net8.0-windows\Dragons.SimpleDragon.GH.gha"
         ) "SimpleDragon Rhino 8 GHA"
         Invoke-ExampleHost "Rhino8" "Validate" $script:dotnet @($rhino8Runner) $invisible8 $simple8 $rhino8Exe $energyPlusWorkflow
     }

@@ -26,7 +26,7 @@ from types import ModuleType, SimpleNamespace
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-hvac-thermal-source.v1"
+SCHEMA = "dragons.python-reference.epsimple-hvac-thermal-source.v1"
 SOURCE_PATH = "src/epsimple/core/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -64,7 +64,7 @@ def _load_base() -> Any:
     ):
         raise RuntimeError("Pinned HVAC enum/base support receipt drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_hvac_thermal_source_base", BASE_PATH
+        "_dragons_epsimple_hvac_thermal_source_base", BASE_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load HVAC oracle support: {BASE_PATH}")
@@ -254,21 +254,21 @@ def _native_route(symbol: str) -> str:
     member = symbol.rsplit(".", 1)[1] if "." in symbol else None
     if symbol in _PROPERTY_ROUTES:
         return (
-            "GonieGonie.SimpleDragon.SourceSystem."
+            "Dragons.SimpleDragon.SourceSystem."
             + _PROPERTY_ROUTES[symbol]
         )
     if member == "from_json":
         return (
-            "GonieGonie.SimpleDragon.GrmReader.Read(string, "
+            "Dragons.SimpleDragon.GrmReader.Read(string, "
             "SimpleDragonDatabase?) source-system dispatch"
         )
     if member == "to_dragon":
         return (
-            "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert("
+            "Dragons.SimpleDragon.GreenRetrofitConverter.Convert("
             "GreenRetrofitModel, GreenRetrofitConversionOptions?)"
         )
     return (
-        "GonieGonie.SimpleDragon.SourceSystem constructor with "
+        "Dragons.SimpleDragon.SourceSystem constructor with "
         f"SourceSystemType.{_class_name(symbol)} and public properties"
     )
 
@@ -277,22 +277,22 @@ NATIVE_ROUTES = {symbol: _native_route(symbol) for symbol in TARGET_SYMBOLS}
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 6_894,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs",
         "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad",
     },
     {
         "bytes": 48_650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968",
     },
     {
         "bytes": 16_652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842",
     },
     {
         "bytes": 87_343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd",
     },
 )
@@ -365,7 +365,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         },
         "Public-symbol inventory",
     )
-    if value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2":
+    if value["schema"] != "dragons.upstream-public-symbol-inventory.v2":
         raise SystemExit("The public-symbol inventory schema drifted.")
     if value["upstream_commit"].lower() != commit:
         raise SystemExit("The public-symbol inventory commit drifted.")

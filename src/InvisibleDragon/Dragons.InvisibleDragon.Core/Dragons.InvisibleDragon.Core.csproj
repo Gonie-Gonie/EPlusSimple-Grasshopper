@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>Dragons.InvisibleDragon.Core</AssemblyName>
+    <RootNamespace>Dragons.InvisibleDragon</RootNamespace>
+    <Description>Rhino-independent C# port of the InvisibleDragon EnergyPlus model layer.</Description>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Dragons.BuildingEnergy.Contracts\Dragons.BuildingEnergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shared\Dragons.EnergyPlus.Runtime\Dragons.EnergyPlus.Runtime.csproj" />
+  </ItemGroup>
+</Project>

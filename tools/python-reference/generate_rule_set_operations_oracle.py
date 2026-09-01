@@ -18,7 +18,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.invisibledragon.rule-set-operations-oracle.v1"
+SCHEMA = "dragons.invisibledragon.rule-set-operations-oracle.v1"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -167,7 +167,7 @@ def _load_day_support() -> Any:
         "generate_day_schedule_operations_oracle.py"
     )
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_day_schedule_operations_support",
+        "_dragons_day_schedule_operations_support",
         path,
     )
     if spec is None or spec.loader is None:

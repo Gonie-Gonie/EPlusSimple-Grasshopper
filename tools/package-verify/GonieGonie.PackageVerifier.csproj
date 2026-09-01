@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <AssemblyName>GonieGonie.PackageVerifier</AssemblyName>
-    <RootNamespace>GonieGonie.PackageVerifier</RootNamespace>
-    <Description>Artifact-only verifier for Gonie-Gonie Yak and portable plugin packages.</Description>
-  </PropertyGroup>
-</Project>

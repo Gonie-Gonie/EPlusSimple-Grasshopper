@@ -388,12 +388,12 @@ function Copy-FrameworkPayload {
         }
         if ([string] $Product.id -eq 'simple-dragon' -and
             $file.Name -in @(
-                'GonieGonie.InvisibleDragon.GH.gha',
-                'GonieGonie.InvisibleDragon.Grasshopper.Types.dll')) {
+                'Dragons.InvisibleDragon.GH.gha',
+                'Dragons.InvisibleDragon.Grasshopper.Types.dll')) {
             continue
         }
         if ([string] $Product.id -eq 'invisible-dragon' -and
-            $file.Name -match '^GonieGonie\.SimpleDragon\.') {
+            $file.Name -match '^Dragons\.SimpleDragon\.') {
             continue
         }
 
@@ -439,7 +439,7 @@ function Write-PayloadManifest {
     }
 
     $manifest = [pscustomobject] [ordered] @{
-        schema = 'goniegonie.dragons-grasshopper.payload-manifest.v1'
+        schema = 'dragons-grasshopper.payload-manifest.v1'
         product = [pscustomobject] [ordered] @{
             id = [string] $Product.id
             name = [string] $Product.display_name
@@ -546,7 +546,7 @@ function New-YakDistribution {
 
     $logPath = Join-Path $workingRoot (Join-Path 'logs' ("yak-$($Product.id)-$($Target.id).log"))
     $oldStartupHooks = [Environment]::GetEnvironmentVariable('DOTNET_STARTUP_HOOKS', 'Process')
-    $oldProbePaths = [Environment]::GetEnvironmentVariable('GONIEGONIE_YAK_INSPECTION_PATHS', 'Process')
+    $oldProbePaths = [Environment]::GetEnvironmentVariable('DRAGONS_YAK_INSPECTION_PATHS', 'Process')
     $startupHooks = if ([string]::IsNullOrWhiteSpace($oldStartupHooks)) {
         $StartupHook
     }
@@ -569,7 +569,7 @@ function New-YakDistribution {
     Push-Location $StageRoot
     try {
         [Environment]::SetEnvironmentVariable('DOTNET_STARTUP_HOOKS', $startupHooks, 'Process')
-        [Environment]::SetEnvironmentVariable('GONIEGONIE_YAK_INSPECTION_PATHS', $probePaths, 'Process')
+        [Environment]::SetEnvironmentVariable('DRAGONS_YAK_INSPECTION_PATHS', $probePaths, 'Process')
         Invoke-LoggedNativeCommand `
             -FilePath $YakExecutable `
             -ArgumentList @('build', '--platform', 'win') `
@@ -578,7 +578,7 @@ function New-YakDistribution {
     }
     finally {
         [Environment]::SetEnvironmentVariable('DOTNET_STARTUP_HOOKS', $oldStartupHooks, 'Process')
-        [Environment]::SetEnvironmentVariable('GONIEGONIE_YAK_INSPECTION_PATHS', $oldProbePaths, 'Process')
+        [Environment]::SetEnvironmentVariable('DRAGONS_YAK_INSPECTION_PATHS', $oldProbePaths, 'Process')
         Pop-Location
     }
 
@@ -632,7 +632,7 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $spec = Get-Content -LiteralPath $specPath -Raw | ConvertFrom-Json
-if ([string] $spec.schema -ne 'goniegonie.dragons-grasshopper.package-spec.v3') {
+if ([string] $spec.schema -ne 'dragons-grasshopper.package-spec.v3') {
     throw "Unsupported package spec schema in '$specPath'."
 }
 $publicationSpec = $spec.publication
@@ -652,7 +652,7 @@ if ([string] $publicationSpec.projectLicense -cne 'MIT' -or
     throw 'Package publication metadata differs from the reviewed individual/MIT/support/owner-risk-acceptance contract.'
 }
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v3' -or
+if ([string] $distributionManifest.schema -ne 'dragons-grasshopper.distributions.v3' -or
     @($distributionManifest.payloads).Count -ne 2 -or
     @($distributionManifest.payloads | Group-Object product | Where-Object { $_.Count -ne 1 }).Count -ne 0) {
     throw "Distribution manifest must define exactly one reviewed payload for each product: '$distributionManifestPath'."
@@ -766,7 +766,7 @@ if ($yakExecutable -is [array]) {
 }
 $yakExecutable = [string] $yakExecutable
 
-$inspectionHookProject = Join-Path $repositoryRoot 'tools\yak-inspection-host\GonieGonie.YakInspectionHost.csproj'
+$inspectionHookProject = Join-Path $repositoryRoot 'tools\yak-inspection-host\Dragons.YakInspectionHost.csproj'
 $inspectionHookOutput = Join-Path $workingRoot 'yak-inspection-hook'
 $inspectionHookLog = Join-Path $workingRoot 'logs\yak-inspection-hook-build.log'
 $inspectionHookArguments = @(
@@ -783,7 +783,7 @@ Invoke-LoggedNativeCommand `
     -ArgumentList $inspectionHookArguments `
     -LogPath $inspectionHookLog `
     -FailureMessage 'Yak inspection startup-hook build failed'
-$inspectionHook = Join-Path $inspectionHookOutput 'GonieGonie.YakInspectionHost.dll'
+$inspectionHook = Join-Path $inspectionHookOutput 'Dragons.YakInspectionHost.dll'
 if (-not (Test-Path -LiteralPath $inspectionHook -PathType Leaf)) {
     throw "Yak inspection startup hook is missing: '$inspectionHook'."
 }
@@ -931,7 +931,7 @@ foreach ($product in @($spec.products)) {
 }
 
 $index = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.package-index.v3'
+    schema = 'dragons-grasshopper.package-index.v3'
     version = [string] $spec.version
     owner = 'Gonie-Gonie'
     products = @($indexProducts)

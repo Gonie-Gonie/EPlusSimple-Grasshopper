@@ -4,9 +4,9 @@ import unittest
 
 from support import TemporaryWorkspace, write_configuration
 
-from goniegonie_upstream_tracker.classifier import ChangeClassification, compare_sources
-from goniegonie_upstream_tracker.config import load_configuration
-from goniegonie_upstream_tracker.symbols import build_snapshot
+from dragons_upstream_tracker.classifier import ChangeClassification, compare_sources
+from dragons_upstream_tracker.config import load_configuration
+from dragons_upstream_tracker.symbols import build_snapshot
 
 
 class SymbolAndClassifierTests(unittest.TestCase):

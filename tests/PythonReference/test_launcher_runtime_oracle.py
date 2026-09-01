@@ -244,7 +244,7 @@ class LauncherRuntimeOracleTests(unittest.TestCase):
             (r"C:\\raw\\path", "absolute path"),
             ("failure at C://Users//host//AppData//Local//Temp//file", "absolute path"),
             ("failure at /tmp/launcher-runtime/file", "absolute path"),
-            ("goniegonie-launcher-runtime-oracle-random", "temporary token"),
+            ("dragons-launcher-runtime-oracle-random", "temporary token"),
             ("0xdeadbeef", "raw address"),
             ("01234567-89ab-4cde-8fab-0123456789ab", "GUID-like"),
             ("2026-08-26T12:34:56Z", "timestamp"),

@@ -127,7 +127,7 @@ def warning_report(error_path: Path) -> dict[str, Any]:
         "fatal": sum(item["severity"] == "Fatal" for item in items),
     }
     return {
-        "schema": "goniegonie.dragons.energyplus-warnings.v1",
+        "schema": "dragons.energyplus-warnings.v1",
         "summary": summary,
         "items": items,
     }
@@ -221,7 +221,7 @@ def run_case(
         produced.extend([grr_path, warnings_path])
 
     metadata = {
-        "schema": "goniegonie.dragons.compatibility-engine-output.v1",
+        "schema": "dragons.compatibility-engine-output.v1",
         "producer": "python-0.7.0",
         "case_id": case_id,
         "upstream_commit": upstream_commit,

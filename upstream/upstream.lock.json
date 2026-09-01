@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.upstream-lock.v1",
+  "schema": "dragons.upstream-lock.v1",
   "repository": "https://github.com/snu-bslab/EPlusSimple.git",
   "branch": "main",
   "commit": "847b01f68f438f560a986072bcaa7768fbf67897",

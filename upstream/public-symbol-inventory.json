@@ -122,7 +122,7 @@
       "path": "src/idragon/utils.py"
     }
   ],
-  "schema": "goniegonie.upstream-public-symbol-inventory.v2",
+  "schema": "dragons.upstream-public-symbol-inventory.v2",
   "scope_sha256": "sha256:9b34f9d49e7cba5aa9e2102a86fd62b59732d6ea5d4a5c5024692ed2657b7985",
   "summary": {
     "kind_counts": {

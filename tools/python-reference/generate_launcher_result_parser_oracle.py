@@ -23,7 +23,7 @@ import types
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.launcher-result-parser.v1"
+SCHEMA = "dragons.python-reference.launcher-result-parser.v1"
 SOURCE_PATH = "src/idragon/launcher.py"
 IMPORT_RELATIVE_PATH = Path("idragon") / "launcher.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
@@ -153,7 +153,7 @@ BINARY64_PATTERN = re.compile(r"^-?(?:[0-9a-f]+\.[0-9a-f]+p[+-][0-9]+)$")
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_common_core_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_launcher_result_support", path
+        "_dragons_launcher_result_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load launcher oracle support: {path}")

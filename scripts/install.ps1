@@ -277,7 +277,7 @@ if (-not (Test-Path -LiteralPath $packageIndexPath -PathType Leaf)) {
     throw "Package index is missing: '$packageIndexPath'. Rerun without -UseExistingPackages."
 }
 $packageIndex = Get-Content -LiteralPath $packageIndexPath -Raw | ConvertFrom-Json
-if ([string] $packageIndex.schema -ne 'goniegonie.dragons-grasshopper.package-index.v3') {
+if ([string] $packageIndex.schema -ne 'dragons-grasshopper.package-index.v3') {
     throw "Unsupported package-index schema: '$($packageIndex.schema)'."
 }
 $version = [string] $packageIndex.version
@@ -366,7 +366,7 @@ foreach ($rhinoHost in $hosts) {
 }
 
 $result = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.local-install.v1'
+    schema = 'dragons-grasshopper.local-install.v1'
     status = 'installed'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     packageVersion = $version

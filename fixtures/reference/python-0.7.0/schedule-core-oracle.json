@@ -462479,7 +462479,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.schedule-core-oracle.v1",
+  "schema": "dragons.invisibledragon.schedule-core-oracle.v1",
   "summary": {
     "adaptation_case_count": 48,
     "adaptation_ids": [

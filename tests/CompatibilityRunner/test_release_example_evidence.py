@@ -38,7 +38,7 @@ class ReleaseExampleEvidenceContractTests(unittest.TestCase):
         workflow = RELEASE_WORKFLOW.read_text(encoding="utf-8")
         checklist = RELEASE_CHECKLIST.read_text(encoding="utf-8")
         for required in (
-            "goniegonie.dragons-grasshopper.examples.v3",
+            "dragons-grasshopper.examples.v3",
             "does not cover every tracked definition exactly once",
             "does not cover every tracked Rhino model exactly once",
             "runtimeGateStatus -cne 'ready'",

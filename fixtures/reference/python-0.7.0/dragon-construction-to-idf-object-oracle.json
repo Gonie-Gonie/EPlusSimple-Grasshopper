@@ -1728,7 +1728,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-construction-to-idf-object.v1",
+  "schema": "dragons.python-reference.dragon-construction-to-idf-object.v1",
   "symbols": [
     {
       "body_hash": "sha256:ada40fa4a3bb88a012f0e91622290700bbae9e525bb8f07ac918f39290e2d325",

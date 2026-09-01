@@ -98,7 +98,7 @@ def load_registered_exception_ids(path: Path) -> set[str]:
     if tracker_root_text not in sys.path:
         sys.path.insert(0, tracker_root_text)
 
-    from goniegonie_upstream_tracker.yaml_subset import load_yaml_subset
+    from dragons_upstream_tracker.yaml_subset import load_yaml_subset
 
     source = load_yaml_subset(path)
     if not isinstance(source, list):
@@ -1613,7 +1613,7 @@ def main() -> None:
     skip_count = sum(item["skip_count"] for item in results)
     limitation_summary = summarize_limitations(results)
     report = {
-        "schema": "goniegonie.dragons.engineering-compatibility-report.v1",
+        "schema": "dragons.engineering-compatibility-report.v1",
         "upstream_commit": manifest["upstream_commit"],
         "energyplus": manifest["energyplus"],
         "tolerances": manifest["tolerances"],

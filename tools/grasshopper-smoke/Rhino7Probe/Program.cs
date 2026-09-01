@@ -1,8 +1,8 @@
 using System.Reflection;
-using GonieGonie.Dragons.GrasshopperSmoke;
+using Dragons.GrasshopperSmoke;
 using RhinoInside;
 
-namespace GonieGonie.Dragons.Grasshopper.Rhino7Probe;
+namespace Dragons.Grasshopper.Rhino7Probe;
 
 internal static class Program
 {

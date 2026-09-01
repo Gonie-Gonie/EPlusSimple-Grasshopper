@@ -1,8 +1,8 @@
-# GonieGonie upstream tracker
+# Dragons upstream tracker
 
 This Python 3.12 development tool compares the pinned historical source with a
 candidate source root. It classifies AST-level changes, maps affected
-GonieGonie InvisibleDragon and SimpleDragon code and tests, and produces stable
+InvisibleDragon and SimpleDragon code and tests, and produces stable
 JSON, Markdown, and sync-branch review files.
 
 The tracker uses only the Python standard library. Generated files are allowed
@@ -129,7 +129,7 @@ Write the machine-readable compatibility report using the exact pinned clone:
 
 For every matrix entry classified `equivalent` or `exception`, the report also
 requires an executed assertion result. External test collectors may emit
-`goniegonie.upstream-evidence-results.v1` JSON containing the exact
+`dragons.upstream-evidence-results.v1` JSON containing the exact
 `assertion_id`, pass/skip/structural flags, exercised-load category, and a
 deterministic `output_sha256`. Each result is also bound to the exact test path,
 test symbol, and test-source SHA-256; the artifact itself records the exact
@@ -249,9 +249,9 @@ authority receipt's EvidenceResults hash is independently recomputed. Parent
 validation adds its `g2` build-props descriptor to each validated `z.json`
 project, so the artifact index can never serve as its own descriptor oracle.
 
-Each xUnit case must emit one `goniegonie.trusted-evidence-record.v1` JSON file
-to the directory in `GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY`, using the nonce in
-`GONIEGONIE_EVIDENCE_SESSION_NONCE`. Required fields are `assertion_id`, exact
+Each xUnit case must emit one `dragons.trusted-evidence-record.v1` JSON file
+to the directory in `DRAGONS_EVIDENCE_RECORDS_DIRECTORY`, using the nonce in
+`DRAGONS_EVIDENCE_SESSION_NONCE`. Required fields are `assertion_id`, exact
 TRX `test_case`, `exercised_load`, `structural_only: false`, and a finite JSON
 `output`. Theory cases are ordered by exact TRX name and the collector computes
 `sha256(canonical-json({"cases":[{"output":...,"test_case":...}, ...]}))`.

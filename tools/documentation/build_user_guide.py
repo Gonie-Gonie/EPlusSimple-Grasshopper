@@ -25,8 +25,8 @@ from types import SimpleNamespace
 from typing import Any, Mapping, Sequence
 
 
-CATALOG_SCHEMA = "goniegonie.dragons.component-catalog.v1"
-GUIDE_SCHEMA = "goniegonie.dragons.component-guides.v1"
+CATALOG_SCHEMA = "dragons.component-catalog.v1"
+GUIDE_SCHEMA = "dragons.component-guides.v1"
 EXPECTED_OODOCS_VERSION = "1.3.0"
 EXPECTED_COMPONENT_COUNT = 75
 EXPECTED_PRODUCTS = ("InvisibleDragon", "SimpleDragon")

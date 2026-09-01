@@ -22,10 +22,10 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
 $expectedVersion = '0.1.0'
-$packageSpecSchema = 'goniegonie.dragons-grasshopper.package-spec.v3'
-$packageIndexSchema = 'goniegonie.dragons-grasshopper.package-index.v3'
-$installerManifestSchema = 'goniegonie.dragons-grasshopper.windows-installer.v1'
-$assetManifestSchema = 'goniegonie.dragons-grasshopper.github-release-assets.v1'
+$packageSpecSchema = 'dragons-grasshopper.package-spec.v3'
+$packageIndexSchema = 'dragons-grasshopper.package-index.v3'
+$installerManifestSchema = 'dragons-grasshopper.windows-installer.v1'
+$assetManifestSchema = 'dragons-grasshopper.github-release-assets.v1'
 $fixedZipTimestamp = [DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
 $utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 

@@ -233,7 +233,7 @@ class EPlusSimpleModelCoreOracleTests(unittest.TestCase):
         self.assertFalse(evidence["active_energyplus_process_claim"])
         self.assertFalse(evidence["full_idf_semantic_parity_claim"])
         self.assertTrue(evidence["run_boundary_instrumented"])
-        self.assertTrue(all(route.startswith("GonieGonie.") for route in contract["native_routes"].values()))
+        self.assertTrue(all(route.startswith("Dragons.") for route in contract["native_routes"].values()))
 
     def test_runtime_source_dependency_resource_and_relocation_receipts_are_exact(self) -> None:
         value = self.fixture()

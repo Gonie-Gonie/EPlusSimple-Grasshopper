@@ -312,7 +312,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
         symbol_evidence = {
             "content_sha256": symbol_evidence_sha256,
             **evidence_content,
-            "schema": "goniegonie.upstream-symbol-evidence.v1",
+            "schema": "dragons.upstream-symbol-evidence.v1",
             "summary": {
                 "entry_count": 1,
                 "passed_receipt_count": assertion_count,
@@ -396,7 +396,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                         {"bytes": 1, "path": "MSBuild.dll", "sha256": HASH_A}
                     ],
                     "root": "C:/pinned/dotnet/sdk/8.0.424",
-                    "schema": "goniegonie.trusted-dotnet-sdk-manifest.v1",
+                    "schema": "dragons.trusted-dotnet-sdk-manifest.v1",
                     "sha256": HASH_B,
                 },
                 "sdk_root": "C:/pinned/dotnet/sdk/8.0.424",
@@ -404,7 +404,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 "sha256": HASH_C,
             },
             "evidence_binding": {
-                "collector_path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+                "collector_path": "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
                 "collector_source_sha256": HASH_A,
                 "collector_symbol": "collect_trusted_evidence",
                 "inventory_sha256": HASH_A,
@@ -445,7 +445,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "repository_head": REPOSITORY_HEAD,
             "repository_root": repository.as_posix(),
             "required_assertion_ids": list(assertion_ids),
-            "schema": "goniegonie.trusted-evidence-request.v1",
+            "schema": "dragons.trusted-evidence-request.v1",
             "session_directory": session.as_posix(),
             "session_id": SESSION_ID,
             "source": {
@@ -518,7 +518,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             ],
             "repository_head": REPOSITORY_HEAD,
             "request_sha256": request_descriptor["sha256"],
-            "schema": "goniegonie.trusted-evidence-child-result.v1",
+            "schema": "dragons.trusted-evidence-child-result.v1",
             "session_id": SESSION_ID,
             "source_tree_sha256": source_tree_sha256,
             "target_framework": "net8.0-windows",
@@ -583,7 +583,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "project_count": 1,
             "repository_head": REPOSITORY_HEAD,
             "request_sha256": request_descriptor["sha256"],
-            "schema": "goniegonie.trusted-evidence-artifact-index.v1",
+            "schema": "dragons.trusted-evidence-artifact-index.v1",
             "session_id": SESSION_ID,
             "source_tree_sha256": source_tree_sha256,
             "target_framework": "net8.0-windows",
@@ -603,7 +603,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
                 {
                     "assertions": executed_assertions,
                     "collector": {
-                        "path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+                        "path": "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
                         "source_sha256": HASH_A,
                         "symbol": "collect_trusted_evidence",
                     },
@@ -619,7 +619,7 @@ class ReleaseTrustedEvidenceBundleTests(unittest.TestCase):
             "project_count": 1,
             "repository_head": REPOSITORY_HEAD,
             "request_sha256": request_descriptor["sha256"],
-            "schema": "goniegonie.trusted-evidence-authority-receipt.v1",
+            "schema": "dragons.trusted-evidence-authority-receipt.v1",
             "session_id": SESSION_ID,
             "source_tree_sha256": source_tree_sha256,
             "symbol_evidence_sha256": symbol_evidence_sha256,

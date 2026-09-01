@@ -32,7 +32,7 @@ from types import ModuleType, SimpleNamespace
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-construction-core.v1"
+SCHEMA = "dragons.python-reference.epsimple-construction-core.v1"
 SOURCE_PATH = "src/epsimple/core/construction.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -77,7 +77,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_construction_support", SUPPORT_PATH
+        "_dragons_epsimple_construction_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -220,27 +220,27 @@ ASSERTION_IDS = {
 }
 
 NATIVE_ROUTES = {
-    "FenestrationConstruction": "GonieGonie.SimpleDragon.FenestrationConstruction",
+    "FenestrationConstruction": "Dragons.SimpleDragon.FenestrationConstruction",
     "FenestrationConstruction.ID": "FenestrationConstruction.Id",
     "FenestrationConstruction.__init__": "FenestrationConstruction(string, double, double?, EntityId?)",
-    "FenestrationConstruction.from_json": "GonieGonie.SimpleDragon.GrmReader fenestration construction path",
+    "FenestrationConstruction.from_json": "Dragons.SimpleDragon.GrmReader fenestration construction path",
     "FenestrationConstruction.g": "FenestrationConstruction.SolarHeatGainCoefficient",
     "FenestrationConstruction.get_DB": "FenestrationConstructionDatabase.Find and Entries",
     "FenestrationConstruction.is_transparent": "FenestrationConstruction.IsTransparent",
     "FenestrationConstruction.load_DB": "SimpleDragonEmbeddedData.FenestrationConstructions",
-    "FenestrationConstruction.to_dict": "GonieGonie.SimpleDragon.GrmWriter fenestration construction path",
+    "FenestrationConstruction.to_dict": "Dragons.SimpleDragon.GrmWriter fenestration construction path",
     "FenestrationConstruction.to_dragon": "GreenRetrofitConversion fenestration construction conversion",
     "FenestrationConstruction.u": "FenestrationConstruction.UValue",
-    "Material": "GonieGonie.SimpleDragon.Material",
+    "Material": "Dragons.SimpleDragon.Material",
     "Material.ID": "Material.Id",
     "Material.__init__": "Material(string, double, double, double, EntityId?)",
     "Material.conductivity": "Material.Conductivity",
     "Material.density": "Material.Density",
-    "Material.from_json": "GonieGonie.SimpleDragon.GrmReader material path",
+    "Material.from_json": "Dragons.SimpleDragon.GrmReader material path",
     "Material.get_DB": "MaterialDatabase.Find and Items",
     "Material.load_DB": "SimpleDragonEmbeddedData.Materials",
     "Material.specific_heat": "Material.SpecificHeat",
-    "Material.to_dict": "GonieGonie.SimpleDragon.GrmWriter material path",
+    "Material.to_dict": "Dragons.SimpleDragon.GrmWriter material path",
     "Material.to_dragon": "GreenRetrofitConversion material conversion",
     "OpenConstruction": "SurfaceConstructionReferenceKind.Open",
     "OpenConstruction.ID": "Surface.ConstructionId value open and SurfaceConstructionReferenceKind.Open",
@@ -249,13 +249,13 @@ NATIVE_ROUTES = {
     "SpecialConstruction.__new__": "SimpleSurface construction reference kind value semantics",
     "SpecialConstruction.get_unique_materials": "GreenRetrofitConversion special construction material bypass",
     "SpecialConstruction.reversed": "GreenRetrofitConversion special construction orientation bypass",
-    "SurfaceConstruction": "GonieGonie.SimpleDragon.SurfaceConstruction",
+    "SurfaceConstruction": "Dragons.SimpleDragon.SurfaceConstruction",
     "SurfaceConstruction.ID": "SurfaceConstruction.Id",
     "SurfaceConstruction.U_internal": "SurfaceConstruction.InternalUValue",
     "SurfaceConstruction.__init__": "SurfaceConstruction(string, IEnumerable<SurfaceConstructionLayer>, EntityId?)",
     "SurfaceConstruction.create_simply": "SurfaceConstruction.CreateSimple",
     "SurfaceConstruction.depth": "SurfaceConstruction.Depth",
-    "SurfaceConstruction.from_json": "GonieGonie.SimpleDragon.GrmReader surface construction path",
+    "SurfaceConstruction.from_json": "Dragons.SimpleDragon.GrmReader surface construction path",
     "SurfaceConstruction.get_DB": "SurfaceConstructionDatabase.Find and Entries",
     "SurfaceConstruction.get_U": "SurfaceConstruction.GetUValue",
     "SurfaceConstruction.get_regulated_construction": "SurfaceConstructionDatabase.FindRegulated",
@@ -263,7 +263,7 @@ NATIVE_ROUTES = {
     "SurfaceConstruction.heat_capacity": "SurfaceConstruction.HeatCapacity",
     "SurfaceConstruction.load_DB": "SimpleDragonEmbeddedData.SurfaceConstructions",
     "SurfaceConstruction.reversed": "SurfaceConstruction.Reverse",
-    "SurfaceConstruction.to_dict": "GonieGonie.SimpleDragon.GrmWriter surface construction path",
+    "SurfaceConstruction.to_dict": "Dragons.SimpleDragon.GrmWriter surface construction path",
     "SurfaceConstruction.to_dragon": "GreenRetrofitConversion surface construction conversion",
     "UnknownConstruction": "SurfaceConstructionReferenceKind.Unknown",
     "UnknownConstruction.ID": "Surface.ConstructionId null or empty and SurfaceConstructionReferenceKind.Unknown",
@@ -433,7 +433,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         {"content_sha256", "files", "schema", "scope_sha256", "summary", "symbols", "upstream_commit"},
         "Public-symbol inventory",
     )
-    if value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2":
+    if value["schema"] != "dragons.upstream-public-symbol-inventory.v2":
         raise SystemExit("The public-symbol inventory schema drifted.")
     if value["upstream_commit"].lower() != commit:
         raise SystemExit("The public-symbol inventory commit drifted.")

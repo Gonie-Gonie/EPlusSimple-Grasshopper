@@ -4112,7 +4112,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-assembly.v1",
+  "schema": "dragons.python-reference.dragon-model-assembly.v1",
   "symbols": [
     {
       "body_hash": "sha256:9d1b5a610b485aa782c0c1f39ed57b65d5534e1ba3271f1a325c52a109228189",

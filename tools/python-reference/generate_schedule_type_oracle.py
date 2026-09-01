@@ -17,8 +17,8 @@ import sys
 from typing import Any
 
 
-SCHEMA = "goniegonie.invisibledragon.schedule-type-oracle.v1"
-INVENTORY_SCHEMA = "goniegonie.upstream-public-symbol-inventory.v2"
+SCHEMA = "dragons.invisibledragon.schedule-type-oracle.v1"
+INVENTORY_SCHEMA = "dragons.upstream-public-symbol-inventory.v2"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 REQUIRED_PYTHON = (3, 12, 7)
 REQUIRED_HASH_ALGORITHM = "siphash13"

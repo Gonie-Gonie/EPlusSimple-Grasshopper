@@ -24,7 +24,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.dragon-construction-core.v1"
+SCHEMA = "dragons.python-reference.dragon-construction-core.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -162,23 +162,23 @@ ASSERTION_IDS = {
     for item in TARGET_RECEIPTS
 }
 NATIVE_TARGETS = {
-    "Construction": "GonieGonie.InvisibleDragon.Construction.Construction immutable class",
+    "Construction": "Dragons.InvisibleDragon.Construction.Construction immutable class",
     "Construction.U": "Construction.UValue",
     "Construction.__init__": "Construction(string, IEnumerable<Layer>)",
     "Construction.heat_capacity": "Construction.HeatCapacityJoulesPerSquareMetreKelvin",
     "Construction.reversed": "Construction.Reverse",
     "Construction.thickness": "Construction.ThicknessMetres",
-    "Glazing": "GonieGonie.InvisibleDragon.Construction.Glazing immutable record",
+    "Glazing": "Dragons.InvisibleDragon.Construction.Glazing immutable record",
     "Glazing.G": "Glazing.SolarHeatGainCoefficient",
     "Glazing.U": "Glazing.UValueWattsPerSquareMetreKelvin",
     "Glazing.__init__": "Glazing(string, double, double)",
-    "Layer": "GonieGonie.InvisibleDragon.Construction.Layer immutable record",
+    "Layer": "Dragons.InvisibleDragon.Construction.Layer immutable record",
     "Layer.U": "Layer.UValue",
     "Layer.__init__": "Layer(string, Material, double)",
     "Layer.heat_capacity": "Layer.HeatCapacityJoulesPerSquareMetreKelvin",
     "Layer.material": "Layer.Material get-only required reference",
     "Layer.thickness": "Layer.ThicknessMetres get-only finite double",
-    "Material": "GonieGonie.InvisibleDragon.Construction.Material immutable record",
+    "Material": "Dragons.InvisibleDragon.Construction.Material immutable record",
     "Material.__init__": "Material validated typed constructor",
     "Material.conductivity": "Material.ConductivityWattsPerMetreKelvin",
     "Material.density": "Material.DensityKilogramsPerCubicMetre",
@@ -187,14 +187,14 @@ NATIVE_TARGETS = {
     "Material.specific_heat": "Material.SpecificHeatJoulesPerKilogramKelvin",
     "Material.thermal_absorptance": "Material.ThermalAbsorptance",
     "Material.visible_absorptance": "Material.VisibleAbsorptance",
-    "MaterialRoughness": "GonieGonie.InvisibleDragon.Construction.MaterialRoughness enum",
+    "MaterialRoughness": "Dragons.InvisibleDragon.Construction.MaterialRoughness enum",
     "MaterialRoughness.MEDIUMROUGH": "MaterialRoughness.MediumRough",
     "MaterialRoughness.MEDIUMSMOOTH": "MaterialRoughness.MediumSmooth",
     "MaterialRoughness.ROUGH": "MaterialRoughness.Rough",
     "MaterialRoughness.SMOOTH": "MaterialRoughness.Smooth",
     "MaterialRoughness.VERYROUGH": "MaterialRoughness.VeryRough",
     "MaterialRoughness.__str__": "MaterialRoughness.ToString",
-    "NoMassConstruction": "GonieGonie.InvisibleDragon.Construction.NoMassConstruction immutable record",
+    "NoMassConstruction": "Dragons.InvisibleDragon.Construction.NoMassConstruction immutable record",
     "NoMassConstruction.U": "NoMassConstruction.UValueWattsPerSquareMetreKelvin",
     "NoMassConstruction.__init__": "NoMassConstruction(string, double)",
 }
@@ -342,7 +342,7 @@ def _load_core_support() -> Any:
         "generate_dragon_construction_air_boundary_core_oracle.py"
     )
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_construction_core_support", path
+        "_dragons_construction_core_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load construction core support: {path}")

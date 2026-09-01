@@ -5425,7 +5425,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.rule-set-core-oracle.v1",
+  "schema": "dragons.invisibledragon.rule-set-core-oracle.v1",
   "symbols": [
     {
       "body_hash": "sha256:a11810c9b7a2d650b7c76769e34925cdc1c160f0d92a783d616c06a008bbe832",

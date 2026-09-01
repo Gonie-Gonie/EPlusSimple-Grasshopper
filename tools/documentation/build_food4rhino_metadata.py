@@ -36,7 +36,7 @@ _load_oodocs = _USER_GUIDE_HELPERS._load_oodocs
 render_pdf_only = _USER_GUIDE_HELPERS.render_pdf_only
 
 
-PACKAGE_SCHEMA = "goniegonie.dragons-grasshopper.package-spec.v3"
+PACKAGE_SCHEMA = "dragons-grasshopper.package-spec.v3"
 EXPECTED_RELEASE_VERSION = "0.1.0"
 SOURCE_PATH = Path("docs/development/publishing/food4rhino.md")
 EXPECTED_PRODUCT_IDENTITIES = {

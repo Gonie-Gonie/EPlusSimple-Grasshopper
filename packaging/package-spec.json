@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.dragons-grasshopper.package-spec.v3",
+  "schema": "dragons-grasshopper.package-spec.v3",
   "version": "0.1.0",
   "publication": {
     "projectLicense": "MIT",
@@ -40,38 +40,38 @@
     }
   ],
   "shared_assemblies": [
-    "GonieGonie.BuildingEnergy.Contracts.dll",
-    "GonieGonie.EnergyPlus.Runtime.dll",
-    "GonieGonie.InvisibleDragon.Core.dll",
-    "GonieGonie.InvisibleDragon.Rhino.dll"
+    "Dragons.BuildingEnergy.Contracts.dll",
+    "Dragons.EnergyPlus.Runtime.dll",
+    "Dragons.InvisibleDragon.Core.dll",
+    "Dragons.InvisibleDragon.Rhino.dll"
   ],
   "products": [
     {
       "id": "invisible-dragon",
       "display_name": "InvisibleDragon",
-      "entry_assembly": "GonieGonie.InvisibleDragon.GH.gha",
+      "entry_assembly": "Dragons.InvisibleDragon.GH.gha",
       "required_assemblies": [
-        "GonieGonie.BuildingEnergy.Contracts.dll",
-        "GonieGonie.EnergyPlus.Runtime.dll",
-        "GonieGonie.InvisibleDragon.Core.dll",
-        "GonieGonie.InvisibleDragon.Grasshopper.Types.dll",
-        "GonieGonie.InvisibleDragon.Rhino.dll",
-        "GonieGonie.InvisibleDragon.GH.gha"
+        "Dragons.BuildingEnergy.Contracts.dll",
+        "Dragons.EnergyPlus.Runtime.dll",
+        "Dragons.InvisibleDragon.Core.dll",
+        "Dragons.InvisibleDragon.Grasshopper.Types.dll",
+        "Dragons.InvisibleDragon.Rhino.dll",
+        "Dragons.InvisibleDragon.GH.gha"
       ]
     },
     {
       "id": "simple-dragon",
       "display_name": "SimpleDragon",
-      "entry_assembly": "GonieGonie.SimpleDragon.GH.gha",
+      "entry_assembly": "Dragons.SimpleDragon.GH.gha",
       "required_assemblies": [
-        "GonieGonie.BuildingEnergy.Contracts.dll",
-        "GonieGonie.EnergyPlus.Runtime.dll",
-        "GonieGonie.InvisibleDragon.Core.dll",
-        "GonieGonie.InvisibleDragon.Rhino.dll",
-        "GonieGonie.SimpleDragon.Core.dll",
-        "GonieGonie.SimpleDragon.Grasshopper.Types.dll",
-        "GonieGonie.SimpleDragon.Rhino.dll",
-        "GonieGonie.SimpleDragon.GH.gha"
+        "Dragons.BuildingEnergy.Contracts.dll",
+        "Dragons.EnergyPlus.Runtime.dll",
+        "Dragons.InvisibleDragon.Core.dll",
+        "Dragons.InvisibleDragon.Rhino.dll",
+        "Dragons.SimpleDragon.Core.dll",
+        "Dragons.SimpleDragon.Grasshopper.Types.dll",
+        "Dragons.SimpleDragon.Rhino.dll",
+        "Dragons.SimpleDragon.GH.gha"
       ]
     }
   ]

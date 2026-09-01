@@ -1001,7 +1001,7 @@ class CaseStageTests(unittest.TestCase):
             "stage_scope": stage_scope,
         }
         warning_document = {
-            "schema": "goniegonie.dragons.energyplus-warnings.v1",
+            "schema": "dragons.energyplus-warnings.v1",
             "summary": {"warning": 0, "severe": 0, "fatal": 0},
             "items": [],
         }

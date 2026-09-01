@@ -679,7 +679,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-construction-defaults.v1",
+  "schema": "dragons.python-reference.dragon-model-construction-defaults.v1",
   "symbols": [
     {
       "body_hash": "sha256:e4e5ef56fd12719fe976231c03d867e932eff64870f9c0fd7a5107b7e11538f1",

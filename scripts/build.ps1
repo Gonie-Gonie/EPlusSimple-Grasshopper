@@ -88,10 +88,10 @@ function Get-PluginOutputIdentity {
     )
 
     $module = $null
-    if ($PluginFile.Name -match '^GonieGonie\.InvisibleDragon\.GH\.(?:gha|dll)$') {
+    if ($PluginFile.Name -match '^Dragons\.InvisibleDragon\.GH\.(?:gha|dll)$') {
         $module = 'invisible-dragon'
     }
-    elseif ($PluginFile.Name -match '^GonieGonie\.SimpleDragon\.GH\.(?:gha|dll)$') {
+    elseif ($PluginFile.Name -match '^Dragons\.SimpleDragon\.GH\.(?:gha|dll)$') {
         $module = 'simple-dragon'
     }
     else {
@@ -214,7 +214,7 @@ if (-not (Test-Path -LiteralPath $localSettingsPath -PathType Leaf)) {
 }
 
 $localSettings = Get-Content -LiteralPath $localSettingsPath -Raw | ConvertFrom-Json
-if ([string] (Get-PropertyValue -Object $localSettings -Name 'schema') -ne 'goniegonie.dragons-grasshopper.local-settings.v1') {
+if ([string] (Get-PropertyValue -Object $localSettings -Name 'schema') -ne 'dragons-grasshopper.local-settings.v1') {
     throw "Local settings schema is unsupported. Re-run 'dev.cmd setup'."
 }
 
@@ -263,8 +263,8 @@ Ensure-Directory -Path $testResultsRoot
 
 $env:DRAGONS_ENERGYPLUS_AVAILABLE = if ($energyPlusReady) { '1' } else { '0' }
 $env:DRAGONS_ENERGYPLUS_EXE = if ($energyPlusReady) { [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'executable') } else { '' }
-$env:GONIEGONIE_RUN_ENERGYPLUS_INTEGRATION = if ($energyPlusReady) { '1' } else { '0' }
-$env:GONIEGONIE_ENERGYPLUS_ROOT = if ($energyPlusReady) { [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'root') } else { '' }
+$env:DRAGONS_RUN_ENERGYPLUS_INTEGRATION = if ($energyPlusReady) { '1' } else { '0' }
+$env:DRAGONS_ENERGYPLUS_ROOT = if ($energyPlusReady) { [string] (Get-PropertyValue -Object $energyPlusSettings -Name 'root') } else { '' }
 $env:DRAGONS_RHINO7_AVAILABLE = if ($rhino7Ready) { '1' } else { '0' }
 $env:DRAGONS_RHINO8_AVAILABLE = if ($rhino8Ready) { '1' } else { '0' }
 $env:DRAGONS_RHINO7_EXE = if ($rhino7Ready) { [string] (Get-PropertyValue -Object $rhino7 -Name 'executable') } else { '' }
@@ -378,7 +378,7 @@ else {
                     '-ExecutionPolicy', 'Bypass',
                     '-File', $installerTestScript
                 ) `
-                -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.Installer.log') `
+                -LogPath (Join-Path $logsRoot 'test-Dragons.Installer.log') `
                 -FailureMessage 'Installer Rhino path checks failed'
         }
         $executedTestProjects += $installerTestScript
@@ -398,7 +398,7 @@ else {
                     '-ExecutionPolicy', 'Bypass',
                     '-File', $tempLifecycleTestScript
                 ) `
-                -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.TempLifecycle.log') `
+                -LogPath (Join-Path $logsRoot 'test-Dragons.TempLifecycle.log') `
                 -FailureMessage 'Repository temp lifecycle checks failed'
         }
         $executedTestProjects += $tempLifecycleTestScript
@@ -409,18 +409,18 @@ else {
     # both Dragon geometry adapters with real Breps.
     $rhinoSmokeChecks = @(
         [pscustomobject] [ordered] @{
-            project = Join-Path $repositoryRoot 'tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj'
+            project = Join-Path $repositoryRoot 'tools\rhino-smoke\Dragons.InvisibleDragon.Rhino.Smoke.csproj'
             executable = Join-Path $buildOutputRoot (
-                Join-Path 'GonieGonie.InvisibleDragon.Rhino.Smoke' (
-                    Join-Path $Configuration 'net8.0-windows\GonieGonie.InvisibleDragon.Rhino.Smoke.exe'))
-            label = 'GonieGonie.InvisibleDragon.Rhino.Smoke'
+                Join-Path 'Dragons.InvisibleDragon.Rhino.Smoke' (
+                    Join-Path $Configuration 'net8.0-windows\Dragons.InvisibleDragon.Rhino.Smoke.exe'))
+            label = 'Dragons.InvisibleDragon.Rhino.Smoke'
         },
         [pscustomobject] [ordered] @{
-            project = Join-Path $repositoryRoot 'tools\simpledragon-rhino-smoke\GonieGonie.SimpleDragon.Rhino.Smoke.csproj'
+            project = Join-Path $repositoryRoot 'tools\simpledragon-rhino-smoke\Dragons.SimpleDragon.Rhino.Smoke.csproj'
             executable = Join-Path $buildOutputRoot (
-                Join-Path 'GonieGonie.SimpleDragon.Rhino.Smoke' (
-                    Join-Path $Configuration 'net8.0-windows\GonieGonie.SimpleDragon.Rhino.Smoke.exe'))
-            label = 'GonieGonie.SimpleDragon.Rhino.Smoke'
+                Join-Path 'Dragons.SimpleDragon.Rhino.Smoke' (
+                    Join-Path $Configuration 'net8.0-windows\Dragons.SimpleDragon.Rhino.Smoke.exe'))
+            label = 'Dragons.SimpleDragon.Rhino.Smoke'
         }
     )
     foreach ($rhinoSmoke in $rhinoSmokeChecks) {
@@ -486,7 +486,7 @@ else {
                 Invoke-LoggedNativeCommand `
                     -FilePath $windowsPowerShell `
                     -ArgumentList $grasshopperArguments `
-                    -LogPath (Join-Path $logsRoot 'test-GonieGonie.Dragons.Grasshopper.Host.log') `
+                    -LogPath (Join-Path $logsRoot 'test-Dragons.Grasshopper.Host.log') `
                     -FailureMessage 'Grasshopper real-host smoke checks failed'
             }
             $executedTestProjects += $grasshopperSmokeScript
@@ -519,7 +519,7 @@ else {
     if (Test-Path -LiteralPath $buildOutputRoot -PathType Container) {
         $pluginFiles = @(Get-ChildItem -LiteralPath $buildOutputRoot -File -Recurse |
             Where-Object {
-                $_.Name -match '^GonieGonie\.(?:InvisibleDragon|SimpleDragon)\.GH\.(?:gha|dll)$' -and
+                $_.Name -match '^Dragons\.(?:InvisibleDragon|SimpleDragon)\.GH\.(?:gha|dll)$' -and
                 $_.FullName -match ('\\' + [regex]::Escape($Configuration) + '\\') -and
                 $_.FullName -notmatch '\\(?:ref|refint)\\'
             })
@@ -562,7 +562,7 @@ if (-not $SkipArtifactStaging -and -not $WhatIfPreference -and (Test-Path -Liter
 
 $gitIdentity = Get-GitBuildIdentity
 $buildManifest = [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.build-manifest.v1'
+    schema = 'dragons-grasshopper.build-manifest.v1'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     configuration = $Configuration
     solution = $solution
@@ -590,7 +590,7 @@ if (-not $SkipArtifactStaging) {
         -Depth 12
 
     $testSummary = [ordered] @{
-        schema = 'goniegonie.dragons-grasshopper.test-summary.v1'
+        schema = 'dragons-grasshopper.test-summary.v1'
         status = $testStatus
         executedProjects = @($executedTestProjects)
         skippedProjects = @($skippedTestProjects)

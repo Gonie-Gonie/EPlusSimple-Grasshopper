@@ -65,7 +65,7 @@ def csv_sha256(profile: Any) -> str:
 def build_oracle(upstream_commit: str, zone_name: str) -> dict[str, Any]:
     profiles = Profile.get_DB("__all__")
     result: dict[str, Any] = {
-        "schema": "goniegonie.simpledragon.usage-profile-schedule-oracle.v1",
+        "schema": "dragons.simpledragon.usage-profile-schedule-oracle.v1",
         "upstream_commit": upstream_commit.lower(),
         "zone_name": zone_name,
         "profile_count": len(profiles),

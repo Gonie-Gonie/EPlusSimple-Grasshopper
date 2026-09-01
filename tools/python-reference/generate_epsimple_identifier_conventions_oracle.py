@@ -28,7 +28,7 @@ from types import ModuleType
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-identifier-conventions.v1"
+SCHEMA = "dragons.python-reference.epsimple-identifier-conventions.v1"
 SOURCE_PATH = "src/epsimple/constants.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -67,7 +67,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_identifier_support", SUPPORT_PATH
+        "_dragons_epsimple_identifier_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -179,26 +179,26 @@ ASSERTION_IDS = {
 
 NATIVE_ROUTES = {
     **{
-        symbol: "GonieGonie.SimpleDragon.AutoIdPrefix"
+        symbol: "Dragons.SimpleDragon.AutoIdPrefix"
         for symbol in ("AUTOID_PREFIX", *AUTO_MEMBER_SYMBOLS)
     },
-    "AUTOID_PREFIX.__format__": "GonieGonie.SimpleDragon.AutoIdPrefix.ToString(string?, IFormatProvider?)",
-    "AUTOID_PREFIX.__str__": "GonieGonie.SimpleDragon.AutoIdPrefix.ToString()",
-    "Directory": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData and WeatherSelection.ResolveEpwPath",
-    "Directory.CONSTRUCTION_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData construction resources",
-    "Directory.PROFILE_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData profile resources",
-    "Directory.WEATHER_DATA_DIR": "GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath",
-    "Directory.WEATHER_META_DIR": "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData weather resources",
-    "PackageInfo": "GonieGonie.SimpleDragon.PackageInfo",
-    "PackageInfo.NAME": "GonieGonie.SimpleDragon.PackageInfo.Name",
+    "AUTOID_PREFIX.__format__": "Dragons.SimpleDragon.AutoIdPrefix.ToString(string?, IFormatProvider?)",
+    "AUTOID_PREFIX.__str__": "Dragons.SimpleDragon.AutoIdPrefix.ToString()",
+    "Directory": "Dragons.SimpleDragon.SimpleDragonEmbeddedData and WeatherSelection.ResolveEpwPath",
+    "Directory.CONSTRUCTION_DIR": "Dragons.SimpleDragon.SimpleDragonEmbeddedData construction resources",
+    "Directory.PROFILE_DIR": "Dragons.SimpleDragon.SimpleDragonEmbeddedData profile resources",
+    "Directory.WEATHER_DATA_DIR": "Dragons.SimpleDragon.WeatherSelection.ResolveEpwPath",
+    "Directory.WEATHER_META_DIR": "Dragons.SimpleDragon.SimpleDragonEmbeddedData weather resources",
+    "PackageInfo": "Dragons.SimpleDragon.PackageInfo",
+    "PackageInfo.NAME": "Dragons.SimpleDragon.PackageInfo.Name",
     "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows target frameworks",
-    "PackageInfo.VERSION": "GonieGonie.SimpleDragon.PackageInfo.Version and Compatibility.UpstreamVersion",
+    "PackageInfo.VERSION": "Dragons.SimpleDragon.PackageInfo.Version and Compatibility.UpstreamVersion",
     **{
-        symbol: "GonieGonie.SimpleDragon.SpecialTag"
+        symbol: "Dragons.SimpleDragon.SpecialTag"
         for symbol in ("SpecialTag", *SPECIAL_MEMBER_SYMBOLS)
     },
-    "SpecialTag.__format__": "GonieGonie.SimpleDragon.SpecialTag.ToString(string?, IFormatProvider?)",
-    "SpecialTag.__str__": "GonieGonie.SimpleDragon.SpecialTag.ToString()",
+    "SpecialTag.__format__": "Dragons.SimpleDragon.SpecialTag.ToString(string?, IFormatProvider?)",
+    "SpecialTag.__str__": "Dragons.SimpleDragon.SpecialTag.ToString()",
 }
 
 PREFIX = "epsimple-identifier-conventions."
@@ -301,8 +301,8 @@ ISOLATED_FILES = (
     "location-b/repository/src/epsimple/constants.py",
 )
 ISOLATED_MODULE_NAMES = (
-    "_goniegonie_epsimple_identifier_location_a",
-    "_goniegonie_epsimple_identifier_location_b",
+    "_dragons_epsimple_identifier_location_a",
+    "_dragons_epsimple_identifier_location_b",
 )
 
 RAW_ADDRESS_PATTERN = re.compile(

@@ -21,7 +21,7 @@ if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
 }
 
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
-if ([string] $lock.schema -ne 'goniegonie.tool-lock.v1') {
+if ([string] $lock.schema -ne 'dragons.tool-lock.v1') {
     throw "Unsupported Yak lock schema in '$lockPath'."
 }
 

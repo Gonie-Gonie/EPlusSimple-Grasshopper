@@ -8,10 +8,10 @@ import unittest
 
 from support import REPOSITORY_ROOT, TemporaryWorkspace, write_configuration
 
-from goniegonie_upstream_tracker.config import load_configuration
-from goniegonie_upstream_tracker.compatibility import load_compatibility_configuration
-from goniegonie_upstream_tracker.errors import ConfigurationError
-from goniegonie_upstream_tracker.yaml_subset import parse_yaml_subset
+from dragons_upstream_tracker.config import load_configuration
+from dragons_upstream_tracker.compatibility import load_compatibility_configuration
+from dragons_upstream_tracker.errors import ConfigurationError
+from dragons_upstream_tracker.yaml_subset import parse_yaml_subset
 
 
 class ConfigurationTests(unittest.TestCase):
@@ -22,11 +22,11 @@ class ConfigurationTests(unittest.TestCase):
             REPOSITORY_ROOT / "upstream" / "compatibility-exceptions.yml",
         )
 
-        self.assertEqual("goniegonie.upstream-lock.v1", configuration.lock.schema)
+        self.assertEqual("dragons.upstream-lock.v1", configuration.lock.schema)
         self.assertGreater(len(configuration.mappings), 0)
         self.assertTrue(
             all(
-                mapping.dotnet_project.startswith("GonieGonie.")
+                mapping.dotnet_project.startswith("Dragons.")
                 for mapping in configuration.mappings
             )
         )
@@ -318,18 +318,18 @@ class ConfigurationTests(unittest.TestCase):
             67: "native-simpledragon-unit-conversion-constants",
         }
         numeric_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "ConstantsNumericOracleParityTests.cs"
         )
         numeric_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.ConstantsNumericOracleParityTests."
+            "Dragons.SimpleDragon.Tests.ConstantsNumericOracleParityTests."
             "MatchesPinnedPythonConstantsNumeric"
         )
         numeric_test_hash = (
             "sha256:29ad9aa6d5cdffd240ec7727ff253812537f5aee5bfee4160bb20eb1ba36603a"
         )
         numeric_implementation_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/"
             "SimpleDragonConstants.cs"
         )
         numeric_implementation_hash = (
@@ -365,7 +365,7 @@ class ConfigurationTests(unittest.TestCase):
             )
             self.assertTrue(
                 evidence_entry.implementation_symbol.startswith(
-                    "GonieGonie.SimpleDragon."
+                    "Dragons.SimpleDragon."
                 ),
                 key,
             )
@@ -446,57 +446,57 @@ class ConfigurationTests(unittest.TestCase):
         }
         identifier_implementations = {
             "auto": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
-                "GonieGonie.SimpleDragon.AutoIdPrefix",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "Dragons.SimpleDragon.AutoIdPrefix",
                 "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
             ),
             "auto_format": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
-                "GonieGonie.SimpleDragon.AutoIdPrefix.ToString",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "Dragons.SimpleDragon.AutoIdPrefix.ToString",
                 "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
             ),
             "embedded": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs",
-                "GonieGonie.SimpleDragon.SimpleDragonEmbeddedData",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Data/SimpleDragonEmbeddedData.cs",
+                "Dragons.SimpleDragon.SimpleDragonEmbeddedData",
                 "sha256:76915a821bccc2dbc8e3f185c1faf6c3da07dfe64cd50301b336367d8c5d2d81",
             ),
             "weather": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Weather/WeatherDatabase.cs",
-                "GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Weather/WeatherDatabase.cs",
+                "Dragons.SimpleDragon.WeatherSelection.ResolveEpwPath",
                 "sha256:c7ddc71015eb375e56565a2898d7998cf865fb50d0c8626374f0f642644e9e98",
             ),
             "package": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
-                "GonieGonie.SimpleDragon.PackageInfo",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
+                "Dragons.SimpleDragon.PackageInfo",
                 "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
             ),
             "package_name": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
-                "GonieGonie.SimpleDragon.PackageInfo.Name",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
+                "Dragons.SimpleDragon.PackageInfo.Name",
                 "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
             ),
             "package_version": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/PackageInfo.cs",
-                "GonieGonie.SimpleDragon.PackageInfo.Version",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/PackageInfo.cs",
+                "Dragons.SimpleDragon.PackageInfo.Version",
                 "sha256:29de3c056446d3ad69084ae681d05a73b8185c881ab0e2d9863423e0ecf3c5f0",
             ),
             "special": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
-                "GonieGonie.SimpleDragon.SpecialTag",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "Dragons.SimpleDragon.SpecialTag",
                 "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
             ),
             "special_format": (
-                "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Constants/IdentifierConventions.cs",
-                "GonieGonie.SimpleDragon.SpecialTag.ToString",
+                "src/SimpleDragon/Dragons.SimpleDragon.Core/Constants/IdentifierConventions.cs",
+                "Dragons.SimpleDragon.SpecialTag.ToString",
                 "sha256:0dfe1e82e58c30dcbe9d5cc031363950a7b5c0ddd10c85c6ea29003eaf90d012",
             ),
         }
         identifier_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "IdentifierConventionsOracleParityTests.cs"
         )
         identifier_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.IdentifierConventionsOracleParityTests."
+            "Dragons.SimpleDragon.Tests.IdentifierConventionsOracleParityTests."
             "MatchesPinnedPythonIdentifierAndMetadataConventions"
         )
         identifier_test_hash = (
@@ -649,7 +649,7 @@ class ConfigurationTests(unittest.TestCase):
                 "dragon-construction-air-boundary-core-588-fd8f9bb9",
                 "sha256:e94adada7522d56edce498e3d9caf6fe390d5926cf42038c689b15b1df8a1be3",
                 "sha256:83167c1eb59ce60b50cd6fbb2e7eebbe87e1452243d6b5ff50287691c3e3f4b7",
-                "GonieGonie.InvisibleDragon.Construction.AirBoundary",
+                "Dragons.InvisibleDragon.Construction.AirBoundary",
             ),
             "AirBoundary.__init__": (
                 589,
@@ -657,15 +657,15 @@ class ConfigurationTests(unittest.TestCase):
                 "dragon-construction-air-boundary-core-589-a69bf707",
                 "sha256:53e6bdb13392529e182b4b16a24fc72d37116abf93472e49e6648d5e0cb8458a",
                 "sha256:a6bc52d12c81f6a4463421cb5c77decd1ba956e797afab0e7c7e19425bf6264f",
-                "GonieGonie.InvisibleDragon.Construction.AirBoundary.AirBoundary",
+                "Dragons.InvisibleDragon.Construction.AirBoundary.AirBoundary",
             ),
         }
         air_boundary_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Construction/"
             "AirBoundaryCoreOracleParityTests.cs"
         )
         air_boundary_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Construction."
+            "Dragons.InvisibleDragon.Tests.Construction."
             "AirBoundaryCoreOracleParityTests."
             "MatchesPinnedAirBoundaryCoreThroughTypedNativeRoutes"
         )
@@ -673,7 +673,7 @@ class ConfigurationTests(unittest.TestCase):
             "sha256:64adf39ee35dc626606071fcf8efd9a46a6e73f21536b2b355834a0611389766"
         )
         air_boundary_implementation_path = (
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/"
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/"
             "SimpleConstructions.cs"
         )
         air_boundary_implementation_hash = (
@@ -788,36 +788,36 @@ class ConfigurationTests(unittest.TestCase):
         }
         construction_core_implementation_files = {
             "Construction": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Construction.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Construction.cs",
                 "sha256:935cfdeb3c6a5ced1c8fc0bbdb5ae91f46cc98f04ac74aa5ff0beadc3f6716a1",
             ),
             "Glazing": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
                 "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
             ),
             "Layer": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Layer.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Layer.cs",
                 "sha256:bed26e36a5a65900291b62dd326d6175283dca3978ef0b2dc7093e9c052109fc",
             ),
             "Material": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/Material.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/Material.cs",
                 "sha256:f0bb5f09769036ce9f2611520f29a2a370bf405ecf10ded77665876f53195f07",
             ),
             "MaterialRoughness": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/MaterialRoughness.cs",
                 "sha256:3e51b913e6323ed92af5d1121337ad9223113b349468866fa9e76c3f7634c6cf",
             ),
             "NoMassConstruction": (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Construction/SimpleConstructions.cs",
                 "sha256:4141d1125d33c40092caaf8b7e472bb50477a8c05b56b24ddf330ca72be22292",
             ),
         }
         construction_core_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Construction/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Construction/"
             "ConstructionCoreOracleParityTests.cs"
         )
         construction_core_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Construction."
+            "Dragons.InvisibleDragon.Tests.Construction."
             "ConstructionCoreOracleParityTests."
             "MatchesPinnedDragonConstructionCoreThroughTypedNativeRoutes"
         )
@@ -874,7 +874,7 @@ class ConfigurationTests(unittest.TestCase):
             )
             self.assertTrue(
                 evidence_entry.implementation_symbol.startswith(
-                    f"GonieGonie.InvisibleDragon.Construction.{owner}"
+                    f"Dragons.InvisibleDragon.Construction.{owner}"
                 ),
                 symbol,
             )
@@ -1139,40 +1139,40 @@ class ConfigurationTests(unittest.TestCase):
             ),
         }
         native_source_hashes = {
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Shading.cs": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Openings.cs": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceAdjacency.cs": "sha256:83d67c465446be31133fcd17d2e3cbbab9b6b320a28a3f2608ad55c99450fb59",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Shading.cs": "sha256:99b426d76894461ca1f29e41dfba08204ee43a72f6133f3588eedd7e79b3affd",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Openings.cs": "sha256:4da15fd6ee228d471bc1a249abf23f7dbff5687ff0f1dabb9dc820b512aee494",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceAdjacency.cs": "sha256:83d67c465446be31133fcd17d2e3cbbab9b6b320a28a3f2608ad55c99450fb59",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
         }
         expected_native_symbols = {
-            "Blind": ("Shape/Shading.cs", "GonieGonie.InvisibleDragon.Shape.Blind"),
-            "Blind.__init__": ("Shape/Shading.cs", "GonieGonie.InvisibleDragon.Shape.Blind.Blind"),
-            "Door": ("Shape/Openings.cs", "GonieGonie.InvisibleDragon.Shape.Door"),
-            "Door.__init__": ("Shape/Openings.cs", "GonieGonie.InvisibleDragon.Shape.Door.Door"),
-            "Shade": ("Shape/Shading.cs", "GonieGonie.InvisibleDragon.Shape.Shade"),
-            "Shade.__init__": ("Shape/Shading.cs", "GonieGonie.InvisibleDragon.Shape.Shade.Shade"),
-            "Shading": ("Shape/Shading.cs", "GonieGonie.InvisibleDragon.Shape.IShadingDevice"),
-            "Surface.__init__": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Surface"),
-            "Surface.blinded_window": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Windows"),
-            "Surface.boundary": ("Shape/SurfaceAdjacency.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceAdjacency.Match"),
-            "Surface.get_subsurface": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.CreateCenteredSubsurface"),
-            "SurfaceBoundaryCondition": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition"),
-            "SurfaceBoundaryCondition.ADIABATIC": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Adiabatic"),
-            "SurfaceBoundaryCondition.GROUND": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Ground"),
-            "SurfaceBoundaryCondition.OUTDOOR": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Outdoors"),
-            "SurfaceBoundaryCondition.ZONE": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition.Zone"),
-            "SurfaceBoundaryCondition.__str__": ("Model/EnergyModelIdfAssembler.cs", "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.BuildingSurface"),
-            "Window": ("Shape/Openings.cs", "GonieGonie.InvisibleDragon.Shape.Window"),
-            "Window.__init__": ("Shape/Openings.cs", "GonieGonie.InvisibleDragon.Shape.Window.Window"),
+            "Blind": ("Shape/Shading.cs", "Dragons.InvisibleDragon.Shape.Blind"),
+            "Blind.__init__": ("Shape/Shading.cs", "Dragons.InvisibleDragon.Shape.Blind.Blind"),
+            "Door": ("Shape/Openings.cs", "Dragons.InvisibleDragon.Shape.Door"),
+            "Door.__init__": ("Shape/Openings.cs", "Dragons.InvisibleDragon.Shape.Door.Door"),
+            "Shade": ("Shape/Shading.cs", "Dragons.InvisibleDragon.Shape.Shade"),
+            "Shade.__init__": ("Shape/Shading.cs", "Dragons.InvisibleDragon.Shape.Shade.Shade"),
+            "Shading": ("Shape/Shading.cs", "Dragons.InvisibleDragon.Shape.IShadingDevice"),
+            "Surface.__init__": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Surface"),
+            "Surface.blinded_window": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Windows"),
+            "Surface.boundary": ("Shape/SurfaceAdjacency.cs", "Dragons.InvisibleDragon.Shape.SurfaceAdjacency.Match"),
+            "Surface.get_subsurface": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.CreateCenteredSubsurface"),
+            "SurfaceBoundaryCondition": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition"),
+            "SurfaceBoundaryCondition.ADIABATIC": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition.Adiabatic"),
+            "SurfaceBoundaryCondition.GROUND": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition.Ground"),
+            "SurfaceBoundaryCondition.OUTDOOR": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition.Outdoors"),
+            "SurfaceBoundaryCondition.ZONE": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition.Zone"),
+            "SurfaceBoundaryCondition.__str__": ("Model/EnergyModelIdfAssembler.cs", "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.BuildingSurface"),
+            "Window": ("Shape/Openings.cs", "Dragons.InvisibleDragon.Shape.Window"),
+            "Window.__init__": ("Shape/Openings.cs", "Dragons.InvisibleDragon.Shape.Window.Window"),
         }
         test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/"
             "OpeningAdjacencyCoreOracleParityTests.cs"
         )
         test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Model."
+            "Dragons.InvisibleDragon.Tests.Model."
             "OpeningAdjacencyCoreOracleParityTests."
             "MatchesPinnedOpeningAdjacencyCoreThroughBoundedNativeRoutes"
         )
@@ -1474,51 +1474,51 @@ class ConfigurationTests(unittest.TestCase):
             ),
         }
         geometry_native_source_hashes = {
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/PlanarPolygon.cs": "sha256:73a1dd052fb12ed0802a6236d21484e2b680cbe3f0f4005ade6a61995111c653",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Surface.cs": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/SurfaceBoundary.cs": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vector3.cs": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Vertex.cs": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/PlanarPolygon.cs": "sha256:73a1dd052fb12ed0802a6236d21484e2b680cbe3f0f4005ade6a61995111c653",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Surface.cs": "sha256:545dc79dd89e84acf6d714e79da7b2cda059dfcaa3b4f74d291ad572ebd51264",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/SurfaceBoundary.cs": "sha256:c0ba4cf5a93eb2678aee2c698320121f5bfbd68f7febb3dc901fe700da1499d9",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Vector3.cs": "sha256:02536827db9d1c6ff48a46678871e4d736d9536228f0de370a9fb2c5294b9ede",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Vertex.cs": "sha256:f37b229b45b23c23ddc54ed85aea1b93a201a74c30c7b29793f268e364435a67",
         }
         expected_geometry_native_symbols = {
-            "Surface": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface"),
-            "Surface.area": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.GrossArea"),
-            "Surface.center": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Center"),
-            "Surface.height": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Height"),
-            "Surface.normal": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Normal"),
-            "Surface.type": ("Shape/Surface.cs", "GonieGonie.InvisibleDragon.Shape.Surface.Type"),
-            "Surface.vertex": ("Shape/PlanarPolygon.cs", "GonieGonie.InvisibleDragon.Shape.PlanarPolygon.Vertices"),
-            "SurfaceType": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType"),
-            "SurfaceType.CEILING": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Ceiling"),
-            "SurfaceType.FLOOR": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Floor"),
-            "SurfaceType.WALL": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType.Wall"),
-            "SurfaceType.__str__": ("Shape/SurfaceBoundary.cs", "GonieGonie.InvisibleDragon.Shape.SurfaceType"),
-            "Vertex": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex"),
-            "Vertex.__add__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"),
-            "Vertex.__deepcopy__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex"),
-            "Vertex.__init__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Vertex"),
-            "Vertex.__iter__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.X"),
-            "Vertex.__mul__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"),
-            "Vertex.__radd__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Addition"),
-            "Vertex.__rmul__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Multiply"),
-            "Vertex.__sub__": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.op_Subtraction"),
-            "Vertex.__truediv__": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.op_Division"),
-            "Vertex.are_coplanar": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.AreCoplanar"),
-            "Vertex.cross": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Cross"),
-            "Vertex.distance": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.DistanceTo"),
-            "Vertex.dot": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Dot"),
-            "Vertex.norm": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Length"),
-            "Vertex.unit": ("Shape/Vector3.cs", "GonieGonie.InvisibleDragon.Shape.Vector3.Normalize"),
-            "Vertex.x": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.X"),
-            "Vertex.y": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Y"),
-            "Vertex.z": ("Shape/Vertex.cs", "GonieGonie.InvisibleDragon.Shape.Vertex.Z"),
+            "Surface": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface"),
+            "Surface.area": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.GrossArea"),
+            "Surface.center": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Center"),
+            "Surface.height": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Height"),
+            "Surface.normal": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Normal"),
+            "Surface.type": ("Shape/Surface.cs", "Dragons.InvisibleDragon.Shape.Surface.Type"),
+            "Surface.vertex": ("Shape/PlanarPolygon.cs", "Dragons.InvisibleDragon.Shape.PlanarPolygon.Vertices"),
+            "SurfaceType": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceType"),
+            "SurfaceType.CEILING": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceType.Ceiling"),
+            "SurfaceType.FLOOR": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceType.Floor"),
+            "SurfaceType.WALL": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceType.Wall"),
+            "SurfaceType.__str__": ("Shape/SurfaceBoundary.cs", "Dragons.InvisibleDragon.Shape.SurfaceType"),
+            "Vertex": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex"),
+            "Vertex.__add__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.op_Addition"),
+            "Vertex.__deepcopy__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex"),
+            "Vertex.__init__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.Vertex"),
+            "Vertex.__iter__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.X"),
+            "Vertex.__mul__": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.op_Multiply"),
+            "Vertex.__radd__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.op_Addition"),
+            "Vertex.__rmul__": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.op_Multiply"),
+            "Vertex.__sub__": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.op_Subtraction"),
+            "Vertex.__truediv__": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.op_Division"),
+            "Vertex.are_coplanar": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.AreCoplanar"),
+            "Vertex.cross": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.Cross"),
+            "Vertex.distance": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.DistanceTo"),
+            "Vertex.dot": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.Dot"),
+            "Vertex.norm": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.Length"),
+            "Vertex.unit": ("Shape/Vector3.cs", "Dragons.InvisibleDragon.Shape.Vector3.Normalize"),
+            "Vertex.x": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.X"),
+            "Vertex.y": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.Y"),
+            "Vertex.z": ("Shape/Vertex.cs", "Dragons.InvisibleDragon.Shape.Vertex.Z"),
         }
         geometry_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/"
             "GeometryCoreOracleParityTests.cs"
         )
         geometry_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Model.GeometryCoreOracleParityTests."
             "MatchesPinnedGeometryCoreThroughBoundedNativeRoutes"
         )
         geometry_test_hash = (
@@ -1688,47 +1688,47 @@ class ConfigurationTests(unittest.TestCase):
             ),
         }
         zone_native_sources = {
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Shape/Zone.cs": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Shape/Zone.cs": "sha256:37bd33ef649a03988255edd9f95bbb0f1ffb7c63cbf8fd1ddb784ebb071b8920",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
         }
         expected_zone_native_symbols = {
-            "Zone": ("Shape/Zone.cs", "GonieGonie.InvisibleDragon.Shape.Zone"),
+            "Zone": ("Shape/Zone.cs", "Dragons.InvisibleDragon.Shape.Zone"),
             "Zone.__init__": (
                 "Shape/Zone.cs",
-                "GonieGonie.InvisibleDragon.Shape.Zone.Zone",
+                "Dragons.InvisibleDragon.Shape.Zone.Zone",
             ),
             "Zone.floor_area": (
                 "Shape/Zone.cs",
-                "GonieGonie.InvisibleDragon.Shape.Zone.FloorArea",
+                "Dragons.InvisibleDragon.Shape.Zone.FloorArea",
             ),
             "Zone.floor_surface": (
                 "Shape/Zone.cs",
-                "GonieGonie.InvisibleDragon.Shape.Zone.FloorSurfaces",
+                "Dragons.InvisibleDragon.Shape.Zone.FloorSurfaces",
             ),
             "Zone.idf_airexhaustnodelistname": (
                 "Model/EnergyModelIdfAssembler.cs",
-                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+                "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
             ),
             "Zone.idf_airinletnodelistname": (
                 "Model/EnergyModelIdfAssembler.cs",
-                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+                "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
             ),
             "Zone.idf_equipmentlistname": (
                 "Model/EnergyModelIdfAssembler.cs",
-                "GonieGonie.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
+                "Dragons.InvisibleDragon.Model.EnergyModelIdfAssembler.AppendZoneEquipment",
             ),
             "Zone.supply": (
                 "Hvac/HvacAbstractions.cs",
-                "GonieGonie.InvisibleDragon.Hvac.ZoneHvacAssignment",
+                "Dragons.InvisibleDragon.Hvac.ZoneHvacAssignment",
             ),
         }
         zone_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/"
             "ZoneCoreOracleParityTests.cs"
         )
         zone_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Model.ZoneCoreOracleParityTests."
             "MatchesPinnedZoneCoreThroughTypedNativeRoutes"
         )
         zone_test_hash = (
@@ -1953,8 +1953,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-568-5b876ad7",
                 "sha256:b010e27fab04726eca7bad08cc9862c6f9614f44bd86658c6fa519f909de7c58",
                 "sha256:1260f23bad5142f44afb51fbbaf1a335b256712d9d1fe3670f3c84f238ecc1ae",
-                "src/Shared/GonieGonie.EnergyPlus.Runtime/RuntimeResolver.cs",
-                "GonieGonie.EnergyPlus.Runtime.RuntimeResolver",
+                "src/Shared/Dragons.EnergyPlus.Runtime/RuntimeResolver.cs",
+                "Dragons.EnergyPlus.Runtime.RuntimeResolver",
                 "sha256:5c4170c2f4648a5fab93ff092c2c307589bd909d436437ccc66280bf4ac487f6",
             ),
             "Directory.ENERGYPLUS_DIR": (
@@ -1963,8 +1963,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-569-7e01ceac",
                 "sha256:e245c641ed9b9a37d6e2f7f17c52f6f44ae274516b4edfe740c4866e81436960",
                 "sha256:9197d216c12052e6553557ef964bd06d48f09c212f4598773f1d7f299e763eba",
-                "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
-                "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.RootPath",
+                "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+                "Dragons.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.RootPath",
                 "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
             ),
             "Directory.IDD_DIR": (
@@ -1973,8 +1973,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-570-1f0c2815",
                 "sha256:bcdb44f08ca85537eca206313be08bf31384dec386fd842bce38e96b3553d1f9",
                 "sha256:ef814651c1d0e843ae53c9dd6fc834ccd2271ea975d2e132d809d644eb53cc88",
-                "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
-                "GonieGonie.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.IddPath",
+                "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRuntimeLayout.cs",
+                "Dragons.EnergyPlus.Runtime.EnergyPlusRuntimeLayout.IddPath",
                 "sha256:3b2beace10108918cfc69b06be42da966fc138e3f2fcff1c9bf39d2d5cdce84c",
             ),
             "Directory.PROFILE_DIR": (
@@ -1983,8 +1983,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-571-f65d5eae",
                 "sha256:5536cae6af137a72c7c927cc4221cd1eea35e0f541b74922275683420ec267eb",
                 "sha256:0c358b1bdfba0186aaf1fbae8d5c9768b2e34c3528cf02df1b720e145eabb25d",
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Profile/Profile.cs",
-                "GonieGonie.InvisibleDragon.Profile.Profile",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Profile/Profile.cs",
+                "Dragons.InvisibleDragon.Profile.Profile",
                 "sha256:99c3e0557ba737aa74cfb0f15faf0730d9f7215a6b66f7f6b6b2044cf4013c72",
             ),
             "PackageInfo": (
@@ -1993,8 +1993,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-572-aaf5b98d",
                 "sha256:a3741a5a5870ff30f6e840e266c436abda507ff96c93e974cbc68df211e28168",
                 "sha256:9add953f90477a1c6294d5c2eba362c862fa6f0aef2bd1b25c4f598ac5d3910f",
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
-                "GonieGonie.InvisibleDragon.PackageInfo",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
+                "Dragons.InvisibleDragon.PackageInfo",
                 "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
             ),
             "PackageInfo.NAME": (
@@ -2003,8 +2003,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-573-3942a963",
                 "sha256:1539ac6658af20566740884fc3f1d4802e99a0a96b9760a06d69f0f37420804b",
                 "sha256:ce337d684f985b7fe8402969f81e473a06ad4a872a1fb0acf66469ddf6f58d73",
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
-                "GonieGonie.InvisibleDragon.PackageInfo.Name",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
+                "Dragons.InvisibleDragon.PackageInfo.Name",
                 "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
             ),
             "PackageInfo.REQUIRED_PYTHON": (
@@ -2013,8 +2013,8 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-574-cf74d0eb",
                 "sha256:c666b0f9e6499a34acc0a98f3f01584e73add9a9d64dd3e66842e79012714aad",
                 "sha256:d16c7e2050430c23a42db97ee0e60db6e4b9d34667a037539879581bdbeaf7aa",
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
-                "GonieGonie.InvisibleDragon.PackageInfo",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
+                "Dragons.InvisibleDragon.PackageInfo",
                 "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
             ),
             "PackageInfo.VERSION": (
@@ -2023,17 +2023,17 @@ class ConfigurationTests(unittest.TestCase):
                 "constants-metadata-575-a8260e5f",
                 "sha256:9ab52755f1c9d6600068d446d4df9420aa0c37df3a365668dc241334f5ca63d7",
                 "sha256:450d23845ac4b76a1a1b9b129d52ef1fc8f824d22eb94a17f43126bb22caab00",
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/PackageInfo.cs",
-                "GonieGonie.InvisibleDragon.PackageInfo.Version",
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/PackageInfo.cs",
+                "Dragons.InvisibleDragon.PackageInfo.Version",
                 "sha256:e4851f596d1761301e6f8a30d30cab04c28a96ab59c3d5419337174839f8ea13",
             ),
         }
         constants_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Common/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Common/"
             "ConstantsMetadataOracleParityTests.cs"
         )
         constants_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Common.ConstantsMetadataOracleParityTests."
             "MatchesPinnedConstantsMetadataThroughBoundedNativeAdaptations"
         )
         constants_test_hash = (
@@ -2258,7 +2258,7 @@ class ConfigurationTests(unittest.TestCase):
         )
         energy_model_evidence = symbol_evidence.entries_by_key[energy_model_key]
         self.assertEqual(
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
             energy_model_evidence.implementation_path,
         )
         self.assertEqual(
@@ -2266,7 +2266,7 @@ class ConfigurationTests(unittest.TestCase):
             energy_model_evidence.implementation_source_sha256,
         )
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Model.EnergyModel",
+            "Dragons.InvisibleDragon.Model.EnergyModel",
             energy_model_evidence.implementation_symbol,
         )
         self.assertEqual(1, len(energy_model_evidence.receipts))
@@ -2281,12 +2281,12 @@ class ConfigurationTests(unittest.TestCase):
             energy_model_receipt.expected_output_sha256,
         )
         self.assertEqual(
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Model/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Model/"
             "EnergyModelClassOracleParityTests.cs",
             energy_model_receipt.test_path,
         )
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Tests.Model.EnergyModelClassOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Model.EnergyModelClassOracleParityTests."
             "MatchesPinnedPythonEnergyModelClassThroughTypedNativeRoutes",
             energy_model_receipt.test_symbol,
         )
@@ -2477,11 +2477,11 @@ class ConfigurationTests(unittest.TestCase):
             / "fixtures/reference/python-0.7.0/epsimple-model-core-oracle.json"
         )
         model_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "ModelCoreOracleParityTests.cs"
         )
         model_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.ModelCoreOracleParityTests."
+            "Dragons.SimpleDragon.Tests.ModelCoreOracleParityTests."
             "MatchesPinnedModelCoreThroughProductionPublicRoutes"
         )
         model_fixture_sha256 = (
@@ -2608,51 +2608,51 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(35, len(set(model_collector_output_hashes)))
 
         model_native_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Model/"
             "GreenRetrofitModel.cs"
         )
         weather_native_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Weather/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Weather/"
             "WeatherDatabase.cs"
         )
         reader_native_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs"
         )
         conversion_native_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/"
             "GreenRetrofitConversion.cs"
         )
         failure_native_path = (
-            "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusFailure.cs"
+            "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusFailure.cs"
         )
         runner_native_path = (
-            "src/Shared/GonieGonie.EnergyPlus.Runtime/EnergyPlusRunner.cs"
+            "src/Shared/Dragons.EnergyPlus.Runtime/EnergyPlusRunner.cs"
         )
         model_members = {
-            "GreenRetrofitModel": "GonieGonie.SimpleDragon.GreenRetrofitModel",
-            "GreenRetrofitModel.__init__": "GonieGonie.SimpleDragon.GreenRetrofitModel",
-            "GreenRetrofitModel.address": "GonieGonie.SimpleDragon.GreenRetrofitModel.Address",
-            "GreenRetrofitModel.area": "GonieGonie.SimpleDragon.GreenRetrofitModel.Area",
-            "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue",
-            "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue",
-            "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue",
-            "GreenRetrofitModel.averaged_infiltration": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageInfiltration",
-            "GreenRetrofitModel.averaged_lightdensity": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageLightDensity",
-            "GreenRetrofitModel.averaged_window_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageWindowUValue",
-            "GreenRetrofitModel.climate": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather",
-            "GreenRetrofitModel.exteriorfloors": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorFloors",
-            "GreenRetrofitModel.exteriorroofs": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorRoofs",
-            "GreenRetrofitModel.exteriorwalls": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWalls",
-            "GreenRetrofitModel.exteriorwindows": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWindows",
-            "GreenRetrofitModel.get_unique_fenestration_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
-            "GreenRetrofitModel.get_unique_materials": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials",
-            "GreenRetrofitModel.get_unique_profiles": "GonieGonie.SimpleDragon.GreenRetrofitModel.Zones",
-            "GreenRetrofitModel.get_unique_surface_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
-            "GreenRetrofitModel.north_axis": "GonieGonie.SimpleDragon.GreenRetrofitModel.NorthAxis",
-            "GreenRetrofitModel.source_system": "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems",
-            "GreenRetrofitModel.terrain": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather",
-            "GreenRetrofitModel.vintage": "GonieGonie.SimpleDragon.GreenRetrofitModel.Vintage",
-            "GreenRetrofitModel.weather": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather",
+            "GreenRetrofitModel": "Dragons.SimpleDragon.GreenRetrofitModel",
+            "GreenRetrofitModel.__init__": "Dragons.SimpleDragon.GreenRetrofitModel",
+            "GreenRetrofitModel.address": "Dragons.SimpleDragon.GreenRetrofitModel.Address",
+            "GreenRetrofitModel.area": "Dragons.SimpleDragon.GreenRetrofitModel.Area",
+            "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue",
+            "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue",
+            "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue",
+            "GreenRetrofitModel.averaged_infiltration": "Dragons.SimpleDragon.GreenRetrofitModel.AverageInfiltration",
+            "GreenRetrofitModel.averaged_lightdensity": "Dragons.SimpleDragon.GreenRetrofitModel.AverageLightDensity",
+            "GreenRetrofitModel.averaged_window_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageWindowUValue",
+            "GreenRetrofitModel.climate": "Dragons.SimpleDragon.GreenRetrofitModel.Weather",
+            "GreenRetrofitModel.exteriorfloors": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorFloors",
+            "GreenRetrofitModel.exteriorroofs": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorRoofs",
+            "GreenRetrofitModel.exteriorwalls": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWalls",
+            "GreenRetrofitModel.exteriorwindows": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWindows",
+            "GreenRetrofitModel.get_unique_fenestration_constructions": "Dragons.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
+            "GreenRetrofitModel.get_unique_materials": "Dragons.SimpleDragon.GreenRetrofitModel.Materials",
+            "GreenRetrofitModel.get_unique_profiles": "Dragons.SimpleDragon.GreenRetrofitModel.Zones",
+            "GreenRetrofitModel.get_unique_surface_constructions": "Dragons.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
+            "GreenRetrofitModel.north_axis": "Dragons.SimpleDragon.GreenRetrofitModel.NorthAxis",
+            "GreenRetrofitModel.source_system": "Dragons.SimpleDragon.GreenRetrofitModel.SourceSystems",
+            "GreenRetrofitModel.terrain": "Dragons.SimpleDragon.GreenRetrofitModel.Weather",
+            "GreenRetrofitModel.vintage": "Dragons.SimpleDragon.GreenRetrofitModel.Vintage",
+            "GreenRetrofitModel.weather": "Dragons.SimpleDragon.GreenRetrofitModel.Weather",
         }
 
         def expected_model_implementation(symbol: str) -> tuple[str, str]:
@@ -2664,33 +2664,33 @@ class ConfigurationTests(unittest.TestCase):
             }:
                 return (
                     weather_native_path,
-                    "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress",
+                    "Dragons.SimpleDragon.WeatherDatabase.FindByAddress",
                 )
             if symbol in {"EnergyPlusError", "EnergyPlusError.__init__"}:
                 return (
                     failure_native_path,
-                    "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure",
+                    "Dragons.EnergyPlus.Runtime.EnergyPlusFailure",
                 )
             special_routes = {
                 "GreenRetrofitModel.from_grjson": (
                     reader_native_path,
-                    "GonieGonie.SimpleDragon.GrmReader.ReadFile",
+                    "Dragons.SimpleDragon.GrmReader.ReadFile",
                 ),
                 "GreenRetrofitModel.run": (
                     runner_native_path,
-                    "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
+                    "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
                 ),
                 "GreenRetrofitModel.to_dragon": (
                     conversion_native_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 ),
                 "GreenRetrofitModel.to_idf": (
                     conversion_native_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.ToIdfDocument",
                 ),
                 "GreenRetrofitModel.weather_filepath": (
                     weather_native_path,
-                    "GonieGonie.SimpleDragon.WeatherSelection.ResolveEpwPath",
+                    "Dragons.SimpleDragon.WeatherSelection.ResolveEpwPath",
                 ),
             }
             if symbol in special_routes:
@@ -2892,11 +2892,11 @@ class ConfigurationTests(unittest.TestCase):
             / "fixtures/reference/python-0.7.0/epsimple-model-result-oracle.json"
         )
         result_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "ModelResultOracleParityTests.cs"
         )
         result_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.ModelResultOracleParityTests."
+            "Dragons.SimpleDragon.Tests.ModelResultOracleParityTests."
             "MatchesPinnedModelResultThroughProductionPublicRoutes"
         )
         result_fixture_sha256 = (
@@ -2993,72 +2993,72 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(14, len(set(result_collector_output_hashes)))
 
         result_models_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/"
             "GreenRetrofitResultModels.cs"
         )
         result_builder_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/"
             "GreenRetrofitResultBuilder.cs"
         )
         result_writer_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrWriter.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs"
         )
         result_implementations = {
             "GreenRetrofitResult": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult",
+                "Dragons.SimpleDragon.GreenRetrofitResult",
             ),
             "GreenRetrofitResult.VALID_DIGITS": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits",
+                "Dragons.SimpleDragon.GreenRetrofitResult.ValidDigits",
             ),
             "GreenRetrofitResult.__init__": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.FromSiteUses",
+                "Dragons.SimpleDragon.GreenRetrofitResult.FromSiteUses",
             ),
             "GreenRetrofitResult.area": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea",
+                "Dragons.SimpleDragon.GreenRetrofitResult.TotalArea",
             ),
             "GreenRetrofitResult.calc_domestic_hotwater_site_energy": (
                 result_builder_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+                "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build",
             ),
             "GreenRetrofitResult.get_dhw_servers": (
                 result_builder_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+                "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build",
             ),
             "GreenRetrofitResult.get_domestic_hotwater_energy": (
                 result_builder_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+                "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build",
             ),
             "GreenRetrofitResult.summarize": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries",
+                "Dragons.SimpleDragon.GreenRetrofitResult.PerAreaSummaries",
             ),
             "GreenRetrofitResult.to_co2": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon",
+                "Dragons.SimpleDragon.GreenRetrofitResult.Carbon",
             ),
             "GreenRetrofitResult.to_cost": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.Cost",
+                "Dragons.SimpleDragon.GreenRetrofitResult.Cost",
             ),
             "GreenRetrofitResult.to_dict": (
                 result_writer_path,
-                "GonieGonie.SimpleDragon.GrrWriter.Serialize",
+                "Dragons.SimpleDragon.GrrWriter.Serialize",
             ),
             "GreenRetrofitResult.to_site_uses": (
                 result_builder_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build",
+                "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build",
             ),
             "GreenRetrofitResult.to_source_uses": (
                 result_models_path,
-                "GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses",
+                "Dragons.SimpleDragon.GreenRetrofitResult.SourceUses",
             ),
             "GreenRetrofitResult.write": (
                 result_writer_path,
-                "GonieGonie.SimpleDragon.GrrWriter.WriteFile",
+                "Dragons.SimpleDragon.GrrWriter.WriteFile",
             ),
         }
         result_exception_ids = {
@@ -3327,11 +3327,11 @@ class ConfigurationTests(unittest.TestCase):
             / "fixtures/reference/python-0.7.0/epsimple-shape-core-oracle.json"
         )
         shape_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "ShapeCoreOracleParityTests.cs"
         )
         shape_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.ShapeCoreOracleParityTests."
+            "Dragons.SimpleDragon.Tests.ShapeCoreOracleParityTests."
             "MatchesPinnedShapeCoreThroughProductionPublicRoutes"
         )
         shape_fixture_sha256 = (
@@ -3473,44 +3473,44 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(53, len(set(shape_collector_output_hashes)))
 
         fenestration_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Fenestration.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Fenestration.cs"
         )
         surface_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Surface.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Surface.cs"
         )
-        zone_path = "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Shape/Zone.cs"
+        zone_path = "src/SimpleDragon/Dragons.SimpleDragon.Core/Shape/Zone.cs"
         reader_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs"
         )
         writer_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs"
         )
         converter_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/"
             "GreenRetrofitConversion.cs"
         )
         model_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Model/GreenRetrofitModel.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Model/GreenRetrofitModel.cs"
         )
 
         def expected_shape_implementation(symbol: str) -> tuple[str, str]:
             if symbol == "BlindType":
-                return fenestration_path, "GonieGonie.SimpleDragon.BlindType"
+                return fenestration_path, "Dragons.SimpleDragon.BlindType"
             if symbol == "BlindType.SHADE":
-                return fenestration_path, "GonieGonie.SimpleDragon.BlindType.Shade"
+                return fenestration_path, "Dragons.SimpleDragon.BlindType.Shade"
             if symbol == "BlindType.VENETIAN":
-                return fenestration_path, "GonieGonie.SimpleDragon.BlindType.Venetian"
+                return fenestration_path, "Dragons.SimpleDragon.BlindType.Venetian"
             if symbol == "BlindType.__str__":
-                return writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"
+                return writer_path, "Dragons.SimpleDragon.GrmWriter.Serialize"
             if symbol.endswith(".from_json"):
-                return reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+                return reader_path, "Dragons.SimpleDragon.GrmReader.Read"
             if symbol.endswith(".to_dragon"):
                 return (
                     converter_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 )
             if symbol in {"Door", "Fenestration", "GlassDoor", "Window"}:
-                return fenestration_path, "GonieGonie.SimpleDragon.Fenestration"
+                return fenestration_path, "Dragons.SimpleDragon.Fenestration"
             if symbol.startswith(("Door.", "Fenestration.", "Window.")):
                 member = {
                     "construction": "Construction",
@@ -3521,16 +3521,16 @@ class ConfigurationTests(unittest.TestCase):
                 }[symbol.split(".", 1)[1]]
                 return (
                     fenestration_path,
-                    "GonieGonie.SimpleDragon.Fenestration." + member,
+                    "Dragons.SimpleDragon.Fenestration." + member,
                 )
             if symbol == "Surface":
-                return surface_path, "GonieGonie.SimpleDragon.Surface"
+                return surface_path, "Dragons.SimpleDragon.Surface"
             if symbol.startswith("Surface."):
                 member_name = symbol.split(".", 1)[1]
                 if member_name == "get_unique_fenestration_constructions":
                     return (
                         model_path,
-                        "GonieGonie.SimpleDragon.GreenRetrofitModel."
+                        "Dragons.SimpleDragon.GreenRetrofitModel."
                         "FenestrationConstructions",
                     )
                 member = {
@@ -3548,9 +3548,9 @@ class ConfigurationTests(unittest.TestCase):
                     "reflectance": "CoolRoofReflectance",
                     "type": "Type",
                 }[member_name]
-                return surface_path, "GonieGonie.SimpleDragon.Surface." + member
+                return surface_path, "Dragons.SimpleDragon.Surface." + member
             if symbol == "Zone":
-                return zone_path, "GonieGonie.SimpleDragon.Zone"
+                return zone_path, "Dragons.SimpleDragon.Zone"
             if symbol.startswith("Zone."):
                 member_name = symbol.split(".", 1)[1]
                 catalogs = {
@@ -3563,7 +3563,7 @@ class ConfigurationTests(unittest.TestCase):
                 if member_name in catalogs:
                     return (
                         model_path,
-                        "GonieGonie.SimpleDragon.GreenRetrofitModel."
+                        "Dragons.SimpleDragon.GreenRetrofitModel."
                         + catalogs[member_name],
                     )
                 member = {
@@ -3576,7 +3576,7 @@ class ConfigurationTests(unittest.TestCase):
                     "infiltration": "Infiltration",
                     "supply_systems": "SupplySystems",
                 }[member_name]
-                return zone_path, "GonieGonie.SimpleDragon.Zone." + member
+                return zone_path, "Dragons.SimpleDragon.Zone." + member
             self.fail(f"Missing expected shape implementation for {symbol}")
             raise AssertionError(symbol)
 
@@ -3732,11 +3732,11 @@ class ConfigurationTests(unittest.TestCase):
             / "fixtures/reference/python-0.7.0/epsimple-construction-core-oracle.json"
         )
         construction_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "ConstructionCoreOracleParityTests.cs"
         )
         construction_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.ConstructionCoreOracleParityTests."
+            "Dragons.SimpleDragon.Tests.ConstructionCoreOracleParityTests."
             "MatchesPinnedConstructionCoreThroughProductionPublicRoutes"
         )
         construction_fixture_sha256 = (
@@ -3888,22 +3888,22 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(48, len(set(construction_collector_output_hashes)))
 
         material_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/Material.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/Material.cs"
         )
         fenestration_construction_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/"
             "FenestrationConstruction.cs"
         )
         surface_construction_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/"
             "SurfaceConstruction.cs"
         )
         construction_database_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Construction/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Construction/"
             "ConstructionDatabases.cs"
         )
         database_aggregate_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Data/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Data/"
             "SimpleDragonDatabase.cs"
         )
 
@@ -3911,24 +3911,24 @@ class ConfigurationTests(unittest.TestCase):
             if symbol == "FenestrationConstruction":
                 return (
                     fenestration_construction_path,
-                    "GonieGonie.SimpleDragon.FenestrationConstruction",
+                    "Dragons.SimpleDragon.FenestrationConstruction",
                 )
             if symbol.startswith("FenestrationConstruction."):
                 member_name = symbol.split(".", 1)[1]
                 routed = {
-                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
-                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "from_json": (reader_path, "Dragons.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "Dragons.SimpleDragon.GrmWriter.Serialize"),
                     "to_dragon": (
                         converter_path,
-                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                        "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                     ),
                     "get_DB": (
                         construction_database_path,
-                        "GonieGonie.SimpleDragon.FenestrationConstructionDatabase.Find",
+                        "Dragons.SimpleDragon.FenestrationConstructionDatabase.Find",
                     ),
                     "load_DB": (
                         database_aggregate_path,
-                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                        "Dragons.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
                     ),
                 }
                 if member_name in routed:
@@ -3943,26 +3943,26 @@ class ConfigurationTests(unittest.TestCase):
                 suffix = "" if native_member is None else "." + native_member
                 return (
                     fenestration_construction_path,
-                    "GonieGonie.SimpleDragon.FenestrationConstruction" + suffix,
+                    "Dragons.SimpleDragon.FenestrationConstruction" + suffix,
                 )
             if symbol == "Material":
-                return material_path, "GonieGonie.SimpleDragon.Material"
+                return material_path, "Dragons.SimpleDragon.Material"
             if symbol.startswith("Material."):
                 member_name = symbol.split(".", 1)[1]
                 routed = {
-                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
-                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "from_json": (reader_path, "Dragons.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "Dragons.SimpleDragon.GrmWriter.Serialize"),
                     "to_dragon": (
                         converter_path,
-                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                        "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                     ),
                     "get_DB": (
                         construction_database_path,
-                        "GonieGonie.SimpleDragon.MaterialDatabase.Find",
+                        "Dragons.SimpleDragon.MaterialDatabase.Find",
                     ),
                     "load_DB": (
                         database_aggregate_path,
-                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                        "Dragons.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
                     ),
                 }
                 if member_name in routed:
@@ -3975,47 +3975,47 @@ class ConfigurationTests(unittest.TestCase):
                     "specific_heat": "SpecificHeat",
                 }[member_name]
                 suffix = "" if native_member is None else "." + native_member
-                return material_path, "GonieGonie.SimpleDragon.Material" + suffix
+                return material_path, "Dragons.SimpleDragon.Material" + suffix
             special_routes = {
                 "OpenConstruction": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind.Open",
+                    "Dragons.SimpleDragon.SurfaceConstructionReferenceKind.Open",
                 ),
                 "OpenConstruction.ID": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.Surface.ConstructionId",
+                    "Dragons.SimpleDragon.Surface.ConstructionId",
                 ),
                 "OpenConstruction.to_dragon": (
                     converter_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 ),
                 "SpecialConstruction": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind",
+                    "Dragons.SimpleDragon.SurfaceConstructionReferenceKind",
                 ),
                 "SpecialConstruction.__new__": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.Surface.ConstructionReferenceKind",
+                    "Dragons.SimpleDragon.Surface.ConstructionReferenceKind",
                 ),
                 "SpecialConstruction.get_unique_materials": (
                     converter_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 ),
                 "SpecialConstruction.reversed": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.Surface.Flip",
+                    "Dragons.SimpleDragon.Surface.Flip",
                 ),
                 "UnknownConstruction": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.SurfaceConstructionReferenceKind.Unknown",
+                    "Dragons.SimpleDragon.SurfaceConstructionReferenceKind.Unknown",
                 ),
                 "UnknownConstruction.ID": (
                     surface_path,
-                    "GonieGonie.SimpleDragon.Surface.ConstructionId",
+                    "Dragons.SimpleDragon.Surface.ConstructionId",
                 ),
                 "UnknownConstruction.to_dragon": (
                     converter_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 ),
             }
             if symbol in special_routes:
@@ -4023,28 +4023,28 @@ class ConfigurationTests(unittest.TestCase):
             if symbol == "SurfaceConstruction":
                 return (
                     surface_construction_path,
-                    "GonieGonie.SimpleDragon.SurfaceConstruction",
+                    "Dragons.SimpleDragon.SurfaceConstruction",
                 )
             if symbol.startswith("SurfaceConstruction."):
                 member_name = symbol.split(".", 1)[1]
                 routed = {
-                    "from_json": (reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"),
-                    "to_dict": (writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"),
+                    "from_json": (reader_path, "Dragons.SimpleDragon.GrmReader.Read"),
+                    "to_dict": (writer_path, "Dragons.SimpleDragon.GrmWriter.Serialize"),
                     "to_dragon": (
                         converter_path,
-                        "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                        "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                     ),
                     "get_DB": (
                         construction_database_path,
-                        "GonieGonie.SimpleDragon.SurfaceConstructionDatabase.Find",
+                        "Dragons.SimpleDragon.SurfaceConstructionDatabase.Find",
                     ),
                     "get_regulated_construction": (
                         construction_database_path,
-                        "GonieGonie.SimpleDragon.SurfaceConstructionDatabase.FindRegulated",
+                        "Dragons.SimpleDragon.SurfaceConstructionDatabase.FindRegulated",
                     ),
                     "load_DB": (
                         database_aggregate_path,
-                        "GonieGonie.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
+                        "Dragons.SimpleDragon.SimpleDragonDatabase.LoadEmbedded",
                     ),
                 }
                 if member_name in routed:
@@ -4063,7 +4063,7 @@ class ConfigurationTests(unittest.TestCase):
                 suffix = "" if native_member is None else "." + native_member
                 return (
                     surface_construction_path,
-                    "GonieGonie.SimpleDragon.SurfaceConstruction" + suffix,
+                    "Dragons.SimpleDragon.SurfaceConstruction" + suffix,
                 )
             self.fail(f"Missing expected construction implementation for {symbol}")
             raise AssertionError(symbol)
@@ -4248,11 +4248,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_epsimple_hvac_enums_base_oracle.py"
         )
         hvac_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "HvacEnumsBaseOracleParityTests.cs"
         )
         hvac_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.HvacEnumsBaseOracleParityTests."
+            "Dragons.SimpleDragon.Tests.HvacEnumsBaseOracleParityTests."
             "MatchesPinnedHvacEnumsBaseThroughProductionPublicRoutes"
         )
         hvac_fixture_sha256 = (
@@ -4425,63 +4425,63 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(28, len(set(hvac_collector_output_hashes)))
 
         hvac_source_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs"
         )
         hvac_supply_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs"
         )
         hvac_reader_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs"
         )
         hvac_writer_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs"
         )
         hvac_conversion_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/"
             "GreenRetrofitConversion.cs"
         )
 
         def expected_hvac_implementation(symbol: str) -> tuple[str, str]:
             enum_members = {
-                "CompressorType": "GonieGonie.SimpleDragon.CompressorType",
-                "CompressorType.RECIPROCATING": "GonieGonie.SimpleDragon.CompressorType.Reciprocating",
-                "CompressorType.SCREW": "GonieGonie.SimpleDragon.CompressorType.Screw",
-                "CompressorType.TURBO": "GonieGonie.SimpleDragon.CompressorType.Turbo",
-                "CoolingTowerControl": "GonieGonie.SimpleDragon.CoolingTowerControl",
-                "CoolingTowerControl.SINGLESPEED": "GonieGonie.SimpleDragon.CoolingTowerControl.SingleSpeed",
-                "CoolingTowerControl.TWOSPEED": "GonieGonie.SimpleDragon.CoolingTowerControl.TwoSpeed",
-                "CoolingTowerType": "GonieGonie.SimpleDragon.CoolingTowerType",
-                "CoolingTowerType.CLOSED": "GonieGonie.SimpleDragon.CoolingTowerType.Closed",
-                "CoolingTowerType.OPEN": "GonieGonie.SimpleDragon.CoolingTowerType.Open",
-                "Fuel": "GonieGonie.SimpleDragon.FuelType",
-                "Fuel.DISTRICTHEATING": "GonieGonie.SimpleDragon.FuelType.DistrictHeating",
-                "Fuel.ELECTRICITY": "GonieGonie.SimpleDragon.FuelType.Electricity",
-                "Fuel.LPG": "GonieGonie.SimpleDragon.FuelType.LiquefiedPetroleumGas",
-                "Fuel.NATURALGAS": "GonieGonie.SimpleDragon.FuelType.NaturalGas",
-                "Fuel.OIL": "GonieGonie.SimpleDragon.FuelType.Oil",
-                "SourceSystem": "GonieGonie.SimpleDragon.SourceSystem",
+                "CompressorType": "Dragons.SimpleDragon.CompressorType",
+                "CompressorType.RECIPROCATING": "Dragons.SimpleDragon.CompressorType.Reciprocating",
+                "CompressorType.SCREW": "Dragons.SimpleDragon.CompressorType.Screw",
+                "CompressorType.TURBO": "Dragons.SimpleDragon.CompressorType.Turbo",
+                "CoolingTowerControl": "Dragons.SimpleDragon.CoolingTowerControl",
+                "CoolingTowerControl.SINGLESPEED": "Dragons.SimpleDragon.CoolingTowerControl.SingleSpeed",
+                "CoolingTowerControl.TWOSPEED": "Dragons.SimpleDragon.CoolingTowerControl.TwoSpeed",
+                "CoolingTowerType": "Dragons.SimpleDragon.CoolingTowerType",
+                "CoolingTowerType.CLOSED": "Dragons.SimpleDragon.CoolingTowerType.Closed",
+                "CoolingTowerType.OPEN": "Dragons.SimpleDragon.CoolingTowerType.Open",
+                "Fuel": "Dragons.SimpleDragon.FuelType",
+                "Fuel.DISTRICTHEATING": "Dragons.SimpleDragon.FuelType.DistrictHeating",
+                "Fuel.ELECTRICITY": "Dragons.SimpleDragon.FuelType.Electricity",
+                "Fuel.LPG": "Dragons.SimpleDragon.FuelType.LiquefiedPetroleumGas",
+                "Fuel.NATURALGAS": "Dragons.SimpleDragon.FuelType.NaturalGas",
+                "Fuel.OIL": "Dragons.SimpleDragon.FuelType.Oil",
+                "SourceSystem": "Dragons.SimpleDragon.SourceSystem",
             }
             if symbol in enum_members:
                 return hvac_source_path, enum_members[symbol]
             if symbol.endswith(".__str__"):
-                return hvac_writer_path, "GonieGonie.SimpleDragon.GrmWriter.Serialize"
+                return hvac_writer_path, "Dragons.SimpleDragon.GrmWriter.Serialize"
             if symbol.endswith(".to_dragon"):
                 return (
                     hvac_conversion_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 )
             if symbol == "NoneSource.ID":
                 return (
                     hvac_supply_path,
-                    "GonieGonie.SimpleDragon.SupplySystem.SourceSystemId",
+                    "Dragons.SimpleDragon.SupplySystem.SourceSystemId",
                 )
             if symbol in {"NoneSource", "NoneSource.__new__"}:
                 return (
                     hvac_supply_path,
-                    "GonieGonie.SimpleDragon.SupplySystem.SourceSystem",
+                    "Dragons.SimpleDragon.SupplySystem.SourceSystem",
                 )
             if symbol == "SourceSystem.TYPE_MAPPER":
-                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+                return hvac_reader_path, "Dragons.SimpleDragon.GrmReader.Read"
             raise AssertionError(symbol)
 
         hvac_exception_ids = {
@@ -4780,11 +4780,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_epsimple_hvac_thermal_source_oracle.py"
         )
         thermal_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "HvacThermalSourceOracleParityTests.cs"
         )
         thermal_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.HvacThermalSourceOracleParityTests."
+            "Dragons.SimpleDragon.Tests.HvacThermalSourceOracleParityTests."
             "MatchesPinnedHvacThermalSourcesThroughProductionPublicRoutes"
         )
         thermal_fixture_sha256 = (
@@ -4893,14 +4893,14 @@ class ConfigurationTests(unittest.TestCase):
         def expected_thermal_implementation(symbol: str) -> tuple[str, str]:
             route = thermal_contract["native_routes"][symbol]
             if symbol.endswith(".from_json"):
-                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+                return hvac_reader_path, "Dragons.SimpleDragon.GrmReader.Read"
             if symbol.endswith(".to_dragon"):
                 return (
                     hvac_conversion_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 )
             if "." not in symbol or symbol.endswith(".__init__"):
-                return hvac_source_path, "GonieGonie.SimpleDragon.SourceSystem"
+                return hvac_source_path, "Dragons.SimpleDragon.SourceSystem"
             return hvac_source_path, route
 
         thermal_exception_ids = set(thermal_contract["adaptations"].values())
@@ -5153,11 +5153,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_epsimple_hvac_supply_system_oracle.py"
         )
         supply_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "HvacSupplySystemOracleParityTests.cs"
         )
         supply_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.HvacSupplySystemOracleParityTests."
+            "Dragons.SimpleDragon.Tests.HvacSupplySystemOracleParityTests."
             "MatchesPinnedHvacSupplySystemsThroughProductionPublicRoutes"
         )
         supply_fixture_sha256 = (
@@ -5263,19 +5263,19 @@ class ConfigurationTests(unittest.TestCase):
         def expected_supply_implementation(symbol: str) -> tuple[str, str]:
             route = supply_contract["native_routes"][symbol]
             if symbol.endswith(".from_json") or symbol == "SupplySystem.TYPE_MAPPER":
-                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+                return hvac_reader_path, "Dragons.SimpleDragon.GrmReader.Read"
             if symbol.endswith(".to_dragon"):
                 return (
                     hvac_conversion_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 )
             if "." not in symbol or symbol.endswith(".__init__"):
-                return hvac_supply_path, "GonieGonie.SimpleDragon.SupplySystem"
+                return hvac_supply_path, "Dragons.SimpleDragon.SupplySystem"
             return (
                 hvac_supply_path,
                 route.replace(
-                    "GonieGonie.SimpleDragon.SourceSystem.",
-                    "GonieGonie.SimpleDragon.SupplySystem.",
+                    "Dragons.SimpleDragon.SourceSystem.",
+                    "Dragons.SimpleDragon.SupplySystem.",
                 ),
             )
 
@@ -5522,11 +5522,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_epsimple_hvac_other_systems_oracle.py"
         )
         other_test_path = (
-            "tests/SimpleDragon/GonieGonie.SimpleDragon.Core.Tests/"
+            "tests/SimpleDragon/Dragons.SimpleDragon.Core.Tests/"
             "HvacOtherSystemsOracleParityTests.cs"
         )
         other_test_symbol = (
-            "GonieGonie.SimpleDragon.Tests.HvacOtherSystemsOracleParityTests."
+            "Dragons.SimpleDragon.Tests.HvacOtherSystemsOracleParityTests."
             "MatchesPinnedHvacOtherSystemsThroughProductionPublicRoutes"
         )
         other_fixture_sha256 = (
@@ -5628,21 +5628,21 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(17, len(set(other_collector_output_hashes)))
 
         hvac_other_path = (
-            "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs"
+            "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/OtherSystems.cs"
         )
 
         def expected_other_implementation(symbol: str) -> tuple[str, str]:
             if symbol.endswith(".from_json"):
-                return hvac_reader_path, "GonieGonie.SimpleDragon.GrmReader.Read"
+                return hvac_reader_path, "Dragons.SimpleDragon.GrmReader.Read"
             if symbol.endswith(".to_dragon"):
                 return (
                     hvac_conversion_path,
-                    "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert",
+                    "Dragons.SimpleDragon.GreenRetrofitConverter.Convert",
                 )
             owner = (
-                "GonieGonie.SimpleDragon.PhotovoltaicSystem"
+                "Dragons.SimpleDragon.PhotovoltaicSystem"
                 if symbol.startswith("PhotoVoltaicSystem")
-                else "GonieGonie.SimpleDragon.VentilationSystem"
+                else "Dragons.SimpleDragon.VentilationSystem"
             )
             if "." not in symbol or symbol.endswith(".__init__"):
                 return hvac_other_path, owner
@@ -5818,11 +5818,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_dragon_hvac_source_tower_core_oracle.py"
         )
         source_tower_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/"
             "SourceTowerCoreOracleParityTests.cs"
         )
         source_tower_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Hvac.SourceTowerCoreOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Hvac.SourceTowerCoreOracleParityTests."
             "MatchesPinnedSourceTowerCoreThroughProductionPublicRoutes"
         )
         source_tower_fixture_sha256 = (
@@ -5926,38 +5926,38 @@ class ConfigurationTests(unittest.TestCase):
         ) -> tuple[str, str]:
             if symbol.startswith(("AbsorptionChiller", "Chiller", "CompressorType")):
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs"
                 )
             elif symbol.startswith(("CoolingTower", "Closed", "Open")):
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "CoolingTowers.cs"
                 )
             elif symbol.startswith("GeothermalHeatPump"):
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "GeothermalHeatPump.cs"
                 )
             elif symbol == "SourceSystem.idf_terminalunitlistname" or symbol.startswith(
                 ("Boiler", "HeatPump")
             ):
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "SourceSystems.cs"
                 )
             else:
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "HvacAbstractions.cs"
                 )
 
             if ".__init__" in symbol or "." not in symbol:
                 owner = symbol.split(".", 1)[0]
-                implementation_symbol = f"GonieGonie.InvisibleDragon.Hvac.{owner}"
+                implementation_symbol = f"Dragons.InvisibleDragon.Hvac.{owner}"
             elif "ToIdfObjects(...) ->" in native_route:
                 owner = symbol.split(".", 1)[0]
                 implementation_symbol = (
-                    f"GonieGonie.InvisibleDragon.Hvac.{owner}.ToIdfObjects"
+                    f"Dragons.InvisibleDragon.Hvac.{owner}.ToIdfObjects"
                 )
             else:
                 implementation_symbol = native_route
@@ -5965,7 +5965,7 @@ class ConfigurationTests(unittest.TestCase):
                     implementation_symbol = implementation_symbol.split("(", 1)[0]
             if symbol == "GeothermalHeatPump.idf_objtypename":
                 implementation_symbol = (
-                    "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump"
+                    "Dragons.InvisibleDragon.Hvac.GeothermalHeatPump"
                 )
             return implementation_path, implementation_symbol
 
@@ -6120,11 +6120,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_dragon_hvac_supply_core_oracle.py"
         )
         supply_core_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/"
             "SupplyCoreOracleParityTests.cs"
         )
         supply_core_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Hvac.SupplyCoreOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Hvac.SupplyCoreOracleParityTests."
             "MatchesPinnedSupplyCoreThroughProductionPublicRoutes"
         )
         supply_core_fixture_sha256 = (
@@ -6251,56 +6251,56 @@ class ConfigurationTests(unittest.TestCase):
         ) -> tuple[str, str]:
             owner = symbol.split(".", 1)[0]
             if native_route.startswith(
-                "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+                "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
             ):
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/"
                     "EnergyModel.cs",
-                    "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument",
+                    "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument",
                 )
             if symbol in {
                 "ElectricRadiantFloor.source",
                 "ElectricRadiator.source",
             }:
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "HvacAbstractions.cs",
-                    "GonieGonie.InvisibleDragon.Hvac.SupplySystem.Source",
+                    "Dragons.InvisibleDragon.Hvac.SupplySystem.Source",
                 )
             if symbol == "PackagedAirConditioner.coolable":
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "SupplySystems.cs",
-                    "GonieGonie.InvisibleDragon.Hvac.AirHandlingUnit.CanCool",
+                    "Dragons.InvisibleDragon.Hvac.AirHandlingUnit.CanCool",
                 )
             if symbol == "SupplySystem.idf_get_objname":
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "HvacAbstractions.cs",
-                    "GonieGonie.InvisibleDragon.Hvac.SupplySystem.ObjectNameFor",
+                    "Dragons.InvisibleDragon.Hvac.SupplySystem.ObjectNameFor",
                 )
             if owner in {"SupplyGroup", "SupplySystem"}:
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "HvacAbstractions.cs"
                 )
             elif owner in {"FanCoilUnit", "Radiator"}:
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "HydronicSupplySystems.cs"
                 )
             else:
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "SupplySystems.cs"
                 )
 
             if ".__init__" in symbol or "." not in symbol:
-                implementation_symbol = f"GonieGonie.InvisibleDragon.Hvac.{owner}"
+                implementation_symbol = f"Dragons.InvisibleDragon.Hvac.{owner}"
             else:
                 implementation_symbol = native_route
                 if " public " in implementation_symbol:
-                    implementation_symbol = f"GonieGonie.InvisibleDragon.Hvac.{owner}"
+                    implementation_symbol = f"Dragons.InvisibleDragon.Hvac.{owner}"
                 if "(" in implementation_symbol:
                     implementation_symbol = implementation_symbol.split("(", 1)[0]
             return implementation_path, implementation_symbol
@@ -6457,11 +6457,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_dragon_hvac_appenders_controllers_oracle.py"
         )
         appender_controller_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/"
             "AppendersControllersOracleParityTests.cs"
         )
         appender_controller_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Hvac."
+            "Dragons.InvisibleDragon.Tests.Hvac."
             "AppendersControllersOracleParityTests."
             "MatchesPinnedAppendersControllersThroughPublicAggregateRoute"
         )
@@ -6596,10 +6596,10 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(24, len(set(appender_controller_collector_output_hashes)))
 
         appender_controller_implementation_path = (
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs"
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs"
         )
         appender_controller_implementation_symbol = (
-            "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
+            "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument"
         )
         appender_controller_implementation_sha256 = (
             "sha256:" + hashlib.sha256(
@@ -6759,11 +6759,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_dragon_hvac_misc_systems_core_oracle.py"
         )
         misc_systems_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Hvac/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Hvac/"
             "MiscSystemsCoreOracleParityTests.cs"
         )
         misc_systems_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Hvac.MiscSystemsCoreOracleParityTests."
+            "Dragons.InvisibleDragon.Tests.Hvac.MiscSystemsCoreOracleParityTests."
             "MatchesPinnedMiscSystemsThroughPublicProductionApis"
         )
         misc_systems_fixture_sha256 = (
@@ -6916,18 +6916,18 @@ class ConfigurationTests(unittest.TestCase):
             owner = symbol.split(".", 1)[0]
             if symbol == "EnergyRecoveryVentilator.to_idf_object":
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
-                    "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument",
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
+                    "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument",
                 )
             if owner == "DomesticHotWater":
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "DomesticHotWater.cs"
                 )
             else:
                 self.assertIn(owner, {"EnergyRecoveryVentilator", "PhotoVoltaicPanel"})
                 implementation_path = (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/"
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/"
                     "VentilationAndPv.cs"
                 )
             if ".__init__" in symbol or "." not in symbol:
@@ -6936,7 +6936,7 @@ class ConfigurationTests(unittest.TestCase):
                     "EnergyRecoveryVentilator": "EnergyRecoveryVentilator",
                     "PhotoVoltaicPanel": "PhotovoltaicPanel",
                 }[owner]
-                implementation_symbol = f"GonieGonie.InvisibleDragon.Hvac.{native_owner}"
+                implementation_symbol = f"Dragons.InvisibleDragon.Hvac.{native_owner}"
             else:
                 implementation_symbol = native_route.split("(", 1)[0]
             return implementation_path, implementation_symbol
@@ -7117,11 +7117,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_imugi_idd_definitions_core_oracle.py"
         )
         imugi_idd_definitions_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/"
             "ImugiIddDefinitionsCoreOracleParityTests.cs"
         )
         imugi_idd_definitions_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Idd."
+            "Dragons.InvisibleDragon.Tests.Idd."
             "ImugiIddDefinitionsCoreOracleParityTests."
             "MatchesPinnedImugiIddDefinitionsThroughPublicProductionApis"
         )
@@ -7303,11 +7303,11 @@ class ConfigurationTests(unittest.TestCase):
             ]
         }
         for native_path, expected_receipt in {
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs": {
                 "bytes": 13005,
                 "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
             },
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs": {
                 "bytes": 19960,
                 "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
             },
@@ -7381,11 +7381,11 @@ class ConfigurationTests(unittest.TestCase):
         ) -> tuple[str, str]:
             if symbol.endswith(".from_text"):
                 return (
-                    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
-                    "GonieGonie.InvisibleDragon.Idd.IddParser.Parse",
+                    "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
+                    "Dragons.InvisibleDragon.Idd.IddParser.Parse",
                 )
             implementation_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/"
                 "IddDefinitions.cs"
             )
             owner = (
@@ -7396,7 +7396,7 @@ class ConfigurationTests(unittest.TestCase):
             if "." not in symbol or symbol.endswith((".__init__", ".__eq__")):
                 return (
                     implementation_path,
-                    f"GonieGonie.InvisibleDragon.Idd.{owner}",
+                    f"Dragons.InvisibleDragon.Idd.{owner}",
                 )
             implementation_symbol = native_route
             for separator in (
@@ -7594,11 +7594,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_imugi_idd_schema_static_core_oracle.py"
         )
         imugi_idd_schema_static_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/"
             "ImugiIddSchemaStaticCoreOracleParityTests.cs"
         )
         imugi_idd_schema_static_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Idd."
+            "Dragons.InvisibleDragon.Tests.Idd."
             "ImugiIddSchemaStaticCoreOracleParityTests."
             "MatchesPinnedImugiIddSchemaStaticSemanticsThroughPublicProductionApis"
         )
@@ -7820,19 +7820,19 @@ class ConfigurationTests(unittest.TestCase):
             for item in imugi_idd_schema_static_native_review["source_receipts"]
         }
         for native_path, expected_receipt in {
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs": {
                 "bytes": 13005,
                 "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
             },
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs": {
                 "bytes": 19960,
                 "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
             },
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddSchemaCache.cs": {
                 "bytes": 11254,
                 "sha256": "sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b",
             },
-            "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs": {
+            "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Common/EnergyPlusVersion.cs": {
                 "bytes": 4954,
                 "sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
             },
@@ -7905,46 +7905,46 @@ class ConfigurationTests(unittest.TestCase):
             native_route: str,
         ) -> tuple[str, str]:
             definitions_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/"
                 "IddDefinitions.cs"
             )
             parser_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/"
                 "IddParser.cs"
             )
             cache_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/"
                 "IddSchemaCache.cs"
             )
             if symbol == "IDD.load":
                 return (
                     cache_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Read",
+                    "Dragons.InvisibleDragon.Idd.IddSchemaCache.Read",
                 )
             if symbol == "IDD.to_pickle":
                 return (
                     cache_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Write",
+                    "Dragons.InvisibleDragon.Idd.IddSchemaCache.Write",
                 )
             if symbol == "IDD.read_idd":
                 return (
                     parser_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddParser.ParseFile",
+                    "Dragons.InvisibleDragon.Idd.IddParser.ParseFile",
                 )
             if symbol == "VersionIdentificationError":
                 return (
                     parser_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddParser.Parse",
+                    "Dragons.InvisibleDragon.Idd.IddParser.Parse",
                 )
             if symbol == "InvalidFieldValue":
                 return (
                     definitions_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition",
+                    "Dragons.InvisibleDragon.Idd.IddFieldDefinition",
                 )
             if symbol == "InvalidParentManagement":
                 return (
                     definitions_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition",
+                    "Dragons.InvisibleDragon.Idd.IddObjectDefinition",
                 )
             if symbol in {
                 "IDD",
@@ -7955,12 +7955,12 @@ class ConfigurationTests(unittest.TestCase):
             }:
                 return (
                     definitions_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddSchema",
+                    "Dragons.InvisibleDragon.Idd.IddSchema",
                 )
             if symbol.startswith("StaticIndexedDict."):
                 return (
                     definitions_path,
-                    "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects",
+                    "Dragons.InvisibleDragon.Idd.IddSchema.Objects",
                 )
             implementation_symbol = native_route
             for separator in ("/", " projection", "(...) constructor", " and "):
@@ -8152,11 +8152,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_imugi_idf_object_core_oracle.py"
         )
         imugi_idf_object_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idf/"
             "ImugiIdfObjectCoreOracleParityTests.cs"
         )
         imugi_idf_object_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Idf."
+            "Dragons.InvisibleDragon.Tests.Idf."
             "ImugiIdfObjectCoreOracleParityTests."
             "MatchesPinnedImugiIdfObjectThroughPublicProductionApis"
         )
@@ -8350,36 +8350,36 @@ class ConfigurationTests(unittest.TestCase):
             symbol: str,
         ) -> tuple[str, str]:
             model_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfModel.cs"
             )
             parser_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfParser.cs"
             )
             writer_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfWriter.cs"
             )
             if symbol in {"IDF.__str__", "IdfObject.__str__"}:
-                return writer_path, "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write"
+                return writer_path, "Dragons.InvisibleDragon.Idf.IdfWriter.Write"
             if symbol == "IDF.append":
-                return model_path, "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append"
+                return model_path, "Dragons.InvisibleDragon.Idf.IdfDocument.Append"
             if symbol == "IDF.read_idf":
-                return parser_path, "GonieGonie.InvisibleDragon.Idf.IdfParser.ParseFile"
+                return parser_path, "Dragons.InvisibleDragon.Idf.IdfParser.ParseFile"
             if symbol == "IdfObject.idd":
-                return model_path, "GonieGonie.InvisibleDragon.Idf.IdfObject.Definition"
+                return model_path, "Dragons.InvisibleDragon.Idf.IdfObject.Definition"
             if symbol == "IDF" or symbol.startswith("IDF."):
-                return model_path, "GonieGonie.InvisibleDragon.Idf.IdfDocument"
-            return model_path, "GonieGonie.InvisibleDragon.Idf.IdfObject"
+                return model_path, "Dragons.InvisibleDragon.Idf.IdfDocument"
+            return model_path, "Dragons.InvisibleDragon.Idf.IdfObject"
 
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
             imugi_idf_object_contract["native_routes"]["IDF.append"],
         )
         idf_model_text = (
             REPOSITORY_ROOT
-            / "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs"
+            / "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs"
         ).read_text(encoding="utf-8")
         self.assertIn("public void Append(IdfObject value)", idf_model_text)
 
@@ -8561,11 +8561,11 @@ class ConfigurationTests(unittest.TestCase):
             / "tests/PythonReference/test_imugi_idf_object_list_core_oracle.py"
         )
         imugi_idf_object_list_test_path = (
-            "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idf/"
+            "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idf/"
             "ImugiIdfObjectListCoreOracleParityTests.cs"
         )
         imugi_idf_object_list_test_symbol = (
-            "GonieGonie.InvisibleDragon.Tests.Idf."
+            "Dragons.InvisibleDragon.Tests.Idf."
             "ImugiIdfObjectListCoreOracleParityTests."
             "MatchesPinnedImugiIdfObjectListThroughPublicProductionApis"
         )
@@ -8779,49 +8779,49 @@ class ConfigurationTests(unittest.TestCase):
             symbol: str,
         ) -> tuple[str, str]:
             model_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfModel.cs"
             )
             validator_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfValidator.cs"
             )
             writer_path = (
-                "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/"
+                "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/"
                 "IdfWriter.cs"
             )
             if symbol == "IdfObjectList.__str__":
-                return writer_path, "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write"
+                return writer_path, "Dragons.InvisibleDragon.Idf.IdfWriter.Write"
             if symbol == "IdfObjectList.check_validity":
                 return (
                     validator_path,
-                    "GonieGonie.InvisibleDragon.Idf.IdfValidator.Validate",
+                    "Dragons.InvisibleDragon.Idf.IdfValidator.Validate",
                 )
             if symbol == "IdfObjectList.append":
                 return (
                     model_path,
-                    "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append",
+                    "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append",
                 )
             if symbol == "IdfObjectList.insert":
                 return (
                     model_path,
-                    "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert",
+                    "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert",
                 )
             if symbol == "IdfObjectList.names":
-                return model_path, "GonieGonie.InvisibleDragon.Idf.IdfObject.Name"
+                return model_path, "Dragons.InvisibleDragon.Idf.IdfObject.Name"
             return (
                 model_path,
-                "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection",
+                "Dragons.InvisibleDragon.Idf.IdfObjectCollection",
             )
 
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
             imugi_idf_object_list_contract["native_routes"][
                 "IdfObjectList.append"
             ],
         )
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
             imugi_idf_object_list_contract["native_routes"][
                 "IdfObjectList.insert"
             ],
@@ -9003,14 +9003,14 @@ class ConfigurationTests(unittest.TestCase):
             energy_model_to_idf.evidence,
         )
 
-    def test_rejects_non_goniegonie_product_ownership(self) -> None:
+    def test_rejects_non_dragons_product_ownership(self) -> None:
         with TemporaryWorkspace() as workspace:
             lock, port_map, exceptions = write_configuration(
                 workspace,
                 project="OtherCompany.Product.Core",
             )
 
-            with self.assertRaisesRegex(ConfigurationError, "GonieGonie"):
+            with self.assertRaisesRegex(ConfigurationError, "Dragons"):
                 load_configuration(lock, port_map, exceptions)
 
     def test_rejects_port_path_outside_locked_modules(self) -> None:

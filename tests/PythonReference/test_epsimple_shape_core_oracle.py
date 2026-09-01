@@ -151,7 +151,7 @@ class EpsimpleShapeCoreOracleTests(unittest.TestCase):
         self.assertEqual(generator.ASSERTION_IDS, contract["assertion_ids"])
         self.assertEqual(generator.NATIVE_ROUTES, contract["native_routes"])
         self.assertEqual(set(generator.TARGET_SYMBOLS), set(contract["native_routes"]))
-        self.assertTrue(all(route.startswith("GonieGonie.SimpleDragon.") for route in contract["native_routes"].values()))
+        self.assertTrue(all(route.startswith("Dragons.SimpleDragon.") for route in contract["native_routes"].values()))
         self.assertTrue(all(".Internal." not in route and "GrmVocabulary" not in route for route in contract["native_routes"].values()))
 
     def test_blind_and_fenestration_abstract_dispatch_deepcopy_semantics(self) -> None:

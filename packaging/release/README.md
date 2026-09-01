@@ -24,7 +24,7 @@ packages/
 ```
 
 `release-manifest.json` uses schema
-`goniegonie.dragons-grasshopper.windows-installer.v1`, version `0.1.0`, and an
+`dragons-grasshopper.windows-installer.v1`, version `0.1.0`, and an
 ordered `products` array: `invisible-dragon` / `InvisibleDragon`, then
 `simple-dragon` / `SimpleDragon`. Each product contains an ordered `packages`
 array for `rhino7` then `rhino8`; every record has `target`, canonical relative

@@ -24,10 +24,10 @@ ADVANCED_EXAMPLES = (
     ROOT / "tools" / "example-definitions" / "Shared" / "AdvancedExampleDefinitions.cs"
 )
 SOURCE_ROOTS = (
-    "src/Shared/GonieGonie.BuildingEnergy.Contracts",
-    "src/Shared/GonieGonie.EnergyPlus.Runtime",
-    "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core",
-    "src/SimpleDragon/GonieGonie.SimpleDragon.Core",
+    "src/Shared/Dragons.BuildingEnergy.Contracts",
+    "src/Shared/Dragons.EnergyPlus.Runtime",
+    "src/InvisibleDragon/Dragons.InvisibleDragon.Core",
+    "src/SimpleDragon/Dragons.SimpleDragon.Core",
     "tools/compatibility-runner",
 )
 
@@ -128,11 +128,11 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         recorded = hashlib.sha256(original).digest()
         self.assertNotEqual(recorded, hashlib.sha256(original + b"\n").digest())
         binary_names = {
-            "GonieGonie.CompatibilityRunner",
-            "GonieGonie.BuildingEnergy.Contracts",
-            "GonieGonie.EnergyPlus.Runtime",
-            "GonieGonie.InvisibleDragon.Core",
-            "GonieGonie.SimpleDragon.Core",
+            "Dragons.CompatibilityRunner",
+            "Dragons.BuildingEnergy.Contracts",
+            "Dragons.EnergyPlus.Runtime",
+            "Dragons.InvisibleDragon.Core",
+            "Dragons.SimpleDragon.Core",
         }
         self.assertEqual(5, len(binary_names))
 
@@ -163,7 +163,7 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
         for required in (
             "KOR_SO_Seoul.WS.471080_TMYx.2009-2023.epw",
             'DRAGONS_INVISIBLE_EXAMPLE_EPW = $EnergyPlusWorkflow.InvisibleWeatherPath',
-            "GONIEGONIE_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot",
+            "DRAGONS_ENERGYPLUS_ROOT = $EnergyPlusWorkflow.RuntimeRoot",
             'TEMP = $hostTemp',
             'TMP = $hostTemp',
             '$_.fileName -eq "02-invisibledragon-single-zone-hvac-idf.gh"',
@@ -179,7 +179,7 @@ class EngineeringProvenanceContractTests(unittest.TestCase):
             "RequireEmptyFilePath(document, expectation.WeatherPathGuid);",
             "ValidateInvisibleRuntimeWorkflow(",
             "IsSameOrDescendant(processTempRoot, inputs.OutputDirectory)",
-            '"GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo"',
+            '"Dragons.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo"',
             '"ERV supply flow 0.20 m3/s"',
         ):
             self.assertIn(required, examples)

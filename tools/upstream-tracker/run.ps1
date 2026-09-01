@@ -36,7 +36,7 @@ $env:PYTHONHASHSEED = '0'
 $env:PYTHONPATH = $toolRoot
 $arguments = @($selected.Prefix) + @(
     '-m',
-    'goniegonie_upstream_tracker',
+    'dragons_upstream_tracker',
     '--repository-root',
     $repositoryRoot
 ) + @($TrackerArguments)

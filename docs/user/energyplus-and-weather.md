@@ -15,9 +15,9 @@ Weather are internal values rather than Grasshopper ports in this workflow.
 The module-owned locations are:
 
 ```text
-Runtime: %LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
-Weather: %LOCALAPPDATA%\GonieGonie\BuildingEnergyWeather\SimpleDragon\korean-tmy-v1
-Runs:    %TEMP%\GonieGonie\Dragons\energyplus-runs
+Runtime: %LOCALAPPDATA%\Dragons\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
+Weather: %LOCALAPPDATA%\Dragons\BuildingEnergyWeather\SimpleDragon\korean-tmy-v1
+Runs:    %TEMP%\Dragons\energyplus-runs
 ```
 
 These locations are implementation details rather than Grasshopper inputs. They are per-user and writable without administrator rights. Rhino's installation folders are never used as write targets.
@@ -82,7 +82,7 @@ conversion, preparation, compilation, and execution stay behind it.
 
 Successful simulations remove their temporary working directories after the
 result is parsed. Failed or cancelled simulations are retained below
-`%TEMP%\GonieGonie\Dragons\energyplus-runs` so their EnergyPlus output and logs
+`%TEMP%\Dragons\energyplus-runs` so their EnergyPlus output and logs
 can be inspected; that whole location is disposable after diagnosis.
 
 The files are sourced from Climate.OneBuilding using ISD and Oikolab-supplied

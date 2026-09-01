@@ -1,11 +1,11 @@
-using GonieGonie.InvisibleDragon.Shape;
-using GonieGonie.InvisibleDragon.Rhino;
+using Dragons.InvisibleDragon.Shape;
+using Dragons.InvisibleDragon.Rhino;
 using Rhino;
 using Rhino.Geometry;
 using RhinoApp = global::Rhino.RhinoApp;
 using RhinoCore = global::Rhino.Runtime.InProcess.RhinoCore;
 
-namespace GonieGonie.InvisibleDragon.RhinoSmoke;
+namespace Dragons.InvisibleDragon.RhinoSmoke;
 
 internal static class RhinoSmokeChecks
 {

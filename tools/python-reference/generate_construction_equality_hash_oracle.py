@@ -16,8 +16,8 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.invisibledragon.construction-equality-hash-oracle.v1"
-INVENTORY_SCHEMA = "goniegonie.upstream-public-symbol-inventory.v2"
+SCHEMA = "dragons.invisibledragon.construction-equality-hash-oracle.v1"
+INVENTORY_SCHEMA = "dragons.upstream-public-symbol-inventory.v2"
 SOURCE_PATH = "src/idragon/dragon/construction.py"
 REQUIRED_PYTHON = (3, 12, 7)
 REQUIRED_HASH_ALGORITHM = "siphash13"

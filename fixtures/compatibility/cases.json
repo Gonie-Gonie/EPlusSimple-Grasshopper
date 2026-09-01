@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.dragons.compatibility-cases.v1",
+  "schema": "dragons.compatibility-cases.v1",
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
   "energyplus": {
     "version": "24.2.0",

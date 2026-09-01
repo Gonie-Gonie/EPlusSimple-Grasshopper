@@ -17,7 +17,7 @@ import sys
 from typing import Any
 
 
-SCHEMA = "goniegonie.invisibledragon.profile-residual-oracle.v1"
+SCHEMA = "dragons.invisibledragon.profile-residual-oracle.v1"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -165,7 +165,7 @@ FORBIDDEN_EQUIVALENT_FACT_KEY_FRAGMENTS = (
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_day_schedule_core_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_profile_residual_support", path
+        "_dragons_profile_residual_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load Profile residual oracle support: {path}")

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Dragons.Grasshopper.Rhino8Smoke</AssemblyName>
+    <RootNamespace>Dragons.GrasshopperSmoke.Rhino8</RootNamespace>
+    <Description>Bounded STA Rhino 8 host gate for the InvisibleDragon and SimpleDragon Grasshopper plug-ins.</Description>
+    <NoWarn>$(NoWarn);NU1701;CA1031;CA1510;CA1512</NoWarn>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" />
+    <PackageReference Include="Rhino.Inside" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" Private="false" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\GrasshopperSmokeGate.cs" Link="Shared\GrasshopperSmokeGate.cs" />
+    <Compile Include="..\Shared\GrasshopperSmokeSummary.cs" Link="Shared\GrasshopperSmokeSummary.cs" />
+    <Compile Include="..\Shared\SmokeHostInputs.cs" Link="Shared\SmokeHostInputs.cs" />
+  </ItemGroup>
+</Project>

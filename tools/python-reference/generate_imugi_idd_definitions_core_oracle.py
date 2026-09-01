@@ -36,7 +36,7 @@ from types import ModuleType, SimpleNamespace
 from typing import Any, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.imugi-idd-definitions-core.v1"
+SCHEMA = "dragons.python-reference.imugi-idd-definitions-core.v1"
 SOURCE_PATH = "src/idragon/imugi.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -271,7 +271,7 @@ ADAPTATIONS = {
 
 
 def _native_route(symbol: str) -> str:
-    prefix = "GonieGonie.InvisibleDragon.Idd."
+    prefix = "Dragons.InvisibleDragon.Idd."
     field_routes = {
         "IddField": "IddFieldDefinition",
         "IddField.__eq__": "IddFieldDefinition public properties (structural comparison)",
@@ -417,22 +417,22 @@ SUPPORT_FIXTURE_RECEIPT = {
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 13_005,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs",
         "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
     },
     {
         "bytes": 19_960,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
         "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
     },
     {
         "bytes": 8_339,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
         "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa",
     },
     {
         "bytes": 16_860,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
         "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f",
     },
 )
@@ -541,7 +541,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
     }:
         raise SystemExit("The public-symbol inventory root contract drifted.")
     if (
-        value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2"
+        value["schema"] != "dragons.upstream-public-symbol-inventory.v2"
         or value["upstream_commit"].lower() != commit
     ):
         raise SystemExit("The public-symbol inventory identity drifted.")
@@ -1258,7 +1258,7 @@ def _support_receipt() -> dict[str, Any]:
         "upstream_commit": support["upstream_commit"],
     }
     if (
-        identity["oracle_schema"] != "goniegonie.energyplus-idd-schema.v1"
+        identity["oracle_schema"] != "dragons.energyplus-idd-schema.v1"
         or identity["energyplus_version"] != "24.2.0"
         or identity["energyplus_build"] != "94a887817b"
         or identity["object_count"] != 848
@@ -1274,7 +1274,7 @@ def _support_receipt() -> dict[str, Any]:
         "full_schema_identity_sha256": canonical_sha256(identity),
         "generator": SUPPORT_GENERATOR_RECEIPT,
         "native_full_schema_test_route": (
-            "GonieGonie.InvisibleDragon.Tests.Idd."
+            "Dragons.InvisibleDragon.Tests.Idd."
             "IddSchemaOracleTests.EnergyPlus242FullSchemaMatchesRawIddRegressionOracleWhenRuntimeReady"
         ),
     }

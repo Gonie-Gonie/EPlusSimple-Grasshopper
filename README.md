@@ -4,9 +4,9 @@ This Gonie-Gonie repository ports the upstream EPlusSimple 0.7.0 project and
 its IDragon layer to two independently installable Rhino 7+ / Grasshopper
 plugins written in C#. The public product names in this port are:
 
-- `GonieGonie.InvisibleDragon.GH` is the renamed IDragon port. It preserves
+- `Dragons.InvisibleDragon.GH` is the renamed IDragon port. It preserves
   planar polygon vertices and builds EnergyPlus models.
-- `GonieGonie.SimpleDragon.GH` is the renamed EPlusSimple port. It preserves the
+- `Dragons.SimpleDragon.GH` is the renamed EPlusSimple port. It preserves the
   area-and-azimuth abstraction and internally converts a `GreenRetrofitModel`
   through the InvisibleDragon engine when `Run SimpleDragon` is requested.
 

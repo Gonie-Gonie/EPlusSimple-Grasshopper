@@ -30,7 +30,7 @@ if _base_spec is None or _base_spec.loader is None:
 base = importlib.util.module_from_spec(_base_spec)
 _base_spec.loader.exec_module(base)
 
-SCHEMA = "goniegonie.python-reference.imugi-idf-object-core.v1"
+SCHEMA = "dragons.python-reference.imugi-idf-object-core.v1"
 PREFIX = "imugi-idf-object-core."
 SOURCE_PATH = base.SOURCE_PATH
 EXPECTED_UPSTREAM_COMMIT = base.EXPECTED_UPSTREAM_COMMIT
@@ -135,10 +135,10 @@ CASE_SPECS = (
 CASE_IDS = tuple(PREFIX + slug for _, slug, _ in CASE_SPECS)
 
 NATIVE_SOURCES = (
-    {"bytes": 13_182, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
-    {"bytes": 6_040, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfParser.cs", "sha256": "sha256:98a33eaed892707acb1d05c9e9ef74a9ebb9ec3d258e370e89ff706e267806be"},
-    {"bytes": 4_289, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
-    {"bytes": 12_094, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
+    {"bytes": 13_182, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
+    {"bytes": 6_040, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfParser.cs", "sha256": "sha256:98a33eaed892707acb1d05c9e9ef74a9ebb9ec3d258e370e89ff706e267806be"},
+    {"bytes": 4_289, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
+    {"bytes": 12_094, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
 )
 SUPPORT = (
     {"bytes": BASE_BYTES, "path": "tools/python-reference/generate_imugi_idd_definitions_core_oracle.py", "sha256": BASE_SHA256},
@@ -291,7 +291,7 @@ def _idf_run(imugi: Any) -> dict[str, Any]:
         "run_signature": str(inspect.signature(imugi.IDF.run)),
         "run_executed": False,
         "active_energyplus_process_claim": False,
-        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
+        "native_route": "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
     }
 
 
@@ -354,17 +354,17 @@ def _runtime_signatures(imugi: Any) -> dict[str, Any]:
 
 def _route(symbol: str) -> str:
     routes = {
-        "IDF.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-        "IDF.append": "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
-        "IDF.read_idf": "GonieGonie.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
-        "IdfObject.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject.this[int|string]",
-        "IdfObject.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-        "IdfObject.idd": "GonieGonie.InvisibleDragon.Idf.IdfObject.Definition",
+        "IDF.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+        "IDF.append": "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+        "IDF.read_idf": "Dragons.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
+        "IdfObject.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObject.this[int|string]",
+        "IdfObject.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+        "IdfObject.idd": "Dragons.InvisibleDragon.Idf.IdfObject.Definition",
     }
     if symbol in routes:
         return routes[symbol]
     owner = "IdfDocument" if symbol.startswith("IDF") else "IdfObject"
-    return f"GonieGonie.InvisibleDragon.Idf.{owner} public production API (intentional adaptation; no Python source/API compatibility claim)"
+    return f"Dragons.InvisibleDragon.Idf.{owner} public production API (intentional adaptation; no Python source/API compatibility claim)"
 
 
 def _adaptation(symbol: str) -> str:

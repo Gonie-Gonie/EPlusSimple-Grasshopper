@@ -685,7 +685,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-projections.v1",
+  "schema": "dragons.python-reference.dragon-model-projections.v1",
   "symbols": [
     {
       "body_hash": "sha256:9ac965df879ac38614b80c38800b8b7e28f3a584d20be71afac9301eea223c06",

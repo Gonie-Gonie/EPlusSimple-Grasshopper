@@ -1866,7 +1866,7 @@
     },
     "identity_encoding": "stable-direct-is-relations-only-no-id-or-address",
     "native_targets": {
-      "Zone": "GonieGonie.InvisibleDragon.Shape.Zone typed aggregate",
+      "Zone": "Dragons.InvisibleDragon.Shape.Zone typed aggregate",
       "Zone.__init__": "Shape.Zone constructor with validated identifiers, profile, and defensive surface-collection copy retaining immutable Surface references",
       "Zone.floor_area": "Zone.FloorArea over immutable native Surface.GrossArea values",
       "Zone.floor_surface": "Zone.FloorSurfaces filtered from the native read-only surface collection",
@@ -2107,7 +2107,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-shape-zone-core.v1",
+  "schema": "dragons.python-reference.dragon-shape-zone-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:82f464feaab2b692325befc8de0fdf44f28698a041430c75dce9acb727a1a318",

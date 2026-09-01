@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.python-reference.idf-summary.v1",
+  "schema": "dragons.python-reference.idf-summary.v1",
   "energyplus_version": "EnergyPlus Version V24-2-0",
   "total_object_count": 136,
   "populated_object_type_count": 62,

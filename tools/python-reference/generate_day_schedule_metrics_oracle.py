@@ -16,8 +16,8 @@ import sys
 from typing import Any
 
 
-SCHEMA = "goniegonie.invisibledragon.day-schedule-metrics-oracle.v1"
-INVENTORY_SCHEMA = "goniegonie.upstream-public-symbol-inventory.v2"
+SCHEMA = "dragons.invisibledragon.day-schedule-metrics-oracle.v1"
+INVENTORY_SCHEMA = "dragons.upstream-public-symbol-inventory.v2"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (

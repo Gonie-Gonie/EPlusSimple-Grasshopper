@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.simpledragon.usage-profile-schedule-oracle.v1",
+  "schema": "dragons.simpledragon.usage-profile-schedule-oracle.v1",
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
   "zone_name": "ZONE-0x000000",
   "profile_count": 24,

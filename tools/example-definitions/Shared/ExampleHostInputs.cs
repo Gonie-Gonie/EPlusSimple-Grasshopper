@@ -1,4 +1,4 @@
-namespace GonieGonie.Dragons.ExampleDefinitions;
+namespace Dragons.ExampleDefinitions;
 
 internal enum ExampleHostAction
 {
@@ -95,8 +95,8 @@ internal sealed class ExampleHostInputs
 
         string invisibleGha = RequireFile(InvisibleGhaVariable);
         string simpleGha = RequireFile(SimpleGhaVariable);
-        RequireFileName(invisibleGha, "GonieGonie.InvisibleDragon.GH.gha", InvisibleGhaVariable);
-        RequireFileName(simpleGha, "GonieGonie.SimpleDragon.GH.gha", SimpleGhaVariable);
+        RequireFileName(invisibleGha, "Dragons.InvisibleDragon.GH.gha", InvisibleGhaVariable);
+        RequireFileName(simpleGha, "Dragons.SimpleDragon.GH.gha", SimpleGhaVariable);
         string examplesRoot = RequireDirectoryPath(ExamplesRootVariable);
         string outputDirectory = RequireDirectoryPath(OutputVariable);
         string gateStatus = Environment.GetEnvironmentVariable(EnergyPlusGateStatusVariable)

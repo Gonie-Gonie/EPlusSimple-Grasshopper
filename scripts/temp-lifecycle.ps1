@@ -5,7 +5,7 @@ Set-StrictMode -Version 2.0
 
 . (Join-Path $PSScriptRoot 'common.ps1')
 
-$script:TempWorkflowEnvironmentVariable = 'GONIEGONIE_DRAGONS_TEMP_WORKFLOW'
+$script:TempWorkflowEnvironmentVariable = 'DRAGONS_TEMP_WORKFLOW'
 
 function Test-ForwardedWhatIfRequest {
     [CmdletBinding()]

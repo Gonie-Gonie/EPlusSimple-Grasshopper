@@ -112,7 +112,7 @@ jobs:
 
           $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
           $cases = @($report.cases)
-          if ([string] $report.schema -cne 'goniegonie.dragons.engineering-compatibility-report.v1' -or
+          if ([string] $report.schema -cne 'dragons.engineering-compatibility-report.v1' -or
               -not [bool] $report.passed -or
               [int] $report.declared_case_count -ne 11 -or
               [int] $report.executed_case_count -ne 11 -or
@@ -167,7 +167,7 @@ jobs:
 
           $provenance = $report.port_provenance
           if ($null -eq $provenance -or
-              [string] $provenance.schema -cne 'goniegonie.dragons.engineering-port-provenance.v1' -or
+              [string] $provenance.schema -cne 'dragons.engineering-port-provenance.v1' -or
               [string] $provenance.git.commit -cne $env:GITHUB_SHA -or
               $provenance.git.dirty -isnot [bool] -or
               [bool] $provenance.git.dirty) {

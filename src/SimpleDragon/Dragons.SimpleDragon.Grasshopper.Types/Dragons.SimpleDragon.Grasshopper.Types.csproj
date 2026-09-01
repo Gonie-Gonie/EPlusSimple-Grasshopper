@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>Dragons.SimpleDragon.Grasshopper.Types</AssemblyName>
+    <RootNamespace>Dragons.SimpleDragon.Grasshopper</RootNamespace>
+    <Description>Grasshopper data types for SimpleDragon models and results.</Description>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dragons.SimpleDragon.Core\Dragons.SimpleDragon.Core.csproj" />
+    <PackageReference Include="Grasshopper" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Dragons.SimpleDragon.Grasshopper.Types.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\simple-dragon\parameters\*.png">
+      <Link>Resources\Parameters\%(Filename)%(Extension)</Link>
+      <LogicalName>Dragons.SimpleDragon.Grasshopper.Resources.Parameters.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -2775,7 +2775,7 @@
     }
   ],
   "inventory_sha256": "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0",
-  "schema": "goniegonie.upstream-scope-decisions.v1",
+  "schema": "dragons.upstream-scope-decisions.v1",
   "summary": {
     "approved_count": 252,
     "decision_count": 252,

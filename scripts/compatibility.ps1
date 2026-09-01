@@ -21,7 +21,7 @@ $manifestPath = Join-Path $repositoryRoot 'fixtures\compatibility\cases.json'
 $bootstrapPath = Join-Path $repositoryRoot 'tools\python-reference\bootstrap_reference.py'
 $pythonEnginePath = Join-Path $repositoryRoot 'tools\compatibility-runner\python_engine.py'
 $reporterPath = Join-Path $repositoryRoot 'tools\compatibility-runner\compare_outputs.py'
-$csharpProject = Join-Path $repositoryRoot 'tools\compatibility-runner\GonieGonie.CompatibilityRunner.csproj'
+$csharpProject = Join-Path $repositoryRoot 'tools\compatibility-runner\Dragons.CompatibilityRunner.csproj'
 $runtimeManifestPath = Join-Path $repositoryRoot 'resources\runtime\manifest.template.json'
 $compatibilityExceptionsPath = Join-Path $repositoryRoot 'upstream\compatibility-exceptions.yml'
 $dependencyRoot = Join-Path $repositoryRoot '.tools\python-reference\3.12.7\site-packages'
@@ -48,10 +48,10 @@ function Get-EngineeringGitState {
 
 function Get-EngineeringSourceSet {
     $roots = @(
-        'src/Shared/GonieGonie.BuildingEnergy.Contracts',
-        'src/Shared/GonieGonie.EnergyPlus.Runtime',
-        'src/InvisibleDragon/GonieGonie.InvisibleDragon.Core',
-        'src/SimpleDragon/GonieGonie.SimpleDragon.Core',
+        'src/Shared/Dragons.BuildingEnergy.Contracts',
+        'src/Shared/Dragons.EnergyPlus.Runtime',
+        'src/InvisibleDragon/Dragons.InvisibleDragon.Core',
+        'src/SimpleDragon/Dragons.SimpleDragon.Core',
         'tools/compatibility-runner'
     )
     $files = @($roots | ForEach-Object {
@@ -76,13 +76,13 @@ function Get-EngineeringSourceSet {
 }
 
 function Get-EngineeringBinarySet {
-    $directory = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.CompatibilityRunner\Release\net8.0-windows'
+    $directory = Join-Path $repositoryRoot 'temp\build\bin\Dragons.CompatibilityRunner\Release\net8.0-windows'
     $names = @(
-        'GonieGonie.CompatibilityRunner.dll',
-        'GonieGonie.BuildingEnergy.Contracts.dll',
-        'GonieGonie.EnergyPlus.Runtime.dll',
-        'GonieGonie.InvisibleDragon.Core.dll',
-        'GonieGonie.SimpleDragon.Core.dll'
+        'Dragons.CompatibilityRunner.dll',
+        'Dragons.BuildingEnergy.Contracts.dll',
+        'Dragons.EnergyPlus.Runtime.dll',
+        'Dragons.InvisibleDragon.Core.dll',
+        'Dragons.SimpleDragon.Core.dll'
     )
     $entries = @($names | ForEach-Object {
         $path = Join-Path $directory $_
@@ -151,7 +151,7 @@ $expectedStages = @(
 $compatibilityManifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
 $manifestCases = @($compatibilityManifest.cases)
 $manifestCaseIds = @($manifestCases | ForEach-Object { [string] $_.id } | Sort-Object)
-if ([string] $compatibilityManifest.schema -cne 'goniegonie.dragons.compatibility-cases.v1' -or
+if ([string] $compatibilityManifest.schema -cne 'dragons.compatibility-cases.v1' -or
     $manifestCases.Count -ne 11 -or
     [int] ($manifestCases | ForEach-Object { @($_.stages).Count } | Measure-Object -Sum).Sum -ne 66 -or
     @($manifestCaseIds | Select-Object -Unique).Count -ne 11 -or
@@ -329,7 +329,7 @@ Invoke-LoggedNativeCommand `
 # readers can continue consuming the established comparison fields.
 $engineeringReport = Get-Content -LiteralPath $artifactReport -Raw | ConvertFrom-Json
 $provenance = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons.engineering-port-provenance.v1'
+    schema = 'dragons.engineering-port-provenance.v1'
     git = Get-EngineeringGitState
     production_source_set = Get-EngineeringSourceSet
     executed_binaries = Get-EngineeringBinarySet

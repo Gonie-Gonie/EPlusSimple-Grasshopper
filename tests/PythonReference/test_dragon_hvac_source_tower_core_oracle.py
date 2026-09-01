@@ -292,7 +292,7 @@ class DragonHvacSourceTowerCoreOracleTests(unittest.TestCase):
         for symbol, expectation in contract["expectations"].items():
             self.assertEqual(generator.CLASSIFICATIONS[symbol], expectation["classification"])
             self.assertEqual(generator.NATIVE_ROUTES[symbol], expectation["native_route"])
-            self.assertIn("GonieGonie.InvisibleDragon", expectation["native_route"])
+            self.assertIn("Dragons.InvisibleDragon", expectation["native_route"])
             self.assertNotIn(".Internal", expectation["native_route"])
             self.assertEqual(
                 generator.ADAPTATIONS.get(symbol, "not_applicable"),

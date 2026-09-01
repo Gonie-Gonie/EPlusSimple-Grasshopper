@@ -68,7 +68,7 @@ if (-not (Test-Path -LiteralPath $distributionManifestPath -PathType Leaf)) {
 }
 
 $distributionManifest = Get-Content -LiteralPath $distributionManifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $distributionManifest.schema -ne 'goniegonie.dragons-grasshopper.distributions.v3') {
+if ([string] $distributionManifest.schema -ne 'dragons-grasshopper.distributions.v3') {
     throw "Unsupported distribution manifest schema in '$distributionManifestPath'."
 }
 
@@ -844,7 +844,7 @@ function Test-PythonEnvironmentReady {
 
     try {
         $stamp = Get-Content -LiteralPath $pythonEnvironmentStampPath -Raw -Encoding UTF8 | ConvertFrom-Json
-        if ([string] $stamp.schema -ne 'goniegonie.documentation-python-environment.v1' -or
+        if ([string] $stamp.schema -ne 'dragons.documentation-python-environment.v1' -or
             [string] $stamp.pythonVersion -ne $requiredPython -or
             [string] $stamp.baseExecutable -ne [string] $Python.executable -or
             [string] $stamp.venvExecutable -ne $pythonEnvironmentExecutable -or
@@ -998,7 +998,7 @@ function Ensure-PythonEnvironment {
     # Validate the existing ancestor chain before creating or writing through
     # it, then inspect the small setup-owned subtree after creation.
     Assert-NoReparsePoints `
-        -Path (Join-Path $setupPythonTemp '.goniegonie-ancestor-safety-probe') `
+        -Path (Join-Path $setupPythonTemp '.dragons-ancestor-safety-probe') `
         -AnchorPath $repositoryRoot
     Ensure-Directory -Path $setupPythonTemp
     Ensure-Directory -Path $pipCache
@@ -1059,7 +1059,7 @@ function Ensure-PythonEnvironment {
             -FailureMessage 'Verifying the exact OODocs environment and PDF renderer failed'
 
         $stamp = [ordered] @{
-            schema = 'goniegonie.documentation-python-environment.v1'
+            schema = 'dragons.documentation-python-environment.v1'
             pythonVersion = $requiredPython
             baseExecutable = [string] $Python.executable
             venvExecutable = $pythonEnvironmentExecutable
@@ -1068,7 +1068,7 @@ function Ensure-PythonEnvironment {
             oodocsVersion = $requiredOodocs
         }
         Assert-NoReparsePoints `
-            -Path (Join-Path (Split-Path -Parent $pythonEnvironmentStampPath) '.goniegonie-ancestor-safety-probe') `
+            -Path (Join-Path (Split-Path -Parent $pythonEnvironmentStampPath) '.dragons-ancestor-safety-probe') `
             -AnchorPath $repositoryRoot
         Write-Utf8JsonIfChanged -InputObject $stamp -Path $pythonEnvironmentStampPath -Depth 4
 
@@ -1479,7 +1479,7 @@ if ($RequireRhino8 -and $rhino8.status -ne 'ready' -and -not $WhatIfPreference) 
 }
 
 $localSettings = [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.local-settings.v1'
+    schema = 'dragons-grasshopper.local-settings.v1'
     repositoryRoot = $repositoryRoot
     dotnet = $dotnet
     pythonOracle = $python
@@ -1506,7 +1506,7 @@ $localSettings = [ordered] @{
 }
 
 Assert-NoReparsePoints `
-    -Path (Join-Path (Split-Path -Parent $configPath) '.goniegonie-ancestor-safety-probe') `
+    -Path (Join-Path (Split-Path -Parent $configPath) '.dragons-ancestor-safety-probe') `
     -AnchorPath $repositoryRoot
 Write-Utf8JsonIfChanged -InputObject $localSettings -Path $configPath -Depth 10
 Remove-RetiredRootLocalSettings

@@ -1,7 +1,7 @@
 using System.Reflection;
 using RhinoInside;
 
-namespace GonieGonie.Dragons.ExampleDefinitions.Rhino7;
+namespace Dragons.ExampleDefinitions.Rhino7;
 
 internal static class Program
 {

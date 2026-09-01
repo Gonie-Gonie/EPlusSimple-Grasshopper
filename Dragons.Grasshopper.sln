@@ -1,58 +1,58 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.BuildingEnergy.Contracts", "src\Shared\GonieGonie.BuildingEnergy.Contracts\GonieGonie.BuildingEnergy.Contracts.csproj", "{DBBA68BC-2571-4E4C-A005-0409264D10E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.BuildingEnergy.Contracts", "src\Shared\Dragons.BuildingEnergy.Contracts\Dragons.BuildingEnergy.Contracts.csproj", "{DBBA68BC-2571-4E4C-A005-0409264D10E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.EnergyPlus.Runtime", "src\Shared\GonieGonie.EnergyPlus.Runtime\GonieGonie.EnergyPlus.Runtime.csproj", "{8A7DC4D2-FEB0-403E-A940-142083191C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.EnergyPlus.Runtime", "src\Shared\Dragons.EnergyPlus.Runtime\Dragons.EnergyPlus.Runtime.csproj", "{8A7DC4D2-FEB0-403E-A940-142083191C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Core", "src\InvisibleDragon\GonieGonie.InvisibleDragon.Core\GonieGonie.InvisibleDragon.Core.csproj", "{4CC95ED9-6C9C-4EDC-82ED-18C2D11C78D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Core", "src\InvisibleDragon\Dragons.InvisibleDragon.Core\Dragons.InvisibleDragon.Core.csproj", "{4CC95ED9-6C9C-4EDC-82ED-18C2D11C78D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Rhino", "src\InvisibleDragon\GonieGonie.InvisibleDragon.Rhino\GonieGonie.InvisibleDragon.Rhino.csproj", "{82A4C93B-C05B-45A0-A69E-744DEBEA2F74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Rhino", "src\InvisibleDragon\Dragons.InvisibleDragon.Rhino\Dragons.InvisibleDragon.Rhino.csproj", "{82A4C93B-C05B-45A0-A69E-744DEBEA2F74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Grasshopper.Types", "src\InvisibleDragon\GonieGonie.InvisibleDragon.Grasshopper.Types\GonieGonie.InvisibleDragon.Grasshopper.Types.csproj", "{7514B95B-46B5-464A-A88D-2B38F17FDC7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Grasshopper.Types", "src\InvisibleDragon\Dragons.InvisibleDragon.Grasshopper.Types\Dragons.InvisibleDragon.Grasshopper.Types.csproj", "{7514B95B-46B5-464A-A88D-2B38F17FDC7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.GH", "src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj", "{F67D1D4C-9B2A-4CBA-88EB-D3BD64945670}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.GH", "src\InvisibleDragon\Dragons.InvisibleDragon.GH\Dragons.InvisibleDragon.GH.csproj", "{F67D1D4C-9B2A-4CBA-88EB-D3BD64945670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Core", "src\SimpleDragon\GonieGonie.SimpleDragon.Core\GonieGonie.SimpleDragon.Core.csproj", "{7B104995-CC43-44A7-B374-5B0CBC31C99D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Core", "src\SimpleDragon\Dragons.SimpleDragon.Core\Dragons.SimpleDragon.Core.csproj", "{7B104995-CC43-44A7-B374-5B0CBC31C99D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Rhino", "src\SimpleDragon\GonieGonie.SimpleDragon.Rhino\GonieGonie.SimpleDragon.Rhino.csproj", "{A1B6E6E4-7C4E-480A-936C-68F4FD315EAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Rhino", "src\SimpleDragon\Dragons.SimpleDragon.Rhino\Dragons.SimpleDragon.Rhino.csproj", "{A1B6E6E4-7C4E-480A-936C-68F4FD315EAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Grasshopper.Types", "src\SimpleDragon\GonieGonie.SimpleDragon.Grasshopper.Types\GonieGonie.SimpleDragon.Grasshopper.Types.csproj", "{36B9CD28-5AE5-4CBD-A9E4-E396590E6B58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Grasshopper.Types", "src\SimpleDragon\Dragons.SimpleDragon.Grasshopper.Types\Dragons.SimpleDragon.Grasshopper.Types.csproj", "{36B9CD28-5AE5-4CBD-A9E4-E396590E6B58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.GH", "src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj", "{7904FD08-124E-454C-8A4B-88EEDEEA745B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.GH", "src\SimpleDragon\Dragons.SimpleDragon.GH\Dragons.SimpleDragon.GH.csproj", "{7904FD08-124E-454C-8A4B-88EEDEEA745B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.BuildingEnergy.Contracts.Tests", "tests\Shared\GonieGonie.BuildingEnergy.Contracts.Tests\GonieGonie.BuildingEnergy.Contracts.Tests.csproj", "{EBCF50E5-3469-47F7-B404-545C8C882067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.BuildingEnergy.Contracts.Tests", "tests\Shared\Dragons.BuildingEnergy.Contracts.Tests\Dragons.BuildingEnergy.Contracts.Tests.csproj", "{EBCF50E5-3469-47F7-B404-545C8C882067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Core.Tests", "tests\InvisibleDragon\GonieGonie.InvisibleDragon.Core.Tests\GonieGonie.InvisibleDragon.Core.Tests.csproj", "{60232A27-1F6F-4F53-BDD8-F8D20469990A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Core.Tests", "tests\InvisibleDragon\Dragons.InvisibleDragon.Core.Tests\Dragons.InvisibleDragon.Core.Tests.csproj", "{60232A27-1F6F-4F53-BDD8-F8D20469990A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Core.Tests", "tests\SimpleDragon\GonieGonie.SimpleDragon.Core.Tests\GonieGonie.SimpleDragon.Core.Tests.csproj", "{75464EA2-3558-49ED-9337-F2E43542B9FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Core.Tests", "tests\SimpleDragon\Dragons.SimpleDragon.Core.Tests\Dragons.SimpleDragon.Core.Tests.csproj", "{75464EA2-3558-49ED-9337-F2E43542B9FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{65F29CFD-8035-4E56-9A1A-8DC76C52960F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4A3E0CF3-4C4D-45F3-9C91-31D5C18FA014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.EnergyPlus.Runtime.Tests", "tests\Shared\GonieGonie.EnergyPlus.Runtime.Tests\GonieGonie.EnergyPlus.Runtime.Tests.csproj", "{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.EnergyPlus.Runtime.Tests", "tests\Shared\Dragons.EnergyPlus.Runtime.Tests\Dragons.EnergyPlus.Runtime.Tests.csproj", "{CD98FEA4-B16C-4C1B-B012-E9B9C78259CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InvisibleDragon", "InvisibleDragon", "{6041BFAB-29C1-47C1-90BB-B9788B1807CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Rhino.Tests", "tests\InvisibleDragon\GonieGonie.InvisibleDragon.Rhino.Tests\GonieGonie.InvisibleDragon.Rhino.Tests.csproj", "{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Rhino.Tests", "tests\InvisibleDragon\Dragons.InvisibleDragon.Rhino.Tests\Dragons.InvisibleDragon.Rhino.Tests.csproj", "{2D01D1A5-D7EA-4326-8618-0AD5CDA7A09B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{99E9D322-CE32-45E7-8852-2416AC9530A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Rhino.Smoke", "tools\rhino-smoke\GonieGonie.InvisibleDragon.Rhino.Smoke.csproj", "{589883DE-6C2D-4AA0-8FCE-7EF11206428E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Rhino.Smoke", "tools\rhino-smoke\Dragons.InvisibleDragon.Rhino.Smoke.csproj", "{589883DE-6C2D-4AA0-8FCE-7EF11206428E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.InvisibleDragon.Grasshopper.Types.Tests", "tests\InvisibleDragon\GonieGonie.InvisibleDragon.Grasshopper.Types.Tests\GonieGonie.InvisibleDragon.Grasshopper.Types.Tests.csproj", "{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.InvisibleDragon.Grasshopper.Types.Tests", "tests\InvisibleDragon\Dragons.InvisibleDragon.Grasshopper.Types.Tests\Dragons.InvisibleDragon.Grasshopper.Types.Tests.csproj", "{3E988FB3-1A78-4806-8FC9-E7D0CAE8C348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Rhino.Smoke", "tools\simpledragon-rhino-smoke\GonieGonie.SimpleDragon.Rhino.Smoke.csproj", "{4C07682F-3132-4876-8308-DF651A538332}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Rhino.Smoke", "tools\simpledragon-rhino-smoke\Dragons.SimpleDragon.Rhino.Smoke.csproj", "{4C07682F-3132-4876-8308-DF651A538332}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleDragon", "SimpleDragon", "{A5DB67CF-CBD4-4955-8B8B-364553E0189A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.SimpleDragon.Grasshopper.Types.Tests", "tests\SimpleDragon\GonieGonie.SimpleDragon.Grasshopper.Types.Tests\GonieGonie.SimpleDragon.Grasshopper.Types.Tests.csproj", "{AE1B1BB1-11DA-4277-9320-7FD665F6B57B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.SimpleDragon.Grasshopper.Types.Tests", "tests\SimpleDragon\Dragons.SimpleDragon.Grasshopper.Types.Tests\Dragons.SimpleDragon.Grasshopper.Types.Tests.csproj", "{AE1B1BB1-11DA-4277-9320-7FD665F6B57B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.CompatibilityRunner", "tools\compatibility-runner\GonieGonie.CompatibilityRunner.csproj", "{9585626A-CD28-40BF-811E-1F892CF46579}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.CompatibilityRunner", "tools\compatibility-runner\Dragons.CompatibilityRunner.csproj", "{9585626A-CD28-40BF-811E-1F892CF46579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonieGonie.Dragons.ComponentCatalog", "tools\component-catalog\GonieGonie.Dragons.ComponentCatalog.csproj", "{447C670C-D840-44DE-AAFA-B212E91C1E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragons.ComponentCatalog", "tools\component-catalog\Dragons.ComponentCatalog.csproj", "{447C670C-D840-44DE-AAFA-B212E91C1E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

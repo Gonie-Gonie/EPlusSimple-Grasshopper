@@ -1920,417 +1920,417 @@
         "adaptation": "validated-immutable-entity-id-construction-641",
         "assertion_id": "dragon-hvac-source-tower-core-641-3a1dd026",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller"
+        "native_route": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller"
       },
       "AbsorptionChiller.__init__": {
         "adaptation": "validated-immutable-entity-id-construction-642",
         "assertion_id": "dragon-hvac-source-tower-core-642-14ca97c1",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller(...)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller(...)"
       },
       "AbsorptionChiller.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-643-3e4cd4b3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType"
       },
       "Boiler": {
         "adaptation": "validated-immutable-entity-id-construction-652",
         "assertion_id": "dragon-hvac-source-tower-core-652-fef90e4c",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Boiler"
       },
       "Boiler.__init__": {
         "adaptation": "validated-immutable-entity-id-construction-653",
         "assertion_id": "dragon-hvac-source-tower-core-653-735f922d",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler(...)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Boiler(...)"
       },
       "Boiler.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-654-b97f1590",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Boiler.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Boiler.IdfObjectType"
       },
       "Chiller": {
         "adaptation": "validated-immutable-entity-id-construction-657",
         "assertion_id": "dragon-hvac-source-tower-core-657-610bd83a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Chiller"
       },
       "Chiller.__init__": {
         "adaptation": "validated-immutable-entity-id-construction-658",
         "assertion_id": "dragon-hvac-source-tower-core-658-65f8043a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller(...)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Chiller(...)"
       },
       "Chiller.idf_objtypename": {
         "adaptation": "safe-screw-reformulated-eir-type-659",
         "assertion_id": "dragon-hvac-source-tower-core-659-4ab109ff",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Chiller.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Chiller.IdfObjectType"
       },
       "ClosedSingleSpeedCoolingTower": {
         "adaptation": "validated-immutable-entity-id-construction-661",
         "assertion_id": "dragon-hvac-source-tower-core-661-a4d512bc",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower"
+        "native_route": "Dragons.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower"
       },
       "ClosedSingleSpeedCoolingTower.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-662-4b2767cd",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType"
       },
       "ClosedTwoSpeedCoolingTower": {
         "adaptation": "validated-immutable-entity-id-construction-664",
         "assertion_id": "dragon-hvac-source-tower-core-664-a365cc0a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower"
+        "native_route": "Dragons.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower"
       },
       "ClosedTwoSpeedCoolingTower.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-665-648bc45c",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType"
       },
       "CompressorType": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-667-8785ee6d",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CompressorType"
       },
       "CompressorType.RECIPROCATING": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-668-dfd51671",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Reciprocating"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CompressorType.Reciprocating"
       },
       "CompressorType.SCREW": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-669-2947a213",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Screw"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CompressorType.Screw"
       },
       "CompressorType.TURBO": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-670-5074351d",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Turbo"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CompressorType.Turbo"
       },
       "CoolingTower": {
         "adaptation": "validated-immutable-entity-id-construction-673",
         "assertion_id": "dragon-hvac-source-tower-core-673-4b07da75",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower"
       },
       "CoolingTower.__init__": {
         "adaptation": "validated-immutable-entity-id-construction-674",
         "assertion_id": "dragon-hvac-source-tower-core-674-d388c8f3",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)"
       },
       "CoolingTower.idf_get_demandbranchlistname": {
         "adaptation": "public-context-emission-derived-name-675",
         "assertion_id": "dragon-hvac-source-tower-core-675-b754f9c4",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_get_demandmixername": {
         "adaptation": "public-context-emission-derived-name-676",
         "assertion_id": "dragon-hvac-source-tower-core-676-482bcce0",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_get_demandsplittername": {
         "adaptation": "public-context-emission-derived-name-677",
         "assertion_id": "dragon-hvac-source-tower-core-677-bc43234b",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_get_loopname": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-678-7da2b907",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)"
       },
       "CoolingTower.idf_get_objname": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-679-53dba42f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)"
       },
       "CoolingTower.idf_get_supplybranchlistname": {
         "adaptation": "public-context-emission-derived-name-680",
         "assertion_id": "dragon-hvac-source-tower-core-680-87efb2b8",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_get_supplymixername": {
         "adaptation": "public-context-emission-derived-name-681",
         "assertion_id": "dragon-hvac-source-tower-core-681-8200f079",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_get_supplysplittername": {
         "adaptation": "public-context-emission-derived-name-682",
         "assertion_id": "dragon-hvac-source-tower-core-682-c1e5599b",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields"
       },
       "CoolingTower.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-683-65852008",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.CoolingTower.IdfObjectType"
       },
       "Fuel": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-726-66a9b58b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel"
       },
       "Fuel.COAL": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-727-4d234c1e",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Coal"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.Coal"
       },
       "Fuel.DIESEL": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-728-a3ee9ef5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Diesel"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.Diesel"
       },
       "Fuel.ELECTRICITY": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-729-8d1b877f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Electricity"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.Electricity"
       },
       "Fuel.FUELOILNO1": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-730-b26b5808",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo1"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.FuelOilNo1"
       },
       "Fuel.FUELOILNO2": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-731-1f61e381",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo2"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.FuelOilNo2"
       },
       "Fuel.GASOLINE": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-732-7fc1afe4",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Gasoline"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.Gasoline"
       },
       "Fuel.NATURALGAS": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-733-5afbce03",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.NaturalGas"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.NaturalGas"
       },
       "Fuel.OTHERFUEL1": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-734-42a148cb",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel1"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.OtherFuel1"
       },
       "Fuel.OTHERFUEL2": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-735-914d30a5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel2"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.OtherFuel2"
       },
       "Fuel.PROPANE": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-736-dea3dce6",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.Fuel.Propane"
+        "native_route": "Dragons.InvisibleDragon.Hvac.Fuel.Propane"
       },
       "GeothermalHeatPump": {
         "adaptation": "functional-native-heatpump-route-for-incomplete-abstract-upstream-738",
         "assertion_id": "dragon-hvac-source-tower-core-738-5016ceb5",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump"
+        "native_route": "Dragons.InvisibleDragon.Hvac.GeothermalHeatPump"
       },
       "GeothermalHeatPump.idf_objtypename": {
         "adaptation": "functional-native-heatpump-route-for-incomplete-abstract-upstream-739",
         "assertion_id": "dragon-hvac-source-tower-core-739-0189ef90",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType"
       },
       "HeatPump": {
         "adaptation": "validated-immutable-entity-id-construction-740",
         "assertion_id": "dragon-hvac-source-tower-core-740-f862c5a4",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump"
+        "native_route": "Dragons.InvisibleDragon.Hvac.HeatPump"
       },
       "HeatPump.__init__": {
         "adaptation": "validated-immutable-entity-id-construction-741",
         "assertion_id": "dragon-hvac-source-tower-core-741-498d6fec",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump(...)"
+        "native_route": "Dragons.InvisibleDragon.Hvac.HeatPump(...)"
       },
       "HeatPump.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-742-66eef776",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.HeatPump.IdfObjectType"
       },
       "OpenSingleSpeedCoolingTower": {
         "adaptation": "validated-immutable-entity-id-construction-744",
         "assertion_id": "dragon-hvac-source-tower-core-744-219b5b22",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower"
+        "native_route": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower"
       },
       "OpenSingleSpeedCoolingTower.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-745-7ba0b88b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType"
       },
       "OpenTwoSpeedCoolingTower": {
         "adaptation": "validated-immutable-entity-id-construction-747",
         "assertion_id": "dragon-hvac-source-tower-core-747-3946064c",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower"
+        "native_route": "Dragons.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower"
       },
       "OpenTwoSpeedCoolingTower.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-748-3692dbe4",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType"
       },
       "SourceSystem": {
         "adaptation": "validated-immutable-entity-id-construction-777",
         "assertion_id": "dragon-hvac-source-tower-core-777-d8fcbe86",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem"
       },
       "SourceSystem.idf_demandbranchlistname": {
         "adaptation": "public-context-emission-derived-name-778",
         "assertion_id": "dragon-hvac-source-tower-core-778-491d3dcc",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_demandmixername": {
         "adaptation": "public-context-emission-derived-name-779",
         "assertion_id": "dragon-hvac-source-tower-core-779-dd1f2652",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_demandsplittername": {
         "adaptation": "public-context-emission-derived-name-780",
         "assertion_id": "dragon-hvac-source-tower-core-780-9fcd3f6d",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_loopname": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-781-ee8dc7f9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.LoopName"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.LoopName"
       },
       "SourceSystem.idf_objname": {
         "adaptation": "concrete-native-idf-object-name-overrides-782",
         "assertion_id": "dragon-hvac-source-tower-core-782-5b92cad7",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectName"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.IdfObjectName"
       },
       "SourceSystem.idf_objtypename": {
         "adaptation": "not_applicable",
         "assertion_id": "dragon-hvac-source-tower-core-783-65852008",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectType"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.IdfObjectType"
       },
       "SourceSystem.idf_supplybranchlistname": {
         "adaptation": "public-context-emission-derived-name-784",
         "assertion_id": "dragon-hvac-source-tower-core-784-6cd0d336",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_supplymixername": {
         "adaptation": "public-context-emission-derived-name-785",
         "assertion_id": "dragon-hvac-source-tower-core-785-b62cdf0b",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_supplysplittername": {
         "adaptation": "public-context-emission-derived-name-786",
         "assertion_id": "dragon-hvac-source-tower-core-786-8ad08f57",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
+        "native_route": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields"
       },
       "SourceSystem.idf_terminalunitlistname": {
         "adaptation": "public-context-emission-derived-name-787",
         "assertion_id": "dragon-hvac-source-tower-core-787-14bb746e",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
+        "native_route": "Dragons.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
       }
     },
     "native_routes": {
-      "AbsorptionChiller": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller",
-      "AbsorptionChiller.__init__": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller(...)",
-      "AbsorptionChiller.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType",
-      "Boiler": "GonieGonie.InvisibleDragon.Hvac.Boiler",
-      "Boiler.__init__": "GonieGonie.InvisibleDragon.Hvac.Boiler(...)",
-      "Boiler.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.Boiler.IdfObjectType",
-      "Chiller": "GonieGonie.InvisibleDragon.Hvac.Chiller",
-      "Chiller.__init__": "GonieGonie.InvisibleDragon.Hvac.Chiller(...)",
-      "Chiller.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.Chiller.IdfObjectType",
-      "ClosedSingleSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower",
-      "ClosedSingleSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType",
-      "ClosedTwoSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower",
-      "ClosedTwoSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType",
-      "CompressorType": "GonieGonie.InvisibleDragon.Hvac.CompressorType",
-      "CompressorType.RECIPROCATING": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Reciprocating",
-      "CompressorType.SCREW": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Screw",
-      "CompressorType.TURBO": "GonieGonie.InvisibleDragon.Hvac.CompressorType.Turbo",
-      "CoolingTower": "GonieGonie.InvisibleDragon.Hvac.CoolingTower",
-      "CoolingTower.__init__": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)",
-      "CoolingTower.idf_get_demandbranchlistname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_get_demandmixername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_get_demandsplittername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_get_loopname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)",
-      "CoolingTower.idf_get_objname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)",
-      "CoolingTower.idf_get_supplybranchlistname": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_get_supplymixername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_get_supplysplittername": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
-      "CoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.CoolingTower.IdfObjectType",
-      "Fuel": "GonieGonie.InvisibleDragon.Hvac.Fuel",
-      "Fuel.COAL": "GonieGonie.InvisibleDragon.Hvac.Fuel.Coal",
-      "Fuel.DIESEL": "GonieGonie.InvisibleDragon.Hvac.Fuel.Diesel",
-      "Fuel.ELECTRICITY": "GonieGonie.InvisibleDragon.Hvac.Fuel.Electricity",
-      "Fuel.FUELOILNO1": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo1",
-      "Fuel.FUELOILNO2": "GonieGonie.InvisibleDragon.Hvac.Fuel.FuelOilNo2",
-      "Fuel.GASOLINE": "GonieGonie.InvisibleDragon.Hvac.Fuel.Gasoline",
-      "Fuel.NATURALGAS": "GonieGonie.InvisibleDragon.Hvac.Fuel.NaturalGas",
-      "Fuel.OTHERFUEL1": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel1",
-      "Fuel.OTHERFUEL2": "GonieGonie.InvisibleDragon.Hvac.Fuel.OtherFuel2",
-      "Fuel.PROPANE": "GonieGonie.InvisibleDragon.Hvac.Fuel.Propane",
-      "GeothermalHeatPump": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump",
-      "GeothermalHeatPump.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType",
-      "HeatPump": "GonieGonie.InvisibleDragon.Hvac.HeatPump",
-      "HeatPump.__init__": "GonieGonie.InvisibleDragon.Hvac.HeatPump(...)",
-      "HeatPump.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.HeatPump.IdfObjectType",
-      "OpenSingleSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower",
-      "OpenSingleSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType",
-      "OpenTwoSpeedCoolingTower": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower",
-      "OpenTwoSpeedCoolingTower.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType",
-      "SourceSystem": "GonieGonie.InvisibleDragon.Hvac.SourceSystem",
-      "SourceSystem.idf_demandbranchlistname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_demandmixername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_demandsplittername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_loopname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.LoopName",
-      "SourceSystem.idf_objname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectName",
-      "SourceSystem.idf_objtypename": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.IdfObjectType",
-      "SourceSystem.idf_supplybranchlistname": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_supplymixername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_supplysplittername": "GonieGonie.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
-      "SourceSystem.idf_terminalunitlistname": "GonieGonie.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
+      "AbsorptionChiller": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller",
+      "AbsorptionChiller.__init__": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller(...)",
+      "AbsorptionChiller.idf_objtypename": "Dragons.InvisibleDragon.Hvac.AbsorptionChiller.IdfObjectType",
+      "Boiler": "Dragons.InvisibleDragon.Hvac.Boiler",
+      "Boiler.__init__": "Dragons.InvisibleDragon.Hvac.Boiler(...)",
+      "Boiler.idf_objtypename": "Dragons.InvisibleDragon.Hvac.Boiler.IdfObjectType",
+      "Chiller": "Dragons.InvisibleDragon.Hvac.Chiller",
+      "Chiller.__init__": "Dragons.InvisibleDragon.Hvac.Chiller(...)",
+      "Chiller.idf_objtypename": "Dragons.InvisibleDragon.Hvac.Chiller.IdfObjectType",
+      "ClosedSingleSpeedCoolingTower": "Dragons.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower",
+      "ClosedSingleSpeedCoolingTower.idf_objtypename": "Dragons.InvisibleDragon.Hvac.ClosedSingleSpeedCoolingTower.IdfObjectType",
+      "ClosedTwoSpeedCoolingTower": "Dragons.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower",
+      "ClosedTwoSpeedCoolingTower.idf_objtypename": "Dragons.InvisibleDragon.Hvac.ClosedTwoSpeedCoolingTower.IdfObjectType",
+      "CompressorType": "Dragons.InvisibleDragon.Hvac.CompressorType",
+      "CompressorType.RECIPROCATING": "Dragons.InvisibleDragon.Hvac.CompressorType.Reciprocating",
+      "CompressorType.SCREW": "Dragons.InvisibleDragon.Hvac.CompressorType.Screw",
+      "CompressorType.TURBO": "Dragons.InvisibleDragon.Hvac.CompressorType.Turbo",
+      "CoolingTower": "Dragons.InvisibleDragon.Hvac.CoolingTower",
+      "CoolingTower.__init__": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower(...), OpenTwoSpeedCoolingTower(...), ClosedSingleSpeedCoolingTower(...), ClosedTwoSpeedCoolingTower(...)",
+      "CoolingTower.idf_get_demandbranchlistname": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_demandmixername": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_demandsplittername": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_loopname": "Dragons.InvisibleDragon.Hvac.CoolingTower.LoopNameFor(SourceSystem)",
+      "CoolingTower.idf_get_objname": "Dragons.InvisibleDragon.Hvac.CoolingTower.ObjectNameFor(SourceSystem)",
+      "CoolingTower.idf_get_supplybranchlistname": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_supplymixername": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_get_supplysplittername": "Dragons.InvisibleDragon.Hvac.CoolingTower.ToIdfObjects(...) -> public IdfObject fields",
+      "CoolingTower.idf_objtypename": "Dragons.InvisibleDragon.Hvac.CoolingTower.IdfObjectType",
+      "Fuel": "Dragons.InvisibleDragon.Hvac.Fuel",
+      "Fuel.COAL": "Dragons.InvisibleDragon.Hvac.Fuel.Coal",
+      "Fuel.DIESEL": "Dragons.InvisibleDragon.Hvac.Fuel.Diesel",
+      "Fuel.ELECTRICITY": "Dragons.InvisibleDragon.Hvac.Fuel.Electricity",
+      "Fuel.FUELOILNO1": "Dragons.InvisibleDragon.Hvac.Fuel.FuelOilNo1",
+      "Fuel.FUELOILNO2": "Dragons.InvisibleDragon.Hvac.Fuel.FuelOilNo2",
+      "Fuel.GASOLINE": "Dragons.InvisibleDragon.Hvac.Fuel.Gasoline",
+      "Fuel.NATURALGAS": "Dragons.InvisibleDragon.Hvac.Fuel.NaturalGas",
+      "Fuel.OTHERFUEL1": "Dragons.InvisibleDragon.Hvac.Fuel.OtherFuel1",
+      "Fuel.OTHERFUEL2": "Dragons.InvisibleDragon.Hvac.Fuel.OtherFuel2",
+      "Fuel.PROPANE": "Dragons.InvisibleDragon.Hvac.Fuel.Propane",
+      "GeothermalHeatPump": "Dragons.InvisibleDragon.Hvac.GeothermalHeatPump",
+      "GeothermalHeatPump.idf_objtypename": "Dragons.InvisibleDragon.Hvac.GeothermalHeatPump.IdfObjectType",
+      "HeatPump": "Dragons.InvisibleDragon.Hvac.HeatPump",
+      "HeatPump.__init__": "Dragons.InvisibleDragon.Hvac.HeatPump(...)",
+      "HeatPump.idf_objtypename": "Dragons.InvisibleDragon.Hvac.HeatPump.IdfObjectType",
+      "OpenSingleSpeedCoolingTower": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower",
+      "OpenSingleSpeedCoolingTower.idf_objtypename": "Dragons.InvisibleDragon.Hvac.OpenSingleSpeedCoolingTower.IdfObjectType",
+      "OpenTwoSpeedCoolingTower": "Dragons.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower",
+      "OpenTwoSpeedCoolingTower.idf_objtypename": "Dragons.InvisibleDragon.Hvac.OpenTwoSpeedCoolingTower.IdfObjectType",
+      "SourceSystem": "Dragons.InvisibleDragon.Hvac.SourceSystem",
+      "SourceSystem.idf_demandbranchlistname": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_demandmixername": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_demandsplittername": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_loopname": "Dragons.InvisibleDragon.Hvac.SourceSystem.LoopName",
+      "SourceSystem.idf_objname": "Dragons.InvisibleDragon.Hvac.SourceSystem.IdfObjectName",
+      "SourceSystem.idf_objtypename": "Dragons.InvisibleDragon.Hvac.SourceSystem.IdfObjectType",
+      "SourceSystem.idf_supplybranchlistname": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_supplymixername": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_supplysplittername": "Dragons.InvisibleDragon.Hvac.SourceSystem.ToIdfObjects(...) -> public IdfObject fields",
+      "SourceSystem.idf_terminalunitlistname": "Dragons.InvisibleDragon.Hvac.HeatPump.TerminalUnitListName"
     },
     "runtime_signatures": {
       "AbsorptionChiller": {
@@ -2722,27 +2722,27 @@
     "source_receipts": [
       {
         "bytes": 7582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"
       },
       {
         "bytes": 18027,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs",
         "sha256": "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e"
       },
       {
         "bytes": 1076,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
         "sha256": "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a"
       },
       {
         "bytes": 23777,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs",
         "sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be"
       },
       {
         "bytes": 19554,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
         "sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07"
       }
     ],
@@ -2769,7 +2769,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-hvac-source-tower-core.v1",
+  "schema": "dragons.python-reference.dragon-hvac-source-tower-core.v1",
   "support": {
     "case_count": 20,
     "cases_sha256": "sha256:755e2115db65a100fe1b4249c4b4507719e5083aa2ea22939955a7aae53c5c07",
@@ -2798,7 +2798,7 @@
       "OpenTwoSpeedCoolingTower.to_idf_main_object",
       "SourceSystem.to_idf_object"
     ],
-    "schema": "goniegonie.python-reference.dragon-hvac-source-system-to-idf-object.v1"
+    "schema": "dragons.python-reference.dragon-hvac-source-system-to-idf-object.v1"
   },
   "symbols": [
     {

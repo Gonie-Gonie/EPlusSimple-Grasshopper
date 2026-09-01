@@ -25,7 +25,7 @@ from types import ModuleType
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.constants-metadata.v1"
+SCHEMA = "dragons.python-reference.constants-metadata.v1"
 SOURCE_PATH = "src/idragon/constants.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -103,14 +103,14 @@ ASSERTION_IDS = {
     for item in TARGET_RECEIPTS
 }
 NATIVE_ADAPTATION_CANDIDATES = {
-    "Directory": "GonieGonie.EnergyPlus.Runtime.RuntimeResolver and caller-supplied resource paths",
+    "Directory": "Dragons.EnergyPlus.Runtime.RuntimeResolver and caller-supplied resource paths",
     "Directory.ENERGYPLUS_DIR": "EnergyPlusRuntimeLayout.RootPath after manifest and payload validation",
     "Directory.IDD_DIR": "EnergyPlusRuntimeLayout.IddPath or an explicit Grasshopper IDD path",
-    "Directory.PROFILE_DIR": "typed GonieGonie.InvisibleDragon.Profile values supplied by callers",
-    "PackageInfo": "GonieGonie.InvisibleDragon.PackageInfo static class",
-    "PackageInfo.NAME": "GonieGonie.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
+    "Directory.PROFILE_DIR": "typed Dragons.InvisibleDragon.Profile values supplied by callers",
+    "PackageInfo": "Dragons.InvisibleDragon.PackageInfo static class",
+    "PackageInfo.NAME": "Dragons.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
     "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows build targets",
-    "PackageInfo.VERSION": "GonieGonie.InvisibleDragon.PackageInfo.Version (0.1.0)",
+    "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.0)",
 }
 RUNTIME_CONTRACTS = {
     "Directory": "class-signature:()",
@@ -192,15 +192,15 @@ ISOLATED_SOURCE_FILES = [
     "location-b/repository/src/idragon/constants.py",
 ]
 ISOLATED_MODULE_NAMES = [
-    "_goniegonie_constants_metadata_location_a",
-    "_goniegonie_constants_metadata_location_b",
+    "_dragons_constants_metadata_location_a",
+    "_dragons_constants_metadata_location_b",
 ]
 
 
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_schedule_type_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_constants_metadata_support", path
+        "_dragons_constants_metadata_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load constants metadata support: {path}")

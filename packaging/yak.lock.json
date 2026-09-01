@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.tool-lock.v1",
+  "schema": "dragons.tool-lock.v1",
   "version": "0.13.0",
   "windows_x64_url": "https://files.mcneel.com/yak/tools/0.13.0/yak.exe",
   "windows_x64_size": 12091427,

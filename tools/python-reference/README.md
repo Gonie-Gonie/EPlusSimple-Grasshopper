@@ -410,7 +410,7 @@ The dragon-model class oracle targets only public-inventory index 815,
 topology. It binds classification exception
 `sealed-read-only-native-energy-model-class-a7582a41`, assertion
 `dragon-model-energy-model-class-a7582a41`, and native type
-`GonieGonie.InvisibleDragon.Model.EnergyModel`. Indices 816-825 are resolved
+`Dragons.InvisibleDragon.Model.EnergyModel`. Indices 816-825 are resolved
 receipts only; the loaded `Version` symbols are context receipts only. The
 external temporary import audits all twelve loaded local modules against exact
 source and Python 3.12 AST receipts. Constructors and named members are not

@@ -114,7 +114,7 @@
       "python": {
         "facts": {
           "active_energyplus_process_claim": false,
-          "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
+          "native_route": "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync",
           "run_executed": false,
           "run_signature": "(self, weather: 'str', *, ep_dir: 'str' = None, verbose: 'bool' = True) -> 'EnergyPlusResult'"
         },
@@ -646,31 +646,31 @@
       "structural_only": false
     },
     "native_routes": {
-      "IDF": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.__init__": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-      "IDF.append": "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
-      "IDF.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.default_filename": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.idd": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.read_idf": "GonieGonie.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
-      "IDF.run": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.version": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.write": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject.this[int|string]",
-      "IdfObject.__init__": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__setitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-      "IdfObject.check_field_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.choices": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.ensure_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.grandparent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.has_parent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.idd": "GonieGonie.InvisibleDragon.Idf.IdfObject.Definition",
-      "IdfObject.parent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.rename": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)"
+      "IDF": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.__init__": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+      "IDF.append": "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+      "IDF.check_validity": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.default_filename": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.idd": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.read_idf": "Dragons.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
+      "IDF.run": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.version": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.write": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObject.this[int|string]",
+      "IdfObject.__init__": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__setitem__": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+      "IdfObject.check_field_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.check_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.choices": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.ensure_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.grandparent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.has_parent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.idd": "Dragons.InvisibleDragon.Idf.IdfObject.Definition",
+      "IdfObject.parent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.rename": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)"
     },
     "runtime_signatures": {
       "IDF": {
@@ -871,31 +871,31 @@
       "exception": 19
     },
     "native_routes": {
-      "IDF": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.__init__": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-      "IDF.append": "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
-      "IDF.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.default_filename": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.idd": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.read_idf": "GonieGonie.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
-      "IDF.run": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.version": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IDF.write": "GonieGonie.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject.this[int|string]",
-      "IdfObject.__init__": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__setitem__": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.__str__": "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
-      "IdfObject.check_field_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.check_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.choices": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.ensure_validity": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.grandparent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.has_parent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.idd": "GonieGonie.InvisibleDragon.Idf.IdfObject.Definition",
-      "IdfObject.parent": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
-      "IdfObject.rename": "GonieGonie.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)"
+      "IDF": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.__init__": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+      "IDF.append": "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+      "IDF.check_validity": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.default_filename": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.idd": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.read_idf": "Dragons.InvisibleDragon.Idf.IdfParser.ParseFile(string, IddSchema?, Encoding?)",
+      "IDF.run": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.version": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IDF.write": "Dragons.InvisibleDragon.Idf.IdfDocument public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObject.this[int|string]",
+      "IdfObject.__init__": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__setitem__": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.__str__": "Dragons.InvisibleDragon.Idf.IdfWriter.Write(IdfDocument, IdfWriterOptions?)",
+      "IdfObject.check_field_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.check_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.choices": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.ensure_validity": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.grandparent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.has_parent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.idd": "Dragons.InvisibleDragon.Idf.IdfObject.Definition",
+      "IdfObject.parent": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)",
+      "IdfObject.rename": "Dragons.InvisibleDragon.Idf.IdfObject public production API (intentional adaptation; no Python source/API compatibility claim)"
     },
     "no_python_api_or_source_compatibility_claim": true,
     "public_production_routes_only": true,
@@ -903,22 +903,22 @@
     "sources": [
       {
         "bytes": 13182,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
         "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"
       },
       {
         "bytes": 6040,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfParser.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfParser.cs",
         "sha256": "sha256:98a33eaed892707acb1d05c9e9ef74a9ebb9ec3d258e370e89ff706e267806be"
       },
       {
         "bytes": 4289,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs",
         "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"
       },
       {
         "bytes": 12094,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs",
         "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"
       }
     ]
@@ -2153,7 +2153,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.imugi-idf-object-core.v1",
+  "schema": "dragons.python-reference.imugi-idf-object-core.v1",
   "support": [
     {
       "bytes": 70965,

@@ -1,6 +1,6 @@
-using GonieGonie.Dragons.GrasshopperSmoke;
+using Dragons.GrasshopperSmoke;
 
-namespace GonieGonie.Dragons.Grasshopper.Rhino7Probe;
+namespace Dragons.Grasshopper.Rhino7Probe;
 
 internal static class Rhino7InsideHost
 {

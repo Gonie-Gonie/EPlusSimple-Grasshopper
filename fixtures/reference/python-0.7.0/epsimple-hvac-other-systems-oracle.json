@@ -1138,123 +1138,123 @@
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-5a79715b",
         "assertion_id": "epsimple-hvac-other-systems-283-5a79715b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
       },
       "PhotoVoltaicSystem.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-284-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Id"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem.Id"
       },
       "PhotoVoltaicSystem.__init__": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-b0187462",
         "assertion_id": "epsimple-hvac-other-systems-287-b0187462",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
       },
       "PhotoVoltaicSystem.area": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-290-aa93b96b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Area"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem.Area"
       },
       "PhotoVoltaicSystem.azimuth": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-291-3b2cfc1a",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Azimuth"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem.Azimuth"
       },
       "PhotoVoltaicSystem.efficiency": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-292-80144f2f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Efficiency"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem.Efficiency"
       },
       "PhotoVoltaicSystem.from_json": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-1571f37e",
         "assertion_id": "epsimple-hvac-other-systems-293-1571f37e",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch"
       },
       "PhotoVoltaicSystem.tilt": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-294-abeb16e6",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Tilt"
+        "native_route": "Dragons.SimpleDragon.PhotovoltaicSystem.Tilt"
       },
       "PhotoVoltaicSystem.to_dragon": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-6f67da14",
         "assertion_id": "epsimple-hvac-other-systems-295-6f67da14",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "VentilationSystem": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-b4f22735",
         "assertion_id": "epsimple-hvac-other-systems-325-b4f22735",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
       },
       "VentilationSystem.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-326-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.Id"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem.Id"
       },
       "VentilationSystem.__init__": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-7d9d5173",
         "assertion_id": "epsimple-hvac-other-systems-329-7d9d5173",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)"
       },
       "VentilationSystem.airflow_rate": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-332-b19eca15",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.AirflowRate"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem.AirflowRate"
       },
       "VentilationSystem.cooling_efficiency": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-333-83943137",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.CoolingEfficiency"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem.CoolingEfficiency"
       },
       "VentilationSystem.from_json": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-acaa4faa",
         "assertion_id": "epsimple-hvac-other-systems-334-acaa4faa",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch"
       },
       "VentilationSystem.heating_efficiency": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-other-systems-335-76edd9cd",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.VentilationSystem.HeatingEfficiency"
+        "native_route": "Dragons.SimpleDragon.VentilationSystem.HeatingEfficiency"
       },
       "VentilationSystem.to_dragon": {
         "adaptation": "reviewed-native-immutable-other-system-and-aggregate-route-fdc1293c",
         "assertion_id": "epsimple-hvac-other-systems-336-fdc1293c",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       }
     },
     "native_routes": {
-      "PhotoVoltaicSystem": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
-      "PhotoVoltaicSystem.ID": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Id",
-      "PhotoVoltaicSystem.__init__": "GonieGonie.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
-      "PhotoVoltaicSystem.area": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Area",
-      "PhotoVoltaicSystem.azimuth": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Azimuth",
-      "PhotoVoltaicSystem.efficiency": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Efficiency",
-      "PhotoVoltaicSystem.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch",
-      "PhotoVoltaicSystem.tilt": "GonieGonie.SimpleDragon.PhotovoltaicSystem.Tilt",
-      "PhotoVoltaicSystem.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "VentilationSystem": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
-      "VentilationSystem.ID": "GonieGonie.SimpleDragon.VentilationSystem.Id",
-      "VentilationSystem.__init__": "GonieGonie.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
-      "VentilationSystem.airflow_rate": "GonieGonie.SimpleDragon.VentilationSystem.AirflowRate",
-      "VentilationSystem.cooling_efficiency": "GonieGonie.SimpleDragon.VentilationSystem.CoolingEfficiency",
-      "VentilationSystem.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch",
-      "VentilationSystem.heating_efficiency": "GonieGonie.SimpleDragon.VentilationSystem.HeatingEfficiency",
-      "VentilationSystem.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      "PhotoVoltaicSystem": "Dragons.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "PhotoVoltaicSystem.ID": "Dragons.SimpleDragon.PhotovoltaicSystem.Id",
+      "PhotoVoltaicSystem.__init__": "Dragons.SimpleDragon.PhotovoltaicSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "PhotoVoltaicSystem.area": "Dragons.SimpleDragon.PhotovoltaicSystem.Area",
+      "PhotoVoltaicSystem.azimuth": "Dragons.SimpleDragon.PhotovoltaicSystem.Azimuth",
+      "PhotoVoltaicSystem.efficiency": "Dragons.SimpleDragon.PhotovoltaicSystem.Efficiency",
+      "PhotoVoltaicSystem.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) photovoltaic-system dispatch",
+      "PhotoVoltaicSystem.tilt": "Dragons.SimpleDragon.PhotovoltaicSystem.Tilt",
+      "PhotoVoltaicSystem.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "VentilationSystem": "Dragons.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "VentilationSystem.ID": "Dragons.SimpleDragon.VentilationSystem.Id",
+      "VentilationSystem.__init__": "Dragons.SimpleDragon.VentilationSystem constructor, public immutable properties, and GrmWriter.Write(GreenRetrofitModel, bool)",
+      "VentilationSystem.airflow_rate": "Dragons.SimpleDragon.VentilationSystem.AirflowRate",
+      "VentilationSystem.cooling_efficiency": "Dragons.SimpleDragon.VentilationSystem.CoolingEfficiency",
+      "VentilationSystem.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) ventilation-system dispatch",
+      "VentilationSystem.heating_efficiency": "Dragons.SimpleDragon.VentilationSystem.HeatingEfficiency",
+      "VentilationSystem.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     },
     "runtime_signatures": {
       "PhotoVoltaicSystem": {
@@ -1357,22 +1357,22 @@
     "source_receipts": [
       {
         "bytes": 3855,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/OtherSystems.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/OtherSystems.cs",
         "sha256": "sha256:72280cf991d2b48cca0e4be0c0da9402e63348666c4ae5f91ab41d7d1b5938b5"
       },
       {
         "bytes": 48650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
       },
       {
         "bytes": 16652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
       },
       {
         "bytes": 87343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
       }
     ],
@@ -1412,7 +1412,7 @@
       "sha256": "sha256:4d2dd8d0c487af7a24f93f1e79b9b27ed19676cf7909a8039d90248fd7d6e1bc"
     }
   },
-  "schema": "goniegonie.python-reference.epsimple-hvac-other-systems.v1",
+  "schema": "dragons.python-reference.epsimple-hvac-other-systems.v1",
   "symbols": [
     {
       "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",

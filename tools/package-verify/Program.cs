@@ -9,7 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace GonieGonie.PackageVerifier;
+namespace Dragons.PackageVerifier;
 
 internal static class Program
 {
@@ -131,7 +131,7 @@ internal sealed class PackageVerifier
 
     public VerificationReport Verify()
     {
-        Check(BothScenario, _spec.Schema == "goniegonie.dragons-grasshopper.package-spec.v3",
+        Check(BothScenario, _spec.Schema == "dragons-grasshopper.package-spec.v3",
             "Unsupported package specification schema '" + _spec.Schema + "'.");
         Check(BothScenario, Regex.IsMatch(_spec.Version, @"^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$"),
             "Package version is not SemVer: '" + _spec.Version + "'.");
@@ -157,7 +157,7 @@ internal sealed class PackageVerifier
         bool bothSuccess = _failures.Count == 0;
         return new VerificationReport
         {
-            Schema = "goniegonie.dragons-grasshopper.package-verification.v1",
+            Schema = "dragons-grasshopper.package-verification.v1",
             Version = _spec.Version,
             Success = bothSuccess,
             Scenarios = new SortedDictionary<string, bool>(StringComparer.Ordinal)
@@ -173,7 +173,7 @@ internal sealed class PackageVerifier
 
     private void VerifyDistributionManifest()
     {
-        Check(BothScenario, _distributions.Schema == "goniegonie.dragons-grasshopper.distributions.v3",
+        Check(BothScenario, _distributions.Schema == "dragons-grasshopper.distributions.v3",
             "Unsupported distribution manifest schema '" + _distributions.Schema + "'.");
         Check(BothScenario, _distributions.Payloads.Count == 2,
             "Distribution manifest must contain exactly two reviewed payloads.");
@@ -302,7 +302,7 @@ internal sealed class PackageVerifier
         using JsonDocument document = JsonDocument.Parse(File.ReadAllText(path));
         JsonElement root = document.RootElement;
         Check(BothScenario, root.GetProperty("schema").GetString()
-                == "goniegonie.dragons-grasshopper.package-index.v3",
+                == "dragons-grasshopper.package-index.v3",
             "Package index schema mismatch.");
         JsonElement redistribution = root.GetProperty("redistribution");
         Check(BothScenario, redistribution.GetProperty("energyPlusBinariesIncluded").GetBoolean()
@@ -438,7 +438,7 @@ internal sealed class PackageVerifier
             using JsonDocument document = JsonDocument.Parse(File.ReadAllText(payloadManifestPath));
             JsonElement package = document.RootElement;
             Check(scenario, package.GetProperty("schema").GetString()
-                    == "goniegonie.dragons-grasshopper.payload-manifest.v1",
+                    == "dragons-grasshopper.payload-manifest.v1",
                 "Payload manifest schema mismatch in '" + payloadManifestPath + "'.");
             Check(scenario, package.GetProperty("product").GetProperty("id").GetString() == product.Id,
                 "Payload manifest product mismatch in '" + payloadManifestPath + "'.");
@@ -710,14 +710,14 @@ internal sealed class PackageVerifier
             "Debug symbols or XML documentation are present in " + product.DisplayName + " " + targetKey + ".");
         if (product.Id == "invisible-dragon")
         {
-            Check(scenario, !files.Any(path => Path.GetFileName(path).StartsWith("GonieGonie.SimpleDragon.", StringComparison.Ordinal)),
+            Check(scenario, !files.Any(path => Path.GetFileName(path).StartsWith("Dragons.SimpleDragon.", StringComparison.Ordinal)),
                 "InvisibleDragon-only payload contains a SimpleDragon assembly in " + targetKey + ".");
         }
         else
         {
-            Check(scenario, !File.Exists(Path.Combine(payloadRoot, "GonieGonie.InvisibleDragon.GH.gha")),
+            Check(scenario, !File.Exists(Path.Combine(payloadRoot, "Dragons.InvisibleDragon.GH.gha")),
                 "SimpleDragon-only payload must not contain the InvisibleDragon component GHA in " + targetKey + ".");
-            Check(scenario, !File.Exists(Path.Combine(payloadRoot, "GonieGonie.InvisibleDragon.Grasshopper.Types.dll")),
+            Check(scenario, !File.Exists(Path.Combine(payloadRoot, "Dragons.InvisibleDragon.Grasshopper.Types.dll")),
                 "SimpleDragon-only payload must not contain InvisibleDragon Grasshopper types in " + targetKey + ".");
         }
 
@@ -731,7 +731,7 @@ internal sealed class PackageVerifier
                     + " " + targetKey + ": '" + identities[metadata.Name] + "' and '" + path + "'.");
             }
 
-            if (metadata.Name.StartsWith("GonieGonie.", StringComparison.Ordinal))
+            if (metadata.Name.StartsWith("Dragons.", StringComparison.Ordinal))
             {
                 Check(scenario, metadata.Version == new Version(0, 1, 0, 0),
                     "Assembly version mismatch for '" + path + "': " + metadata.Version + ".");
@@ -761,8 +761,8 @@ internal sealed class PackageVerifier
             AssemblyReferenceIdentity[] invisibleGrasshopperReferences = files.Where(IsManagedPayloadFile)
                 .Select(ReadAssembly)
                 .SelectMany(item => item.References)
-                .Where(reference => reference.Name is "GonieGonie.InvisibleDragon.GH"
-                    or "GonieGonie.InvisibleDragon.Grasshopper.Types")
+                .Where(reference => reference.Name is "Dragons.InvisibleDragon.GH"
+                    or "Dragons.InvisibleDragon.Grasshopper.Types")
                 .ToArray();
             Check(scenario, invisibleGrasshopperReferences.Length == 0,
                 "SimpleDragon " + targetKey + " still references an InvisibleDragon Grasshopper assembly.");
@@ -1070,7 +1070,7 @@ internal sealed class PackageVerifier
                 || name.StartsWith("python", StringComparison.Ordinal)
                 || name is "rhinocommon.dll" or "grasshopper.dll" or "gh_io.dll"
                     or "rhino.ui.dll" or "eto.dll" or "ed.eto.dll"
-                    or "goniegonie.yakinspectionhost.dll" or "yak.exe"
+                    or "dragons.yakinspectionhost.dll" or "yak.exe"
                     or "energyplus.exe" or "expandobjects.exe"
                 || name.EndsWith(".epw", StringComparison.Ordinal)
                 || name.EndsWith(".idd", StringComparison.Ordinal)

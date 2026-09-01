@@ -17,7 +17,7 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 }
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
-if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v3' -or
+if ([string] $packageSpec.schema -cne 'dragons-grasshopper.package-spec.v3' -or
     [string] $packageSpec.version -cne '0.1.0') {
     throw 'The first public release process is deliberately bound to version 0.1.0. Decide and commit the final version in package-spec.json before changing this guard.'
 }
@@ -238,17 +238,17 @@ function Assert-EngineeringPortProvenance {
     )
     $provenance = $Report.port_provenance
     if ($null -eq $provenance -or
-        [string] $provenance.schema -cne 'goniegonie.dragons.engineering-port-provenance.v1' -or
+        [string] $provenance.schema -cne 'dragons.engineering-port-provenance.v1' -or
         [string] $provenance.git.commit -cne $ExpectedCommit -or
         $provenance.git.dirty -isnot [bool] -or [bool] $provenance.git.dirty) {
         throw 'Engineering compatibility is not bound to the clean release HEAD.'
     }
 
     $sourceRoots = @(
-        'src/Shared/GonieGonie.BuildingEnergy.Contracts',
-        'src/Shared/GonieGonie.EnergyPlus.Runtime',
-        'src/InvisibleDragon/GonieGonie.InvisibleDragon.Core',
-        'src/SimpleDragon/GonieGonie.SimpleDragon.Core',
+        'src/Shared/Dragons.BuildingEnergy.Contracts',
+        'src/Shared/Dragons.EnergyPlus.Runtime',
+        'src/InvisibleDragon/Dragons.InvisibleDragon.Core',
+        'src/SimpleDragon/Dragons.SimpleDragon.Core',
         'tools/compatibility-runner'
     )
     $expectedPaths = @($sourceRoots | ForEach-Object {
@@ -283,9 +283,9 @@ function Assert-EngineeringPortProvenance {
 
     $binaries = @($provenance.executed_binaries.files)
     $expectedAssemblies = @(
-        'GonieGonie.BuildingEnergy.Contracts', 'GonieGonie.CompatibilityRunner',
-        'GonieGonie.EnergyPlus.Runtime', 'GonieGonie.InvisibleDragon.Core',
-        'GonieGonie.SimpleDragon.Core') | Sort-Object
+        'Dragons.BuildingEnergy.Contracts', 'Dragons.CompatibilityRunner',
+        'Dragons.EnergyPlus.Runtime', 'Dragons.InvisibleDragon.Core',
+        'Dragons.SimpleDragon.Core') | Sort-Object
     if ([string] $provenance.executed_binaries.target_framework -cne 'net8.0-windows' -or
         [string] $provenance.executed_binaries.configuration -cne 'Release' -or
         $provenance.executed_binaries.gha_executed -isnot [bool] -or
@@ -888,7 +888,7 @@ function Read-TrustedEvidenceFileOnce {
         throw "Trusted evidence $Label may not be a reparse point."
     }
 
-    if ($null -eq ('GonieGonieTrustedEvidenceNativeFile' -as [type])) {
+    if ($null -eq ('DragonsTrustedEvidenceNativeFile' -as [type])) {
         Add-Type -TypeDefinition @'
 using System;
 using System.ComponentModel;
@@ -896,7 +896,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-public static class GonieGonieTrustedEvidenceNativeFile
+public static class DragonsTrustedEvidenceNativeFile
 {
     [StructLayout(LayoutKind.Sequential)]
     private struct BY_HANDLE_FILE_INFORMATION
@@ -938,7 +938,7 @@ public static class GonieGonieTrustedEvidenceNativeFile
             [System.IO.FileMode]::Open,
             [System.IO.FileAccess]::Read,
             [System.IO.FileShare]::None)
-        if ([GonieGonieTrustedEvidenceNativeFile]::GetLinkCount(
+        if ([DragonsTrustedEvidenceNativeFile]::GetLinkCount(
                 $stream.SafeFileHandle) -ne 1) {
             throw "Trusted evidence $Label may not be hardlinked."
         }
@@ -1143,7 +1143,7 @@ function Get-TrustedEvidenceCanonicalReceiptMap {
             'upstream_commit') `
         -Label 'tracked symbol-evidence manifest'
     if ($Manifest.schema -isnot [string] -or
-        $Manifest.schema -cne 'goniegonie.upstream-symbol-evidence.v1' -or
+        $Manifest.schema -cne 'dragons.upstream-symbol-evidence.v1' -or
         $Manifest.entries -isnot [System.Array] -or
         $Manifest.upstream_commit -isnot [string] -or
         $Manifest.upstream_commit -cne $ExpectedUpstreamCommit) {
@@ -1487,7 +1487,7 @@ function Copy-TrustedEvidenceSession {
             'upstream_commit') `
         -Label 'authority receipt'
     if ($receipt.schema -isnot [string] -or
-        $receipt.schema -cne 'goniegonie.trusted-evidence-authority-receipt.v1' -or
+        $receipt.schema -cne 'dragons.trusted-evidence-authority-receipt.v1' -or
         $receipt.session_id -isnot [string] -or
         $receipt.session_id -cne $sessionId -or
         $receipt.artifact_index_path -isnot [string] -or
@@ -1559,7 +1559,7 @@ function Copy-TrustedEvidenceSession {
             'toolchain_manifest_sha256') `
         -Label 'artifact index'
     if ($index.schema -isnot [string] -or
-        $index.schema -cne 'goniegonie.trusted-evidence-artifact-index.v1' -or
+        $index.schema -cne 'dragons.trusted-evidence-artifact-index.v1' -or
         $index.session_id -isnot [string] -or
         $index.session_id -cne $sessionId -or
         $index.target_framework -isnot [string] -or
@@ -1735,7 +1735,7 @@ function Copy-TrustedEvidenceSession {
             'target_framework') `
         -Label 'collector request'
     if ($request.schema -isnot [string] -or
-        $request.schema -cne 'goniegonie.trusted-evidence-request.v1' -or
+        $request.schema -cne 'dragons.trusted-evidence-request.v1' -or
         $request.session_id -isnot [string] -or
         $request.session_id -cne $sessionId -or
         $request.repository_head -isnot [string] -or
@@ -1800,7 +1800,7 @@ function Copy-TrustedEvidenceSession {
             -Label "collector request.evidence_binding.$name"
     }
     if ($request.evidence_binding.collector_path -isnot [string] -or
-        $request.evidence_binding.collector_path -cne 'tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py' -or
+        $request.evidence_binding.collector_path -cne 'tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py' -or
         $request.evidence_binding.collector_symbol -isnot [string] -or
         $request.evidence_binding.collector_symbol -cne 'collect_trusted_evidence' -or
         $request.evidence_binding.collector_source_sha256 -cne $receipt.collector_source_sha256 -or
@@ -1823,7 +1823,7 @@ function Copy-TrustedEvidenceSession {
         $request.dotnet.sdk_root -isnot [string] -or
         $request.dotnet.sdk_version -isnot [string] -or
         $request.dotnet.sdk_manifest.schema -isnot [string] -or
-        $request.dotnet.sdk_manifest.schema -cne 'goniegonie.trusted-dotnet-sdk-manifest.v1' -or
+        $request.dotnet.sdk_manifest.schema -cne 'dragons.trusted-dotnet-sdk-manifest.v1' -or
         $request.dotnet.sdk_manifest.files -isnot [System.Array]) {
         throw 'Trusted evidence request dotnet/SDK manifest shape is invalid.'
     }
@@ -2184,7 +2184,7 @@ function Copy-TrustedEvidenceSession {
             'toolchain_manifest_sha256') `
         -Label 'collector child result'
     if ($child.schema -isnot [string] -or
-        $child.schema -cne 'goniegonie.trusted-evidence-child-result.v1' -or
+        $child.schema -cne 'dragons.trusted-evidence-child-result.v1' -or
         $child.session_id -isnot [string] -or
         $child.session_id -cne $sessionId -or
         $child.repository_head -isnot [string] -or
@@ -2873,7 +2873,7 @@ function Copy-ExampleGateEvidence {
         $reportPath = Join-Path $exampleEvidenceRoot ([string] $hostSpec.report)
         $summary = Require-Json `
             -Path $reportPath `
-            -Schema 'goniegonie.dragons-grasshopper.examples.v3'
+            -Schema 'dragons-grasshopper.examples.v3'
         if ([string] $summary.host -cne [string] $hostSpec.host -or
             [string] $summary.action -cne 'Validate' -or
             [string]::IsNullOrWhiteSpace([string] $summary.rhinoVersion) -or
@@ -3095,7 +3095,7 @@ Invoke-RepositoryCommand `
 $upstreamGateRead = Read-JsonBytesOnce -Path $upstreamGatePath
 $upstreamCompatibility = $upstreamGateRead.json
 if ($upstreamCompatibility.schema -isnot [string] -or
-    $upstreamCompatibility.schema -cne 'goniegonie.upstream-compatibility-report.v2') {
+    $upstreamCompatibility.schema -cne 'dragons.upstream-compatibility-report.v2') {
     throw 'Exact upstream public-symbol compatibility report has the wrong schema.'
 }
 
@@ -3287,7 +3287,7 @@ Assert-ReleaseSourceClean -Stage 'post-verification'
 
 $settings = Require-Json `
     -Path $settingsPath `
-    -Schema 'goniegonie.dragons-grasshopper.local-settings.v1'
+    -Schema 'dragons-grasshopper.local-settings.v1'
 $buildManifestPath = Join-Path $reportsRoot 'build-manifest.json'
 $testSummaryPath = Join-Path $reportsRoot 'test-summary.json'
 $engineeringCompatibilityPath = Join-Path $reportsRoot 'engineering-compatibility.json'
@@ -3298,19 +3298,19 @@ $compatibilityPath = Join-Path $packagesRoot 'compatibility-report.json'
 $packageChecksumsPath = Join-Path $packagesRoot 'checksums.sha256'
 $buildManifest = Require-Json `
     -Path $buildManifestPath `
-    -Schema 'goniegonie.dragons-grasshopper.build-manifest.v1'
+    -Schema 'dragons-grasshopper.build-manifest.v1'
 $testSummary = Require-Json `
     -Path $testSummaryPath `
-    -Schema 'goniegonie.dragons-grasshopper.test-summary.v1'
+    -Schema 'dragons-grasshopper.test-summary.v1'
 $engineeringCompatibility = Require-Json `
     -Path $engineeringCompatibilityPath `
-    -Schema 'goniegonie.dragons.engineering-compatibility-report.v1'
+    -Schema 'dragons.engineering-compatibility-report.v1'
 Assert-EngineeringPortProvenance `
     -Report $engineeringCompatibility `
     -ExpectedCommit $commit
 $packageIndex = Require-Json `
     -Path $packageIndexPath `
-    -Schema 'goniegonie.dragons-grasshopper.package-index.v3'
+    -Schema 'dragons-grasshopper.package-index.v3'
 $packagePublication = $packageIndex.redistribution
 if ([bool] $packagePublication.publicPublicationApprovedByOwner -ne [bool] $publicationSpec.publicPublicationApprovedByOwner -or
     [string] $packagePublication.publicPublicationApprovalBasis -cne [string] $publicationSpec.publicPublicationApprovalBasis -or
@@ -3329,7 +3329,7 @@ if ([bool] $packagePublication.publicPublicationApprovedByOwner -ne [bool] $publ
 }
 $compatibilityReport = Require-Json `
     -Path $compatibilityPath `
-    -Schema 'goniegonie.dragons-grasshopper.package-verification.v1'
+    -Schema 'dragons-grasshopper.package-verification.v1'
 if (-not [bool] $compatibilityReport.success -or
     @($compatibilityReport.failures).Count -ne 0) {
     throw 'Package compatibility report records a failure.'
@@ -3596,7 +3596,7 @@ Ensure-Directory -Path $hostReportRoot
 foreach ($summaryFile in $summaryFiles) {
     $summary = Require-Json `
         -Path $summaryFile.FullName `
-        -Schema 'goniegonie.dragons-grasshopper.host-smoke.v3'
+        -Schema 'dragons-grasshopper.host-smoke.v3'
     $key = [string] $summary.host + '/' + [string] $summary.scenario
     if ($expectedScenarios -notcontains $key) {
         throw "Portable host gate reported an unexpected scenario '$key'."
@@ -3795,11 +3795,11 @@ Remove-Item -LiteralPath $githubAssetsBuildRoot -Force
 
 $githubAssetsManifest = Require-Json `
     -Path $githubAssetsManifestPath `
-    -Schema 'goniegonie.dragons-grasshopper.github-release-assets.v1'
+    -Schema 'dragons-grasshopper.github-release-assets.v1'
 if ([string] $githubAssetsManifest.version -cne $releaseVersion -or
     [string] $githubAssetsManifest.publicDirectory -cne 'github-assets' -or
     [string] $githubAssetsManifest.installerManifestSchema -cne
-        'goniegonie.dragons-grasshopper.windows-installer.v1' -or
+        'dragons-grasshopper.windows-installer.v1' -or
     @($githubAssetsManifest.packageInputs).Count -ne 4) {
     throw 'GitHub Release asset manifest has the wrong version, layout, installer schema, or package count.'
 }
@@ -3864,7 +3864,7 @@ if ($githubUserGuide.Count -ne 1 -or
 }
 
 $releaseGate = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.release-gate.v3'
+    schema = 'dragons-grasshopper.release-gate.v3'
     status = 'passed'
     generatedUtc = [DateTime]::UtcNow.ToString('o')
     source = [pscustomobject] [ordered] @{

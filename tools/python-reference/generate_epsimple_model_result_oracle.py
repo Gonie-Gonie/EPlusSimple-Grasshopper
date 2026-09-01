@@ -30,7 +30,7 @@ from types import SimpleNamespace
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-model-result.v1"
+SCHEMA = "dragons.python-reference.epsimple-model-result.v1"
 SOURCE_PATH = "src/epsimple/core/model.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -82,7 +82,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_model_result_support", SUPPORT_PATH
+        "_dragons_epsimple_model_result_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -115,27 +115,27 @@ WEATHER_RESOURCES = (
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 23_665,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
         "sha256": "sha256:533ee8789aa9e02951216416be168b43c0ad7c20fc8da0c256a72650806fc32f",
     },
     {
         "bytes": 17_506,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs",
         "sha256": "sha256:9a9f1bc3c38814776c3c0ac888423418215c42bb7c270848b72b480751438b3b",
     },
     {
         "bytes": 19_280,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs",
         "sha256": "sha256:5181cc98bb9e193cae2c6c29b33ca74d6e98bf7e44f11e0e3855d9f591f4e8f7",
     },
     {
         "bytes": 14_845,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrReader.cs",
         "sha256": "sha256:498b12addde1cfc0c4e6c3931dd5c079e185cc2f45a9fa2cb5cde700f4075130",
     },
     {
         "bytes": 5_023,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs",
         "sha256": "sha256:802f6fb7592f1d48504f6d26b50a5d29e0e5305d5379265effb9efe080d5e65a",
     },
 )
@@ -202,20 +202,20 @@ ASSERTION_IDS = {
 }
 
 NATIVE_ROUTES = {
-    "GreenRetrofitResult": "GonieGonie.SimpleDragon.GreenRetrofitResult",
-    "GreenRetrofitResult.VALID_DIGITS": "GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits",
+    "GreenRetrofitResult": "Dragons.SimpleDragon.GreenRetrofitResult",
+    "GreenRetrofitResult.VALID_DIGITS": "Dragons.SimpleDragon.GreenRetrofitResult.ValidDigits",
     "GreenRetrofitResult.__init__": "GreenRetrofitResult.FromSiteUses(double, EnergyUseBreakdown) and GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
-    "GreenRetrofitResult.area": "GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea",
-    "GreenRetrofitResult.calc_domestic_hotwater_site_energy": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection",
-    "GreenRetrofitResult.get_dhw_servers": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping",
-    "GreenRetrofitResult.get_domestic_hotwater_energy": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand",
-    "GreenRetrofitResult.summarize": "GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries",
-    "GreenRetrofitResult.to_co2": "GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon",
-    "GreenRetrofitResult.to_cost": "GonieGonie.SimpleDragon.GreenRetrofitResult.Cost",
-    "GreenRetrofitResult.to_dict": "GonieGonie.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)",
-    "GreenRetrofitResult.to_site_uses": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses",
-    "GreenRetrofitResult.to_source_uses": "GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses",
-    "GreenRetrofitResult.write": "GonieGonie.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)",
+    "GreenRetrofitResult.area": "Dragons.SimpleDragon.GreenRetrofitResult.TotalArea",
+    "GreenRetrofitResult.calc_domestic_hotwater_site_energy": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection",
+    "GreenRetrofitResult.get_dhw_servers": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping",
+    "GreenRetrofitResult.get_domestic_hotwater_energy": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand",
+    "GreenRetrofitResult.summarize": "Dragons.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries",
+    "GreenRetrofitResult.to_co2": "Dragons.SimpleDragon.GreenRetrofitResult.Carbon",
+    "GreenRetrofitResult.to_cost": "Dragons.SimpleDragon.GreenRetrofitResult.Cost",
+    "GreenRetrofitResult.to_dict": "Dragons.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)",
+    "GreenRetrofitResult.to_site_uses": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses",
+    "GreenRetrofitResult.to_source_uses": "Dragons.SimpleDragon.GreenRetrofitResult.SourceUses",
+    "GreenRetrofitResult.write": "Dragons.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)",
 }
 
 _ADAPTATION_BASES = {
@@ -414,7 +414,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         },
         "Public-symbol inventory",
     )
-    if value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2":
+    if value["schema"] != "dragons.upstream-public-symbol-inventory.v2":
         raise SystemExit("The public-symbol inventory schema drifted.")
     if value["upstream_commit"].lower() != commit:
         raise SystemExit("The public-symbol inventory commit drifted.")

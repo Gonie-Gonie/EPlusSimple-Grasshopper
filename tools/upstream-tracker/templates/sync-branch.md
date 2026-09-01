@@ -1,4 +1,4 @@
-# GonieGonie upstream sync {{short_commit}}
+# Dragons upstream sync {{short_commit}}
 
 Branch: `{{branch_name}}`
 
@@ -17,7 +17,7 @@ Branch: `{{branch_name}}`
 
 - [ ] Revalidate `upstream/upstream.lock.json` without changing it prematurely.
 - [ ] Regenerate Python reference fixtures beneath `temp/`.
-- [ ] Port reviewed behavior into GonieGonie InvisibleDragon or SimpleDragon code.
+- [ ] Port reviewed behavior into InvisibleDragon or SimpleDragon code.
 - [ ] Run focused unit and parity tests.
 - [ ] Run semantic IDF comparison where applicable.
 - [ ] Run EnergyPlus numerical comparison where applicable.

@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.upstream-compatibility-scope.v1",
+  "schema": "dragons.upstream-compatibility-scope.v1",
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
   "module_paths": [
     "src/epsimple",

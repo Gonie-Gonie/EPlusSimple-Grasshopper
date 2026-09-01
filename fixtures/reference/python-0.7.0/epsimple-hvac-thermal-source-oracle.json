@@ -1581,333 +1581,333 @@
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c44e12f9",
         "assertion_id": "epsimple-hvac-thermal-source-135-c44e12f9",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
       },
       "AbsorptionChiller.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-136-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "AbsorptionChiller.__init__": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-4aae19c6",
         "assertion_id": "epsimple-hvac-thermal-source-139-4aae19c6",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties"
       },
       "AbsorptionChiller.boiler_efficiency": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-142-be052579",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.BoilerEfficiency"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.BoilerEfficiency"
       },
       "AbsorptionChiller.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-143-d699d5f1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity"
       },
       "AbsorptionChiller.cop": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-144-253d21d2",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCop"
       },
       "AbsorptionChiller.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f305d756",
         "assertion_id": "epsimple-hvac-thermal-source-145-f305d756",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "AbsorptionChiller.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7a12c015",
         "assertion_id": "epsimple-hvac-thermal-source-146-7a12c015",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "Boiler": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8d52ff9e",
         "assertion_id": "epsimple-hvac-thermal-source-157-8d52ff9e",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
       },
       "Boiler.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-158-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "Boiler.__init__": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f45db90e",
         "assertion_id": "epsimple-hvac-thermal-source-161-f45db90e",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties"
       },
       "Boiler.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-164-d699d5f1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity"
       },
       "Boiler.efficiency": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-165-80144f2f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Efficiency"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Efficiency"
       },
       "Boiler.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bd3f1e5a",
         "assertion_id": "epsimple-hvac-thermal-source-166-bd3f1e5a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "Boiler.fuel": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-167-64d0443e",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.FuelType"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.FuelType"
       },
       "Boiler.hotwater_supply": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-168-f9effaf3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HotWaterSupply"
       },
       "Boiler.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-86b77a93",
         "assertion_id": "epsimple-hvac-thermal-source-169-86b77a93",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "Chiller": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-8baa00de",
         "assertion_id": "epsimple-hvac-thermal-source-170-8baa00de",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
       },
       "Chiller.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-171-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "Chiller.__init__": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-9c5215c4",
         "assertion_id": "epsimple-hvac-thermal-source-174-9c5215c4",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties"
       },
       "Chiller.capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-177-d699d5f1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity"
       },
       "Chiller.compressor_type": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-178-000c99e3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CompressorType"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CompressorType"
       },
       "Chiller.coolingtower_capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-179-e56b52fb",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingTowerCapacity"
       },
       "Chiller.coolingtower_control": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-180-473c615a",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerControl"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingTowerControl"
       },
       "Chiller.coolingtower_type": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-181-75acdde9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerType"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingTowerType"
       },
       "Chiller.cop": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-182-253d21d2",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCop"
       },
       "Chiller.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-ca5a6445",
         "assertion_id": "epsimple-hvac-thermal-source-183-ca5a6445",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "Chiller.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-b3b58ae8",
         "assertion_id": "epsimple-hvac-thermal-source-184-b3b58ae8",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "DistrictHeating": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a1c6d574",
         "assertion_id": "epsimple-hvac-thermal-source-199-a1c6d574",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
       },
       "DistrictHeating.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-200-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "DistrictHeating.__init__": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-f477c20b",
         "assertion_id": "epsimple-hvac-thermal-source-203-f477c20b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties"
       },
       "DistrictHeating.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-c53a5bbb",
         "assertion_id": "epsimple-hvac-thermal-source-206-c53a5bbb",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "DistrictHeating.hotwater_supply": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-207-f9effaf3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HotWaterSupply"
       },
       "DistrictHeating.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-bf1c4c8b",
         "assertion_id": "epsimple-hvac-thermal-source-208-bf1c4c8b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "GeothermalHeatPump": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-a87f33ee",
         "assertion_id": "epsimple-hvac-thermal-source-248-a87f33ee",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties"
       },
       "GeothermalHeatPump.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-81ac3508",
         "assertion_id": "epsimple-hvac-thermal-source-251-81ac3508",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "GeothermalHeatPump.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-069a6710",
         "assertion_id": "epsimple-hvac-thermal-source-252-069a6710",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "HeatPump": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-3872db31",
         "assertion_id": "epsimple-hvac-thermal-source-253-3872db31",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
       },
       "HeatPump.ID": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-254-246156d9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.Id"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.Id"
       },
       "HeatPump.__init__": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-7e88c6cd",
         "assertion_id": "epsimple-hvac-thermal-source-257-7e88c6cd",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
+        "native_route": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties"
       },
       "HeatPump.cooling_capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-260-2c365992",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity"
       },
       "HeatPump.cooling_cop": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-261-59bd7983",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.CoolingCop"
       },
       "HeatPump.from_json": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-20b220f0",
         "assertion_id": "epsimple-hvac-thermal-source-262-20b220f0",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
+        "native_route": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch"
       },
       "HeatPump.fuel": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-263-37420422",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.FuelType"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.FuelType"
       },
       "HeatPump.heating_capacity": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-264-b48949da",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity"
       },
       "HeatPump.heating_cop": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-hvac-thermal-source-265-55ddf021",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.SourceSystem.HeatingCop"
+        "native_route": "Dragons.SimpleDragon.SourceSystem.HeatingCop"
       },
       "HeatPump.to_dragon": {
         "adaptation": "reviewed-native-discriminated-source-aggregate-and-conversion-route-0feeee0b",
         "assertion_id": "epsimple-hvac-thermal-source-266-0feeee0b",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       }
     },
     "native_routes": {
-      "AbsorptionChiller": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
-      "AbsorptionChiller.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "AbsorptionChiller.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
-      "AbsorptionChiller.boiler_efficiency": "GonieGonie.SimpleDragon.SourceSystem.BoilerEfficiency",
-      "AbsorptionChiller.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
-      "AbsorptionChiller.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
-      "AbsorptionChiller.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "AbsorptionChiller.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "Boiler": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
-      "Boiler.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "Boiler.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
-      "Boiler.capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
-      "Boiler.efficiency": "GonieGonie.SimpleDragon.SourceSystem.Efficiency",
-      "Boiler.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "Boiler.fuel": "GonieGonie.SimpleDragon.SourceSystem.FuelType",
-      "Boiler.hotwater_supply": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply",
-      "Boiler.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "Chiller": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
-      "Chiller.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "Chiller.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
-      "Chiller.capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
-      "Chiller.compressor_type": "GonieGonie.SimpleDragon.SourceSystem.CompressorType",
-      "Chiller.coolingtower_capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerCapacity",
-      "Chiller.coolingtower_control": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerControl",
-      "Chiller.coolingtower_type": "GonieGonie.SimpleDragon.SourceSystem.CoolingTowerType",
-      "Chiller.cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
-      "Chiller.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "Chiller.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "DistrictHeating": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
-      "DistrictHeating.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "DistrictHeating.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
-      "DistrictHeating.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "DistrictHeating.hotwater_supply": "GonieGonie.SimpleDragon.SourceSystem.HotWaterSupply",
-      "DistrictHeating.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "GeothermalHeatPump": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties",
-      "GeothermalHeatPump.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "GeothermalHeatPump.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "HeatPump": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
-      "HeatPump.ID": "GonieGonie.SimpleDragon.SourceSystem.Id",
-      "HeatPump.__init__": "GonieGonie.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
-      "HeatPump.cooling_capacity": "GonieGonie.SimpleDragon.SourceSystem.CoolingCapacity",
-      "HeatPump.cooling_cop": "GonieGonie.SimpleDragon.SourceSystem.CoolingCop",
-      "HeatPump.from_json": "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
-      "HeatPump.fuel": "GonieGonie.SimpleDragon.SourceSystem.FuelType",
-      "HeatPump.heating_capacity": "GonieGonie.SimpleDragon.SourceSystem.HeatingCapacity",
-      "HeatPump.heating_cop": "GonieGonie.SimpleDragon.SourceSystem.HeatingCop",
-      "HeatPump.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+      "AbsorptionChiller": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
+      "AbsorptionChiller.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "AbsorptionChiller.__init__": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.AbsorptionChiller and public properties",
+      "AbsorptionChiller.boiler_efficiency": "Dragons.SimpleDragon.SourceSystem.BoilerEfficiency",
+      "AbsorptionChiller.capacity": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity",
+      "AbsorptionChiller.cop": "Dragons.SimpleDragon.SourceSystem.CoolingCop",
+      "AbsorptionChiller.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "AbsorptionChiller.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Boiler": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
+      "Boiler.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "Boiler.__init__": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Boiler and public properties",
+      "Boiler.capacity": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity",
+      "Boiler.efficiency": "Dragons.SimpleDragon.SourceSystem.Efficiency",
+      "Boiler.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "Boiler.fuel": "Dragons.SimpleDragon.SourceSystem.FuelType",
+      "Boiler.hotwater_supply": "Dragons.SimpleDragon.SourceSystem.HotWaterSupply",
+      "Boiler.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "Chiller": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
+      "Chiller.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "Chiller.__init__": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.Chiller and public properties",
+      "Chiller.capacity": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity",
+      "Chiller.compressor_type": "Dragons.SimpleDragon.SourceSystem.CompressorType",
+      "Chiller.coolingtower_capacity": "Dragons.SimpleDragon.SourceSystem.CoolingTowerCapacity",
+      "Chiller.coolingtower_control": "Dragons.SimpleDragon.SourceSystem.CoolingTowerControl",
+      "Chiller.coolingtower_type": "Dragons.SimpleDragon.SourceSystem.CoolingTowerType",
+      "Chiller.cop": "Dragons.SimpleDragon.SourceSystem.CoolingCop",
+      "Chiller.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "Chiller.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "DistrictHeating": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
+      "DistrictHeating.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "DistrictHeating.__init__": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.DistrictHeating and public properties",
+      "DistrictHeating.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "DistrictHeating.hotwater_supply": "Dragons.SimpleDragon.SourceSystem.HotWaterSupply",
+      "DistrictHeating.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "GeothermalHeatPump": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.GeothermalHeatPump and public properties",
+      "GeothermalHeatPump.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "GeothermalHeatPump.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "HeatPump": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
+      "HeatPump.ID": "Dragons.SimpleDragon.SourceSystem.Id",
+      "HeatPump.__init__": "Dragons.SimpleDragon.SourceSystem constructor with SourceSystemType.HeatPump and public properties",
+      "HeatPump.cooling_capacity": "Dragons.SimpleDragon.SourceSystem.CoolingCapacity",
+      "HeatPump.cooling_cop": "Dragons.SimpleDragon.SourceSystem.CoolingCop",
+      "HeatPump.from_json": "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) source-system dispatch",
+      "HeatPump.fuel": "Dragons.SimpleDragon.SourceSystem.FuelType",
+      "HeatPump.heating_capacity": "Dragons.SimpleDragon.SourceSystem.HeatingCapacity",
+      "HeatPump.heating_cop": "Dragons.SimpleDragon.SourceSystem.HeatingCop",
+      "HeatPump.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     },
     "runtime_signatures": {
       "AbsorptionChiller": {
@@ -2139,22 +2139,22 @@
     "source_receipts": [
       {
         "bytes": 6894,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs",
         "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad"
       },
       {
         "bytes": 48650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968"
       },
       {
         "bytes": 16652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842"
       },
       {
         "bytes": 87343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd"
       }
     ],
@@ -2194,7 +2194,7 @@
       "sha256": "sha256:eaa5691d29c341844097c8690f0e12970824494f1e00e8287811b7876ba3df0d"
     }
   },
-  "schema": "goniegonie.python-reference.epsimple-hvac-thermal-source.v1",
+  "schema": "dragons.python-reference.epsimple-hvac-thermal-source.v1",
   "symbols": [
     {
       "body_hash": "sha256:a8cb41ce6b4a3368c18fc1ffc46dc3caa684c9c210d2e0c0b194a276332c88b0",

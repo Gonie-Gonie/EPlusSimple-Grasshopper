@@ -15,20 +15,20 @@ from support import (
     write_configuration,
 )
 
-from goniegonie_upstream_tracker.classifier import (
+from dragons_upstream_tracker.classifier import (
     ChangeClassification,
     compare_sources,
     inspect_source_identity,
 )
-from goniegonie_upstream_tracker.config import load_configuration
-from goniegonie_upstream_tracker.errors import SourceError
-from goniegonie_upstream_tracker.reporting import (
+from dragons_upstream_tracker.config import load_configuration
+from dragons_upstream_tracker.errors import SourceError
+from dragons_upstream_tracker.reporting import (
     render_json,
     render_markdown,
     render_sync_branch,
     write_reports,
 )
-from goniegonie_upstream_tracker.symbols import build_snapshot
+from dragons_upstream_tracker.symbols import build_snapshot
 
 
 class MappingAndReportTests(unittest.TestCase):
@@ -195,7 +195,7 @@ class MappingAndReportTests(unittest.TestCase):
             second_paths = write_reports(report, output, REPOSITORY_ROOT, TOOL_ROOT / "templates" / "sync-branch.md")
             self.assertEqual(first_bytes, tuple(path.read_bytes() for path in second_paths))
             parsed = json.loads((output / "report.json").read_text(encoding="utf-8"))
-            self.assertEqual("goniegonie.upstream-diff-report.v1", parsed["schema"])
+            self.assertEqual("dragons.upstream-diff-report.v1", parsed["schema"])
             with self.assertRaisesRegex(SourceError, "beneath"):
                 write_reports(
                     report,
@@ -245,9 +245,9 @@ class MappingAndReportTests(unittest.TestCase):
             [
                 "git",
                 "-c",
-                "user.name=GonieGonie Test",
+                "user.name=Dragons Test",
                 "-c",
-                "user.email=test@goniegonie.invalid",
+                "user.email=test@dragons.invalid",
                 "commit",
                 "--quiet",
                 "-m",

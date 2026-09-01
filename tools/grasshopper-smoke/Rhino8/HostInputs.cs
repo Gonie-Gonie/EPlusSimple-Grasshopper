@@ -1,4 +1,4 @@
-namespace GonieGonie.Dragons.GrasshopperSmoke.Rhino8;
+namespace Dragons.GrasshopperSmoke.Rhino8;
 
 internal static class Rhino8Environment
 {

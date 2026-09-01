@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.python-reference.database-query-oracle.v1",
+  "schema": "dragons.python-reference.database-query-oracle.v1",
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
   "surface": {
     "regulation_dates": [

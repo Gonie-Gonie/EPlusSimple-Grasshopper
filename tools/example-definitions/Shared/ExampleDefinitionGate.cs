@@ -6,7 +6,7 @@ using Grasshopper;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Special;
 
-namespace GonieGonie.Dragons.ExampleDefinitions;
+namespace Dragons.ExampleDefinitions;
 
 internal static class ExampleDefinitionGate
 {
@@ -32,10 +32,10 @@ internal static class ExampleDefinitionGate
             new Guid("dca742da-0ac5-4520-8022-97f98974dfea"),
             new Guid("d15984d5-cd3f-4798-a67c-73138b54859e"),
             new Guid("6d5a9b54-8a9e-4c95-91df-469e21a783c9"),
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.OpaqueMaterialComponent",
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.ConstructionLayerComponent",
-            "GonieGonie.InvisibleDragon.Grasshopper.Components.LayeredConstructionComponent",
-            "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo",
+            "Dragons.InvisibleDragon.Grasshopper.Components.OpaqueMaterialComponent",
+            "Dragons.InvisibleDragon.Grasshopper.Components.ConstructionLayerComponent",
+            "Dragons.InvisibleDragon.Grasshopper.Components.LayeredConstructionComponent",
+            "Dragons.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo",
             new Guid("01000000-0000-4000-8000-000000000001"),
             new Guid("01000000-0000-4000-8000-000000000002"),
             new Guid("01000000-0000-4000-8000-000000000005"),
@@ -53,10 +53,10 @@ internal static class ExampleDefinitionGate
             new Guid("fee586e8-692c-407e-a803-d5c43f3c7222"),
             new Guid("b97da4a1-7b1c-472a-a4b0-83603e202c2b"),
             new Guid("3e1fa67f-dbb2-4c19-b54b-226c295f5751"),
-            "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent",
-            "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionLayerComponent",
-            "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionComponent",
-            "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo",
+            "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent",
+            "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionLayerComponent",
+            "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionComponent",
+            "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo",
             new Guid("02000000-0000-4000-8000-000000000001"),
             new Guid("02000000-0000-4000-8000-000000000002"),
             new Guid("02000000-0000-4000-8000-000000000005"),
@@ -459,7 +459,7 @@ internal static class ExampleDefinitionGate
             string? product = Definitions
                 .Where(definition => string.Equals(
                     Path.GetFileName(path),
-                    $"GonieGonie.{definition.Product}.GH.gha",
+                    $"Dragons.{definition.Product}.GH.gha",
                     StringComparison.OrdinalIgnoreCase))
                 .Select(definition => definition.Product)
                 .Distinct(StringComparer.Ordinal)
@@ -866,7 +866,7 @@ internal static class ExampleDefinitionGate
 internal sealed class ExampleHostSummary
 {
     [DataMember(Name = "schema", Order = 1)]
-    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.examples.v3";
+    public string Schema { get; set; } = "dragons-grasshopper.examples.v3";
 
     [DataMember(Name = "host", Order = 2)]
     public string Host { get; set; } = string.Empty;

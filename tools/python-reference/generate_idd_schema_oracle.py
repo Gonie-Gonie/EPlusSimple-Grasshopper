@@ -29,7 +29,7 @@ from pathlib import Path
 from typing import Any
 
 
-ORACLE_SCHEMA = "goniegonie.energyplus-idd-schema.v1"
+ORACLE_SCHEMA = "dragons.energyplus-idd-schema.v1"
 REQUIRED_PYTHON = (3, 12, 7)
 EPJSON_SCHEMA_DRAFT = "https://json-schema.org/draft-07/schema#"
 FIELD_PATTERN = re.compile(

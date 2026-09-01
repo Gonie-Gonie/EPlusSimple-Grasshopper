@@ -730,7 +730,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-hvac-supply-group-core.v1",
+  "schema": "dragons.python-reference.dragon-hvac-supply-group-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:643ca4afc57e9a0b22eee5df0a2cd7b90d9d579cf16bb20fd6d6a9e40b5bc57c",

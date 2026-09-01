@@ -6,7 +6,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.schedule-type-oracle.v1",
+  "schema": "dragons.invisibledragon.schedule-type-oracle.v1",
   "symbols": [
     {
       "body_hash": "sha256:28911386caf6d923039bdb75e4f158df1102e0a5415fce1567ccbdaaf7eb5f09",

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Dragons.ExampleDefinitions.Rhino8</AssemblyName>
+    <RootNamespace>Dragons.ExampleDefinitions.Rhino8</RootNamespace>
+    <Description>Real Rhino 8 generator and reopen validator for tracked Dragon Grasshopper examples.</Description>
+    <NoWarn>$(NoWarn);NU1701;CA1031;CA1510;CA1512</NoWarn>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" />
+    <PackageReference Include="Rhino.Inside" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" Private="false" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\CanonicalExamplePublisher.cs" Link="Shared\CanonicalExamplePublisher.cs" />
+    <Compile Include="..\Shared\AdvancedExampleDefinitions.cs" Link="Shared\AdvancedExampleDefinitions.cs" />
+    <Compile Include="..\Shared\ExampleBuildingModels.cs" Link="Shared\ExampleBuildingModels.cs" />
+    <Compile Include="..\Shared\ExampleDefinitionGate.cs" Link="Shared\ExampleDefinitionGate.cs" />
+    <Compile Include="..\Shared\ExampleHostInputs.cs" Link="Shared\ExampleHostInputs.cs" />
+    <Compile Include="..\Shared\IsExternalInit.cs" Link="Shared\IsExternalInit.cs" />
+  </ItemGroup>
+</Project>

@@ -36,7 +36,7 @@ from types import SimpleNamespace
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-model-core.v1"
+SCHEMA = "dragons.python-reference.epsimple-model-core.v1"
 SOURCE_PATH = "src/epsimple/core/model.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -84,7 +84,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_model_support", SUPPORT_PATH
+        "_dragons_epsimple_model_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -260,21 +260,21 @@ ASSERTION_IDS = {
 
 def _native_route(symbol: str) -> str:
     if symbol in {"ADDR_WEATHER_TABLE", "CLIMATE_TABLE", "InvalidAddressError", "address_to_weather"}:
-        return "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+        return "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
     if symbol.startswith("EnergyPlusError"):
-        return "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+        return "Dragons.EnergyPlus.Runtime.EnergyPlusFailure and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
     if symbol == "GreenRetrofitModel.from_grjson":
-        return "GonieGonie.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)"
+        return "Dragons.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)"
     if symbol == "GreenRetrofitModel.to_dragon":
-        return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     if symbol == "GreenRetrofitModel.to_idf":
-        return "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)"
+        return "Dragons.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)"
     if symbol == "GreenRetrofitModel.run":
-        return "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+        return "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
     if symbol == "GreenRetrofitModel.source_system":
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems and GonieGonie.SimpleDragon.GreenRetrofitModel.SupplySystems"
+        return "Dragons.SimpleDragon.GreenRetrofitModel.SourceSystems and Dragons.SimpleDragon.GreenRetrofitModel.SupplySystems"
     if symbol == "GreenRetrofitModel.weather_filepath":
-        return "GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)"
+        return "Dragons.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)"
     member = {
         "GreenRetrofitModel.address": "Address",
         "GreenRetrofitModel.area": "Area",
@@ -299,9 +299,9 @@ def _native_route(symbol: str) -> str:
         "GreenRetrofitModel.weather": "Weather.WeatherLocation",
     }
     if symbol in {"GreenRetrofitModel", "GreenRetrofitModel.__init__"}:
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel constructor"
+        return "Dragons.SimpleDragon.GreenRetrofitModel constructor"
     if symbol in member:
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel." + member[symbol]
+        return "Dragons.SimpleDragon.GreenRetrofitModel." + member[symbol]
     raise RuntimeError(f"No reviewed native route for {symbol}.")
 
 
@@ -427,7 +427,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         {"content_sha256", "files", "schema", "scope_sha256", "summary", "symbols", "upstream_commit"},
         "Public-symbol inventory",
     )
-    if value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2":
+    if value["schema"] != "dragons.upstream-public-symbol-inventory.v2":
         raise SystemExit("The public-symbol inventory schema drifted.")
     if value["upstream_commit"].lower() != commit:
         raise SystemExit("The public-symbol inventory commit drifted.")

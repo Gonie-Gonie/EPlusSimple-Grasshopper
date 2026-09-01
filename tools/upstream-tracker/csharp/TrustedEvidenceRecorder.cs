@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text.Json;
 
-namespace GonieGonie.UpstreamTracker;
+namespace Dragons.UpstreamTracker;
 
 /// <summary>
 /// Emits one deterministic-output record for the trusted compatibility collector.
@@ -10,7 +10,7 @@ namespace GonieGonie.UpstreamTracker;
 /// </summary>
 internal static class TrustedEvidenceRecorder
 {
-    private const string RecordSchema = "goniegonie.trusted-evidence-record.v1";
+    private const string RecordSchema = "dragons.trusted-evidence-record.v1";
 
     public static void Record(
         string assertionId,
@@ -19,9 +19,9 @@ internal static class TrustedEvidenceRecorder
         object? output)
     {
         string? recordsDirectory = Environment.GetEnvironmentVariable(
-            "GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY");
+            "DRAGONS_EVIDENCE_RECORDS_DIRECTORY");
         string? nonce = Environment.GetEnvironmentVariable(
-            "GONIEGONIE_EVIDENCE_SESSION_NONCE");
+            "DRAGONS_EVIDENCE_SESSION_NONCE");
         bool hasRecordsDirectory = !string.IsNullOrWhiteSpace(recordsDirectory);
         bool hasNonce = !string.IsNullOrWhiteSpace(nonce);
         if (!hasRecordsDirectory && !hasNonce)

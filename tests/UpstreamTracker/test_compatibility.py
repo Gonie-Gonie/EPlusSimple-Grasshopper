@@ -7,7 +7,7 @@ import unittest
 
 from support import TemporaryWorkspace, bind_exception_hash, write_configuration
 
-from goniegonie_upstream_tracker.compatibility import (
+from dragons_upstream_tracker.compatibility import (
     CompatibilityConfiguration,
     CompatibilityMatrix,
     MatrixEntry,
@@ -25,9 +25,9 @@ from goniegonie_upstream_tracker.compatibility import (
     rebase_compatibility_inventory,
     render_compatibility_report,
 )
-from goniegonie_upstream_tracker.config import TrackerConfiguration, load_configuration
-from goniegonie_upstream_tracker.errors import ConfigurationError
-from goniegonie_upstream_tracker.evidence import (
+from dragons_upstream_tracker.config import TrackerConfiguration, load_configuration
+from dragons_upstream_tracker.errors import ConfigurationError
+from dragons_upstream_tracker.evidence import (
     ScopeDecision,
     ScopeDecisionRegistry,
     empty_scope_decisions,
@@ -323,7 +323,7 @@ class _PrivateService:
             self.assertFalse(report.classification_complete)
             self.assertFalse(report.passed)
             data = json.loads(render_compatibility_report(report))
-            self.assertEqual("goniegonie.upstream-compatibility-report.v2", data["schema"])
+            self.assertEqual("dragons.upstream-compatibility-report.v2", data["schema"])
             self.assertEqual(len(inventory.symbols), len(data["unresolved"]))
 
             decisions = tuple(
@@ -659,7 +659,7 @@ class _PrivateService:
         )
         tracker = load_configuration(lock, port_map, exceptions)
         scope_data = {
-            "schema": "goniegonie.upstream-compatibility-scope.v1",
+            "schema": "dragons.upstream-compatibility-scope.v1",
             "upstream_commit": tracker.lock.commit,
             "module_paths": list(tracker.lock.module_paths),
             "inventory_policy": {
@@ -722,9 +722,9 @@ class _PrivateService:
             [
                 "git",
                 "-c",
-                "user.name=GonieGonie Test",
+                "user.name=Dragons Test",
                 "-c",
-                "user.email=test@goniegonie.invalid",
+                "user.email=test@dragons.invalid",
                 "commit",
                 "--quiet",
                 "-m",

@@ -47,14 +47,14 @@ def write_configuration(
     workspace: TemporaryWorkspace,
     *,
     mapping_symbol: str = "Service.run",
-    project: str = "GonieGonie.InvisibleDragon.Core",
+    project: str = "Dragons.InvisibleDragon.Core",
     mapping_path: str = "src/source/service.py",
     exception_symbol: str | None = None,
 ) -> tuple[Path, Path, Path]:
     lock = workspace.write(
         "config/upstream.lock.json",
         """{
-  "schema": "goniegonie.upstream-lock.v1",
+  "schema": "dragons.upstream-lock.v1",
   "repository": "https://example.invalid/historical-source.git",
   "branch": "main",
   "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -77,7 +77,7 @@ def write_configuration(
   dotnet:
     project: {project}
     file: Model/Service.cs
-    symbol: GonieGonie.InvisibleDragon.Model.Service
+    symbol: Dragons.InvisibleDragon.Model.Service
   tests:
     - ServiceParityTests
   status: equivalent
@@ -91,7 +91,7 @@ def write_configuration(
     symbol_hash: null
   difference:
     upstream: source behavior
-    dotnet: reviewed GonieGonie behavior
+    dotnet: reviewed Dragons behavior
   effect:
     engineering_result: none
   approval: accepted
@@ -104,7 +104,7 @@ def write_configuration(
     symbol_hash: sha256:{'0' * 64}
   difference:
     upstream: source behavior
-    dotnet: reviewed GonieGonie behavior
+    dotnet: reviewed Dragons behavior
   effect:
     engineering_result: none
   approval: accepted

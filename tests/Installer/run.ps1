@@ -121,7 +121,7 @@ try {
         -Pattern '*must be named Rhino.exe*'
 
     $settings = [pscustomobject] [ordered] @{
-        schema = 'goniegonie.dragons-grasshopper.local-settings.v1'
+        schema = 'dragons-grasshopper.local-settings.v1'
         rhino = [pscustomobject] [ordered] @{
             rhino7 = [pscustomobject] [ordered] @{
                 status = 'missing'

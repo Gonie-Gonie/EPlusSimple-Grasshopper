@@ -11,7 +11,7 @@ import unittest
 
 from support import REPOSITORY_ROOT, TemporaryWorkspace
 
-from goniegonie_upstream_tracker.evidence import (
+from dragons_upstream_tracker.evidence import (
     EvidenceReceipt,
     EvidenceResults,
     ExecutedAssertion,
@@ -19,8 +19,8 @@ from goniegonie_upstream_tracker.evidence import (
     SymbolEvidenceRegistry,
     evaluate_evidence_execution,
 )
-import goniegonie_upstream_tracker.trusted_collector as trusted_collector
-from goniegonie_upstream_tracker.trusted_collector import (
+import dragons_upstream_tracker.trusted_collector as trusted_collector
+from dragons_upstream_tracker.trusted_collector import (
     RECORD_SCHEMA,
     REQUEST_SCHEMA,
     TrustedCollectorError,
@@ -187,7 +187,7 @@ class TrustedCollectorTests(unittest.TestCase):
                 newline="\n",
             )
             (source / "Program.cs").write_text(
-                """using GonieGonie.UpstreamTracker;
+                """using Dragons.UpstreamTracker;
 try
 {
     if (args[0] == "invalid")
@@ -234,8 +234,8 @@ catch (InvalidOperationException)
             base_environment = _isolated_dotnet_environment(
                 workspace.path / "runs" / "base", dotnet
             )
-            base_environment.pop("GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY", None)
-            base_environment.pop("GONIEGONIE_EVIDENCE_SESSION_NONCE", None)
+            base_environment.pop("DRAGONS_EVIDENCE_RECORDS_DIRECTORY", None)
+            base_environment.pop("DRAGONS_EVIDENCE_SESSION_NONCE", None)
             no_op = subprocess.run(
                 [str(dotnet), str(probe), "invalid"],
                 cwd=source,
@@ -250,7 +250,7 @@ catch (InvalidOperationException)
             )
 
             one_environment = dict(base_environment)
-            one_environment["GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY"] = str(
+            one_environment["DRAGONS_EVIDENCE_RECORDS_DIRECTORY"] = str(
                 workspace.path / "records-one"
             )
             one = subprocess.run(
@@ -266,8 +266,8 @@ catch (InvalidOperationException)
             both_environment = dict(base_environment)
             both_environment.update(
                 {
-                    "GONIEGONIE_EVIDENCE_RECORDS_DIRECTORY": str(records),
-                    "GONIEGONIE_EVIDENCE_SESSION_NONCE": NONCE,
+                    "DRAGONS_EVIDENCE_RECORDS_DIRECTORY": str(records),
+                    "DRAGONS_EVIDENCE_SESSION_NONCE": NONCE,
                 }
             )
             both = subprocess.run(
@@ -701,7 +701,7 @@ catch (InvalidOperationException)
         self.assertIn("'--collect-evidence'", release)
         self.assertIn("$upstreamRoot", release)
         self.assertIn("$upstreamGatePath", release)
-        self.assertIn("goniegonie.upstream-compatibility-report.v2", release)
+        self.assertIn("dragons.upstream-compatibility-report.v2", release)
         self.assertLess(release.index(reference), release.index(gate))
         self.assertLess(release.index(gate), release.index(build))
         self.assertIn("upstreamPublicSymbolCompatibility", release)
@@ -1023,12 +1023,12 @@ if (-not $rejected) {{ exit 14 }}
             restore_command = _dotnet_restore_command(request, project)
             self.assertIn(
                 "-p:CustomBeforeMicrosoftCommonTargets="
-                f"{source_root / '.goniegonie-no-custom-before.targets'}",
+                f"{source_root / '.dragons-no-custom-before.targets'}",
                 command,
             )
             self.assertIn(
                 "-p:CustomAfterMicrosoftCommonTargets="
-                f"{source_root / '.goniegonie-no-custom-after.targets'}",
+                f"{source_root / '.dragons-no-custom-after.targets'}",
                 command,
             )
             self.assertIn("-p:ImportDirectoryBuildTargets=false", command)
@@ -1287,7 +1287,7 @@ if (-not $rejected) {{ exit 14 }}
             inventory = {
                 "content_sha256": inventory_hash,
                 **inventory_content,
-                "schema": "goniegonie.upstream-public-symbol-inventory.v2",
+                "schema": "dragons.upstream-public-symbol-inventory.v2",
                 "summary": {},
             }
             evidence_content = {
@@ -1299,7 +1299,7 @@ if (-not $rejected) {{ exit 14 }}
             evidence = {
                 "content_sha256": evidence_hash,
                 **evidence_content,
-                "schema": "goniegonie.upstream-symbol-evidence.v1",
+                "schema": "dragons.upstream-symbol-evidence.v1",
                 "summary": {},
             }
             self._write_json(upstream / "public-symbol-inventory.json", inventory)
@@ -1318,7 +1318,7 @@ if (-not $rejected) {{ exit 14 }}
             matrix = {
                 "content_sha256": matrix_hash,
                 **matrix_content,
-                "schema": "goniegonie.upstream-compatibility-matrix.v1",
+                "schema": "dragons.upstream-compatibility-matrix.v1",
                 "summary": {},
             }
             self._write_json(upstream / "compatibility-matrix.json", matrix)
@@ -1576,17 +1576,17 @@ if (-not $rejected) {{ exit 14 }}
         session = root / "temp" / "u" / session_id
         session.mkdir(parents=True)
         collector = workspace.write(
-            "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+            "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
             "def collect_trusted_evidence():\n    pass\n",
         )
         collector_hash = _sha256_bytes(collector.read_bytes())
         source_root = session / "s"
-        source_collector = source_root / "tools" / "upstream-tracker" / "goniegonie_upstream_tracker" / "trusted_collector.py"
+        source_collector = source_root / "tools" / "upstream-tracker" / "dragons_upstream_tracker" / "trusted_collector.py"
         source_collector.parent.mkdir(parents=True)
         source_collector.write_bytes(collector.read_bytes())
         source_files = [
             {
-                "path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+                "path": "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
                 "sha256": collector_hash,
             }
         ]
@@ -1618,7 +1618,7 @@ if (-not $rejected) {{ exit 14 }}
                 "sha256": _sha256_bytes(dotnet_path.read_bytes()),
             },
             "evidence_binding": {
-                "collector_path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+                "collector_path": "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
                 "collector_source_sha256": collector_hash,
                 "collector_symbol": "collect_trusted_evidence",
                 "inventory_sha256": HASH_A,
@@ -1632,7 +1632,7 @@ if (-not $rejected) {{ exit 14 }}
             },
             "inputs": [
                 {
-                    "path": "tools/upstream-tracker/goniegonie_upstream_tracker/trusted_collector.py",
+                    "path": "tools/upstream-tracker/dragons_upstream_tracker/trusted_collector.py",
                     "sha256": collector_hash,
                 }
             ],
@@ -1757,9 +1757,9 @@ if (-not $rejected) {{ exit 14 }}
             [
                 "git",
                 "-c",
-                "user.name=GonieGonie Test",
+                "user.name=Dragons Test",
                 "-c",
-                "user.email=test@goniegonie.invalid",
+                "user.email=test@dragons.invalid",
                 "commit",
                 "--quiet",
                 "-m",

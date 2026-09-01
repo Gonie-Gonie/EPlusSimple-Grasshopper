@@ -1301,7 +1301,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.day-schedule-metrics-oracle.v1",
+  "schema": "dragons.invisibledragon.day-schedule-metrics-oracle.v1",
   "symbols": [
     {
       "body_hash": "sha256:52a6dab9125b3d5bd64c619c6719f15633c05fc014502fc0eb00add48f1b3b70",

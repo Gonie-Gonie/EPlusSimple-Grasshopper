@@ -41,8 +41,8 @@ foreach ($expected in @(
 }
 
 foreach ($packageInfo in @(
-    'src\InvisibleDragon\GonieGonie.InvisibleDragon.Core\PackageInfo.cs',
-    'src\SimpleDragon\GonieGonie.SimpleDragon.Core\PackageInfo.cs')) {
+    'src\InvisibleDragon\Dragons.InvisibleDragon.Core\PackageInfo.cs',
+    'src\SimpleDragon\Dragons.SimpleDragon.Core\PackageInfo.cs')) {
     $text = [System.IO.File]::ReadAllText((Join-Path $repositoryRoot $packageInfo))
     if ($text -notmatch ('public const string Version\s*=\s*"' + [regex]::Escape($version) + '";')) {
         throw "PackageInfo version does not match $version in '$packageInfo'."
@@ -88,7 +88,7 @@ foreach ($generatedRoot in @($PackagesRoot, $StageRoot)) {
 }
 
 Set-RepositoryBuildEnvironment -RepositoryRoot $repositoryRoot -DotNetExecutable $DotNetExecutable
-$project = Join-Path $repositoryRoot 'tools\package-verify\GonieGonie.PackageVerifier.csproj'
+$project = Join-Path $repositoryRoot 'tools\package-verify\Dragons.PackageVerifier.csproj'
 $buildLog = Join-Path $repositoryRoot 'temp\packaging\logs\package-verifier-build.log'
 Invoke-LoggedNativeCommand `
     -FilePath $DotNetExecutable `

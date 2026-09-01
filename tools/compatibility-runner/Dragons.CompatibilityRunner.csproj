@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>Dragons.CompatibilityRunner</AssemblyName>
+    <RootNamespace>Dragons.CompatibilityRunner</RootNamespace>
+    <Description>Paired C# engine and reporter for pinned Python compatibility cases.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Shared\Dragons.EnergyPlus.Runtime\Dragons.EnergyPlus.Runtime.csproj" />
+    <ProjectReference Include="..\..\src\InvisibleDragon\Dragons.InvisibleDragon.Core\Dragons.InvisibleDragon.Core.csproj" />
+    <ProjectReference Include="..\..\src\SimpleDragon\Dragons.SimpleDragon.Core\Dragons.SimpleDragon.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -2,27 +2,27 @@
   "version": 2,
   "dependencies": {
     "net8.0-windows7.0": {
-      "goniegonie.buildingenergy.contracts": {
+      "dragons.buildingenergy.contracts": {
         "type": "Project"
       },
-      "goniegonie.energyplus.runtime": {
+      "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.0, )"
         }
       },
-      "goniegonie.invisibledragon.core": {
+      "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[0.1.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[0.1.0, )",
+          "Dragons.EnergyPlus.Runtime": "[0.1.0, )"
         }
       },
-      "goniegonie.simpledragon.core": {
+      "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[0.1.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[0.1.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[0.1.0, )",
+          "Dragons.InvisibleDragon.Core": "[0.1.0, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },

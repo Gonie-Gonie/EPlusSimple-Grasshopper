@@ -11,11 +11,11 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 
-namespace GonieGonie.Dragons.ComponentCatalog;
+namespace Dragons.ComponentCatalog;
 
 internal static class Program
 {
-    private const string CatalogSchema = "goniegonie.dragons.component-catalog.v1";
+    private const string CatalogSchema = "dragons.component-catalog.v1";
     private const string DefaultConfiguration = "Release";
     private const string DefaultFramework = "net8.0-windows";
 
@@ -30,14 +30,14 @@ internal static class Program
     {
         new(
             "InvisibleDragon",
-            "GonieGonie.InvisibleDragon.GH",
-            "GonieGonie.InvisibleDragon.Grasshopper.Types",
-            "GonieGonie.InvisibleDragon.Grasshopper.Parameters"),
+            "Dragons.InvisibleDragon.GH",
+            "Dragons.InvisibleDragon.Grasshopper.Types",
+            "Dragons.InvisibleDragon.Grasshopper.Parameters"),
         new(
             "SimpleDragon",
-            "GonieGonie.SimpleDragon.GH",
-            "GonieGonie.SimpleDragon.Grasshopper.Types",
-            "GonieGonie.SimpleDragon.Grasshopper.Parameters"),
+            "Dragons.SimpleDragon.GH",
+            "Dragons.SimpleDragon.Grasshopper.Types",
+            "Dragons.SimpleDragon.Grasshopper.Parameters"),
     };
 
     [STAThread]

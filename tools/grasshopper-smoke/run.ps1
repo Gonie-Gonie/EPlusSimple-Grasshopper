@@ -237,16 +237,16 @@ function Get-ScenarioProducts([string]$ScenarioName) {
 
 function Get-ProductGhaName([string]$ProductId) {
     switch ($ProductId) {
-        "invisible-dragon" { return "GonieGonie.InvisibleDragon.GH.gha" }
-        "simple-dragon" { return "GonieGonie.SimpleDragon.GH.gha" }
+        "invisible-dragon" { return "Dragons.InvisibleDragon.GH.gha" }
+        "simple-dragon" { return "Dragons.SimpleDragon.GH.gha" }
         default { throw "Unsupported product '$ProductId'." }
     }
 }
 
 function Get-ProductTypesName([string]$ProductId) {
     switch ($ProductId) {
-        "invisible-dragon" { return "GonieGonie.InvisibleDragon.Grasshopper.Types.dll" }
-        "simple-dragon" { return "GonieGonie.SimpleDragon.Grasshopper.Types.dll" }
+        "invisible-dragon" { return "Dragons.InvisibleDragon.Grasshopper.Types.dll" }
+        "simple-dragon" { return "Dragons.SimpleDragon.Grasshopper.Types.dll" }
         default { throw "Unsupported product '$ProductId'." }
     }
 }
@@ -269,7 +269,7 @@ function Read-PackageIndex {
     ) "portable package index"
     Assert-NoReparseChain $indexPath
     $index = Get-Content -LiteralPath $indexPath -Raw | ConvertFrom-Json
-    if ([string]$index.schema -ne "goniegonie.dragons-grasshopper.package-index.v3") {
+    if ([string]$index.schema -ne "dragons-grasshopper.package-index.v3") {
         throw "Unsupported portable package index schema in '$indexPath'."
     }
 
@@ -496,7 +496,7 @@ function Assert-IndexedArchiveShaRejected {
     $archivePath = Join-Path $portable "invisible-dragon-0.1.0-portable-plugin-win.zip"
     New-ArchiveSafetyTestZip $archivePath @("safe.txt")
     $index = [pscustomobject]@{
-        schema = "goniegonie.dragons-grasshopper.package-index.v3"
+        schema = "dragons-grasshopper.package-index.v3"
         products = @([pscustomobject]@{
             id = "invisible-dragon"
             portable = [pscustomobject]@{
@@ -559,10 +559,10 @@ function Resolve-PortablePayload(
     }
 
     $oppositeGha = if ($ProductId -eq "simple-dragon") {
-        "GonieGonie.InvisibleDragon.GH.gha"
+        "Dragons.InvisibleDragon.GH.gha"
     }
     else {
-        "GonieGonie.SimpleDragon.GH.gha"
+        "Dragons.SimpleDragon.GH.gha"
     }
     if (@(Get-ChildItem -LiteralPath $ExtractedRoot -File -Recurse |
             Where-Object { $_.Name.Equals($oppositeGha, [StringComparison]::OrdinalIgnoreCase) }).Count -ne 0) {
@@ -583,10 +583,10 @@ function Resolve-PortablePayload(
 
 function Resolve-BuildPayload([string]$ProductId, [string]$Framework) {
     $assemblyName = if ($ProductId -eq "invisible-dragon") {
-        "GonieGonie.InvisibleDragon.GH"
+        "Dragons.InvisibleDragon.GH"
     }
     else {
-        "GonieGonie.SimpleDragon.GH"
+        "Dragons.SimpleDragon.GH"
     }
     $payloadRoot = Join-Path $repoRoot (
         "temp\build\bin\$assemblyName\Release\$Framework")
@@ -626,7 +626,7 @@ function Assert-HostSummary(
     [object[]]$Payloads) {
     Require-File $SummaryPath "host summary" | Out-Null
     $summary = Get-Content -LiteralPath $SummaryPath -Raw | ConvertFrom-Json
-    if ([string]$summary.schema -ne "goniegonie.dragons-grasshopper.host-smoke.v3") {
+    if ([string]$summary.schema -ne "dragons-grasshopper.host-smoke.v3") {
         throw "Host summary has an unexpected schema: '$($summary.schema)'."
     }
     if ([string]$summary.scenario -ne $ScenarioName -or
@@ -792,8 +792,8 @@ try {
     $requestedProducts = @($scenarios |
         ForEach-Object { Get-ScenarioProducts $_ } |
         Select-Object -Unique)
-    $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\GonieGonie.InvisibleDragon.GH\GonieGonie.InvisibleDragon.GH.csproj"
-    $simpleProject = Join-Path $repoRoot "src\SimpleDragon\GonieGonie.SimpleDragon.GH\GonieGonie.SimpleDragon.GH.csproj"
+    $invisibleProject = Join-Path $repoRoot "src\InvisibleDragon\Dragons.InvisibleDragon.GH\Dragons.InvisibleDragon.GH.csproj"
+    $simpleProject = Join-Path $repoRoot "src\SimpleDragon\Dragons.SimpleDragon.GH\Dragons.SimpleDragon.GH.csproj"
 
     $portableRoots = @{}
     if ($Source -eq "PortablePackage") {
@@ -819,7 +819,7 @@ try {
             Build-Plugin $project ($rhino8Framework + "-windows") "$productId-rhino8"
         }
 
-        $rhino8Project = Join-Path $toolRoot "Rhino8\GonieGonie.Dragons.Grasshopper.Rhino8Smoke.csproj"
+        $rhino8Project = Join-Path $toolRoot "Rhino8\Dragons.Grasshopper.Rhino8Smoke.csproj"
         $rhino8HostOutput = Join-Path $runRoot "host-runner\rhino8"
         Invoke-DotNetLogged @("restore", $rhino8Project, "--locked-mode", "--nologo") "restore-rhino8-host.log"
         Invoke-DotNetLogged @(
@@ -829,7 +829,7 @@ try {
             "--output", $rhino8HostOutput
         ) "build-rhino8-host.log"
         $rhino8Runner = Require-File (
-            Join-Path $rhino8HostOutput "GonieGonie.Dragons.Grasshopper.Rhino8Smoke.dll"
+            Join-Path $rhino8HostOutput "Dragons.Grasshopper.Rhino8Smoke.dll"
         ) "Rhino 8 host runner"
 
         foreach ($scenarioName in $scenarios) {
@@ -880,7 +880,7 @@ try {
             "--output", $rhino7HostOutput
         ) + $rhino7Properties) "build-rhino7-host.log"
         $rhino7Runner = Require-File (
-            Join-Path $rhino7HostOutput "GonieGonie.Dragons.Grasshopper.Rhino7Probe.exe"
+            Join-Path $rhino7HostOutput "Dragons.Grasshopper.Rhino7Probe.exe"
         ) "Rhino 7 host runner"
 
         foreach ($scenarioName in $scenarios) {

@@ -136,9 +136,9 @@ class ImugiIdfObjectCoreOracleTests(unittest.TestCase):
         self.assertEqual(Counter({"equivalent": 6, "exception": 19}), Counter(contract["classifications"].values()))
         self.assertEqual(set(generator.TARGET_SYMBOLS), set(contract["native_routes"]))
         self.assertEqual(25, len(set(contract["assertion_ids"].values())))
-        self.assertTrue(all(route.startswith("GonieGonie.") for route in contract["native_routes"].values()))
+        self.assertTrue(all(route.startswith("Dragons.") for route in contract["native_routes"].values()))
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
             contract["native_routes"]["IDF.append"],
         )
 

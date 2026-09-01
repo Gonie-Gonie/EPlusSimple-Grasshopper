@@ -488,7 +488,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.simpledragon.utils-core-oracle.v1",
+  "schema": "dragons.simpledragon.utils-core-oracle.v1",
   "symbols": [
     {
       "body_hash": "sha256:bfd54ded3c829caf3ffe7c5b15a3692067451f5f758d2bc89df825fb39c4409e",

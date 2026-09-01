@@ -4268,7 +4268,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
+  "schema": "dragons.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
   "symbols": [
     {
       "body_hash": "sha256:a227ed7b60c5a482a11b9a11f36e243b56cae95e2889effe9abe7e6e70d0346b",

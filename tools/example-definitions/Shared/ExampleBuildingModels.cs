@@ -5,7 +5,7 @@ using Rhino.DocObjects;
 using Rhino.FileIO;
 using Rhino.Geometry;
 
-namespace GonieGonie.Dragons.ExampleDefinitions;
+namespace Dragons.ExampleDefinitions;
 
 internal static class ExampleBuildingModels
 {

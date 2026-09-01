@@ -564,7 +564,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-conditioning.v1",
+  "schema": "dragons.python-reference.dragon-model-conditioning.v1",
   "symbols": [
     {
       "body_hash": "sha256:ae71f1c62c76cfdf6890e18c83f3dd2709b9fb72627f690db7dc52b7db719348",

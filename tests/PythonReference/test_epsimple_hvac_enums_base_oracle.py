@@ -257,7 +257,7 @@ class EPlusSimpleHvacEnumsBaseOracleTests(unittest.TestCase):
         self.assertTrue(evidence["python_behavior_oracle_only"])
         self.assertTrue(evidence["relocatable_import_claim"])
         for route in contract["native_routes"].values():
-            self.assertIn("GonieGonie.SimpleDragon", route)
+            self.assertIn("Dragons.SimpleDragon", route)
             self.assertNotIn(".Internal", route)
             self.assertNotIn("GrmVocabulary", route)
 

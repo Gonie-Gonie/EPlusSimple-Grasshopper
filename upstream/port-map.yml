@@ -6,9 +6,9 @@
     path: src/idragon/__init__.py
     symbol: package metadata
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: PackageInfo.cs
-    symbol: GonieGonie.InvisibleDragon.PackageInfo
+    symbol: Dragons.InvisibleDragon.PackageInfo
   tests:
     - PackageInfoTests
   status: equivalent
@@ -17,9 +17,9 @@
     path: src/epsimple/__init__.py
     symbol: package metadata
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: PackageInfo.cs
-    symbol: GonieGonie.SimpleDragon.PackageInfo
+    symbol: Dragons.SimpleDragon.PackageInfo
   tests:
     - PackageInfoTests
   status: equivalent
@@ -28,9 +28,9 @@
     path: src/idragon/imugi.py
     symbol: IDD / IddObject / IddField
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Idd/
-    symbol: GonieGonie.InvisibleDragon.Idd
+    symbol: Dragons.InvisibleDragon.Idd
   tests:
     - IddParserTests
   status: equivalent
@@ -39,9 +39,9 @@
     path: src/idragon/imugi.py
     symbol: IDF / IdfObject / IdfObjectList
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Idf/
-    symbol: GonieGonie.InvisibleDragon.Idf
+    symbol: Dragons.InvisibleDragon.Idf
   tests:
     - IdfDocumentTests
     - IdfValidatorTests
@@ -51,9 +51,9 @@
     path: src/idragon/dragon/construction.py
     symbol: construction domain
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Construction/
-    symbol: GonieGonie.InvisibleDragon.Construction
+    symbol: Dragons.InvisibleDragon.Construction
   tests:
     - ConstructionTests
   status: implemented
@@ -62,9 +62,9 @@
     path: src/idragon/dragon/profile.py
     symbol: schedule and profile domain
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Profile/
-    symbol: GonieGonie.InvisibleDragon.Profile
+    symbol: Dragons.InvisibleDragon.Profile
   tests:
     - DayScheduleTests
     - RuleSetScheduleProfileTests
@@ -74,9 +74,9 @@
     path: src/idragon/dragon/shape.py
     symbol: vertex surface opening and zone domain
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Shape/
-    symbol: GonieGonie.InvisibleDragon.Shape
+    symbol: Dragons.InvisibleDragon.Shape
   tests:
     - PlanarPolygonTests
     - SurfaceOpeningTests
@@ -87,9 +87,9 @@
     path: src/epsimple/core/construction.py
     symbol: Material / SurfaceConstruction / FenestrationConstruction databases
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Construction/
-    symbol: GonieGonie.SimpleDragon.Construction
+    symbol: Dragons.SimpleDragon.Construction
   tests:
     - ConstructionDatabaseTests
   status: equivalent
@@ -98,9 +98,9 @@
     path: src/epsimple/core/profile.py
     symbol: Profile database
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Profiles/
-    symbol: GonieGonie.SimpleDragon.Profiles
+    symbol: Dragons.SimpleDragon.Profiles
   tests:
     - ProfileDatabaseTests
   status: equivalent
@@ -109,9 +109,9 @@
     path: src/epsimple/core/model.py
     symbol: address_to_weather
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Weather/WeatherDatabase.cs
-    symbol: GonieGonie.SimpleDragon.Weather.WeatherDatabase
+    symbol: Dragons.SimpleDragon.Weather.WeatherDatabase
   tests:
     - WeatherDatabaseTests
   status: equivalent
@@ -120,9 +120,9 @@
     path: src/epsimple/core/model.py
     symbol: GreenRetrofitModel._dragonize_surface / GreenRetrofitModel.to_dragon
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Conversion/GreenRetrofitConversion.cs
-    symbol: GonieGonie.SimpleDragon.GreenRetrofitConverter
+    symbol: Dragons.SimpleDragon.GreenRetrofitConverter
   tests:
     - GreenRetrofitConversionTests
   status: implemented
@@ -131,9 +131,9 @@
     path: src/epsimple/core/model.py
     symbol: GreenRetrofitResult / GreenRetrofitModel.run result projection
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Results/
-    symbol: GonieGonie.SimpleDragon.GreenRetrofitResult
+    symbol: Dragons.SimpleDragon.GreenRetrofitResult
   tests:
     - GrrRoundTripTests
     - GreenRetrofitResultBuilderTests
@@ -143,9 +143,9 @@
     path: src/epsimple/core/shape.py
     symbol: Surface / Fenestration / Zone / BuildingFloor
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Shape/
-    symbol: GonieGonie.SimpleDragon.Shape
+    symbol: Dragons.SimpleDragon.Shape
   tests:
     - ShapeAndSystemsTests
     - GrmRoundTripTests
@@ -155,9 +155,9 @@
     path: src/epsimple/core/hvac.py
     symbol: source supply ventilation and photovoltaic systems
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Hvac/
-    symbol: GonieGonie.SimpleDragon.Hvac
+    symbol: Dragons.SimpleDragon.Hvac
   tests:
     - ShapeAndSystemsTests
     - GreenRetrofitConversionTests
@@ -167,9 +167,9 @@
     path: src/epsimple/core/model.py
     symbol: GreenRetrofitModel GRM serialization
   dotnet:
-    project: GonieGonie.SimpleDragon.Core
+    project: Dragons.SimpleDragon.Core
     file: Serialization/
-    symbol: GonieGonie.SimpleDragon.GrmReader / GonieGonie.SimpleDragon.GrmWriter
+    symbol: Dragons.SimpleDragon.GrmReader / Dragons.SimpleDragon.GrmWriter
   tests:
     - GrmRoundTripTests
   status: equivalent
@@ -178,9 +178,9 @@
     path: src/idragon/dragon/hvac.py
     symbol: HVAC sources supplies ventilation and photovoltaic systems
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Hvac/
-    symbol: GonieGonie.InvisibleDragon.Hvac
+    symbol: Dragons.InvisibleDragon.Hvac
   tests:
     - SourceSystemTests
     - ColdSourceSystemTests
@@ -195,9 +195,9 @@
     path: src/idragon/dragon/model.py
     symbol: EnergyModel and EnergyPlus IDF assembly
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Model/
-    symbol: GonieGonie.InvisibleDragon.Model
+    symbol: Dragons.InvisibleDragon.Model
   tests:
     - EnergyModelValidationTests
     - EnergyModelFixtureMatrixTests
@@ -209,9 +209,9 @@
     path: src/idragon/launcher.py
     symbol: EnergyPlus result collection and interpretation
   dotnet:
-    project: GonieGonie.InvisibleDragon.Core
+    project: Dragons.InvisibleDragon.Core
     file: Results/
-    symbol: GonieGonie.InvisibleDragon.Results
+    symbol: Dragons.InvisibleDragon.Results
   tests:
     - EnergyPlusResultParserTests
   status: implemented
@@ -220,21 +220,21 @@
     path: src/idragon/dragon/shape.py
     symbol: Rhino geometry conversion provenance and face adjacency
   dotnet:
-    project: GonieGonie.InvisibleDragon.Rhino
+    project: Dragons.InvisibleDragon.Rhino
     file: RhinoPolygonConverter.cs
-    symbol: GonieGonie.InvisibleDragon.Rhino.RhinoPolygonConverter
+    symbol: Dragons.InvisibleDragon.Rhino.RhinoPolygonConverter
   tests:
     - RhinoGeometryFingerprintTests
-    - GonieGonie.InvisibleDragon.Rhino.Smoke
+    - Dragons.InvisibleDragon.Rhino.Smoke
   status: enhanced
 
 - upstream:
     path: src/idragon/dragon/construction.py
     symbol: Grasshopper construction authoring surface
   dotnet:
-    project: GonieGonie.InvisibleDragon.GH
+    project: Dragons.InvisibleDragon.GH
     file: Components/ConstructionComponents.cs
-    symbol: GonieGonie.InvisibleDragon.Grasshopper.Components
+    symbol: Dragons.InvisibleDragon.Grasshopper.Components
   tests:
     - DragonGooTests
     - GrasshopperAssemblyTests
@@ -244,9 +244,9 @@
     path: src/idragon/dragon/model.py
     symbol: Grasshopper model compile run and result workflow
   dotnet:
-    project: GonieGonie.InvisibleDragon.GH
+    project: Dragons.InvisibleDragon.GH
     file: Components/
-    symbol: GonieGonie.InvisibleDragon.Grasshopper.Components
+    symbol: Dragons.InvisibleDragon.Grasshopper.Components
   tests:
     - DragonGooTests
     - GrasshopperAssemblyTests

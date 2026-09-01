@@ -3,15 +3,15 @@ using Grasshopper;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 
-namespace GonieGonie.Dragons.GrasshopperSmoke;
+namespace Dragons.GrasshopperSmoke;
 
 internal static class GrasshopperSmokeGate
 {
-    private const string HostAssemblyPrefix = "GonieGonie.Dragons.Grasshopper";
+    private const string HostAssemblyPrefix = "Dragons.Grasshopper";
     private static readonly string[] KnownPluginAssemblies =
     {
-        "GonieGonie.InvisibleDragon.GH",
-        "GonieGonie.SimpleDragon.GH"
+        "Dragons.InvisibleDragon.GH",
+        "Dragons.SimpleDragon.GH"
     };
 
     internal static void BlockInstalledDragonPackages()
@@ -337,7 +337,7 @@ internal static class GrasshopperSmokeGate
         ConstructorInfo gooConstructor = RequireValueConstructor(gooType);
         Type diagnosticType = gooConstructor.GetParameters()[0].ParameterType;
         Type severityType = diagnosticType.Assembly.GetType(
-            "GonieGonie.BuildingEnergy.Contracts.DiagnosticSeverity",
+            "Dragons.BuildingEnergy.Contracts.DiagnosticSeverity",
             throwOnError: true)!;
         object severity = Enum.Parse(severityType, "Info", ignoreCase: false);
         ConstructorInfo diagnosticConstructor = diagnosticType.GetConstructors()
@@ -458,7 +458,7 @@ internal static class GrasshopperSmokeGate
         {
             string? name = assembly.GetName().Name;
             if (string.IsNullOrWhiteSpace(name)
-                || !name.StartsWith("GonieGonie.", StringComparison.Ordinal)
+                || !name.StartsWith("Dragons.", StringComparison.Ordinal)
                 || name.StartsWith(HostAssemblyPrefix, StringComparison.Ordinal))
             {
                 continue;

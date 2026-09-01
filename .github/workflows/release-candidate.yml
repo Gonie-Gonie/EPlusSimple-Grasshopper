@@ -82,7 +82,7 @@ jobs:
           $food4RhinoMetadata = $gate.verification.food4RhinoMetadata
           $githubRelease = $gate.githubRelease
           $publication = $gate.publication
-          if ([string] $gate.schema -cne 'goniegonie.dragons-grasshopper.release-gate.v3' -or
+          if ([string] $gate.schema -cne 'dragons-grasshopper.release-gate.v3' -or
               [string] $gate.status -cne 'passed' -or
               [string] $gate.source.commit -cne $env:EXPECTED_SHA -or
               [string] $gate.source.branch -cne 'main' -or
@@ -297,7 +297,7 @@ jobs:
               -Report $expectedReport `
               -ExpectedSha256 ([string] $row.sha256)
             $summary = Get-Content -LiteralPath $summaryPath -Raw | ConvertFrom-Json
-            if ([string] $summary.schema -cne 'goniegonie.dragons-grasshopper.examples.v3' -or
+            if ([string] $summary.schema -cne 'dragons-grasshopper.examples.v3' -or
                 [string] $summary.host -cne $host -or
                 [string] $summary.action -cne 'Validate' -or
                 @($summary.definitions).Count -ne 8 -or

@@ -599,7 +599,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.launcher-runtime.v1",
+  "schema": "dragons.python-reference.launcher-runtime.v1",
   "symbols": [
     {
       "body_hash": "sha256:921a63a3a05234e5b1c61efbee031114924c6587cc8d60b93d4932290c0b549a",

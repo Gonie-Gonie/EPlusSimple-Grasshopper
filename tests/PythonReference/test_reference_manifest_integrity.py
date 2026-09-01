@@ -23,7 +23,7 @@ class ReferenceManifestIntegrityTests(unittest.TestCase):
     def test_manifest_exactly_hashes_every_reviewed_baseline_file(self) -> None:
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual(
-            "goniegonie.python-reference.manifest.v1",
+            "dragons.python-reference.manifest.v1",
             manifest.get("schema"),
         )
         entries = manifest.get("files")

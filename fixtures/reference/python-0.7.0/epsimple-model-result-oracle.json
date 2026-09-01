@@ -22645,13 +22645,13 @@
         "adaptation": "reviewed-native-adaptation-immutable-complete-result-tree-rather-than-model-result-wrapper-8b407386",
         "assertion_id": "epsimple-model-result-373-8b407386",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult"
       },
       "GreenRetrofitResult.VALID_DIGITS": {
         "adaptation": "direct-native-greenretrofitresult-valid-digits-ff1cddac",
         "assertion_id": "epsimple-model-result-374-ff1cddac",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.ValidDigits"
       },
       "GreenRetrofitResult.__init__": {
         "adaptation": "reviewed-native-adaptation-validated-factory-and-diagnostic-build-result-boundary-856dd66b",
@@ -22663,67 +22663,67 @@
         "adaptation": "direct-native-greenretrofitresult-area-37a89b1c",
         "assertion_id": "epsimple-model-result-376-37a89b1c",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.TotalArea"
       },
       "GreenRetrofitResult.calc_domestic_hotwater_site_energy": {
         "adaptation": "reviewed-native-adaptation-typed-server-filtering-first-id-wins-and-structured-diagnostics-4e80e0ef",
         "assertion_id": "epsimple-model-result-377-4e80e0ef",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection"
       },
       "GreenRetrofitResult.get_dhw_servers": {
         "adaptation": "reviewed-native-adaptation-typed-boiler-district-filtering-rather-than-arbitrary-hotwater-object-a63f6fa2",
         "assertion_id": "epsimple-model-result-378-a63f6fa2",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping"
       },
       "GreenRetrofitResult.get_domestic_hotwater_energy": {
         "adaptation": "direct-native-greenretrofitresult-get-domestic-hotwater-energy-b7774317",
         "assertion_id": "epsimple-model-result-379-b7774317",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand"
       },
       "GreenRetrofitResult.summarize": {
         "adaptation": "direct-native-greenretrofitresult-summarize-93d2bbd8",
         "assertion_id": "epsimple-model-result-380-93d2bbd8",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries"
       },
       "GreenRetrofitResult.to_co2": {
         "adaptation": "direct-native-greenretrofitresult-to-co2-72b97e85",
         "assertion_id": "epsimple-model-result-381-72b97e85",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.Carbon"
       },
       "GreenRetrofitResult.to_cost": {
         "adaptation": "direct-native-greenretrofitresult-to-cost-7d1d1cd9",
         "assertion_id": "epsimple-model-result-382-7d1d1cd9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.Cost"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.Cost"
       },
       "GreenRetrofitResult.to_dict": {
         "adaptation": "direct-native-greenretrofitresult-to-dict-010fb599",
         "assertion_id": "epsimple-model-result-383-010fb599",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)"
+        "native_route": "Dragons.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)"
       },
       "GreenRetrofitResult.to_site_uses": {
         "adaptation": "direct-native-greenretrofitresult-to-site-uses-48114e14",
         "assertion_id": "epsimple-model-result-384-48114e14",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses"
       },
       "GreenRetrofitResult.to_source_uses": {
         "adaptation": "direct-native-greenretrofitresult-to-source-uses-842eb853",
         "assertion_id": "epsimple-model-result-385-842eb853",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitResult.SourceUses"
       },
       "GreenRetrofitResult.write": {
         "adaptation": "reviewed-native-adaptation-deterministic-grr-writer-with-terminal-newline-67ef521c",
         "assertion_id": "epsimple-model-result-386-67ef521c",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)"
+        "native_route": "Dragons.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)"
       }
     },
     "native_route_audit": {
@@ -22769,20 +22769,20 @@
       }
     },
     "native_routes": {
-      "GreenRetrofitResult": "GonieGonie.SimpleDragon.GreenRetrofitResult",
-      "GreenRetrofitResult.VALID_DIGITS": "GonieGonie.SimpleDragon.GreenRetrofitResult.ValidDigits",
+      "GreenRetrofitResult": "Dragons.SimpleDragon.GreenRetrofitResult",
+      "GreenRetrofitResult.VALID_DIGITS": "Dragons.SimpleDragon.GreenRetrofitResult.ValidDigits",
       "GreenRetrofitResult.__init__": "GreenRetrofitResult.FromSiteUses(double, EnergyUseBreakdown) and GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
-      "GreenRetrofitResult.area": "GonieGonie.SimpleDragon.GreenRetrofitResult.TotalArea",
-      "GreenRetrofitResult.calc_domestic_hotwater_site_energy": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection",
-      "GreenRetrofitResult.get_dhw_servers": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping",
-      "GreenRetrofitResult.get_domestic_hotwater_energy": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand",
-      "GreenRetrofitResult.summarize": "GonieGonie.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries",
-      "GreenRetrofitResult.to_co2": "GonieGonie.SimpleDragon.GreenRetrofitResult.Carbon",
-      "GreenRetrofitResult.to_cost": "GonieGonie.SimpleDragon.GreenRetrofitResult.Cost",
-      "GreenRetrofitResult.to_dict": "GonieGonie.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)",
-      "GreenRetrofitResult.to_site_uses": "GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses",
-      "GreenRetrofitResult.to_source_uses": "GonieGonie.SimpleDragon.GreenRetrofitResult.SourceUses",
-      "GreenRetrofitResult.write": "GonieGonie.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)"
+      "GreenRetrofitResult.area": "Dragons.SimpleDragon.GreenRetrofitResult.TotalArea",
+      "GreenRetrofitResult.calc_domestic_hotwater_site_energy": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build domestic-hot-water projection",
+      "GreenRetrofitResult.get_dhw_servers": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build source-system filtering and grouping",
+      "GreenRetrofitResult.get_domestic_hotwater_energy": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build usage-profile domestic-hot-water demand",
+      "GreenRetrofitResult.summarize": "Dragons.SimpleDragon.GreenRetrofitResult.PerAreaSummaries and GrossSummaries",
+      "GreenRetrofitResult.to_co2": "Dragons.SimpleDragon.GreenRetrofitResult.Carbon",
+      "GreenRetrofitResult.to_cost": "Dragons.SimpleDragon.GreenRetrofitResult.Cost",
+      "GreenRetrofitResult.to_dict": "Dragons.SimpleDragon.GrrWriter.Serialize(GreenRetrofitResult, bool)",
+      "GreenRetrofitResult.to_site_uses": "Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build and GreenRetrofitResult.SiteUses",
+      "GreenRetrofitResult.to_source_uses": "Dragons.SimpleDragon.GreenRetrofitResult.SourceUses",
+      "GreenRetrofitResult.write": "Dragons.SimpleDragon.GrrWriter.WriteFile(string, GreenRetrofitResult, bool)"
     },
     "runtime_signatures": {
       "GreenRetrofitResult": {
@@ -22903,27 +22903,27 @@
     "source_receipts": [
       {
         "bytes": 23665,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitCsvExporter.cs",
         "sha256": "sha256:533ee8789aa9e02951216416be168b43c0ad7c20fc8da0c256a72650806fc32f"
       },
       {
         "bytes": 17506,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultBuilder.cs",
         "sha256": "sha256:9a9f1bc3c38814776c3c0ac888423418215c42bb7c270848b72b480751438b3b"
       },
       {
         "bytes": 19280,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GreenRetrofitResultModels.cs",
         "sha256": "sha256:5181cc98bb9e193cae2c6c29b33ca74d6e98bf7e44f11e0e3855d9f591f4e8f7"
       },
       {
         "bytes": 14845,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrReader.cs",
         "sha256": "sha256:498b12addde1cfc0c4e6c3931dd5c079e185cc2f45a9fa2cb5cde700f4075130"
       },
       {
         "bytes": 5023,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Results/GrrWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Results/GrrWriter.cs",
         "sha256": "sha256:802f6fb7592f1d48504f6d26b50a5d29e0e5305d5379265effb9efe080d5e65a"
       }
     ]
@@ -22947,7 +22947,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.epsimple-model-result.v1",
+  "schema": "dragons.python-reference.epsimple-model-result.v1",
   "symbols": [
     {
       "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",

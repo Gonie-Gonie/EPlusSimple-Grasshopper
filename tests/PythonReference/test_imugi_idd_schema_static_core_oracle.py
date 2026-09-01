@@ -343,7 +343,7 @@ class ImugiIddSchemaStaticCoreOracleTests(unittest.TestCase):
                 generator.CLASSIFICATIONS[symbol], expectation["classification"]
             )
             self.assertEqual(generator.NATIVE_ROUTES[symbol], expectation["native_route"])
-            self.assertIn("GonieGonie.InvisibleDragon.Idd", expectation["native_route"])
+            self.assertIn("Dragons.InvisibleDragon.Idd", expectation["native_route"])
             self.assertNotIn(".Internal", expectation["native_route"])
             self.assertEqual(
                 generator.ADAPTATIONS.get(symbol, "not_applicable"),

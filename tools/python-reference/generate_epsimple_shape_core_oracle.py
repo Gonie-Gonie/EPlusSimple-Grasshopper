@@ -26,7 +26,7 @@ from types import SimpleNamespace
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-shape-core.v1"
+SCHEMA = "dragons.python-reference.epsimple-shape-core.v1"
 SOURCE_PATH = "src/epsimple/core/shape.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -65,7 +65,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_shape_support", SUPPORT_PATH
+        "_dragons_epsimple_shape_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -188,36 +188,36 @@ ASSERTION_IDS = {
 
 def _native_route(symbol: str) -> str:
     if symbol.startswith("BlindType"):
-        return "GonieGonie.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        return "Dragons.SimpleDragon.BlindType with GrmReader.Read(string, SimpleDragonDatabase?) and GrmWriter.Serialize(GreenRetrofitModel, bool)"
     if symbol.startswith(("Door", "Fenestration", "GlassDoor", "Window")):
         if symbol.endswith("from_json"):
-            return "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
+            return "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
         if symbol.endswith("to_dragon"):
-            return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+            return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
         if symbol == "Fenestration.ID":
-            return "GonieGonie.SimpleDragon.Fenestration.Id"
+            return "Dragons.SimpleDragon.Fenestration.Id"
         if symbol in {"Door.construction", "Fenestration.construction", "Window.construction"}:
-            return "GonieGonie.SimpleDragon.Fenestration.Construction"
+            return "Dragons.SimpleDragon.Fenestration.Construction"
         if symbol == "Window.blind":
-            return "GonieGonie.SimpleDragon.Fenestration.Blind"
+            return "Dragons.SimpleDragon.Fenestration.Blind"
         if symbol in {"Fenestration.__deepcopy__", "Fenestration.__init__", "Window.__init__"}:
-            return "GonieGonie.SimpleDragon.Fenestration constructor"
-        return "GonieGonie.SimpleDragon.Fenestration with GonieGonie.SimpleDragon.FenestrationType"
+            return "Dragons.SimpleDragon.Fenestration constructor"
+        return "Dragons.SimpleDragon.Fenestration with Dragons.SimpleDragon.FenestrationType"
     if symbol == "Surface.from_json":
-        return "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
+        return "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
     if symbol == "Surface.to_dragon":
-        return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     if symbol == "Surface.flip":
-        return "GonieGonie.SimpleDragon.Surface.Flip()"
+        return "Dragons.SimpleDragon.Surface.Flip()"
     if symbol == "Surface.get_unique_fenestration_constructions":
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
+        return "Dragons.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
     if symbol == "Surface.adjacent_zone":
-        return "GonieGonie.SimpleDragon.Surface.AdjacentZoneId"
+        return "Dragons.SimpleDragon.Surface.AdjacentZoneId"
     if symbol.startswith("Surface"):
         if symbol == "Surface.__init__":
-            return "GonieGonie.SimpleDragon.Surface constructor"
+            return "Dragons.SimpleDragon.Surface constructor"
         if symbol == "Surface.__deepcopy__":
-            return "GonieGonie.SimpleDragon.Surface constructor"
+            return "Dragons.SimpleDragon.Surface constructor"
         members = {
             "Surface.ID": "Id",
             "Surface.area": "Area",
@@ -230,23 +230,23 @@ def _native_route(symbol: str) -> str:
             "Surface.type": "Type",
         }
         return (
-            f"GonieGonie.SimpleDragon.Surface.{members[symbol]}"
+            f"Dragons.SimpleDragon.Surface.{members[symbol]}"
             if symbol in members
-            else "GonieGonie.SimpleDragon.Surface"
+            else "Dragons.SimpleDragon.Surface"
         )
     if symbol == "Zone.from_json":
-        return "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
+        return "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?)"
     if symbol == "Zone.to_dragon":
-        return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     if symbol == "Zone.get_unique_fenestration_constructions":
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
+        return "Dragons.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
     if symbol == "Zone.get_unique_surface_constructions":
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions"
+        return "Dragons.SimpleDragon.GreenRetrofitModel.SurfaceConstructions"
     if symbol == "Zone.get_unique_materials":
-        return "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials"
+        return "Dragons.SimpleDragon.GreenRetrofitModel.Materials"
     if symbol.startswith("Zone"):
         if symbol == "Zone.__init__":
-            return "GonieGonie.SimpleDragon.Zone constructor"
+            return "Dragons.SimpleDragon.Zone constructor"
         members = {
             "Zone.ID": "Id",
             "Zone.area": "Area",
@@ -257,9 +257,9 @@ def _native_route(symbol: str) -> str:
             "Zone.supply_systems": "SupplySystems",
         }
         return (
-            f"GonieGonie.SimpleDragon.Zone.{members[symbol]}"
+            f"Dragons.SimpleDragon.Zone.{members[symbol]}"
             if symbol in members
-            else "GonieGonie.SimpleDragon.Zone"
+            else "Dragons.SimpleDragon.Zone"
         )
     raise RuntimeError(f"No reviewed native route for {symbol}.")
 

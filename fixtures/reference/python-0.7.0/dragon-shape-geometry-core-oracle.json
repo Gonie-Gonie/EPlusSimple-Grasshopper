@@ -5906,19 +5906,19 @@
     ],
     "identity_encoding": "stable-boolean-relations-only-no-id-or-address",
     "native_targets": {
-      "Surface": "GonieGonie.InvisibleDragon.Shape.Surface plus PlanarPolygon",
+      "Surface": "Dragons.InvisibleDragon.Shape.Surface plus PlanarPolygon",
       "Surface.area": "Surface.GrossArea via PlanarPolygon.Area",
       "Surface.center": "Surface.Center via PlanarPolygon.Centroid",
       "Surface.height": "Surface.Height via PlanarPolygon.Height",
       "Surface.normal": "Surface.Normal via PlanarPolygon.Normal",
       "Surface.type": "Surface.Type immutable enum property",
       "Surface.vertex": "Surface.Polygon.Vertices immutable defensive copy",
-      "SurfaceType": "GonieGonie.InvisibleDragon.Shape.SurfaceType",
+      "SurfaceType": "Dragons.InvisibleDragon.Shape.SurfaceType",
       "SurfaceType.CEILING": "SurfaceType.Ceiling",
       "SurfaceType.FLOOR": "SurfaceType.Floor",
       "SurfaceType.WALL": "SurfaceType.Wall",
       "SurfaceType.__str__": "explicit native enum-to-IDF mapping where required",
-      "Vertex": "GonieGonie.InvisibleDragon.Shape.Vertex readonly struct",
+      "Vertex": "Dragons.InvisibleDragon.Shape.Vertex readonly struct",
       "Vertex.__add__": "Vertex plus Vector3 operator",
       "Vertex.__deepcopy__": "Vertex value-copy semantics",
       "Vertex.__init__": "Vertex constructor with finite double guards",
@@ -6324,7 +6324,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-shape-geometry-core.v1",
+  "schema": "dragons.python-reference.dragon-shape-geometry-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:926a3131b4eecef848f3f1fca552718277fa4340c9b34aca7db597364c57df1f",

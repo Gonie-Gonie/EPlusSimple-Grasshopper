@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace GonieGonie.Dragons.ExampleDefinitions.Rhino7;
+namespace Dragons.ExampleDefinitions.Rhino7;
 
 internal static class Rhino7Host
 {

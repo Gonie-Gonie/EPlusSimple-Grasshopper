@@ -21,7 +21,7 @@ if spec is None or spec.loader is None:
 base = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(base)
 
-SCHEMA = "goniegonie.python-reference.imugi-idf-object-list-core.v1"
+SCHEMA = "dragons.python-reference.imugi-idf-object-list-core.v1"
 PREFIX = "imugi-idf-object-list-core."
 EXPECTED_UPSTREAM_COMMIT = base.EXPECTED_UPSTREAM_COMMIT
 SOURCE_PATH = base.SOURCE_PATH
@@ -80,9 +80,9 @@ CASE_SPECS = (
 CASE_IDS = tuple(PREFIX + slug for _, slug, _ in CASE_SPECS)
 
 NATIVE_SOURCES = (
-    {"bytes": 13_182, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
-    {"bytes": 12_094, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
-    {"bytes": 4_289, "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
+    {"bytes": 13_182, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs", "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"},
+    {"bytes": 12_094, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfValidator.cs", "sha256": "sha256:3f1c8c191cf7054ebdbf674895a2efcabe0b4d265c0de093d900efbb369ed3dd"},
+    {"bytes": 4_289, "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfWriter.cs", "sha256": "sha256:cc7cc49afcd98a4d4067371686feb49d120a4dd5f7bf30611599a6512c062892"},
 )
 SUPPORT = (
     {"bytes": BASE_BYTES, "path": "tools/python-reference/generate_imugi_idf_object_core_oracle.py", "sha256": BASE_SHA256},
@@ -229,12 +229,12 @@ def _signatures(imugi: Any) -> dict[str, Any]:
 
 def _route(symbol: str) -> str:
     routes = {
-        "IdfObjectList.__getitem__": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
-        "IdfObjectList.append": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
-        "IdfObjectList.insert": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
-        "IdfObjectList.names": "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
+        "IdfObjectList.__getitem__": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.this[int|string]",
+        "IdfObjectList.append": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+        "IdfObjectList.insert": "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+        "IdfObjectList.names": "Dragons.InvisibleDragon.Idf.IdfObjectCollection -> IdfObject.Name",
     }
-    return routes.get(symbol, "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)")
+    return routes.get(symbol, "Dragons.InvisibleDragon.Idf.IdfObjectCollection/IdfDocument public typed adaptation (no Python API/source compatibility claim)")
 
 
 def definitions() -> list[dict[str, Any]]:

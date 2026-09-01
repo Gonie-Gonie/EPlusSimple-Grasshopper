@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace GonieGonie.Dragons.GrasshopperSmoke;
+namespace Dragons.GrasshopperSmoke;
 
 internal enum SmokeScenario
 {
@@ -414,8 +414,8 @@ internal sealed class SmokeArtifactProvenance
 
 internal sealed class DragonModuleSpec
 {
-    internal const string InvisibleGhaFileName = "GonieGonie.InvisibleDragon.GH.gha";
-    internal const string SimpleGhaFileName = "GonieGonie.SimpleDragon.GH.gha";
+    internal const string InvisibleGhaFileName = "Dragons.InvisibleDragon.GH.gha";
+    internal const string SimpleGhaFileName = "Dragons.SimpleDragon.GH.gha";
 
     private DragonModuleSpec(
         string product,
@@ -474,11 +474,11 @@ internal sealed class DragonModuleSpec
             return new DragonModuleSpec(
                 "InvisibleDragon",
                 pluginPath,
-                "GonieGonie.InvisibleDragon.GH",
-                "GonieGonie.InvisibleDragon.Grasshopper.Types",
-                "GonieGonie.InvisibleDragon.Grasshopper.Parameters",
-                "GonieGonie.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam",
-                "GonieGonie.InvisibleDragon.Grasshopper.Types.DiagnosticGoo",
+                "Dragons.InvisibleDragon.GH",
+                "Dragons.InvisibleDragon.Grasshopper.Types",
+                "Dragons.InvisibleDragon.Grasshopper.Parameters",
+                "Dragons.InvisibleDragon.Grasshopper.Parameters.DiagnosticParam",
+                "Dragons.InvisibleDragon.Grasshopper.Types.DiagnosticGoo",
                 "Code",
                 "DRAGON_HOST_GATE");
         }
@@ -488,11 +488,11 @@ internal sealed class DragonModuleSpec
             return new DragonModuleSpec(
                 "SimpleDragon",
                 pluginPath,
-                "GonieGonie.SimpleDragon.GH",
-                "GonieGonie.SimpleDragon.Grasshopper.Types",
-                "GonieGonie.SimpleDragon.Grasshopper.Parameters",
-                "GonieGonie.SimpleDragon.Grasshopper.Parameters.SimpleDragonMaterialParam",
-                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonMaterialGoo",
+                "Dragons.SimpleDragon.GH",
+                "Dragons.SimpleDragon.Grasshopper.Types",
+                "Dragons.SimpleDragon.Grasshopper.Parameters",
+                "Dragons.SimpleDragon.Grasshopper.Parameters.SimpleDragonMaterialParam",
+                "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonMaterialGoo",
                 "Name",
                 "Smoke Simple Material");
         }

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>Dragons.EnergyPlus.Runtime.Tests</AssemblyName>
+    <RootNamespace>Dragons.EnergyPlus.Runtime.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\tools\upstream-tracker\csharp\TrustedEvidenceRecorder.cs" Link="TrustedEvidenceRecorder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    <ProjectReference Include="..\..\..\src\Shared\Dragons.EnergyPlus.Runtime\Dragons.EnergyPlus.Runtime.csproj" />
+    <ProjectReference Include="..\..\..\src\SimpleDragon\Dragons.SimpleDragon.Core\Dragons.SimpleDragon.Core.csproj" />
+  </ItemGroup>
+</Project>

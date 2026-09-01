@@ -22,7 +22,7 @@ from types import SimpleNamespace
 from typing import Any, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.dragon-model-conditioning.v1"
+SCHEMA = "dragons.python-reference.dragon-model-conditioning.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -209,7 +209,7 @@ TIMESTAMP_PATTERN = re.compile(
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_schedule_type_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_dragon_model_conditioning_support", path
+        "_dragons_dragon_model_conditioning_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load conditioning oracle support: {path}")

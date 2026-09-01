@@ -181,7 +181,7 @@ finally {
 }
 $referenceMutex = [System.Threading.Mutex]::new(
     $false,
-    "Local\GonieGonie.Reference.$mutexHash")
+    "Local\Dragons.Reference.$mutexHash")
 $referenceMutexAcquired = $false
 try {
     $referenceMutexAcquired = $referenceMutex.WaitOne(0)
@@ -467,7 +467,7 @@ function Test-UpstreamCheckoutAuthority {
 from pathlib import Path
 import sys
 sys.path.insert(0, sys.argv[1])
-from goniegonie_upstream_tracker.classifier import inspect_source_identity
+from dragons_upstream_tracker.classifier import inspect_source_identity
 identity = inspect_source_identity(
     Path(sys.argv[2]),
     expected_commit=sys.argv[3],
@@ -721,7 +721,7 @@ raise SystemExit(main(sys.argv[2:]))
     Move-Item -LiteralPath $stagingRoot -Destination $dependencyRoot
     Assert-ReferenceDependencies
     $stamp = [ordered] @{
-        schema = 'goniegonie.python-reference.dependencies.v1'
+        schema = 'dragons.python-reference.dependencies.v1'
         pythonVersion = $requiredPythonVersion
         requirementsSha256 = $requirementsSha256
         pipVersion = '24.3.1'

@@ -72,20 +72,20 @@ class LockfileNormalizationTests(unittest.TestCase):
                 },
             )
             environment = self._powershell_environment(repository)
-            environment["GONIEGONIE_HELD_LOCK"] = str(
+            environment["DRAGONS_HELD_LOCK"] = str(
                 locks["src/Z/packages.lock.json"]
             )
             marker = workspace.path / "replace-holder.ready"
-            environment["GONIEGONIE_HOLDER_READY"] = str(marker)
+            environment["DRAGONS_HOLDER_READY"] = str(marker)
             holder_command = (
                 "$ErrorActionPreference = 'Stop'; "
                 "$stream = New-Object System.IO.FileStream("
-                "$env:GONIEGONIE_HELD_LOCK, "
+                "$env:DRAGONS_HELD_LOCK, "
                 "[System.IO.FileMode]::Open, "
                 "[System.IO.FileAccess]::Read, "
                 "[System.IO.FileShare]::Read); "
                 "try { "
-                "$null = New-Item -ItemType File -Path $env:GONIEGONIE_HOLDER_READY; "
+                "$null = New-Item -ItemType File -Path $env:DRAGONS_HOLDER_READY; "
                 "$null = [Console]::In.ReadLine() "
                 "} finally { $stream.Dispose() }"
             )
@@ -114,20 +114,20 @@ class LockfileNormalizationTests(unittest.TestCase):
                 {"src/Product/packages.lock.json": LF_LOCK},
             )
             environment = self._powershell_environment(repository)
-            environment["GONIEGONIE_ACTION_LOCK"] = str(
+            environment["DRAGONS_ACTION_LOCK"] = str(
                 locks["src/Product/packages.lock.json"]
             )
-            environment["GONIEGONIE_ACTION_BYTES"] = base64.b64encode(CRLF_LOCK).decode(
+            environment["DRAGONS_ACTION_BYTES"] = base64.b64encode(CRLF_LOCK).decode(
                 "ascii"
             )
             command = (
-                ". $env:GONIEGONIE_COMMON_SCRIPT; "
+                ". $env:DRAGONS_COMMON_SCRIPT; "
                 "Invoke-WithTrackedPackageLockNormalization "
-                "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT "
+                "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT "
                 "-Action { "
                 "[System.IO.File]::WriteAllBytes("
-                "$env:GONIEGONIE_ACTION_LOCK, "
-                "[System.Convert]::FromBase64String($env:GONIEGONIE_ACTION_BYTES)); "
+                "$env:DRAGONS_ACTION_LOCK, "
+                "[System.Convert]::FromBase64String($env:DRAGONS_ACTION_BYTES)); "
                 "throw 'synthetic restore failure' "
                 "}"
             )
@@ -152,14 +152,14 @@ class LockfileNormalizationTests(unittest.TestCase):
             )
             environment = self._powershell_environment(repository)
             marker = workspace.path / "workflow-holder.ready"
-            environment["GONIEGONIE_HOLDER_READY"] = str(marker)
+            environment["DRAGONS_HOLDER_READY"] = str(marker)
             holder_command = (
                 "$ErrorActionPreference = 'Stop'; "
-                ". $env:GONIEGONIE_COMMON_SCRIPT; "
+                ". $env:DRAGONS_COMMON_SCRIPT; "
                 "$workflow = Enter-TrackedPackageLockWorkflow "
-                "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT; "
+                "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT; "
                 "try { "
-                "$null = New-Item -ItemType File -Path $env:GONIEGONIE_HOLDER_READY; "
+                "$null = New-Item -ItemType File -Path $env:DRAGONS_HOLDER_READY; "
                 "$null = [Console]::In.ReadLine() "
                 "} finally { $workflow.Dispose() }"
             )
@@ -219,29 +219,29 @@ class LockfileNormalizationTests(unittest.TestCase):
             )
             lock_path = locks["src/Product/packages.lock.json"]
             environment = self._powershell_environment(repository)
-            environment["GONIEGONIE_CONCURRENT_BYTES"] = base64.b64encode(
+            environment["DRAGONS_CONCURRENT_BYTES"] = base64.b64encode(
                 CONCURRENT_CRLF_LOCK
             ).decode("ascii")
             command = (
-                ". $env:GONIEGONIE_COMMON_SCRIPT; "
-                "$script:GonieGonieCommitReplaceCalls = 0; "
+                ". $env:DRAGONS_COMMON_SCRIPT; "
+                "$script:DragonsCommitReplaceCalls = 0; "
                 "function Invoke-PackageLockCommitReplace { "
                 "param("
                 "[string] $SourcePath, "
                 "[string] $DestinationPath, "
                 "[string] $BackupPath); "
-                "$script:GonieGonieCommitReplaceCalls += 1; "
-                "if ($script:GonieGonieCommitReplaceCalls -eq 1) { "
+                "$script:DragonsCommitReplaceCalls += 1; "
+                "if ($script:DragonsCommitReplaceCalls -eq 1) { "
                 "[System.IO.File]::WriteAllBytes("
                 "$DestinationPath, "
                 "[System.Convert]::FromBase64String("
-                "$env:GONIEGONIE_CONCURRENT_BYTES)) "
+                "$env:DRAGONS_CONCURRENT_BYTES)) "
                 "}; "
                 "[System.IO.File]::Replace("
                 "$SourcePath, $DestinationPath, $BackupPath, $true) "
                 "}; "
                 "Normalize-TrackedPackageLockLineEndings "
-                "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT"
+                "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT"
             )
 
             rejected = self._run_powershell(
@@ -287,9 +287,9 @@ class LockfileNormalizationTests(unittest.TestCase):
             )
             environment = self._powershell_environment(repository)
             command = (
-                ". $env:GONIEGONIE_COMMON_SCRIPT; "
+                ". $env:DRAGONS_COMMON_SCRIPT; "
                 "Normalize-TrackedPackageLockLineEndings "
-                "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT "
+                "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT "
                 "-WhatIf"
             )
 
@@ -326,18 +326,18 @@ class LockfileNormalizationTests(unittest.TestCase):
             sentinel.write_bytes(sentinel_bytes)
 
             environment = self._powershell_environment(repository)
-            environment["GONIEGONIE_CLEAN_SCRIPT"] = str(
+            environment["DRAGONS_CLEAN_SCRIPT"] = str(
                 fixture_scripts / "clean.ps1"
             )
             marker = workspace.path / "clean-holder.ready"
-            environment["GONIEGONIE_HOLDER_READY"] = str(marker)
+            environment["DRAGONS_HOLDER_READY"] = str(marker)
             holder_command = (
                 "$ErrorActionPreference = 'Stop'; "
-                ". $env:GONIEGONIE_COMMON_SCRIPT; "
+                ". $env:DRAGONS_COMMON_SCRIPT; "
                 "$workflow = Enter-TrackedPackageLockWorkflow "
-                "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT; "
+                "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT; "
                 "try { "
-                "$null = New-Item -ItemType File -Path $env:GONIEGONIE_HOLDER_READY; "
+                "$null = New-Item -ItemType File -Path $env:DRAGONS_HOLDER_READY; "
                 "$null = [Console]::In.ReadLine() "
                 "} finally { $workflow.Dispose() }"
             )
@@ -363,7 +363,7 @@ class LockfileNormalizationTests(unittest.TestCase):
                     powershell,
                     repository,
                     environment,
-                    "& $env:GONIEGONIE_CLEAN_SCRIPT -TempOnly -Confirm:$false",
+                    "& $env:DRAGONS_CLEAN_SCRIPT -TempOnly -Confirm:$false",
                 )
             finally:
                 holder_result = self._stop_holder(holder)
@@ -403,7 +403,7 @@ class LockfileNormalizationTests(unittest.TestCase):
             sentinel_bytes = b"fully disposable temp tree\n"
             sentinel.write_bytes(sentinel_bytes)
             environment = self._powershell_environment(repository)
-            environment["GONIEGONIE_CLEAN_SCRIPT"] = str(
+            environment["DRAGONS_CLEAN_SCRIPT"] = str(
                 fixture_scripts / "clean.ps1"
             )
 
@@ -411,7 +411,7 @@ class LockfileNormalizationTests(unittest.TestCase):
                 powershell,
                 repository,
                 environment,
-                "& $env:GONIEGONIE_CLEAN_SCRIPT -TempOnly -Confirm:$false",
+                "& $env:DRAGONS_CLEAN_SCRIPT -TempOnly -Confirm:$false",
             )
 
             self.assertEqual(0, completed.returncode, self._failure_message(completed))
@@ -484,9 +484,9 @@ class LockfileNormalizationTests(unittest.TestCase):
     ) -> subprocess.CompletedProcess[str]:
         environment = self._powershell_environment(repository)
         command = (
-            ". $env:GONIEGONIE_COMMON_SCRIPT; "
+            ". $env:DRAGONS_COMMON_SCRIPT; "
             "Normalize-TrackedPackageLockLineEndings "
-            "-RepositoryRoot $env:GONIEGONIE_NORMALIZE_ROOT"
+            "-RepositoryRoot $env:DRAGONS_NORMALIZE_ROOT"
         )
         return self._run_powershell(
             powershell,
@@ -497,10 +497,10 @@ class LockfileNormalizationTests(unittest.TestCase):
 
     def _powershell_environment(self, repository: Path) -> dict[str, str]:
         environment = dict(os.environ)
-        environment["GONIEGONIE_COMMON_SCRIPT"] = str(
+        environment["DRAGONS_COMMON_SCRIPT"] = str(
             REPOSITORY_ROOT / "scripts" / "common.ps1"
         )
-        environment["GONIEGONIE_NORMALIZE_ROOT"] = str(repository)
+        environment["DRAGONS_NORMALIZE_ROOT"] = str(repository)
         return environment
 
     def _run_powershell(

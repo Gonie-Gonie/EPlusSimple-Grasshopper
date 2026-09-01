@@ -25,9 +25,9 @@ $food4RhinoBuilderPath = Join-Path $repositoryRoot 'tools\documentation\build_fo
 $food4RhinoSourcePath = Join-Path $repositoryRoot 'docs\development\publishing\food4rhino.md'
 $guideMetadataPath = Join-Path $repositoryRoot 'tools\documentation\component-guides.json'
 $packageSpecPath = Join-Path $repositoryRoot 'packaging\package-spec.json'
-$catalogProjectPath = Join-Path $repositoryRoot 'tools\component-catalog\GonieGonie.Dragons.ComponentCatalog.csproj'
-$catalogNet8AssemblyPath = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.Dragons.ComponentCatalog\Release\net8.0-windows\GonieGonie.Dragons.ComponentCatalog.dll'
-$catalogNet48ExecutablePath = Join-Path $repositoryRoot 'temp\build\bin\GonieGonie.Dragons.ComponentCatalog\Release\net48\GonieGonie.Dragons.ComponentCatalog.exe'
+$catalogProjectPath = Join-Path $repositoryRoot 'tools\component-catalog\Dragons.ComponentCatalog.csproj'
+$catalogNet8AssemblyPath = Join-Path $repositoryRoot 'temp\build\bin\Dragons.ComponentCatalog\Release\net8.0-windows\Dragons.ComponentCatalog.dll'
+$catalogNet48ExecutablePath = Join-Path $repositoryRoot 'temp\build\bin\Dragons.ComponentCatalog\Release\net48\Dragons.ComponentCatalog.exe'
 $workRoot = Join-Path $repositoryRoot 'temp\documentation'
 $catalogNet8Path = Join-Path $workRoot 'component-catalog.net8.0-windows.json'
 $catalogNet7Path = Join-Path $workRoot 'component-catalog.net7.0-windows.json'
@@ -40,7 +40,7 @@ if (-not (Test-Path -LiteralPath $packageSpecPath -PathType Leaf)) {
 }
 $packageSpec = Get-Content -LiteralPath $packageSpecPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
-if ([string] $packageSpec.schema -cne 'goniegonie.dragons-grasshopper.package-spec.v3' -or
+if ([string] $packageSpec.schema -cne 'dragons-grasshopper.package-spec.v3' -or
     [string] $packageSpec.version -cne '0.1.0') {
     throw 'Documentation requires the deliberate first-release package version 0.1.0.'
 }
@@ -113,7 +113,7 @@ foreach ($stateFile in @($settingsPath, $environmentStampPath)) {
 }
 
 $settings = Get-Content -LiteralPath $settingsPath -Raw -Encoding UTF8 | ConvertFrom-Json
-if ([string] $settings.schema -cne 'goniegonie.dragons-grasshopper.local-settings.v1') {
+if ([string] $settings.schema -cne 'dragons-grasshopper.local-settings.v1') {
     throw "Unsupported local settings schema. Run 'dev.cmd setup' again."
 }
 if ([string] $settings.dotnet.status -cne 'ready') {
@@ -127,7 +127,7 @@ $requirementsSha256 = Get-Sha256 -Path $requirementsPath
 $environmentStamp = Get-Content -LiteralPath $environmentStampPath -Raw -Encoding UTF8 |
     ConvertFrom-Json
 if ([string] $settings.pythonEnvironment.requirementsSha256 -cne $requirementsSha256 -or
-    [string] $environmentStamp.schema -cne 'goniegonie.documentation-python-environment.v1' -or
+    [string] $environmentStamp.schema -cne 'dragons.documentation-python-environment.v1' -or
     [string] $environmentStamp.requirementsSha256 -cne $requirementsSha256 -or
     [string] $environmentStamp.pythonVersion -cne '3.12.7' -or
     [string] $environmentStamp.oodocsVersion -cne '1.3.0' -or

@@ -84,7 +84,7 @@ function Read-RhinoLocalSettings {
     }
 
     $schema = [string] (Get-OptionalObjectProperty -InputObject $settings -Name 'schema')
-    if ($schema -ne 'goniegonie.dragons-grasshopper.local-settings.v1') {
+    if ($schema -ne 'dragons-grasshopper.local-settings.v1') {
         throw "Unsupported local settings schema '$schema' in '$Path'. Run 'dev.cmd setup' again."
     }
 
@@ -128,7 +128,7 @@ function Resolve-RhinoHostCandidate {
 
     if ($null -ne $LocalSettings) {
         $schema = [string] (Get-OptionalObjectProperty -InputObject $LocalSettings -Name 'schema')
-        if ($schema -ne 'goniegonie.dragons-grasshopper.local-settings.v1') {
+        if ($schema -ne 'dragons-grasshopper.local-settings.v1') {
             throw "Unsupported local settings schema '$schema'. Run 'dev.cmd setup' again."
         }
 

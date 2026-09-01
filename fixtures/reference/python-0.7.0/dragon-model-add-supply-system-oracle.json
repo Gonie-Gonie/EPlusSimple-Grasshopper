@@ -244,7 +244,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-model-add-supply-system.v1",
+  "schema": "dragons.python-reference.dragon-model-add-supply-system.v1",
   "symbols": [
     {
       "body_hash": "sha256:6bf509a4d5050f54bd748c516ed98b6ae249edf3aaa84a75c4c7bd11b7fbef4b",

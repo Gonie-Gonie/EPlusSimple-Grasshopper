@@ -1,13 +1,13 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
-namespace GonieGonie.Dragons.GrasshopperSmoke;
+namespace Dragons.GrasshopperSmoke;
 
 [DataContract]
 internal sealed class GrasshopperSmokeSummary
 {
     [DataMember(Name = "schema", Order = 1)]
-    public string Schema { get; set; } = "goniegonie.dragons-grasshopper.host-smoke.v3";
+    public string Schema { get; set; } = "dragons-grasshopper.host-smoke.v3";
 
     [DataMember(Name = "host", Order = 2)]
     public string Host { get; set; } = string.Empty;

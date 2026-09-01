@@ -8,7 +8,7 @@ using Grasshopper.Kernel.Special;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 
-namespace GonieGonie.Dragons.ExampleDefinitions;
+namespace Dragons.ExampleDefinitions;
 
 internal static class AdvancedExampleDefinitions
 {
@@ -186,17 +186,17 @@ internal static class AdvancedExampleDefinitions
         foreach (GraphNode layer in new[] { concreteLayer, insulationLayer, finishLayer })
         {
             graph.Connect(layer, 0, construction, 1);
-            graph.ExpectOutput(layer, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
+            graph.ExpectOutput(layer, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
         }
 
         graph.Connect(construction, 1, uValue, null);
         graph.Connect(construction, 0, layeredValue, null);
         graph.Connect(noMass, 0, noMassValue, null);
         graph.Connect(profile, 0, profileValue, null);
-        graph.ExpectOutput(construction, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
+        graph.ExpectOutput(construction, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
         graph.ExpectOutput(construction, 1, 1);
-        graph.ExpectOutput(noMass, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
-        graph.ExpectOutput(profile, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonProfileGoo");
+        graph.ExpectOutput(noMass, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
+        graph.ExpectOutput(profile, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonProfileGoo");
         graph.ExpectOutput(uValue, null, 1);
         GraphNode materialNote = graph.Note(
             800,
@@ -249,7 +249,7 @@ internal static class AdvancedExampleDefinitions
             profileValue);
         return graph.Build(
             InvisibleProduct,
-            "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
+            "Dragons.InvisibleDragon.Grasshopper.Types.DragonConstructionGoo");
     }
 
     private static ScenarioGraph BuildInvisibleSingleZone(GH_ComponentServer server)
@@ -338,10 +338,10 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(southWallName, null, southWall, 1);
         graph.Connect(construction, 0, southWall, 2);
         graph.Connect(window, 0, southWall, 4);
-        graph.ExpectOutput(floor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
-        graph.ExpectOutput(ceiling, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
-        graph.ExpectOutput(plainWalls, 0, 3, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
-        graph.ExpectOutput(southWall, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(floor, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(ceiling, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(plainWalls, 0, 3, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
+        graph.ExpectOutput(southWall, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSurfaceGoo");
 
         GraphNode zone = graph.Component(50, Catalog.InvisibleZone, 1230, 1050);
         foreach (GraphNode surface in surfaces)
@@ -408,14 +408,14 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(run, 1, runState, null);
         graph.Connect(run, 2, runSuccess, null);
         graph.Connect(run, 3, runDiagnostics, null);
-        graph.ExpectOutput(glazing, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonGlazingGoo");
-        graph.ExpectOutput(layer, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
-        graph.ExpectOutput(window, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonOpeningGoo");
-        graph.ExpectOutput(zone, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonZoneDefinitionGoo");
-        graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
-        graph.ExpectOutput(radiantFloor, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
-        graph.ExpectOutput(model, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
-        graph.ExpectOutput(compile, 0, 1, "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
+        graph.ExpectOutput(glazing, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonGlazingGoo");
+        graph.ExpectOutput(layer, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonLayerGoo");
+        graph.ExpectOutput(window, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonOpeningGoo");
+        graph.ExpectOutput(zone, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonZoneDefinitionGoo");
+        graph.ExpectOutput(airHandler, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
+        graph.ExpectOutput(radiantFloor, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonSupplySystemGoo");
+        graph.ExpectOutput(model, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonEnergyModelGoo");
+        graph.ExpectOutput(compile, 0, 1, "Dragons.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
         graph.ExpectOutput(idfText, null, 1);
         graph.ExpectOutput(valid, null, 1);
         graph.ExpectBoolean(zone, 1, true);
@@ -538,7 +538,7 @@ internal static class AdvancedExampleDefinitions
             runDiagnostics);
         return graph.Build(
             InvisibleProduct,
-            "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
+            "Dragons.InvisibleDragon.Grasshopper.Types.DragonIdfGoo",
             envelope: new OutwardEnvelopeExpectation(
                 curves.Select(item => item.InstanceGuid).ToArray(),
                 new Point3d(4, 3, 1.5)),
@@ -580,7 +580,7 @@ internal static class AdvancedExampleDefinitions
                 layers[index],
                 0,
                 1,
-                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
+                "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
         }
 
         GraphNode fenestration = graph.Component(31, Catalog.SimpleFenestration, 860, 520);
@@ -606,14 +606,14 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(airHandler, 0, systems, null);
         graph.Connect(radiator, 0, systems, null);
         graph.Connect(fanCoil, 0, systems, null);
-        graph.ExpectOutput(construction, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo");
-        graph.ExpectOutput(fenestration, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonFenestrationConstructionGoo");
-        graph.ExpectOutput(profile, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonUsageProfileGoo");
-        graph.ExpectOutput(airHandler, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
-        graph.ExpectOutput(radiator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
-        graph.ExpectOutput(fanCoil, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
-        graph.ExpectOutput(ventilator, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneErvGoo");
-        graph.ExpectOutput(photovoltaic, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonPhotovoltaicPanelGoo");
+        graph.ExpectOutput(construction, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo");
+        graph.ExpectOutput(fenestration, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonFenestrationConstructionGoo");
+        graph.ExpectOutput(profile, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonUsageProfileGoo");
+        graph.ExpectOutput(airHandler, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
+        graph.ExpectOutput(radiator, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
+        graph.ExpectOutput(fanCoil, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSupplySystemGoo");
+        graph.ExpectOutput(ventilator, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneErvGoo");
+        graph.ExpectOutput(photovoltaic, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonPhotovoltaicPanelGoo");
         graph.ExpectOutput(systems, null, 3);
         GraphNode materialNote = graph.Note(
             800,
@@ -677,7 +677,7 @@ internal static class AdvancedExampleDefinitions
             systems);
         return graph.Build(
             SimpleProduct,
-            "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo");
+            "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionGoo");
     }
 
     private static ScenarioGraph BuildSimpleTwoZone(GH_ComponentServer server)
@@ -818,25 +818,25 @@ internal static class AdvancedExampleDefinitions
         GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2000, 2010);
         graph.Connect(model, 3, map, null);
         graph.Connect(model, 6, area, null);
-        graph.ExpectOutput(westOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
-        graph.ExpectOutput(eastOpening, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        graph.ExpectOutput(westOpening, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
+        graph.ExpectOutput(eastOpening, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
         foreach (GraphNode surface in westSurfaces.Concat(eastSurfaces))
         {
             graph.ExpectOutput(
                 surface,
                 0,
                 1,
-                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceDefinitionGoo");
+                "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceDefinitionGoo");
         }
         graph.ExpectOutput(
             layer,
             0,
             1,
-            "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
-        graph.ExpectOutput(westZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
-        graph.ExpectOutput(eastZone, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
-        graph.ExpectOutput(model, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
-        graph.ExpectOutput(model, 1, 2, "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
+            "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonSurfaceConstructionLayerGoo");
+        graph.ExpectOutput(westZone, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
+        graph.ExpectOutput(eastZone, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
+        graph.ExpectOutput(model, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
+        graph.ExpectOutput(model, 1, 2, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
         graph.ExpectOutput(map, null, 1);
         graph.ExpectOutput(area, null, 1);
         graph.ExpectNumber(model, 6, 96, 1e-8);
@@ -1025,7 +1025,7 @@ internal static class AdvancedExampleDefinitions
                 batchCase,
                 0,
                 1,
-                "GonieGonie.SimpleDragon.Grasshopper.Types.SimpleDragonBatchCaseGoo");
+                "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonBatchCaseGoo");
             graph.ExpectOutput(managedBatch, 0, 1);
             graph.ExpectOutput(batchState, null, 1);
             graph.ExpectOutput(batchComplete, null, 1);
@@ -1115,8 +1115,8 @@ internal static class AdvancedExampleDefinitions
         return graph.Build(
             SimpleProduct,
             includeRuntimeWorkflow
-                ? "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo"
-                : "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo",
+                ? "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo"
+                : "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo",
             new LinkedModelExpectation(
                 TwoZoneModel,
                 westFaceParameters.Concat(eastFaceParameters).Select(item => item.InstanceGuid).ToArray(),
@@ -1291,7 +1291,7 @@ internal static class AdvancedExampleDefinitions
         graph.Connect(linePlot, 0, lines, null);
         graph.Connect(barPlot, 0, bars, null);
         graph.Connect(export, 1, csvFiles, null);
-        graph.ExpectOutput(read, 0, 1, "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+        graph.ExpectOutput(read, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
         graph.ExpectOutput(summary, 2, 12);
         graph.ExpectOutput(dataTree, 3, 12);
         graph.ExpectOutput(linePlot, 0, 1);
@@ -1362,7 +1362,7 @@ internal static class AdvancedExampleDefinitions
             csvFiles);
         return graph.Build(
             SimpleProduct,
-            "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+            "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
     }
 
     private static ValidationFacts ValidateGraph(
@@ -1719,12 +1719,12 @@ internal static class AdvancedExampleDefinitions
                 document,
                 expectation.WeatherComponentGuid,
                 0,
-                "GonieGonie.InvisibleDragon.Grasshopper.Types.PreparedWeatherFileGoo");
+                "Dragons.InvisibleDragon.Grasshopper.Types.PreparedWeatherFileGoo");
             RequireOutputType(
                 document,
                 expectation.CompileComponentGuid,
                 0,
-                "GonieGonie.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
+                "Dragons.InvisibleDragon.Grasshopper.Types.DragonIdfGoo");
             Require(
                 ReadBoolean(document, expectation.CompileComponentGuid, 2),
                 "Compile InvisibleDragon did not report a valid managed IDF. "
@@ -1756,7 +1756,7 @@ internal static class AdvancedExampleDefinitions
                 document,
                 expectation.RunComponentGuid,
                 0,
-                "GonieGonie.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
+                "Dragons.InvisibleDragon.Grasshopper.Types.EnergyPlusResultGoo");
 
             SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
@@ -1905,7 +1905,7 @@ internal static class AdvancedExampleDefinitions
                 document,
                 expectation.RunComponentGuid,
                 0,
-                "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+                "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
             double totalArea = ReadNumber(document, expectation.ResultSummaryGuid, 0);
             double annualResult = ReadNumber(document, expectation.ResultSummaryGuid, 1);
             double[] monthlyResults = ReadNumbers(document, expectation.ResultSummaryGuid, 2);
@@ -1987,7 +1987,7 @@ internal static class AdvancedExampleDefinitions
             }
 
             Require(
-                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
+                csvContents.Any(content => content.Contains("dragons-simpledragon-csv-export.v2")
                     && content.Contains("\"csv_schema\": \"2\"")),
                 "The CSV package manifest does not identify its schema.");
             int summaryCsvIndex = Array.FindIndex(
@@ -1999,7 +1999,7 @@ internal static class AdvancedExampleDefinitions
                 totalArea,
                 annualResult);
             Require(
-                csvContents.Any(content => content.Contains("goniegonie-simpledragon-csv-export.v2")
+                csvContents.Any(content => content.Contains("dragons-simpledragon-csv-export.v2")
                     && content.Contains(csvCaseId)),
                 "The CSV package manifest does not preserve its model-derived case ID.");
             SetButtonDown(document, expectation.ExportTriggerGuid, false);
@@ -2031,7 +2031,7 @@ internal static class AdvancedExampleDefinitions
                 document,
                 expectation.RunComponentGuid,
                 0,
-                "GonieGonie.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+                "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
 
             SetBoolean(document, expectation.ForceRerunGuid, true);
             Solve(document);
@@ -2109,7 +2109,7 @@ internal static class AdvancedExampleDefinitions
                 "The SimpleDragon batch combined CSV does not contain the successful ordered case.");
             RequireBatchCsvMatchesResult(combinedCsvContent, batchCaseId, totalArea, annualResult);
             Require(
-                manifestContent.Contains("goniegonie.simple-dragon.batch-manifest.v1")
+                manifestContent.Contains("dragons.simple-dragon.batch-manifest.v1")
                     && manifestContent.Contains(batchCaseId)
                     && manifestContent.Contains("\"status\": \"succeeded\""),
                 "The SimpleDragon batch manifest does not contain its schema and successful case.");
@@ -3242,7 +3242,7 @@ internal static class AdvancedExampleDefinitions
             return new ComponentIdentity(
                 InvisibleProduct,
                 new Guid(id),
-                "GonieGonie.InvisibleDragon.Grasshopper.Components." + type);
+                "Dragons.InvisibleDragon.Grasshopper.Components." + type);
         }
 
         private static ComponentIdentity S(string id, string type)
@@ -3250,7 +3250,7 @@ internal static class AdvancedExampleDefinitions
             return new ComponentIdentity(
                 SimpleProduct,
                 new Guid(id),
-                "GonieGonie.SimpleDragon.Grasshopper.Components." + type);
+                "Dragons.SimpleDragon.Grasshopper.Components." + type);
         }
     }
 }

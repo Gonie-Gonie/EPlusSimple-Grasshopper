@@ -755,249 +755,249 @@
         "adaptation": "typed-packaged-weather-database-rather-than-mutable-dataframe-1a4029a1",
         "assertion_id": "epsimple-model-core-337-1a4029a1",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+        "native_route": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
       },
       "CLIMATE_TABLE": {
         "adaptation": "typed-date-indexed-weather-database-rather-than-mutable-dataframe-fbfb5af8",
         "assertion_id": "epsimple-model-core-338-fbfb5af8",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+        "native_route": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
       },
       "EnergyPlusError": {
         "adaptation": "structured-diagnostics-rather-than-throwing-table-wrapper-3ed10042",
         "assertion_id": "epsimple-model-core-339-3ed10042",
         "classification": "exception",
-        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+        "native_route": "Dragons.EnergyPlus.Runtime.EnergyPlusFailure and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
       },
       "EnergyPlusError.__init__": {
         "adaptation": "energyplus-failure-and-result-builder-diagnostics-328cf73b",
         "assertion_id": "epsimple-model-core-340-328cf73b",
         "classification": "exception",
-        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+        "native_route": "Dragons.EnergyPlus.Runtime.EnergyPlusFailure and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
       },
       "GreenRetrofitModel": {
         "adaptation": "immutable-floor-and-catalog-aggregate-rather-than-mutable-zone-list-fb39a800",
         "assertion_id": "epsimple-model-core-341-fb39a800",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel constructor"
       },
       "GreenRetrofitModel.__init__": {
         "adaptation": "immutable-defensive-copy-constructor-with-explicit-weather-e8bd64b7",
         "assertion_id": "epsimple-model-core-342-e8bd64b7",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel constructor"
       },
       "GreenRetrofitModel.address": {
         "adaptation": "readonly-address-with-explicit-weather-selection-df358686",
         "assertion_id": "epsimple-model-core-345-df358686",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Address"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Address"
       },
       "GreenRetrofitModel.area": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-346-bf31ed3c",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Area"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Area"
       },
       "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": {
         "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-ef752eff",
         "assertion_id": "epsimple-model-core-347-ef752eff",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue"
       },
       "GreenRetrofitModel.averaged_exteriorroof_Uvalue": {
         "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-871c1b93",
         "assertion_id": "epsimple-model-core-348-871c1b93",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue"
       },
       "GreenRetrofitModel.averaged_exteriorwall_Uvalue": {
         "adaptation": "nullable-construction-filter-rather-than-singleton-identity-regulation-13f93b86",
         "assertion_id": "epsimple-model-core-349-13f93b86",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue"
       },
       "GreenRetrofitModel.averaged_infiltration": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-350-4046cce9",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageInfiltration"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageInfiltration"
       },
       "GreenRetrofitModel.averaged_lightdensity": {
         "adaptation": "nullable-light-density-excluded-from-weight-denominator-695c215a",
         "assertion_id": "epsimple-model-core-351-695c215a",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageLightDensity"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageLightDensity"
       },
       "GreenRetrofitModel.averaged_window_Uvalue": {
         "adaptation": "native-window-projection-also-includes-glass-doors-235f45cc",
         "assertion_id": "epsimple-model-core-352-235f45cc",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageWindowUValue"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.AverageWindowUValue"
       },
       "GreenRetrofitModel.climate": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-353-27c207a5",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion"
       },
       "GreenRetrofitModel.exteriorfloors": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-354-61333306",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorFloors"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorFloors"
       },
       "GreenRetrofitModel.exteriorroofs": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-355-9ba0cb63",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorRoofs"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorRoofs"
       },
       "GreenRetrofitModel.exteriorwalls": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-356-428acddc",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWalls"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWalls"
       },
       "GreenRetrofitModel.exteriorwindows": {
         "adaptation": "native-window-projection-also-includes-glass-doors-d363d717",
         "assertion_id": "epsimple-model-core-357-d363d717",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWindows"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWindows"
       },
       "GreenRetrofitModel.from_grjson": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-359-696d04c3",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)"
+        "native_route": "Dragons.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)"
       },
       "GreenRetrofitModel.get_unique_fenestration_constructions": {
         "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-0963ad71",
         "assertion_id": "epsimple-model-core-360-0963ad71",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.FenestrationConstructions"
       },
       "GreenRetrofitModel.get_unique_materials": {
         "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-ecb20cb3",
         "assertion_id": "epsimple-model-core-361-ecb20cb3",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Materials"
       },
       "GreenRetrofitModel.get_unique_profiles": {
         "adaptation": "database-resolved-zone-profiles-rather-than-derived-overwrite-map-13af13a1",
         "assertion_id": "epsimple-model-core-362-13af13a1",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles"
       },
       "GreenRetrofitModel.get_unique_surface_constructions": {
         "adaptation": "explicit-validated-model-catalog-rather-than-derived-overwrite-map-a05748b1",
         "assertion_id": "epsimple-model-core-363-a05748b1",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.SurfaceConstructions"
       },
       "GreenRetrofitModel.north_axis": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-364-fc0d665a",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.NorthAxis"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.NorthAxis"
       },
       "GreenRetrofitModel.run": {
         "adaptation": "async-runner-and-result-builder-diagnostic-boundary-bf192ec8",
         "assertion_id": "epsimple-model-core-365-bf192ec8",
         "classification": "exception",
-        "native_route": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
+        "native_route": "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)"
       },
       "GreenRetrofitModel.source_system": {
         "adaptation": "immutable-explicit-catalog-rather-than-computed-plus-unvalidated-merge-b2b62b80",
         "assertion_id": "epsimple-model-core-366-b2b62b80",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems and GonieGonie.SimpleDragon.GreenRetrofitModel.SupplySystems"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.SourceSystems and Dragons.SimpleDragon.GreenRetrofitModel.SupplySystems"
       },
       "GreenRetrofitModel.terrain": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-367-152775fe",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.Terrain"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.Terrain"
       },
       "GreenRetrofitModel.to_dragon": {
         "adaptation": "nonthrowing-aggregate-conversion-result-with-diagnostics-5e2e21f3",
         "assertion_id": "epsimple-model-core-368-5e2e21f3",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
       },
       "GreenRetrofitModel.to_idf": {
         "adaptation": "native-idf-document-conversion-result-with-diagnostics-e8d26d72",
         "assertion_id": "epsimple-model-core-369-e8d26d72",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)"
       },
       "GreenRetrofitModel.vintage": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-370-e739b9d6",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Vintage"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Vintage"
       },
       "GreenRetrofitModel.weather": {
         "adaptation": "not_applicable",
         "assertion_id": "epsimple-model-core-371-acd72fe8",
         "classification": "equivalent",
-        "native_route": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation"
+        "native_route": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation"
       },
       "GreenRetrofitModel.weather_filepath": {
         "adaptation": "epw-filename-with-caller-owned-directory-resolution-fa174585",
         "assertion_id": "epsimple-model-core-372-fa174585",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)"
+        "native_route": "Dragons.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)"
       },
       "InvalidAddressError": {
         "adaptation": "lookup-diagnostic-rather-than-address-exception-aee12b8f",
         "assertion_id": "epsimple-model-core-387-aee12b8f",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+        "native_route": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
       },
       "address_to_weather": {
         "adaptation": "typed-nonthrowing-weather-selection-result-6e86f546",
         "assertion_id": "epsimple-model-core-388-6e86f546",
         "classification": "exception",
-        "native_route": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+        "native_route": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
       }
     },
     "native_routes": {
-      "ADDR_WEATHER_TABLE": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
-      "CLIMATE_TABLE": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
-      "EnergyPlusError": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
-      "EnergyPlusError.__init__": "GonieGonie.EnergyPlus.Runtime.EnergyPlusFailure and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
-      "GreenRetrofitModel": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor",
-      "GreenRetrofitModel.__init__": "GonieGonie.SimpleDragon.GreenRetrofitModel constructor",
-      "GreenRetrofitModel.address": "GonieGonie.SimpleDragon.GreenRetrofitModel.Address",
-      "GreenRetrofitModel.area": "GonieGonie.SimpleDragon.GreenRetrofitModel.Area",
-      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue",
-      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue",
-      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue",
-      "GreenRetrofitModel.averaged_infiltration": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageInfiltration",
-      "GreenRetrofitModel.averaged_lightdensity": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageLightDensity",
-      "GreenRetrofitModel.averaged_window_Uvalue": "GonieGonie.SimpleDragon.GreenRetrofitModel.AverageWindowUValue",
-      "GreenRetrofitModel.climate": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion",
-      "GreenRetrofitModel.exteriorfloors": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorFloors",
-      "GreenRetrofitModel.exteriorroofs": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorRoofs",
-      "GreenRetrofitModel.exteriorwalls": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWalls",
-      "GreenRetrofitModel.exteriorwindows": "GonieGonie.SimpleDragon.GreenRetrofitModel.ExteriorWindows",
-      "GreenRetrofitModel.from_grjson": "GonieGonie.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)",
-      "GreenRetrofitModel.get_unique_fenestration_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
-      "GreenRetrofitModel.get_unique_materials": "GonieGonie.SimpleDragon.GreenRetrofitModel.Materials",
-      "GreenRetrofitModel.get_unique_profiles": "GonieGonie.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles",
-      "GreenRetrofitModel.get_unique_surface_constructions": "GonieGonie.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
-      "GreenRetrofitModel.north_axis": "GonieGonie.SimpleDragon.GreenRetrofitModel.NorthAxis",
-      "GreenRetrofitModel.run": "GonieGonie.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and GonieGonie.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
-      "GreenRetrofitModel.source_system": "GonieGonie.SimpleDragon.GreenRetrofitModel.SourceSystems and GonieGonie.SimpleDragon.GreenRetrofitModel.SupplySystems",
-      "GreenRetrofitModel.terrain": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.Terrain",
-      "GreenRetrofitModel.to_dragon": "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
-      "GreenRetrofitModel.to_idf": "GonieGonie.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)",
-      "GreenRetrofitModel.vintage": "GonieGonie.SimpleDragon.GreenRetrofitModel.Vintage",
-      "GreenRetrofitModel.weather": "GonieGonie.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation",
-      "GreenRetrofitModel.weather_filepath": "GonieGonie.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)",
-      "InvalidAddressError": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection",
-      "address_to_weather": "GonieGonie.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and GonieGonie.SimpleDragon.WeatherSelection"
+      "ADDR_WEATHER_TABLE": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection",
+      "CLIMATE_TABLE": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection",
+      "EnergyPlusError": "Dragons.EnergyPlus.Runtime.EnergyPlusFailure and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "EnergyPlusError.__init__": "Dragons.EnergyPlus.Runtime.EnergyPlusFailure and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "GreenRetrofitModel": "Dragons.SimpleDragon.GreenRetrofitModel constructor",
+      "GreenRetrofitModel.__init__": "Dragons.SimpleDragon.GreenRetrofitModel constructor",
+      "GreenRetrofitModel.address": "Dragons.SimpleDragon.GreenRetrofitModel.Address",
+      "GreenRetrofitModel.area": "Dragons.SimpleDragon.GreenRetrofitModel.Area",
+      "GreenRetrofitModel.averaged_exteriorfloor_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorFloorUValue",
+      "GreenRetrofitModel.averaged_exteriorroof_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorRoofUValue",
+      "GreenRetrofitModel.averaged_exteriorwall_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageExteriorWallUValue",
+      "GreenRetrofitModel.averaged_infiltration": "Dragons.SimpleDragon.GreenRetrofitModel.AverageInfiltration",
+      "GreenRetrofitModel.averaged_lightdensity": "Dragons.SimpleDragon.GreenRetrofitModel.AverageLightDensity",
+      "GreenRetrofitModel.averaged_window_Uvalue": "Dragons.SimpleDragon.GreenRetrofitModel.AverageWindowUValue",
+      "GreenRetrofitModel.climate": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.ClimateRegion",
+      "GreenRetrofitModel.exteriorfloors": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorFloors",
+      "GreenRetrofitModel.exteriorroofs": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorRoofs",
+      "GreenRetrofitModel.exteriorwalls": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWalls",
+      "GreenRetrofitModel.exteriorwindows": "Dragons.SimpleDragon.GreenRetrofitModel.ExteriorWindows",
+      "GreenRetrofitModel.from_grjson": "Dragons.SimpleDragon.GrmReader.ReadFile(string, SimpleDragonDatabase?)",
+      "GreenRetrofitModel.get_unique_fenestration_constructions": "Dragons.SimpleDragon.GreenRetrofitModel.FenestrationConstructions",
+      "GreenRetrofitModel.get_unique_materials": "Dragons.SimpleDragon.GreenRetrofitModel.Materials",
+      "GreenRetrofitModel.get_unique_profiles": "Dragons.SimpleDragon.GreenRetrofitModel.Zones with SimpleDragonDatabase.Profiles",
+      "GreenRetrofitModel.get_unique_surface_constructions": "Dragons.SimpleDragon.GreenRetrofitModel.SurfaceConstructions",
+      "GreenRetrofitModel.north_axis": "Dragons.SimpleDragon.GreenRetrofitModel.NorthAxis",
+      "GreenRetrofitModel.run": "Dragons.EnergyPlus.Runtime.EnergyPlusRunner.RunAsync(EnergyPlusRunRequest, CancellationToken) and Dragons.SimpleDragon.GreenRetrofitResultBuilder.Build(GreenRetrofitModel, EnergyPlusSimulationResult, GreenRetrofitResultBuildOptions?)",
+      "GreenRetrofitModel.source_system": "Dragons.SimpleDragon.GreenRetrofitModel.SourceSystems and Dragons.SimpleDragon.GreenRetrofitModel.SupplySystems",
+      "GreenRetrofitModel.terrain": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.Terrain",
+      "GreenRetrofitModel.to_dragon": "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)",
+      "GreenRetrofitModel.to_idf": "Dragons.SimpleDragon.GreenRetrofitConverter.ToIdfDocument(GreenRetrofitModel, GreenRetrofitConversionOptions?, IddSchema?, EnergyModelIdfOptions?)",
+      "GreenRetrofitModel.vintage": "Dragons.SimpleDragon.GreenRetrofitModel.Vintage",
+      "GreenRetrofitModel.weather": "Dragons.SimpleDragon.GreenRetrofitModel.Weather.WeatherLocation",
+      "GreenRetrofitModel.weather_filepath": "Dragons.SimpleDragon.WeatherSelection.EpwFileName and ResolveEpwPath(string)",
+      "InvalidAddressError": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection",
+      "address_to_weather": "Dragons.SimpleDragon.WeatherDatabase.FindByAddress(string?, DateTime) and Dragons.SimpleDragon.WeatherSelection"
     },
     "runtime_names": "pinned-python-only-no-native-type-name-claims",
     "runtime_signatures": {
@@ -1394,7 +1394,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.epsimple-model-core.v1",
+  "schema": "dragons.python-reference.epsimple-model-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:87be4b5360ff3816bcda24ff61d639a3676702dae470cde8f721d0159bc9edac",

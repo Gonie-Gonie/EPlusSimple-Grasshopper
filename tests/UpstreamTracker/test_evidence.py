@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from support import TemporaryWorkspace, write_configuration
 
-from goniegonie_upstream_tracker.compatibility import (
+from dragons_upstream_tracker.compatibility import (
     CompatibilityConfiguration,
     CompatibilityMatrix,
     MatrixEntry,
@@ -18,9 +18,9 @@ from goniegonie_upstream_tracker.compatibility import (
     build_public_inventory,
     load_compatibility_scope,
 )
-from goniegonie_upstream_tracker.config import load_configuration
-from goniegonie_upstream_tracker.errors import ConfigurationError
-from goniegonie_upstream_tracker.evidence import (
+from dragons_upstream_tracker.config import load_configuration
+from dragons_upstream_tracker.errors import ConfigurationError
+from dragons_upstream_tracker.evidence import (
     EvidenceReceipt,
     EvidenceResults,
     ExecutedAssertion,
@@ -40,7 +40,7 @@ from goniegonie_upstream_tracker.evidence import (
 OUTPUT_HASH = "sha256:" + ("1" * 64)
 OTHER_HASH = "sha256:" + ("2" * 64)
 IMPLEMENTATION_SOURCE = (
-    "namespace GonieGonie.InvisibleDragon.Model;\n"
+    "namespace Dragons.InvisibleDragon.Model;\n"
     "public class Service {\n"
     "  public int Run() => Helper.Missing();\n"
     "#if NEVER_DEFINED\n"
@@ -60,7 +60,7 @@ def source_hash(value: str) -> str:
 
 class ExactEvidenceTests(unittest.TestCase):
     def test_csharp_binding_resolves_fully_qualified_types_and_masks_raw_strings(self) -> None:
-        source = '''namespace GonieGonie.Model;
+        source = '''namespace Dragons.Model;
 public class Owner
 {
     private string Text = """" inside """ ; public int Ghost; """";
@@ -69,15 +69,15 @@ public class Owner
 }
 '''
 
-        self.assertTrue(_csharp_declares_symbol(source, "GonieGonie.Model.Owner"))
-        self.assertTrue(_csharp_declares_symbol(source, "GonieGonie.Model.Owner.Real"))
+        self.assertTrue(_csharp_declares_symbol(source, "Dragons.Model.Owner"))
+        self.assertTrue(_csharp_declares_symbol(source, "Dragons.Model.Owner.Real"))
         self.assertTrue(
-            _csharp_declares_symbol(source, "GonieGonie.Model.Owner.Nested")
+            _csharp_declares_symbol(source, "Dragons.Model.Owner.Nested")
         )
         self.assertTrue(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.Model.Owner.Nested.Run",
+                "Dragons.Model.Owner.Nested.Run",
             )
         )
         self.assertFalse(_csharp_declares_symbol(source, "Owner.Ghost"))
@@ -91,7 +91,7 @@ public class Owner
         self.assertFalse(_csharp_declares_symbol(source, "N.Owner.Owner"))
 
     def test_csharp_binding_recognizes_tuple_return_method_declarations(self) -> None:
-        source = """namespace GonieGonie.InvisibleDragon.Profile;
+        source = """namespace Dragons.InvisibleDragon.Profile;
 public sealed class Schedule
 {
     public static (
@@ -109,7 +109,7 @@ public sealed class Schedule
         self.assertTrue(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.Schedule.UnifyCompactizedSchedules",
+                "Dragons.InvisibleDragon.Profile.Schedule.UnifyCompactizedSchedules",
             )
         )
 
@@ -187,7 +187,7 @@ public static class Helper
                 self.assertFalse(_csharp_declares_symbol(source, "N.Owner.U"))
 
     def test_csharp_binding_recognizes_first_middle_and_last_enum_members(self) -> None:
-        source = """namespace GonieGonie.InvisibleDragon.Profile;
+        source = """namespace Dragons.InvisibleDragon.Profile;
 public enum ScheduleType
 {
     [System.Obsolete] Temperature = -1,
@@ -205,25 +205,25 @@ public class Other
             self.assertTrue(
                 _csharp_declares_symbol(
                     source,
-                    f"GonieGonie.InvisibleDragon.Profile.ScheduleType.{member}",
+                    f"Dragons.InvisibleDragon.Profile.ScheduleType.{member}",
                 ),
                 member,
             )
         self.assertFalse(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.ScheduleType.Missing",
+                "Dragons.InvisibleDragon.Profile.ScheduleType.Missing",
             )
         )
         self.assertFalse(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.Other.Temperature",
+                "Dragons.InvisibleDragon.Profile.Other.Temperature",
             )
         )
 
     def test_csharp_binding_maps_only_closed_operator_metadata_names(self) -> None:
-        source = r'''namespace GonieGonie.InvisibleDragon.Profile;
+        source = r'''namespace Dragons.InvisibleDragon.Profile;
 public sealed class DaySchedule
 {
     public static DaySchedule operator +(DaySchedule left, DaySchedule right) => left;
@@ -266,7 +266,7 @@ public sealed class UnaryOnly
             self.assertTrue(
                 _csharp_declares_symbol(
                     source,
-                    f"GonieGonie.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
+                    f"Dragons.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
                 ),
                 metadata_name,
             )
@@ -281,26 +281,26 @@ public sealed class UnaryOnly
             self.assertFalse(
                 _csharp_declares_symbol(
                     source,
-                    f"GonieGonie.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
+                    f"Dragons.InvisibleDragon.Profile.DaySchedule.{metadata_name}",
                 ),
                 metadata_name,
             )
         self.assertFalse(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.Other.op_Subtraction",
+                "Dragons.InvisibleDragon.Profile.Other.op_Subtraction",
             )
         )
         self.assertFalse(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.UnaryOnly.op_Addition",
+                "Dragons.InvisibleDragon.Profile.UnaryOnly.op_Addition",
             )
         )
         self.assertFalse(
             _csharp_declares_symbol(
                 source,
-                "GonieGonie.InvisibleDragon.Profile.UnaryOnly.op_Subtraction",
+                "Dragons.InvisibleDragon.Profile.UnaryOnly.op_Subtraction",
             )
         )
 
@@ -633,7 +633,7 @@ public enum ForgedEnum
                 )
 
             untracked_source = (
-                "namespace GonieGonie.InvisibleDragon.Model;\n"
+                "namespace Dragons.InvisibleDragon.Model;\n"
                 "public class Untracked { public int Run() => 1; }\n"
             )
             workspace.write("src/Model/Untracked.cs", untracked_source)
@@ -642,7 +642,7 @@ public enum ForgedEnum
                 {
                     "path": "src/Model/Untracked.cs",
                     "source_sha256": source_hash(untracked_source),
-                    "symbol": "GonieGonie.InvisibleDragon.Model.Untracked.Run",
+                    "symbol": "Dragons.InvisibleDragon.Model.Untracked.Run",
                 }
             )
             with self.assertRaisesRegex(
@@ -916,7 +916,7 @@ public enum ForgedEnum
         lock, port_map, exceptions = write_configuration(workspace)
         tracker = load_configuration(lock, port_map, exceptions)
         scope_data = {
-            "schema": "goniegonie.upstream-compatibility-scope.v1",
+            "schema": "dragons.upstream-compatibility-scope.v1",
             "upstream_commit": tracker.lock.commit,
             "module_paths": list(tracker.lock.module_paths),
             "inventory_policy": {
@@ -989,9 +989,9 @@ public enum ForgedEnum
             [
                 "git",
                 "-c",
-                "user.name=GonieGonie Test",
+                "user.name=Dragons Test",
                 "-c",
-                "user.email=test@goniegonie.invalid",
+                "user.email=test@dragons.invalid",
                 "commit",
                 "--quiet",
                 "-m",
@@ -1019,9 +1019,9 @@ public enum ForgedEnum
             [
                 "git",
                 "-c",
-                "user.name=GonieGonie Test",
+                "user.name=Dragons Test",
                 "-c",
-                "user.email=test@goniegonie.invalid",
+                "user.email=test@dragons.invalid",
                 "commit",
                 "--quiet",
                 "-m",
@@ -1066,7 +1066,7 @@ public enum ForgedEnum
                     symbol.symbol,
                     symbol.symbol_hash,
                     "src/Model/Service.cs",
-                    "GonieGonie.InvisibleDragon.Model.Service.Run",
+                    "Dragons.InvisibleDragon.Model.Service.Run",
                     source_hash(IMPLEMENTATION_SOURCE),
                     (receipt,),
                 ),

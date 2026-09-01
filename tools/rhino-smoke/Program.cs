@@ -1,6 +1,6 @@
 using RhinoInside;
 
-namespace GonieGonie.InvisibleDragon.RhinoSmoke;
+namespace Dragons.InvisibleDragon.RhinoSmoke;
 
 internal static class Program
 {

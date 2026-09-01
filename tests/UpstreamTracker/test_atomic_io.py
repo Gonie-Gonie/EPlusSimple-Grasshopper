@@ -5,7 +5,7 @@ import unittest
 
 from support import TemporaryWorkspace
 
-from goniegonie_upstream_tracker.atomic_io import write_text_atomically
+from dragons_upstream_tracker.atomic_io import write_text_atomically
 
 
 class AtomicIoTests(unittest.TestCase):

@@ -25,7 +25,7 @@ _ALLOWED_SOURCE_PREFIXES = frozenset(
 )
 _ORIGINAL_RUN = getattr(
     subprocess.run,
-    "_goniegonie_original_run",
+    "_dragons_original_run",
     subprocess.run,
 )
 
@@ -121,7 +121,7 @@ def run_isolated_bootstrap(
     return _ORIGINAL_RUN(normalized, *popen_arguments, **kwargs)
 
 
-setattr(run_isolated_bootstrap, "_goniegonie_original_run", _ORIGINAL_RUN)
+setattr(run_isolated_bootstrap, "_dragons_original_run", _ORIGINAL_RUN)
 
 
 def main() -> int:

@@ -21,7 +21,7 @@ import tempfile
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.launcher-runtime.v1"
+SCHEMA = "dragons.python-reference.launcher-runtime.v1"
 SOURCE_PATH = "src/idragon/launcher.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -111,7 +111,7 @@ ABSOLUTE_PATH_PATTERN = re.compile(
     r"(?i)(?:[a-z]:[\\/]|\\\\[^\\]|(?<![A-Za-z0-9_.<>-])/(?:home|mnt|private|root|tmp|Users|var)(?:/|$))"
 )
 TEMP_LEAK_PATTERN = re.compile(
-    r"(?i)(?:goniegonie-launcher-runtime-oracle-|AppData[\\/]+Local[\\/]+Temp)"
+    r"(?i)(?:dragons-launcher-runtime-oracle-|AppData[\\/]+Local[\\/]+Temp)"
 )
 GUID_PATTERN = re.compile(
     r"(?i)(?<![0-9a-f])(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-"
@@ -127,7 +127,7 @@ def _load_support() -> Any:
         "generate_launcher_result_parser_oracle.py"
     )
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_launcher_runtime_support", path
+        "_dragons_launcher_runtime_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load launcher runtime support: {path}")
@@ -579,7 +579,7 @@ def _ensure_descendant(root: Path, value: Any) -> Path:
 @contextmanager
 def _closed_workspace(module: Any) -> Iterator[dict[str, Any]]:
     with tempfile.TemporaryDirectory(
-        prefix="goniegonie-launcher-runtime-oracle-"
+        prefix="dragons-launcher-runtime-oracle-"
     ) as raw_root:
         root = Path(raw_root).resolve()
         created: list[Path] = []

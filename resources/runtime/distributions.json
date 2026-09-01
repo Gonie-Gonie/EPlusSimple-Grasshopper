@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.dragons-grasshopper.distributions.v3",
+  "schema": "dragons-grasshopper.distributions.v3",
   "payloads": [
     {
       "id": "energyplus-24.2.0-windows-x64",

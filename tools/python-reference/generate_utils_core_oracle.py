@@ -19,7 +19,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.simpledragon.utils-core-oracle.v1"
+SCHEMA = "dragons.simpledragon.utils-core-oracle.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -190,7 +190,7 @@ BINARY64_PATTERN = re.compile(
 
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_day_schedule_core_oracle.py")
-    spec = importlib.util.spec_from_file_location("_goniegonie_utils_core_support", path)
+    spec = importlib.util.spec_from_file_location("_dragons_utils_core_support", path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load utils core oracle support: {path}")
     module = importlib.util.module_from_spec(spec)

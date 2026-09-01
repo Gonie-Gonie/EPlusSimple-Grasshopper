@@ -3215,14 +3215,14 @@
       ]
     },
     "native_adaptation_candidates": {
-      "Directory": "GonieGonie.EnergyPlus.Runtime.RuntimeResolver and caller-supplied resource paths",
+      "Directory": "Dragons.EnergyPlus.Runtime.RuntimeResolver and caller-supplied resource paths",
       "Directory.ENERGYPLUS_DIR": "EnergyPlusRuntimeLayout.RootPath after manifest and payload validation",
       "Directory.IDD_DIR": "EnergyPlusRuntimeLayout.IddPath or an explicit Grasshopper IDD path",
-      "Directory.PROFILE_DIR": "typed GonieGonie.InvisibleDragon.Profile values supplied by callers",
-      "PackageInfo": "GonieGonie.InvisibleDragon.PackageInfo static class",
-      "PackageInfo.NAME": "GonieGonie.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
+      "Directory.PROFILE_DIR": "typed Dragons.InvisibleDragon.Profile values supplied by callers",
+      "PackageInfo": "Dragons.InvisibleDragon.PackageInfo static class",
+      "PackageInfo.NAME": "Dragons.InvisibleDragon.PackageInfo.Name (InvisibleDragon)",
       "PackageInfo.REQUIRED_PYTHON": "net48, net7.0-windows, and net8.0-windows build targets",
-      "PackageInfo.VERSION": "GonieGonie.InvisibleDragon.PackageInfo.Version (0.1.0)"
+      "PackageInfo.VERSION": "Dragons.InvisibleDragon.PackageInfo.Version (0.1.0)"
     },
     "native_binding_status": "proposed-not-yet-cross-language-verified",
     "path_encoding": "anchor-relative-parts-only-no-host-absolute-paths",
@@ -3317,7 +3317,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.constants-metadata.v1",
+  "schema": "dragons.python-reference.constants-metadata.v1",
   "symbols": [
     {
       "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",
@@ -3471,8 +3471,8 @@
         "location-b/repository/src/idragon/constants.py"
       ],
       "module_names": [
-        "_goniegonie_constants_metadata_location_a",
-        "_goniegonie_constants_metadata_location_b"
+        "_dragons_constants_metadata_location_a",
+        "_dragons_constants_metadata_location_b"
       ],
       "source_copy_sha256": {
         "location-a/repository/src/idragon/constants.py": "sha256:90f6d9750bc33f68ca5003ed7a643e920119133520d2369d0d0c3bfc2b08e520",

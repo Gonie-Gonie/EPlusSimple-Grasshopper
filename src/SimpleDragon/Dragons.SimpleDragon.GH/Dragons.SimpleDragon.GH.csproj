@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <AssemblyName>Dragons.SimpleDragon.GH</AssemblyName>
+    <RootNamespace>Dragons.SimpleDragon.Grasshopper</RootNamespace>
+    <Description>SimpleDragon compatibility components for Rhino 7 and Rhino 8 Grasshopper.</Description>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <TargetExt>.gha</TargetExt>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dragons.SimpleDragon.Core\Dragons.SimpleDragon.Core.csproj" />
+    <ProjectReference Include="..\Dragons.SimpleDragon.Rhino\Dragons.SimpleDragon.Rhino.csproj" />
+    <ProjectReference Include="..\Dragons.SimpleDragon.Grasshopper.Types\Dragons.SimpleDragon.Grasshopper.Types.csproj" />
+    <PackageReference Include="Grasshopper" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="Grasshopper" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="7.0.20314.3001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' == 'net48'" />
+    <PackageReference Include="RhinoCommon" VersionOverride="8.0.23304.9001" ExcludeAssets="runtime" Condition="'$(TargetFramework)' != 'net48'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\simple-dragon\simple-dragon-24.png"
+                      Link="Resources\simple-dragon-24.png"
+                      LogicalName="Dragons.SimpleDragon.Grasshopper.Resources.SimpleDragon24.png" />
+    <EmbeddedResource Include="..\..\..\resources\icons\generated\simple-dragon\components\*.png">
+      <Link>Resources\Components\%(Filename)%(Extension)</Link>
+      <LogicalName>Dragons.SimpleDragon.Grasshopper.Resources.Components.%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

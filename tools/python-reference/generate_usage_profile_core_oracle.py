@@ -20,7 +20,7 @@ import tempfile
 from typing import Any
 
 
-SCHEMA = "goniegonie.simpledragon.usage-profile-core-oracle.v1"
+SCHEMA = "dragons.simpledragon.usage-profile-core-oracle.v1"
 SOURCE_PATH = "src/epsimple/core/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -331,7 +331,7 @@ LEAP_DAY_FAILURE_FACT_KEYS = {"end", "start"}
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_day_schedule_core_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_usage_profile_core_support", path
+        "_dragons_usage_profile_core_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load UsageProfile core oracle support: {path}")

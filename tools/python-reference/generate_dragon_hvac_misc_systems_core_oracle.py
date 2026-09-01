@@ -25,7 +25,7 @@ import tempfile
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.dragon-hvac-misc-systems-core.v1"
+SCHEMA = "dragons.python-reference.dragon-hvac-misc-systems-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -65,7 +65,7 @@ def _load_support() -> Any:
     ):
         raise RuntimeError("Pinned dragon HVAC supply-core support drifted.")
     specification = importlib.util.spec_from_file_location(
-        "_goniegonie_dragon_hvac_misc_support", SUPPORT_GENERATOR_PATH
+        "_dragons_dragon_hvac_misc_support", SUPPORT_GENERATOR_PATH
     )
     if specification is None or specification.loader is None:
         raise RuntimeError("Cannot load pinned dragon HVAC misc support.")
@@ -180,7 +180,7 @@ PV_SUPPORT_FIXTURE = {
     "bytes": 147_261,
     "cases_sha256": "sha256:767c3314ec20d07aa12fdce48b9969a98b54b835855b4be7ecfdd896816be0dd",
     "path": "fixtures/reference/python-0.7.0/dragon-hvac-photovoltaic-to-idf-object-oracle.json",
-    "schema": "goniegonie.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
+    "schema": "dragons.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
     "sha256": "sha256:07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b",
 }
 
@@ -207,7 +207,7 @@ ASSERTION_IDS = {
 
 
 def _native_route(symbol: str) -> str:
-    prefix = "GonieGonie.InvisibleDragon.Hvac."
+    prefix = "Dragons.InvisibleDragon.Hvac."
     routes = {
         "DomesticHotWater": prefix + "DomesticHotWater",
         "DomesticHotWater.__init__": prefix + "DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
@@ -218,8 +218,8 @@ def _native_route(symbol: str) -> str:
         "EnergyRecoveryVentilator.__init__": prefix + "EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
         "EnergyRecoveryVentilator.to_idf_object": (
             prefix + "ZoneVentilationAssignment -> "
-            "GonieGonie.InvisibleDragon.Model.EnergyModel -> "
-            "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)"
+            "Dragons.InvisibleDragon.Model.EnergyModel -> "
+            "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)"
         ),
         "PhotoVoltaicPanel": prefix + "PhotovoltaicPanel",
         "PhotoVoltaicPanel.__init__": prefix + "PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
@@ -298,32 +298,32 @@ NATIVE_IMPLEMENTATION_COMMIT = "8f289eb8e94883cde53f583ab250fa6c4394ce2a"
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 7_582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
     },
     {
         "bytes": 1_941,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/DomesticHotWater.cs",
         "sha256": "sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d",
     },
     {
         "bytes": 7_074,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
         "sha256": "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82",
     },
     {
         "bytes": 22_015,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
         "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
     },
     {
         "bytes": 50_764,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
     },
     {
         "bytes": 13_182,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
         "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495",
     },
 )
@@ -1020,7 +1020,7 @@ def build_oracle(inventory_path: Path, upstream_commit: str) -> dict[str, Any]:
         loaded_modules = list(modules.loaded_local_modules)
 
     with tempfile.TemporaryDirectory(
-        prefix="goniegonie-dragon-hvac-misc-relocated-"
+        prefix="dragons-dragon-hvac-misc-relocated-"
     ) as temporary:
         relocated_root = Path(temporary) / "relocated-source"
         shutil.copytree(source_root, relocated_root)

@@ -5227,21 +5227,21 @@
     },
     "internal_generate_claimed": false,
     "native_routes": {
-      "DomesticHotWater": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater",
-      "DomesticHotWater.__init__": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
-      "DomesticHotWater.efficiency": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
-      "DomesticHotWater.fuel": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
-      "DomesticHotWater.to_idf_object": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
-      "EnergyRecoveryVentilator": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
-      "EnergyRecoveryVentilator.__init__": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
-      "EnergyRecoveryVentilator.to_idf_object": "GonieGonie.InvisibleDragon.Hvac.ZoneVentilationAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
-      "PhotoVoltaicPanel": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel",
-      "PhotoVoltaicPanel.__init__": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
-      "PhotoVoltaicPanel.area": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
-      "PhotoVoltaicPanel.azimuth": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
-      "PhotoVoltaicPanel.effective_area_ratio": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
-      "PhotoVoltaicPanel.efficiency": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
-      "PhotoVoltaicPanel.tilt": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees"
+      "DomesticHotWater": "Dragons.InvisibleDragon.Hvac.DomesticHotWater",
+      "DomesticHotWater.__init__": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
+      "DomesticHotWater.efficiency": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
+      "DomesticHotWater.fuel": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
+      "DomesticHotWater.to_idf_object": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
+      "EnergyRecoveryVentilator": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
+      "EnergyRecoveryVentilator.__init__": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
+      "EnergyRecoveryVentilator.to_idf_object": "Dragons.InvisibleDragon.Hvac.ZoneVentilationAssignment -> Dragons.InvisibleDragon.Model.EnergyModel -> Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
+      "PhotoVoltaicPanel": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel",
+      "PhotoVoltaicPanel.__init__": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
+      "PhotoVoltaicPanel.area": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
+      "PhotoVoltaicPanel.azimuth": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
+      "PhotoVoltaicPanel.effective_area_ratio": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
+      "PhotoVoltaicPanel.efficiency": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
+      "PhotoVoltaicPanel.tilt": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees"
     },
     "runtime_signatures": {
       "DomesticHotWater": {
@@ -5366,52 +5366,52 @@
     "internal_generate_route_claimed": false,
     "native_implementation_commit": "8f289eb8e94883cde53f583ab250fa6c4394ce2a",
     "native_routes": {
-      "DomesticHotWater": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater",
-      "DomesticHotWater.__init__": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
-      "DomesticHotWater.efficiency": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
-      "DomesticHotWater.fuel": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
-      "DomesticHotWater.to_idf_object": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
-      "EnergyRecoveryVentilator": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
-      "EnergyRecoveryVentilator.__init__": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
-      "EnergyRecoveryVentilator.to_idf_object": "GonieGonie.InvisibleDragon.Hvac.ZoneVentilationAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
-      "PhotoVoltaicPanel": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel",
-      "PhotoVoltaicPanel.__init__": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
-      "PhotoVoltaicPanel.area": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
-      "PhotoVoltaicPanel.azimuth": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
-      "PhotoVoltaicPanel.effective_area_ratio": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
-      "PhotoVoltaicPanel.efficiency": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
-      "PhotoVoltaicPanel.tilt": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees"
+      "DomesticHotWater": "Dragons.InvisibleDragon.Hvac.DomesticHotWater",
+      "DomesticHotWater.__init__": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
+      "DomesticHotWater.efficiency": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
+      "DomesticHotWater.fuel": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
+      "DomesticHotWater.to_idf_object": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
+      "EnergyRecoveryVentilator": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
+      "EnergyRecoveryVentilator.__init__": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
+      "EnergyRecoveryVentilator.to_idf_object": "Dragons.InvisibleDragon.Hvac.ZoneVentilationAssignment -> Dragons.InvisibleDragon.Model.EnergyModel -> Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
+      "PhotoVoltaicPanel": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel",
+      "PhotoVoltaicPanel.__init__": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
+      "PhotoVoltaicPanel.area": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
+      "PhotoVoltaicPanel.azimuth": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
+      "PhotoVoltaicPanel.effective_area_ratio": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
+      "PhotoVoltaicPanel.efficiency": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
+      "PhotoVoltaicPanel.tilt": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees"
     },
     "photovoltaic_public_api_only": true,
     "sources": [
       {
         "bytes": 7582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a"
       },
       {
         "bytes": 1941,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/DomesticHotWater.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/DomesticHotWater.cs",
         "sha256": "sha256:586f020b82c50c70ad20d8a667fa338ce3372d39bb1bd48291ea42c97b8d4e2d"
       },
       {
         "bytes": 7074,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/VentilationAndPv.cs",
         "sha256": "sha256:eb7d871d621c8f3970099dff7bdb412dc84f33cd2ef07c0fb99c94a550d5eb82"
       },
       {
         "bytes": 22015,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
         "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3"
       },
       {
         "bytes": 50764,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905"
       },
       {
         "bytes": 13182,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idf/IdfModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idf/IdfModel.cs",
         "sha256": "sha256:50aa8a362214d34bba37dcf51ef3c0cce89d54895110a0da786c11d8fe233495"
       }
     ]
@@ -5441,7 +5441,7 @@
     },
     "utf8_mode": true
   },
-  "schema": "goniegonie.python-reference.dragon-hvac-misc-systems-core.v1",
+  "schema": "dragons.python-reference.dragon-hvac-misc-systems-core.v1",
   "support": {
     "bytes": 147261,
     "cases_sha256": "sha256:767c3314ec20d07aa12fdce48b9969a98b54b835855b4be7ecfdd896816be0dd",
@@ -5458,7 +5458,7 @@
       }
     ],
     "role": "immutable-index-761-photovoltaic-idf-emission-support-only",
-    "schema": "goniegonie.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
+    "schema": "dragons.python-reference.dragon-hvac-photovoltaic-to-idf-object.v1",
     "sha256": "sha256:07c383c316989ccb22ac3eadcf9d8388764f76effbbf03c13b7a54f8af20f22b",
     "target_promoted": false
   },
@@ -5468,7 +5468,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-693-domestichotwater",
       "classification": "exception",
       "inventory_index": 693,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater",
+      "native_route": "Dragons.InvisibleDragon.Hvac.DomesticHotWater",
       "symbol": "DomesticHotWater",
       "symbol_hash": "sha256:457365bf4f456d73a293453b3b34e5c50b7567621186e6a94f7308d3f72bc0e2"
     },
@@ -5477,7 +5477,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-694-domestichotwater-__init__",
       "classification": "exception",
       "inventory_index": 694,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
+      "native_route": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.DomesticHotWater(EntityId, string, Fuel, double)",
       "symbol": "DomesticHotWater.__init__",
       "symbol_hash": "sha256:20c8ef6767c1709ca4fa34051879479a2040016ed0b14e743226b964683a7026"
     },
@@ -5486,7 +5486,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-697-domestichotwater-efficiency",
       "classification": "equivalent",
       "inventory_index": 697,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
+      "native_route": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Efficiency",
       "symbol": "DomesticHotWater.efficiency",
       "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
     },
@@ -5495,7 +5495,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-698-domestichotwater-fuel",
       "classification": "exception",
       "inventory_index": 698,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
+      "native_route": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.Fuel",
       "symbol": "DomesticHotWater.fuel",
       "symbol_hash": "sha256:3742042244a97d39c02c78bc2f4951361dfc5122def303875aaeb7b97e02cc41"
     },
@@ -5504,7 +5504,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-699-domestichotwater-to_idf_object",
       "classification": "equivalent",
       "inventory_index": 699,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
+      "native_route": "Dragons.InvisibleDragon.Hvac.DomesticHotWater.ToIdfObjects(IdfGenerationContext)",
       "symbol": "DomesticHotWater.to_idf_object",
       "symbol_hash": "sha256:266f0bb22b3292f9d766ec7971914232f43504e6b36a51253b460ede73f4d16e"
     },
@@ -5513,7 +5513,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-714-energyrecoveryventilator",
       "classification": "exception",
       "inventory_index": 714,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
+      "native_route": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator",
       "symbol": "EnergyRecoveryVentilator",
       "symbol_hash": "sha256:f233aecd2b66b406dfc965c85af77235d9f4ad038eaa7efa94ec58f2e4f4d3b5"
     },
@@ -5522,7 +5522,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-715-energyrecoveryventilator-__init__",
       "classification": "exception",
       "inventory_index": 715,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
+      "native_route": "Dragons.InvisibleDragon.Hvac.EnergyRecoveryVentilator.EnergyRecoveryVentilator(EntityId, string, double, double, double?, double, double)",
       "symbol": "EnergyRecoveryVentilator.__init__",
       "symbol_hash": "sha256:aec429110645f1b3e06b031984f676db5d879b53ef74d38c7ec9a249430e2d12"
     },
@@ -5531,7 +5531,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-716-energyrecoveryventilator-to_idf_object",
       "classification": "exception",
       "inventory_index": 716,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.ZoneVentilationAssignment -> GonieGonie.InvisibleDragon.Model.EnergyModel -> GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
+      "native_route": "Dragons.InvisibleDragon.Hvac.ZoneVentilationAssignment -> Dragons.InvisibleDragon.Model.EnergyModel -> Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument(IddSchema?, EnergyModelIdfOptions?)",
       "symbol": "EnergyRecoveryVentilator.to_idf_object",
       "symbol_hash": "sha256:266f0bb22b3292f9d766ec7971914232f43504e6b36a51253b460ede73f4d16e"
     },
@@ -5540,7 +5540,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-753-photovoltaicpanel",
       "classification": "exception",
       "inventory_index": 753,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel",
       "symbol": "PhotoVoltaicPanel",
       "symbol_hash": "sha256:5bbb7bf55de0727dba1afc5318aa6ad01693681428d5358de691f92e7889b74a"
     },
@@ -5549,7 +5549,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-754-photovoltaicpanel-__init__",
       "classification": "exception",
       "inventory_index": 754,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.PhotovoltaicPanel(EntityId, string, double, double, double, double, double)",
       "symbol": "PhotoVoltaicPanel.__init__",
       "symbol_hash": "sha256:31bb27fead2069ec9da48c75df84376bdd4ec7744a754d62bd5fd1aace8e81fe"
     },
@@ -5558,7 +5558,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-756-photovoltaicpanel-area",
       "classification": "equivalent",
       "inventory_index": 756,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AreaSquareMetres",
       "symbol": "PhotoVoltaicPanel.area",
       "symbol_hash": "sha256:aa93b96bd36a02c789e649c6beb5f1309eefbfa45fbc91d8318df3474ec06d7a"
     },
@@ -5567,7 +5567,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-757-photovoltaicpanel-azimuth",
       "classification": "equivalent",
       "inventory_index": 757,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.AzimuthDegrees",
       "symbol": "PhotoVoltaicPanel.azimuth",
       "symbol_hash": "sha256:85179b4343be74cef5082ef838d2010ff71774146c34feb7e8ffe3fe325a69de"
     },
@@ -5576,7 +5576,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-758-photovoltaicpanel-effective_area_ratio",
       "classification": "equivalent",
       "inventory_index": 758,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.ActiveCellAreaFraction",
       "symbol": "PhotoVoltaicPanel.effective_area_ratio",
       "symbol_hash": "sha256:334dc7b9a730fc22af97c84c8b20b815f6a2b8d3851cf2f17082badcc3ef961f"
     },
@@ -5585,7 +5585,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-759-photovoltaicpanel-efficiency",
       "classification": "equivalent",
       "inventory_index": 759,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.Efficiency",
       "symbol": "PhotoVoltaicPanel.efficiency",
       "symbol_hash": "sha256:80144f2f58577c9b96d6d6d012e949a459d23f8cfb4a3f77e5656154e80b6947"
     },
@@ -5594,7 +5594,7 @@
       "assertion_id": "dragon-hvac-misc-systems-core-760-photovoltaicpanel-tilt",
       "classification": "equivalent",
       "inventory_index": 760,
-      "native_route": "GonieGonie.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees",
+      "native_route": "Dragons.InvisibleDragon.Hvac.PhotovoltaicPanel.TiltDegrees",
       "symbol": "PhotoVoltaicPanel.tilt",
       "symbol_hash": "sha256:abeb16e68a1dc65d3d43f76029e2824f9f73bd5351e65bb1c5b2f17348eb161d"
     }

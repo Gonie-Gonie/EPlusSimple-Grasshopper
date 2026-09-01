@@ -6,7 +6,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.construction-equality-hash-oracle.v1",
+  "schema": "dragons.invisibledragon.construction-equality-hash-oracle.v1",
   "source": {
     "content_sha256": "sha256:2cbae026eaad36833111d7d8c96eb12ee615ec952294db62454197d11ac75622",
     "path": "src/idragon/dragon/construction.py"

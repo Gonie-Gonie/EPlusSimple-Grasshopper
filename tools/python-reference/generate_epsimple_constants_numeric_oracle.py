@@ -25,7 +25,7 @@ import sys
 from typing import Any, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-constants-numeric.v1"
+SCHEMA = "dragons.python-reference.epsimple-constants-numeric.v1"
 SOURCE_PATH = "src/epsimple/constants.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -449,7 +449,7 @@ BINARY64_PATTERN = re.compile(r"^-?[0-9a-f]+\.[0-9a-f]+p[+-][0-9]+$")
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_schedule_type_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_constants_numeric_support", path
+        "_dragons_epsimple_constants_numeric_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load epsimple constants oracle support: {path}")

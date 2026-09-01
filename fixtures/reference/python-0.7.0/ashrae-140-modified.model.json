@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.python-reference.model-summary.v1",
+  "schema": "dragons.python-reference.model-summary.v1",
   "fixture_sha256": "8e2ff63e17af29e7429b696800dbb11a5af45817cd97724481b9152b90fc76b3",
   "name": "ASHRAE 140 modified",
   "address": "서울특별시 관악구",

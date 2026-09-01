@@ -1,5 +1,5 @@
 {
-  "runtime_schema": "goniegonie.energyplus-runtime.v3",
+  "runtime_schema": "dragons.energyplus-runtime.v3",
   "energyplus_version": "24.2.0",
   "energyplus_build": "94a887817b",
   "energyplus_archive_sha256": "26c7c22b731f54031626750284c8b613fb8f03c3aa56b6bc7ec65b6bf8668df1",
@@ -9,5 +9,5 @@
   "energyplus_epjson_schema_sha256": "aefb16d63495d170468ecab3c935f1aeb68eb07c6551403dd11cbba61cb136fa",
   "expandobjects_sha256": "a15bd8e10f6a004e270fa4761527cabc95f776c089b92c11603faba19ed541ae",
   "weather_policy": "user-supplied",
-  "created_by": "GonieGonie-Dragons"
+  "created_by": "Dragons"
 }

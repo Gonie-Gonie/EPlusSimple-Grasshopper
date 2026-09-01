@@ -20,7 +20,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.invisibledragon.day-schedule-core-oracle.v1"
+SCHEMA = "dragons.invisibledragon.day-schedule-core-oracle.v1"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -123,7 +123,7 @@ SYMBOL_KEYS = {
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_day_schedule_metrics_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_day_schedule_core_support", path
+        "_dragons_day_schedule_core_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load DaySchedule oracle support: {path}")

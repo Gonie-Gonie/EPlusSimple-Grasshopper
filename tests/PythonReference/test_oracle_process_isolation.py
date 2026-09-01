@@ -66,7 +66,7 @@ EXPECTED_VALIDATORS = frozenset(
 
 def _load_runner():
     specification = importlib.util.spec_from_file_location(
-        "goniegonie_reference_test_runner",
+        "dragons_reference_test_runner",
         RUNNER_PATH,
     )
     if specification is None or specification.loader is None:
@@ -159,15 +159,15 @@ class OracleProcessIsolationTests(unittest.TestCase):
             dependency_root.mkdir()
             upstream_source.mkdir()
             poison_root.mkdir()
-            (poison_root / "goniegonie_oracle_poison.py").write_text(
+            (poison_root / "dragons_oracle_poison.py").write_text(
                 "VALUE = 'host-only'\n",
                 encoding="utf-8",
             )
-            metadata_root = poison_root / "goniegonie_oracle_poison-9.9.9.dist-info"
+            metadata_root = poison_root / "dragons_oracle_poison-9.9.9.dist-info"
             metadata_root.mkdir()
             (metadata_root / "METADATA").write_text(
                 "Metadata-Version: 2.1\n"
-                "Name: goniegonie-oracle-poison\n"
+                "Name: dragons-oracle-poison\n"
                 "Version: 9.9.9\n",
                 encoding="utf-8",
             )
@@ -181,15 +181,15 @@ from pathlib import Path
 import sys
 
 distribution_visible = any(
-    item.metadata.get("Name", "").lower() == "goniegonie-oracle-poison"
+    item.metadata.get("Name", "").lower() == "dragons-oracle-poison"
     for item in importlib.metadata.distributions()
 )
 payload = {
     "distribution_visible": distribution_visible,
     "dont_write_bytecode": sys.dont_write_bytecode,
     "hash_randomization": sys.flags.hash_randomization,
-    "hash_value": hash("goniegonie-oracle-boundary"),
-    "module_visible": importlib.util.find_spec("goniegonie_oracle_poison") is not None,
+    "hash_value": hash("dragons-oracle-boundary"),
+    "module_visible": importlib.util.find_spec("dragons_oracle_poison") is not None,
     "no_site": sys.flags.no_site,
     "safe_path": sys.flags.safe_path,
     "sys_path": sys.path,

@@ -22,7 +22,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.dragon-shape-geometry-core.v1"
+SCHEMA = "dragons.python-reference.dragon-shape-geometry-core.v1"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
     "sha256:fdafc8752a9f1bee90b1d2099274899d74ab7e6fb47738211918d683d7cf82b0"
@@ -132,19 +132,19 @@ ASSERTION_IDS = {
     for item in TARGET_RECEIPTS
 }
 NATIVE_TARGETS = {
-    "Surface": "GonieGonie.InvisibleDragon.Shape.Surface plus PlanarPolygon",
+    "Surface": "Dragons.InvisibleDragon.Shape.Surface plus PlanarPolygon",
     "Surface.area": "Surface.GrossArea via PlanarPolygon.Area",
     "Surface.center": "Surface.Center via PlanarPolygon.Centroid",
     "Surface.height": "Surface.Height via PlanarPolygon.Height",
     "Surface.normal": "Surface.Normal via PlanarPolygon.Normal",
     "Surface.type": "Surface.Type immutable enum property",
     "Surface.vertex": "Surface.Polygon.Vertices immutable defensive copy",
-    "SurfaceType": "GonieGonie.InvisibleDragon.Shape.SurfaceType",
+    "SurfaceType": "Dragons.InvisibleDragon.Shape.SurfaceType",
     "SurfaceType.CEILING": "SurfaceType.Ceiling",
     "SurfaceType.FLOOR": "SurfaceType.Floor",
     "SurfaceType.WALL": "SurfaceType.Wall",
     "SurfaceType.__str__": "explicit native enum-to-IDF mapping where required",
-    "Vertex": "GonieGonie.InvisibleDragon.Shape.Vertex readonly struct",
+    "Vertex": "Dragons.InvisibleDragon.Shape.Vertex readonly struct",
     "Vertex.__add__": "Vertex plus Vector3 operator",
     "Vertex.__deepcopy__": "Vertex value-copy semantics",
     "Vertex.__init__": "Vertex constructor with finite double guards",
@@ -261,7 +261,7 @@ def _load_core_support() -> Any:
         "generate_dragon_hvac_supply_group_core_oracle.py"
     )
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_shape_geometry_support", path
+        "_dragons_shape_geometry_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load geometry oracle support: {path}")

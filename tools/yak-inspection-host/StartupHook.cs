@@ -2,7 +2,7 @@ using System.Reflection;
 
 public static class StartupHook
 {
-    private const string ProbePathsVariable = "GONIEGONIE_YAK_INSPECTION_PATHS";
+    private const string ProbePathsVariable = "DRAGONS_YAK_INSPECTION_PATHS";
     private static readonly string[] ManagedExtensions = { ".dll", ".gha" };
 
     public static void Initialize()
@@ -27,7 +27,7 @@ public static class StartupHook
         // SDK references or changing the archive payload.
         foreach (string directory in directories)
         {
-            foreach (string path in Directory.EnumerateFiles(directory, "GonieGonie.*.dll"))
+            foreach (string path in Directory.EnumerateFiles(directory, "Dragons.*.dll"))
             {
                 TryLoad(path);
             }

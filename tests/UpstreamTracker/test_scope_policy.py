@@ -6,16 +6,16 @@ import unittest
 
 from support import REPOSITORY_ROOT
 
-from goniegonie_upstream_tracker.compatibility import (
+from dragons_upstream_tracker.compatibility import (
     CompatibilityMatrix,
     MatrixEntry,
     PublicSymbolInventory,
     load_compatibility_configuration,
 )
-from goniegonie_upstream_tracker.config import load_configuration
-from goniegonie_upstream_tracker.errors import ConfigurationError
-from goniegonie_upstream_tracker.evidence import ScopeDecision, ScopeDecisionRegistry
-from goniegonie_upstream_tracker.scope_policy import (
+from dragons_upstream_tracker.config import load_configuration
+from dragons_upstream_tracker.errors import ConfigurationError
+from dragons_upstream_tracker.evidence import ScopeDecision, ScopeDecisionRegistry
+from dragons_upstream_tracker.scope_policy import (
     BASELINE_SCOPE_KEYS,
     EXPECTED_BASELINE_DECISION_COUNT,
     EXPECTED_SAFE_SCOPE_COUNT,
@@ -2969,12 +2969,12 @@ class SafeScopePolicyTests(unittest.TestCase):
         self.assertEqual("equivalent", append_entry.classification)
         self.assertIsNone(append_entry.exception_id)
         self.assertIn(
-            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfDocument.Append(IdfObject)",
             append_entry.rationale,
         )
         append_evidence = evidence.entries_by_key[append_entry.key]
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Idf.IdfDocument.Append",
+            "Dragons.InvisibleDragon.Idf.IdfDocument.Append",
             append_evidence.implementation_symbol,
         )
         self.assertNotIn("IdfDocument.Add", append_entry.rationale)
@@ -3175,11 +3175,11 @@ class SafeScopePolicyTests(unittest.TestCase):
         )
 
         expected_implementation_symbols = {
-            1198: "GonieGonie.InvisibleDragon.Idf.IdfWriter.Write",
-            1199: "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append",
-            1201: "GonieGonie.InvisibleDragon.Idf.IdfValidator.Validate",
-            1209: "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert",
-            1211: "GonieGonie.InvisibleDragon.Idf.IdfObject.Name",
+            1198: "Dragons.InvisibleDragon.Idf.IdfWriter.Write",
+            1199: "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append",
+            1201: "Dragons.InvisibleDragon.Idf.IdfValidator.Validate",
+            1209: "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert",
+            1211: "Dragons.InvisibleDragon.Idf.IdfObject.Name",
         }
         for index, implementation_symbol in expected_implementation_symbols.items():
             evidence_entry = evidence.entries_by_key[entries[index].key]
@@ -3189,11 +3189,11 @@ class SafeScopePolicyTests(unittest.TestCase):
                 index,
             )
         self.assertIn(
-            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Append(IdfObject)",
             entries[1199].rationale,
         )
         self.assertIn(
-            "GonieGonie.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
+            "Dragons.InvisibleDragon.Idf.IdfObjectCollection.Insert(int, IdfObject)",
             entries[1209].rationale,
         )
 

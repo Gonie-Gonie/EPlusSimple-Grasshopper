@@ -185,7 +185,7 @@ class DragonModelClassOracleTests(unittest.TestCase):
         self.assertEqual({"EnergyModel": "exception"}, contract["classifications"])
         self.assertEqual({"equivalent": 0, "exception": 1}, contract["classification_counts"])
         self.assertEqual(
-            {"EnergyModel": "GonieGonie.InvisibleDragon.Model.EnergyModel"},
+            {"EnergyModel": "Dragons.InvisibleDragon.Model.EnergyModel"},
             contract["native_targets"],
         )
         self.assertEqual(["EnergyModel"], contract["target_symbols"])

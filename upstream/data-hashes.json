@@ -1,5 +1,5 @@
 {
-  "schema": "goniegonie.upstream-data-hashes.v1",
+  "schema": "dragons.upstream-data-hashes.v1",
   "algorithm": "sha256",
   "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897",
   "files": {

@@ -1817,7 +1817,7 @@
     "identity_encoding": "stable-direct-is-relations-only-no-id-or-address",
     "native_binding_status": "proposed-not-yet-cross-language-verified",
     "native_targets": {
-      "AirBoundary": "GonieGonie.InvisibleDragon.Construction.AirBoundary sealed typed record",
+      "AirBoundary": "Dragons.InvisibleDragon.Construction.AirBoundary sealed typed record",
       "AirBoundary.__init__": "AirBoundary(string name, double airChangesPerHour = 0.5) validated constructor"
     },
     "raw_fact_encoding": "typed-scalars-recursive-mutable-input-snapshots-and-phase-bound-errors",
@@ -1877,7 +1877,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-construction-air-boundary-core.v1",
+  "schema": "dragons.python-reference.dragon-construction-air-boundary-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:bd863bc3e852b36fd85133650c3e35281bab274515287b85d902c6731caac0d4",

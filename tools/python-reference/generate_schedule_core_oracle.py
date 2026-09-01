@@ -27,7 +27,7 @@ import sys
 from typing import Any
 
 
-SCHEMA = "goniegonie.invisibledragon.schedule-core-oracle.v1"
+SCHEMA = "dragons.invisibledragon.schedule-core-oracle.v1"
 SOURCE_PATH = "src/idragon/dragon/profile.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_SHA256 = (
@@ -168,7 +168,7 @@ EXPECTED_EQUIVALENT_SYMBOLS = frozenset(TARGET_SYMBOLS) - frozenset(
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_schedule_operations_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_schedule_operations_support", path
+        "_dragons_schedule_operations_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load Schedule operation support: {path}")

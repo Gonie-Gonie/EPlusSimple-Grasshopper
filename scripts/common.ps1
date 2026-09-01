@@ -658,7 +658,7 @@ function Normalize-TrackedPackageLockLineEndings {
                 })
             }
             $manifest = [pscustomobject] [ordered] @{
-                schema = 'goniegonie.package-lock-normalization-transaction.v1'
+                schema = 'dragons.package-lock-normalization-transaction.v1'
                 repository = $root
                 files = @($manifestEntries)
             }

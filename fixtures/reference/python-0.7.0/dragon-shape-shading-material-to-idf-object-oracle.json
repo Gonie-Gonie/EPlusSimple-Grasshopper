@@ -1587,7 +1587,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-shape-shading-material-to-idf-object.v1",
+  "schema": "dragons.python-reference.dragon-shape-shading-material-to-idf-object.v1",
   "symbols": [
     {
       "body_hash": "sha256:dbdfe63eb69145e34565287fea0891f7bafaeb23b5a147b7f8d6799a8f6b652b",

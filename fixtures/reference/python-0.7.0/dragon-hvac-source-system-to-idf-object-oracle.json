@@ -123648,7 +123648,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-hvac-source-system-to-idf-object.v1",
+  "schema": "dragons.python-reference.dragon-hvac-source-system-to-idf-object.v1",
   "symbols": [
     {
       "body_hash": "sha256:235dd3954501399871a0317fb9665091c192830665e9f95baae7eb9a3d80823b",

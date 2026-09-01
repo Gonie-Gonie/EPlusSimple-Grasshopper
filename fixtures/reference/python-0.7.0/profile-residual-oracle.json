@@ -741,7 +741,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.profile-residual-oracle.v1",
+  "schema": "dragons.invisibledragon.profile-residual-oracle.v1",
   "symbols": [
     {
       "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",

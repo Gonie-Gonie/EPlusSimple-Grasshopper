@@ -30,7 +30,7 @@ from types import SimpleNamespace
 from typing import Any, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.dragon-hvac-source-tower-core.v1"
+SCHEMA = "dragons.python-reference.dragon-hvac-source-tower-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -81,7 +81,7 @@ def _load_support() -> Any:
     ):
         raise RuntimeError("Pinned source-system IDF support generator drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_dragon_hvac_source_tower_support",
+        "_dragons_dragon_hvac_source_tower_support",
         SUPPORT_GENERATOR_PATH,
     )
     if spec is None or spec.loader is None:
@@ -293,7 +293,7 @@ ADAPTATIONS = {
 
 
 def _native_route(symbol: str) -> str:
-    prefix = "GonieGonie.InvisibleDragon.Hvac."
+    prefix = "Dragons.InvisibleDragon.Hvac."
     fuel_members = {
         "COAL": "Coal",
         "DIESEL": "Diesel",
@@ -435,27 +435,27 @@ EXPECTED_CASES_SHA256 = (
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 7_582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
     },
     {
         "bytes": 18_027,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SourceSystems.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SourceSystems.cs",
         "sha256": "sha256:8d302f00514af53816cec9e5ba6b80a8214921b354d86bbbc4d581ec972e026e",
     },
     {
         "bytes": 1_076,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/GeothermalHeatPump.cs",
         "sha256": "sha256:40fcb9c008b953cf54dfa4581c95af4073e0040fc9efcd62598e056c5b2ca80a",
     },
     {
         "bytes": 23_777,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/Chillers.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/Chillers.cs",
         "sha256": "sha256:7616675c6750b32ded6edd796576b347703a88103a91dff846ca5a08c65b72be",
     },
     {
         "bytes": 19_554,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/CoolingTowers.cs",
         "sha256": "sha256:007145933076386fcbc44daba8a28c63d3c5467bbd687c9da87f769c969e9d07",
     },
 )
@@ -513,7 +513,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
     }:
         raise SystemExit("The public-symbol inventory root contract drifted.")
     if (
-        value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2"
+        value["schema"] != "dragons.upstream-public-symbol-inventory.v2"
         or value["upstream_commit"].lower() != commit
     ):
         raise SystemExit("The public-symbol inventory identity drifted.")

@@ -1995,284 +1995,284 @@
         "adaptation": "typed-immutable-field-definition-1123",
         "assertion_id": "imugi-idd-definitions-core-1123-209ee073",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition"
       },
       "IddField.__eq__": {
         "adaptation": "field-by-field-structural-parity-without-value-equality-override-1124",
         "assertion_id": "imugi-idd-definitions-core-1124-cc926b4c",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)"
       },
       "IddField.__init__": {
         "adaptation": "token-position-kind-explicit-validated-construction-1125",
         "assertion_id": "imugi-idd-definitions-core-1125-e4303f76",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition(...) constructor"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition(...) constructor"
       },
       "IddField.default": {
         "adaptation": "lossless-string-default-instead-of-legacy-numeric-coercion-1128",
         "assertion_id": "imugi-idd-definitions-core-1128-4748d03a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue"
       },
       "IddField.external_list": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1129-d3f9ed1f",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ExternalList"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ExternalList"
       },
       "IddField.from_text": {
         "adaptation": "full-schema-parser-route-instead-of-field-fragment-parser-1130",
         "assertion_id": "imugi-idd-definitions-core-1130-2b6d880a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]"
       },
       "IddField.is_autocalculatable": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1131-d0349be4",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable"
       },
       "IddField.is_autosizable": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1132-a5aa4b09",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable"
       },
       "IddField.is_deprecated": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1133-83922a08",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated"
       },
       "IddField.is_extensible": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1134-6f8cd3f1",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible"
       },
       "IddField.is_required": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1135-b64e2145",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsRequired"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsRequired"
       },
       "IddField.is_retaincase": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1136-46f42932",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase"
       },
       "IddField.key": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1137-b2a62552",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Choices"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Choices"
       },
       "IddField.maximum": {
         "adaptation": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1138",
         "assertion_id": "imugi-idd-definitions-core-1138-0fc0df49",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Maximum"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Maximum"
       },
       "IddField.memo": {
         "adaptation": "ordered-note-list-instead-of-formatted-sentence-string-1139",
         "assertion_id": "imugi-idd-definitions-core-1139-203215fc",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Notes"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Notes"
       },
       "IddField.minimum": {
         "adaptation": "explicit-inclusive-bound-instead-of-nextafter-sentinel-1140",
         "assertion_id": "imugi-idd-definitions-core-1140-04d44d1d",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Minimum"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Minimum"
       },
       "IddField.name": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1141-dc05a34b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Name"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Name"
       },
       "IddField.object_list": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1142-f35f045c",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists"
       },
       "IddField.reference": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1143-ecceb577",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.References"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.References"
       },
       "IddField.reference_cls": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1144-704213be",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames"
       },
       "IddField.referenceable": {
         "adaptation": "schema-projection-instead-of-mutable-backreference-list-1145",
         "assertion_id": "imugi-idd-definitions-core-1145-4695751c",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References"
       },
       "IddField.type": {
         "adaptation": "closed-idd-data-type-enum-with-kind-derived-default-1146",
         "assertion_id": "imugi-idd-definitions-core-1146-5b7e3d73",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DataType"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.DataType"
       },
       "IddField.unit": {
         "adaptation": "separate-units-ip-units-and-units-based-on-field-metadata-1147",
         "assertion_id": "imugi-idd-definitions-core-1147-59edda63",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField"
       },
       "IddObject": {
         "adaptation": "typed-immutable-object-definition-1148",
         "assertion_id": "imugi-idd-definitions-core-1148-8a75cdbc",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition"
       },
       "IddObject.__eq__": {
         "adaptation": "field-by-field-structural-parity-without-value-equality-override-1149",
         "assertion_id": "imugi-idd-definitions-core-1149-355edc7a",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)"
       },
       "IddObject.__init__": {
         "adaptation": "ordered-consecutive-field-definition-construction-1150",
         "assertion_id": "imugi-idd-definitions-core-1150-a85878fd",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition(...) constructor"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition(...) constructor"
       },
       "IddObject.begin_extensible": {
         "adaptation": "resolved-zero-based-extensible-start-index-1153",
         "assertion_id": "imugi-idd-definitions-core-1153-cc944d8e",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex"
       },
       "IddObject.default": {
         "adaptation": "field-default-projection-instead-of-cached-list-1154",
         "assertion_id": "imugi-idd-definitions-core-1154-ceed741c",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue"
       },
       "IddObject.extensible": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1155-656dae5a",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize"
       },
       "IddObject.format": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1156-54aa570d",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Format"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Format"
       },
       "IddObject.from_text": {
         "adaptation": "full-schema-parser-route-instead-of-object-fragment-parser-1157",
         "assertion_id": "imugi-idd-definitions-core-1157-e55a8f89",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]"
       },
       "IddObject.idd_index": {
         "adaptation": "ordered-field-token-projection-1158",
         "assertion_id": "imugi-idd-definitions-core-1158-b7a1f5de",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token"
       },
       "IddObject.is_obsolete": {
         "adaptation": "obsolete-message-preservation-instead-of-boolean-only-1159",
         "assertion_id": "imugi-idd-definitions-core-1159-b654e577",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage"
       },
       "IddObject.is_required": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1160-b64e2145",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsRequired"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.IsRequired"
       },
       "IddObject.is_unique": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1161-9f99bd10",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsUnique"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.IsUnique"
       },
       "IddObject.memo": {
         "adaptation": "ordered-memo-list-instead-of-formatted-sentence-string-1162",
         "assertion_id": "imugi-idd-definitions-core-1162-203215fc",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Memo"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Memo"
       },
       "IddObject.min_fields": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1163-1821fd04",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields"
       },
       "IddObject.name": {
         "adaptation": "not_applicable",
         "assertion_id": "imugi-idd-definitions-core-1164-dc05a34b",
         "classification": "equivalent",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Name"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Name"
       },
       "IddObject.reference": {
         "adaptation": "additional-directive-preservation-for-reference-class-name-1165",
         "assertion_id": "imugi-idd-definitions-core-1165-ecceb577",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives"
       },
       "IddObject.required_fields": {
         "adaptation": "required-field-definition-projection-instead-of-cached-name-list-1166",
         "assertion_id": "imugi-idd-definitions-core-1166-b01c46a0",
         "classification": "exception",
-        "native_route": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
+        "native_route": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
       }
     },
     "native_routes": {
-      "IddField": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition",
-      "IddField.__eq__": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)",
-      "IddField.__init__": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition(...) constructor",
-      "IddField.default": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue",
-      "IddField.external_list": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ExternalList",
-      "IddField.from_text": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]",
-      "IddField.is_autocalculatable": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable",
-      "IddField.is_autosizable": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable",
-      "IddField.is_deprecated": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated",
-      "IddField.is_extensible": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible",
-      "IddField.is_required": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.IsRequired",
-      "IddField.is_retaincase": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase",
-      "IddField.key": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Choices",
-      "IddField.maximum": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Maximum",
-      "IddField.memo": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Notes",
-      "IddField.minimum": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Minimum",
-      "IddField.name": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Name",
-      "IddField.object_list": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists",
-      "IddField.reference": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.References",
-      "IddField.reference_cls": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames",
-      "IddField.referenceable": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References",
-      "IddField.type": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.DataType",
-      "IddField.unit": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField",
-      "IddObject": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition",
-      "IddObject.__eq__": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)",
-      "IddObject.__init__": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition(...) constructor",
-      "IddObject.begin_extensible": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex",
-      "IddObject.default": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue",
-      "IddObject.extensible": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize",
-      "IddObject.format": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Format",
-      "IddObject.from_text": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]",
-      "IddObject.idd_index": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token",
-      "IddObject.is_obsolete": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage",
-      "IddObject.is_required": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsRequired",
-      "IddObject.is_unique": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.IsUnique",
-      "IddObject.memo": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Memo",
-      "IddObject.min_fields": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields",
-      "IddObject.name": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Name",
-      "IddObject.reference": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives",
-      "IddObject.required_fields": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
+      "IddField": "Dragons.InvisibleDragon.Idd.IddFieldDefinition",
+      "IddField.__eq__": "Dragons.InvisibleDragon.Idd.IddFieldDefinition public properties (structural comparison)",
+      "IddField.__init__": "Dragons.InvisibleDragon.Idd.IddFieldDefinition(...) constructor",
+      "IddField.default": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.DefaultValue",
+      "IddField.external_list": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ExternalList",
+      "IddField.from_text": "Dragons.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0].Fields[0]",
+      "IddField.is_autocalculatable": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsAutocalculatable",
+      "IddField.is_autosizable": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsAutosizable",
+      "IddField.is_deprecated": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsDeprecated",
+      "IddField.is_extensible": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.BeginsExtensible",
+      "IddField.is_required": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.IsRequired",
+      "IddField.is_retaincase": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.RetainsCase",
+      "IddField.key": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Choices",
+      "IddField.maximum": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Maximum",
+      "IddField.memo": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Notes",
+      "IddField.minimum": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Minimum",
+      "IddField.name": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Name",
+      "IddField.object_list": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ObjectLists",
+      "IddField.reference": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.References",
+      "IddField.reference_cls": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.ReferenceClassNames",
+      "IddField.referenceable": "Dragons.InvisibleDragon.Idd.IddSchema.Objects projection over IddFieldDefinition.References",
+      "IddField.type": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.DataType",
+      "IddField.unit": "Dragons.InvisibleDragon.Idd.IddFieldDefinition.Units and UnitsBasedOnField",
+      "IddObject": "Dragons.InvisibleDragon.Idd.IddObjectDefinition",
+      "IddObject.__eq__": "Dragons.InvisibleDragon.Idd.IddObjectDefinition public properties (structural comparison)",
+      "IddObject.__init__": "Dragons.InvisibleDragon.Idd.IddObjectDefinition(...) constructor",
+      "IddObject.begin_extensible": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleStartIndex",
+      "IddObject.default": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over DefaultValue",
+      "IddObject.extensible": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ExtensibleGroupSize",
+      "IddObject.format": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Format",
+      "IddObject.from_text": "Dragons.InvisibleDragon.Idd.IddParser.Parse(...).Objects[0]",
+      "IddObject.idd_index": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over Token",
+      "IddObject.is_obsolete": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.ObsoleteMessage",
+      "IddObject.is_required": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.IsRequired",
+      "IddObject.is_unique": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.IsUnique",
+      "IddObject.memo": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Memo",
+      "IddObject.min_fields": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.MinimumFields",
+      "IddObject.name": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Name",
+      "IddObject.reference": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.AdditionalDirectives",
+      "IddObject.required_fields": "Dragons.InvisibleDragon.Idd.IddObjectDefinition.Fields projection over IsRequired"
     },
     "runtime_signatures": {
       "IddField": {
@@ -3126,22 +3126,22 @@
     "source_receipts": [
       {
         "bytes": 13005,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs",
         "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed"
       },
       {
         "bytes": 19960,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
         "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f"
       },
       {
         "bytes": 8339,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
         "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa"
       },
       {
         "bytes": 16860,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
         "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f"
       }
     ],
@@ -3422,7 +3422,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.imugi-idd-definitions-core.v1",
+  "schema": "dragons.python-reference.imugi-idd-definitions-core.v1",
   "support": {
     "fixture": {
       "bytes": 585482,
@@ -3450,7 +3450,7 @@
         ],
         "validated_field_occurrence_count": 13469
       },
-      "oracle_schema": "goniegonie.energyplus-idd-schema.v1",
+      "oracle_schema": "dragons.energyplus-idd-schema.v1",
       "source_bytes": 4556412,
       "source_sha256": "3b56fd8afb02a557f1c2cfb963cbc6f53963738bc6aa169f996d7a5175b324a2",
       "upstream_commit": "847b01f68f438f560a986072bcaa7768fbf67897"
@@ -3461,7 +3461,7 @@
       "path": "tools/python-reference/generate_idd_schema_oracle.py",
       "sha256": "sha256:64986549c0e3a3aadfef16606396006257d1be4e3b301058098ce364db8391f0"
     },
-    "native_full_schema_test_route": "GonieGonie.InvisibleDragon.Tests.Idd.IddSchemaOracleTests.EnergyPlus242FullSchemaMatchesRawIddRegressionOracleWhenRuntimeReady"
+    "native_full_schema_test_route": "Dragons.InvisibleDragon.Tests.Idd.IddSchemaOracleTests.EnergyPlus242FullSchemaMatchesRawIddRegressionOracleWhenRuntimeReady"
   },
   "symbols": [
     {

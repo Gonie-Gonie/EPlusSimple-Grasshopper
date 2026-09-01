@@ -104537,7 +104537,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.invisibledragon.rule-set-operations-oracle.v1",
+  "schema": "dragons.invisibledragon.rule-set-operations-oracle.v1",
   "summary": {
     "adaptation_case_count": 61,
     "adaptation_ids": [

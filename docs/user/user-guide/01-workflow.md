@@ -582,9 +582,9 @@ Dragon runners do not write into Rhino's installation directory. Their owned
 locations are per-user:
 
 ```text
-EnergyPlus: %LOCALAPPDATA%\GonieGonie\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
-Weather:    %LOCALAPPDATA%\GonieGonie\BuildingEnergyWeather\SimpleDragon\korean-tmy-v1
-Runs:       %TEMP%\GonieGonie\Dragons\energyplus-runs
+EnergyPlus: %LOCALAPPDATA%\Dragons\BuildingEnergyRuntime\EnergyPlus\24.2.0-94a887817b
+Weather:    %LOCALAPPDATA%\Dragons\BuildingEnergyWeather\SimpleDragon\korean-tmy-v1
+Runs:       %TEMP%\Dragons\energyplus-runs
 ```
 
 Normal use should not require “Run as administrator.” Confirm that the current

@@ -6,7 +6,7 @@ Start here when an installed Dragon package, model, or simulation does not behav
 
 Close all Rhino processes, verify that the package targets the running Rhino
 generation, and unblock the downloaded archive before reinstalling. Do not copy
-only the GHA; its adjacent `GonieGonie.*` dependencies are required.
+only the GHA; its adjacent `Dragons.*` dependencies are required.
 
 ## One Dragon loads and the other fails
 
@@ -54,7 +54,7 @@ is intentionally a no-op; it does not access a path or emit an error.
 
 ## Rhino reports access denied when Run is clicked
 
-The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches and `%TEMP%/GonieGonie/Dragons` for simulation work. It does not write below Rhino's installation directory and requires no administrator rights.
+The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches and `%TEMP%/Dragons` for simulation work. It does not write below Rhino's installation directory and requires no administrator rights.
 
 If access is still denied, verify that the current Windows profile can write to
 LocalAppData and the operating-system temp directory, reinstall the current
@@ -98,4 +98,4 @@ matching can apply the same Opening list to unrelated faces.
 
 ## A model compiles but EnergyPlus reports severe errors
 
-Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, indistinguishable duplicate authored objects, positive capacities and flows, schedule ranges, construction references, and the model address. Entity IDs are generated internally, so resolve a duplicate-identity diagnostic by making the relevant authored names, geometry, or connected definitions distinct. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\GonieGonie\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.
+Read the structured Diagnostics and Result outputs. Check source/supply compatibility, direct Zone HVAC ownership, indistinguishable duplicate authored objects, positive capacities and flows, schedule ranges, construction references, and the model address. Entity IDs are generated internally, so resolve a duplicate-identity diagnostic by making the relevant authored names, geometry, or connected definitions distinct. A successful run removes its temporary working directory after parsing the result. A failed or cancelled run is retained below `%TEMP%\Dragons\energyplus-runs` so its EnergyPlus output and logs can be inspected.

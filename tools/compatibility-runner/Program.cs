@@ -2,13 +2,13 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using GonieGonie.EnergyPlus.Runtime;
-using GonieGonie.InvisibleDragon.Idd;
-using GonieGonie.InvisibleDragon.Idf;
-using GonieGonie.InvisibleDragon.Results;
-using GonieGonie.SimpleDragon;
+using Dragons.EnergyPlus.Runtime;
+using Dragons.InvisibleDragon.Idd;
+using Dragons.InvisibleDragon.Idf;
+using Dragons.InvisibleDragon.Results;
+using Dragons.SimpleDragon;
 
-namespace GonieGonie.CompatibilityRunner;
+namespace Dragons.CompatibilityRunner;
 
 internal static class Program
 {
@@ -178,7 +178,7 @@ internal static class Program
         string metadataPath = Path.Combine(caseRoot, "metadata.json");
         WriteJson(metadataPath, new
         {
-            Schema = "goniegonie.dragons.compatibility-engine-output.v1",
+            Schema = "dragons.compatibility-engine-output.v1",
             Producer = "csharp-port",
             CaseId = item.Id,
             manifest.UpstreamCommit,
@@ -213,7 +213,7 @@ internal static class Program
     {
         return new
         {
-            Schema = "goniegonie.dragons.energyplus-warnings.v1",
+            Schema = "dragons.energyplus-warnings.v1",
             Summary = new
             {
                 Warning = errorLog.Summary.WarningCount,

@@ -6824,25 +6824,25 @@
     },
     "identity_encoding": "stable-boolean-relations-only-no-id-or-address",
     "native_targets": {
-      "Blind": "GonieGonie.InvisibleDragon.Shape.Blind constructor",
-      "Blind.__init__": "GonieGonie.InvisibleDragon.Shape.Blind constructor",
-      "Door": "GonieGonie.InvisibleDragon.Shape.Door constructor",
-      "Door.__init__": "GonieGonie.InvisibleDragon.Shape.Door constructor",
-      "Shade": "GonieGonie.InvisibleDragon.Shape.Shade constructor",
-      "Shade.__init__": "GonieGonie.InvisibleDragon.Shape.Shade constructor",
-      "Shading": "GonieGonie.InvisibleDragon.Shape.IShadingDevice contract",
-      "Surface.__init__": "GonieGonie.InvisibleDragon.Shape.Surface constructor",
+      "Blind": "Dragons.InvisibleDragon.Shape.Blind constructor",
+      "Blind.__init__": "Dragons.InvisibleDragon.Shape.Blind constructor",
+      "Door": "Dragons.InvisibleDragon.Shape.Door constructor",
+      "Door.__init__": "Dragons.InvisibleDragon.Shape.Door constructor",
+      "Shade": "Dragons.InvisibleDragon.Shape.Shade constructor",
+      "Shade.__init__": "Dragons.InvisibleDragon.Shape.Shade constructor",
+      "Shading": "Dragons.InvisibleDragon.Shape.IShadingDevice contract",
+      "Surface.__init__": "Dragons.InvisibleDragon.Shape.Surface constructor",
       "Surface.blinded_window": "Surface.Windows filtered by Window.Shading",
       "Surface.boundary": "SurfaceBoundary plus SurfaceAdjacency.Match",
       "Surface.get_subsurface": "Surface.CreateCenteredSubsurface",
-      "SurfaceBoundaryCondition": "GonieGonie.InvisibleDragon.Shape.SurfaceBoundaryCondition",
+      "SurfaceBoundaryCondition": "Dragons.InvisibleDragon.Shape.SurfaceBoundaryCondition",
       "SurfaceBoundaryCondition.ADIABATIC": "SurfaceBoundaryCondition.Adiabatic",
       "SurfaceBoundaryCondition.GROUND": "SurfaceBoundaryCondition.Ground",
       "SurfaceBoundaryCondition.OUTDOOR": "SurfaceBoundaryCondition.Outdoors",
       "SurfaceBoundaryCondition.ZONE": "SurfaceBoundaryCondition.Zone",
       "SurfaceBoundaryCondition.__str__": "EnergyModelIdfAssembler boundary mapping",
-      "Window": "GonieGonie.InvisibleDragon.Shape.Window constructor",
-      "Window.__init__": "GonieGonie.InvisibleDragon.Shape.Window constructor"
+      "Window": "Dragons.InvisibleDragon.Shape.Window constructor",
+      "Window.__init__": "Dragons.InvisibleDragon.Shape.Window constructor"
     },
     "raw_fact_encoding": "typed-scalars-with-explicit-nonfinite-classes-and-phase-bound-errors",
     "runtime_signatures": {
@@ -7102,7 +7102,7 @@
     "python_hash_width_bits": 64,
     "python_version": "3.12.7"
   },
-  "schema": "goniegonie.python-reference.dragon-shape-opening-adjacency-core.v1",
+  "schema": "dragons.python-reference.dragon-shape-opening-adjacency-core.v1",
   "symbols": [
     {
       "body_hash": "sha256:643d5437104296e21d906ecb15b2c96ad278f20cfc4af53b12bb6069bd853726",

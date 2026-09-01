@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_PREFIX = "goniegonie.python-reference"
+SCHEMA_PREFIX = "dragons.python-reference"
 REQUIRED_PYTHON = (3, 12, 7)
 DEPENDENCIES = (
     "colorama",

@@ -1,7 +1,7 @@
 {
-  "schema": "goniegonie.dragons.component-guides.v1",
+  "schema": "dragons.component-guides.v1",
   "components": {
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ConstructionLayerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ConstructionLayerComponent": {
       "role": "Authoring",
       "purpose": "Combines one opaque material with a physical thickness into a reusable construction layer.",
       "workflow": "Connect Opaque Material to Material, set Thickness in metres, and send the Layer output into the ordered Layers list of Layered Construction. Leave Name blank when the generated material-and-thickness label is sufficient.",
@@ -10,7 +10,7 @@
         "Build each material/thickness pair as its own Layer instead of matching separate lists later."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.GlazingComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.GlazingComponent": {
       "role": "Authoring",
       "purpose": "Defines the aggregate U-value and solar heat-gain coefficient used by an InvisibleDragon window.",
       "workflow": "Set the fenestration performance once, connect Glazing to Window From Polyline, and then connect the completed Opening only to its host Surface.",
@@ -19,7 +19,7 @@
         "This is a simple glazing system; panes, gas layers, frames, and shades are not authored separately."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.LayeredConstructionComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.LayeredConstructionComponent": {
       "role": "Authoring",
       "purpose": "Collects one or more construction layers into an opaque assembly and reports its calculated U-value.",
       "workflow": "Connect a branch-local list of Layer outputs in outside-to-inside order, then reuse the resulting Construction on Floors, Ceilings, Walls, and opaque Doors that share the assembly.",
@@ -28,7 +28,7 @@
         "The reported U-value is based on layer resistances and excludes inside and outside surface-film resistance."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.NoMassConstructionComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.NoMassConstructionComponent": {
       "role": "Authoring",
       "purpose": "Creates a lightweight opaque construction directly from a target U-value.",
       "workflow": "Use it for schematic envelope studies where thermal storage is intentionally omitted, and connect it anywhere an opaque Construction is accepted.",
@@ -37,7 +37,7 @@
         "It cannot reproduce material heat capacity and is not a good host construction for radiant-floor modeling."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.OpaqueMaterialComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.OpaqueMaterialComponent": {
       "role": "Authoring",
       "purpose": "Defines the conductivity, density, and specific heat of a reusable opaque material.",
       "workflow": "Enter SI material properties, connect Material to one or more Construction Layer components, and reuse the same output wherever the material specification is identical.",
@@ -46,7 +46,7 @@
         "Roughness and absorptance values are fixed internally in this release."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.InvisibleDragonVersionComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.InvisibleDragonVersionComponent": {
       "role": "Utility",
       "purpose": "Reports the installed InvisibleDragon version and the pinned upstream revision.",
       "workflow": "Connect both outputs to a Panel when recording a study, preparing a screenshot, or reporting a compatibility problem. It does not participate in model authoring.",
@@ -54,7 +54,7 @@
         "Version information describes the loaded assembly, so include it when mixed-package loading is suspected."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ManagedRunEnergyPlusComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ManagedRunEnergyPlusComponent": {
       "role": "Trigger",
       "purpose": "Runs one compiled InvisibleDragon IDF against one verified EPW and returns a typed EnergyPlus result.",
       "workflow": "Connect Compile InvisibleDragon to IDF and Verify InvisibleDragon Weather to Weather. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run; use the Result with EnergyPlus Result Summary.",
@@ -64,7 +64,7 @@
         "Successful work directories are cleaned after parsing; failed and cancelled runs remain under the Windows temp directory for diagnosis."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.VerifyInvisibleDragonWeatherComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.VerifyInvisibleDragonWeatherComponent": {
       "role": "Utility",
       "purpose": "Validates the explicit EPW chosen for a standalone InvisibleDragon simulation and creates an opaque Weather handle.",
       "workflow": "Choose a local EPW, connect its path to EPW File, check Success, and wire Weather to Run InvisibleDragon. Relative paths resolve from the saved Grasshopper document.",
@@ -74,7 +74,7 @@
         "An unsaved definition cannot resolve a relative EPW path."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.CeilingComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.CeilingComponent": {
       "role": "Authoring",
       "purpose": "Creates a vertex-preserving Ceiling Surface with its opaque construction, boundary intent, and owned openings.",
       "workflow": "Connect a closed planar polygon, Construction, and named Boundary Condition, then combine the Surface with the other enclosure surfaces in one Thermal Zone branch.",
@@ -83,7 +83,7 @@
         "Openings must be coplanar, contained, non-overlapping, and uniquely named."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.DoorFromPolylineComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.DoorFromPolylineComponent": {
       "role": "Authoring",
       "purpose": "Creates an opaque Door Opening that already owns its construction.",
       "workflow": "Connect a closed polygon and opaque Construction, then wire the completed Opening only to the Openings input of its host Floor, Ceiling, or usually Wall.",
@@ -92,7 +92,7 @@
         "Coplanarity, host containment, and overlap are validated by the host Surface."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.FloorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.FloorComponent": {
       "role": "Authoring",
       "purpose": "Creates a vertex-preserving Floor Surface and reports gross area, opaque net area, validity, and diagnostics.",
       "workflow": "Connect a closed planar floor polygon and Construction, keep the Ground default for slab-on-ground work, and combine the output with Ceiling and Wall outputs in the Zone's Surfaces branch.",
@@ -101,7 +101,7 @@
         "Valid checks the Surface and its openings but does not prove that all Zone surfaces form a watertight enclosure."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.WallComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.WallComponent": {
       "role": "Authoring",
       "purpose": "Creates a vertex-preserving Wall Surface and is the normal host for Window and Door openings.",
       "workflow": "Connect the wall polygon, Construction, boundary choice, and only that wall's completed Openings. Send the resulting Surface into the owning Thermal Zone branch.",
@@ -111,7 +111,7 @@
         "Three or more coincident candidate surfaces are ambiguous and invalidate model composition."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.WindowFromPolylineComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.WindowFromPolylineComponent": {
       "role": "Authoring",
       "purpose": "Creates a Window Opening from a closed polygon and a completed Glazing definition.",
       "workflow": "Connect the Rhino window boundary and Glazing, then connect Opening only to the owning Surface; the glazing does not need another Zone-level wire.",
@@ -120,7 +120,7 @@
         "Overlapping host openings are rejected during Surface validation."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.AbsorptionChillerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.AbsorptionChillerComponent": {
       "role": "Authoring",
       "purpose": "Creates a thermally driven chilled-water source with an explicit generator boiler and cooling tower.",
       "workflow": "Connect Boiler to Generator Boiler and Cooling Tower to Cooling Tower, then pass Source through a Fan Coil Unit before connecting the Supply to a Zone.",
@@ -130,7 +130,7 @@
         "This is a cooling source and should not be connected directly to a Zone."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.AirHandlingUnitComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.AirHandlingUnitComponent": {
       "role": "Authoring",
       "purpose": "Turns an air-source or geothermal Heat Pump into a heating-and-cooling zone supply terminal.",
       "workflow": "Use the common path Heat Pump or Geothermal Heat Pump → Air Handling Unit → Thermal Zone HVAC. Adjust fan efficiency, pressure rise, and motor efficiency only when project data is available.",
@@ -139,7 +139,7 @@
         "The connected Heat Pump owns the heating/cooling COP and capacity behavior."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.BoilerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.BoilerComponent": {
       "role": "Authoring",
       "purpose": "Creates a fuel-fired hot-water plant source for hydronic heating or absorption cooling.",
       "workflow": "Connect Source to Radiator, Radiant Floor, a heating-mode Fan Coil Unit, or the Generator Boiler input of Absorption Chiller; connect only the resulting Supply to a Zone.",
@@ -149,7 +149,7 @@
         "Choose Fuel by name from the input menu rather than using an integer enum."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ChillerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ChillerComponent": {
       "role": "Authoring",
       "purpose": "Creates a water-cooled electric chilled-water source with an owned condenser connection.",
       "workflow": "Connect a Cooling Tower, choose compressor type, and feed Source into Fan Coil Unit before sending the Supply to the Zone.",
@@ -158,7 +158,7 @@
         "This source is cooling-only; the single-source Fan Coil path does not independently author a second heating plant."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.CoolingTowerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.CoolingTowerComponent": {
       "role": "Helper",
       "purpose": "Defines the condenser-side tower consumed by a Chiller or Absorption Chiller.",
       "workflow": "Choose Open/Closed circuit and Single/Two fan speeds, then wire Cooling Tower to the matching plant component. It is not a Zone terminal.",
@@ -167,7 +167,7 @@
         "The Generic Data output is deliberately a plant helper, not an object to connect to Zone or Model."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.DistrictHeatingComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.DistrictHeatingComponent": {
       "role": "Authoring",
       "purpose": "Represents purchased hot water whose fuel conversion occurs outside the modeled building.",
       "workflow": "Connect Source to Radiator, Radiant Floor, or a heating-mode Fan Coil Unit, then connect the completed Supply to Thermal Zone HVAC.",
@@ -176,7 +176,7 @@
         "Use Boiler instead when on-site fuel and conversion efficiency must be represented."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.DomesticHotWaterComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.DomesticHotWaterComponent": {
       "role": "Compatibility",
       "purpose": "Creates a typed domestic-hot-water definition retained for domain compatibility and future integration.",
       "workflow": "Use it only when inspecting or extending the domain model; it is not part of the executable 0.1.0 Grasshopper simulation graph.",
@@ -185,7 +185,7 @@
         "The current Core export path produces no EnergyPlus objects for this value, so it must not be presented as an active load."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ElectricRadiantFloorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ElectricRadiantFloorComponent": {
       "role": "Authoring",
       "purpose": "Creates a source-free electric radiant-floor terminal.",
       "workflow": "Connect Supply directly to Thermal Zone HVAC. Use layered Floor constructions and a valid heating setpoint so the exporter can place the internal floor heat source.",
@@ -194,7 +194,7 @@
         "All Zone Floor surfaces participate; there is intentionally no face-index input."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ElectricRadiatorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ElectricRadiatorComponent": {
       "role": "Authoring",
       "purpose": "Creates a simple source-free electric radiator suitable for a stable heating-only Zone.",
       "workflow": "Connect Supply directly to Thermal Zone HVAC; no plant Source component is required. This is the shortest dependable HVAC path for a runnable example.",
@@ -203,7 +203,7 @@
         "Efficiency must be greater than 0 and no greater than 1; Radiant Fraction must be between 0 and 1."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.EnergyRecoveryVentilatorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.EnergyRecoveryVentilatorComponent": {
       "role": "Authoring",
       "purpose": "Creates a standalone sensible/latent energy-recovery ventilator owned by one Zone.",
       "workflow": "Connect Ventilator to Thermal Zone ERVs rather than HVAC. Use a list of completed ERVs when a Zone has more than one distinct unit.",
@@ -212,7 +212,7 @@
         "Effectiveness and fan efficiency must remain in their documented physical ranges."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.FanCoilUnitComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.FanCoilUnitComponent": {
       "role": "Authoring",
       "purpose": "Turns one compatible hydronic plant Source into a zone-side fan-coil Supply.",
       "workflow": "Connect Boiler or District Heating for a heating path, or Chiller or Absorption Chiller for a cooling path, then connect Supply to Zone HVAC.",
@@ -221,7 +221,7 @@
         "Use separate terminals if the study requires independently authored heating and cooling systems."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.GeothermalHeatPumpComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.GeothermalHeatPumpComponent": {
       "role": "Authoring",
       "purpose": "Creates a geothermal-labeled reversible heat-pump Source for an AHU or Packaged Air Conditioner.",
       "workflow": "Set heating/cooling COP and optional autosize capacities, then wire Source through a compatible Supply terminal before the Zone.",
@@ -230,7 +230,7 @@
         "This release preserves geothermal identity but does not separately model boreholes, ground loops, or ground heat exchangers."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.HeatPumpComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.HeatPumpComponent": {
       "role": "Authoring",
       "purpose": "Creates a reversible air-source heat-pump Source for packaged or air-handling terminals.",
       "workflow": "Use Heat Pump → Air Handling Unit → Zone for heating and cooling, or Heat Pump → Packaged Air Conditioner → Zone for the exposed cooling-only terminal path.",
@@ -239,7 +239,7 @@
         "Source does not connect directly to Thermal Zone."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.PackagedAirConditionerComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.PackagedAirConditionerComponent": {
       "role": "Authoring",
       "purpose": "Creates a cooling-only packaged zone terminal around an InvisibleDragon Heat Pump source.",
       "workflow": "Connect Heat Pump or Geothermal Heat Pump to Heat Pump, then connect Supply directly to Thermal Zone HVAC.",
@@ -248,7 +248,7 @@
         "Internal fan values use domain defaults; use Air Handling Unit when those fan inputs must be controlled."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.RadiantFloorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.RadiantFloorComponent": {
       "role": "Authoring",
       "purpose": "Creates a hydronic low-temperature radiant-floor Supply.",
       "workflow": "Use Boiler or District Heating → Radiant Floor → Thermal Zone HVAC. Prefer layered Floor constructions and provide a usable heating setpoint.",
@@ -257,7 +257,7 @@
         "The component strictly rejects Heat Pump, but cooling sources should also not be used as heating plants even if a broad domain type reaches the input."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.RadiatorComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.RadiatorComponent": {
       "role": "Authoring",
       "purpose": "Creates a hydronic radiant-convective radiator Supply from Boiler or District Heating.",
       "workflow": "Connect the compatible heating Source, then wire Supply directly to Thermal Zone HVAC.",
@@ -266,7 +266,7 @@
         "Nonzero radiant output is distributed across Zone surfaces by gross area."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.CompileInvisibleDragonComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.CompileInvisibleDragonComponent": {
       "role": "Utility",
       "purpose": "Compiles a typed InvisibleDragon Energy Model into the EnergyPlus 24.2 IDF used by the low-level runner.",
       "workflow": "Connect Energy Model to Model, review Valid and Diagnostics, inspect Text in a Panel if needed, and pass IDF to Run InvisibleDragon. No EnergyPlus or IDD path is required.",
@@ -275,7 +275,7 @@
         "Managed IDD validation is used when available; otherwise the embedded 24.2 execution mapping reports deferred validation information."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.EnergyModelComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.EnergyModelComponent": {
       "role": "Authoring",
       "purpose": "Resolves all authored Zones together, derives nested systems, infers compatible surface adjacency, and creates the complete low-level Energy Model.",
       "workflow": "Connect completed Zone branches and optional model-level PV panels, choose Terrain and North Axis, then send Model to Compile InvisibleDragon.",
@@ -285,7 +285,7 @@
         "HVAC sources and assignments are derived from Zone wires and need no parallel catalog connection."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ZoneComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ZoneComponent": {
       "role": "Authoring",
       "purpose": "Collects one branch-local surface enclosure, one Profile, optional terminal HVAC systems, and optional ERVs into a Thermal Zone definition.",
       "workflow": "Connect completed Floor/Ceiling/Wall outputs as one Surfaces branch, a Profile, only completed Supply objects to HVAC, and Ventilator objects to ERVs; send Zone to Energy Model.",
@@ -296,7 +296,7 @@
         "Valid aggregates local diagnostics but does not prove watertight enclosure topology."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ConstantProfileComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ConstantProfileComponent": {
       "role": "Authoring",
       "purpose": "Creates a quick annual profile with constant heating/cooling setpoints, HVAC availability, and occupancy.",
       "workflow": "Connect Profile directly to Thermal Zone for simple constant-condition studies. Positive Occupancy is interpreted as people per floor area by the current exporter.",
@@ -306,7 +306,7 @@
         "Heating setpoint above cooling setpoint produces a warning."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.EnergyPlusResultSummaryComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.EnergyPlusResultSummaryComponent": {
       "role": "Result",
       "purpose": "Extracts the principal run state, diagnostic counts, timing, monthly table names, and work-directory information from an EnergyPlus Result.",
       "workflow": "Connect Result from Run InvisibleDragon or Read EnergyPlus Results and use the outputs as the first post-run health check or issue-report panel.",
@@ -315,7 +315,7 @@
         "A successful run's reported work directory may already have been cleaned."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.ReadEnergyPlusResultsComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.ReadEnergyPlusResultsComponent": {
       "role": "Result",
       "purpose": "Imports an existing EnergyPlus output folder into the same typed Result used by the managed runner.",
       "workflow": "Point Directory at the folder that contains eplusout.err, eplusout.audit, eplusout.bnd, and table CSV output, then connect Result to EnergyPlus Result Summary.",
@@ -324,7 +324,7 @@
         "Missing individual files are tolerated, so a wrong but existing directory can produce a mostly empty result rather than a path error."
       ]
     },
-    "GonieGonie.InvisibleDragon.Grasshopper.Components.PhotovoltaicPanelComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.PhotovoltaicPanelComponent": {
       "role": "Authoring",
       "purpose": "Creates a simplified fixed-performance photovoltaic generator from area and orientation values.",
       "workflow": "Connect PV Panel to Energy Model PV Panels, not to a Zone or Surface. Use a list for multiple distinct arrays.",
@@ -333,7 +333,7 @@
         "There is no Rhino panel geometry or host-surface placement input; export uses a simplified site-shading representation."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonVersionComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonVersionComponent": {
       "role": "Utility",
       "purpose": "Reports the loaded SimpleDragon plugin version and the upstream revision represented by this port.",
       "workflow": "Connect Version and Upstream to a Panel when recording a study, preparing a support request, or checking that Rhino loaded the intended package. It does not belong in the simulation wire path.",
@@ -341,7 +341,7 @@
         "The values describe the assembly currently loaded by Grasshopper, so record them when mixed or stale package loading is suspected."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent": {
       "role": "Authoring",
       "purpose": "Defines a reusable opaque material from SI thermophysical properties for explicit envelope assemblies.",
       "workflow": "Enter project material data, connect Material to one or more SimpleDragon Construction Layer components, and reuse the same output wherever the specification is identical.",
@@ -350,7 +350,7 @@
         "The defaults resemble a lightweight insulation example and should not be treated as a verified project specification."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionLayerComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionLayerComponent": {
       "role": "Authoring",
       "purpose": "Binds one opaque Material to one physical thickness so layer ownership is explicit before construction assembly.",
       "workflow": "Connect Material and set Thickness in metres, then send each completed Layer to the ordered Layers list of SimpleDragon Surface Construction.",
@@ -359,7 +359,7 @@
         "Create each material/thickness pair as its own Layer instead of trying to match two independent lists at the Construction component."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonSurfaceConstructionComponent": {
       "role": "Authoring",
       "purpose": "Collects one or more completed layers into an explicit opaque envelope assembly and calculates its film-inclusive U-value.",
       "workflow": "Connect Layer outputs in the intended physical order, then reuse Construction on every Floor, Ceiling, or Wall that shares the assembly. Inspect U-Value to catch thickness or conductivity mistakes early.",
@@ -368,7 +368,7 @@
         "Connecting this explicit assembly overrides the automatic regulated-construction selection used when a Surface Construction input is left empty."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonFenestrationConstructionComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonFenestrationConstructionComponent": {
       "role": "Authoring",
       "purpose": "Defines the aggregate thermal and solar performance owned by a SimpleDragon Window, Glass Door, or opaque Door opening.",
       "workflow": "Set U-Value and SHGC once, connect Construction to SimpleDragon Opening, and let that completed Opening carry the construction into its host Surface.",
@@ -377,7 +377,7 @@
         "Window and Glass Door require a transparent construction, while Door requires SHGC 0 and cannot use a blind."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.LookupUsageProfileComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.LookupUsageProfileComponent": {
       "role": "Authoring",
       "purpose": "Resolves a complete packaged Korean operating profile for occupancy, HVAC, ventilation, loads, setpoints, holidays, and vacations.",
       "workflow": "Leave Name blank first and connect Available Names to a Panel, then copy one exact name back into Name and connect Profile to every Zone that follows that use pattern.",
@@ -386,7 +386,7 @@
         "An empty Name intentionally lists choices without producing a Profile or an error."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonOpeningComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonOpeningComponent": {
       "role": "Authoring",
       "purpose": "Creates a geometry-backed Window, Door, or Glass Door that already owns its fenestration construction and optional blind.",
       "workflow": "Connect a closed planar boundary curve and Fenestration Construction, choose Type and Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; no Zone or face index is used.",
@@ -395,7 +395,7 @@
         "A Rhino inner trim still needs matching Opening metadata, and the same opening list should not be broadcast to unrelated face items."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonFloorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonFloorComponent": {
       "role": "Authoring",
       "purpose": "Turns one planar single-face Brep into a Floor Surface with locally owned boundary intent, construction, and openings.",
       "workflow": "Connect a downward-facing floor Brep, use Ground for slab-on-ground work or Outdoors for an inter-story pair, and combine the completed output with the other Surfaces owned by one Zone.",
@@ -404,7 +404,7 @@
         "Ground and Adiabatic floors cannot own openings; a coincident upper-zone Ceiling must use Outdoors with the opposite normal for automatic adjacency."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonCeilingComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonCeilingComponent": {
       "role": "Authoring",
       "purpose": "Turns one planar single-face Brep into a Ceiling or roof Surface with its own envelope and boundary choices.",
       "workflow": "Connect an upward-facing face, keep Outdoors for a roof or pair it with an upper-zone Outdoors Floor, and send the completed Surface into the owning Zone branch.",
@@ -413,7 +413,7 @@
         "An inter-zone Floor/Ceiling pair cannot retain cool-roof reflectance, and Ground or Adiabatic surfaces cannot contain openings."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonWallComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonWallComponent": {
       "role": "Authoring",
       "purpose": "Creates a Wall Surface and is the normal ownership boundary for completed Window and Door openings.",
       "workflow": "Connect one outward-facing planar Brep, optional explicit Construction, boundary choice, and only that face's Openings. Use one component for a list of plain walls and a separate component for each opening-bearing wall unless tree paths are deliberately matched.",
@@ -422,7 +422,7 @@
         "A branch-local Openings list can be repeated across multiple Face items by Grasshopper data matching, so separate hosts to avoid accidental broadcast."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonZoneComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonZoneComponent": {
       "role": "Authoring",
       "purpose": "Collects one branch-local surface enclosure, usage profile, terminal HVAC list, and ERV list into a Zone definition.",
       "workflow": "Connect completed Floor, Ceiling, and Wall outputs to Surfaces; connect one Profile; connect only Supply outputs to HVAC and Zone ERV outputs to ERVs; then send Zone to SimpleDragon Model.",
@@ -432,7 +432,7 @@
         "Use the ERV Count input for identical units instead of duplicating one deterministic ERV value."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.CreateSimpleDragonModelComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonModelComponent": {
       "role": "Authoring",
       "purpose": "Resolves all Zone definitions together, infers geometry adjacency, derives every nested catalog, selects climate metadata, and creates the complete GRM 0.7 model.",
       "workflow": "Connect all completed Zone branches and optional model-level PV panels, set Address and Vintage, inspect Diagnostics and Floor Area, then wire GRM directly to Run SimpleDragon. Use Geometry Map Data, rather than the display-text map, when exporting CSV provenance.",
@@ -442,7 +442,7 @@
         "North Axis remains a model value while wall azimuths use Rhino world north; do not pre-rotate geometry merely to apply North Axis."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitModelComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitModelComponent": {
       "role": "Utility",
       "purpose": "Loads an existing strict GRM 0.7 document into the same typed model used by the visual authoring workflow.",
       "workflow": "Connect a .grm or JSON path, check Success and Diagnostics, and send GRM directly to Run SimpleDragon, Batch Case, or Write GRM. Use Canonical JSON when reviewing deterministic differences.",
@@ -451,7 +451,7 @@
         "This is an artifact interchange path, not a required stage between SimpleDragon Model and Run."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitModelComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitModelComponent": {
       "role": "Utility",
       "purpose": "Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.",
       "workflow": "Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.",
@@ -460,7 +460,7 @@
         "Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonHeatPumpComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonHeatPumpComponent": {
       "role": "Authoring",
       "purpose": "Creates a reversible air-source heat-pump plant Source for the simplified AHU supply path.",
       "workflow": "Set heating and cooling COP, leave capacities disconnected for unset/autosize behavior when appropriate, then use Heat Pump → Air Handling Unit → Zone HVAC.",
@@ -469,7 +469,7 @@
         "Source does not connect directly to a Zone, and the current public AHU compatibility accepts Heat Pump or Geothermal Heat Pump only."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonGeothermalHeatPumpComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonGeothermalHeatPumpComponent": {
       "role": "Authoring",
       "purpose": "Creates a reversible geothermal-labeled Source while retaining the same compact COP and capacity authoring surface as the air-source heat pump.",
       "workflow": "Set heating/cooling COP and optional capacities, then use Geothermal Heat Pump → Air Handling Unit → Zone HVAC.",
@@ -478,7 +478,7 @@
         "Disconnected capacities remain unset/autosized; connected values must be positive."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonChillerComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonChillerComponent": {
       "role": "Authoring",
       "purpose": "Defines an electric chiller and its cooling-tower circuit as one self-contained cooling Source.",
       "workflow": "Choose compressor, tower circuit, and fan control, set COP and optional chiller/tower capacities, then use Chiller → Fan Coil Unit → Zone HVAC.",
@@ -487,7 +487,7 @@
         "This is a cooling Source and does not connect directly to Zone; optional capacities are unset when disconnected."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonAbsorptionChillerComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonAbsorptionChillerComponent": {
       "role": "Authoring",
       "purpose": "Creates an absorption cooling Source whose generator boiler, fuel, and boiler efficiency are contained in one simplified definition.",
       "workflow": "Choose generator fuel, set thermal COP and boiler efficiency, optionally size cooling capacity, then use Absorption Chiller → Fan Coil Unit → Zone HVAC.",
@@ -496,7 +496,7 @@
         "There is no separate generator-boiler wire in SimpleDragon; its properties are owned by this Source."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonBoilerComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonBoilerComponent": {
       "role": "Authoring",
       "purpose": "Creates a fuel-fired hot-water Source for simplified hydronic terminals and optional domestic-hot-water metadata.",
       "workflow": "Choose Fuel, efficiency, optional heating capacity, and Hot Water Supply, then connect Source to Fan Coil Unit, Radiator, or Radiant Floor before the Zone.",
@@ -505,7 +505,7 @@
         "Hot Water Supply records source responsibility; it is not a separate DHW load or schedule component."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonDistrictHeatingComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonDistrictHeatingComponent": {
       "role": "Authoring",
       "purpose": "Represents purchased district heat without disguising it as a local fuel-fired boiler.",
       "workflow": "Set optional service capacity and Hot Water Supply, then connect Source to Fan Coil Unit, Radiator, or Radiant Floor before the Zone.",
@@ -514,7 +514,7 @@
         "The optional capacity is unset when disconnected and must be positive when supplied."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonPackagedAirConditionerComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonPackagedAirConditionerComponent": {
       "role": "Authoring",
       "purpose": "Creates a source-free cooling-only packaged terminal for a short direct Zone HVAC path.",
       "workflow": "Set cooling COP and optional capacity, then connect Supply directly to Zone HVAC without creating a plant Source.",
@@ -523,7 +523,7 @@
         "Cooling capacity remains unset/autosized when disconnected and must be positive when connected."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonAirHandlingUnitComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonAirHandlingUnitComponent": {
       "role": "Authoring",
       "purpose": "Turns a reversible Heat Pump or Geothermal Heat Pump Source into the zone-side AHU Supply accepted by a Zone.",
       "workflow": "Connect Heat Pump or Geothermal Heat Pump to Source, then wire the resulting Supply to the owning Zone's HVAC list.",
@@ -532,7 +532,7 @@
         "COP and capacity live on the connected Source; this compact AHU exposes no second sizing layer."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonFanCoilUnitComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonFanCoilUnitComponent": {
       "role": "Authoring",
       "purpose": "Turns one compatible hydronic heating or cooling Source into a zone-side fan-coil Supply.",
       "workflow": "Connect Boiler or District Heating for a heating path, or Chiller or Absorption Chiller for a cooling path, then wire Supply to Zone HVAC.",
@@ -541,7 +541,7 @@
         "One Fan Coil Unit owns one Source; use additional terminal objects if the study needs separately authored heating and cooling paths."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonRadiatorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonRadiatorComponent": {
       "role": "Authoring",
       "purpose": "Creates a hydronic radiator Supply from a Boiler or District Heating Source.",
       "workflow": "Connect the compatible heating Source, optionally provide terminal heating capacity, and connect Supply directly to the owning Zone's HVAC list.",
@@ -550,7 +550,7 @@
         "Heating capacity remains unset/autosized when disconnected and must be positive when connected."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonElectricRadiatorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonElectricRadiatorComponent": {
       "role": "Authoring",
       "purpose": "Creates a simple source-free electric radiator suitable for a stable heating-only Zone path.",
       "workflow": "Optionally set heating capacity and connect Supply directly to Zone HVAC; no Boiler, heat pump, or other Source is required.",
@@ -559,7 +559,7 @@
         "Use a separate cooling Supply if the Zone also requires active cooling."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonRadiantFloorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonRadiantFloorComponent": {
       "role": "Authoring",
       "purpose": "Creates a hydronic radiant-floor Supply whose presence also informs regulated Floor construction selection.",
       "workflow": "Use Boiler or District Heating → Radiant Floor → Zone HVAC, and author the Zone's actual Floor Surfaces rather than selecting faces by index.",
@@ -568,7 +568,7 @@
         "This compact terminal has no separate capacity input and rejects non-heating Sources."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonElectricRadiantFloorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonElectricRadiantFloorComponent": {
       "role": "Authoring",
       "purpose": "Creates a source-free electric radiant-floor Supply with the shortest radiant-heating wire path.",
       "workflow": "Name the system and connect Supply directly to Zone HVAC; SimpleDragon applies radiant-floor behavior to the Zone rather than asking for floor indices.",
@@ -577,7 +577,7 @@
         "It counts toward the same one-radiant-floor-system-per-Zone limit as the hydronic variant."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonEnergyRecoveryVentilatorComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonEnergyRecoveryVentilatorComponent": {
       "role": "Authoring",
       "purpose": "Creates both an ERV definition and its owned Zone assignment in one step.",
       "workflow": "Set airflow and sensible heating/cooling recovery efficiencies, use Count for identical units, and connect Zone ERV directly to the one Zone that owns it.",
@@ -586,7 +586,7 @@
         "Connect this output to Zone ERVs, not HVAC, and use Count instead of duplicating an identical deterministic ERV value."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonPhotovoltaicPanelComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonPhotovoltaicPanelComponent": {
       "role": "Authoring",
       "purpose": "Defines a simplified fixed photovoltaic array from active area, efficiency, azimuth, and tilt.",
       "workflow": "Connect PV to SimpleDragon Model's Photovoltaic Panels list, not to a Zone, Ceiling, or host Surface. Use a list for multiple distinct arrays.",
@@ -595,7 +595,7 @@
         "There is no panel Brep or host geometry; distinguish repeated arrays by meaningful names or values to avoid deterministic duplicate identities."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent": {
       "role": "Trigger",
       "purpose": "Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR without exposing an intermediate IDF workflow.",
       "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
@@ -605,7 +605,7 @@
         "Previous GRR output is hidden while a new run is active or after inputs change, preventing downstream consumers from mixing stale results."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitResultComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitResultComponent": {
       "role": "Result",
       "purpose": "Loads a strict GRR 0.7 artifact into the same typed result consumed by every SimpleDragon analysis component.",
       "workflow": "Connect a GRR path, check Success and Diagnostics, then fan GRR out to Summary, Data Tree, Plots, Write GRR, or CSV Export without rerunning EnergyPlus.",
@@ -614,7 +614,7 @@
         "Invalid or incomplete GRR content does not become a usable result even when the file itself exists."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitResultComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitResultComponent": {
       "role": "Result",
       "purpose": "Serializes a typed GRR as deterministic UTF-8 GRR 0.7 JSON for reproducible exchange or archival.",
       "workflow": "Connect GRR and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the result artifact should be persisted.",
@@ -623,7 +623,7 @@
         "Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.GreenRetrofitResultSummaryComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitResultSummaryComponent": {
       "role": "Result",
       "purpose": "Extracts annual, January-to-December, carrier, and end-use totals for one selected GRR metric and basis.",
       "workflow": "Connect GRR, choose Site Uses, Source Uses, Carbon, or Cost, and keep Gross False for per-area comparison or enable it for whole-building totals. Pair each names list with its corresponding totals list.",
@@ -632,7 +632,7 @@
         "Monthly Totals are always January through December; carrier and end-use lists include stable zero-valued categories as well as active ones."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.GreenRetrofitDataTreeComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitDataTreeComponent": {
       "role": "Result",
       "purpose": "Transforms one GRR metric into stable monthly Fuel or End Use series for native Grasshopper tree calculations.",
       "workflow": "Connect GRR and normally leave the defaults for Site Uses per area by Fuel. Use Series Names with the matching X/Y branches, or consume the selected monthly CSV text without writing a file.",
@@ -641,7 +641,7 @@
         "X branches contain month numbers 1–12 and Y branches contain the corresponding twelve values; use Unit rather than assuming every metric is kWh."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyLinePlotComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyLinePlotComponent": {
       "role": "Result",
       "purpose": "Creates immediately previewable monthly result curves while exposing the exact matching data trees for annotation or custom graphics.",
       "workflow": "Connect only GRR for a default Site Uses-per-area Fuel plot on a 12 by 6 World XY frame, or set Metric, Gross, Grouping, Plane, Width, and Height for a custom layout.",
@@ -650,7 +650,7 @@
         "Plane must be valid and Width/Height finite and positive; before a GRR exists the component intentionally waits without a red error."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyBarPlotComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyBarPlotComponent": {
       "role": "Result",
       "purpose": "Creates grouped or stacked monthly bar-outline geometry from the same typed series used by the numeric result components.",
       "workflow": "Connect GRR for the default grouped Fuel chart, enable Stacked for monthly accumulation, and use the parallel Series Names, X/Y trees, and Unit to build labels or downstream visualization.",
@@ -659,7 +659,7 @@
         "Positive and negative values stack separately around Zero Axis, and Plane/Width/Height must be valid and positive."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.ExportGreenRetrofitCsvComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.ExportGreenRetrofitCsvComponent": {
       "role": "Result",
       "purpose": "Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.",
       "workflow": "Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write.",
@@ -669,7 +669,7 @@
         "File Paths describe what would be written; Written is the authoritative indication that all package files were created in that solution."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.SimpleDragonBatchCaseComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonBatchCaseComponent": {
       "role": "Helper",
       "purpose": "Wraps one complete GRM alternative in the typed value consumed by the managed batch runner.",
       "workflow": "Connect GRM items, lists, or trees to create matching Case values, then preserve those branches when wiring Cases into Managed Run SimpleDragon Batch.",
@@ -678,7 +678,7 @@
         "Runtime, weather, work, and output paths are not stored as user-authored case inputs."
       ]
     },
-    "GonieGonie.SimpleDragon.Grasshopper.Components.ManagedRunSimpleDragonBatchComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.ManagedRunSimpleDragonBatchComponent": {
       "role": "Trigger",
       "purpose": "Executes a branch-preserving research matrix of SimpleDragon models with managed runtime, packaged weather, caching, and result artifacts.",
       "workflow": "Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.",

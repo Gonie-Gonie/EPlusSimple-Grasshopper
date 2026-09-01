@@ -26,7 +26,7 @@ from types import SimpleNamespace
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.python-reference.dragon-hvac-supply-core.v1"
+SCHEMA = "dragons.python-reference.dragon-hvac-supply-core.v1"
 SOURCE_PATH = "src/idragon/dragon/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -64,7 +64,7 @@ def _load_base() -> Any:
     ):
         raise RuntimeError("Pinned dragon model-assembly support receipt drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_dragon_hvac_supply_core_base", BASE_PATH
+        "_dragons_dragon_hvac_supply_core_base", BASE_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load supply-core oracle support: {BASE_PATH}")
@@ -223,7 +223,7 @@ ASSERTION_IDS = {
 
 
 def _native_route(symbol: str) -> str:
-    public_prefix = "GonieGonie.InvisibleDragon.Hvac."
+    public_prefix = "Dragons.InvisibleDragon.Hvac."
     member_routes = {
         "coolable": "CanCool",
         "heatable": "CanHeat",
@@ -253,7 +253,7 @@ def _native_route(symbol: str) -> str:
             "idf_get_demandbranchname",
         }:
             return (
-                "GonieGonie.InvisibleDragon.Model.EnergyModel.ToIdfDocument("
+                "Dragons.InvisibleDragon.Model.EnergyModel.ToIdfDocument("
                 "IddSchema?, EnergyModelIdfOptions?) public aggregate emission"
             )
     return public_prefix + symbol + " public constructor and immutable properties"
@@ -273,19 +273,19 @@ SUPPORT_FIXTURES = (
     {
         "bytes": 31_163,
         "path": "fixtures/reference/python-0.7.0/dragon-hvac-supply-group-core-oracle.json",
-        "schema": "goniegonie.python-reference.dragon-hvac-supply-group-core.v1",
+        "schema": "dragons.python-reference.dragon-hvac-supply-group-core.v1",
         "sha256": "sha256:320ac62b8b9eccc9d4053a6b5ceb6fa3e825c329d1ac3d10f4c8c5cd89f0c092",
     },
     {
         "bytes": 22_608,
         "path": "fixtures/reference/python-0.7.0/dragon-hvac-supply-group-to-idf-object-oracle.json",
-        "schema": "goniegonie.python-reference.dragon-hvac-supply-group-to-idf-object.v1",
+        "schema": "dragons.python-reference.dragon-hvac-supply-group-to-idf-object.v1",
         "sha256": "sha256:f1c3454cdf34eed1a47180b13bacab2dadf04a06883a34c214738ed6ef50a608",
     },
     {
         "bytes": 15_122,
         "path": "fixtures/reference/python-0.7.0/dragon-model-add-supply-system-oracle.json",
-        "schema": "goniegonie.python-reference.dragon-model-add-supply-system.v1",
+        "schema": "dragons.python-reference.dragon-model-add-supply-system.v1",
         "sha256": "sha256:4896c54312c44bffc573d0dc4d0fddfff14d17b0c65a3f789b8f6a487e1f181c",
     },
 )
@@ -293,27 +293,27 @@ SUPPORT_FIXTURES = (
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 7_582,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HvacAbstractions.cs",
         "sha256": "sha256:6c8e16ec5e7ff1fd6c29717112e4dcaa5eb3a0725e20317a3ad35db75131784a",
     },
     {
         "bytes": 18_267,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/SupplySystems.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/SupplySystems.cs",
         "sha256": "sha256:4de030455a8a1b8db0ca4eca7745c6501930c984f9d1e156e17cb0b752d845cf",
     },
     {
         "bytes": 24_522,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Hvac/HydronicSupplySystems.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Hvac/HydronicSupplySystems.cs",
         "sha256": "sha256:c815c219d38294b0d3ba1a0ad2921e5ea77a90377887ed0fca8150bae46f96b2",
     },
     {
         "bytes": 22_015,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModel.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModel.cs",
         "sha256": "sha256:f9a4bcda010c2690ea57b2f9f8d9d3b134fc60139bfe24dce5d973dc18eeceb3",
     },
     {
         "bytes": 50_764,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Model/EnergyModelIdfAssembler.cs",
         "sha256": "sha256:af84d55c3450260f6ff59e277724b853a7749def3e18b44ba65e7ccefb725905",
     },
 )
@@ -1377,7 +1377,7 @@ def build_oracle(
         loaded_modules = list(modules.loaded_local_modules)
 
     with tempfile.TemporaryDirectory(
-        prefix="goniegonie-dragon-hvac-supply-relocated-"
+        prefix="dragons-dragon-hvac-supply-relocated-"
     ) as temporary:
         relocated_root = Path(temporary) / "relocated-source"
         shutil.copytree(source_root, relocated_root)

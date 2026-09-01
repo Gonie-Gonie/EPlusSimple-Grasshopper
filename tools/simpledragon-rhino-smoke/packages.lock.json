@@ -18,42 +18,42 @@
         "resolved": "8.0.23304.9001",
         "contentHash": "hWuqXjcj/eb1/z8+bml4Bav/8Oug2p6t0mAVf37GhX9sP+M1aYNO9FappqeN8oefcIBkLBmAzr46DYNhTxFAGQ=="
       },
-      "goniegonie.buildingenergy.contracts": {
+      "dragons.buildingenergy.contracts": {
         "type": "Project"
       },
-      "goniegonie.energyplus.runtime": {
+      "dragons.energyplus.runtime": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )"
         }
       },
-      "goniegonie.invisibledragon.core": {
+      "dragons.invisibledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.EnergyPlus.Runtime": "[1.0.0, )"
+          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
+          "Dragons.EnergyPlus.Runtime": "[1.0.0, )"
         }
       },
-      "goniegonie.invisibledragon.rhino": {
+      "dragons.invisibledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },
-      "goniegonie.simpledragon.core": {
+      "dragons.simpledragon.core": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.BuildingEnergy.Contracts": "[1.0.0, )",
-          "GonieGonie.InvisibleDragon.Core": "[1.0.0, )",
+          "Dragons.BuildingEnergy.Contracts": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Core": "[1.0.0, )",
           "System.Text.Json": "[8.0.6, )"
         }
       },
-      "goniegonie.simpledragon.rhino": {
+      "dragons.simpledragon.rhino": {
         "type": "Project",
         "dependencies": {
-          "GonieGonie.InvisibleDragon.Rhino": "[1.0.0, )",
-          "GonieGonie.SimpleDragon.Core": "[1.0.0, )",
+          "Dragons.InvisibleDragon.Rhino": "[1.0.0, )",
+          "Dragons.SimpleDragon.Core": "[1.0.0, )",
           "RhinoCommon": "[8.0.23304.9001, )"
         }
       },

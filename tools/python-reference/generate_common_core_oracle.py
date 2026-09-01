@@ -23,7 +23,7 @@ import sys
 from typing import Any, Callable
 
 
-SCHEMA = "goniegonie.invisibledragon.common-core-oracle.v1"
+SCHEMA = "dragons.invisibledragon.common-core-oracle.v1"
 SOURCE_PATH = "src/idragon/common.py"
 IMPORT_RELATIVE_PATH = Path("idragon") / "common.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
@@ -297,7 +297,7 @@ BINARY64_PATTERN = re.compile(
 def _load_support() -> Any:
     path = Path(__file__).resolve().with_name("generate_day_schedule_core_oracle.py")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_common_core_support", path
+        "_dragons_common_core_support", path
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load common core oracle support: {path}")
@@ -1225,7 +1225,7 @@ def _load_pinned_common_module(path: Path) -> Any:
     if sha256_file(path) != EXPECTED_SOURCE_SHA256:
         raise SystemExit("The selected common.py is not the exact pinned source.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_pinned_idragon_common", path
+        "_dragons_pinned_idragon_common", path
     )
     if spec is None or spec.loader is None:
         raise SystemExit(f"Cannot directly import pinned common.py: {path}")

@@ -18,7 +18,7 @@ endlocal & exit /b %DRAGONS_INSTALLER_EXIT%
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2.0
 
-$ExpectedSchema = 'goniegonie.dragons-grasshopper.windows-installer.v1'
+$ExpectedSchema = 'dragons-grasshopper.windows-installer.v1'
 $ExpectedVersion = '0.1.0'
 $ProductDefinitions = @(
     [pscustomobject] [ordered] @{
@@ -595,8 +595,8 @@ function Find-StrayManualDragonGhas {
     }
 
     $expectedNames = @(
-        'GonieGonie.InvisibleDragon.GH.gha',
-        'GonieGonie.SimpleDragon.GH.gha'
+        'Dragons.InvisibleDragon.GH.gha',
+        'Dragons.SimpleDragon.GH.gha'
     )
     $matches = New-Object 'System.Collections.Generic.List[string]'
     foreach ($rootPath in $roots) {
@@ -865,7 +865,7 @@ foreach ($package in @($release.packages)) {
 
 $logRoot = Join-Path `
     ([System.IO.Path]::GetTempPath()) `
-    (Join-Path 'GonieGonie\Dragons' (
+    (Join-Path 'Dragons' (
         'install-{0}-{1}' -f `
             [DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fff'),
             $PID))
@@ -955,7 +955,7 @@ foreach ($resolvedRhino in $resolvedRhinoInstallations) {
 }
 
 $result = [pscustomobject] [ordered] @{
-    schema = 'goniegonie.dragons-grasshopper.windows-install-result.v1'
+    schema = 'dragons-grasshopper.windows-install-result.v1'
     status = 'installed'
     version = $ExpectedVersion
     generatedUtc = [DateTime]::UtcNow.ToString('o')

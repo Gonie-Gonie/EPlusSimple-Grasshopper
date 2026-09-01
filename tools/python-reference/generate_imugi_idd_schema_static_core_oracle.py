@@ -57,7 +57,7 @@ def _load_pinned_base() -> Any:
 
 _base = _load_pinned_base()
 
-SCHEMA = "goniegonie.python-reference.imugi-idd-schema-static-core.v1"
+SCHEMA = "dragons.python-reference.imugi-idd-schema-static-core.v1"
 PREFIX = "imugi-idd-schema-static-core."
 SOURCE_PATH = _base.SOURCE_PATH
 EXPECTED_UPSTREAM_COMMIT = _base.EXPECTED_UPSTREAM_COMMIT
@@ -186,27 +186,27 @@ if set(ADAPTATIONS) != EXCEPTION_SYMBOLS:
     raise RuntimeError("Imugi batch-2 adaptation coverage drifted.")
 
 NATIVE_ROUTES = {
-    "IDD": "GonieGonie.InvisibleDragon.Idd.IddSchema",
-    "IDD.__init__": "GonieGonie.InvisibleDragon.Idd.IddSchema(...) constructor",
-    "IDD.load": "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Read/TryRead",
-    "IDD.read_idd": "GonieGonie.InvisibleDragon.Idd.IddParser.ParseFile",
-    "IDD.reference_map_cls": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/ReferenceClassNames projection",
-    "IDD.reference_map_obj": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/References projection",
-    "IDD.referenced_map_obj": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects/Fields/ObjectLists projection",
-    "IDD.required_objects": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over IsRequired",
-    "IDD.to_pickle": "GonieGonie.InvisibleDragon.Idd.IddSchemaCache.Write",
-    "IDD.version": "GonieGonie.InvisibleDragon.Idd.IddSchema.Version",
-    "InvalidFieldValue": "GonieGonie.InvisibleDragon.Idd.IddFieldDefinition/IddObjectDefinition public validation",
-    "InvalidParentManagement": "GonieGonie.InvisibleDragon.Idd.IddObjectDefinition immutable public ownership",
-    "StaticIndexedDict": "GonieGonie.InvisibleDragon.Idd.IddSchema and IddObjectDefinition typed collections",
-    "StaticIndexedDict.__getitem__": "GonieGonie.InvisibleDragon.Idd.IddSchema.this[int|string]",
-    "StaticIndexedDict.__init__": "GonieGonie.InvisibleDragon.Idd.IddSchema(...) constructor",
-    "StaticIndexedDict.__setitem__": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects read-only collection",
-    "StaticIndexedDict.allowed_keys": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over Name",
-    "StaticIndexedDict.items": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects key/value projection",
-    "StaticIndexedDict.keys": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects projection over Name",
-    "StaticIndexedDict.values": "GonieGonie.InvisibleDragon.Idd.IddSchema.Objects",
-    "VersionIdentificationError": "GonieGonie.InvisibleDragon.Idd.IddParser.Parse/ParseFile version contract",
+    "IDD": "Dragons.InvisibleDragon.Idd.IddSchema",
+    "IDD.__init__": "Dragons.InvisibleDragon.Idd.IddSchema(...) constructor",
+    "IDD.load": "Dragons.InvisibleDragon.Idd.IddSchemaCache.Read/TryRead",
+    "IDD.read_idd": "Dragons.InvisibleDragon.Idd.IddParser.ParseFile",
+    "IDD.reference_map_cls": "Dragons.InvisibleDragon.Idd.IddSchema.Objects/Fields/ReferenceClassNames projection",
+    "IDD.reference_map_obj": "Dragons.InvisibleDragon.Idd.IddSchema.Objects/Fields/References projection",
+    "IDD.referenced_map_obj": "Dragons.InvisibleDragon.Idd.IddSchema.Objects/Fields/ObjectLists projection",
+    "IDD.required_objects": "Dragons.InvisibleDragon.Idd.IddSchema.Objects projection over IsRequired",
+    "IDD.to_pickle": "Dragons.InvisibleDragon.Idd.IddSchemaCache.Write",
+    "IDD.version": "Dragons.InvisibleDragon.Idd.IddSchema.Version",
+    "InvalidFieldValue": "Dragons.InvisibleDragon.Idd.IddFieldDefinition/IddObjectDefinition public validation",
+    "InvalidParentManagement": "Dragons.InvisibleDragon.Idd.IddObjectDefinition immutable public ownership",
+    "StaticIndexedDict": "Dragons.InvisibleDragon.Idd.IddSchema and IddObjectDefinition typed collections",
+    "StaticIndexedDict.__getitem__": "Dragons.InvisibleDragon.Idd.IddSchema.this[int|string]",
+    "StaticIndexedDict.__init__": "Dragons.InvisibleDragon.Idd.IddSchema(...) constructor",
+    "StaticIndexedDict.__setitem__": "Dragons.InvisibleDragon.Idd.IddSchema.Objects read-only collection",
+    "StaticIndexedDict.allowed_keys": "Dragons.InvisibleDragon.Idd.IddSchema.Objects projection over Name",
+    "StaticIndexedDict.items": "Dragons.InvisibleDragon.Idd.IddSchema.Objects key/value projection",
+    "StaticIndexedDict.keys": "Dragons.InvisibleDragon.Idd.IddSchema.Objects projection over Name",
+    "StaticIndexedDict.values": "Dragons.InvisibleDragon.Idd.IddSchema.Objects",
+    "VersionIdentificationError": "Dragons.InvisibleDragon.Idd.IddParser.Parse/ParseFile version contract",
 }
 if set(NATIVE_ROUTES) != set(TARGET_SYMBOLS):
     raise RuntimeError("Imugi batch-2 public native-route coverage drifted.")
@@ -301,32 +301,32 @@ EXPECTED_CASES_SHA256 = (
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 13_005,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddDefinitions.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddDefinitions.cs",
         "sha256": "sha256:5e716db28821b68ae147ab0700380fdc6d406bb2666367903f3c12c2b54427ed",
     },
     {
         "bytes": 19_960,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddParser.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddParser.cs",
         "sha256": "sha256:0f932fe250ca0e63b8734032abc34adf98c31ade16405caa547f5ac67c76823f",
     },
     {
         "bytes": 11_254,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Idd/IddSchemaCache.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Idd/IddSchemaCache.cs",
         "sha256": "sha256:80f2e2a803128b52aec6df95b0ff2567a5b53bd51e72b1154e7c9a8a3ebf9e4b",
     },
     {
         "bytes": 4_954,
-        "path": "src/InvisibleDragon/GonieGonie.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
+        "path": "src/InvisibleDragon/Dragons.InvisibleDragon.Core/Common/EnergyPlusVersion.cs",
         "sha256": "sha256:ea908729f5517e3c9d301210f882019bc8b026da8e3055caeb187d80db86a685",
     },
     {
         "bytes": 8_339,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddParserTests.cs",
         "sha256": "sha256:783ff125aa66cd72afe67ef5c45b69bc208a7c7f9a9d04fe99a930d9ec7a1eaa",
     },
     {
         "bytes": 16_860,
-        "path": "tests/InvisibleDragon/GonieGonie.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
+        "path": "tests/InvisibleDragon/Dragons.InvisibleDragon.Core.Tests/Idd/IddSchemaOracleTests.cs",
         "sha256": "sha256:04d3a61e8c5d2a6bf7addc6900f5a8e0c2736005f90955f97641457cb27ea31f",
     },
 )

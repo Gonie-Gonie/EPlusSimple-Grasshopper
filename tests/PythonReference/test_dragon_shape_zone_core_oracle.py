@@ -209,7 +209,7 @@ class DragonShapeZoneCoreOracleTests(unittest.TestCase):
         self.assertEqual({"equivalent": 0, "exception": 8}, contract["classification_counts"])
         self.assertEqual({"exception"}, set(contract["classifications"].values()))
         self.assertEqual(
-            "GonieGonie.InvisibleDragon.Shape.Zone typed aggregate",
+            "Dragons.InvisibleDragon.Shape.Zone typed aggregate",
             contract["native_targets"]["Zone"],
         )
 

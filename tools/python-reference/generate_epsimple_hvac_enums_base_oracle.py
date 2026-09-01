@@ -36,7 +36,7 @@ from types import ModuleType
 from typing import Any, Callable, Iterator
 
 
-SCHEMA = "goniegonie.python-reference.epsimple-hvac-enums-base.v1"
+SCHEMA = "dragons.python-reference.epsimple-hvac-enums-base.v1"
 SOURCE_PATH = "src/epsimple/core/hvac.py"
 EXPECTED_UPSTREAM_COMMIT = "847b01f68f438f560a986072bcaa7768fbf67897"
 EXPECTED_INVENTORY_BYTES = 518_070
@@ -85,7 +85,7 @@ def _load_support() -> Any:
     if SUPPORT_PATH.stat().st_size != EXPECTED_SUPPORT_BYTES:
         raise RuntimeError("Strict JSON support byte length drifted.")
     spec = importlib.util.spec_from_file_location(
-        "_goniegonie_epsimple_hvac_enums_base_support", SUPPORT_PATH
+        "_dragons_epsimple_hvac_enums_base_support", SUPPORT_PATH
     )
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Cannot load strict JSON support: {SUPPORT_PATH}")
@@ -228,22 +228,22 @@ ASSERTION_IDS = {
 def _native_route(symbol: str) -> str:
     if symbol.startswith("Fuel"):
         if symbol == "Fuel.to_dragon":
-            return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
-        return "GonieGonie.SimpleDragon.FuelType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+            return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.FuelType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
     if symbol.startswith("CompressorType"):
         if symbol == "CompressorType.to_dragon":
-            return "GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
-        return "GonieGonie.SimpleDragon.CompressorType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+            return "Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.CompressorType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
     if symbol.startswith("CoolingTowerControl"):
-        return "GonieGonie.SimpleDragon.CoolingTowerControl through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        return "Dragons.SimpleDragon.CoolingTowerControl through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
     if symbol.startswith("CoolingTowerType"):
-        return "GonieGonie.SimpleDragon.CoolingTowerType through GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and GonieGonie.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
+        return "Dragons.SimpleDragon.CoolingTowerType through Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) and Dragons.SimpleDragon.GrmWriter.Serialize(GreenRetrofitModel, bool)"
     if symbol.startswith("NoneSource"):
-        return "GonieGonie.SimpleDragon.SupplySystem.SourceSystem nullable reference with GonieGonie.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
+        return "Dragons.SimpleDragon.SupplySystem.SourceSystem nullable reference with Dragons.SimpleDragon.GreenRetrofitConverter.Convert(GreenRetrofitModel, GreenRetrofitConversionOptions?)"
     if symbol == "SourceSystem":
-        return "GonieGonie.SimpleDragon.SourceSystem constructor and public properties"
+        return "Dragons.SimpleDragon.SourceSystem constructor and public properties"
     if symbol == "SourceSystem.TYPE_MAPPER":
-        return "GonieGonie.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with GonieGonie.SimpleDragon.SourceSystemType"
+        return "Dragons.SimpleDragon.GrmReader.Read(string, SimpleDragonDatabase?) with Dragons.SimpleDragon.SourceSystemType"
     raise RuntimeError(f"No reviewed native route for {symbol}.")
 
 
@@ -251,27 +251,27 @@ NATIVE_ROUTES = {symbol: _native_route(symbol) for symbol in TARGET_SYMBOLS}
 NATIVE_SOURCE_RECEIPTS = (
     {
         "bytes": 6_894,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SourceSystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SourceSystem.cs",
         "sha256": "sha256:c96df1bb42da5df66b3c4cbf61b800c9bf8450b4b8e427d97929809bca4e8cad",
     },
     {
         "bytes": 6_465,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Hvac/SupplySystem.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Hvac/SupplySystem.cs",
         "sha256": "sha256:1858281dcb5ea2df12a09c0c19caba77cf785a10458fb8d265e882f5695a11c5",
     },
     {
         "bytes": 48_650,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmReader.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmReader.cs",
         "sha256": "sha256:d91f90946ec19602751fc7818484ca43f85d1c46f9905fa805d8ee8a7281d968",
     },
     {
         "bytes": 16_652,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Serialization/GrmWriter.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Serialization/GrmWriter.cs",
         "sha256": "sha256:4048cc4bdfca312a7baae54c7055bb3aa7177ee6a8143ed9ef1d182353df1842",
     },
     {
         "bytes": 87_343,
-        "path": "src/SimpleDragon/GonieGonie.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
+        "path": "src/SimpleDragon/Dragons.SimpleDragon.Core/Conversion/GreenRetrofitConversion.cs",
         "sha256": "sha256:0a0774b4461442b2a3cccf68d39fbc236104a2aa13611e0d27c38f27aa2fe5fd",
     },
 )
@@ -418,7 +418,7 @@ def load_exact_inventory(path: Path, upstream_commit: str) -> dict[str, Any]:
         },
         "Public-symbol inventory",
     )
-    if value["schema"] != "goniegonie.upstream-public-symbol-inventory.v2":
+    if value["schema"] != "dragons.upstream-public-symbol-inventory.v2":
         raise SystemExit("The public-symbol inventory schema drifted.")
     if value["upstream_commit"].lower() != commit:
         raise SystemExit("The public-symbol inventory commit drifted.")
