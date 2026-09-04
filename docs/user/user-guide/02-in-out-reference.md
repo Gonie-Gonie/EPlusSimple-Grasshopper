@@ -4,7 +4,7 @@ _Generated from the public runtime catalog; do not edit this chapter directly._
 
 This reference combines runtime-reflected Grasshopper ports with curated workflow guidance. It covers every public component in InvisibleDragon and SimpleDragon; port order, access mode, defaults, choices, and wire types come from the built plugins rather than a manually maintained list.
 
-**Coverage:** 77 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
+**Coverage:** 78 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
 
 A port marked optional accepts an omitted wire. A non-optional port can still show a persistent default; consult the Default / choices column before wiring a replacement. Choice inputs are selected directly on the component and are flagged so integer or identifier plumbing is unnecessary.
 
@@ -47,9 +47,9 @@ A port marked optional accepts an omitted wire. A non-optional port can still sh
 
 **Role:** Authoring
 
-**Purpose:** Defines the aggregate U-value and solar heat-gain coefficient used by an InvisibleDragon window.
+**Purpose:** Defines the aggregate U-value and solar heat-gain coefficient used by an InvisibleDragon window or glass door.
 
-**How to use it:** Set the fenestration performance once, connect Glazing to Window From Polyline, and then connect the completed Opening only to its host Surface.
+**How to use it:** Set the fenestration performance once, connect Glazing to ID Window or ID GlassDoor, and then connect the completed Opening only to its host Surface.
 
 **Canvas location:** InvisibleDragon → Construction. Exposure: `primary`.
 
@@ -285,7 +285,7 @@ _This component has no inputs._
 | 1 | Name (`N`) | Text | Item | No | Default: `Ceiling` | Ceiling name. |
 | 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque Ceiling construction. |
 | 3 | Boundary Condition (`BC`) | Text | Item | No | Default: `Outdoors`; Choices: `Outdoors`; `Ground`; `Adiabatic` | Outdoors, Ground, or Adiabatic. Coincident surfaces in distinct Zones become reciprocal Zone boundaries automatically. Choices: Outdoors, Ground, Adiabatic. |
-| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Windows and doors owned by this Ceiling. |
+| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Openings owned by this Ceiling. |
 
 **Outputs**
 
@@ -296,35 +296,6 @@ _This component has no inputs._
 | 2 | Net Area (`Net`) | Number | Item | Opaque net area after openings in m². |
 | 3 | Valid (`V`) | Boolean | Item | True when opening containment and overlap validation pass. |
 | 4 | Diagnostics (`D`) | InvisibleDragon Diagnostic | List | Surface and opening diagnostics. |
-
-##### Door From Polyline (`Door`)
-
-**Role:** Authoring
-
-**Purpose:** Creates an opaque Door Opening that already owns its construction.
-
-**How to use it:** Connect a closed polygon and opaque Construction, then wire the completed Opening only to the Openings input of its host Floor, Ceiling, or usually Wall.
-
-**Canvas location:** InvisibleDragon → Geometry. Exposure: `primary`.
-
-**Important caveats:**
-
-- The curve must be a closed polygon; curved/NURBS boundaries must be explicitly polygonized first.
-- Coplanarity, host containment, and overlap are validated by the host Surface.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | Curve (`C`) | Curve | Item | No | — | Closed planar polygonal door boundary. |
-| 1 | Name (`N`) | Text | Item | No | Default: `Door` | Door name. |
-| 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque door construction. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Opening (`O`) | InvisibleDragon Opening | Item | InvisibleDragon door opening. |
 
 ##### Floor (`Floor`)
 
@@ -351,7 +322,7 @@ _This component has no inputs._
 | 1 | Name (`N`) | Text | Item | No | Default: `Floor` | Floor name. |
 | 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque Floor construction. |
 | 3 | Boundary Condition (`BC`) | Text | Item | No | Default: `Ground`; Choices: `Outdoors`; `Ground`; `Adiabatic` | Outdoors, Ground, or Adiabatic. Coincident surfaces in distinct Zones become reciprocal Zone boundaries automatically. Choices: Outdoors, Ground, Adiabatic. |
-| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Windows and doors owned by this Floor. |
+| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Openings owned by this Floor. |
 
 **Outputs**
 
@@ -363,51 +334,71 @@ _This component has no inputs._
 | 3 | Valid (`V`) | Boolean | Item | True when opening containment and overlap validation pass. |
 | 4 | Diagnostics (`D`) | InvisibleDragon Diagnostic | List | Surface and opening diagnostics. |
 
-##### Wall (`Wall`)
+##### InvisibleDragon Door (`ID Door`)
 
 **Role:** Authoring
 
-**Flags:** `CHOICE INPUTS`
+**Purpose:** Creates an opaque ID Door Opening that already owns its construction.
 
-**Purpose:** Creates a vertex-preserving Wall Surface and is the normal host for Window and Door openings.
-
-**How to use it:** Connect the wall polygon, Construction, boundary choice, and only that wall's completed Openings. Send the resulting Surface into the owning Thermal Zone branch.
+**How to use it:** Connect a closed polygon and opaque Construction, then wire the completed Opening only to the Openings input of its host ID Floor, ID Ceiling, or usually ID Wall.
 
 **Canvas location:** InvisibleDragon → Geometry. Exposure: `primary`.
 
 **Important caveats:**
 
-- Two coincident Outdoors walls in different Zones are paired automatically; do not add adjacent-surface IDs or indices.
-- Interzone openings must be mirrored on both InvisibleDragon walls with matching geometry and type.
-- Three or more coincident candidate surfaces are ambiguous and invalidate model composition.
+- The curve must be a closed polygon; curved/NURBS boundaries must be explicitly polygonized first.
+- Coplanarity, host containment, and overlap are validated by the host Surface.
 
 **Inputs**
 
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | Curve (`C`) | Curve | Item | No | — | Closed planar polygonal surface boundary. |
-| 1 | Name (`N`) | Text | Item | No | Default: `Wall` | Wall name. |
-| 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque Wall construction. |
-| 3 | Boundary Condition (`BC`) | Text | Item | No | Default: `Outdoors`; Choices: `Outdoors`; `Ground`; `Adiabatic` | Outdoors, Ground, or Adiabatic. Coincident surfaces in distinct Zones become reciprocal Zone boundaries automatically. Choices: Outdoors, Ground, Adiabatic. |
-| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Windows and doors owned by this Wall. |
+| 0 | Curve (`C`) | Curve | Item | No | — | Closed planar polygonal door boundary. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Door` | Door name. |
+| 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque door construction. |
 
 **Outputs**
 
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
-| 0 | Surface (`S`) | InvisibleDragon Surface | Item | InvisibleDragon surface. |
-| 1 | Gross Area (`Gross`) | Number | Item | Surface gross area in m². |
-| 2 | Net Area (`Net`) | Number | Item | Opaque net area after openings in m². |
-| 3 | Valid (`V`) | Boolean | Item | True when opening containment and overlap validation pass. |
-| 4 | Diagnostics (`D`) | InvisibleDragon Diagnostic | List | Surface and opening diagnostics. |
+| 0 | Opening (`O`) | InvisibleDragon Opening | Item | InvisibleDragon door opening. |
 
-##### Window From Polyline (`Window`)
+##### InvisibleDragon Glass Door (`ID GlassDoor`)
 
 **Role:** Authoring
 
-**Purpose:** Creates a Window Opening from a closed polygon and a completed Glazing definition.
+**Purpose:** Creates a transparent ID GlassDoor Opening from a closed polygon and a completed Glazing definition.
 
-**How to use it:** Connect the Rhino window boundary and Glazing, then connect Opening only to the owning Surface; the glazing does not need another Zone-level wire.
+**How to use it:** Connect the glass-door boundary and Glazing, then connect Opening only to its owning ID Floor, ID Ceiling, or usually ID Wall; the glazing does not need another Zone-level wire.
+
+**Canvas location:** InvisibleDragon → Geometry. Exposure: `primary`.
+
+**Important caveats:**
+
+- InvisibleDragon's low-level domain distinguishes only Window and Door, so ID GlassDoor follows the same transparent Window domain route as ID Window.
+- The boundary must be closed, planar, polygonal, coplanar with the host, fully contained by it, and non-overlapping with other openings.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | Curve (`C`) | Curve | Item | No | — | Closed planar polygonal glass-door boundary. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Glass Door` | Glass-door name. |
+| 2 | Glazing (`G`) | InvisibleDragon Glazing | Item | No | — | Glass-door glazing. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Opening (`O`) | InvisibleDragon Opening | Item | InvisibleDragon glass-door opening represented by transparent Window semantics. |
+
+##### InvisibleDragon Window (`ID Window`)
+
+**Role:** Authoring
+
+**Purpose:** Creates an ID Window Opening from a closed polygon and a completed Glazing definition.
+
+**How to use it:** Connect the Rhino window boundary and Glazing, then connect Opening only to its owning ID Floor, ID Ceiling, or usually ID Wall; the glazing does not need another Zone-level wire.
 
 **Canvas location:** InvisibleDragon → Geometry. Exposure: `primary`.
 
@@ -429,6 +420,44 @@ _This component has no inputs._
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
 | 0 | Opening (`O`) | InvisibleDragon Opening | Item | InvisibleDragon window opening. |
+
+##### Wall (`Wall`)
+
+**Role:** Authoring
+
+**Flags:** `CHOICE INPUTS`
+
+**Purpose:** Creates a vertex-preserving Wall Surface and is the normal host for Window, Glass Door, and Door openings.
+
+**How to use it:** Connect the wall polygon, Construction, boundary choice, and only that wall's completed Openings. Send the resulting Surface into the owning Thermal Zone branch.
+
+**Canvas location:** InvisibleDragon → Geometry. Exposure: `primary`.
+
+**Important caveats:**
+
+- Two coincident Outdoors walls in different Zones are paired automatically; do not add adjacent-surface IDs or indices.
+- Interzone openings must be mirrored on both InvisibleDragon walls with matching geometry and type.
+- Three or more coincident candidate surfaces are ambiguous and invalidate model composition.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | Curve (`C`) | Curve | Item | No | — | Closed planar polygonal surface boundary. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Wall` | Wall name. |
+| 2 | Construction (`C`) | InvisibleDragon Construction | Item | No | — | Opaque Wall construction. |
+| 3 | Boundary Condition (`BC`) | Text | Item | No | Default: `Outdoors`; Choices: `Outdoors`; `Ground`; `Adiabatic` | Outdoors, Ground, or Adiabatic. Coincident surfaces in distinct Zones become reciprocal Zone boundaries automatically. Choices: Outdoors, Ground, Adiabatic. |
+| 4 | Openings (`O`) | InvisibleDragon Opening | List | Yes | — | Openings owned by this Wall. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Surface (`S`) | InvisibleDragon Surface | Item | InvisibleDragon surface. |
+| 1 | Gross Area (`Gross`) | Number | Item | Surface gross area in m². |
+| 2 | Net Area (`Net`) | Number | Item | Opaque net area after openings in m². |
+| 3 | Valid (`V`) | Boolean | Item | True when opening containment and overlap validation pass. |
+| 4 | Diagnostics (`D`) | InvisibleDragon Diagnostic | List | Surface and opening diagnostics. |
 
 #### Subcategory: HVAC
 
@@ -2577,7 +2606,7 @@ Typed parameters are the native Grasshopper containers carried by component wire
 | InvisibleDragon Glazing | `Glazing` | InvisibleDragon Glazing | secondary | An InvisibleDragon transparent opening construction. |
 | InvisibleDragon IDF | `IDF` | InvisibleDragon IDF | secondary | An assembled EnergyPlus IDF document. |
 | InvisibleDragon Material | `Material` | InvisibleDragon Material | secondary | An InvisibleDragon opaque material. |
-| InvisibleDragon Opening | `Opening` | InvisibleDragon Opening | secondary | An InvisibleDragon polygonal window or door. |
+| InvisibleDragon Opening | `Opening` | InvisibleDragon Opening | secondary | An InvisibleDragon polygonal window, glass door, or opaque door. |
 | InvisibleDragon Photovoltaic Panel | `PV` | InvisibleDragon Photovoltaic Panel | secondary | An InvisibleDragon photovoltaic panel. |
 | InvisibleDragon Prepared Weather | `Weather` | InvisibleDragon Prepared Weather | secondary | A content-addressed EPW artifact prepared for InvisibleDragon execution. |
 | InvisibleDragon Profile | `Profile` | InvisibleDragon Profile | secondary | An InvisibleDragon zone usage profile. |
@@ -2617,4 +2646,4 @@ Typed parameters are the native Grasshopper containers carried by component wire
 
 ---
 
-Reference completeness: 77 of 77 public components documented; 38 standalone typed parameters listed.
+Reference completeness: 78 of 78 public components documented; 38 standalone typed parameters listed.

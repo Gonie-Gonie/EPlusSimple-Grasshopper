@@ -12,8 +12,8 @@
     },
     "Dragons.InvisibleDragon.Grasshopper.Components.GlazingComponent": {
       "role": "Authoring",
-      "purpose": "Defines the aggregate U-value and solar heat-gain coefficient used by an InvisibleDragon window.",
-      "workflow": "Set the fenestration performance once, connect Glazing to Window From Polyline, and then connect the completed Opening only to its host Surface.",
+      "purpose": "Defines the aggregate U-value and solar heat-gain coefficient used by an InvisibleDragon window or glass door.",
+      "workflow": "Set the fenestration performance once, connect Glazing to ID Window or ID GlassDoor, and then connect the completed Opening only to its host Surface.",
       "caveats": [
         "U-value must be positive and SHGC must be between 0 and 1.",
         "This is a simple glazing system; panes, gas layers, frames, and shades are not authored separately."
@@ -83,13 +83,22 @@
         "Openings must be coplanar, contained, non-overlapping, and uniquely named."
       ]
     },
-    "Dragons.InvisibleDragon.Grasshopper.Components.DoorFromPolylineComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.CreateInvisibleDragonDoorComponent": {
       "role": "Authoring",
-      "purpose": "Creates an opaque Door Opening that already owns its construction.",
-      "workflow": "Connect a closed polygon and opaque Construction, then wire the completed Opening only to the Openings input of its host Floor, Ceiling, or usually Wall.",
+      "purpose": "Creates an opaque ID Door Opening that already owns its construction.",
+      "workflow": "Connect a closed polygon and opaque Construction, then wire the completed Opening only to the Openings input of its host ID Floor, ID Ceiling, or usually ID Wall.",
       "caveats": [
         "The curve must be a closed polygon; curved/NURBS boundaries must be explicitly polygonized first.",
         "Coplanarity, host containment, and overlap are validated by the host Surface."
+      ]
+    },
+    "Dragons.InvisibleDragon.Grasshopper.Components.CreateInvisibleDragonGlassDoorComponent": {
+      "role": "Authoring",
+      "purpose": "Creates a transparent ID GlassDoor Opening from a closed polygon and a completed Glazing definition.",
+      "workflow": "Connect the glass-door boundary and Glazing, then connect Opening only to its owning ID Floor, ID Ceiling, or usually ID Wall; the glazing does not need another Zone-level wire.",
+      "caveats": [
+        "InvisibleDragon's low-level domain distinguishes only Window and Door, so ID GlassDoor follows the same transparent Window domain route as ID Window.",
+        "The boundary must be closed, planar, polygonal, coplanar with the host, fully contained by it, and non-overlapping with other openings."
       ]
     },
     "Dragons.InvisibleDragon.Grasshopper.Components.FloorComponent": {
@@ -103,7 +112,7 @@
     },
     "Dragons.InvisibleDragon.Grasshopper.Components.WallComponent": {
       "role": "Authoring",
-      "purpose": "Creates a vertex-preserving Wall Surface and is the normal host for Window and Door openings.",
+      "purpose": "Creates a vertex-preserving Wall Surface and is the normal host for Window, Glass Door, and Door openings.",
       "workflow": "Connect the wall polygon, Construction, boundary choice, and only that wall's completed Openings. Send the resulting Surface into the owning Thermal Zone branch.",
       "caveats": [
         "Two coincident Outdoors walls in different Zones are paired automatically; do not add adjacent-surface IDs or indices.",
@@ -111,10 +120,10 @@
         "Three or more coincident candidate surfaces are ambiguous and invalidate model composition."
       ]
     },
-    "Dragons.InvisibleDragon.Grasshopper.Components.WindowFromPolylineComponent": {
+    "Dragons.InvisibleDragon.Grasshopper.Components.CreateInvisibleDragonWindowComponent": {
       "role": "Authoring",
-      "purpose": "Creates a Window Opening from a closed polygon and a completed Glazing definition.",
-      "workflow": "Connect the Rhino window boundary and Glazing, then connect Opening only to the owning Surface; the glazing does not need another Zone-level wire.",
+      "purpose": "Creates an ID Window Opening from a closed polygon and a completed Glazing definition.",
+      "workflow": "Connect the Rhino window boundary and Glazing, then connect Opening only to its owning ID Floor, ID Ceiling, or usually ID Wall; the glazing does not need another Zone-level wire.",
       "caveats": [
         "The boundary must be closed, planar, polygonal, coplanar with the host, and fully contained by it.",
         "Overlapping host openings are rejected during Surface validation."

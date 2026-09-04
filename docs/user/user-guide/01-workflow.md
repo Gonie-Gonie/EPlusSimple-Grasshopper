@@ -373,11 +373,16 @@ outside to inside. Use `No-Mass Construction` when a U-value-only assembly is
 appropriate. Unlike a SimpleDragon surface, every InvisibleDragon opaque
 surface requires a construction.
 
-Use `Glazing` -> `Window From Polyline` for a transparent opening. Use an opaque
-construction -> `Door From Polyline` for a door. Connect each completed Window
-or Door directly to the `Openings` list of its owning `Floor`, `Ceiling`, or
-`Wall`. The explicit surface components return gross area, net opaque area,
-validity, and diagnostics.
+Use `Glazing` -> `ID Window` for a transparent window or `Glazing` -> `ID
+GlassDoor` for transparent glass-door authoring. Use an opaque construction ->
+`ID Door` for a door. These components expose only Curve, Name, and the
+applicable Glazing or Construction input; there is no Type or Blind input.
+InvisibleDragon's low-level domain distinguishes only Window and Door, so `ID
+GlassDoor` follows the same transparent Window domain route as `ID Window`.
+
+Connect each completed Opening directly to the `Openings` list of its owning
+`ID Floor`, `ID Ceiling`, or `ID Wall`. The explicit surface components return
+gross area, net opaque area, validity, and diagnostics.
 
 ### 2. Create profiles, HVAC, and zones
 

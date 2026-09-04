@@ -68,12 +68,12 @@ public sealed class GlazingComponent : DragonComponent
     }
 }
 
-public sealed class WindowFromPolylineComponent : DragonComponent
+public sealed class CreateInvisibleDragonWindowComponent : DragonComponent
 {
-    public WindowFromPolylineComponent()
+    public CreateInvisibleDragonWindowComponent()
         : base(
-            "Window From Polyline",
-            "Window",
+            "InvisibleDragon Window",
+            "ID Window",
             "Creates a polygonal window. Connect it directly to its owning Surface.",
             DragonPanels.Geometry)
     {
@@ -127,12 +127,71 @@ public sealed class WindowFromPolylineComponent : DragonComponent
     }
 }
 
-public sealed class DoorFromPolylineComponent : DragonComponent
+public sealed class CreateInvisibleDragonGlassDoorComponent : DragonComponent
 {
-    public DoorFromPolylineComponent()
+    public CreateInvisibleDragonGlassDoorComponent()
         : base(
-            "Door From Polyline",
-            "Door",
+            "InvisibleDragon Glass Door",
+            "ID GlassDoor",
+            "Creates a polygonal glass door using InvisibleDragon's transparent Window semantics. Connect it directly to its owning Surface.",
+            DragonPanels.Geometry)
+    {
+    }
+
+    public override Guid ComponentGuid => new("8756c3e5-b64e-480a-91b8-ac3400669202");
+
+    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    {
+        pManager.AddCurveParameter("Curve", "C", "Closed planar polygonal glass-door boundary.", GH_ParamAccess.item);
+        pManager.AddTextParameter("Name", "N", "Glass-door name.", GH_ParamAccess.item, "Glass Door");
+        pManager.AddParameter(new DragonGlazingParam(), "Glazing", "G", "Glass-door glazing.", GH_ParamAccess.item);
+    }
+
+    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    {
+        pManager.AddParameter(
+            new DragonOpeningParam(),
+            "Opening",
+            "O",
+            "InvisibleDragon glass-door opening represented by transparent Window semantics.",
+            GH_ParamAccess.item);
+    }
+
+    protected override void Solve(IGH_DataAccess DA)
+    {
+        Curve? curve = null;
+        string name = "Glass Door";
+        DragonGlazingGoo? glazingGoo = null;
+        if (!DA.GetData(0, ref curve)
+            || !DA.GetData(1, ref name)
+            || !DA.GetData(2, ref glazingGoo))
+        {
+            return;
+        }
+
+        Glazing glazing = glazingGoo?.Value
+            ?? throw new ArgumentException("Glazing requires a non-empty value.");
+        OpeningGeometry geometry = OpeningGeometry.FromCurve(
+            curve,
+            "Glass Door",
+            GrasshopperTarget.Path(DA, 0),
+            GrasshopperTarget.Index(DA, 0));
+        var glassDoor = new Window(
+            StableIds.Create("glass-door", name, geometry.Fingerprint, glazing.Name),
+            name,
+            glazing,
+            geometry.Polygon,
+            provenance: geometry.Provenance);
+        DA.SetData(0, new DragonOpeningGoo(glassDoor));
+    }
+}
+
+public sealed class CreateInvisibleDragonDoorComponent : DragonComponent
+{
+    public CreateInvisibleDragonDoorComponent()
+        : base(
+            "InvisibleDragon Door",
+            "ID Door",
             "Creates a polygonal opaque door. Connect it directly to its owning Surface.",
             DragonPanels.Geometry)
     {
@@ -244,7 +303,7 @@ public abstract class OpaqueSurfaceComponent : DragonComponent
             new DragonOpeningParam(),
             "Openings",
             "O",
-            "Windows and doors owned by this " + FixedSurfaceType + ".",
+            "Openings owned by this " + FixedSurfaceType + ".",
             GH_ParamAccess.list);
         pManager[openings].Optional = true;
     }

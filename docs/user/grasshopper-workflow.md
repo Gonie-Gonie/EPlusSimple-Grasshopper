@@ -118,19 +118,26 @@ Low-level authoring uses the same local-ownership rule:
 
 Here `ID` is the InvisibleDragon component prefix, not an identifier input.
 
-Connect each Window or Door to its owning `ID Wall`, `ID Ceiling`, or `ID
+Choose `ID Window`, `ID Door`, or `ID GlassDoor`. `ID Window` and `ID
+GlassDoor` accept Glazing, while `ID Door` accepts an opaque Construction. The
+components have no Type or Blind input. InvisibleDragon's low-level domain
+distinguishes only Window and Door, so `ID GlassDoor` follows the same
+transparent Window domain route as `ID Window`.
+
+Connect each completed Opening to its owning `ID Wall`, `ID Ceiling`, or `ID
 Floor`; connect the completed typed Surface outputs and systems to their owning
-Zone, and only completed Zone definitions to the Model. The three components
-fix the type and expose a named Boundary Condition choice instead of integer
-Type or Boundary inputs. Floor defaults to Ground; Wall and Ceiling default to
-Outdoors. Their curve inputs also vectorize lists and trees, preserve paths, and
-feed each Zone as a branch-local Surface list. Coincident, opposite-facing
-Surfaces with the Outdoors Boundary Condition in different Zones are paired
-automatically into reciprocal inter-zone boundaries. The Model derives HVAC
-assignments and nested sources from the Zone wires, so there are no Zone
-indices, adjacent-surface IDs, source catalogs, or assignment components on the
-canvas. Material, geometry, profile, Zone, HVAC, ERV, and PV components also
-generate their entity IDs internally; none exposes a relationship-ID input.
+Zone, and only completed Zone definitions to the Model. `ID Floor`, `ID
+Ceiling`, and `ID Wall` fix the surface type and expose a named Boundary
+Condition choice instead of integer Type or Boundary inputs. Floor defaults to
+Ground; Wall and Ceiling default to Outdoors. Their curve inputs also vectorize
+lists and trees, preserve paths, and feed each Zone as a branch-local Surface
+list. Coincident, opposite-facing Surfaces with the Outdoors Boundary Condition
+in different Zones are paired automatically into reciprocal inter-zone
+boundaries. The Model derives HVAC assignments and nested sources from the Zone
+wires, so there are no Zone indices, adjacent-surface IDs, source catalogs, or
+assignment components on the canvas. Material, geometry, profile, Zone, HVAC,
+ERV, and PV components also generate their entity IDs internally; none exposes
+a relationship-ID input.
 
 Connect `ID Model -> Compile InvisibleDragon -> Run InvisibleDragon`.
 The compiler has only a typed Model input and resolves the managed EnergyPlus

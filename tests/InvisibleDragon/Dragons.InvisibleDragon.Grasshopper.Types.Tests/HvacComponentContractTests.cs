@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
@@ -12,6 +13,10 @@ using Dragons.InvisibleDragon.Shape;
 
 namespace Dragons.InvisibleDragon.Grasshopper.Tests;
 
+[SuppressMessage(
+    "Performance",
+    "CA1861:Avoid constant arrays as arguments",
+    Justification = "Inline arrays keep the direct Grasshopper contract readable.")]
 public sealed class HvacComponentContractTests
 {
     private const string ComponentsNamespace = "Dragons.InvisibleDragon.Grasshopper.Components.";
@@ -61,8 +66,9 @@ public sealed class HvacComponentContractTests
 
     private static readonly string[] GeometryModelAndProfileComponentNames =
     {
-        "WindowFromPolylineComponent",
-        "DoorFromPolylineComponent",
+        "CreateInvisibleDragonWindowComponent",
+        "CreateInvisibleDragonDoorComponent",
+        "CreateInvisibleDragonGlassDoorComponent",
         "FloorComponent",
         "CeilingComponent",
         "WallComponent",
@@ -145,7 +151,7 @@ public sealed class HvacComponentContractTests
             .Concat(GeometryModelAndProfileComponentNames)
             .ToArray();
 
-        Assert.Equal(24, componentNames.Length);
+        Assert.Equal(25, componentNames.Length);
         Assert.All(componentNames, name => Assert.DoesNotContain(
             Component(assembly, name).Params.Input,
             parameter => string.Equals(parameter.Name, "ID", StringComparison.OrdinalIgnoreCase)));
@@ -327,28 +333,44 @@ public sealed class HvacComponentContractTests
     {
         Assembly assembly = LoadPlugin();
         GH_Component glazing = Component(assembly, "GlazingComponent");
-        GH_Component window = Component(assembly, "WindowFromPolylineComponent");
-        GH_Component door = Component(assembly, "DoorFromPolylineComponent");
+        GH_Component window = Component(assembly, "CreateInvisibleDragonWindowComponent");
+        GH_Component door = Component(assembly, "CreateInvisibleDragonDoorComponent");
+        GH_Component glassDoor = Component(assembly, "CreateInvisibleDragonGlassDoorComponent");
         GH_Component floor = Component(assembly, "FloorComponent");
         GH_Component ceiling = Component(assembly, "CeilingComponent");
         GH_Component wall = Component(assembly, "WallComponent");
         GH_Component[] surfaces = { floor, ceiling, wall };
 
         Assert.Equal(new Guid("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599"), glazing.ComponentGuid);
-        Assert.Equal(new Guid("54bb0065-1b10-420c-a90e-0ce75e746781"), window.ComponentGuid);
-        Assert.Equal(new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"), door.ComponentGuid);
+        AssertOpeningContract(
+            window,
+            new Guid("54bb0065-1b10-420c-a90e-0ce75e746781"),
+            "InvisibleDragon Window",
+            "ID Window",
+            "Window",
+            usesGlazing: true);
+        AssertOpeningContract(
+            door,
+            new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"),
+            "InvisibleDragon Door",
+            "ID Door",
+            "Door",
+            usesGlazing: false);
+        AssertOpeningContract(
+            glassDoor,
+            new Guid("8756c3e5-b64e-480a-91b8-ac3400669202"),
+            "InvisibleDragon Glass Door",
+            "ID GlassDoor",
+            "Glass Door",
+            usesGlazing: true);
         Assert.Equal(new Guid("1938b273-3a60-459b-beb2-92e7c4905053"), floor.ComponentGuid);
         Assert.Equal(new Guid("d1930bb6-4398-46b9-a661-451370f09103"), ceiling.ComponentGuid);
         Assert.Equal(new Guid("20a8a2f5-845e-4a46-aa03-fb8849f592e2"), wall.ComponentGuid);
         Assert.Equal("Name|U-Value|SHGC", string.Join("|", glazing.Params.Input.Select(item => item.Name)));
-        Assert.Equal("Curve|Name|Glazing", string.Join("|", window.Params.Input.Select(item => item.Name)));
-        Assert.Equal("Curve|Name|Construction", string.Join("|", door.Params.Input.Select(item => item.Name)));
         Assert.All(surfaces, surface => Assert.Equal(
             "Curve|Name|Construction|Boundary Condition|Openings",
             string.Join("|", surface.Params.Input.Select(item => item.Name))));
         Assert.Equal("DragonGlazingParam", glazing.Params.Output[0].GetType().Name);
-        Assert.Equal("DragonOpeningParam", window.Params.Output[0].GetType().Name);
-        Assert.Equal("DragonOpeningParam", door.Params.Output[0].GetType().Name);
         Assert.All(surfaces, surface =>
         {
             Assert.Equal("ChoiceStringParam", surface.Params.Input[3].GetType().Name);
@@ -362,6 +384,19 @@ public sealed class HvacComponentContractTests
         Assert.Equal(nameof(SurfaceBoundaryCondition.Outdoors), PersistentDefault(ceiling.Params.Input[3]));
         Assert.Equal(nameof(SurfaceBoundaryCondition.Outdoors), PersistentDefault(wall.Params.Input[3]));
         Assert.Null(assembly.GetType(ComponentsNamespace + "SurfaceComponent", throwOnError: false));
+        Assert.Null(assembly.GetType(
+            ComponentsNamespace + "WindowFromPolylineComponent",
+            throwOnError: false));
+        Assert.Null(assembly.GetType(
+            ComponentsNamespace + "DoorFromPolylineComponent",
+            throwOnError: false));
+        GH_Component[] publicComponents = assembly.GetTypes()
+            .Where(type => !type.IsAbstract && typeof(GH_Component).IsAssignableFrom(type))
+            .Select(type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)))
+            .ToArray();
+        Assert.DoesNotContain(publicComponents, component =>
+            string.Equals(component.Name, "Window From Polyline", StringComparison.Ordinal)
+            || string.Equals(component.Name, "Door From Polyline", StringComparison.Ordinal));
         Assert.DoesNotContain(
             assembly.GetTypes().Where(type => !type.IsAbstract && typeof(GH_Component).IsAssignableFrom(type)),
             type => Assert.IsAssignableFrom<GH_Component>(Activator.CreateInstance(type)).ComponentGuid
@@ -384,6 +419,79 @@ public sealed class HvacComponentContractTests
         Assert.Contains(
             host.Validate().Diagnostics,
             diagnostic => diagnostic.Code == "INVISIBLEDRAGON.SURFACE.OPENING_OUTSIDE_HOST");
+    }
+
+    [Fact]
+    public void GlassDoorUsesTransparentWindowDomainSemantics()
+    {
+        RunWithNativeGeometry(() =>
+        {
+            using var curve = new Rhino.Geometry.PolylineCurve(new[]
+            {
+                new Rhino.Geometry.Point3d(0d, 0d, 0d),
+                new Rhino.Geometry.Point3d(1.2d, 0d, 0d),
+                new Rhino.Geometry.Point3d(1.2d, 0d, 2.1d),
+                new Rhino.Geometry.Point3d(0d, 0d, 2.1d),
+                new Rhino.Geometry.Point3d(0d, 0d, 0d),
+            });
+            var glazing = new Glazing("Glass Door Glazing", 1.4d, 0.42d);
+            var access = new TestDataAccess(new Dictionary<int, object?>
+            {
+                [0] = curve,
+                [1] = "South Glass Door",
+                [2] = new DragonGlazingGoo(glazing),
+            });
+            GH_Component component = Component(
+                LoadPlugin(),
+                "CreateInvisibleDragonGlassDoorComponent");
+
+            InvokeSolve(component, access);
+
+            Window opening = Assert.IsType<Window>(
+                Assert.IsType<DragonOpeningGoo>(access.Outputs[0]).Value);
+            Assert.Equal(OpeningType.Window, opening.Type);
+            Assert.Equal("South Glass Door", opening.Name);
+            Assert.Equal(glazing, opening.Glazing);
+            Assert.StartsWith("glass-door-", opening.Id.Value, StringComparison.Ordinal);
+            Assert.Empty(component.RuntimeMessages(GH_RuntimeMessageLevel.Error));
+        });
+    }
+
+    private static void AssertOpeningContract(
+        GH_Component component,
+        Guid expectedGuid,
+        string expectedName,
+        string expectedNickname,
+        string expectedDefaultName,
+        bool usesGlazing)
+    {
+        Assert.Equal(expectedGuid, component.ComponentGuid);
+        Assert.Equal(expectedName, component.Name);
+        Assert.Equal(expectedNickname, component.NickName);
+        Assert.Equal("InvisibleDragon", component.Category);
+        Assert.Equal("Geometry", component.SubCategory);
+        Assert.Equal(
+            usesGlazing
+                ? new[] { "Curve", "Name", "Glazing" }
+                : new[] { "Curve", "Name", "Construction" },
+            component.Params.Input.Select(parameter => parameter.Name));
+        Assert.Equal(
+            new[] { "C", "N", usesGlazing ? "G" : "C" },
+            component.Params.Input.Select(parameter => parameter.NickName));
+        Assert.All(
+            component.Params.Input,
+            parameter => Assert.Equal(GH_ParamAccess.item, parameter.Access));
+        Assert.DoesNotContain(component.Params.Input, parameter => parameter.Name == "Type");
+        Assert.DoesNotContain(component.Params.Input, parameter => parameter.Name == "Blind");
+        Assert.Equal(expectedDefaultName, PersistentDefault(component.Params.Input[1]));
+        Assert.Equal(
+            usesGlazing ? "DragonGlazingParam" : "DragonConstructionParam",
+            component.Params.Input[2].GetType().Name);
+        Assert.False(component.Params.Input[2].Optional);
+        Assert.Equal(new[] { "Opening" }, component.Params.Output.Select(parameter => parameter.Name));
+        Assert.Equal(new[] { "O" }, component.Params.Output.Select(parameter => parameter.NickName));
+        Assert.Equal("DragonOpeningParam", component.Params.Output[0].GetType().Name);
+        Assert.Equal(GH_ParamAccess.item, component.Params.Output[0].Access);
     }
 
     [Fact]
@@ -811,6 +919,20 @@ public sealed class HvacComponentContractTests
 
         Assert.NotNull(solve);
         solve.Invoke(component, new object[] { access });
+    }
+
+    private static void RunWithNativeGeometry(Action assertion)
+    {
+        try
+        {
+            assertion();
+        }
+        catch (DllNotFoundException exception)
+        {
+            // Managed xUnit intentionally runs without Rhino's native geometry
+            // library. Rhino host gates execute this assertion with rhcommon_c.
+            Assert.Contains("rhcommon_c", exception.Message, StringComparison.OrdinalIgnoreCase);
+        }
     }
 
     private static object? PersistentDefault(IGH_Param parameter)

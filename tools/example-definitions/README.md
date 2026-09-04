@@ -38,9 +38,9 @@ each Zone-exclusive HVAC/ERV value feeds exactly one Zone. Zone definitions feed
 Model. The complex authoring example ends at the complete GRM and its derived
 Model Summary, while the execution example feeds that GRM directly to `Run
 SimpleDragon`.
-The standalone InvisibleDragon example follows the same rule: Window feeds its
-owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
-feed Model. It then shows `Model -> Compile -> Run` beside
+The standalone InvisibleDragon example follows the same rule: `ID Window`
+feeds its owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus
+model-level PV feed Model. It then shows `Model -> Compile -> Run` beside
 `EPW File -> ID Weather -> Run`. The EPW File parameter has no persisted data;
 the Run and Cancel action Buttons rest at False, and the Force Rerun option
 Toggle is False, so solve/save/reopen performs no weather path access and starts

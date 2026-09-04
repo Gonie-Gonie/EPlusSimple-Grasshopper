@@ -43,8 +43,12 @@ public sealed class GrasshopperAssemblyTests
         Assert.Contains(new Guid("1938b273-3a60-459b-beb2-92e7c4905053"), components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("d1930bb6-4398-46b9-a661-451370f09103"), components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("20a8a2f5-845e-4a46-aa03-fb8849f592e2"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("54bb0065-1b10-420c-a90e-0ce75e746781"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("b2e1e805-a126-44fe-bf6c-4dbf16a76aae"), components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("8756c3e5-b64e-480a-91b8-ac3400669202"), components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("4f443564-2e13-4a79-8845-27d1e6eb285d"), components.Select(component => component.ComponentGuid));
         Assert.All(HvacComponentGuids, guid => Assert.Contains(guid, components.Select(component => component.ComponentGuid)));
+        Assert.Equal(6, components.Count(component => component.SubCategory == "Geometry"));
     }
 
     [Fact]
@@ -54,7 +58,7 @@ public sealed class GrasshopperAssemblyTests
         Type[] componentTypes = ComponentTypes(assembly);
 
         Assert.EndsWith(".gha", assembly.Location, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal(36, componentTypes.Length);
+        Assert.Equal(37, componentTypes.Length);
         Assert.All(componentTypes, type => Assert.NotNull(Activator.CreateInstance(type)));
     }
 

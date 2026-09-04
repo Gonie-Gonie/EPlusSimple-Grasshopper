@@ -19,6 +19,10 @@ version exactly: source `0.1.2` maps only to `v0.1.2`.
 
 ### Changed
 
+- Replace `Window From Polyline` and `Door From Polyline` with the aligned
+  `ID Window`, `ID Door`, and `ID GlassDoor` authoring components. Window and
+  Door retain their existing component identities and behavior; GlassDoor uses
+  InvisibleDragon's transparent Window domain route.
 - Replace the generic `SD Opening` and its Type selector with fixed `SD Window`,
   `SD Door`, and `SD GlassDoor` components. Each opening now exposes only the
   inputs valid for its type while retaining direct ownership by one Surface.

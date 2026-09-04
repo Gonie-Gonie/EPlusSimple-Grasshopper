@@ -49,8 +49,9 @@ $products = @(
             (New-ComponentIcon 'NoMassConstructionComponent' 2 'membrane'),
             (New-ComponentIcon 'ConstantProfileComponent' 3 'none'),
             (New-ComponentIcon 'GlazingComponent' 3 'glazing'),
-            (New-ComponentIcon 'WindowFromPolylineComponent' 4 'window'),
-            (New-ComponentIcon 'DoorFromPolylineComponent' 4 'door'),
+            (New-ComponentIcon 'CreateInvisibleDragonWindowComponent' 4 'window'),
+            (New-ComponentIcon 'CreateInvisibleDragonDoorComponent' 4 'door'),
+            (New-ComponentIcon 'CreateInvisibleDragonGlassDoorComponent' 4 'glass-door'),
             (New-ComponentIcon 'FloorComponent' 4 'floor'),
             (New-ComponentIcon 'CeilingComponent' 4 'ceiling'),
             (New-ComponentIcon 'WallComponent' 4 'surface'),
@@ -614,6 +615,17 @@ function Draw-Overlay {
                     [System.Drawing.PointF]::new(61, 75), [System.Drawing.PointF]::new(29, 75)))
                 $Graphics.FillEllipse($accentBrush, 51, 49, 8, 8)
                 $Graphics.DrawArc($secondaryPen, 43, 23, 38, 55, -90, 90)
+            }
+            'glass-door' {
+                $Graphics.FillRectangle($neutralBrush, 19, 11, 58, 74)
+                $Graphics.DrawRectangle($inkPen, 19, 11, 58, 74)
+                $Graphics.FillRectangle($primaryBrush, 27, 19, 39, 57)
+                $Graphics.DrawRectangle($thinInkPen, 27, 19, 39, 57)
+                $Graphics.DrawLine($neutralPen, 30, 65, 58, 24)
+                $Graphics.DrawLine($accentPen, 42, 74, 65, 39)
+                $Graphics.FillEllipse($hotBrush, 60, 50, 9, 9)
+                $Graphics.DrawEllipse($thinInkPen, 60, 50, 9, 9)
+                $Graphics.DrawArc($secondaryPen, 42, 27, 41, 54, -90, 90)
             }
             'surface' {
                 $face = [System.Drawing.PointF[]]@(

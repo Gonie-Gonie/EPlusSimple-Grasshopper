@@ -75,8 +75,14 @@ the usual case, its `SD Wall`. The component fixes the opening type, so no Type
 input is present; Door also has no Blind input. Its curve must be a closed
 planar polygon coplanar with and contained by that component's single-face Brep.
 A trimmed inner loop also needs a geometrically matching explicit Opening; the
-module does not invent fallback opening metadata. No Zone Index or Face Index
-is required.
+module does not invent fallback opening metadata.
+
+For InvisibleDragon, use `ID Window` or `ID GlassDoor` with Glazing and use `ID
+Door` with an opaque Construction. These components have no Type or Blind input.
+`ID GlassDoor` follows InvisibleDragon's transparent Window domain route. Wire
+the completed Opening only to its owning `ID Wall`, `ID Ceiling`, or `ID Floor`;
+its curve must be a closed planar polygon coplanar with and contained by that
+host. No Zone Index or Face Index is required in either product.
 
 ## A Zone does not form a valid enclosure
 

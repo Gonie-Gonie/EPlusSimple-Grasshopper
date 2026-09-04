@@ -169,7 +169,7 @@ InvisibleDragon runs explicit EnergyPlus workflows from Grasshopper, with user-s
 ```text
 InvisibleDragon is a Grasshopper plugin for explicit, vertex-preserving building-energy model authoring and EnergyPlus execution.
 
-Build opaque constructions, openings, floors, ceilings, walls, zones, schedules, HVAC systems, energy-recovery ventilation, and photovoltaics as typed Grasshopper objects. Ownership is expressed by wires: an opening belongs to one surface, surfaces and HVAC belong to a zone, and zones belong to the model. No entity IDs or zone/surface indices are user inputs.
+Build opaque constructions, windows, doors, glass doors, floors, ceilings, walls, zones, schedules, HVAC systems, energy-recovery ventilation, and photovoltaics as typed Grasshopper objects. Ownership is expressed by wires: an opening belongs to one surface, surfaces and HVAC belong to a zone, and zones belong to the model. No entity IDs or zone/surface indices are user inputs.
 
 Compile the model to IDF, verify a user-selected EPW, run the internally prepared EnergyPlus 24.2 engine, cancel a run, reuse cached results, and inspect structured outputs. Run, Cancel, and file actions use momentary Grasshopper Buttons. Components accept normal Grasshopper lists and trees.
 
@@ -217,7 +217,7 @@ InvisibleDragon 0.1.2
 ### Yak-managed Release Description [VERIFY OR PASTE IF EDITABLE]
 
 ```text
-Corrected first Rhino 7+ release. Adds typed construction, opening, floor, ceiling, wall, zone, profile, HVAC, ERV, PV, IDF compilation, explicit EPW verification, managed EnergyPlus execution, cancellation, cache reuse, and structured result components. The release includes Rhino 7/net48 and Rhino 8/net7+net8 payloads.
+Corrected first Rhino 7+ release. Adds typed construction, window, door, glass-door, floor, ceiling, wall, zone, profile, HVAC, ERV, PV, IDF compilation, explicit EPW verification, managed EnergyPlus execution, cancellation, cache reuse, and structured result components. The release includes Rhino 7/net48 and Rhino 8/net7+net8 payloads.
 ```
 
 Do not create a second manual release record if the Yak connection has already

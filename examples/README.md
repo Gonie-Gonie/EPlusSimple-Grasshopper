@@ -9,7 +9,7 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | --- | --- |
 | `00-invisibledragon-material-construction.gh` | Minimal InvisibleDragon Material -> Construction Layer -> Construction -> U-value graph |
 | `01-invisibledragon-envelope-profile.gh` | Three-layer envelope, no-mass construction, constant annual profile, and typed output previews |
-| `02-invisibledragon-single-zone-hvac-idf.gh` | Window -> opening-bearing Wall, list-authored plain Walls, explicit Floor/Ceiling/Wall -> Zone and HVAC/ERV -> Zone ownership, PV, `ID Model -> Compile -> Run`, and the deliberate `EPW File -> ID Weather -> Run` standalone boundary |
+| `02-invisibledragon-single-zone-hvac-idf.gh` | `ID Window` -> opening-bearing Wall, list-authored plain Walls, explicit Floor/Ceiling/Wall -> Zone and HVAC/ERV -> Zone ownership, PV, `ID Model -> Compile -> Run`, and the deliberate `EPW File -> ID Weather -> Run` standalone boundary |
 | `10-simpledragon-material-construction.gh` | Minimal SimpleDragon Material -> Construction Layer -> Surface Construction graph |
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: explicit Floor/Ceiling/Wall components, opening-free Walls authored as a list, each opening-bearing Wall kept separate, one owned Surface branch per Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, diagnostics, and a derived Model Summary |

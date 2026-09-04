@@ -76,7 +76,10 @@ public sealed class DragonSurfaceParam : DragonParam<Types.DragonSurfaceGoo>
 public sealed class DragonOpeningParam : DragonParam<Types.DragonOpeningGoo>
 {
     public DragonOpeningParam()
-        : base("InvisibleDragon Opening", "Opening", "An InvisibleDragon polygonal window or door.") { }
+        : base(
+            "InvisibleDragon Opening",
+            "Opening",
+            "An InvisibleDragon polygonal window, glass door, or opaque door.") { }
     public override Guid ComponentGuid => new("d12ac46e-0e15-4d41-8643-5771940991f7");
 }
 

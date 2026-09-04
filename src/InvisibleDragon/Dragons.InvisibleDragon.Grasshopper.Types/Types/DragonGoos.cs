@@ -105,7 +105,8 @@ public sealed class DragonOpeningGoo : DragonGoo<IOpening>
     public DragonOpeningGoo() { }
     public DragonOpeningGoo(IOpening value) : base(value) { }
     public override string TypeName => "InvisibleDragon Opening";
-    public override string TypeDescription => "A polygonal InvisibleDragon window or door.";
+    public override string TypeDescription =>
+        "A polygonal InvisibleDragon window, glass door, or opaque door.";
     protected override DragonGoo<IOpening> Create(IOpening value) => new DragonOpeningGoo(value);
     protected override DragonGoo<IOpening> CreateEmpty() => new DragonOpeningGoo();
     protected override string DisplayText(IOpening value) =>

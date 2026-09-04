@@ -3217,8 +3217,9 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity InvisibleNoMass = I("e292a44e-9d8d-4796-95fb-126f77e83796", "NoMassConstructionComponent");
         internal static readonly ComponentIdentity InvisibleProfile = I("3d5717de-1b16-406a-91e0-7a392c08aa51", "ConstantProfileComponent");
         internal static readonly ComponentIdentity InvisibleGlazing = I("ecfd5cdd-3e4c-4261-8ddd-ecea8eaf5599", "GlazingComponent");
-        internal static readonly ComponentIdentity InvisibleWindow = I("54bb0065-1b10-420c-a90e-0ce75e746781", "WindowFromPolylineComponent");
-        internal static readonly ComponentIdentity InvisibleDoor = I("b2e1e805-a126-44fe-bf6c-4dbf16a76aae", "DoorFromPolylineComponent");
+        internal static readonly ComponentIdentity InvisibleWindow = I("54bb0065-1b10-420c-a90e-0ce75e746781", "CreateInvisibleDragonWindowComponent");
+        internal static readonly ComponentIdentity InvisibleDoor = I("b2e1e805-a126-44fe-bf6c-4dbf16a76aae", "CreateInvisibleDragonDoorComponent");
+        internal static readonly ComponentIdentity InvisibleGlassDoor = I("8756c3e5-b64e-480a-91b8-ac3400669202", "CreateInvisibleDragonGlassDoorComponent");
         internal static readonly ComponentIdentity InvisibleFloor = I("1938b273-3a60-459b-beb2-92e7c4905053", "FloorComponent");
         internal static readonly ComponentIdentity InvisibleCeiling = I("d1930bb6-4398-46b9-a661-451370f09103", "CeilingComponent");
         internal static readonly ComponentIdentity InvisibleWall = I("20a8a2f5-845e-4a46-aa03-fb8849f592e2", "WallComponent");
@@ -3269,7 +3270,7 @@ internal static class AdvancedExampleDefinitions
         internal static IReadOnlyList<ComponentIdentity> All { get; } = new[]
         {
             InvisibleMaterial, InvisibleLayer, InvisibleConstruction, InvisibleNoMass, InvisibleProfile,
-            InvisibleGlazing, InvisibleWindow, InvisibleDoor, InvisibleFloor, InvisibleCeiling, InvisibleWall,
+            InvisibleGlazing, InvisibleWindow, InvisibleDoor, InvisibleGlassDoor, InvisibleFloor, InvisibleCeiling, InvisibleWall,
             InvisibleZone, InvisibleHeatPump, InvisibleAirHandler, InvisibleBoiler, InvisibleRadiantFloor,
             InvisibleErv, InvisiblePv, InvisibleModel, InvisibleCompile,
             InvisibleWeather, InvisibleManagedRun, InvisibleResultSummary,
