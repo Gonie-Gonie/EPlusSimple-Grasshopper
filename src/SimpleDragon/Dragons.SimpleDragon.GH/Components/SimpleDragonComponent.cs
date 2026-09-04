@@ -6,11 +6,11 @@ namespace Dragons.SimpleDragon.Grasshopper.Components;
 internal static class SimpleDragonPanels
 {
     internal const string Category = "SimpleDragon";
-    internal const string Core = "Core";
     internal const string Construction = "Construction";
     internal const string Geometry = "Geometry";
     internal const string Model = "Model";
-    internal const string Results = "Results";
+    internal const string Simulation = "Simulation";
+    internal const string Analysis = "Analysis";
 }
 
 public abstract class SimpleDragonComponent : GH_Component

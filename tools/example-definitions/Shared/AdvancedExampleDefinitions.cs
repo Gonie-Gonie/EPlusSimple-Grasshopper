@@ -592,9 +592,8 @@ internal static class AdvancedExampleDefinitions
         }
 
         GraphNode fenestration = graph.Component(31, Catalog.SimpleFenestration, 860, 520);
-        GraphNode profileName = graph.Panel(32, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 680, 730);
         GraphNode profile = graph.Component(33, Catalog.SimpleProfile, 980, 700);
-        graph.Connect(profileName, null, profile, 0);
+        ScenarioGraphBuilder.SelectChoice(profile, 0, "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4");
         GraphNode heatPump = graph.Component(40, Catalog.SimpleHeatPump, 60, 1000);
         GraphNode airHandler = graph.Component(41, Catalog.SimpleAirHandler, 360, 1000);
         GraphNode boiler = graph.Component(42, Catalog.SimpleBoiler, 60, 1190);
@@ -635,7 +634,7 @@ internal static class AdvancedExampleDefinitions
             120);
         GraphNode profileNote = graph.Note(
             802,
-            "The packaged office profile resolves occupancy and operational schedules.",
+            "Choose the packaged office profile directly from the Profile component selector.",
             300,
             650);
         GraphNode systemsNote = graph.Note(
@@ -666,7 +665,6 @@ internal static class AdvancedExampleDefinitions
             "3  Usage profile",
             ExampleGroupTheme.Model,
             profileNote,
-            profileName,
             profile,
             profileValue);
         graph.Group(
@@ -715,8 +713,8 @@ internal static class AdvancedExampleDefinitions
             -60);
         GraphNode westCurve = graph.Curves(4, "WINDOW_ZONE_01_SOUTH", new[] { openingGeometry[0] }, 60, 760);
         GraphNode eastCurve = graph.Curves(5, "WINDOW_ZONE_02_SOUTH", new[] { openingGeometry[1] }, 60, 2170);
-        GraphNode profileName = graph.Panel(6, "Packaged office profile", "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4", 780, -80);
         GraphNode profile = graph.Component(7, Catalog.SimpleProfile, 1080, -80);
+        ScenarioGraphBuilder.SelectChoice(profile, 0, "\uC18C\uADDC\uBAA8\uC0AC\uBB34\uC2E4");
         GraphNode material = graph.Component(8, Catalog.SimpleMaterial, 330, 80);
         GraphNode thickness = graph.Slider(9, "Envelope 0.200 m", 0.2m, 0.01m, 0.5m, 350, 220);
         GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 100);
@@ -724,7 +722,6 @@ internal static class AdvancedExampleDefinitions
         GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 850, 180);
         GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 950, 750);
         GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 950, 2160);
-        graph.Connect(profileName, null, profile, 0);
         graph.Connect(material, 0, layer, 0);
         graph.Connect(thickness, null, layer, 1);
         graph.Connect(layer, 0, construction, 1);
@@ -856,7 +853,7 @@ internal static class AdvancedExampleDefinitions
 
         GraphNode sharedNote = graph.Note(
             800,
-            "Shared construction, fenestration and office-profile definitions feed both zone lanes.",
+            "Shared construction and fenestration definitions plus the Profile selector feed both zone lanes.",
             1300,
             10);
         GraphNode westSystemsNote = graph.Note(
@@ -875,7 +872,6 @@ internal static class AdvancedExampleDefinitions
             ExampleGroupTheme.Inputs,
             modelInfo,
             sharedNote,
-            profileName,
             profile,
             material,
             thickness,
@@ -3563,6 +3559,22 @@ internal sealed class ScenarioGraphBuilder
             FileFilter = fileFilter,
         };
         return AddSpecial(key, parameter, x, y);
+    }
+
+    internal static void SelectChoice(GraphNode component, int inputIndex, string value)
+    {
+        IGH_Param input = Parameter(component.Object, inputIndex, output: false);
+        if (input is not Param_String parameter
+            || !string.Equals(input.GetType().Name, "ChoiceStringParam", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                component.Object.GetType().FullName + " input " + inputIndex
+                    + " is not a native selectable text input.");
+        }
+
+        parameter.PersistentData.Clear();
+        parameter.PersistentData.Append(new GH_String(value));
+        parameter.ExpireSolution(false);
     }
 
     internal void Connect(GraphNode source, int? sourceOutput, GraphNode target, int? targetInput)

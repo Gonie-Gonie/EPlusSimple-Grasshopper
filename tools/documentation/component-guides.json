@@ -333,14 +333,6 @@
         "There is no Rhino panel geometry or host-surface placement input; export uses a simplified site-shading representation."
       ]
     },
-    "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonVersionComponent": {
-      "role": "Utility",
-      "purpose": "Reports the loaded SimpleDragon plugin version and the upstream revision represented by this port.",
-      "workflow": "Connect Version and Upstream to a Panel when recording a study, preparing a support request, or checking that Rhino loaded the intended package. It does not belong in the simulation wire path.",
-      "caveats": [
-        "The values describe the assembly currently loaded by Grasshopper, so record them when mixed or stale package loading is suspected."
-      ]
-    },
     "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonMaterialComponent": {
       "role": "Authoring",
       "purpose": "Defines a reusable opaque material from SI thermophysical properties for explicit envelope assemblies.",
@@ -380,10 +372,10 @@
     "Dragons.SimpleDragon.Grasshopper.Components.LookupUsageProfileComponent": {
       "role": "Authoring",
       "purpose": "Resolves a complete packaged Korean operating profile for occupancy, HVAC, ventilation, loads, setpoints, holidays, and vacations.",
-      "workflow": "Leave Name blank first and connect Available Names to a Panel, then copy one exact name back into Name and connect Profile to every Zone that follows that use pattern.",
+      "workflow": "Find SD Profile in the Model group, choose Name directly from its native selector, and connect the resulting Profile to every Zone that follows that use pattern. No Panel or copied text is required.",
       "caveats": [
-        "Lookup is trimmed but otherwise exact and case-sensitive; partial or approximate names do not resolve.",
-        "An empty Name intentionally lists choices without producing a Profile or an error."
+        "A real packaged usage profile is selected by default, and every packaged name is available from the input selector.",
+        "Text supplied by a wire must normalize to one packaged selector choice; use the selector whenever possible so the canonical packaged name remains visible."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonOpeningComponent": {
@@ -445,7 +437,7 @@
     "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitModelSummaryComponent": {
       "role": "Analysis",
       "purpose": "Exposes the Python-oracle-compatible derived envelope, load, infiltration, and weather properties of a typed SimpleDragon model without expanding the SD Model authoring component.",
-      "workflow": "Connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.",
+      "workflow": "Find SD Model Summary in the Analysis group and connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.",
       "caveats": [
         "Exterior Windows includes windows and glass doors hosted by exterior walls; exterior floors include outdoor and ground-contact floors.",
         "A zero weighted value can also mean there was no contributing resolved construction or load. Average Infiltration is the zone-volume-weighted source value at 50 Pa, not natural ACH.",
@@ -453,16 +445,16 @@
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitModelComponent": {
-      "role": "Utility",
+      "role": "Simulation",
       "purpose": "Loads an existing strict GRM 0.7 document into the same typed model used by the visual authoring workflow.",
-      "workflow": "Connect a .grm or JSON path, check Success and Diagnostics, and send GRM directly to Run SimpleDragon, Batch Case, or Write GRM. Use Canonical JSON when reviewing deterministic differences.",
+      "workflow": "Find Read GRM in the Simulation group, connect a .grm or JSON path, check Success and Diagnostics, and send GRM directly to Run SimpleDragon, Batch Case, or Write GRM. Use Canonical JSON when reviewing deterministic differences.",
       "caveats": [
         "Relative paths use the saved Grasshopper document folder; an unsaved definition falls back to the process working directory for reads.",
         "This is an artifact interchange path, not a required stage between SimpleDragon Model and Run."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitModelComponent": {
-      "role": "Utility",
+      "role": "Simulation",
       "purpose": "Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.",
       "workflow": "Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.",
       "caveats": [
@@ -608,7 +600,7 @@
     "Dragons.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent": {
       "role": "Trigger",
       "purpose": "Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR and optionally saving the canonical GRR file without exposing an intermediate IDF workflow.",
-      "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
+      "workflow": "Find SD Run in the Simulation group and connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR to the Analysis-group summaries and plots or to Simulation-group Write GRR and CSV Export.",
       "caveats": [
         "One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.",
         "The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.",
@@ -617,16 +609,16 @@
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitResultComponent": {
-      "role": "Result",
+      "role": "Simulation",
       "purpose": "Loads a strict GRR 0.7 artifact into the same typed result consumed by every SimpleDragon analysis component.",
-      "workflow": "Connect a GRR path, check Success and Diagnostics, then fan GRR out to Summary, Data Tree, Plots, Write GRR, or CSV Export without rerunning EnergyPlus.",
+      "workflow": "Find Read GRR in the Simulation group, connect a GRR path, check Success and Diagnostics, then fan GRR out to Analysis-group Summary, Data Tree, and Plots or to Write GRR and CSV Export without rerunning EnergyPlus.",
       "caveats": [
         "Relative paths use the saved Grasshopper document folder; unsaved read paths fall back to the process working directory.",
         "Invalid or incomplete GRR content does not become a usable result even when the file itself exists."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.WriteGreenRetrofitResultComponent": {
-      "role": "Result",
+      "role": "Simulation",
       "purpose": "Serializes a typed GRR as deterministic UTF-8 GRR 0.7 JSON for reproducible exchange or archival.",
       "workflow": "Connect GRR and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the result artifact should be persisted.",
       "caveats": [
@@ -635,45 +627,45 @@
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitResultSummaryComponent": {
-      "role": "Result",
+      "role": "Analysis",
       "purpose": "Extracts annual, January-to-December, carrier, and end-use totals for one selected GRR metric and basis.",
-      "workflow": "Connect GRR, choose Site Uses, Source Uses, Carbon, or Cost, and keep Gross False for per-area comparison or enable it for whole-building totals. Pair each names list with its corresponding totals list.",
+      "workflow": "Find GRR Summary in the Analysis group, connect GRR, choose Site Uses, Source Uses, Carbon, or Cost, and keep Gross False for per-area comparison or enable it for whole-building totals. Pair each names list with its corresponding totals list.",
       "caveats": [
         "Energy units are kWh/m² or kWh, carbon units kgCO2e/m² or kgCO2e, and cost units KRW/m² or KRW according to Gross.",
         "Monthly Totals are always January through December; carrier and end-use lists include stable zero-valued categories as well as active ones."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitDataTreeComponent": {
-      "role": "Result",
+      "role": "Analysis",
       "purpose": "Transforms one GRR metric into stable monthly Fuel or End Use series for native Grasshopper tree calculations.",
-      "workflow": "Connect GRR and normally leave the defaults for Site Uses per area by Fuel. Use Series Names with the matching X/Y branches, or consume the selected monthly CSV text without writing a file.",
+      "workflow": "Find GRR Data Tree in the Analysis group, connect GRR, and normally leave the defaults for Site Uses per area by Fuel. Use Series Names with the matching X/Y branches, or consume the selected monthly CSV text without writing a file.",
       "caveats": [
         "Each series appends its index to the incoming GRR path, preserving separate result branches instead of flattening them.",
         "X branches contain month numbers 1–12 and Y branches contain the corresponding twelve values; use Unit rather than assuming every metric is kWh."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyLinePlotComponent": {
-      "role": "Result",
+      "role": "Analysis",
       "purpose": "Creates immediately previewable monthly result curves while exposing the exact matching data trees for annotation or custom graphics.",
-      "workflow": "Connect only GRR for a default Site Uses-per-area Fuel plot on a 12 by 6 World XY frame, or set Metric, Gross, Grouping, Plane, Width, and Height for a custom layout.",
+      "workflow": "Find Monthly Lines in the Analysis group and connect only GRR for a default Site Uses-per-area Fuel plot on a 12 by 6 World XY frame, or set Metric, Gross, Grouping, Plane, Width, and Height for a custom layout.",
       "caveats": [
         "The component draws one 12-point polyline per series plus Frame and Zero Axis, but it does not create colors, labels, or a legend; use Series Names and Month Names downstream.",
         "Plane must be valid and Width/Height finite and positive; before a GRR exists the component intentionally waits without a red error."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitMonthlyBarPlotComponent": {
-      "role": "Result",
+      "role": "Analysis",
       "purpose": "Creates grouped or stacked monthly bar-outline geometry from the same typed series used by the numeric result components.",
-      "workflow": "Connect GRR for the default grouped Fuel chart, enable Stacked for monthly accumulation, and use the parallel Series Names, X/Y trees, and Unit to build labels or downstream visualization.",
+      "workflow": "Find Monthly Bars in the Analysis group, connect GRR for the default grouped Fuel chart, enable Stacked for monthly accumulation, and use the parallel Series Names, X/Y trees, and Unit to build labels or downstream visualization.",
       "caveats": [
         "Bars are outline curves in one branch per series rather than filled chart objects; the Y Values tree remains the authoritative numeric result.",
         "Positive and negative values stack separately around Zero Axis, and Plane/Width/Height must be valid and positive."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.ExportGreenRetrofitCsvComponent": {
-      "role": "Result",
+      "role": "Simulation",
       "purpose": "Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.",
-      "workflow": "Connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.",
+      "workflow": "Find Export CSV in the Simulation group, connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.",
       "caveats": [
         "The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv. A GRM or GRR read from a standalone file has no Rhino-session provenance, so geometry_map.csv is header-only unless live Grasshopper context is present.",
         "An unpressed Export Button provides the no-write preview, while the Overwrite option Toggle blocks existing package files when False. Export is internally level-sensitive, so use a momentary Button rather than a Toggle.",
@@ -681,7 +673,7 @@
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonBatchCaseComponent": {
-      "role": "Helper",
+      "role": "Simulation",
       "purpose": "Wraps one complete GRM alternative in the typed value consumed by the managed batch runner.",
       "workflow": "Connect GRM items, lists, or trees to create matching Case values, then preserve those branches when wiring Cases into Managed Run SimpleDragon Batch.",
       "caveats": [
@@ -692,7 +684,7 @@
     "Dragons.SimpleDragon.Grasshopper.Components.ManagedRunSimpleDragonBatchComponent": {
       "role": "Trigger",
       "purpose": "Executes a branch-preserving research matrix of SimpleDragon models with managed runtime, packaged weather, caching, and result artifacts.",
-      "workflow": "Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.",
+      "workflow": "In the Simulation group, feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.",
       "caveats": [
         "Parallel Limit must be 1–1024; the default caps ordinary execution at four simultaneous cases or the processor count.",
         "Case IDs and Statuses preserve the original paths, but the component outputs aggregate CSV/manifest artifacts rather than one GRR wire per case.",

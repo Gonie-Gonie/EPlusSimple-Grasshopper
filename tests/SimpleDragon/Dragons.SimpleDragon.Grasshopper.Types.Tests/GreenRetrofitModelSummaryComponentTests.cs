@@ -35,7 +35,7 @@ public sealed class GreenRetrofitModelSummaryComponentTests
         Assert.Equal("SimpleDragon Model Summary", component.Name);
         Assert.Equal("SD Model Summary", component.NickName);
         Assert.Equal("SimpleDragon", component.Category);
-        Assert.Equal("Model", component.SubCategory);
+        Assert.Equal("Analysis", component.SubCategory);
         Assert.Equal(new Guid("f2e7bb6b-9cf9-4833-9069-b9be4089e1b3"), component.ComponentGuid);
         Assert.Single(component.Params.Input);
         Assert.IsType<GreenRetrofitModelParam>(component.Params.Input[0]);

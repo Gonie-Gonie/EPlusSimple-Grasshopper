@@ -11,7 +11,7 @@ public sealed class ReadGreenRetrofitResultComponent : SimpleDragonComponent
             "Read SimpleDragon GRR",
             "Read GRR",
             "Reads a strict UTF-8 GRR 0.7 result file.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Simulation)
     {
     }
 
@@ -59,7 +59,7 @@ public sealed class WriteGreenRetrofitResultComponent : SimpleDragonComponent
             "Write SimpleDragon GRR",
             "Write GRR",
             "Writes deterministic UTF-8 GRR 0.7 JSON when the Write Button is pressed.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Simulation)
     {
     }
 
@@ -122,7 +122,7 @@ public sealed class GreenRetrofitResultSummaryComponent : SimpleDragonComponent
             "SimpleDragon GRR Summary",
             "GRR Summary",
             "Extracts annual, monthly, carrier, and end-use totals for one GRR metric.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Analysis)
     {
     }
 

@@ -15,7 +15,7 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             "Export SimpleDragon CSV",
             "Export CSV",
             "Builds the deterministic SimpleDragon CSV package and writes it when the Export Button is pressed.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Simulation)
     {
     }
 
@@ -141,7 +141,7 @@ public abstract class MonthlySimpleDragonComponent : SimpleDragonComponent
         string name,
         string nickname,
         string description)
-        : base(name, nickname, description, SimpleDragonPanels.Results)
+        : base(name, nickname, description, SimpleDragonPanels.Analysis)
     {
     }
 

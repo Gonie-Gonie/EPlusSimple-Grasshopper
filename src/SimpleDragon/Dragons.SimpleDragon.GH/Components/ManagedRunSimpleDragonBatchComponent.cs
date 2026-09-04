@@ -39,7 +39,7 @@ public sealed class ManagedRunSimpleDragonBatchComponent : SimpleDragonComponent
             "Managed Run SimpleDragon Batch",
             "Managed Batch",
             "Runs address-selected SimpleDragon models with module-managed EnergyPlus, weather, and temporary storage. No setup path input is required.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Simulation)
     {
     }
 

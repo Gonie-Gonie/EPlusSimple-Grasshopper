@@ -123,7 +123,6 @@ $products = @(
             Ink = [System.Drawing.Color]::FromArgb(255, 17, 65, 62)
         }
         Components = @(
-            (New-ComponentIcon 'SimpleDragonVersionComponent' 0 'none'),
             (New-ComponentIcon 'SimpleDragonMaterialComponent' 1 'none'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionLayerComponent' 2 'layer'),
             (New-ComponentIcon 'SimpleDragonSurfaceConstructionComponent' 2 'none'),

@@ -224,12 +224,17 @@ public sealed class SimpleDragonFenestrationConstructionComponent : SimpleDragon
 
 public sealed class LookupUsageProfileComponent : SimpleDragonComponent
 {
+    private static readonly string[] ProfileNames = SimpleDragonDatabase.Default.UsageProfiles.Items
+        .Select(profile => profile.Name)
+        .ToArray();
+    private static readonly string DefaultProfileName = ProfileNames[0];
+
     public LookupUsageProfileComponent()
         : base(
             "Lookup SimpleDragon Usage Profile",
             "SD Profile",
-            "Looks up a packaged Korean standard or extended usage profile by exact name.",
-            SimpleDragonPanels.Construction)
+            "Selects a packaged Korean standard or extended usage profile.",
+            SimpleDragonPanels.Model)
     {
     }
 
@@ -237,27 +242,31 @@ public sealed class LookupUsageProfileComponent : SimpleDragonComponent
 
     protected override void RegisterInputParams(GH_InputParamManager pManager)
     {
-        pManager.AddTextParameter("Name", "N", "Exact packaged usage-profile name. Leave empty to list names.", GH_ParamAccess.item, string.Empty);
+        ChoiceInputs.Add(
+            pManager,
+            "Name",
+            "N",
+            "Packaged usage profile.",
+            DefaultProfileName,
+            ProfileNames);
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(new SimpleDragonUsageProfileParam(), "Profile", "P", "Resolved usage profile.", GH_ParamAccess.item);
-        pManager.AddTextParameter("Available Names", "Names", "All packaged usage-profile names.", GH_ParamAccess.list);
         pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Lookup diagnostics.", GH_ParamAccess.list);
     }
 
     protected override void Solve(IGH_DataAccess DA)
     {
-        string name = string.Empty;
-        DA.GetData(0, ref name);
-        UsageProfileDatabase database = SimpleDragonDatabase.Default.UsageProfiles;
-        DA.SetDataList(1, database.Items.Select(item => item.Name));
-        if (string.IsNullOrWhiteSpace(name))
+        string name = DefaultProfileName;
+        if (!DA.GetData(0, ref name))
         {
             return;
         }
 
+        name = ChoiceInputs.Parse(name, "Name", ProfileNames);
+        UsageProfileDatabase database = SimpleDragonDatabase.Default.UsageProfiles;
         LookupResult<UsageProfile> lookup = database.Find(name);
         Report(lookup.Diagnostics);
         if (lookup.Value is not null)
@@ -265,6 +274,6 @@ public sealed class LookupUsageProfileComponent : SimpleDragonComponent
             DA.SetData(0, new SimpleDragonUsageProfileGoo(lookup.Value));
         }
 
-        DA.SetDataList(2, lookup.Diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
+        DA.SetDataList(1, lookup.Diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 }

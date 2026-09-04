@@ -11,7 +11,7 @@ public sealed class GreenRetrofitModelSummaryComponent : SimpleDragonComponent
             "SimpleDragon Model Summary",
             "SD Model Summary",
             "Extracts envelope, load, and weather summary values directly from a SimpleDragon GRM.",
-            SimpleDragonPanels.Model)
+            SimpleDragonPanels.Analysis)
     {
     }
 

@@ -90,7 +90,8 @@ developer environment setup, .NET SDK, Python, or Visual Studio.
 
 1. Start Rhino and open Grasshopper after installation completes.
 2. Confirm that the `InvisibleDragon` or `SimpleDragon` tab appears.
-3. Add the module's Version component before opening a production definition.
+3. Open the appropriate tracked starter definition with every action Button at
+   its resting False value before adapting it for production work.
 
 InvisibleDragon can be installed by itself. SimpleDragon can also be installed
 by itself; its package carries the shared InvisibleDragon Core and Rhino libraries

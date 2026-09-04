@@ -4,7 +4,7 @@ _Generated from the public runtime catalog; do not edit this chapter directly._
 
 This reference combines runtime-reflected Grasshopper ports with curated workflow guidance. It covers every public component in InvisibleDragon and SimpleDragon; port order, access mode, defaults, choices, and wire types come from the built plugins rather than a manually maintained list.
 
-**Coverage:** 76 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
+**Coverage:** 75 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
 
 A port marked optional accepts an omitted wire. A non-optional port can still show a persistent default; consult the Default / choices column before wiring a replacement. Choice inputs are selected directly on the component and are flagged so integer or identifier plumbing is unnecessary.
 
@@ -1187,36 +1187,210 @@ _This component has no inputs._
 
 ### Category: SimpleDragon
 
-#### Subcategory: Construction
+#### Subcategory: Analysis
 
-##### Lookup SimpleDragon Usage Profile (`SD Profile`)
+##### SimpleDragon GRR Data Tree (`GRR Tree`)
 
-**Role:** Authoring
+**Role:** Analysis
 
-**Purpose:** Resolves a complete packaged Korean operating profile for occupancy, HVAC, ventilation, loads, setpoints, holidays, and vacations.
+**Flags:** `CHOICE INPUTS`
 
-**How to use it:** Leave Name blank first and connect Available Names to a Panel, then copy one exact name back into Name and connect Profile to every Zone that follows that use pattern.
+**Purpose:** Transforms one GRR metric into stable monthly Fuel or End Use series for native Grasshopper tree calculations.
 
-**Canvas location:** SimpleDragon → Construction. Exposure: `primary`.
+**How to use it:** Find GRR Data Tree in the Analysis group, connect GRR, and normally leave the defaults for Site Uses per area by Fuel. Use Series Names with the matching X/Y branches, or consume the selected monthly CSV text without writing a file.
+
+**Canvas location:** SimpleDragon → Analysis. Exposure: `primary`.
 
 **Important caveats:**
 
-- Lookup is trimmed but otherwise exact and case-sensitive; partial or approximate names do not resolve.
-- An empty Name intentionally lists choices without producing a Profile or an error.
+- Each series appends its index to the incoming GRR path, preserving separate result branches instead of flattening them.
+- X branches contain month numbers 1–12 and Y branches contain the corresponding twelve values; use Unit rather than assuming every metric is kWh.
 
 **Inputs**
 
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | Name (`N`) | Text | Item | No | Default: `""` | Exact packaged usage-profile name. Leave empty to list names. |
+| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
+| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
+| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
+| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
 
 **Outputs**
 
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
-| 0 | Profile (`P`) | SimpleDragon Usage Profile | Item | Resolved usage profile. |
-| 1 | Available Names (`Names`) | Text | List | All packaged usage-profile names. |
-| 2 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Lookup diagnostics. |
+| 0 | Series Names (`N`) | Text | List | Stable snake_case series names. |
+| 1 | Month Names (`Months`) | Text | List | January through December. |
+| 2 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
+| 3 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
+| 4 | Unit (`U`) | Text | Item | Selected value unit. |
+| 5 | CSV (`CSV`) | Text | Item | Selected deterministic monthly CSV. |
+
+##### SimpleDragon GRR Summary (`GRR Summary`)
+
+**Role:** Analysis
+
+**Flags:** `CHOICE INPUTS`
+
+**Purpose:** Extracts annual, January-to-December, carrier, and end-use totals for one selected GRR metric and basis.
+
+**How to use it:** Find GRR Summary in the Analysis group, connect GRR, choose Site Uses, Source Uses, Carbon, or Cost, and keep Gross False for per-area comparison or enable it for whole-building totals. Pair each names list with its corresponding totals list.
+
+**Canvas location:** SimpleDragon → Analysis. Exposure: `primary`.
+
+**Important caveats:**
+
+- Energy units are kWh/m² or kWh, carbon units kgCO2e/m² or kgCO2e, and cost units KRW/m² or KRW according to Gross.
+- Monthly Totals are always January through December; carrier and end-use lists include stable zero-valued categories as well as active ones.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
+| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | GRR summary metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
+| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross building values. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Total Area (`A`) | Number | Item | Building floor area in m². |
+| 1 | Annual Total (`Annual`) | Number | Item | Net annual total for the selected metric. |
+| 2 | Monthly Totals (`Monthly`) | Number | List | January through December net totals. |
+| 3 | Carriers (`C`) | Text | List | Energy carrier names. |
+| 4 | Carrier Totals (`CV`) | Number | List | Totals corresponding to Carriers. |
+| 5 | End Uses (`E`) | Text | List | Energy end-use names. |
+| 6 | End-Use Totals (`EV`) | Number | List | Totals corresponding to End Uses. |
+| 7 | Basis (`B`) | Text | Item | Selected metric and gross/per-area basis. |
+
+##### SimpleDragon Model Summary (`SD Model Summary`)
+
+**Role:** Analysis
+
+**Purpose:** Exposes the Python-oracle-compatible derived envelope, load, infiltration, and weather properties of a typed SimpleDragon model without expanding the SD Model authoring component.
+
+**How to use it:** Find SD Model Summary in the Analysis group and connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.
+
+**Canvas location:** SimpleDragon → Analysis. Exposure: `primary`.
+
+**Important caveats:**
+
+- Exterior Windows includes windows and glass doors hosted by exterior walls; exterior floors include outdoor and ground-contact floors.
+- A zero weighted value can also mean there was no contributing resolved construction or load. Average Infiltration is the zone-volume-weighted source value at 50 Pa, not natural ACH.
+- Weather outputs are unavailable when the GRM has no resolved weather selection; EPW filenames and paths remain internal.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | SimpleDragon model to summarize. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Floor Area (`Area`) | Number | Item | Total conditioned zone floor area in m². |
+| 1 | Exterior Floors (`Floors`) | SimpleDragon Surface | List | Exterior or ground-contact floor surfaces. |
+| 2 | Exterior Roofs (`Roofs`) | SimpleDragon Surface | List | Outdoor ceiling surfaces used as exterior roofs. |
+| 3 | Exterior Walls (`Walls`) | SimpleDragon Surface | List | Outdoor wall surfaces. |
+| 4 | Exterior Windows (`Windows`) | SimpleDragon Fenestration | List | Windows and glass doors hosted by exterior walls. |
+| 5 | Average Exterior Floor U-Value (`Floor U`) | Number | Item | Area-weighted U-value of exterior and ground-contact floors in W/(m²·K). |
+| 6 | Average Exterior Roof U-Value (`Roof U`) | Number | Item | Area-weighted U-value of exterior roofs in W/(m²·K). |
+| 7 | Average Exterior Wall U-Value (`Wall U`) | Number | Item | Area-weighted U-value of exterior walls in W/(m²·K). |
+| 8 | Average Window U-Value (`Window U`) | Number | Item | Area-weighted U-value of exterior windows and glass doors in W/(m²·K). |
+| 9 | Average Infiltration at 50 Pa (`ACH50`) | Number | Item | Zone-volume-weighted average infiltration rate at 50 Pa in air changes per hour. |
+| 10 | Average Lighting Power Density (`LPD`) | Number | Item | Zone-area-weighted average lighting power density in W/m² for zones with a defined value. |
+| 11 | Climate Region (`Climate`) | Text | Item | Resolved climate region embedded in the model. |
+| 12 | Terrain (`Terrain`) | Text | Item | Resolved terrain category embedded in the model. |
+| 13 | Weather Location (`Weather`) | Text | Item | Resolved weather-station location embedded in the model. |
+
+##### SimpleDragon Monthly Bar Plot (`Monthly Bars`)
+
+**Role:** Analysis
+
+**Flags:** `CHOICE INPUTS`
+
+**Purpose:** Creates grouped or stacked monthly bar-outline geometry from the same typed series used by the numeric result components.
+
+**How to use it:** Find Monthly Bars in the Analysis group, connect GRR for the default grouped Fuel chart, enable Stacked for monthly accumulation, and use the parallel Series Names, X/Y trees, and Unit to build labels or downstream visualization.
+
+**Canvas location:** SimpleDragon → Analysis. Exposure: `primary`.
+
+**Important caveats:**
+
+- Bars are outline curves in one branch per series rather than filled chart objects; the Y Values tree remains the authoritative numeric result.
+- Positive and negative values stack separately around Zero Axis, and Plane/Width/Height must be valid and positive.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
+| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
+| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
+| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
+| 4 | Plane (`P`) | Plane | Item | No | Default: `World XY` | Plot plane. |
+| 5 | Width (`W`) | Number | Item | No | Default: `12` | Plot width in model units. |
+| 6 | Height (`H`) | Number | Item | No | Default: `6` | Plot height in model units. |
+| 7 | Stacked (`S`) | Boolean | Item | No | Default: `False` | True stacks series by month; false groups them side by side. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Bars (`B`) | Curve | Tree | Bar-outline tree with one branch per series. |
+| 1 | Frame (`F`) | Curve | Item | Plot frame. |
+| 2 | Zero Axis (`Z`) | Curve | Item | Zero-value axis. |
+| 3 | Series Names (`N`) | Text | List | Stable snake_case series names. |
+| 4 | Month Names (`Months`) | Text | List | January through December. |
+| 5 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
+| 6 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
+| 7 | Unit (`U`) | Text | Item | Selected value unit. |
+
+##### SimpleDragon Monthly Line Plot (`Monthly Lines`)
+
+**Role:** Analysis
+
+**Flags:** `CHOICE INPUTS`
+
+**Purpose:** Creates immediately previewable monthly result curves while exposing the exact matching data trees for annotation or custom graphics.
+
+**How to use it:** Find Monthly Lines in the Analysis group and connect only GRR for a default Site Uses-per-area Fuel plot on a 12 by 6 World XY frame, or set Metric, Gross, Grouping, Plane, Width, and Height for a custom layout.
+
+**Canvas location:** SimpleDragon → Analysis. Exposure: `primary`.
+
+**Important caveats:**
+
+- The component draws one 12-point polyline per series plus Frame and Zero Axis, but it does not create colors, labels, or a legend; use Series Names and Month Names downstream.
+- Plane must be valid and Width/Height finite and positive; before a GRR exists the component intentionally waits without a red error.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
+| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
+| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
+| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
+| 4 | Plane (`P`) | Plane | Item | No | Default: `World XY` | Plot plane. |
+| 5 | Width (`W`) | Number | Item | No | Default: `12` | Plot width in model units. |
+| 6 | Height (`H`) | Number | Item | No | Default: `6` | Plot height in model units. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Lines (`L`) | Curve | List | One preview curve per series. |
+| 1 | Frame (`F`) | Curve | Item | Plot frame. |
+| 2 | Zero Axis (`Z`) | Curve | Item | Zero-value axis. |
+| 3 | Series Names (`N`) | Text | List | Stable snake_case series names. |
+| 4 | Month Names (`Months`) | Text | List | January through December. |
+| 5 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
+| 6 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
+| 7 | Unit (`U`) | Text | Item | Selected value unit. |
+
+#### Subcategory: Construction
 
 ##### SimpleDragon Construction Layer (`SD Layer`)
 
@@ -1334,74 +1508,6 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- |
 | 0 | Construction (`C`) | SimpleDragon Surface Construction | Item | SimpleDragon surface construction. |
 | 1 | U-Value (`U`) | Number | Item | U-value including default films in W/(m² K). |
-
-#### Subcategory: Core
-
-##### Run SimpleDragon (`SD Run`)
-
-**Role:** Trigger
-
-**Flags:** `RUN TRIGGER`
-
-**Purpose:** Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR and optionally saving the canonical GRR file without exposing an intermediate IDF workflow.
-
-**How to use it:** Connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.
-
-**Canvas location:** SimpleDragon → Core. Exposure: `primary`.
-
-**Important caveats:**
-
-- One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.
-- The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.
-- A Run pulse saves a newly completed or cached GRR when GRR Path is set, creates missing parent directories, and replaces an existing destination; changing the path alone never launches work.
-- Previous GRR output is hidden while a run or cached-GRR save is active, or after simulation inputs change; a save failure keeps the completed in-memory GRR usable and is reported through State and Diagnostics.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | Complete SimpleDragon model. Its Address and Vintage select the packaged weather internally. |
-| 1 | Run (`Run`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action. |
-| 2 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active run. |
-| 3 | Force Rerun (`Force`) | Boolean | Item | No | Default: `False` | Ignore the last result for an identical GRM and timeout. |
-| 4 | Timeout (`Min`) | Number | Item | No | Default: `30` | Positive EnergyPlus timeout in minutes. |
-| 5 | GRR Path (`P`) | Text | Item | Yes | — | Optional destination .grr or JSON path. Leave blank to keep the GRR in memory only. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | Last complete SimpleDragon result. |
-| 1 | State (`State`) | Text | Item | Idle, preparation/execution progress, Cached, or a terminal state. |
-| 2 | Success (`OK`) | Boolean | Item | True when the last run produced a complete GRR. A requested file-write failure is reported by State and Diagnostics while the in-memory GRR remains usable. |
-| 3 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | SimpleDragon conversion, weather, runtime, simulation, and result diagnostics. |
-
-##### SimpleDragon Version (`SimpleDragonVersion`)
-
-**Role:** Utility
-
-**Flags:** `UTILITY`
-
-**Purpose:** Reports the loaded SimpleDragon plugin version and the upstream revision represented by this port.
-
-**How to use it:** Connect Version and Upstream to a Panel when recording a study, preparing a support request, or checking that Rhino loaded the intended package. It does not belong in the simulation wire path.
-
-**Canvas location:** SimpleDragon → Core. Exposure: `primary`.
-
-**Important caveats:**
-
-- The values describe the assembly currently loaded by Grasshopper, so record them when mixed or stale package loading is suspected.
-
-**Inputs**
-
-_This component has no inputs._
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Version (`V`) | Text | Item | SimpleDragon.GH version. |
-| 1 | Upstream (`U`) | Text | Item | Tracked SimpleDragon upstream commit. |
 
 #### Subcategory: Geometry
 
@@ -1580,38 +1686,35 @@ _This component has no inputs._
 
 #### Subcategory: Model
 
-##### Read SimpleDragon GRM (`Read GRM`)
+##### Lookup SimpleDragon Usage Profile (`SD Profile`)
 
-**Role:** Utility
+**Role:** Authoring
 
-**Flags:** `UTILITY`
+**Flags:** `CHOICE INPUTS`
 
-**Purpose:** Loads an existing strict GRM 0.7 document into the same typed model used by the visual authoring workflow.
+**Purpose:** Resolves a complete packaged Korean operating profile for occupancy, HVAC, ventilation, loads, setpoints, holidays, and vacations.
 
-**How to use it:** Connect a .grm or JSON path, check Success and Diagnostics, and send GRM directly to Run SimpleDragon, Batch Case, or Write GRM. Use Canonical JSON when reviewing deterministic differences.
+**How to use it:** Find SD Profile in the Model group, choose Name directly from its native selector, and connect the resulting Profile to every Zone that follows that use pattern. No Panel or copied text is required.
 
 **Canvas location:** SimpleDragon → Model. Exposure: `primary`.
 
 **Important caveats:**
 
-- Relative paths use the saved Grasshopper document folder; an unsaved definition falls back to the process working directory for reads.
-- This is an artifact interchange path, not a required stage between SimpleDragon Model and Run.
+- A real packaged usage profile is selected by default, and every packaged name is available from the input selector.
+- Text supplied by a wire must normalize to one packaged selector choice; use the selector whenever possible so the canonical packaged name remains visible.
 
 **Inputs**
 
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | Path (`P`) | Text | Item | No | — | Path to a GRM JSON file. |
+| 0 | Name (`N`) | Text | Item | No | Default: 주거공간; Choices: 주거공간; 소규모사무실; 대규모사무실; 회의실 및 세미나실; 강당; 구내식당; 화장실; 그 외 체류공간; 부속공간; 창고/설비/문서실; 전산실; 주방 및 조리실; 병실; 객실; 교실(초중고); 강의실(대학); 매장(상점/백화점); 전시실(전시관/박물관); 열람실(도서관); 체육시설; 구내식당(초중고); 주방 및 조리실(초중고); 체육시설(초중고); 교실(어린이집) | Packaged usage profile. Choices: 주거공간, 소규모사무실, 대규모사무실, 회의실 및 세미나실, 강당, 구내식당, 화장실, 그 외 체류공간, 부속공간, 창고/설비/문서실, 전산실, 주방 및 조리실, 병실, 객실, 교실(초중고), 강의실(대학), 매장(상점/백화점), 전시실(전시관/박물관), 열람실(도서관), 체육시설, 구내식당(초중고), 주방 및 조리실(초중고), 체육시설(초중고), 교실(어린이집). |
 
 **Outputs**
 
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
-| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | Parsed GRM model. |
-| 1 | Zones (`Z`) | SimpleDragon Zone | List | Zones contained in the model. |
-| 2 | Canonical JSON (`J`) | Text | Item | Deterministic canonical GRM JSON. |
-| 3 | Success (`OK`) | Boolean | Item | True when parsing and reference resolution succeeded. |
-| 4 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | GRM read diagnostics. |
+| 0 | Profile (`P`) | SimpleDragon Usage Profile | Item | Resolved usage profile. |
+| 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Lookup diagnostics. |
 
 ##### SimpleDragon Absorption Chiller (`SD Absorption`)
 
@@ -2002,47 +2105,6 @@ _This component has no inputs._
 | 3 | JSON (`J`) | Text | Item | Deterministic GRM 0.7 JSON. |
 | 4 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Geometry, weather, and model diagnostics. |
 
-##### SimpleDragon Model Summary (`SD Model Summary`)
-
-**Role:** Analysis
-
-**Purpose:** Exposes the Python-oracle-compatible derived envelope, load, infiltration, and weather properties of a typed SimpleDragon model without expanding the SD Model authoring component.
-
-**How to use it:** Connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.
-
-**Canvas location:** SimpleDragon → Model. Exposure: `primary`.
-
-**Important caveats:**
-
-- Exterior Windows includes windows and glass doors hosted by exterior walls; exterior floors include outdoor and ground-contact floors.
-- A zero weighted value can also mean there was no contributing resolved construction or load. Average Infiltration is the zone-volume-weighted source value at 50 Pa, not natural ACH.
-- Weather outputs are unavailable when the GRM has no resolved weather selection; EPW filenames and paths remain internal.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | SimpleDragon model to summarize. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Floor Area (`Area`) | Number | Item | Total conditioned zone floor area in m². |
-| 1 | Exterior Floors (`Floors`) | SimpleDragon Surface | List | Exterior or ground-contact floor surfaces. |
-| 2 | Exterior Roofs (`Roofs`) | SimpleDragon Surface | List | Outdoor ceiling surfaces used as exterior roofs. |
-| 3 | Exterior Walls (`Walls`) | SimpleDragon Surface | List | Outdoor wall surfaces. |
-| 4 | Exterior Windows (`Windows`) | SimpleDragon Fenestration | List | Windows and glass doors hosted by exterior walls. |
-| 5 | Average Exterior Floor U-Value (`Floor U`) | Number | Item | Area-weighted U-value of exterior and ground-contact floors in W/(m²·K). |
-| 6 | Average Exterior Roof U-Value (`Roof U`) | Number | Item | Area-weighted U-value of exterior roofs in W/(m²·K). |
-| 7 | Average Exterior Wall U-Value (`Wall U`) | Number | Item | Area-weighted U-value of exterior walls in W/(m²·K). |
-| 8 | Average Window U-Value (`Window U`) | Number | Item | Area-weighted U-value of exterior windows and glass doors in W/(m²·K). |
-| 9 | Average Infiltration at 50 Pa (`ACH50`) | Number | Item | Zone-volume-weighted average infiltration rate at 50 Pa in air changes per hour. |
-| 10 | Average Lighting Power Density (`LPD`) | Number | Item | Zone-area-weighted average lighting power density in W/m² for zones with a defined value. |
-| 11 | Climate Region (`Climate`) | Text | Item | Resolved climate region embedded in the model. |
-| 12 | Terrain (`Terrain`) | Text | Item | Resolved terrain category embedded in the model. |
-| 13 | Weather Location (`Weather`) | Text | Item | Resolved weather-station location embedded in the model. |
-
 ##### SimpleDragon Packaged Air Conditioner (`SD Packaged AC`)
 
 **Role:** Authoring
@@ -2164,52 +2226,17 @@ _This component has no inputs._
 | 0 | Supply (`S`) | SimpleDragon Supply System | Item | Authored hydronic radiator. |
 | 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Compatibility and authoring diagnostics. |
 
-##### Write SimpleDragon GRM (`Write GRM`)
-
-**Role:** Utility
-
-**Flags:** `UTILITY`
-
-**Purpose:** Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.
-
-**How to use it:** Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.
-
-**Canvas location:** SimpleDragon → Model. Exposure: `primary`.
-
-**Important caveats:**
-
-- Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.
-- Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | GRM model to serialize. |
-| 1 | Path (`P`) | Text | Item | No | — | Destination .grm or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
-| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | JSON (`J`) | Text | Item | Deterministic GRM JSON. |
-| 1 | Full Path (`P`) | Text | Item | Resolved destination path. |
-| 2 | Written (`OK`) | Boolean | Item | True when the file was written during this solution. |
-
-#### Subcategory: Results
+#### Subcategory: Simulation
 
 ##### Export SimpleDragon CSV (`Export CSV`)
 
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS`
+**Role:** Simulation
 
 **Purpose:** Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.
 
-**How to use it:** Connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.
+**How to use it:** Find Export CSV in the Simulation group, connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.
 
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
@@ -2246,9 +2273,9 @@ _This component has no inputs._
 
 **Purpose:** Executes a branch-preserving research matrix of SimpleDragon models with managed runtime, packaged weather, caching, and result artifacts.
 
-**How to use it:** Feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.
+**How to use it:** In the Simulation group, feed a Case tree from SimpleDragon Batch Case, choose a practical Parallel Limit, and connect momentary Grasshopper Buttons to Run and Cancel. Let them solve once at rest, then press Run. Track State, Case IDs, Statuses, Combined CSV, Manifest, and Complete.
 
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
@@ -2277,17 +2304,46 @@ _This component has no inputs._
 | 5 | Complete (`OK`) | Boolean | Item | True when every case succeeded. |
 | 6 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Path-free preparation and per-case diagnostics. |
 
+##### Read SimpleDragon GRM (`Read GRM`)
+
+**Role:** Simulation
+
+**Purpose:** Loads an existing strict GRM 0.7 document into the same typed model used by the visual authoring workflow.
+
+**How to use it:** Find Read GRM in the Simulation group, connect a .grm or JSON path, check Success and Diagnostics, and send GRM directly to Run SimpleDragon, Batch Case, or Write GRM. Use Canonical JSON when reviewing deterministic differences.
+
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
+
+**Important caveats:**
+
+- Relative paths use the saved Grasshopper document folder; an unsaved definition falls back to the process working directory for reads.
+- This is an artifact interchange path, not a required stage between SimpleDragon Model and Run.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | Path (`P`) | Text | Item | No | — | Path to a GRM JSON file. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | Parsed GRM model. |
+| 1 | Zones (`Z`) | SimpleDragon Zone | List | Zones contained in the model. |
+| 2 | Canonical JSON (`J`) | Text | Item | Deterministic canonical GRM JSON. |
+| 3 | Success (`OK`) | Boolean | Item | True when parsing and reference resolution succeeded. |
+| 4 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | GRM read diagnostics. |
+
 ##### Read SimpleDragon GRR (`Read GRR`)
 
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS`
+**Role:** Simulation
 
 **Purpose:** Loads a strict GRR 0.7 artifact into the same typed result consumed by every SimpleDragon analysis component.
 
-**How to use it:** Connect a GRR path, check Success and Diagnostics, then fan GRR out to Summary, Data Tree, Plots, Write GRR, or CSV Export without rerunning EnergyPlus.
+**How to use it:** Find Read GRR in the Simulation group, connect a GRR path, check Success and Diagnostics, then fan GRR out to Analysis-group Summary, Data Tree, and Plots or to Write GRR and CSV Export without rerunning EnergyPlus.
 
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
@@ -2309,15 +2365,54 @@ _This component has no inputs._
 | 2 | Success (`OK`) | Boolean | Item | True when the GRR is complete and valid. |
 | 3 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | GRR read diagnostics. |
 
+##### Run SimpleDragon (`SD Run`)
+
+**Role:** Trigger
+
+**Flags:** `RUN TRIGGER`
+
+**Purpose:** Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR and optionally saving the canonical GRR file without exposing an intermediate IDF workflow.
+
+**How to use it:** Find SD Run in the Simulation group and connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR to the Analysis-group summaries and plots or to Simulation-group Write GRR and CSV Export.
+
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
+
+**Important caveats:**
+
+- One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.
+- The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.
+- A Run pulse saves a newly completed or cached GRR when GRR Path is set, creates missing parent directories, and replaces an existing destination; changing the path alone never launches work.
+- Previous GRR output is hidden while a run or cached-GRR save is active, or after simulation inputs change; a save failure keeps the completed in-memory GRR usable and is reported through State and Diagnostics.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | Complete SimpleDragon model. Its Address and Vintage select the packaged weather internally. |
+| 1 | Run (`Run`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to start one run; do not use a Toggle for this action. |
+| 2 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active run. |
+| 3 | Force Rerun (`Force`) | Boolean | Item | No | Default: `False` | Ignore the last result for an identical GRM and timeout. |
+| 4 | Timeout (`Min`) | Number | Item | No | Default: `30` | Positive EnergyPlus timeout in minutes. |
+| 5 | GRR Path (`P`) | Text | Item | Yes | — | Optional destination .grr or JSON path. Leave blank to keep the GRR in memory only. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | Last complete SimpleDragon result. |
+| 1 | State (`State`) | Text | Item | Idle, preparation/execution progress, Cached, or a terminal state. |
+| 2 | Success (`OK`) | Boolean | Item | True when the last run produced a complete GRR. A requested file-write failure is reported by State and Diagnostics while the in-memory GRR remains usable. |
+| 3 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | SimpleDragon conversion, weather, runtime, simulation, and result diagnostics. |
+
 ##### SimpleDragon Batch Case (`SD Batch Case`)
 
-**Role:** Helper
+**Role:** Simulation
 
 **Purpose:** Wraps one complete GRM alternative in the typed value consumed by the managed batch runner.
 
 **How to use it:** Connect GRM items, lists, or trees to create matching Case values, then preserve those branches when wiring Cases into Managed Run SimpleDragon Batch.
 
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
@@ -2336,177 +2431,46 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- |
 | 0 | Case (`Case`) | SimpleDragon Batch Case | Item | Typed SimpleDragon batch case. |
 
-##### SimpleDragon GRR Data Tree (`GRR Tree`)
+##### Write SimpleDragon GRM (`Write GRM`)
 
-**Role:** Result
+**Role:** Simulation
 
-**Flags:** `RESULT / ANALYSIS` · `CHOICE INPUTS`
+**Purpose:** Serializes a typed model as deterministic UTF-8 GRM 0.7 JSON for exchange, review, or versioned study records.
 
-**Purpose:** Transforms one GRR metric into stable monthly Fuel or End Use series for native Grasshopper tree calculations.
+**How to use it:** Connect GRM and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the user-owned artifact should be created.
 
-**How to use it:** Connect GRR and normally leave the defaults for Site Uses per area by Fuel. Use Series Names with the matching X/Y branches, or consume the selected monthly CSV text without writing a file.
-
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
-- Each series appends its index to the incoming GRR path, preserving separate result branches instead of flattening them.
-- X branches contain month numbers 1–12 and Y branches contain the corresponding twelve values; use Unit rather than assuming every metric is kWh.
+- Relative output paths use the saved .gh folder; unsaved definitions use the Windows temp directory.
+- Write is internally level-sensitive, so connect a momentary Grasshopper Button rather than a Toggle; one Button pulse bounds the overwrite to the intended solution.
 
 **Inputs**
 
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
-| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
-| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
-| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
+| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | GRM model to serialize. |
+| 1 | Path (`P`) | Text | Item | No | — | Destination .grm or JSON path. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
+| 2 | Write (`W`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write. |
 
 **Outputs**
 
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
-| 0 | Series Names (`N`) | Text | List | Stable snake_case series names. |
-| 1 | Month Names (`Months`) | Text | List | January through December. |
-| 2 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
-| 3 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
-| 4 | Unit (`U`) | Text | Item | Selected value unit. |
-| 5 | CSV (`CSV`) | Text | Item | Selected deterministic monthly CSV. |
-
-##### SimpleDragon GRR Summary (`GRR Summary`)
-
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS` · `CHOICE INPUTS`
-
-**Purpose:** Extracts annual, January-to-December, carrier, and end-use totals for one selected GRR metric and basis.
-
-**How to use it:** Connect GRR, choose Site Uses, Source Uses, Carbon, or Cost, and keep Gross False for per-area comparison or enable it for whole-building totals. Pair each names list with its corresponding totals list.
-
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
-
-**Important caveats:**
-
-- Energy units are kWh/m² or kWh, carbon units kgCO2e/m² or kgCO2e, and cost units KRW/m² or KRW according to Gross.
-- Monthly Totals are always January through December; carrier and end-use lists include stable zero-valued categories as well as active ones.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
-| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | GRR summary metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
-| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross building values. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Total Area (`A`) | Number | Item | Building floor area in m². |
-| 1 | Annual Total (`Annual`) | Number | Item | Net annual total for the selected metric. |
-| 2 | Monthly Totals (`Monthly`) | Number | List | January through December net totals. |
-| 3 | Carriers (`C`) | Text | List | Energy carrier names. |
-| 4 | Carrier Totals (`CV`) | Number | List | Totals corresponding to Carriers. |
-| 5 | End Uses (`E`) | Text | List | Energy end-use names. |
-| 6 | End-Use Totals (`EV`) | Number | List | Totals corresponding to End Uses. |
-| 7 | Basis (`B`) | Text | Item | Selected metric and gross/per-area basis. |
-
-##### SimpleDragon Monthly Bar Plot (`Monthly Bars`)
-
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS` · `CHOICE INPUTS`
-
-**Purpose:** Creates grouped or stacked monthly bar-outline geometry from the same typed series used by the numeric result components.
-
-**How to use it:** Connect GRR for the default grouped Fuel chart, enable Stacked for monthly accumulation, and use the parallel Series Names, X/Y trees, and Unit to build labels or downstream visualization.
-
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
-
-**Important caveats:**
-
-- Bars are outline curves in one branch per series rather than filled chart objects; the Y Values tree remains the authoritative numeric result.
-- Positive and negative values stack separately around Zero Axis, and Plane/Width/Height must be valid and positive.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
-| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
-| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
-| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
-| 4 | Plane (`P`) | Plane | Item | No | Default: `World XY` | Plot plane. |
-| 5 | Width (`W`) | Number | Item | No | Default: `12` | Plot width in model units. |
-| 6 | Height (`H`) | Number | Item | No | Default: `6` | Plot height in model units. |
-| 7 | Stacked (`S`) | Boolean | Item | No | Default: `False` | True stacks series by month; false groups them side by side. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Bars (`B`) | Curve | Tree | Bar-outline tree with one branch per series. |
-| 1 | Frame (`F`) | Curve | Item | Plot frame. |
-| 2 | Zero Axis (`Z`) | Curve | Item | Zero-value axis. |
-| 3 | Series Names (`N`) | Text | List | Stable snake_case series names. |
-| 4 | Month Names (`Months`) | Text | List | January through December. |
-| 5 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
-| 6 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
-| 7 | Unit (`U`) | Text | Item | Selected value unit. |
-
-##### SimpleDragon Monthly Line Plot (`Monthly Lines`)
-
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS` · `CHOICE INPUTS`
-
-**Purpose:** Creates immediately previewable monthly result curves while exposing the exact matching data trees for annotation or custom graphics.
-
-**How to use it:** Connect only GRR for a default Site Uses-per-area Fuel plot on a 12 by 6 World XY frame, or set Metric, Gross, Grouping, Plane, Width, and Height for a custom layout.
-
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
-
-**Important caveats:**
-
-- The component draws one 12-point polyline per series plus Frame and Zero Axis, but it does not create colors, labels, or a legend; use Series Names and Month Names downstream.
-- Plane must be valid and Width/Height finite and positive; before a GRR exists the component intentionally waits without a red error.
-
-**Inputs**
-
-| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | GRR (`GRR`) | SimpleDragon GRR | Item | No | — | SimpleDragon result. |
-| 1 | Metric (`M`) | Text | Item | No | Default: `SiteUses`; Choices: Site Uses (`SiteUses`); Source Uses (`SourceUses`); `Carbon`; `Cost` | Monthly GRR metric. Choices: Site Uses, Source Uses, Carbon, Cost. |
-| 2 | Gross (`G`) | Boolean | Item | No | Default: `False` | False for per-area values; true for gross values. |
-| 3 | Grouping (`By`) | Text | Item | No | Default: `Fuel`; Choices: `Fuel`; End Use (`EndUse`) | Monthly series grouping. Choices: Fuel, End Use. |
-| 4 | Plane (`P`) | Plane | Item | No | Default: `World XY` | Plot plane. |
-| 5 | Width (`W`) | Number | Item | No | Default: `12` | Plot width in model units. |
-| 6 | Height (`H`) | Number | Item | No | Default: `6` | Plot height in model units. |
-
-**Outputs**
-
-| # | Output (nickname) | Wire type | Access | Description |
-| --- | --- | --- | --- | --- |
-| 0 | Lines (`L`) | Curve | List | One preview curve per series. |
-| 1 | Frame (`F`) | Curve | Item | Plot frame. |
-| 2 | Zero Axis (`Z`) | Curve | Item | Zero-value axis. |
-| 3 | Series Names (`N`) | Text | List | Stable snake_case series names. |
-| 4 | Month Names (`Months`) | Text | List | January through December. |
-| 5 | X Values (`X`) | Number | Tree | Month numbers, one branch per series. |
-| 6 | Y Values (`Y`) | Number | Tree | Monthly values, one branch per series. |
-| 7 | Unit (`U`) | Text | Item | Selected value unit. |
+| 0 | JSON (`J`) | Text | Item | Deterministic GRM JSON. |
+| 1 | Full Path (`P`) | Text | Item | Resolved destination path. |
+| 2 | Written (`OK`) | Boolean | Item | True when the file was written during this solution. |
 
 ##### Write SimpleDragon GRR (`Write GRR`)
 
-**Role:** Result
-
-**Flags:** `RESULT / ANALYSIS`
+**Role:** Simulation
 
 **Purpose:** Serializes a typed GRR as deterministic UTF-8 GRR 0.7 JSON for reproducible exchange or archival.
 
 **How to use it:** Connect GRR and a destination, inspect JSON and Full Path while the Write Button is unpressed, then press the Button once when the result artifact should be persisted.
 
-**Canvas location:** SimpleDragon → Results. Exposure: `primary`.
+**Canvas location:** SimpleDragon → Simulation. Exposure: `primary`.
 
 **Important caveats:**
 
@@ -2591,4 +2555,4 @@ Typed parameters are the native Grasshopper containers carried by component wire
 
 ---
 
-Reference completeness: 76 of 76 public components documented; 38 standalone typed parameters listed.
+Reference completeness: 75 of 75 public components documented; 38 standalone typed parameters listed.

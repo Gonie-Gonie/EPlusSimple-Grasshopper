@@ -134,10 +134,11 @@ diagnostic has one. Standalone GRM/GRR files intentionally do not store Rhino
 session provenance. Users never supply these identifiers as relationship or
 export inputs.
 
-The two Version components expose the product version and pinned upstream
-commit. CSV/batch manifests record the product/core versions and run identity;
-release manifests additionally bind EnergyPlus executable, IDD, ExpandObjects,
-weather archive/file, shared assembly, and package SHA-256 values.
+The InvisibleDragon Version component exposes its loaded product version and
+pinned upstream commit. SimpleDragon product/core versions and run identity are
+recorded in its CSV and batch manifests. Release manifests additionally bind
+EnergyPlus executable, IDD, ExpandObjects, weather archive/file, shared
+assembly, and package SHA-256 values.
 
 ## Product boundary compatibility
 

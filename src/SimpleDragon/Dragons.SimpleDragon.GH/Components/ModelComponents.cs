@@ -11,7 +11,7 @@ public sealed class ReadGreenRetrofitModelComponent : SimpleDragonComponent
             "Read SimpleDragon GRM",
             "Read GRM",
             "Reads a UTF-8 GRM 0.7 file and reports reference-resolution diagnostics.",
-            SimpleDragonPanels.Model)
+            SimpleDragonPanels.Simulation)
     {
     }
 
@@ -61,7 +61,7 @@ public sealed class WriteGreenRetrofitModelComponent : SimpleDragonComponent
             "Write SimpleDragon GRM",
             "Write GRM",
             "Writes deterministic UTF-8 GRM 0.7 JSON when the Write Button is pressed.",
-            SimpleDragonPanels.Model)
+            SimpleDragonPanels.Simulation)
     {
     }
 

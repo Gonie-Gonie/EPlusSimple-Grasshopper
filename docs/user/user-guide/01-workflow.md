@@ -184,12 +184,20 @@ No `toIdf`, InvisibleDragon model, IDF, Weather, EnergyPlus result, executable,
 IDD, EPW, runtime-root, or temporary-directory input belongs between `SD Model`
 and `Run SimpleDragon`.
 
+The SimpleDragon tab follows the same workflow hierarchy: Construction holds
+material assemblies; Geometry holds Opening, Floor, Ceiling, Wall, and Zone;
+Model holds Profile, model, HVAC, ERV, and PV authoring; Simulation holds Run,
+GRM/GRR file operations, CSV export, and batch execution; Analysis holds model
+and result summaries, Data Trees, and plots.
+
 ### 1. Choose a usage profile
 
-Place `SD Profile` (`Lookup SimpleDragon Usage Profile`). With an empty `Name`,
-the component lists all packaged profile names. Feed one exact name back to the
-component and connect the resulting Profile to the Zone. A partial or
-case-adjusted name is not a substitute for the packaged name.
+Place `SD Profile` (`Lookup SimpleDragon Usage Profile`) from the Model group.
+Choose a packaged Name from the native selector on the component, then connect
+the resulting Profile to the Zone. A real packaged profile is selected by
+default, so no text Panel or copy-and-paste loop is required. Text supplied by
+a wire must normalize to one of the packaged selector choices; the output still
+uses the canonical packaged name.
 
 ### 2. Create opaque constructions when needed
 

@@ -59,7 +59,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
             "Run SimpleDragon",
             "SD Run",
             "Runs a complete GRM with address-selected packaged weather and module-managed EnergyPlus. Simulation preparation, weather, runtime, and work paths remain internal.",
-            SimpleDragonPanels.Core)
+            SimpleDragonPanels.Simulation)
     {
     }
 

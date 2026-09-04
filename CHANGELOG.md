@@ -17,6 +17,17 @@ version exactly: source `0.1.2` maps only to `v0.1.2`.
   Geometry provenance now follows typed GRM/GRR wires automatically into CSV
   Export, eliminating the public Map, Map Data, Area, and CSV Map input ports.
 
+### Changed
+
+- Reorganize the SimpleDragon tab into Construction, Geometry, Model,
+  Simulation, and Analysis. Model now contains Profile and HVAC authoring,
+  Simulation contains Run, artifact, CSV, and batch operations, and Analysis
+  contains summaries, Data Trees, and plots.
+- Make `SD Profile` a native packaged-profile selector with a usable default,
+  removing the Panel-and-copied-text lookup loop.
+- Remove the pre-release SimpleDragon Info component so normal canvases expose
+  only modeling, simulation, and analysis operations.
+
 ## 0.1.2 — 2026-09-01
 
 ### Corrected

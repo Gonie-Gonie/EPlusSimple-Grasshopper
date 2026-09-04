@@ -19,6 +19,22 @@ This is the concise canvas-authoring guide for installed Dragon components.
   False value. Use Toggles only for persistent options such as Force Rerun and
   Overwrite; they do not launch an action by themselves.
 
+## SimpleDragon canvas groups
+
+The SimpleDragon tab is organized by the stage and purpose of each component:
+
+| Group | Components and purpose |
+|---|---|
+| Construction | Opaque materials, layers, and surface/fenestration constructions |
+| Geometry | Opening, Floor, Ceiling, Wall, and Zone ownership |
+| Model | Usage Profile selection, model assembly, HVAC sources and terminals, ERV, and PV |
+| Simulation | Direct Run, GRM/GRR read and write, CSV export, Batch Case, and Managed Batch |
+| Analysis | Model/GRR summaries, result Data Trees, and monthly line/bar plots |
+
+`SD Profile` uses a native choice selector on its Name input. Choose the
+packaged usage profile directly on the component and connect Profile to the
+owning Zone; a text Panel round trip is not part of the workflow.
+
 ## Canonical SimpleDragon graph
 
 Build each object where its ownership is visible in the wires:
@@ -135,11 +151,13 @@ execution; simulations use the operating-system temp directory. Nothing writes
 below the Rhino installation directory, and no administrator permission is
 required.
 
-## Results, CSV, and batch studies
+## Simulation and analysis
 
-`Run SimpleDragon` emits the completed GRR directly. Summary, DataTree,
-line-plot, and bar-plot components expose the same ordered month, fuel, and
-end-use data without an InvisibleDragon-result handoff or file round trip.
+The Simulation group contains execution and result-artifact operations; the
+Analysis group contains non-writing model/result inspection and plots. `Run
+SimpleDragon` emits the completed GRR directly. Summary, DataTree, line-plot,
+and bar-plot components expose the same ordered month, fuel, and end-use data
+without an InvisibleDragon-result handoff or file round trip.
 Their result trees append series indices to the incoming GRR path instead of
 collapsing separate branches.
 

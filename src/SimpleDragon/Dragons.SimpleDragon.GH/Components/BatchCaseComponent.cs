@@ -15,7 +15,7 @@ public sealed class SimpleDragonBatchCaseComponent : SimpleDragonComponent
             "SimpleDragon Batch Case",
             "SD Batch Case",
             "Creates one typed batch case from a GRM model. Identity, runtime, and weather remain module-managed.",
-            SimpleDragonPanels.Results)
+            SimpleDragonPanels.Simulation)
     {
     }
 

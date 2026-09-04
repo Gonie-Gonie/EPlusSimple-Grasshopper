@@ -11,7 +11,8 @@ for externally distributed guidance.
 - [Choosing a Dragon](choosing-a-dragon.md): when to use the explicit
   vertex-preserving InvisibleDragon model or the reduced SimpleDragon model.
 - [Grasshopper workflow](grasshopper-workflow.md): ownership-based authoring,
-  direct runs, lists/trees, results, plots, CSV, and batch studies.
+  the Model/Simulation/Analysis group layout, direct runs, lists/trees, plots,
+  CSV, and batch studies.
 - [EnergyPlus and weather](energyplus-and-weather.md): internal runtime
   preparation, SimpleDragon address-based weather, and InvisibleDragon's one
   explicit EPW boundary.
