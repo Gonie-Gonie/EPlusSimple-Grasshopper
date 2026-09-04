@@ -19,7 +19,6 @@ public sealed class GrasshopperAssemblyTests
         "GRM",
         "Directory",
         "Diagnostics",
-        "Geometry Map Data",
         "Export",
         "Overwrite",
     };
@@ -120,7 +119,7 @@ public sealed class GrasshopperAssemblyTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(18, parameterTypes.Length);
+        Assert.Equal(19, parameterTypes.Length);
         Assert.Equal(parameterTypes.Length, resources.Length);
         var resourceHashes = new HashSet<string>(StringComparer.Ordinal);
         var runtimeHashes = new HashSet<string>(StringComparer.Ordinal);
@@ -185,7 +184,7 @@ public sealed class GrasshopperAssemblyTests
             }
         }
 
-        Assert.Equal(37, count);
+        Assert.Equal(38, count);
     }
 
     private static void AssertTransparentBorder(Bitmap bitmap)

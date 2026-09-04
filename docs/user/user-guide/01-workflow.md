@@ -269,8 +269,11 @@ the `SD Model` Diagnostics output before running; an unsupported prefix or
 uncovered vintage is a model error.
 
 `SD Model` resolves zone adjacency, nested constructions, openings, HVAC, ERV,
-PV, and generated relationships into one GRM. Its geometry-map outputs can be
-passed to `Export CSV` when geometry provenance is useful downstream.
+PV, and generated relationships into one GRM. Connect that GRM to `SD Model
+Summary` for floor area, exterior floor/roof/wall/window lists, weighted
+U-values, ACH50, lighting power density, and resolved climate information.
+Source geometry provenance is carried inside the typed GRM and subsequent GRR,
+so `Export CSV` receives it without a separate Map or identifier wire.
 
 ### 8. Run without setup paths
 
@@ -495,11 +498,13 @@ parallelism, executor and canonical options, both core versions, upstream and
 EnergyPlus identities, plus each case's cache key, model/weather hashes,
 snake-case status, metrics, and diagnostics.
 
-GRR and Directory are required. GRM, diagnostics, and Model `Geometry Map Data`
-are optional additions to the package. If files already exist, either choose a
-new directory or deliberately set the `Overwrite` option Toggle to True. Press
-the Export Button once for the intended write; do not leave a Toggle connected
-to this level-sensitive action input.
+GRR and Directory are required. GRM and diagnostics are optional additions to
+the package. Live Rhino geometry provenance follows the typed GRM into GRR and
+CSV automatically; a GRM or GRR loaded from a standalone file has no Rhino
+session context, so its `geometry_map.csv` contains only the header. If files
+already exist, either choose a new directory or deliberately set the
+`Overwrite` option Toggle to True. Press the Export Button once for the intended
+write; do not leave a Toggle connected to this level-sensitive action input.
 
 ### Managed SimpleDragon batch
 
@@ -527,7 +532,7 @@ at its resting False value. Force Rerun and Overwrite remain option Toggles.
 | `examples/02-invisibledragon-single-zone-hvac-idf.gh` | Full InvisibleDragon surface ownership, Zone HVAC/ERV, Model, compile, explicit EPW verification, run, and result flow |
 | `examples/10-simpledragon-material-construction.gh` | Minimal SimpleDragon construction graph |
 | `examples/11-simpledragon-envelope-hvac.gh` | Fenestration, packaged profile, multiple compatible HVAC families, ERV, and PV |
-| `examples/12-simpledragon-two-zone-model.gh` | Detailed two-zone list/tree authoring, automatic adjacency, ownership, HVAC, ERV, PV, GRM, and geometry mapping |
+| `examples/12-simpledragon-two-zone-model.gh` | Detailed two-zone list/tree authoring, automatic adjacency, ownership, HVAC, ERV, PV, GRM, and derived Model Summary |
 | `examples/13-simpledragon-results-and-plots.gh` | GRR reading, summaries, DataTree output, line/bar plots, and non-writing CSV preview |
 | `examples/14-simpledragon-two-zone-run-results-csv.gh` | Complete direct SimpleDragon run, optional GRR save, default monthly graph, CSV, and batch connection |
 | `examples/30-two-zone-office.3dm` | Named planar two-zone Breps and window curves for live Rhino references |

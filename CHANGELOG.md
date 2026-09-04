@@ -11,6 +11,11 @@ version exactly: source `0.1.2` maps only to `v0.1.2`.
 - Add an optional `GRR Path` input to `Run SimpleDragon`. A Run Button pulse
   writes either the newly completed or cached canonical GRR; a blank path keeps
   the result in Grasshopper without touching the file system.
+- Add `SD Model Summary` for oracle-backed exterior envelope projections,
+  weighted U-values, infiltration, lighting density, and weather metadata.
+- Reduce `SD Model` to GRM, resolved Zones/Surfaces, JSON, and Diagnostics.
+  Geometry provenance now follows typed GRM/GRR wires automatically into CSV
+  Export, eliminating the public Map, Map Data, Area, and CSV Map input ports.
 
 ## 0.1.2 — 2026-09-01
 

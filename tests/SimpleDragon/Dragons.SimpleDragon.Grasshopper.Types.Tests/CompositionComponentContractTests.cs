@@ -108,6 +108,13 @@ public sealed class CompositionComponentContractTests
         Assert.Equal(GH_ParamAccess.list, model.Params.Input[1].Access);
         Assert.Equal("GreenRetrofitModelParam", model.Params.Output[0].GetType().Name);
         Assert.Equal(GH_ParamAccess.tree, model.Params.Output[2].Access);
+        Assert.Equal(
+            new[] { "GRM", "Zones", "Surfaces", "JSON", "Diagnostics" },
+            model.Params.Output.Select(parameter => parameter.Name));
+        Assert.DoesNotContain(
+            model.Params.Output,
+            parameter => parameter.Name.Contains("Map", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(parameter.Name, "Floor Area", StringComparison.Ordinal));
         Assert.Equal("GreenRetrofitModelParam", run.Params.Input[0].GetType().Name);
         Assert.Equal(
             new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout", "GRR Path" },

@@ -176,6 +176,7 @@ public sealed class SimpleDragonGooTests
             new SimpleDragonSurfaceConstructionLayerParam().ComponentGuid,
             new SimpleDragonSurfaceConstructionParam().ComponentGuid,
             new SimpleDragonFenestrationConstructionParam().ComponentGuid,
+            new SimpleDragonFenestrationParam().ComponentGuid,
             new SimpleDragonUsageProfileParam().ComponentGuid,
             new SimpleDragonSurfaceParam().ComponentGuid,
             new SimpleDragonZoneParam().ComponentGuid,
@@ -191,7 +192,7 @@ public sealed class SimpleDragonGooTests
             new GreenRetrofitResultParam().ComponentGuid,
         };
 
-        Assert.Equal(18, identifiers.Length);
+        Assert.Equal(19, identifiers.Length);
         Assert.Equal(identifiers.Length, identifiers.Distinct().Count());
         Assert.Contains(new Guid("e54751c3-4d56-4499-83fb-f833822cf6bb"), identifiers);
         Assert.Contains(new Guid("e0546c97-2fba-4c51-9613-340dfb1fc416"), identifiers);

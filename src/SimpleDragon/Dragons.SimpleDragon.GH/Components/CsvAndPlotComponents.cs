@@ -36,11 +36,6 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             "Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
             GH_ParamAccess.item);
         pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "Diag", "Optional diagnostics to include.", GH_ParamAccess.list);
-        pManager.AddGenericParameter(
-            "Geometry Map Data",
-            "Map",
-            "Structured GreenRetrofitGeometryMapEntry values from SimpleDragon Model.",
-            GH_ParamAccess.list);
         pManager.AddBooleanParameter(
             "Export",
             "E",
@@ -55,7 +50,6 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
             false);
         pManager[1].Optional = true;
         pManager[3].Optional = true;
-        pManager[4].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -73,13 +67,12 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
         GreenRetrofitModelGoo? modelGoo = null;
         string directory = string.Empty;
         var diagnosticGoos = new List<SimpleDragonDiagnosticGoo>();
-        var geometryWrappers = new List<GH_ObjectWrapper>();
         bool export = false;
         bool overwrite = false;
         if (!DA.GetData(0, ref resultGoo)
             || !DA.GetData(2, ref directory)
-            || !DA.GetData(5, ref export)
-            || !DA.GetData(6, ref overwrite)
+            || !DA.GetData(4, ref export)
+            || !DA.GetData(5, ref overwrite)
             || resultGoo?.Value is null)
         {
             return;
@@ -87,23 +80,14 @@ public sealed class ExportGreenRetrofitCsvComponent : SimpleDragonComponent
 
         DA.GetData(1, ref modelGoo);
         DA.GetDataList(3, diagnosticGoos);
-        DA.GetDataList(4, geometryWrappers);
         string caseId = modelGoo?.Value?.Id.Value ?? string.Empty;
         Diagnostic[] diagnostics = diagnosticGoos
             .Where(item => item?.Value is not null)
             .Select(item => item.Value!)
             .ToArray();
-        GreenRetrofitGeometryMapEntry[] geometryMap = geometryWrappers
-            .Select(wrapper => wrapper?.Value)
-            .OfType<GreenRetrofitGeometryMapEntry>()
-            .ToArray();
-        if (geometryMap.Length != geometryWrappers.Count)
-        {
-            AddRuntimeMessage(
-                GH_RuntimeMessageLevel.Error,
-                "Geometry Map Data contains a value that is not a GreenRetrofitGeometryMapEntry.");
-            return;
-        }
+        IReadOnlyList<GreenRetrofitGeometryMapEntry> geometryMap = resultGoo.GeometryMap.Count > 0
+            ? resultGoo.GeometryMap
+            : modelGoo?.GeometryMap ?? Array.Empty<GreenRetrofitGeometryMapEntry>();
 
         GreenRetrofitCsvPackage package = GreenRetrofitCsvExporter.CreatePackage(
             resultGoo.Value,

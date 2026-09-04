@@ -534,14 +534,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             "S",
             "Resolved area-based surfaces, one branch per Zone.",
             GH_ParamAccess.tree);
-        pManager.AddTextParameter("Geometry Map", "Map", "Domain ID to Zone/Surface/Opening/trim source-provenance mapping.", GH_ParamAccess.list);
-        pManager.AddGenericParameter(
-            "Geometry Map Data",
-            "Map Data",
-            "Structured Rhino-independent geometry mapping for CSV and downstream workflows.",
-            GH_ParamAccess.list);
         pManager.AddTextParameter("JSON", "J", "Deterministic GRM 0.7 JSON.", GH_ParamAccess.item);
-        pManager.AddNumberParameter("Floor Area", "A", "Total floor area in m².", GH_ParamAccess.item);
         pManager.AddParameter(new SimpleDragonDiagnosticParam(), "Diagnostics", "D", "Geometry, weather, and model diagnostics.", GH_ParamAccess.list);
     }
 
@@ -724,7 +717,10 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
                 "Extracted wall azimuths use Rhino world north; the GRM North Axis remains a separate model value.",
                 suggestedAction: "Do not pre-rotate authored Surface geometry to apply the model North Axis."));
 
-            DA.SetData(0, new GreenRetrofitModelGoo(model));
+            GreenRetrofitGeometryMapEntry[] geometryMap = extraction.GeometryMap
+                .Select(ToCoreGeometryMapEntry)
+                .ToArray();
+            DA.SetData(0, new GreenRetrofitModelGoo(model, geometryMap));
             DA.SetDataList(1, zones.Select(item => new SimpleDragonZoneGoo(item)));
             var surfaceTree = new GH_Structure<SimpleDragonSurfaceGoo>();
             for (int zoneIndex = 0; zoneIndex < zones.Length; zoneIndex++)
@@ -737,10 +733,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             }
 
             DA.SetDataTree(2, surfaceTree);
-            DA.SetDataList(3, extraction.GeometryMap.Select(FormatMap));
-            DA.SetDataList(4, extraction.GeometryMap.Select(ToCoreGeometryMapEntry));
-            DA.SetData(5, GrmWriter.Serialize(model));
-            DA.SetData(6, model.Area);
+            DA.SetData(3, GrmWriter.Serialize(model));
             FinishDiagnostics(DA, diagnostics);
         }
         catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
@@ -779,7 +772,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
     private void FinishDiagnostics(IGH_DataAccess access, IReadOnlyList<Diagnostic> diagnostics)
     {
         Report(diagnostics);
-        access.SetDataList(7, diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
+        access.SetDataList(4, diagnostics.Select(item => new SimpleDragonDiagnosticGoo(item)));
     }
 
     private static T[] DistinctById<T>(IEnumerable<T> values)
@@ -805,20 +798,6 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             PhotovoltaicSystem item => item.Id.Value,
             _ => throw new ArgumentException("Unsupported catalog type '" + typeof(T).FullName + "'."),
         };
-    }
-
-    private static string FormatMap(RhinoDomainGeometryMapEntry entry)
-    {
-        string surface = entry.SurfaceIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        string opening = entry.OpeningIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        string trimLoop = entry.TrimLoopIndex?.ToString(CultureInfo.InvariantCulture) ?? "-";
-        return entry.EntityId.Value
-            + " | " + entry.Kind
-            + " | zone " + entry.ZoneIndex.ToString(CultureInfo.InvariantCulture)
-            + " | surface " + surface
-            + " | opening " + opening
-            + " | trim loop " + trimLoop
-            + " | " + entry.Provenance.GeometryFingerprint;
     }
 
     private static GreenRetrofitGeometryMapEntry ToCoreGeometryMapEntry(RhinoDomainGeometryMapEntry entry)

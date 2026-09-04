@@ -35,8 +35,9 @@ The SimpleDragon two-Zone examples use one named single-face Brep parameter per
 Surface. Fenestration Construction feeds Opening only; each completed Opening
 feeds exactly one Surface, each completed Surface feeds exactly one Zone, and
 each Zone-exclusive HVAC/ERV value feeds exactly one Zone. Zone definitions feed
-Model. The complex authoring example ends at the complete GRM, while the
-execution example feeds that GRM directly to `Run SimpleDragon`.
+Model. The complex authoring example ends at the complete GRM and its derived
+Model Summary, while the execution example feeds that GRM directly to `Run
+SimpleDragon`.
 The standalone InvisibleDragon example follows the same rule: Window feeds its
 owning Surface, Surface/HVAC/ERV feed Zone, and only Zone plus model-level PV
 feed Model. It then shows `Model -> Compile -> Run` beside
@@ -58,6 +59,8 @@ rests at False; Overwrite remains a disabled option Toggle. Runtime,
 IDD, weather-cache, and run-temp paths are implementation-owned and never appear
 on the canonical canvas or in its manifest description; the visible GRR and CSV
 destinations are user-owned result paths.
+The Rhino provenance used by `geometry_map.csv` travels inside the typed
+GRM/GRR values; there is no public Map Data port or extra provenance wire.
 Building-model checks cover metre units, layers, object names and ownership user
 strings, planar single-face Surface Breps, exact bounds and outward normals,
 expected adjacency pairs, and closed planar window curves. The two-Zone graphs

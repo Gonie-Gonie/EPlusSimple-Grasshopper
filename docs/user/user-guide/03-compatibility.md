@@ -125,12 +125,14 @@ opening abstraction before generating deterministic InvisibleDragon geometry.
 Consequently a converted face is valid simulation geometry, not a promise to
 reproduce every original Rhino vertex.
 
-Structured Geometry Map outputs preserve the generated entity identity and
-source Rhino object/face provenance where available. `geometry_map.csv` carries
-the entity, topology indices, Rhino object, geometry fingerprint, and
-Grasshopper tree path/index; `diagnostics.csv` additionally carries a Brep face
-index when the diagnostic has one. Use these values to trace a result back to
-source geometry; users never supply them as relationship inputs.
+The typed GRM and GRR Grasshopper values privately preserve generated entity
+identity and source Rhino object/face provenance where available.
+`geometry_map.csv` receives this context automatically and carries the entity,
+topology indices, Rhino object, geometry fingerprint, and Grasshopper tree
+path/index; `diagnostics.csv` additionally carries a Brep face index when the
+diagnostic has one. Standalone GRM/GRR files intentionally do not store Rhino
+session provenance. Users never supply these identifiers as relationship or
+export inputs.
 
 The two Version components expose the product version and pinned upstream
 commit. CSV/batch manifests record the product/core versions and run identity;

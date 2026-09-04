@@ -822,10 +822,18 @@ internal static class AdvancedExampleDefinitions
         {
             graph.Connect(photovoltaic, 0, model, 6);
         }
-        GraphNode map = graph.Panel(40, "Geometry provenance map", string.Empty, 2000, 1880);
-        GraphNode area = graph.Panel(41, "Total floor area", string.Empty, 2000, 2010);
-        graph.Connect(model, 3, map, null);
-        graph.Connect(model, 6, area, null);
+        GraphNode? modelSummary = null;
+        GraphNode? area = null;
+        if (!includeRuntimeWorkflow)
+        {
+            modelSummary = graph.Component(40, Catalog.SimpleModelSummary, 2070, 1900);
+            area = graph.Panel(41, "Total floor area", string.Empty, 2420, 1900);
+            graph.Connect(model, 0, modelSummary, 0);
+            graph.Connect(modelSummary, 0, area, null);
+            graph.ExpectOutput(modelSummary, 0, 1);
+            graph.ExpectOutput(area, null, 1);
+            graph.ExpectNumber(modelSummary, 0, 96, 1e-8);
+        }
         graph.ExpectOutput(westOpening, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
         graph.ExpectOutput(eastOpening, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonOpeningDefinitionGoo");
         foreach (GraphNode surface in westSurfaces.Concat(eastSurfaces))
@@ -845,9 +853,6 @@ internal static class AdvancedExampleDefinitions
         graph.ExpectOutput(eastZone, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneDefinitionGoo");
         graph.ExpectOutput(model, 0, 1, "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitModelGoo");
         graph.ExpectOutput(model, 1, 2, "Dragons.SimpleDragon.Grasshopper.Types.SimpleDragonZoneGoo");
-        graph.ExpectOutput(map, null, 1);
-        graph.ExpectOutput(area, null, 1);
-        graph.ExpectNumber(model, 6, 96, 1e-8);
 
         GraphNode sharedNote = graph.Note(
             800,
@@ -923,15 +928,15 @@ internal static class AdvancedExampleDefinitions
         RuntimeWorkflowExpectation? runtimeWorkflow = null;
         if (!includeRuntimeWorkflow)
         {
-            GraphNode json = graph.Panel(42, "Complete GRM JSON", string.Empty, 2230, 1880);
-            GraphNode diagnostics = graph.Panel(43, "Model diagnostics", string.Empty, 2230, 2050);
-            graph.Connect(model, 5, json, null);
-            graph.Connect(model, 7, diagnostics, null);
+            GraphNode json = graph.Panel(42, "Complete GRM JSON", string.Empty, 2420, 2080);
+            GraphNode diagnostics = graph.Panel(43, "Model diagnostics", string.Empty, 2420, 2250);
+            graph.Connect(model, 3, json, null);
+            graph.Connect(model, 4, diagnostics, null);
             graph.ExpectOutput(json, null, 1);
             graph.ExpectOutput(diagnostics, null, 1);
             GraphNode modelNote = graph.Note(
                 803,
-                "Collect both zone objects into one model; inspect area, provenance, GRM JSON and diagnostics.",
+                "Collect both zone objects into one model; use Model Summary for derived properties, then inspect GRM JSON and diagnostics.",
                 1450,
                 1810);
             graph.Group(
@@ -943,8 +948,8 @@ internal static class AdvancedExampleDefinitions
                     modelNote,
                     modelName,
                     model,
-                    map,
-                    area,
+                    modelSummary!,
+                    area!,
                     json,
                     diagnostics,
                 }
@@ -964,9 +969,7 @@ internal static class AdvancedExampleDefinitions
                 ExampleGroupTheme.Model,
                 modelNote,
                 modelName,
-                model,
-                map,
-                area);
+                model);
 
             GraphNode runTrigger = graph.Button(103, "Run", 2500, 1700);
             GraphNode cancelTrigger = graph.Button(104, "Cancel", 2500, 1780);
@@ -1003,9 +1006,8 @@ internal static class AdvancedExampleDefinitions
             graph.Connect(model, 0, exportCsv, 1);
             graph.Connect(exportDirectory, null, exportCsv, 2);
             graph.Connect(run, 3, exportCsv, 3);
-            graph.Connect(model, 4, exportCsv, 4);
-            graph.Connect(exportTrigger, null, exportCsv, 5);
-            graph.Connect(overwrite, null, exportCsv, 6);
+            graph.Connect(exportTrigger, null, exportCsv, 4);
+            graph.Connect(overwrite, null, exportCsv, 5);
             GraphNode runState = graph.Panel(130, "SimpleDragon run state", string.Empty, 3200, 1740);
             GraphNode runSuccess = graph.Panel(131, "SimpleDragon run success", string.Empty, 3200, 1900);
             GraphNode annualResult = graph.Panel(134, "Annual site result", string.Empty, 3550, 1210);
@@ -1302,7 +1304,7 @@ internal static class AdvancedExampleDefinitions
         }
 
         graph.Connect(exportDirectory, null, export, 2);
-        graph.Connect(exportTrigger, null, export, 5);
+        graph.Connect(exportTrigger, null, export, 4);
         graph.Connect(summary, 1, annual, null);
         graph.Connect(dataTree, 3, monthly, null);
         graph.Connect(linePlot, 0, lines, null);
@@ -3256,6 +3258,7 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleWall = S("2c0bc0e2-df1d-4e42-9b97-d841e8c83214", "CreateSimpleDragonWallComponent");
         internal static readonly ComponentIdentity SimpleZone = S("30b8e2c4-207a-4cf5-9801-ac4ae16d33e2", "CreateSimpleDragonZoneComponent");
         internal static readonly ComponentIdentity SimpleModel = S("ce38124b-f99b-4d09-be3b-e5e5717db707", "CreateSimpleDragonModelComponent");
+        internal static readonly ComponentIdentity SimpleModelSummary = S("f2e7bb6b-9cf9-4833-9069-b9be4089e1b3", "GreenRetrofitModelSummaryComponent");
         internal static readonly ComponentIdentity SimpleRun = S("6e242e51-77ce-4f77-8445-a17d636c7310", "RunSimpleDragonComponent");
         internal static readonly ComponentIdentity SimpleReadResult = S("a03fb1d7-7ae2-4e2c-ab31-0e626af50163", "ReadGreenRetrofitResultComponent");
         internal static readonly ComponentIdentity SimpleResultSummary = S("577809aa-2d1c-40ea-aa50-f71d73f19f83", "GreenRetrofitResultSummaryComponent");
@@ -3274,7 +3277,8 @@ internal static class AdvancedExampleDefinitions
             InvisibleWeather, InvisibleManagedRun, InvisibleResultSummary,
             SimpleMaterial, SimpleLayer, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleOpening, SimpleFloor, SimpleCeiling, SimpleWall, SimpleZone, SimpleModel, SimpleRun,
+            SimplePv, SimpleOpening, SimpleFloor, SimpleCeiling, SimpleWall, SimpleZone, SimpleModel,
+            SimpleModelSummary, SimpleRun,
             SimpleReadResult, SimpleResultSummary, SimpleDataTree,
             SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatchCase, SimpleManagedBatch,
         };

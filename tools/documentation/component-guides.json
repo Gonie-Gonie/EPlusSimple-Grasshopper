@@ -435,11 +435,21 @@
     "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonModelComponent": {
       "role": "Authoring",
       "purpose": "Resolves all Zone definitions together, infers geometry adjacency, derives every nested catalog, selects climate metadata, and creates the complete GRM 0.7 model.",
-      "workflow": "Connect all completed Zone branches and optional model-level PV panels, set Address and Vintage, inspect Diagnostics and Floor Area, then wire GRM directly to Run SimpleDragon. Use Geometry Map Data, rather than the display-text map, when exporting CSV provenance.",
+      "workflow": "Connect all completed Zone branches and optional model-level PV panels, set Address and Vintage, inspect Diagnostics, then wire GRM directly to Run SimpleDragon and Model Summary. Geometry provenance stays inside the typed GRM and follows it automatically into Run and CSV Export.",
       "caveats": [
         "Address must equal or begin with a packaged Korean administrative-area name; Vintage must use yyyy-MM-dd and be covered by the climate database.",
         "An active Rhino document supplies units and tolerances, and Floor/Ceiling/Wall normals must agree with their explicit component types.",
         "North Axis remains a model value while wall azimuths use Rhino world north; do not pre-rotate geometry merely to apply North Axis."
+      ]
+    },
+    "Dragons.SimpleDragon.Grasshopper.Components.GreenRetrofitModelSummaryComponent": {
+      "role": "Analysis",
+      "purpose": "Exposes the Python-oracle-compatible derived envelope, load, infiltration, and weather properties of a typed SimpleDragon model without expanding the SD Model authoring component.",
+      "workflow": "Connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.",
+      "caveats": [
+        "Exterior Windows includes windows and glass doors hosted by exterior walls; exterior floors include outdoor and ground-contact floors.",
+        "A zero weighted value can also mean there was no contributing resolved construction or load. Average Infiltration is the zone-volume-weighted source value at 50 Pa, not natural ACH.",
+        "Weather outputs are unavailable when the GRM has no resolved weather selection; EPW filenames and paths remain internal."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitModelComponent": {
@@ -663,9 +673,9 @@
     "Dragons.SimpleDragon.Grasshopper.Components.ExportGreenRetrofitCsvComponent": {
       "role": "Result",
       "purpose": "Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.",
-      "workflow": "Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write.",
+      "workflow": "Connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.",
       "caveats": [
-        "The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv; connect structured Map Data rather than the display-text map.",
+        "The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv. A GRM or GRR read from a standalone file has no Rhino-session provenance, so geometry_map.csv is header-only unless live Grasshopper context is present.",
         "An unpressed Export Button provides the no-write preview, while the Overwrite option Toggle blocks existing package files when False. Export is internally level-sensitive, so use a momentary Button rather than a Toggle.",
         "File Paths describe what would be written; Written is the authoritative indication that all package files were created in that solution."
       ]

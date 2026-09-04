@@ -279,7 +279,11 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         Message = state;
         if (visibleOutcome?.Result is not null)
         {
-            DA.SetData(0, new GreenRetrofitResultGoo(visibleOutcome.Result));
+            DA.SetData(
+                0,
+                new GreenRetrofitResultGoo(
+                    visibleOutcome.Result,
+                    modelGoo!.GeometryMap));
         }
 
         DA.SetData(1, state);

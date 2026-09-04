@@ -66,6 +66,17 @@ public sealed class SimpleDragonFenestrationConstructionParam : SimpleDragonPara
     public override Guid ComponentGuid => new("7b9bc26e-4c53-4955-abad-026293dc5e63");
 }
 
+public sealed class SimpleDragonFenestrationParam
+    : SimpleDragonParam<Types.SimpleDragonFenestrationGoo>
+{
+    public SimpleDragonFenestrationParam()
+        : base(
+            "SimpleDragon Fenestration",
+            "Fenestration",
+            "A SimpleDragon window, glass door, or opaque door.") { }
+    public override Guid ComponentGuid => new("f79add66-5a0e-4c0b-b42e-8b02fb7e153f");
+}
+
 public sealed class SimpleDragonUsageProfileParam : SimpleDragonParam<Types.SimpleDragonUsageProfileGoo>
 {
     public SimpleDragonUsageProfileParam() : base("SimpleDragon Usage Profile", "Profile", "A SimpleDragon Korean usage profile.") { }

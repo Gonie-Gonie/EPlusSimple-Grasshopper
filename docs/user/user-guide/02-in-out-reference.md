@@ -4,7 +4,7 @@ _Generated from the public runtime catalog; do not edit this chapter directly._
 
 This reference combines runtime-reflected Grasshopper ports with curated workflow guidance. It covers every public component in InvisibleDragon and SimpleDragon; port order, access mode, defaults, choices, and wire types come from the built plugins rather than a manually maintained list.
 
-**Coverage:** 75 components and 37 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
+**Coverage:** 76 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
 
 A port marked optional accepts an omitted wire. A non-optional port can still show a persistent default; consult the Default / choices column before wiring a replacement. Choice inputs are selected directly on the component and are flagged so integer or identifier plumbing is unnecessary.
 
@@ -1970,7 +1970,7 @@ _This component has no inputs._
 
 **Purpose:** Resolves all Zone definitions together, infers geometry adjacency, derives every nested catalog, selects climate metadata, and creates the complete GRM 0.7 model.
 
-**How to use it:** Connect all completed Zone branches and optional model-level PV panels, set Address and Vintage, inspect Diagnostics and Floor Area, then wire GRM directly to Run SimpleDragon. Use Geometry Map Data, rather than the display-text map, when exporting CSV provenance.
+**How to use it:** Connect all completed Zone branches and optional model-level PV panels, set Address and Vintage, inspect Diagnostics, then wire GRM directly to Run SimpleDragon and Model Summary. Geometry provenance stays inside the typed GRM and follows it automatically into Run and CSV Export.
 
 **Canvas location:** SimpleDragon → Model. Exposure: `primary`.
 
@@ -1999,11 +1999,49 @@ _This component has no inputs._
 | 0 | GRM (`GRM`) | SimpleDragon GRM | Item | Complete GRM 0.7 model. |
 | 1 | Zones (`Z`) | SimpleDragon Zone | List | Resolved immutable thermal zones. |
 | 2 | Surfaces (`S`) | SimpleDragon Surface | Tree | Resolved area-based surfaces, one branch per Zone. |
-| 3 | Geometry Map (`Map`) | Text | List | Domain ID to Zone/Surface/Opening/trim source-provenance mapping. |
-| 4 | Geometry Map Data (`Map Data`) | Generic Data | List | Structured Rhino-independent geometry mapping for CSV and downstream workflows. |
-| 5 | JSON (`J`) | Text | Item | Deterministic GRM 0.7 JSON. |
-| 6 | Floor Area (`A`) | Number | Item | Total floor area in m². |
-| 7 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Geometry, weather, and model diagnostics. |
+| 3 | JSON (`J`) | Text | Item | Deterministic GRM 0.7 JSON. |
+| 4 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Geometry, weather, and model diagnostics. |
+
+##### SimpleDragon Model Summary (`SD Model Summary`)
+
+**Role:** Analysis
+
+**Purpose:** Exposes the Python-oracle-compatible derived envelope, load, infiltration, and weather properties of a typed SimpleDragon model without expanding the SD Model authoring component.
+
+**How to use it:** Connect GRM from SimpleDragon Model or Read GRM. Use Floor Area and the typed exterior Surface/Fenestration lists for model checks, and use the weighted U-value, ACH50, LPD, climate, terrain, and weather-location outputs for downstream analysis.
+
+**Canvas location:** SimpleDragon → Model. Exposure: `primary`.
+
+**Important caveats:**
+
+- Exterior Windows includes windows and glass doors hosted by exterior walls; exterior floors include outdoor and ground-contact floors.
+- A zero weighted value can also mean there was no contributing resolved construction or load. Average Infiltration is the zone-volume-weighted source value at 50 Pa, not natural ACH.
+- Weather outputs are unavailable when the GRM has no resolved weather selection; EPW filenames and paths remain internal.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | GRM (`GRM`) | SimpleDragon GRM | Item | No | — | SimpleDragon model to summarize. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Floor Area (`Area`) | Number | Item | Total conditioned zone floor area in m². |
+| 1 | Exterior Floors (`Floors`) | SimpleDragon Surface | List | Exterior or ground-contact floor surfaces. |
+| 2 | Exterior Roofs (`Roofs`) | SimpleDragon Surface | List | Outdoor ceiling surfaces used as exterior roofs. |
+| 3 | Exterior Walls (`Walls`) | SimpleDragon Surface | List | Outdoor wall surfaces. |
+| 4 | Exterior Windows (`Windows`) | SimpleDragon Fenestration | List | Windows and glass doors hosted by exterior walls. |
+| 5 | Average Exterior Floor U-Value (`Floor U`) | Number | Item | Area-weighted U-value of exterior and ground-contact floors in W/(m²·K). |
+| 6 | Average Exterior Roof U-Value (`Roof U`) | Number | Item | Area-weighted U-value of exterior roofs in W/(m²·K). |
+| 7 | Average Exterior Wall U-Value (`Wall U`) | Number | Item | Area-weighted U-value of exterior walls in W/(m²·K). |
+| 8 | Average Window U-Value (`Window U`) | Number | Item | Area-weighted U-value of exterior windows and glass doors in W/(m²·K). |
+| 9 | Average Infiltration at 50 Pa (`ACH50`) | Number | Item | Zone-volume-weighted average infiltration rate at 50 Pa in air changes per hour. |
+| 10 | Average Lighting Power Density (`LPD`) | Number | Item | Zone-area-weighted average lighting power density in W/m² for zones with a defined value. |
+| 11 | Climate Region (`Climate`) | Text | Item | Resolved climate region embedded in the model. |
+| 12 | Terrain (`Terrain`) | Text | Item | Resolved terrain category embedded in the model. |
+| 13 | Weather Location (`Weather`) | Text | Item | Resolved weather-station location embedded in the model. |
 
 ##### SimpleDragon Packaged Air Conditioner (`SD Packaged AC`)
 
@@ -2169,13 +2207,13 @@ _This component has no inputs._
 
 **Purpose:** Builds a deterministic eight-file analysis package from a GRR and optionally enriches its manifest, diagnostics, and geometry provenance.
 
-**How to use it:** Connect GRR, optionally GRM, Run Diagnostics, and SimpleDragon Model's structured Geometry Map Data, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write.
+**How to use it:** Connect GRR, Directory, and optionally GRM and Run Diagnostics, then inspect File Names, Paths, and Content while the Export Button is unpressed. Press Export once for a deliberate user-owned write; live Rhino provenance follows the typed GRM and GRR automatically.
 
 **Canvas location:** SimpleDragon → Results. Exposure: `primary`.
 
 **Important caveats:**
 
-- The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv; connect structured Map Data rather than the display-text map.
+- The package contains manifest.json, summary.csv, monthly/annual files by fuel and end use, diagnostics.csv, and geometry_map.csv. A GRM or GRR read from a standalone file has no Rhino-session provenance, so geometry_map.csv is header-only unless live Grasshopper context is present.
 - An unpressed Export Button provides the no-write preview, while the Overwrite option Toggle blocks existing package files when False. Export is internally level-sensitive, so use a momentary Button rather than a Toggle.
 - File Paths describe what would be written; Written is the authoritative indication that all package files were created in that solution.
 
@@ -2187,9 +2225,8 @@ _This component has no inputs._
 | 1 | GRM (`GRM`) | SimpleDragon GRM | Item | Yes | — | Optional source model metadata for manifest.json. |
 | 2 | Directory (`D`) | Text | Item | No | — | Requested export directory. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
 | 3 | Diagnostics (`Diag`) | SimpleDragon Diagnostic | List | Yes | — | Optional diagnostics to include. |
-| 4 | Geometry Map Data (`Map`) | Generic Data | List | Yes | — | Structured GreenRetrofitGeometryMapEntry values from SimpleDragon Model. |
-| 5 | Export (`E`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write; unpressed previews content without creating files. |
-| 6 | Overwrite (`O`) | Boolean | Item | No | Default: `False` | Explicitly allow replacement of existing package files. |
+| 4 | Export (`E`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it once to write; unpressed previews content without creating files. |
+| 5 | Overwrite (`O`) | Boolean | Item | No | Default: `False` | Explicitly allow replacement of existing package files. |
 
 **Outputs**
 
@@ -2535,6 +2572,7 @@ Typed parameters are the native Grasshopper containers carried by component wire
 | SimpleDragon Batch Case | `Batch Case` | SimpleDragon Batch Case | secondary | One SimpleDragon GRM alternative with its optional stable batch case ID. |
 | SimpleDragon Construction Layer | `Layer` | SimpleDragon Construction Layer | secondary | One material and thickness in a SimpleDragon opaque construction. |
 | SimpleDragon Diagnostic | `Diagnostic` | SimpleDragon Diagnostic | secondary | A stable SimpleDragon validation or execution diagnostic. |
+| SimpleDragon Fenestration | `Fenestration` | SimpleDragon Fenestration | secondary | A SimpleDragon window, glass door, or opaque door. |
 | SimpleDragon Fenestration Construction | `Fenestration` | SimpleDragon Fenestration Construction | secondary | A SimpleDragon window or door construction. |
 | SimpleDragon GRM | `GRM` | SimpleDragon GRM | secondary | A complete GRM 0.7 SimpleDragon model. |
 | SimpleDragon GRR | `GRR` | SimpleDragon GRR | secondary | A complete GRR 0.7 SimpleDragon result. |
@@ -2553,4 +2591,4 @@ Typed parameters are the native Grasshopper containers carried by component wire
 
 ---
 
-Reference completeness: 75 of 75 public components documented; 37 standalone typed parameters listed.
+Reference completeness: 76 of 76 public components documented; 38 standalone typed parameters listed.

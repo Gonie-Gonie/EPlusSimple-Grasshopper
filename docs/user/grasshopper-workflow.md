@@ -60,6 +60,12 @@ automatically. The Model also derives the material, construction,
 supply, source, and ventilation catalogs from the connected objects, so those
 catalogs need no parallel wires into a later assembly component.
 
+Connect the GRM to `SD Model Summary` when you need derived model information.
+It exposes floor area, typed exterior envelope/opening lists, weighted U-values,
+infiltration at 50 Pa, lighting power density, and resolved climate metadata.
+The authoring component itself stays compact. Rhino source provenance remains
+inside the typed GRM/GRR wire and reaches CSV Export automatically.
+
 Build each opaque construction from `Construction Layer` values. Each layer owns
 its Material and Thickness, and the construction receives one ordered Layers
 list; Materials and Thicknesses are never matched by list position.
@@ -182,7 +188,7 @@ The tracked definitions under `examples/` progress from materials and profiles t
   separate, and each Zone owning one Surface branch; terminal systems and ERVs
   remain directly owned by their Zones;
   a heat-pump/AHU serves the west Zone, a boiler/radiator serves the east Zone,
-  and PV is resolved with both into one complete GRM;
+  and PV is resolved with both into one complete GRM and Model Summary;
 - `14-simpledragon-two-zone-run-results-csv.gh`: the stable end-to-end example,
   with an electric radiator and ERV connected directly to each Zone,
   `SD Model -> Run SimpleDragon -> GRR`, a directly connected default monthly

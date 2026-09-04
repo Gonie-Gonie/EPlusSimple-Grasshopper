@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Text.Json;
 using Dragons.BuildingEnergy.Contracts;
 using Rhino.Geometry;
@@ -29,6 +30,7 @@ internal static class SimpleDragonGooSnapshot
             SurfaceConstructionLayer layer => ("surface-construction-layer", ToJson(SurfaceLayerSnapshot.From(layer))),
             SurfaceConstruction construction => ("surface-construction", ToJson(SurfaceConstructionSnapshot.From(construction))),
             FenestrationConstruction construction => ("fenestration-construction", ToJson(FenestrationConstructionSnapshot.From(construction))),
+            Fenestration fenestration => ("fenestration", ToJson(FenestrationSnapshot.From(fenestration))),
             UsageProfile profile => ("usage-profile", ToJson(UsageProfileSnapshot.From(profile))),
             Surface surface => ("surface", ToJson(SurfaceSnapshot.From(surface))),
             Zone zone => ("zone", ToJson(ZoneSnapshot.From(zone))),
@@ -69,6 +71,7 @@ internal static class SimpleDragonGooSnapshot
             "surface-construction-layer" => FromJson<SurfaceLayerSnapshot>(envelope.Payload).ToDomain(),
             "surface-construction" => FromJson<SurfaceConstructionSnapshot>(envelope.Payload).ToDomain(),
             "fenestration-construction" => FromJson<FenestrationConstructionSnapshot>(envelope.Payload).ToDomain(),
+            "fenestration" => FromJson<FenestrationSnapshot>(envelope.Payload).ToDomain(),
             "usage-profile" => FromJson<UsageProfileSnapshot>(envelope.Payload).ToDomain(),
             "surface" => FromJson<SurfaceSnapshot>(envelope.Payload).ToDomain(),
             "zone" => FromJson<ZoneSnapshot>(envelope.Payload).ToDomain(),
@@ -86,6 +89,19 @@ internal static class SimpleDragonGooSnapshot
         return value as T
             ?? throw new InvalidDataException(
                 "The snapshot contains '" + value.GetType().FullName + "', not '" + typeof(T).FullName + "'.");
+    }
+
+    internal static string SerializeGeometryMap(
+        IEnumerable<GreenRetrofitGeometryMapEntry> geometryMap)
+    {
+        return ToJson(geometryMap.Select(GeometryMapEntrySnapshot.From).ToArray());
+    }
+
+    internal static ReadOnlyCollection<GreenRetrofitGeometryMapEntry> DeserializeGeometryMap(
+        string snapshot)
+    {
+        GeometryMapEntrySnapshot[] values = FromJson<GeometryMapEntrySnapshot[]>(snapshot);
+        return Array.AsReadOnly(values.Select(item => item.ToDomain()).ToArray());
     }
 
     private static string ToJson<T>(T value)
@@ -107,6 +123,60 @@ internal static class SimpleDragonGooSnapshot
         public string Kind { get; set; } = string.Empty;
 
         public string Payload { get; set; } = string.Empty;
+    }
+
+    private sealed class GeometryMapEntrySnapshot
+    {
+        public string EntityId { get; set; } = string.Empty;
+
+        public GreenRetrofitGeometryKind Kind { get; set; }
+
+        public int ZoneIndex { get; set; }
+
+        public int? SurfaceIndex { get; set; }
+
+        public int? OpeningIndex { get; set; }
+
+        public int? TrimLoopIndex { get; set; }
+
+        public Guid? RhinoObjectId { get; set; }
+
+        public int? BrepFaceIndex { get; set; }
+
+        public string GeometryFingerprint { get; set; } = string.Empty;
+
+        public string? GrasshopperPath { get; set; }
+
+        public int? GrasshopperIndex { get; set; }
+
+        public static GeometryMapEntrySnapshot From(GreenRetrofitGeometryMapEntry value) => new()
+        {
+            EntityId = value.EntityId.Value,
+            Kind = value.Kind,
+            ZoneIndex = value.ZoneIndex,
+            SurfaceIndex = value.SurfaceIndex,
+            OpeningIndex = value.OpeningIndex,
+            TrimLoopIndex = value.TrimLoopIndex,
+            RhinoObjectId = value.Provenance.RhinoObjectId,
+            BrepFaceIndex = value.Provenance.BrepFaceIndex,
+            GeometryFingerprint = value.Provenance.GeometryFingerprint,
+            GrasshopperPath = value.Provenance.GrasshopperPath,
+            GrasshopperIndex = value.Provenance.GrasshopperIndex,
+        };
+
+        public GreenRetrofitGeometryMapEntry ToDomain() => new(
+            new EntityId(EntityId),
+            Kind,
+            ZoneIndex,
+            SurfaceIndex,
+            OpeningIndex,
+            TrimLoopIndex,
+            new GeometryProvenance(
+                RhinoObjectId,
+                BrepFaceIndex,
+                GeometryFingerprint,
+                GrasshopperPath,
+                GrasshopperIndex));
     }
 
     private sealed class MaterialSnapshot

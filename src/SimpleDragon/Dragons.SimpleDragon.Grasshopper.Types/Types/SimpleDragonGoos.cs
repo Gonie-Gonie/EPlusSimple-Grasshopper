@@ -64,6 +64,19 @@ public sealed class SimpleDragonFenestrationConstructionGoo : SimpleDragonGoo<Fe
     protected override string DisplayText(FenestrationConstruction value) => $"Fenestration {value.Name} (U {value.UValue:0.###})";
 }
 
+public sealed class SimpleDragonFenestrationGoo : SimpleDragonGoo<Fenestration>
+{
+    public SimpleDragonFenestrationGoo() { }
+    public SimpleDragonFenestrationGoo(Fenestration value) : base(value) { }
+    public override string TypeName => "SimpleDragon Fenestration";
+    public override string TypeDescription => "A SimpleDragon window, glass door, or opaque door.";
+    protected override SimpleDragonGoo<Fenestration> Create(Fenestration value) =>
+        new SimpleDragonFenestrationGoo(value);
+    protected override SimpleDragonGoo<Fenestration> CreateEmpty() => new SimpleDragonFenestrationGoo();
+    protected override string DisplayText(Fenestration value) =>
+        $"{value.Type} {value.Name} ({value.Area:0.###} m\u00B2)";
+}
+
 public sealed class SimpleDragonUsageProfileGoo : SimpleDragonGoo<UsageProfile>
 {
     public SimpleDragonUsageProfileGoo() { }
@@ -133,24 +146,38 @@ public sealed class SimpleDragonPhotovoltaicPanelGoo : SimpleDragonGoo<Photovolt
         $"Photovoltaic Panel {value.Name} ({value.Area:0.###} m\u00B2)";
 }
 
-public sealed class GreenRetrofitModelGoo : SimpleDragonGoo<GreenRetrofitModel>
+public sealed class GreenRetrofitModelGoo : SimpleDragonGeometryContextGoo<GreenRetrofitModel>
 {
     public GreenRetrofitModelGoo() { }
-    public GreenRetrofitModelGoo(GreenRetrofitModel value) : base(value) { }
+
+    public GreenRetrofitModelGoo(
+        GreenRetrofitModel value,
+        IEnumerable<GreenRetrofitGeometryMapEntry>? geometryMap = null)
+        : base(value, geometryMap)
+    { }
+
     public override string TypeName => "SimpleDragon GRM";
     public override string TypeDescription => "A complete GRM 0.7 SimpleDragon model.";
-    protected override SimpleDragonGoo<GreenRetrofitModel> Create(GreenRetrofitModel value) => new GreenRetrofitModelGoo(value);
+    protected override SimpleDragonGoo<GreenRetrofitModel> Create(GreenRetrofitModel value) =>
+        new GreenRetrofitModelGoo(value, GeometryMap);
     protected override SimpleDragonGoo<GreenRetrofitModel> CreateEmpty() => new GreenRetrofitModelGoo();
     protected override string DisplayText(GreenRetrofitModel value) => $"GRM {value.Name} ({value.Zones.Count} zones, {value.Area:0.###} m\u00B2)";
 }
 
-public sealed class GreenRetrofitResultGoo : SimpleDragonGoo<GreenRetrofitResult>
+public sealed class GreenRetrofitResultGoo : SimpleDragonGeometryContextGoo<GreenRetrofitResult>
 {
     public GreenRetrofitResultGoo() { }
-    public GreenRetrofitResultGoo(GreenRetrofitResult value) : base(value) { }
+
+    public GreenRetrofitResultGoo(
+        GreenRetrofitResult value,
+        IEnumerable<GreenRetrofitGeometryMapEntry>? geometryMap = null)
+        : base(value, geometryMap)
+    { }
+
     public override string TypeName => "SimpleDragon GRR";
     public override string TypeDescription => "A complete GRR 0.7 SimpleDragon result.";
-    protected override SimpleDragonGoo<GreenRetrofitResult> Create(GreenRetrofitResult value) => new GreenRetrofitResultGoo(value);
+    protected override SimpleDragonGoo<GreenRetrofitResult> Create(GreenRetrofitResult value) =>
+        new GreenRetrofitResultGoo(value, GeometryMap);
     protected override SimpleDragonGoo<GreenRetrofitResult> CreateEmpty() => new GreenRetrofitResultGoo();
     protected override string DisplayText(GreenRetrofitResult value) => $"GRR ({value.TotalArea:0.###} m\u00B2)";
 }
