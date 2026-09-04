@@ -74,6 +74,10 @@ The canonical Grasshopper flow keeps ownership local and simulation setup intern
 
 *SimpleDragon keeps weather selection and EnergyPlus execution inside the direct run boundary.*
 
+`Run SimpleDragon` can optionally save its canonical GRR to a user-owned `GRR
+Path` on the same Run Button pulse. Leave that input blank for an in-memory-only
+result.
+
 ![Illustrated InvisibleDragon workflow from explicit model authoring and compilation through verified EPW input to EnergyPlus results.](docs/user/assets/illustrations/invisibledragon-workflow.png)
 
 *InvisibleDragon exposes the Energy Model, IDF, and verified EPW boundary while keeping the runtime internal.*

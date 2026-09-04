@@ -110,7 +110,7 @@ public sealed class CompositionComponentContractTests
         Assert.Equal(GH_ParamAccess.tree, model.Params.Output[2].Access);
         Assert.Equal("GreenRetrofitModelParam", run.Params.Input[0].GetType().Name);
         Assert.Equal(
-            new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout" },
+            new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout", "GRR Path" },
             run.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
             new[] { "GRR", "State", "Success", "Diagnostics" },

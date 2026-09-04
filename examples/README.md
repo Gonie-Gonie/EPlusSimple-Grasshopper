@@ -14,7 +14,7 @@ Surface Breps and window curves that can be referenced directly from Grasshopper
 | `11-simpledragon-envelope-hvac.gh` | Three-layer envelope, fenestration, packaged usage profile, three compatible source/supply families, ERV, and PV |
 | `12-simpledragon-two-zone-model.gh` | Complex two-Zone model authoring: explicit Floor/Ceiling/Wall components, opening-free Walls authored as a list, each opening-bearing Wall kept separate, one owned Surface branch per Zone, west heat-pump/AHU, east boiler/radiator, dedicated ERVs, PV, then one complete GRM with JSON, provenance, and area previews |
 | `13-simpledragon-results-and-plots.gh` | Real GRR read, annual summary, monthly DataTree, line plot, bar plot, and non-writing CSV preview |
-| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Floor/Ceiling/Wall ownership with plain-wall lists and separate opening hosts, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch with its identity derived internally |
+| `14-simpledragon-two-zone-run-results-csv.gh` | Stable end-to-end flow: explicit Floor/Ceiling/Wall ownership with plain-wall lists and separate opening hosts, dedicated electric radiators and ERVs connect to their own Zones, the complete model feeds `Run SimpleDragon` directly, its optional GRR Path saves the canonical result, and GRR feeds a zero-configuration monthly graph, summaries, and CSV; a typed Batch Case feeds managed batch with its identity derived internally |
 | `30-two-zone-office.3dm` | Twelve named planar Surface Breps forming two adjacent office Zones, plus two named south-window curves |
 | `31-three-zone-stepped-office.3dm` | Eighteen named planar Surface Breps forming two adjacent ground-floor Zones and an adjacent upper Zone, plus three named windows |
 
@@ -44,7 +44,8 @@ monthly SiteUses per area, grouped by fuel, on a 12 x 6 World XY frame. Its inte
 simple electric-radiator HVAC keeps this full-process execution example stable;
 use example 12 for the broader HVAC/ERV/PV composition demonstration. No EnergyPlus,
 IDD, EPW, runtime-root, or temporary-directory path belongs on this canonical
-SimpleDragon canvas.
+SimpleDragon canvas. Its visible GRR destination is a user-owned result path;
+clear that panel to run without saving a file.
 
 Neither Dragon authoring graph asks for entity or relationship IDs. The modules
 derive them deterministically from the authored content, while typed wires carry
@@ -72,7 +73,7 @@ this example does not create the preview directory or write CSV files.
 The canonical `Run SimpleDragon` component exposes no InvisibleDragon model,
 IDF, EnergyPlus-result, Weather, EnergyPlus, IDD, EPW, or temp-path port;
 implementation-owned artifacts remain in verified per-user caches or the system
-temporary directory. User-selected CSV export destinations remain visible.
+temporary directory. User-selected GRR and CSV result destinations remain visible.
 
 ## Relink the two-zone definition to live Rhino objects
 

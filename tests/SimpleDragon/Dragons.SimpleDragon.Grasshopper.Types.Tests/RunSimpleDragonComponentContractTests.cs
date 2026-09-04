@@ -6,6 +6,7 @@ using Dragons.BuildingEnergy.Contracts;
 using Dragons.EnergyPlus.Runtime;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
+using Grasshopper.Kernel.Parameters;
 using Grasshopper.Kernel.Types;
 
 namespace Dragons.SimpleDragon.Grasshopper.Tests;
@@ -20,7 +21,7 @@ public sealed class RunSimpleDragonComponentContractTests
         "Dragons.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent";
 
     [Fact]
-    public void DirectRunHasStablePathlessSimpleDragonContract()
+    public void DirectRunHasStableSimpleDragonContractWithOneOptionalResultPath()
     {
         GH_Component component = Component();
 
@@ -34,12 +35,17 @@ public sealed class RunSimpleDragonComponentContractTests
             component.Description,
             StringComparison.OrdinalIgnoreCase);
         Assert.Equal(
-            new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout" },
+            new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout", "GRR Path" },
             component.Params.Input.Select(parameter => parameter.Name));
         Assert.Equal(
             new[] { "GRR", "State", "Success", "Diagnostics" },
             component.Params.Output.Select(parameter => parameter.Name));
         Assert.Equal("GreenRetrofitModelParam", component.Params.Input[0].GetType().Name);
+        Assert.IsType<Param_String>(component.Params.Input[5]);
+        Assert.Equal(GH_ParamAccess.item, component.Params.Input[5].Access);
+        Assert.True(component.Params.Input[5].Optional);
+        Assert.Null(PersistentDefault(component.Params.Input[5]));
+        Assert.Contains("Leave blank", component.Params.Input[5].Description, StringComparison.Ordinal);
         Assert.Equal("GreenRetrofitResultParam", component.Params.Output[0].GetType().Name);
         Assert.Equal("SimpleDragonDiagnosticParam", component.Params.Output[3].GetType().Name);
         Assert.Equal(GH_ParamAccess.list, component.Params.Output[3].Access);
@@ -48,9 +54,13 @@ public sealed class RunSimpleDragonComponentContractTests
         Assert.False(Assert.IsType<bool>(PersistentDefault(component.Params.Input[3])));
         Assert.Equal(30d, Assert.IsType<double>(PersistentDefault(component.Params.Input[4])));
 
+        Assert.Equal(
+            new[] { "GRR Path" },
+            component.Params.Input
+                .Where(parameter => parameter.Name.Contains("Path", StringComparison.OrdinalIgnoreCase))
+                .Select(parameter => parameter.Name));
         Assert.All(component.Params.Input, parameter =>
         {
-            Assert.DoesNotContain("Path", parameter.Name, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("Directory", parameter.Name, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("Root", parameter.Name, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("EPW", parameter.Name, StringComparison.OrdinalIgnoreCase);
@@ -58,6 +68,106 @@ public sealed class RunSimpleDragonComponentContractTests
             Assert.DoesNotContain("IDF", parameter.Name, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("EnergyPlus", parameter.Name, StringComparison.OrdinalIgnoreCase);
         });
+    }
+
+    [Fact]
+    public void BlankGrrPathSkipsResolutionAndRelativePathUsesUnsavedDocumentTemp()
+    {
+        GH_Component component = Component();
+        MethodInfo resolve = Method(
+            component.GetType(),
+            "ResolveOptionalGrrPath",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+
+        Assert.Null(resolve.Invoke(component, new object[] { string.Empty }));
+        Assert.Null(resolve.Invoke(component, new object[] { "   " }));
+
+        string relative = Path.Combine("dragon-tests", Guid.NewGuid().ToString("N"), "result.grr");
+        string resolved = Assert.IsType<string>(resolve.Invoke(component, new object[] { relative }));
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine(Path.GetTempPath(), relative)),
+            resolved,
+            ignoreCase: true);
+    }
+
+    [Fact]
+    public void OptionalGrrPersistenceSkipsBlankCreatesParentsAndPreservesResultOnWriteFailure()
+    {
+        Type componentType = ComponentType();
+        MethodInfo persist = Method(
+            componentType,
+            "PersistResult",
+            BindingFlags.Static | BindingFlags.NonPublic);
+        GreenRetrofitResult result = GreenRetrofitResult.FromSiteUses(
+            12d,
+            EnergyUseBreakdown.Create((_, _) => Enumerable.Repeat(1d, MonthlySeries.MonthCount)));
+        string root = Path.Combine(Path.GetTempPath(), "dragon-grr-run-tests", Guid.NewGuid().ToString("N"));
+
+        try
+        {
+            object skipped = Required(persist.Invoke(
+                null,
+                new object?[]
+                {
+                    result,
+                    "Succeeded",
+                    Array.Empty<Diagnostic>(),
+                    "   ",
+                    CancellationToken.None,
+                }));
+            Assert.True(Property<bool>(skipped, "Success"));
+            Assert.Equal("Succeeded", Property<string>(skipped, "State"));
+            Assert.False(Directory.Exists(root));
+
+            string destination = Path.Combine(root, "nested", "result.grr");
+            object written = Required(persist.Invoke(
+                null,
+                new object?[]
+                {
+                    result,
+                    "Succeeded",
+                    Array.Empty<Diagnostic>(),
+                    destination,
+                    CancellationToken.None,
+                }));
+            Assert.True(Property<bool>(written, "Success"));
+            Assert.Same(result, Property<GreenRetrofitResult>(written, "Result"));
+            Assert.Equal("Succeeded", Property<string>(written, "State"));
+            Assert.True(File.Exists(destination));
+            byte[] bytes = File.ReadAllBytes(destination);
+            Assert.False(bytes.AsSpan().StartsWith(new byte[] { 0xEF, 0xBB, 0xBF }));
+            Assert.Equal(GrrWriter.Serialize(result), File.ReadAllText(destination));
+            Assert.True(GrrReader.ReadFile(destination).Success);
+
+            object failed = Required(persist.Invoke(
+                null,
+                new object?[]
+                {
+                    result,
+                    "Cached",
+                    Array.Empty<Diagnostic>(),
+                    root,
+                    CancellationToken.None,
+                }));
+            Assert.True(Property<bool>(failed, "Success"));
+            Assert.Same(result, Property<GreenRetrofitResult>(failed, "Result"));
+            Assert.Equal("GRR Save Failed", Property<string>(failed, "State"));
+            Diagnostic diagnostic = Assert.Single(Property<IReadOnlyList<Diagnostic>>(failed, "Diagnostics"));
+            Assert.Equal("SD.GH.RUN_GRR_WRITE_FAILED", diagnostic.Code);
+            Assert.True(diagnostic.IsFailure);
+            Assert.DoesNotContain(root, diagnostic.Message, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain(
+                root,
+                diagnostic.SuggestedAction ?? string.Empty,
+                StringComparison.OrdinalIgnoreCase);
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
     }
 
     [Fact]
@@ -246,6 +356,27 @@ public sealed class RunSimpleDragonComponentContractTests
         Assert.NotEqual(first, changedTimeout);
         Assert.Matches(new Regex("^[0-9a-f]{64}$", RegexOptions.CultureInvariant), first);
 
+        object automation = CreateAutomationOverrides(
+            NestedType(componentType, "AutomationOverrides"),
+            runtimeRoot: null,
+            iddPath: null,
+            weatherPath: null);
+        object firstPathInputs = CreateRunInputs(
+            inputsType,
+            model,
+            TimeSpan.FromMinutes(30),
+            automation,
+            Path.Combine(Path.GetTempPath(), "first.grr"));
+        object secondPathInputs = CreateRunInputs(
+            inputsType,
+            model,
+            TimeSpan.FromMinutes(30),
+            automation,
+            Path.Combine(Path.GetTempPath(), "second.grr"));
+        Assert.Equal(
+            Assert.IsType<string>(compute.Invoke(null, new[] { firstPathInputs })),
+            Assert.IsType<string>(compute.Invoke(null, new[] { secondPathInputs })));
+
         WeatherMetadata firstMetadata = SimpleDragonDatabase.Default.Weather.Items[0];
         WeatherMetadata secondMetadata = SimpleDragonDatabase.Default.Weather.Items.First(
             item => !string.Equals(
@@ -402,7 +533,7 @@ public sealed class RunSimpleDragonComponentContractTests
             Assert.False(resolution.Extracted);
             Assert.Empty(resolution.Diagnostics);
             Assert.Equal(
-                new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout" },
+                new[] { "GRM", "Run", "Cancel", "Force Rerun", "Timeout", "GRR Path" },
                 Component().Params.Input.Select(parameter => parameter.Name));
 
             string firstIdentity = Property<string>(automation, "CacheIdentity");
@@ -752,6 +883,19 @@ public sealed class RunSimpleDragonComponentContractTests
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
             binder: null,
             args: new[] { (object)model, timeout, automation },
+            culture: null));
+
+    private static object CreateRunInputs(
+        Type inputsType,
+        GreenRetrofitModel model,
+        TimeSpan timeout,
+        object automation,
+        string? resultPath) =>
+        Required(Activator.CreateInstance(
+            inputsType,
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+            binder: null,
+            args: new object?[] { model, timeout, automation, resultPath },
             culture: null));
 
     private static object CreateAutomationOverrides(

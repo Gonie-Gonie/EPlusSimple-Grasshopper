@@ -11,6 +11,9 @@ Energy+.idd, runtime root, EPW path, temp root, or output working directory.
 and verify the packaged EPW, converts the GRM to the execution IDF, resolves the
 supported runtime, runs EnergyPlus asynchronously, and returns a GRR. IDF and
 Weather are internal values rather than Grasshopper ports in this workflow.
+An optional `GRR Path` is a user-owned result destination, not an EnergyPlus,
+weather, runtime-cache, or temporary-work setup path. Leaving it blank performs
+no file write.
 
 The module-owned locations are:
 
@@ -75,7 +78,7 @@ Runtime bootstrap rejects archive traversal, links, device paths, excessive entr
 
 If a runtime or weather cache becomes invalid, the next explicit run reports a
 structured diagnostic and can prepare the module-owned cache again. The
-SimpleDragon Grasshopper product exposes one managed path-free run boundary;
+SimpleDragon Grasshopper product exposes one managed setup-path-free run boundary;
 conversion, preparation, compilation, and execution stay behind it.
 
 Successful simulations remove their temporary working directories after the

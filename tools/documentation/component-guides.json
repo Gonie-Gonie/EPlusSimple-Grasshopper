@@ -597,12 +597,13 @@
     },
     "Dragons.SimpleDragon.Grasshopper.Components.RunSimpleDragonComponent": {
       "role": "Trigger",
-      "purpose": "Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR without exposing an intermediate IDF workflow.",
-      "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
+      "purpose": "Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR and optionally saving the canonical GRR file without exposing an intermediate IDF workflow.",
+      "workflow": "Connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.",
       "caveats": [
         "One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.",
         "The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.",
-        "Previous GRR output is hidden while a new run is active or after inputs change, preventing downstream consumers from mixing stale results."
+        "A Run pulse saves a newly completed or cached GRR when GRR Path is set, creates missing parent directories, and replaces an existing destination; changing the path alone never launches work.",
+        "Previous GRR output is hidden while a run or cached-GRR save is active, or after simulation inputs change; a save failure keeps the completed in-memory GRR usable and is reported through State and Diagnostics."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.ReadGreenRetrofitResultComponent": {

@@ -1343,9 +1343,9 @@ _This component has no inputs._
 
 **Flags:** `RUN TRIGGER`
 
-**Purpose:** Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR without exposing an intermediate IDF workflow.
+**Purpose:** Runs one complete GRM through address-selected packaged weather and module-managed EnergyPlus, returning the final typed GRR and optionally saving the canonical GRR file without exposing an intermediate IDF workflow.
 
-**How to use it:** Connect GRM directly from SimpleDragon Model or Read GRM. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.
+**How to use it:** Connect GRM directly from SimpleDragon Model or Read GRM. Optionally connect a user-owned .grr or JSON destination to GRR Path; leave it blank to keep the result in Grasshopper only. Connect momentary Grasshopper Buttons to Run and Cancel, let them solve once at rest, then press Run. Send GRR directly to Summary, Data Tree, Plot, Write GRR, or CSV Export.
 
 **Canvas location:** SimpleDragon → Core. Exposure: `primary`.
 
@@ -1353,7 +1353,8 @@ _This component has no inputs._
 
 - One Run component accepts one data-matched input set; use Batch Case and Managed Batch for model lists or trees.
 - The last successful identical model/weather/timeout result is reused unless the Force Rerun option is True for the next Run Button press.
-- Previous GRR output is hidden while a new run is active or after inputs change, preventing downstream consumers from mixing stale results.
+- A Run pulse saves a newly completed or cached GRR when GRR Path is set, creates missing parent directories, and replaces an existing destination; changing the path alone never launches work.
+- Previous GRR output is hidden while a run or cached-GRR save is active, or after simulation inputs change; a save failure keeps the completed in-memory GRR usable and is reported through State and Diagnostics.
 
 **Inputs**
 
@@ -1364,6 +1365,7 @@ _This component has no inputs._
 | 2 | Cancel (`Cancel`) | Boolean | Item | No | Default: `False` | Connect a momentary Grasshopper Button and press it to cancel the active run. |
 | 3 | Force Rerun (`Force`) | Boolean | Item | No | Default: `False` | Ignore the last result for an identical GRM and timeout. |
 | 4 | Timeout (`Min`) | Number | Item | No | Default: `30` | Positive EnergyPlus timeout in minutes. |
+| 5 | GRR Path (`P`) | Text | Item | Yes | — | Optional destination .grr or JSON path. Leave blank to keep the GRR in memory only. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory. |
 
 **Outputs**
 
@@ -1371,7 +1373,7 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- |
 | 0 | GRR (`GRR`) | SimpleDragon GRR | Item | Last complete SimpleDragon result. |
 | 1 | State (`State`) | Text | Item | Idle, preparation/execution progress, Cached, or a terminal state. |
-| 2 | Success (`OK`) | Boolean | Item | True when the last run produced a complete GRR. |
+| 2 | Success (`OK`) | Boolean | Item | True when the last run produced a complete GRR. A requested file-write failure is reported by State and Diagnostics while the in-memory GRR remains usable. |
 | 3 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | SimpleDragon conversion, weather, runtime, simulation, and result diagnostics. |
 
 ##### SimpleDragon Version (`SimpleDragonVersion`)

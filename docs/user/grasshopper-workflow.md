@@ -66,7 +66,9 @@ list; Materials and Thicknesses are never matched by list position.
 
 The model Address and Vintage select the weather record. Connect the completed
 GRM directly to `Run SimpleDragon`; connect Grasshopper Buttons to Run and
-Cancel, and use Force Rerun and Timeout as options. The component internally converts the GRM, generates the
+Cancel, and use Force Rerun and Timeout as options. Optionally connect a
+user-owned `.grr` or JSON destination to `GRR Path`; leave it blank to return
+the GRR without writing a file. The component internally converts the GRM, generates the
 EnergyPlus 24.2 IDF, verifies the matching packaged EPW, resolves the supported
 runtime, executes EnergyPlus, and constructs the GRR. Its public outputs are
 only GRR, State, Success, and Diagnostics.
@@ -74,8 +76,10 @@ only GRR, State, Success, and Diagnostics.
 Let the definition solve once with the Run and Cancel Buttons at their resting
 False value, then press the required Button to request one action. An identical
 model/weather/timeout combination reuses the last GRR unless Force Rerun is
-enabled. Opening or recomputing a saved document never prepares weather or
-starts EnergyPlus by itself.
+enabled. A Run pulse also writes a newly completed or cached result when GRR
+Path is set; changing the path or recomputing the document does not write by
+itself. Opening or recomputing a saved document never prepares weather or starts
+EnergyPlus by itself.
 
 ## Standalone InvisibleDragon boundary
 
@@ -145,7 +149,14 @@ asynchronous simulation state and therefore accepts one data-matched run. For a
 SimpleDragon model list or tree, use Batch Case and Managed Batch; for separate
 low-level InvisibleDragon simulations, use one Run component per simulation.
 
-GRM/GRR readers, writers, and CSV export intentionally expose artifact destinations because those are user-owned results, not simulation setup. Relative output paths use the saved Grasshopper document folder; unsaved definitions fall back to the per-user temp directory. When a GRM is connected, CSV export derives its case identity from that model rather than asking for a text ID.
+Run's optional GRR Path, GRM/GRR readers and writers, and CSV export intentionally
+expose artifact destinations because those are user-owned results, not simulation
+setup. Relative output paths use the saved Grasshopper document folder; unsaved
+definitions fall back to the per-user temp directory. Run creates a missing
+parent directory and replaces an existing GRR destination. Use the separate
+`Write GRR` component when saving an already available or rerouted result without
+pressing Run. When a GRM is connected, CSV export derives its case identity from
+that model rather than asking for a text ID.
 
 Connect a Grasshopper Button to Write GRM, Write GRR, and Export CSV. Their
 Boolean input is internally level-sensitive, so a Toggle left True could write

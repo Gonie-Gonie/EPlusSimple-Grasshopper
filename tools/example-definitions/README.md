@@ -50,12 +50,14 @@ type, construction, boundary, and opening ownership, a west-Zone heat-pump/AHU,
 east-Zone boiler/radiator, dedicated ERVs, and PV. Example 14 uses dedicated
 electric radiators and ERVs on the same Surface-to-Zone structure as
 the stable execution case and connects Model directly to `Run SimpleDragon`,
-whose GRR output feeds summary and CSV components. Conversion, IDF, weather,
+whose optional GRR destination is written by the same Run pulse and whose GRR
+output feeds summary and CSV components. Conversion, IDF, weather,
 EnergyPlus execution, and GRR construction remain internal. Every persisted
 execution, cancellation, Write, and Export action uses a momentary Button that
 rests at False; Overwrite remains a disabled option Toggle. Runtime,
 IDD, weather-cache, and run-temp paths are implementation-owned and never appear
-on the canonical canvas or in its manifest description.
+on the canonical canvas or in its manifest description; the visible GRR and CSV
+destinations are user-owned result paths.
 Building-model checks cover metre units, layers, object names and ownership user
 strings, planar single-face Surface Breps, exact bounds and outward normals,
 expected adjacency pairs, and closed planar window curves. The two-Zone graphs

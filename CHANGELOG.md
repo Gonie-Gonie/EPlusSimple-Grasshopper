@@ -4,6 +4,14 @@ All notable changes to this project are documented here. Both products share
 one release version. A repository tag must equal the deliberately chosen source
 version exactly: source `0.1.2` maps only to `v0.1.2`.
 
+## Unreleased
+
+### Added
+
+- Add an optional `GRR Path` input to `Run SimpleDragon`. A Run Button pulse
+  writes either the newly completed or cached canonical GRR; a blank path keeps
+  the result in Grasshopper without touching the file system.
+
 ## 0.1.2 — 2026-09-01
 
 ### Corrected

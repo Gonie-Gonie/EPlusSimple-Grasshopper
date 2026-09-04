@@ -972,12 +972,19 @@ internal static class AdvancedExampleDefinitions
             GraphNode cancelTrigger = graph.Button(104, "Cancel", 2500, 1780);
             GraphNode forceRerun = graph.Boolean(105, "Force rerun", false, 2500, 1860);
             GraphNode timeout = graph.Slider(107, "Run timeout 2 min", 2m, 1m, 30m, 2500, 1940);
+            GraphNode grrPath = graph.Panel(
+                106,
+                "Optional GRR destination",
+                @"..\temp\example-preview\run-result.grr",
+                2500,
+                2020);
             GraphNode run = graph.Component(110, Catalog.SimpleRun, 2850, 1780);
             graph.Connect(model, 0, run, 0);
             graph.Connect(runTrigger, null, run, 1);
             graph.Connect(cancelTrigger, null, run, 2);
             graph.Connect(forceRerun, null, run, 3);
             graph.Connect(timeout, null, run, 4);
+            graph.Connect(grrPath, null, run, 5);
 
             GraphNode resultSummary = graph.Component(113, Catalog.SimpleResultSummary, 3200, 1180);
             GraphNode monthlyLines = graph.Component(119, Catalog.SimpleLinePlot, 3200, 1390);
@@ -1041,7 +1048,7 @@ internal static class AdvancedExampleDefinitions
 
             GraphNode runNote = graph.Note(
                 804,
-                "SimpleDragon resolves EnergyPlus and weather internally; press the Run Button to start.",
+                "SimpleDragon resolves EnergyPlus and weather internally. GRR Path is optional: leave it blank for memory only, or press Run to save the completed result there.",
                 2480,
                 1630);
             GraphNode resultsNote = graph.Note(
@@ -1068,6 +1075,7 @@ internal static class AdvancedExampleDefinitions
                 cancelTrigger,
                 forceRerun,
                 timeout,
+                grrPath,
                 run,
                 runState,
                 runSuccess);
@@ -1108,6 +1116,7 @@ internal static class AdvancedExampleDefinitions
                 runTrigger.InstanceGuid,
                 cancelTrigger.InstanceGuid,
                 forceRerun.InstanceGuid,
+                grrPath.InstanceGuid,
                 resultSummary.InstanceGuid,
                 monthlyLines.InstanceGuid,
                 exportCsv.InstanceGuid,
@@ -1876,6 +1885,7 @@ internal static class AdvancedExampleDefinitions
 
         string workflowRoot = Path.Combine(inputs.OutputDirectory, "runtime-workflow", "simpledragon");
         string csvRoot = Path.Combine(workflowRoot, "csv-package");
+        string grrPath = Path.Combine(workflowRoot, "result.grr");
         Require(!Directory.Exists(workflowRoot), "The runtime evidence directory already exists: " + workflowRoot);
         Directory.CreateDirectory(workflowRoot);
         DateTime evidenceNotBeforeUtc = DateTime.UtcNow.AddSeconds(-2);
@@ -1883,6 +1893,7 @@ internal static class AdvancedExampleDefinitions
         try
         {
             SetPanel(document, expectation.ExportDirectoryGuid, csvRoot);
+            SetPanel(document, expectation.GrrPathGuid, grrPath);
             SetButtonDown(document, expectation.RunTriggerGuid, false);
             SetButtonDown(document, expectation.CancelTriggerGuid, false);
             SetBoolean(document, expectation.ForceRerunGuid, false);
@@ -1922,6 +1933,19 @@ internal static class AdvancedExampleDefinitions
             Require(
                 monthlyResults.Length == 12 && monthlyResults.All(IsFinite),
                 "SimpleDragon GRR Summary did not emit twelve finite monthly results.");
+            string writtenGrr = RequireFreshContainedFile(
+                grrPath,
+                workflowRoot,
+                evidenceNotBeforeUtc,
+                "Run SimpleDragon GRR");
+            string writtenGrrContent = File.ReadAllText(writtenGrr);
+            Require(
+                writtenGrrContent.StartsWith("{\n  \"building\":", StringComparison.Ordinal)
+                    && writtenGrrContent.Contains("\"summary_per_area\"")
+                    && writtenGrrContent.Length > 0
+                    && writtenGrrContent[writtenGrrContent.Length - 1] == '\n',
+                "Run SimpleDragon did not write canonical GRR JSON.");
+            string writtenGrrSha256 = ComputeSha256(writtenGrr);
             double monthlySum = monthlyResults.Sum();
             double annualTolerance = Math.Max(1e-6, Math.Abs(annualResult) * 1e-9);
             Require(
@@ -2016,6 +2040,8 @@ internal static class AdvancedExampleDefinitions
 
             SetButtonDown(document, expectation.RunTriggerGuid, false);
             Solve(document);
+            File.Delete(writtenGrr);
+            Require(!File.Exists(writtenGrr), "The cached GRR persistence exercise could not remove the first result.");
             SetButtonDown(document, expectation.RunTriggerGuid, true);
             Solve(document);
             string cachedRunState = WaitForTerminalState(
@@ -2040,6 +2066,14 @@ internal static class AdvancedExampleDefinitions
                 expectation.RunComponentGuid,
                 0,
                 "Dragons.SimpleDragon.Grasshopper.Types.GreenRetrofitResultGoo");
+            string cachedGrr = RequireFreshContainedFile(
+                grrPath,
+                workflowRoot,
+                evidenceNotBeforeUtc,
+                "Cached Run SimpleDragon GRR");
+            Require(
+                string.Equals(ComputeSha256(cachedGrr), writtenGrrSha256, StringComparison.Ordinal),
+                "The cached Run pulse did not restore the same deterministic GRR artifact.");
 
             SetBoolean(document, expectation.ForceRerunGuid, true);
             Solve(document);
@@ -3754,6 +3788,7 @@ internal sealed record SimpleRuntimeWorkflowExpectation(
     Guid RunTriggerGuid,
     Guid CancelTriggerGuid,
     Guid ForceRerunGuid,
+    Guid GrrPathGuid,
     Guid ResultSummaryGuid,
     Guid MonthlyLinePlotGuid,
     Guid ExportCsvGuid,

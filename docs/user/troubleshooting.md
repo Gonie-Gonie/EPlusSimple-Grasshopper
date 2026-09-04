@@ -54,7 +54,13 @@ is intentionally a no-op; it does not access a path or emit an error.
 
 ## Rhino reports access denied when Run is clicked
 
-The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches and `%TEMP%/Dragons` for simulation work. It does not write below Rhino's installation directory and requires no administrator rights.
+If `GRR Path` is connected, first confirm that it names a writable file location,
+or clear it to run without saving. Relative output paths use the saved `.gh`
+folder; unsaved definitions use the system temp directory.
+
+The canonical runner uses `%LOCALAPPDATA%` for verified runtime/weather caches
+and `%TEMP%/Dragons` for simulation work. It does not write below Rhino's
+installation directory and requires no administrator rights.
 
 If access is still denied, verify that the current Windows profile can write to
 LocalAppData and the operating-system temp directory, reinstall the current

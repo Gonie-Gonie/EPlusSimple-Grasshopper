@@ -43,7 +43,9 @@ When the verified distribution payloads and EnergyPlus runtime are available,
 the gate also temporarily enables example 14 in memory and verifies internal
 packaged-weather selection, its Floor/Ceiling/Wall-to-Zone electric-radiator
 model, direct SimpleDragon Run-to-GRR execution, the default monthly graph,
-CSV, cache, and cancellation in both hosts. All saved action Buttons remain at
+the optional canonical GRR write, CSV, cache, and cancellation in both hosts.
+The cache exercise deletes and restores the GRR file to prove that a cached Run
+pulse persists the result without rerunning EnergyPlus. All saved action Buttons remain at
 their resting `False` value. Use `-SkipEnergyPlusWorkflow` to test the explicit
 disabled state or `-EnergyPlusRoot` to select a runtime. The gate supplies that
 root, its IDD, and an optional `-WeatherPath` test override only through

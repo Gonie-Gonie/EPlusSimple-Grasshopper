@@ -283,6 +283,8 @@ Connect the GRM output directly to `Run SimpleDragon`. The runner internally:
 5. Resolves or prepares the pinned EnergyPlus runtime.
 6. Runs EnergyPlus away from Rhino's UI thread.
 7. Parses the result and returns a GRR.
+8. If `GRR Path` is nonblank, writes the same canonical GRR to that user-owned
+   destination.
 
 Connect a momentary Grasshopper Button to `Run` and another to `Cancel`; do not
 use Toggles for these action inputs. Let the definition solve once while the
@@ -294,6 +296,13 @@ after the pulse, so opening or recomputing a saved document does not launch work
 itself a run command. When False, an identical GRM and timeout may reuse the
 previous result. When True, the next Run Button press ignores that last
 identical result. Timeout defaults to 30 positive minutes.
+
+`GRR Path` is optional. Relative destinations use the saved `.gh` folder;
+unsaved definitions use the system temp directory. A blank or whitespace-only
+value performs no file operation. The path is sampled only by a Run Button
+pulse, and a cached run can save its existing GRR without launching EnergyPlus
+again. Missing parent directories are created and an existing file is replaced.
+Changing the path or recomputing the canvas alone never writes.
 
 Watch `State`, `Success`, and `Diagnostics`. `Run SimpleDragon` accepts one
 data-matched model per component. Use the managed batch workflow for a list or
@@ -322,8 +331,10 @@ Monthly series can be grouped by Fuel or End Use; Fuel is the default. Result
 tree components preserve the incoming GRR path and append a series index, so
 separate result branches stay separate downstream.
 
-Use `Write GRR` to save the canonical result JSON, or `Export CSV` for a table
-package. Connect a momentary Grasshopper Button to every Write or Export action
+Use Run's optional `GRR Path` when the result should be saved by the same action
+that performs or reuses the simulation. Use `Write GRR` to save an already
+available or rerouted result later, or `Export CSV` for a table package. Connect
+a momentary Grasshopper Button to every separate Write or Export action
 input and press it only for the intended write. These inputs are internally
 level-sensitive, so a Toggle left True could write again on later solutions;
 the Button avoids that accidental repetition. `Export CSV` requires the
@@ -518,7 +529,7 @@ at its resting False value. Force Rerun and Overwrite remain option Toggles.
 | `examples/11-simpledragon-envelope-hvac.gh` | Fenestration, packaged profile, multiple compatible HVAC families, ERV, and PV |
 | `examples/12-simpledragon-two-zone-model.gh` | Detailed two-zone list/tree authoring, automatic adjacency, ownership, HVAC, ERV, PV, GRM, and geometry mapping |
 | `examples/13-simpledragon-results-and-plots.gh` | GRR reading, summaries, DataTree output, line/bar plots, and non-writing CSV preview |
-| `examples/14-simpledragon-two-zone-run-results-csv.gh` | Complete zero-path SimpleDragon run, default monthly graph, CSV, and batch connection |
+| `examples/14-simpledragon-two-zone-run-results-csv.gh` | Complete direct SimpleDragon run, optional GRR save, default monthly graph, CSV, and batch connection |
 | `examples/30-two-zone-office.3dm` | Named planar two-zone Breps and window curves for live Rhino references |
 | `examples/31-three-zone-stepped-office.3dm` | A larger stepped three-zone Rhino model |
 

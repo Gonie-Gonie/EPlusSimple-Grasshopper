@@ -22,6 +22,7 @@ namespace Dragons.SimpleDragon.Grasshopper.Components;
     Justification = "Grasshopper owns component lifetime; removal cancels work and completion disposes the token source.")]
 public sealed class RunSimpleDragonComponent : SimpleDragonComponent
 {
+    private const string GrrWriteFailureCode = "SD.GH.RUN_GRR_WRITE_FAILED";
     private static readonly char[] FailureCodeSeparators = { '_' };
     private static readonly Regex InvisibleDragonTermPattern = new(
         @"\bInvisibleDragon\b",
@@ -98,6 +99,12 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
             "Positive EnergyPlus timeout in minutes.",
             GH_ParamAccess.item,
             30d);
+        pManager.AddTextParameter(
+            "GRR Path",
+            "P",
+            "Optional destination .grr or JSON path. Leave blank to keep the GRR in memory only. Relative paths use the saved Grasshopper document; unsaved definitions use the system temp directory.",
+            GH_ParamAccess.item);
+        pManager[5].Optional = true;
     }
 
     protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -116,7 +123,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         pManager.AddBooleanParameter(
             "Success",
             "OK",
-            "True when the last run produced a complete GRR.",
+            "True when the last run produced a complete GRR. A requested file-write failure is reported by State and Diagnostics while the in-memory GRR remains usable.",
             GH_ParamAccess.item);
         pManager.AddParameter(
             new SimpleDragonDiagnosticParam(),
@@ -169,6 +176,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         bool cancel = false;
         bool force = false;
         double timeoutMinutes = 30d;
+        string grrPath = string.Empty;
         DA.GetData(1, ref run);
         DA.GetData(2, ref cancel);
         ExplicitRunTriggerObservation triggers = _triggerGate.Observe(run, cancel);
@@ -183,6 +191,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         }
 
         GreenRetrofitModelGoo? modelGoo = null;
+        DA.GetData(5, ref grrPath);
         if (!DA.GetData(0, ref modelGoo)
             || !DA.GetData(3, ref force)
             || !DA.GetData(4, ref timeoutMinutes))
@@ -206,14 +215,31 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
             return;
         }
 
+        AutomationOverrides automation = AutomationOverrides.Capture();
         var inputs = new RunInputs(
             model,
             TimeSpan.FromMinutes(timeoutMinutes),
-            AutomationOverrides.Capture());
+            automation);
         string runKey = ComputeRunKey(inputs);
         if (triggers.Start && !triggers.Cancel)
         {
-            StartRun(inputs, runKey, force);
+            string? resultPath;
+            try
+            {
+                resultPath = ResolveOptionalGrrPath(grrPath);
+            }
+            catch (Exception exception) when (IsResultPathException(exception))
+            {
+                AddRuntimeMessage(
+                    GH_RuntimeMessageLevel.Error,
+                    "GRR Path is invalid. Choose a writable file destination, or leave it blank to run without saving.");
+                return;
+            }
+
+            StartRun(
+                new RunInputs(inputs.Model, inputs.Timeout, automation, resultPath),
+                runKey,
+                force);
         }
 
         RunOutcome? outcome;
@@ -276,16 +302,37 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
                 return;
             }
 
+            Task<RunOutcome> task;
             if (CanReuseLastOutcome(force, _lastOutcome, _lastRunKey, runKey))
             {
-                _state = "Cached";
-                return;
+                RunOutcome cachedOutcome = _lastOutcome!;
+                if (inputs.ResultPath is null)
+                {
+                    _lastOutcome = RunOutcome.Cached(cachedOutcome);
+                    _state = "Cached";
+                    return;
+                }
+
+                _activeCancellation = new CancellationTokenSource();
+                CancellationToken cachedToken = _activeCancellation.Token;
+                _state = "Saving GRR";
+                task = Task.Run(
+                    () => PersistResult(
+                        cachedOutcome.Result!,
+                        "Cached",
+                        cachedOutcome.Diagnostics,
+                        inputs.ResultPath,
+                        cachedToken),
+                    cachedToken);
+            }
+            else
+            {
+                _activeCancellation = new CancellationTokenSource();
+                CancellationToken token = _activeCancellation.Token;
+                _state = "Validating Model";
+                task = Task.Run(() => ExecuteAsync(inputs, UpdateState, token), token);
             }
 
-            _activeCancellation = new CancellationTokenSource();
-            CancellationToken token = _activeCancellation.Token;
-            _state = "Validating Model";
-            Task<RunOutcome> task = Task.Run(() => ExecuteAsync(inputs, UpdateState, token), token);
             _activeTask = task;
             _ = task.ContinueWith(
                 completed => CompleteRun(completed, runKey),
@@ -522,7 +569,22 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
                 .Concat(simulation.Diagnostics)
                 .Distinct()
                 .ToArray();
-            return RunOutcome.FromSimulation(simulation, diagnostics);
+            if (!simulation.IsSuccess || simulation.Result is null)
+            {
+                return RunOutcome.FromSimulation(simulation, diagnostics);
+            }
+
+            if (inputs.ResultPath is not null)
+            {
+                stateChanged("Saving GRR");
+            }
+
+            return PersistResult(
+                simulation.Result,
+                UserFacingState(simulation.State),
+                diagnostics,
+                inputs.ResultPath,
+                cancellationToken);
         }
         catch (OperationCanceledException)
         {
@@ -715,6 +777,61 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
 
         return Path.GetFullPath(Path.Combine(temp, "Dragons", "simpledragon-runs"));
     }
+
+    private string? ResolveOptionalGrrPath(string path)
+    {
+        return string.IsNullOrWhiteSpace(path)
+            ? null
+            : ResolveDocumentPath(path, Path.GetTempPath());
+    }
+
+    private static RunOutcome PersistResult(
+        GreenRetrofitResult result,
+        string successState,
+        IEnumerable<Diagnostic> diagnostics,
+        string? resultPath,
+        CancellationToken cancellationToken)
+    {
+        Diagnostic[] simulationDiagnostics = diagnostics
+            .Where(item => !string.Equals(
+                item.Code,
+                GrrWriteFailureCode,
+                StringComparison.Ordinal))
+            .ToArray();
+        if (string.IsNullOrWhiteSpace(resultPath))
+        {
+            return RunOutcome.Succeeded(successState, result, simulationDiagnostics);
+        }
+
+        try
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            string target = resultPath!;
+            string? directory = Path.GetDirectoryName(target);
+            if (!string.IsNullOrEmpty(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            GrrWriter.WriteFile(target, result);
+            return RunOutcome.Succeeded(successState, result, simulationDiagnostics);
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (Exception exception) when (IsResultPathException(exception))
+        {
+            return RunOutcome.ResultWriteFailed(result, simulationDiagnostics, exception);
+        }
+    }
+
+    private static bool IsResultPathException(Exception exception) =>
+        exception is ArgumentException
+        || exception is IOException
+        || exception is NotSupportedException
+        || exception is UnauthorizedAccessException
+        || exception is System.Security.SecurityException;
 
     private static bool CanReuseLastOutcome(
         bool force,
@@ -951,7 +1068,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
     private sealed class RunInputs
     {
         internal RunInputs(GreenRetrofitModel model, TimeSpan timeout)
-            : this(model, timeout, AutomationOverrides.None)
+            : this(model, timeout, AutomationOverrides.None, null)
         {
         }
 
@@ -959,6 +1076,15 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
             GreenRetrofitModel model,
             TimeSpan timeout,
             AutomationOverrides automation)
+            : this(model, timeout, automation, null)
+        {
+        }
+
+        internal RunInputs(
+            GreenRetrofitModel model,
+            TimeSpan timeout,
+            AutomationOverrides automation,
+            string? resultPath)
         {
             Model = model ?? throw new ArgumentNullException(nameof(model));
             if (timeout <= TimeSpan.Zero)
@@ -968,6 +1094,7 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
 
             Timeout = timeout;
             Automation = automation ?? throw new ArgumentNullException(nameof(automation));
+            ResultPath = string.IsNullOrWhiteSpace(resultPath) ? null : resultPath;
         }
 
         internal GreenRetrofitModel Model { get; }
@@ -975,6 +1102,8 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
         internal TimeSpan Timeout { get; }
 
         internal AutomationOverrides Automation { get; }
+
+        internal string? ResultPath { get; }
     }
 
     private enum OutcomeVisibility
@@ -1295,6 +1424,39 @@ public sealed class RunSimpleDragonComponent : SimpleDragonComponent
                 simulation.Result,
                 diagnostics);
         }
+
+        internal static RunOutcome Succeeded(
+            string state,
+            GreenRetrofitResult result,
+            IEnumerable<Diagnostic> diagnostics) =>
+            new(state, true, result, diagnostics);
+
+        internal static RunOutcome Cached(RunOutcome outcome) =>
+            Succeeded(
+                "Cached",
+                outcome.Result
+                    ?? throw new InvalidOperationException("A cached run requires a complete GRR."),
+                outcome.Diagnostics.Where(item => !string.Equals(
+                    item.Code,
+                    GrrWriteFailureCode,
+                    StringComparison.Ordinal)));
+
+        internal static RunOutcome ResultWriteFailed(
+            GreenRetrofitResult result,
+            IEnumerable<Diagnostic> diagnostics,
+            Exception exception) =>
+            new(
+                "GRR Save Failed",
+                true,
+                result,
+                diagnostics.Concat(new[]
+                {
+                    new Diagnostic(
+                        GrrWriteFailureCode,
+                        DiagnosticSeverity.Error,
+                        "The completed GRR could not be saved (" + exception.GetType().Name + ").",
+                        suggestedAction: "Choose a writable file destination for GRR Path, or leave it blank to run without saving, then press Run again."),
+                }));
 
         internal static RunOutcome Failed(IEnumerable<Diagnostic> diagnostics) =>
             new("Failed", false, null, diagnostics);
