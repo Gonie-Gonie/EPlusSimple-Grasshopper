@@ -12,94 +12,106 @@ using Rhino.Geometry;
 namespace Dragons.SimpleDragon.Grasshopper.Components;
 
 /// <summary>
-/// Authors one geometry-backed opening. Ownership is expressed later by wiring
-/// this value into exactly one SimpleDragon Surface component.
+/// Shared implementation for the three fixed SimpleDragon opening kinds.
+/// Ownership is expressed later by wiring the result into one Surface.
 /// </summary>
-public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
+public abstract class SimpleDragonOpeningAuthoringComponent : SimpleDragonComponent
 {
-    public CreateSimpleDragonOpeningComponent()
-        : base(
-            "SimpleDragon Opening",
-            "SD Opening",
-            "Creates a typed opening definition. Connect it directly to the Surface that owns it; no zone or face index is required.",
-            SimpleDragonPanels.Geometry)
+    protected SimpleDragonOpeningAuthoringComponent(
+        string name,
+        string nickname,
+        string description)
+        : base(name, nickname, description, SimpleDragonPanels.Geometry)
     {
     }
 
-    public override Guid ComponentGuid => new("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1");
+    protected abstract FenestrationType FixedOpeningType { get; }
 
-    protected override void RegisterInputParams(GH_InputParamManager pManager)
+    protected abstract string DefaultOpeningName { get; }
+
+    protected virtual bool SupportsBlind => true;
+
+    private string DisplayOpeningType => FixedOpeningType == FenestrationType.GlassDoor
+        ? "Glass Door"
+        : FixedOpeningType.ToString();
+
+    protected sealed override void RegisterInputParams(GH_InputParamManager pManager)
     {
         pManager.AddCurveParameter(
             "Boundary",
             "C",
-            "Closed planar polygonal opening curve on its intended Surface.",
+            "Closed planar polygonal " + DisplayOpeningType + " curve on its intended Surface.",
             GH_ParamAccess.item);
-        pManager.AddTextParameter("Name", "N", "Opening name.", GH_ParamAccess.item, "Opening");
-        ChoiceInputs.AddEnum(
-            pManager,
-            "Type",
-            "T",
-            "Opening type.",
-            FenestrationType.Window);
-
+        pManager.AddTextParameter(
+            "Name",
+            "N",
+            DisplayOpeningType + " name.",
+            GH_ParamAccess.item,
+            DefaultOpeningName);
         pManager.AddParameter(
             new SimpleDragonFenestrationConstructionParam(),
             "Construction",
             "FC",
-            "Fenestration construction owned by this opening.",
+            (FixedOpeningType == FenestrationType.Door ? "Opaque" : "Transparent")
+                + " fenestration construction owned by this " + DisplayOpeningType + ".",
             GH_ParamAccess.item);
-        ChoiceInputs.Add(
-            pManager,
-            "Blind",
-            "Blind",
-            "Optional Shade or Venetian; leave empty or use None for no blind.",
-            "None",
-            "None",
-            "Shade",
-            "Venetian");
+        if (SupportsBlind)
+        {
+            ChoiceInputs.Add(
+                pManager,
+                "Blind",
+                "Blind",
+                "Optional Shade or Venetian; leave empty or use None for no blind.",
+                "None",
+                "None",
+                "Shade",
+                "Venetian");
+        }
     }
 
-    protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+    protected sealed override void RegisterOutputParams(GH_OutputParamManager pManager)
     {
         pManager.AddParameter(
             new SimpleDragonOpeningDefinitionParam(),
             "Opening",
             "O",
-            "Typed opening definition for one Surface.",
+            "Typed " + DisplayOpeningType + " definition for one Surface.",
             GH_ParamAccess.item);
         pManager.AddParameter(
             new SimpleDragonDiagnosticParam(),
             "Diagnostics",
             "D",
-            "Opening authoring diagnostics.",
+            DisplayOpeningType + " authoring diagnostics.",
             GH_ParamAccess.list);
     }
 
-    protected override void Solve(IGH_DataAccess DA)
+    protected sealed override void Solve(IGH_DataAccess DA)
     {
         Curve? boundary = null;
-        string name = "Opening";
-        string typeText = FenestrationType.Window.ToString();
+        string name = DefaultOpeningName;
         SimpleDragonFenestrationConstructionGoo? constructionGoo = null;
         string blindText = "None";
         if (!DA.GetData(0, ref boundary)
             || !DA.GetData(1, ref name)
-            || !DA.GetData(2, ref typeText)
-            || !DA.GetData(3, ref constructionGoo))
+            || !DA.GetData(2, ref constructionGoo))
         {
             return;
         }
 
-        DA.GetData(4, ref blindText);
+        if (SupportsBlind)
+        {
+            DA.GetData(3, ref blindText);
+        }
+
         try
         {
-            FenestrationType type = ChoiceInputs.ParseEnum<FenestrationType>(typeText, "Type");
-            BlindType? blind = OptionalEnum<BlindType>(blindText, "Blind");
+            BlindType? blind = SupportsBlind
+                ? OptionalEnum<BlindType>(blindText, "Blind")
+                : null;
             var opening = new OpeningDefinition(
                 boundary!,
                 name,
-                type,
+                FixedOpeningType,
                 constructionGoo?.Value
                     ?? throw new ArgumentException("Construction contains no value."),
                 blind);
@@ -113,7 +125,9 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
                 1,
                 "SD.GH.OPENING_INVALID",
                 exception.Message,
-                "Use a closed planar polygon and a compatible construction/type.");
+                "Use a closed planar polygon and a compatible "
+                    + (FixedOpeningType == FenestrationType.Door ? "opaque" : "transparent")
+                    + " construction.");
         }
     }
 
@@ -151,6 +165,59 @@ public sealed class CreateSimpleDragonOpeningComponent : SimpleDragonComponent
         Report(new[] { diagnostic });
         access.SetDataList(outputIndex, new[] { new SimpleDragonDiagnosticGoo(diagnostic) });
     }
+}
+
+public sealed class CreateSimpleDragonWindowComponent : SimpleDragonOpeningAuthoringComponent
+{
+    public CreateSimpleDragonWindowComponent()
+        : base(
+            "SimpleDragon Window",
+            "SD Window",
+            "Creates a Window with its own transparent construction and optional blind for one owning Surface.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("ce46938c-f720-4ca5-839b-50b0ca33a58f");
+
+    protected override FenestrationType FixedOpeningType => FenestrationType.Window;
+
+    protected override string DefaultOpeningName => "Window";
+}
+
+public sealed class CreateSimpleDragonDoorComponent : SimpleDragonOpeningAuthoringComponent
+{
+    public CreateSimpleDragonDoorComponent()
+        : base(
+            "SimpleDragon Door",
+            "SD Door",
+            "Creates an opaque Door with its own construction for one owning Surface.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("f293420c-85bd-4bb7-a62b-1c2b9de3ab26");
+
+    protected override FenestrationType FixedOpeningType => FenestrationType.Door;
+
+    protected override string DefaultOpeningName => "Door";
+
+    protected override bool SupportsBlind => false;
+}
+
+public sealed class CreateSimpleDragonGlassDoorComponent : SimpleDragonOpeningAuthoringComponent
+{
+    public CreateSimpleDragonGlassDoorComponent()
+        : base(
+            "SimpleDragon Glass Door",
+            "SD GlassDoor",
+            "Creates a Glass Door with its own transparent construction and optional blind for one owning Surface.")
+    {
+    }
+
+    public override Guid ComponentGuid => new("c60ad628-b4b7-4db7-ae47-bc2c806b0291");
+
+    protected override FenestrationType FixedOpeningType => FenestrationType.GlassDoor;
+
+    protected override string DefaultOpeningName => "Glass Door";
 }
 
 /// <summary>
@@ -286,7 +353,7 @@ public abstract class SimpleDragonOpaqueSurfaceComponent : SimpleDragonComponent
             DA.SetData(0, new SimpleDragonSurfaceDefinitionGoo(definition));
             DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
-        catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
+        catch (Exception exception) when (SimpleDragonOpeningAuthoringComponent.IsAuthoringException(exception))
         {
             var diagnostic = new Diagnostic(
                 "SD.GH.SURFACE_DEFINITION_INVALID",
@@ -467,7 +534,7 @@ public sealed class CreateSimpleDragonZoneComponent : SimpleDragonComponent
             DA.SetData(0, new SimpleDragonZoneDefinitionGoo(definition));
             DA.SetDataList(1, Array.Empty<SimpleDragonDiagnosticGoo>());
         }
-        catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
+        catch (Exception exception) when (SimpleDragonOpeningAuthoringComponent.IsAuthoringException(exception))
         {
             var diagnostic = new Diagnostic(
                 "SD.GH.ZONE_DEFINITION_INVALID",
@@ -736,7 +803,7 @@ public sealed class CreateSimpleDragonModelComponent : SimpleDragonComponent
             DA.SetData(3, GrmWriter.Serialize(model));
             FinishDiagnostics(DA, diagnostics);
         }
-        catch (Exception exception) when (CreateSimpleDragonOpeningComponent.IsAuthoringException(exception))
+        catch (Exception exception) when (SimpleDragonOpeningAuthoringComponent.IsAuthoringException(exception))
         {
             diagnostics.Add(new Diagnostic(
                 "SD.GH.MODEL_COMPOSITION_INVALID",

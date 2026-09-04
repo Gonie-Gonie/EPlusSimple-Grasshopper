@@ -22,7 +22,9 @@ public sealed class SimpleDragonPaletteContractTests
             ["SimpleDragonSurfaceConstructionComponent"] = "Construction",
             ["SimpleDragonFenestrationConstructionComponent"] = "Construction",
 
-            ["CreateSimpleDragonOpeningComponent"] = "Geometry",
+            ["CreateSimpleDragonWindowComponent"] = "Geometry",
+            ["CreateSimpleDragonDoorComponent"] = "Geometry",
+            ["CreateSimpleDragonGlassDoorComponent"] = "Geometry",
             ["CreateSimpleDragonFloorComponent"] = "Geometry",
             ["CreateSimpleDragonCeilingComponent"] = "Geometry",
             ["CreateSimpleDragonWallComponent"] = "Geometry",
@@ -72,6 +74,8 @@ public sealed class SimpleDragonPaletteContractTests
             .OrderBy(component => component.GetType().Name, StringComparer.Ordinal)
             .ToArray();
 
+        Assert.Equal(41, components.Length);
+        Assert.Equal(7, components.Count(component => component.SubCategory == "Geometry"));
         Assert.Equal(ExpectedSubcategories.Count, components.Length);
         Assert.Equal(
             ExpectedSubcategories.Keys.OrderBy(name => name, StringComparer.Ordinal),

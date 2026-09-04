@@ -363,7 +363,7 @@
     "Dragons.SimpleDragon.Grasshopper.Components.SimpleDragonFenestrationConstructionComponent": {
       "role": "Authoring",
       "purpose": "Defines the aggregate thermal and solar performance owned by a SimpleDragon Window, Glass Door, or opaque Door opening.",
-      "workflow": "Set U-Value and SHGC once, connect Construction to SimpleDragon Opening, and let that completed Opening carry the construction into its host Surface.",
+      "workflow": "Set U-Value and SHGC once, connect Construction to SD Window, SD Door, or SD GlassDoor, and let that completed opening carry the construction into its host Surface.",
       "caveats": [
         "SHGC 0 creates an opaque door construction; a positive SHGC strictly below 1 creates a transparent window or glass-door construction.",
         "Window and Glass Door require a transparent construction, while Door requires SHGC 0 and cannot use a blind."
@@ -378,13 +378,31 @@
         "Text supplied by a wire must normalize to one packaged selector choice; use the selector whenever possible so the canonical packaged name remains visible."
       ]
     },
-    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonOpeningComponent": {
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonWindowComponent": {
       "role": "Authoring",
-      "purpose": "Creates a geometry-backed Window, Door, or Glass Door that already owns its fenestration construction and optional blind.",
-      "workflow": "Connect a closed planar boundary curve and Fenestration Construction, choose Type and Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; no Zone or face index is used.",
+      "purpose": "Creates a geometry-backed Window that already owns its transparent fenestration construction and optional blind.",
+      "workflow": "Connect a closed planar window boundary and transparent Fenestration Construction, optionally choose a Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; the component fixes the type as Window.",
       "caveats": [
         "Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry.",
         "A Rhino inner trim still needs matching Opening metadata, and the same opening list should not be broadcast to unrelated face items."
+      ]
+    },
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonDoorComponent": {
+      "role": "Authoring",
+      "purpose": "Creates a geometry-backed opaque Door that already owns its fenestration construction.",
+      "workflow": "Connect a closed planar door boundary and an opaque Fenestration Construction, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; Door has no Type or Blind input.",
+      "caveats": [
+        "Door requires an opaque construction with SHGC 0; transparent constructions are rejected.",
+        "Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry."
+      ]
+    },
+    "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonGlassDoorComponent": {
+      "role": "Authoring",
+      "purpose": "Creates a geometry-backed Glass Door that already owns its transparent fenestration construction and optional blind.",
+      "workflow": "Connect a closed planar glass-door boundary and transparent Fenestration Construction, optionally choose a Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; the component fixes the type as GlassDoor.",
+      "caveats": [
+        "GlassDoor requires a transparent construction with SHGC greater than 0 and less than 1.",
+        "Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry."
       ]
     },
     "Dragons.SimpleDragon.Grasshopper.Components.CreateSimpleDragonFloorComponent": {

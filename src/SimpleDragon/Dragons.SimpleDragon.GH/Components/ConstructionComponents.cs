@@ -176,7 +176,7 @@ public sealed class SimpleDragonFenestrationConstructionComponent : SimpleDragon
         : base(
             "SimpleDragon Fenestration Construction",
             "SD Fenestration",
-            "Creates a SimpleDragon transparent window or opaque door construction.",
+            "Creates a SimpleDragon transparent window/glass-door or opaque door construction.",
             SimpleDragonPanels.Construction)
     {
     }

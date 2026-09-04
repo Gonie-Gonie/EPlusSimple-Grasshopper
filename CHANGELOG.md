@@ -19,6 +19,9 @@ version exactly: source `0.1.2` maps only to `v0.1.2`.
 
 ### Changed
 
+- Replace the generic `SD Opening` and its Type selector with fixed `SD Window`,
+  `SD Door`, and `SD GlassDoor` components. Each opening now exposes only the
+  inputs valid for its type while retaining direct ownership by one Surface.
 - Reorganize the SimpleDragon tab into Construction, Geometry, Model,
   Simulation, and Analysis. Model now contains Profile and HVAC authoring,
   Simulation contains Run, artifact, CSV, and batch operations, and Analysis

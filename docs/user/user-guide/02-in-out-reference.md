@@ -4,7 +4,7 @@ _Generated from the public runtime catalog; do not edit this chapter directly._
 
 This reference combines runtime-reflected Grasshopper ports with curated workflow guidance. It covers every public component in InvisibleDragon and SimpleDragon; port order, access mode, defaults, choices, and wire types come from the built plugins rather than a manually maintained list.
 
-**Coverage:** 75 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
+**Coverage:** 77 components and 38 standalone typed parameters for `net48 + net7.0-windows + net8.0-windows`.
 
 A port marked optional accepts an omitted wire. A non-optional port can still show a persistent default; consult the Default / choices column before wiring a replacement. Choice inputs are selected directly on the component and are flagged so integer or identifier plumbing is unnecessary.
 
@@ -1426,7 +1426,7 @@ _This component has no inputs._
 
 **Purpose:** Defines the aggregate thermal and solar performance owned by a SimpleDragon Window, Glass Door, or opaque Door opening.
 
-**How to use it:** Set U-Value and SHGC once, connect Construction to SimpleDragon Opening, and let that completed Opening carry the construction into its host Surface.
+**How to use it:** Set U-Value and SHGC once, connect Construction to SD Window, SD Door, or SD GlassDoor, and let that completed opening carry the construction into its host Surface.
 
 **Canvas location:** SimpleDragon → Construction. Exposure: `primary`.
 
@@ -1546,6 +1546,36 @@ _This component has no inputs._
 | 0 | Surface (`S`) | SimpleDragon Surface Definition | Item | Geometry-backed Ceiling definition for one Zone. |
 | 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Surface authoring diagnostics. |
 
+##### SimpleDragon Door (`SD Door`)
+
+**Role:** Authoring
+
+**Purpose:** Creates a geometry-backed opaque Door that already owns its fenestration construction.
+
+**How to use it:** Connect a closed planar door boundary and an opaque Fenestration Construction, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; Door has no Type or Blind input.
+
+**Canvas location:** SimpleDragon → Geometry. Exposure: `primary`.
+
+**Important caveats:**
+
+- Door requires an opaque construction with SHGC 0; transparent constructions are rejected.
+- Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | Boundary (`C`) | Curve | Item | No | — | Closed planar polygonal Door curve on its intended Surface. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Door` | Door name. |
+| 2 | Construction (`FC`) | SimpleDragon Fenestration Construction | Item | No | — | Opaque fenestration construction owned by this Door. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Opening (`O`) | SimpleDragon Opening Definition | Item | Typed Door definition for one Surface. |
+| 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Door authoring diagnostics. |
+
 ##### SimpleDragon Floor (`SD Floor`)
 
 **Role:** Authoring
@@ -1580,39 +1610,38 @@ _This component has no inputs._
 | 0 | Surface (`S`) | SimpleDragon Surface Definition | Item | Geometry-backed Floor definition for one Zone. |
 | 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Surface authoring diagnostics. |
 
-##### SimpleDragon Opening (`SD Opening`)
+##### SimpleDragon Glass Door (`SD GlassDoor`)
 
 **Role:** Authoring
 
 **Flags:** `CHOICE INPUTS`
 
-**Purpose:** Creates a geometry-backed Window, Door, or Glass Door that already owns its fenestration construction and optional blind.
+**Purpose:** Creates a geometry-backed Glass Door that already owns its transparent fenestration construction and optional blind.
 
-**How to use it:** Connect a closed planar boundary curve and Fenestration Construction, choose Type and Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; no Zone or face index is used.
+**How to use it:** Connect a closed planar glass-door boundary and transparent Fenestration Construction, optionally choose a Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; the component fixes the type as GlassDoor.
 
 **Canvas location:** SimpleDragon → Geometry. Exposure: `primary`.
 
 **Important caveats:**
 
+- GlassDoor requires a transparent construction with SHGC greater than 0 and less than 1.
 - Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry.
-- A Rhino inner trim still needs matching Opening metadata, and the same opening list should not be broadcast to unrelated face items.
 
 **Inputs**
 
 | # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | Boundary (`C`) | Curve | Item | No | — | Closed planar polygonal opening curve on its intended Surface. |
-| 1 | Name (`N`) | Text | Item | No | Default: `Opening` | Opening name. |
-| 2 | Type (`T`) | Text | Item | No | Default: `Window`; Choices: `Window`; `Door`; Glass Door (`GlassDoor`) | Opening type. Choices: Window, Door, Glass Door. |
-| 3 | Construction (`FC`) | SimpleDragon Fenestration Construction | Item | No | — | Fenestration construction owned by this opening. |
-| 4 | Blind (`Blind`) | Text | Item | No | Default: `None`; Choices: `None`; `Shade`; `Venetian` | Optional Shade or Venetian; leave empty or use None for no blind. Choices: None, Shade, Venetian. |
+| 0 | Boundary (`C`) | Curve | Item | No | — | Closed planar polygonal Glass Door curve on its intended Surface. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Glass Door` | Glass Door name. |
+| 2 | Construction (`FC`) | SimpleDragon Fenestration Construction | Item | No | — | Transparent fenestration construction owned by this Glass Door. |
+| 3 | Blind (`Blind`) | Text | Item | No | Default: `None`; Choices: `None`; `Shade`; `Venetian` | Optional Shade or Venetian; leave empty or use None for no blind. Choices: None, Shade, Venetian. |
 
 **Outputs**
 
 | # | Output (nickname) | Wire type | Access | Description |
 | --- | --- | --- | --- | --- |
-| 0 | Opening (`O`) | SimpleDragon Opening Definition | Item | Typed opening definition for one Surface. |
-| 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Opening authoring diagnostics. |
+| 0 | Opening (`O`) | SimpleDragon Opening Definition | Item | Typed Glass Door definition for one Surface. |
+| 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Glass Door authoring diagnostics. |
 
 ##### SimpleDragon Wall (`SD Wall`)
 
@@ -1647,6 +1676,39 @@ _This component has no inputs._
 | --- | --- | --- | --- | --- |
 | 0 | Surface (`S`) | SimpleDragon Surface Definition | Item | Geometry-backed Wall definition for one Zone. |
 | 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Surface authoring diagnostics. |
+
+##### SimpleDragon Window (`SD Window`)
+
+**Role:** Authoring
+
+**Flags:** `CHOICE INPUTS`
+
+**Purpose:** Creates a geometry-backed Window that already owns its transparent fenestration construction and optional blind.
+
+**How to use it:** Connect a closed planar window boundary and transparent Fenestration Construction, optionally choose a Blind, then wire Opening only to the Floor, Ceiling, or normally Wall that owns it; the component fixes the type as Window.
+
+**Canvas location:** SimpleDragon → Geometry. Exposure: `primary`.
+
+**Important caveats:**
+
+- Host coplanarity, containment, overlap, and trim-loop agreement are checked when SimpleDragon Model resolves the complete geometry.
+- A Rhino inner trim still needs matching Opening metadata, and the same opening list should not be broadcast to unrelated face items.
+
+**Inputs**
+
+| # | Input (nickname) | Wire type | Access | Optional | Default / choices | Description |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | Boundary (`C`) | Curve | Item | No | — | Closed planar polygonal Window curve on its intended Surface. |
+| 1 | Name (`N`) | Text | Item | No | Default: `Window` | Window name. |
+| 2 | Construction (`FC`) | SimpleDragon Fenestration Construction | Item | No | — | Transparent fenestration construction owned by this Window. |
+| 3 | Blind (`Blind`) | Text | Item | No | Default: `None`; Choices: `None`; `Shade`; `Venetian` | Optional Shade or Venetian; leave empty or use None for no blind. Choices: None, Shade, Venetian. |
+
+**Outputs**
+
+| # | Output (nickname) | Wire type | Access | Description |
+| --- | --- | --- | --- | --- |
+| 0 | Opening (`O`) | SimpleDragon Opening Definition | Item | Typed Window definition for one Surface. |
+| 1 | Diagnostics (`D`) | SimpleDragon Diagnostic | List | Window authoring diagnostics. |
 
 ##### SimpleDragon Zone (`SD Zone`)
 
@@ -2555,4 +2617,4 @@ Typed parameters are the native Grasshopper containers carried by component wire
 
 ---
 
-Reference completeness: 75 of 75 public components documented; 38 standalone typed parameters listed.
+Reference completeness: 77 of 77 public components documented; 38 standalone typed parameters listed.

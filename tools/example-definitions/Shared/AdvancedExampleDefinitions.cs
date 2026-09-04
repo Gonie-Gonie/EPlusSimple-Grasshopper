@@ -720,15 +720,15 @@ internal static class AdvancedExampleDefinitions
         GraphNode layer = graph.Component(14, Catalog.SimpleLayer, 620, 100);
         GraphNode construction = graph.Component(10, Catalog.SimpleConstruction, 730, 100);
         GraphNode fenestration = graph.Component(11, Catalog.SimpleFenestration, 850, 180);
-        GraphNode westOpening = graph.Component(12, Catalog.SimpleOpening, 950, 750);
-        GraphNode eastOpening = graph.Component(13, Catalog.SimpleOpening, 950, 2160);
+        GraphNode westOpening = graph.Component(12, Catalog.SimpleWindow, 950, 750);
+        GraphNode eastOpening = graph.Component(13, Catalog.SimpleWindow, 950, 2160);
         graph.Connect(material, 0, layer, 0);
         graph.Connect(thickness, null, layer, 1);
         graph.Connect(layer, 0, construction, 1);
         graph.Connect(westCurve, null, westOpening, 0);
         graph.Connect(eastCurve, null, eastOpening, 0);
-        graph.Connect(fenestration, 0, westOpening, 3);
-        graph.Connect(fenestration, 0, eastOpening, 3);
+        graph.Connect(fenestration, 0, westOpening, 2);
+        graph.Connect(fenestration, 0, eastOpening, 2);
 
         (GraphNode[] westSurfaces, GraphNode[] westFaceParameters) = BuildSimpleSurfaceCluster(
             graph,
@@ -3248,7 +3248,9 @@ internal static class AdvancedExampleDefinitions
         internal static readonly ComponentIdentity SimpleFanCoil = S("dd41df8f-9e3e-4663-8ce7-89025cfde30c", "SimpleDragonFanCoilUnitComponent");
         internal static readonly ComponentIdentity SimpleErv = S("15afd6e6-1c05-4715-909b-b6e98ef91375", "SimpleDragonEnergyRecoveryVentilatorComponent");
         internal static readonly ComponentIdentity SimplePv = S("7fcb5c47-3d49-4aa0-8fbc-bd765711401f", "SimpleDragonPhotovoltaicPanelComponent");
-        internal static readonly ComponentIdentity SimpleOpening = S("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1", "CreateSimpleDragonOpeningComponent");
+        internal static readonly ComponentIdentity SimpleWindow = S("ce46938c-f720-4ca5-839b-50b0ca33a58f", "CreateSimpleDragonWindowComponent");
+        internal static readonly ComponentIdentity SimpleDoor = S("f293420c-85bd-4bb7-a62b-1c2b9de3ab26", "CreateSimpleDragonDoorComponent");
+        internal static readonly ComponentIdentity SimpleGlassDoor = S("c60ad628-b4b7-4db7-ae47-bc2c806b0291", "CreateSimpleDragonGlassDoorComponent");
         internal static readonly ComponentIdentity SimpleFloor = S("e15d7475-e5cf-4e37-81a4-e656c69ee250", "CreateSimpleDragonFloorComponent");
         internal static readonly ComponentIdentity SimpleCeiling = S("39e2ad8c-8fbb-40bd-84cc-218de37bb720", "CreateSimpleDragonCeilingComponent");
         internal static readonly ComponentIdentity SimpleWall = S("2c0bc0e2-df1d-4e42-9b97-d841e8c83214", "CreateSimpleDragonWallComponent");
@@ -3273,7 +3275,7 @@ internal static class AdvancedExampleDefinitions
             InvisibleWeather, InvisibleManagedRun, InvisibleResultSummary,
             SimpleMaterial, SimpleLayer, SimpleConstruction, SimpleFenestration, SimpleProfile, SimpleHeatPump,
             SimpleAirHandler, SimpleBoiler, SimpleRadiator, SimpleElectricRadiator, SimpleChiller, SimpleFanCoil, SimpleErv,
-            SimplePv, SimpleOpening, SimpleFloor, SimpleCeiling, SimpleWall, SimpleZone, SimpleModel,
+            SimplePv, SimpleWindow, SimpleDoor, SimpleGlassDoor, SimpleFloor, SimpleCeiling, SimpleWall, SimpleZone, SimpleModel,
             SimpleModelSummary, SimpleRun,
             SimpleReadResult, SimpleResultSummary, SimpleDataTree,
             SimpleLinePlot, SimpleBarPlot, SimpleExportCsv, SimpleBatchCase, SimpleManagedBatch,

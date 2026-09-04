@@ -89,7 +89,7 @@ and remains portable. To use live document references instead:
    Face input on `SD Wall` vectorizes this list and preserves its branch path.
 4. Set `WINDOW_ZONE_01_SOUTH` and `WINDOW_ZONE_02_SOUTH` to their same-named
    Rhino curves.
-5. Keep each curve wired through `SD Opening` to the separate matching `_SOUTH`
+5. Keep each curve wired through `SD Window` to the separate matching `_SOUTH`
    `SD Wall`. Combine the completed `SD Floor`, `SD Ceiling`, opening-free `SD
    Wall` list, and opening-bearing `SD Wall` into that Zone's Surfaces branch.
    `SD Zone` consumes each branch as one owned Surface list. Construction and

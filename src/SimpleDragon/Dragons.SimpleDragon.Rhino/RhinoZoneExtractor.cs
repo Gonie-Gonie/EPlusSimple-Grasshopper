@@ -696,7 +696,7 @@ public static class RhinoZoneExtractor
                         diagnostics.Add(new Diagnostic(
                             "SD.RHINO.OPENING_INNER_LOOP_ANNOTATED",
                             DiagnosticSeverity.Info,
-                            "An SD Opening supplied metadata for its matching surface trim loop.",
+                            "An SD Window, SD Door, or SD GlassDoor supplied metadata for its matching surface trim loop.",
                             source.Id,
                             provenance,
                             "The geometry map retains both the opening and trim-loop indices."));
@@ -708,7 +708,7 @@ public static class RhinoZoneExtractor
                             "The same opening geometry was supplied more than once on one surface.",
                             source.Id,
                             provenance,
-                            "Keep exactly one SD Opening for each physical opening."));
+                            "Keep exactly one completed SD opening component for each physical opening."));
                     }
 
                     continue;
@@ -983,10 +983,10 @@ public static class RhinoZoneExtractor
             {
                 diagnostics.Add(Error(
                     "SD.RHINO.OPENING_METADATA_REQUIRED",
-                    "A surface inner loop has no matching SD Opening metadata.",
+                    "A surface inner loop has no matching SD Window, SD Door, or SD GlassDoor metadata.",
                     surface.SurfaceId,
                     opening.Provenance,
-                    "Connect an Opening with its own fenestration construction to this Surface."));
+                    "Connect the matching completed opening with its own fenestration construction to this Surface."));
             }
         }
     }

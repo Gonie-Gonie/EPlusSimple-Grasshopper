@@ -26,7 +26,7 @@ The SimpleDragon tab is organized by the stage and purpose of each component:
 | Group | Components and purpose |
 |---|---|
 | Construction | Opaque materials, layers, and surface/fenestration constructions |
-| Geometry | Opening, Floor, Ceiling, Wall, and Zone ownership |
+| Geometry | Window, Door, Glass Door, Floor, Ceiling, Wall, and Zone ownership |
 | Model | Usage Profile selection, model assembly, HVAC sources and terminals, ERV, and PV |
 | Simulation | Direct Run, GRM/GRR read and write, CSV export, Batch Case, and Managed Batch |
 | Analysis | Model/GRR summaries, result Data Trees, and monthly line/bar plots |
@@ -43,16 +43,21 @@ Build each object where its ownership is visible in the wires:
 
 *Figure: The canonical SimpleDragon graph keeps ownership local and the simulation boundary short.*
 
-`SD Opening` has no Zone Index or Face Index. Its Construction input is required
-and belongs to the Opening. Connect that completed Opening only to its owning
-`SD Wall`, `SD Ceiling`, or `SD Floor`--normally `SD Wall`. There is no generic
-public `SD Surface` authoring component or Type input: the selected component
-fixes the surface type. Each output Surface owns one planar single-face Brep,
-opaque Construction, named Boundary Condition, and its Openings. `SD Ceiling`
-also exposes optional cool-roof reflectance. Floor defaults to Ground; Wall and
-Ceiling default to Outdoors. The opening curve must be coplanar with and
-contained by that face; a trimmed inner loop needs a matching explicit Opening
-rather than guessed metadata.
+Choose `SD Window`, `SD Door`, or `SD GlassDoor`. Each component fixes the
+opening type without a Type input and has no Zone Index or Face Index. Its
+Construction input is required and belongs to the
+completed Opening: Window and GlassDoor require a transparent construction and
+optionally accept a Blind, while Door requires an opaque construction and has
+no Blind input. Connect that Opening only to its owning `SD Wall`, `SD Ceiling`,
+or `SD Floor`--normally `SD Wall`.
+
+There is likewise no generic public `SD Surface` authoring component or Type
+input: the selected component fixes the surface type. Each output Surface owns
+one planar single-face Brep, opaque Construction, named Boundary Condition, and
+its Openings. `SD Ceiling` also exposes optional cool-roof reflectance. Floor
+defaults to Ground; Wall and Ceiling default to Outdoors. The opening curve
+must be coplanar with and contained by that face; a trimmed inner loop needs a
+matching explicit Opening rather than guessed metadata.
 
 A Floor, Ceiling, or Wall Face input may receive a list or tree. The component
 creates one typed Surface for each face and preserves its path. Combine the

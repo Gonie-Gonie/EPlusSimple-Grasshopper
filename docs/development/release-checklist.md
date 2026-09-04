@@ -57,7 +57,7 @@ For diagnosis, its constituent commands are:
 - Require zero compiler warnings and errors for `net48`, `net7.0-windows`, and
   `net8.0-windows`.
 - Require the user-guide PDF builder to reflect and exactly cross-compare all three public
-  Grasshopper contracts, join detailed guidance 1:1 for all 75 components, and
+  Grasshopper contracts, join detailed guidance 1:1 for all 77 components, and
   postflight the PDF for all component and typed-parameter names, all four
   chapters, the framework coverage statement, and zero internal GUID leakage.
 - Require the Food4Rhino metadata PDF builder to import the canonical

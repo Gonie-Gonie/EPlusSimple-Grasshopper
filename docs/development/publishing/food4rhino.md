@@ -319,7 +319,7 @@ SimpleDragon turns Grasshopper building geometry into EnergyPlus simulations wit
 ```text
 SimpleDragon is a Grasshopper plugin for fast area-and-azimuth building-energy and retrofit studies.
 
-Create constructions and openings, place them on explicit floors, ceilings, and walls, collect surfaces and HVAC at each zone, and assemble zones into a Green Retrofit Model (GRM). Ownership is expressed by typed wires rather than entity IDs, face indices, or assignment components. Components accept normal Grasshopper lists and trees.
+Create constructions, windows, doors, and glass doors, place them on explicit floors, ceilings, and walls, collect surfaces and HVAC at each zone, and assemble zones into a Green Retrofit Model (GRM). Ownership is expressed by typed wires rather than entity IDs, face indices, or assignment components. Components accept normal Grasshopper lists and trees.
 
 Connect the GRM directly to Run SimpleDragon. Address and Vintage select packaged weather internally; InvisibleDragon conversion, IDF generation, EnergyPlus execution, and Green Retrofit Result (GRR) construction remain inside the component. Plot monthly results, inspect data trees, write GRM/GRR files, export a documented CSV package, or run managed batches without exposing EPW, IDD, EnergyPlus, or temporary paths on the canvas.
 
@@ -368,7 +368,7 @@ SimpleDragon 0.1.2
 ### Yak-managed Release Description [VERIFY OR PASTE IF EDITABLE]
 
 ```text
-Corrected first Rhino 7+ release. Adds typed construction, opening, floor, ceiling, wall, zone, usage-profile, HVAC, ERV, PV, direct GRM-to-GRR simulation, internal address-based weather, cancellation, cache reuse, result plots/data trees, GRM/GRR persistence, CSV export, and managed batch runs. The release includes Rhino 7/net48 and Rhino 8/net7+net8 payloads.
+Corrected first Rhino 7+ release. Adds typed construction, window, door, glass-door, floor, ceiling, wall, zone, usage-profile, HVAC, ERV, PV, direct GRM-to-GRR simulation, internal address-based weather, cancellation, cache reuse, result plots/data trees, GRM/GRR persistence, CSV export, and managed batch runs. The release includes Rhino 7/net48 and Rhino 8/net7+net8 payloads.
 ```
 
 Do not create a second manual release record if the Yak connection has already

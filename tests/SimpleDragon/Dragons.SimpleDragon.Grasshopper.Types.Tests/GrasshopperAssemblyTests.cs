@@ -66,6 +66,14 @@ public sealed class GrasshopperAssemblyTests
             components.Select(component => component.ComponentGuid));
         Assert.Contains(new Guid("2c0bc0e2-df1d-4e42-9b97-d841e8c83214"),
             components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("ce46938c-f720-4ca5-839b-50b0ca33a58f"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("f293420c-85bd-4bb7-a62b-1c2b9de3ab26"),
+            components.Select(component => component.ComponentGuid));
+        Assert.Contains(new Guid("c60ad628-b4b7-4db7-ae47-bc2c806b0291"),
+            components.Select(component => component.ComponentGuid));
+        Assert.DoesNotContain(new Guid("7d41fd2c-b93f-4fc8-88ea-db1f3abeb2f1"),
+            components.Select(component => component.ComponentGuid));
         Assert.DoesNotContain(new Guid("039bf7bb-da65-49e2-80fe-86d636cf0a48"),
             components.Select(component => component.ComponentGuid));
     }

@@ -66,14 +66,17 @@ If access is still denied, verify that the current Windows profile can write to
 LocalAppData and the operating-system temp directory, reinstall the current
 packages, and include the diagnostic code in the report.
 
-## An opening has no host Surface
+## A Window, Door, or GlassDoor has no host Surface
 
-Connect a Fenestration Construction to each `SD Opening`, then connect that
+Use `SD Window` or `SD GlassDoor` with a transparent Fenestration Construction;
+use `SD Door` with an opaque Fenestration Construction. Then connect the
 completed Opening only to its owning `SD Wall`, `SD Ceiling`, or `SD Floor`--in
-the usual case, its `SD Wall`. Its curve must be a closed planar polygon
-coplanar with and contained by that component's single-face Brep. A trimmed
-inner loop also needs a geometrically matching explicit Opening; the module does
-not invent fallback opening metadata. No Zone Index or Face Index is required.
+the usual case, its `SD Wall`. The component fixes the opening type, so no Type
+input is present; Door also has no Blind input. Its curve must be a closed
+planar polygon coplanar with and contained by that component's single-face Brep.
+A trimmed inner loop also needs a geometrically matching explicit Opening; the
+module does not invent fallback opening metadata. No Zone Index or Face Index
+is required.
 
 ## A Zone does not form a valid enclosure
 

@@ -218,11 +218,16 @@ override that regulated default.
 
 ### 3. Create openings and their constructions
 
-Create `SD Fenestration`, then connect it to `SD Opening` together with the
-opening boundary curve. The opening type is `Window`, `GlassDoor`, or `Door`.
-Windows and glass doors require a transparent construction; an opaque Door uses
-SHGC `0`. `None`, `Shade`, and `Venetian` are the available blind choices, and
-an opaque Door cannot have a blind.
+Create `SD Fenestration`, then choose the fixed component matching the opening:
+
+- `SD Window`: transparent Construction with optional `None`, `Shade`, or
+  `Venetian` Blind.
+- `SD Door`: opaque Construction with SHGC `0`; no Blind input.
+- `SD GlassDoor`: transparent Construction with optional `None`, `Shade`, or
+  `Venetian` Blind.
+
+Connect the construction and boundary curve to that component. The selected
+component fixes the type without a separate Type input.
 
 Connect the completed opening to the `Openings` input of its one owning surface.
 Do not also connect its fenestration construction to the Zone or Model. A
